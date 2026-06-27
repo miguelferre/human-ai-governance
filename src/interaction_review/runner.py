@@ -22,15 +22,6 @@ DETERMINISTIC = {"b0"}
 JudgeFn = Callable[[list[Finding], list[GoldenIssue], Dossier], list[Adjudication]]
 
 
-def _one_run(
-    name: str, dossier: Dossier, golden: list[GoldenIssue], guidelines: list[Guideline], judge: JudgeFn
-) -> tuple[list[Finding], list[Adjudication], RunMetrics]:
-    findings = REGISTRY[name](dossier, guidelines)
-    adjs = judge(findings, golden, dossier)
-    rm = compute_run_metrics(name, findings, adjs, golden)
-    return findings, adjs, rm
-
-
 def run_experiment(
     *,
     dossier: Dossier,
@@ -41,19 +32,31 @@ def run_experiment(
     judge: JudgeFn = default_judge,
     save_path: str | None = None,
 ) -> dict:
-    """Devuelve {'aggregates': {name: AggregateMetrics}, 'runs': {...}, 'config': {...}}."""
-    aggregates: dict[str, AggregateMetrics] = {}
-    runs_detail: dict[str, list[dict]] = {}
+    """Devuelve {'aggregates': {name: AggregateMetrics}, 'runs': {...}, 'config': {...}}.
 
+    Dos fases para no recargar modelos en cada iteracion: primero TODA la generacion
+    (mantiene cargado el modelo generador), luego TODA la adjudicacion (mantiene
+    cargado el modelo juez). En local, eso reduce los swaps de modelo de ~13 a 1.
+    """
     for name in approaches:
         if name not in REGISTRY:
             raise ValueError(f"Approach desconocido: {name}. Disponibles: {sorted(REGISTRY)}")
+
+    # --- Fase 1: generacion (modelo generador) ---
+    gen_results: dict[str, list[list[Finding]]] = {}
+    for name in approaches:
+        n_iter = 1 if name in DETERMINISTIC else k
+        gen_results[name] = [REGISTRY[name](dossier, guidelines) for _ in range(n_iter)]
+
+    # --- Fase 2: adjudicacion + metricas (modelo juez) ---
+    aggregates: dict[str, AggregateMetrics] = {}
+    runs_detail: dict[str, list[dict]] = {}
+    for name in approaches:
         run_metrics: list[RunMetrics] = []
         detail: list[dict] = []
-
-        n_iter = 1 if name in DETERMINISTIC else k
-        for _ in range(n_iter):
-            findings, adjs, rm = _one_run(name, dossier, golden, guidelines, judge)
+        for findings in gen_results[name]:
+            adjs = judge(findings, golden, dossier)
+            rm = compute_run_metrics(name, findings, adjs, golden)
             run_metrics.append(rm)
             detail.append(
                 {

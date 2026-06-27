@@ -20,8 +20,9 @@ def test_backend_ollama_cambia_modelos_por_defecto(monkeypatch):
     monkeypatch.setenv("LLM_BACKEND", "ollama")
     monkeypatch.delenv("GEN_MODEL", raising=False)
     monkeypatch.delenv("JUDGE_MODEL", raising=False)
-    assert "qwen2.5" in llm.gen_model()
-    assert "gemma3" in llm.judge_model()  # familia distinta -> no auto-evaluacion
+    assert "qwen2.5:14b" == llm.gen_model()
+    assert "qwen2.5:32b" == llm.judge_model()      # juez mas fuerte que el generador
+    assert llm.gen_model() != llm.judge_model()    # independencia (ADR-002)
 
 
 def test_env_override_de_modelos(monkeypatch):

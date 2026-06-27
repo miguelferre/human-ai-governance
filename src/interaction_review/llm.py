@@ -16,8 +16,11 @@ from typing import Any
 # --- Defaults por backend ---
 DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"     # Anthropic: generador barato
 DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"           # Anthropic: juez (modelo distinto)
-DEFAULT_OLLAMA_GEN = "qwen2.5:14b"                  # Local: instruct, fuerte en instrucciones/JSON
-DEFAULT_OLLAMA_JUDGE = "gemma3:12b"                 # Local: familia distinta (no auto-eval)
+DEFAULT_OLLAMA_GEN = "qwen2.5:14b"                  # Local: generador (lo que se evalua)
+DEFAULT_OLLAMA_JUDGE = "qwen2.5:32b"                # Local: juez mas fuerte que el generador.
+# Nota (ADR-004): gemma3:12b se probo como juez y fallo el emparejamiento (demasiado
+# flojo). qwen2.5:32b es distinto en tamano del generador 14b; la independencia ideal
+# (otra familia) se cambia por capacidad del juez, mitigada por el anclaje al golden.
 
 DEFAULT_OLLAMA_URL = "http://localhost:11434"
 DEFAULT_NUM_CTX = 16384  # el dossier + catalogo de guidelines no cabe en 2k

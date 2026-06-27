@@ -27,10 +27,23 @@ Modelos por defecto en local (override con `GEN_MODEL`/`JUDGE_MODEL`):
 
 - **Generador:** `qwen2.5:14b` (instruct) — entra entero en 16 GB, rápido, fuerte en
   seguimiento de instrucciones y JSON.
-- **Juez:** `gemma3:12b` — **familia distinta** del generador, para no auto-evaluarse
-  (ADR-002).
-- **Escalada opcional** a `qwen2.5:32b` / `gemma3:27b` (offload parcial a RAM) como
-  "mejor local", para medir cuánta capacidad mínima exige la tarea.
+- **Juez:** `qwen2.5:32b` — más fuerte que el generador (el juez es el instrumento de
+  medida; conviene que sea el más capaz). Distinto en tamaño del generador 14b.
+  - **Por qué no `gemma3:12b`:** se probó como juez y **falló el emparejamiento**
+    (etiquetaba todo `tp_new` aun reconociendo la correspondencia en su razonamiento).
+    Demasiado flojo para esta tarea.
+  - **Independencia (ADR-002):** lo ideal sería otra familia; se cambia por capacidad
+    del juez, mitigado por el anclaje al golden (el juez empareja contra una verdad
+    fija, no "puntúa libremente"). `gemma3:27b` queda como alternativa cross-familia.
+
+### Hallazgo de diseño: el ORDEN de campos del esquema importa
+
+Con decodificación restringida (`format`), el modelo genera los campos del JSON en el
+orden del esquema. Si `label` va antes que el razonamiento, el modelo **decide la
+etiqueta a ciegas** y luego escribe una razón que la contradice (se vio: razonaba
+"se corresponde con GI-03" pero etiquetaba `tp_new`). Solución: en el esquema del juez,
+`judge_rationale` primero, `matched_golden_id` después y `label` AL FINAL. Esto arregló
+el emparejamiento con `qwen2.5:14b` sin cambiar de modelo.
 
 `OLLAMA_NUM_CTX` (def. 16384) evita truncar el dossier + catálogo de guidelines.
 

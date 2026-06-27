@@ -49,7 +49,13 @@ Ademas: rationale (por que es un problema EN ESTE sistema) y recommendation (acc
 
 PROHIBIDO: recomendaciones genericas que valdrian para cualquier sistema de IA
 ("muestra la incertidumbre", "evita el sesgo", "mejora la explicabilidad") sin anclarlas en el dossier.
-Si no puedes apoyar un hallazgo en evidencia del dossier, NO lo reportes. Mejor pocos y solidos que muchos y vagos.
+Si no puedes apoyar un hallazgo en evidencia del dossier, NO lo reportes.
+
+SE EXHAUSTIVO: recorre TODAS las areas de la interaccion (presentacion del resultado, confianza e
+incertidumbre, explicacion del porque, correccion/override, descarte y temporizacion de alertas, onboarding,
+comportamiento ante datos insuficientes o fallo, supervision por subgrupos, cambios y controles, feedback) y
+reporta CADA problema real y anclado que detectes; no te limites a unos pocos. Pero cada hallazgo DEBE pasar
+la regla de oro: si no esta anclado, no va. Vale mas un hallazgo solido que diez genericos.
 Devuelve TODO mediante la herramienta report_findings."""
 
 _FEWSHOT = """\
@@ -133,14 +139,20 @@ FINDINGS_TOOL = {
 # --------------------------------------------------------------------------- #
 JUDGE_SYSTEM = """\
 Eres un adjudicador IMPARCIAL. Recibes hallazgos de una revision de la capa de interaccion de un sistema,
-junto con (a) el dossier del sistema y (b) un golden set de problemas conocidos. Clasifica CADA hallazgo:
+junto con (a) el dossier del sistema y (b) un golden set de problemas conocidos. Clasifica CADA hallazgo.
 
-- "tp_match": describe un problema REAL del sistema y se corresponde con uno del golden. Indica matched_golden_id.
-- "tp_new": real y especifico de ESTE sistema (apoyado en el dossier), pero NO esta en el golden.
-- "fp_generic": generico o no anclado; valdria para cualquier sistema, o no se apoya en evidencia del dossier.
+ORDEN OBLIGATORIO POR HALLAZGO: escribe primero judge_rationale (tu razonamiento), luego matched_golden_id
+si procede, y SOLO AL FINAL la etiqueta label. La etiqueta debe ser coherente con tu razonamiento.
+
+Etiquetas:
+- "tp_match": describe un problema REAL del sistema que SE CORRESPONDE con uno del golden. Si en tu
+  razonamiento concluyes que se corresponde con un golden, DEBES usar tp_match y poner su id EXACTO
+  (uno de la lista de golden) en matched_golden_id. NO uses tp_new si hay correspondencia con el golden.
+- "tp_new": real y especifico de ESTE sistema (apoyado en el dossier) pero que NO se corresponde con ningun golden.
+- "fp_generic": generico o no anclado. Si locus o evidence vienen VACIOS, o el hallazgo valdria para
+  cualquier sistema, es fp_generic.
 - "fp_incorrect": especifico pero incorrecto o no sustentado por el dossier.
 
-Se ESTRICTO: si un hallazgo solo repite una guideline sin locus concreto y sin evidencia del dossier, es fp_generic.
 Un mismo problema del golden puede ser emparejado por varios hallazgos (cada uno tp_match con el mismo id).
 Devuelve TODO mediante la herramienta report_adjudications, una entrada por hallazgo."""
 
@@ -181,16 +193,23 @@ JUDGE_TOOL = {
                 "type": "array",
                 "items": {
                     "type": "object",
+                    # ORDEN INTENCIONADO: razonar primero, etiqueta al final. Con
+                    # decodificacion restringida el modelo genera los campos en este
+                    # orden, asi que la label se decide DESPUES del razonamiento.
                     "properties": {
                         "finding_id": {"type": "string"},
+                        "judge_rationale": {"type": "string", "description": "Razonamiento; escribelo primero."},
+                        "matched_golden_id": {
+                            "type": "string",
+                            "description": "Id EXACTO del golden si label sera tp_match; si no, cadena vacia.",
+                        },
                         "label": {
                             "type": "string",
                             "enum": ["tp_match", "tp_new", "fp_generic", "fp_incorrect"],
+                            "description": "Etiqueta final, coherente con el razonamiento.",
                         },
-                        "matched_golden_id": {"type": "string"},
-                        "judge_rationale": {"type": "string"},
                     },
-                    "required": ["finding_id", "label", "judge_rationale"],
+                    "required": ["finding_id", "judge_rationale", "matched_golden_id", "label"],
                 },
             }
         },
