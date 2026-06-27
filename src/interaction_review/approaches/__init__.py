@@ -17,12 +17,16 @@ from __future__ import annotations
 from typing import Callable
 
 from interaction_review.approaches.b0_checklist import run as run_b0
+from interaction_review.approaches.b1_single_prompt import run as run_b1
+from interaction_review.approaches.b2_few_shot import run as run_b2
 from interaction_review.schemas import Dossier, Finding, Guideline
 
 Approach = Callable[[Dossier, list[Guideline]], list[Finding]]
 
 REGISTRY: dict[str, Approach] = {
-    "b0": run_b0,
+    "b0": run_b0,  # checklist determinista (sin LLM)
+    "b1": run_b1,  # prompt unico zero-shot
+    "b2": run_b2,  # prompt unico few-shot
 }
 
-__all__ = ["REGISTRY", "Approach", "run_b0"]
+__all__ = ["REGISTRY", "Approach", "run_b0", "run_b1", "run_b2"]

@@ -31,9 +31,13 @@ La complejidad solo se justifica si **gana de forma medible**.
 
 ## Estado
 
-**F0 completada** (scaffold + fundamentos): esquemas, HAX-18 y PAIR codificadas,
-métricas, B0 determinista, CLI, ADRs, tests. Los baselines con LLM (B1/B2) y el
-caso golden llegan en F1–F2.
+- **F0 completada:** esquemas, HAX-18 y PAIR codificadas, métricas, B0 determinista,
+  CLI, ADRs, tests.
+- **F1 en curso:** caso clínico golden (EII → Digestivo) ingerido en `data/golden/`
+  (privado), con dossier ciego neutralizado y answer key v0 pendiente de validación.
+- **F2 implementada:** B1 (prompt único), B2 (few-shot) y LLM-juez; comando `comparar`
+  que corre k veces, adjudica y aplica la regla de decisión. Falta la primera ejecución
+  real (requiere `ANTHROPIC_API_KEY`).
 
 ## Instalación
 
@@ -50,6 +54,14 @@ uv run interaction-review revisar --dossier ruta/dossier.json --approach b0
 # Métricas contra un golden set (requiere adjudicaciones para recall/precisión):
 uv run interaction-review evaluar --golden data/golden/answer_key.json \
     --dossier ruta/dossier.json --approach b0 --adjudications adj.json
+
+# Experimento completo: corre B0/B1/B2 k veces, adjudica con el LLM-juez y compara
+# (requiere ANTHROPIC_API_KEY; envía el dossier de-identificado a la nube):
+export ANTHROPIC_API_KEY=...   # GEN_MODEL / JUDGE_MODEL opcionales
+uv run interaction-review comparar \
+    --dossier data/golden/caso-EII/dossier_blind.json \
+    --golden  data/golden/caso-EII/answer_key.json \
+    --approaches b0,b1,b2 --k 3 --save runs/eii.json
 ```
 
 ## Estructura

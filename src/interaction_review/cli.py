@@ -12,8 +12,10 @@ from pathlib import Path
 
 from interaction_review.approaches import REGISTRY
 from interaction_review.guidelines import all_guidelines
-from interaction_review.metrics import aggregate, compute_run_metrics
+from interaction_review.llm import LLMNotConfigured
+from interaction_review.metrics import aggregate, beats, compute_run_metrics
 from interaction_review.report import render_findings_md, render_metrics_md
+from interaction_review.runner import run_experiment
 from interaction_review.schemas import (
     Adjudication,
     Dossier,
@@ -88,6 +90,50 @@ def cmd_evaluar(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_comparar(args: argparse.Namespace) -> int:
+    dossier = Dossier.model_validate(_load_json(args.dossier))
+    golden = [GoldenIssue.model_validate(x) for x in _load_json(args.golden)]
+    guidelines = _select_guidelines(args.corpus)
+    approaches = [a.strip() for a in args.approaches.split(",") if a.strip()]
+
+    try:
+        result = run_experiment(
+            dossier=dossier,
+            golden=golden,
+            guidelines=guidelines,
+            approaches=approaches,
+            k=args.k,
+            save_path=args.save,
+        )
+    except LLMNotConfigured as e:
+        print(f"[LLM no configurado] {e}", file=sys.stderr)
+        return 3
+
+    aggs = result["_aggregate_objs"]
+    table = render_metrics_md([aggs[a] for a in approaches if a in aggs])
+
+    # Regla de decision (ADR-002): cada peldano debe ganar al anterior.
+    decision_lines = ["", "## Regla de decision (margen > ruido)"]
+    for cand, base in (("b1", "b0"), ("b2", "b1")):
+        if cand in aggs and base in aggs:
+            verdict = "GANA" if beats(aggs[cand], aggs[base]) else "NO gana"
+            dc = aggs[cand].primary_score
+            db = aggs[base].primary_score
+            decision_lines.append(
+                f"- {cand} vs {base}: **{verdict}** "
+                f"(primary {dc.mean:.2f}±{dc.std:.2f} vs {db.mean:.2f}±{db.std:.2f})"
+            )
+    config = result["config"]
+    footer = (
+        f"\n> gen_model={config['gen_model']} | judge_model={config['judge_model']} | "
+        f"k={config['k']} | golden={config['n_golden']}"
+    )
+    _emit(table + "\n" + "\n".join(decision_lines) + footer, args.out)
+    if args.save:
+        print(f"Crudos guardados en: {args.save}", file=sys.stderr)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="interaction-review",
@@ -111,6 +157,19 @@ def build_parser() -> argparse.ArgumentParser:
     pe.add_argument("--corpus", default="hax,pair", help="Corpus (def: hax,pair).")
     pe.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
     pe.set_defaults(func=cmd_evaluar)
+
+    pc = sub.add_parser(
+        "comparar",
+        help="Corre approaches k veces, adjudica con el LLM-juez y compara (F2). Requiere ANTHROPIC_API_KEY salvo solo b0.",
+    )
+    pc.add_argument("--dossier", required=True, help="JSON del Dossier (ciego).")
+    pc.add_argument("--golden", required=True, help="JSON con la lista de GoldenIssue.")
+    pc.add_argument("--approaches", default="b0,b1,b2", help="Lista separada por comas (def: b0,b1,b2).")
+    pc.add_argument("--k", type=int, default=3, help="Repeticiones por approach (def: 3).")
+    pc.add_argument("--corpus", default="hax,pair", help="Corpus (def: hax,pair).")
+    pc.add_argument("--save", default=None, help="Ruta para guardar crudos JSON (p. ej. runs/eii.json).")
+    pc.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
+    pc.set_defaults(func=cmd_comparar)
 
     return p
 
