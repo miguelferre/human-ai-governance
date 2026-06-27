@@ -1,0 +1,26 @@
+{
+  "_instrucciones": "Plantilla estructurada del dossier (opcional; alternativa a los .md). Rellena los campos entre <...>. Cada respuesta o documento se vuelca como una entrada de 'sources' con su procedencia ('kind'): document | technician | end_user | other. Puedes anadir tantas 'sources' como necesites. No incluyas datos personales. Borra este campo '_instrucciones' al entregar si quieres.",
+  "system_name": "<nombre del sistema>",
+  "domain": "<dominio / para que se usa, sin datos personales>",
+  "summary": "<resumen breve del sistema y de como interactua con su usuario>",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha tecnica / model card",
+      "content": "<texto o resumen del documento. Ej.: 'Clasifica X en alto/medio/bajo. Precision 0,82. No se reporta rendimiento por subgrupo.'>"
+    },
+    {
+      "id": "tech-1",
+      "kind": "technician",
+      "label": "Responsable tecnico",
+      "content": "<lo que cuenta el perfil tecnico sobre como funciona y se disenó la interaccion>"
+    },
+    {
+      "id": "user-1",
+      "kind": "end_user",
+      "label": "Usuario final",
+      "content": "<como vive el usuario final el sistema: que ve, si se fia, que hace cuando discrepa>"
+    }
+  ]
+}
