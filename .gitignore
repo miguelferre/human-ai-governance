@@ -1,0 +1,35 @@
+# --- Material privado / clinico: NUNCA versionar ---
+# El caso clinico real y el answer key (golden set) son privados.
+data/golden/
+data/private/
+*.phi.*
+
+# Resultados crudos de corridas (pueden contener fragmentos del dossier)
+runs/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Entorno / secretos ---
+.env
+.env.*
+!.env.example
+
+# --- uv ---
+# uv.lock SI se versiona (reproducibilidad). No lo ignoramos.
+
+# --- SO / editores ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

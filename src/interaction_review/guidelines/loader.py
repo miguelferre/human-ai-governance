@@ -1,0 +1,44 @@
+"""Carga y valida los corpus de guidelines (HAX-18 y PAIR) desde YAML."""
+
+from __future__ import annotations
+
+from functools import lru_cache
+from pathlib import Path
+
+import yaml
+
+from interaction_review.schemas import Guideline, GuidelineCorpus
+
+_HERE = Path(__file__).parent
+_FILES = {
+    GuidelineCorpus.HAX: _HERE / "hax18.yaml",
+    GuidelineCorpus.PAIR: _HERE / "pair.yaml",
+}
+
+
+def load_corpus(corpus: GuidelineCorpus) -> list[Guideline]:
+    """Carga un corpus concreto desde su YAML y lo valida con pydantic."""
+    path = _FILES[corpus]
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    declared = GuidelineCorpus(raw["corpus"])
+    if declared != corpus:
+        raise ValueError(f"{path.name} declara corpus {declared}, se esperaba {corpus}.")
+    return [Guideline(corpus=declared, **item) for item in raw["guidelines"]]
+
+
+@lru_cache(maxsize=1)
+def all_guidelines() -> tuple[Guideline, ...]:
+    """Todas las guidelines de todos los corpus (cacheado)."""
+    out: list[Guideline] = []
+    for corpus in GuidelineCorpus:
+        out.extend(load_corpus(corpus))
+    ids = [g.id for g in out]
+    if len(ids) != len(set(ids)):
+        dupes = sorted({i for i in ids if ids.count(i) > 1})
+        raise ValueError(f"Ids de guideline duplicados entre corpus: {dupes}")
+    return tuple(out)
+
+
+def guidelines_by_id() -> dict[str, Guideline]:
+    """Indice id -> Guideline sobre todos los corpus."""
+    return {g.id: g for g in all_guidelines()}
