@@ -27,14 +27,19 @@ Modelos por defecto en local (override con `GEN_MODEL`/`JUDGE_MODEL`):
 
 - **Generador:** `qwen2.5:14b` (instruct) — entra entero en 16 GB, rápido, fuerte en
   seguimiento de instrucciones y JSON.
-- **Juez:** `qwen2.5:32b` — más fuerte que el generador (el juez es el instrumento de
-  medida; conviene que sea el más capaz). Distinto en tamaño del generador 14b.
-  - **Por qué no `gemma3:12b`:** se probó como juez y **falló el emparejamiento**
-    (etiquetaba todo `tp_new` aun reconociendo la correspondencia en su razonamiento).
-    Demasiado flojo para esta tarea.
-  - **Independencia (ADR-002):** lo ideal sería otra familia; se cambia por capacidad
-    del juez, mitigado por el anclaje al golden (el juez empareja contra una verdad
-    fija, no "puntúa libremente"). `gemma3:27b` queda como alternativa cross-familia.
+- **Juez:** `qwen2.5:14b` — el único modelo que **cabe entero en 16 GB de VRAM** y a la
+  vez **juzga bien** (verificado: empareja 5/5).
+  - **Por qué no `qwen2.5:32b`** (juez ideal por capacidad): pesa ~24 GB, NO cabe en
+    16 GB y Ollama lo desborda a memoria compartida vía PCIe. Una corrida `k=3` quedó
+    ~4 h arrastrándose sin terminar. **Inutilizable para iterar** en este hardware.
+  - **Por qué no `gemma3:12b`** (cabe en VRAM): se probó como juez y **falló el
+    emparejamiento** (etiquetaba todo `tp_new` aun reconociendo la correspondencia en su
+    razonamiento). Demasiado flojo.
+  - **Independencia (ADR-002):** generador y juez acaban siendo el mismo modelo. Es un
+    compromiso consciente, mitigado porque el juez empareja contra una verdad fija (el
+    golden), no "puntúa libremente". Queda disponible un **re-juicio independiente** sobre
+    los hallazgos ya guardados con otra familia que también quepa (p. ej. `phi4:14b`),
+    sin necesidad de re-generar.
 
 ### Hallazgo de diseño: el ORDEN de campos del esquema importa
 

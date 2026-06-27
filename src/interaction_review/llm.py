@@ -17,10 +17,13 @@ from typing import Any
 DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"     # Anthropic: generador barato
 DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"           # Anthropic: juez (modelo distinto)
 DEFAULT_OLLAMA_GEN = "qwen2.5:14b"                  # Local: generador (lo que se evalua)
-DEFAULT_OLLAMA_JUDGE = "qwen2.5:32b"                # Local: juez mas fuerte que el generador.
-# Nota (ADR-004): gemma3:12b se probo como juez y fallo el emparejamiento (demasiado
-# flojo). qwen2.5:32b es distinto en tamano del generador 14b; la independencia ideal
-# (otra familia) se cambia por capacidad del juez, mitigada por el anclaje al golden.
+DEFAULT_OLLAMA_JUDGE = "qwen2.5:14b"                # Local: cabe entero en 16 GB y juzga bien.
+# Nota (ADR-004): qwen2.5:32b seria el juez ideal por capacidad, pero NO cabe en 16 GB de
+# VRAM (pesa ~24 GB) y se desborda a memoria compartida -> lentisimo, inutilizable iterando.
+# gemma3:12b cabe pero es demasiado flojo para el emparejamiento. qwen2.5:14b es el unico
+# que cabe Y juzga bien (verificado). Compromiso: gen = juez = qwen2.5:14b; la independencia
+# (ADR-002) se mitiga con el anclaje al golden, y queda disponible un re-juicio independiente
+# (p. ej. phi4:14b, otra familia que tambien cabe).
 
 DEFAULT_OLLAMA_URL = "http://localhost:11434"
 DEFAULT_NUM_CTX = 16384  # el dossier + catalogo de guidelines no cabe en 2k

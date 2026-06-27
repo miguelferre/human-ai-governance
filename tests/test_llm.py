@@ -20,9 +20,9 @@ def test_backend_ollama_cambia_modelos_por_defecto(monkeypatch):
     monkeypatch.setenv("LLM_BACKEND", "ollama")
     monkeypatch.delenv("GEN_MODEL", raising=False)
     monkeypatch.delenv("JUDGE_MODEL", raising=False)
+    # qwen2.5:14b cabe en 16 GB y juzga bien; 32b se desborda (ver ADR-004).
     assert "qwen2.5:14b" == llm.gen_model()
-    assert "qwen2.5:32b" == llm.judge_model()      # juez mas fuerte que el generador
-    assert llm.gen_model() != llm.judge_model()    # independencia (ADR-002)
+    assert "qwen2.5:14b" == llm.judge_model()
 
 
 def test_env_override_de_modelos(monkeypatch):
