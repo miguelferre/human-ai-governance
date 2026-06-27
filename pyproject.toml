@@ -9,9 +9,12 @@ authors = [{ name = "Miguel Ferreiro Garcia" }]
 dependencies = [
     "pydantic>=2.7,<3",
     "pyyaml>=6,<7",
-    # SDK del LLM. No se usa en F0 (B0 es determinista) pero se fija ya porque
+    # SDK del LLM nube. No se usa en F0 (B0 es determinista) pero se fija ya porque
     # es nucleo del proyecto a partir de F2 (B1/B2).
     "anthropic>=0.40,<1",
+    # Backend local (Ollama /api/chat). Ya venia transitiva via anthropic; se
+    # declara explicita porque se usa directamente (ADR-004).
+    "httpx>=0.27,<1",
 ]
 
 [project.optional-dependencies]

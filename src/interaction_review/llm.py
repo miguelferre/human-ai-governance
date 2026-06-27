@@ -1,39 +1,58 @@
-"""Wrapper minimo sobre el SDK de Anthropic para llamadas con salida estructurada.
+"""Wrapper sobre el LLM con dos backends: Anthropic (nube) y Ollama (local).
 
-Aisla la dependencia del LLM: el resto del codigo trabaja con dicts/pydantic.
-Los modelos se leen de variables de entorno para poder "empezar barato" y
-cambiar sin tocar codigo (ADR-001/ADR-002).
+Aisla la dependencia del LLM: el resto del codigo trabaja con dicts/pydantic y
+no sabe que backend hay detras. Se elige con la variable de entorno LLM_BACKEND
+('anthropic' por defecto, o 'ollama'). Los modelos se eligen con GEN_MODEL /
+JUDGE_MODEL. Ver docs/adr/ADR-001, ADR-002 y ADR-004.
 """
 
 from __future__ import annotations
 
+import json
 import os
 import time
 from typing import Any
 
-# Defaults: generador barato; juez con modelo DISTINTO (no auto-evaluacion, ADR-002).
-DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"
-DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"
+# --- Defaults por backend ---
+DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"     # Anthropic: generador barato
+DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"           # Anthropic: juez (modelo distinto)
+DEFAULT_OLLAMA_GEN = "qwen2.5:14b"                  # Local: instruct, fuerte en instrucciones/JSON
+DEFAULT_OLLAMA_JUDGE = "gemma3:12b"                 # Local: familia distinta (no auto-eval)
+
+DEFAULT_OLLAMA_URL = "http://localhost:11434"
+DEFAULT_NUM_CTX = 16384  # el dossier + catalogo de guidelines no cabe en 2k
 
 
 class LLMNotConfigured(RuntimeError):
-    """No hay credenciales para llamar al LLM."""
+    """No hay backend de LLM disponible (sin API key, o Ollama no responde)."""
+
+
+def backend() -> str:
+    return os.environ.get("LLM_BACKEND", "anthropic").lower()
+
+
+def _is_ollama() -> bool:
+    return backend() in ("ollama", "local")
 
 
 def gen_model() -> str:
-    return os.environ.get("GEN_MODEL", DEFAULT_GEN_MODEL)
+    default = DEFAULT_OLLAMA_GEN if _is_ollama() else DEFAULT_GEN_MODEL
+    return os.environ.get("GEN_MODEL", default)
 
 
 def judge_model() -> str:
-    return os.environ.get("JUDGE_MODEL", DEFAULT_JUDGE_MODEL)
+    default = DEFAULT_OLLAMA_JUDGE if _is_ollama() else DEFAULT_JUDGE_MODEL
+    return os.environ.get("JUDGE_MODEL", default)
 
 
-def _client():
+# --------------------------------------------------------------------------- #
+# Backend Anthropic (nube): tool-use forzado.
+# --------------------------------------------------------------------------- #
+def _anthropic_client():
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise LLMNotConfigured(
-            "Falta ANTHROPIC_API_KEY en el entorno. Exportala (o usa un .env) antes de "
-            "ejecutar approaches con LLM o el juez. El dossier de-identificado se enviara "
-            "a la nube de Anthropic (ver docs/adr/ADR-003)."
+            "Falta ANTHROPIC_API_KEY. Exportala o usa LLM_BACKEND=ollama para local "
+            "(ver docs/adr/ADR-003 y ADR-004)."
         )
     try:
         import anthropic
@@ -42,6 +61,63 @@ def _client():
     return anthropic.Anthropic()
 
 
+def _call_anthropic(model, system, user, tool, temperature, max_tokens) -> dict[str, Any]:
+    client = _anthropic_client()
+    resp = client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        system=system,
+        messages=[{"role": "user", "content": user}],
+        tools=[tool],
+        tool_choice={"type": "tool", "name": tool["name"]},
+    )
+    for block in resp.content:
+        if getattr(block, "type", None) == "tool_use":
+            return dict(block.input)
+    raise RuntimeError("El modelo no devolvio un bloque tool_use.")
+
+
+# --------------------------------------------------------------------------- #
+# Backend Ollama (local): salida estructurada por `format` (JSON-schema).
+# --------------------------------------------------------------------------- #
+def ollama_payload(model, system, user, schema, temperature) -> dict[str, Any]:
+    """Construye el cuerpo de /api/chat (funcion pura, testeable sin red)."""
+    return {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        "format": schema,  # decodificacion restringida al JSON-schema
+        "stream": False,
+        "options": {
+            "temperature": temperature,
+            "num_ctx": int(os.environ.get("OLLAMA_NUM_CTX", DEFAULT_NUM_CTX)),
+        },
+    }
+
+
+def _call_ollama(model, system, user, tool, temperature) -> dict[str, Any]:
+    import httpx
+
+    base = os.environ.get("OLLAMA_BASE_URL", DEFAULT_OLLAMA_URL).rstrip("/")
+    payload = ollama_payload(model, system, user, tool["input_schema"], temperature)
+    try:
+        resp = httpx.post(f"{base}/api/chat", json=payload, timeout=600)
+        resp.raise_for_status()
+    except httpx.ConnectError as e:
+        raise LLMNotConfigured(
+            f"Ollama no responde en {base}. Instala Ollama y/o arranca el servicio "
+            "(`ollama serve`), y descarga el modelo (`ollama pull {model}`)."
+        ) from e
+    content = resp.json()["message"]["content"]
+    return json.loads(content)
+
+
+# --------------------------------------------------------------------------- #
+# Interfaz unica.
+# --------------------------------------------------------------------------- #
 def call_structured(
     *,
     model: str,
@@ -52,28 +128,16 @@ def call_structured(
     max_tokens: int = 8000,
     retries: int = 3,
 ) -> dict[str, Any]:
-    """Llama al modelo forzando el uso de `tool` y devuelve sus argumentos (dict).
-
-    Reintenta ante errores transitorios con backoff simple.
-    """
-    client = _client()
+    """Llama al LLM (segun LLM_BACKEND) y devuelve un dict conforme al esquema de `tool`."""
     last_err: Exception | None = None
     for attempt in range(retries):
         try:
-            resp = client.messages.create(
-                model=model,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                system=system,
-                messages=[{"role": "user", "content": user}],
-                tools=[tool],
-                tool_choice={"type": "tool", "name": tool["name"]},
-            )
-            for block in resp.content:
-                if getattr(block, "type", None) == "tool_use":
-                    return dict(block.input)
-            raise RuntimeError("El modelo no devolvio un bloque tool_use.")
-        except Exception as e:  # noqa: BLE001 - reintento generico controlado
+            if _is_ollama():
+                return _call_ollama(model, system, user, tool, temperature)
+            return _call_anthropic(model, system, user, tool, temperature, max_tokens)
+        except LLMNotConfigured:
+            raise  # error de configuracion: no tiene sentido reintentar
+        except Exception as e:  # noqa: BLE001 - reintento controlado ante fallos transitorios
             last_err = e
             if attempt < retries - 1:
                 time.sleep(2 * (attempt + 1))
