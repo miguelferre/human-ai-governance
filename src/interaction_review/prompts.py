@@ -139,22 +139,22 @@ FINDINGS_TOOL = {
 # --------------------------------------------------------------------------- #
 JUDGE_SYSTEM = """\
 Eres un adjudicador IMPARCIAL. Recibes hallazgos de una revision de la capa de interaccion de un sistema,
-junto con (a) el dossier del sistema y (b) un golden set de problemas conocidos. Clasifica CADA hallazgo.
+junto con (a) el dossier del sistema y (b) un golden set de problemas conocidos.
 
-ORDEN OBLIGATORIO POR HALLAZGO: escribe primero judge_rationale (tu razonamiento), luego matched_golden_id
-si procede, y SOLO AL FINAL la etiqueta label. La etiqueta debe ser coherente con tu razonamiento.
+Para CADA hallazgo responde, EN ESTE ORDEN, a preguntas concretas. NO decides una etiqueta:
+la etiqueta la derivamos nosotros de tus respuestas (asi no puedes contradecirte).
 
-Etiquetas:
-- "tp_match": describe un problema REAL del sistema que SE CORRESPONDE con uno del golden. Si en tu
-  razonamiento concluyes que se corresponde con un golden, DEBES usar tp_match y poner su id EXACTO
-  (uno de la lista de golden) en matched_golden_id. NO uses tp_new si hay correspondencia con el golden.
-- "tp_new": real y especifico de ESTE sistema (apoyado en el dossier) pero que NO se corresponde con ningun golden.
-- "fp_generic": generico o no anclado. Si locus o evidence vienen VACIOS, o el hallazgo valdria para
-  cualquier sistema, es fp_generic.
-- "fp_incorrect": especifico pero incorrecto o no sustentado por el dossier.
+1) judge_rationale: tu razonamiento breve.
+2) corresponde_a_golden: el id EXACTO de un problema del golden con el que se corresponde el hallazgo,
+   o la cadena "ninguno". USA SOLO ids de la lista de golden que se te da. Si en tu razonamiento ves
+   que se corresponde con un golden, PON SU ID AQUI (no lo dejes en "ninguno").
+3) es_generico: true si el hallazgo NO esta anclado (locus o evidencia vacios) o si valdria para
+   cualquier sistema de IA; false en caso contrario. Se estricto: sin locus y sin evidencia => generico.
+4) es_real: true si describe un problema real del sistema apoyado en el dossier; false si es incorrecto
+   o no esta sustentado por el dossier.
 
-Un mismo problema del golden puede ser emparejado por varios hallazgos (cada uno tp_match con el mismo id).
-Devuelve TODO mediante la herramienta report_adjudications, una entrada por hallazgo."""
+Varios hallazgos pueden corresponder al mismo golden (cada uno con el mismo id). Devuelve TODO mediante
+la herramienta report_adjudications, una entrada por hallazgo."""
 
 
 def judge_user(findings_payload: list[dict], golden: list[GoldenIssue], dossier: Dossier) -> str:
@@ -193,23 +193,20 @@ JUDGE_TOOL = {
                 "type": "array",
                 "items": {
                     "type": "object",
-                    # ORDEN INTENCIONADO: razonar primero, etiqueta al final. Con
-                    # decodificacion restringida el modelo genera los campos en este
-                    # orden, asi que la label se decide DESPUES del razonamiento.
+                    # Sub-respuestas atomicas; la ETIQUETA se deriva en codigo (judge.py)
+                    # para que el modelo no pueda contradecirse (decir "corresponde a GI-3"
+                    # y etiquetar tp_new). Orden: razonar primero.
                     "properties": {
                         "finding_id": {"type": "string"},
                         "judge_rationale": {"type": "string", "description": "Razonamiento; escribelo primero."},
-                        "matched_golden_id": {
+                        "corresponde_a_golden": {
                             "type": "string",
-                            "description": "Id EXACTO del golden si label sera tp_match; si no, cadena vacia.",
+                            "description": "Id EXACTO del golden correspondiente, o 'ninguno'.",
                         },
-                        "label": {
-                            "type": "string",
-                            "enum": ["tp_match", "tp_new", "fp_generic", "fp_incorrect"],
-                            "description": "Etiqueta final, coherente con el razonamiento.",
-                        },
+                        "es_generico": {"type": "boolean", "description": "true si no anclado o vale para cualquier sistema."},
+                        "es_real": {"type": "boolean", "description": "true si es un problema real apoyado en el dossier."},
                     },
-                    "required": ["finding_id", "judge_rationale", "matched_golden_id", "label"],
+                    "required": ["finding_id", "judge_rationale", "corresponde_a_golden", "es_generico", "es_real"],
                 },
             }
         },

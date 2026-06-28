@@ -75,29 +75,30 @@ def test_to_finding_sin_anclaje_no_grounded():
 
 
 # --- logica del juez (LLM monkeypatcheado) ---
-def test_adjudicate_coherencia_de_etiquetas(monkeypatch):
-    findings = [Finding(id=f"x{i}", title=f"x{i}") for i in (1, 2, 3, 4)]
+def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
+    findings = [Finding(id=f"x{i}", title=f"x{i}") for i in (1, 2, 3, 4, 5)]
     golden = [GoldenIssue(id="G1", description="d")]
 
     def fake_call(**kwargs):
+        # El modelo NO da etiqueta: da sub-respuestas y la derivamos en codigo.
         return {
             "adjudications": [
-                {"finding_id": "x1", "label": "tp_match", "matched_golden_id": "G1", "judge_rationale": "ok"},
-                {"finding_id": "x2", "label": "tp_match", "matched_golden_id": "NOPE", "judge_rationale": "id malo"},
-                {"finding_id": "x3", "label": "fp_generic", "judge_rationale": "generico"},
-                # x4 ausente a proposito
+                {"finding_id": "x1", "judge_rationale": "ok", "corresponde_a_golden": "G1", "es_generico": False, "es_real": True},
+                # id de golden inexistente -> no es match; real -> tp_new
+                {"finding_id": "x2", "judge_rationale": "x", "corresponde_a_golden": "NOPE", "es_generico": False, "es_real": True},
+                {"finding_id": "x3", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": True, "es_real": False},
+                # x4 ausente a proposito -> fp_incorrect
+                {"finding_id": "x5", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": False, "es_real": False},
             ]
         }
 
     monkeypatch.setattr(llm, "call_structured", fake_call)
-    adjs = judge_mod.adjudicate(findings, golden, _dossier())
-    by_id = {a.finding_id: a for a in adjs}
+    by_id = {a.finding_id: a for a in judge_mod.adjudicate(findings, golden, _dossier())}
     assert by_id["x1"].label == AdjudicationLabel.TP_MATCH and by_id["x1"].matched_golden_id == "G1"
-    # tp_match con golden inexistente -> degradado a tp_new sin match
     assert by_id["x2"].label == AdjudicationLabel.TP_NEW and by_id["x2"].matched_golden_id is None
     assert by_id["x3"].label == AdjudicationLabel.FP_GENERIC
-    # hallazgo no clasificado por el juez -> fp_incorrect por prudencia
-    assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT
+    assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT  # ausente -> prudencia
+    assert by_id["x5"].label == AdjudicationLabel.FP_INCORRECT  # ni golden, ni generico, ni real
 
 
 # --- orquestacion (b0 determinista, juez falso, sin API) ---

@@ -46,9 +46,16 @@ Modelos por defecto en local (override con `GEN_MODEL`/`JUDGE_MODEL`):
 Con decodificación restringida (`format`), el modelo genera los campos del JSON en el
 orden del esquema. Si `label` va antes que el razonamiento, el modelo **decide la
 etiqueta a ciegas** y luego escribe una razón que la contradice (se vio: razonaba
-"se corresponde con GI-03" pero etiquetaba `tp_new`). Solución: en el esquema del juez,
-`judge_rationale` primero, `matched_golden_id` después y `label` AL FINAL. Esto arregló
-el emparejamiento con `qwen2.5:14b` sin cambiar de modelo.
+"se corresponde con GI-03" pero etiquetaba `tp_new`). Reordenar (`judge_rationale`
+primero) ayudó con B1, pero **con B2 (12 hallazgos por llamada) el modelo recaía**:
+seguía etiquetando `tp_new` aun nombrando el golden correcto en su razón. Esto
+infravaloraba el recall e inflaba la varianza (era artefacto del juez, no del generador).
+
+**Fix robusto:** el modelo ya NO emite la etiqueta. Da sub-respuestas atómicas
+(`corresponde_a_golden`, `es_generico`, `es_real`) y la **etiqueta se deriva en código**
+(`judge.py`). Así no puede contradecirse. Lección general: con salida estructurada, no
+pidas una conclusión que dependa de un razonamiento que aún no ha escrito; pide hechos
+atómicos y compón la conclusión tú.
 
 `OLLAMA_NUM_CTX` (def. 16384) evita truncar el dossier + catálogo de guidelines.
 

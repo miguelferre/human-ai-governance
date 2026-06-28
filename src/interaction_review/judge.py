@@ -58,17 +58,18 @@ def adjudicate(
                 )
             )
             continue
-        try:
-            label = AdjudicationLabel(a.get("label"))
-        except ValueError:
-            label = AdjudicationLabel.FP_INCORRECT
-        matched = a.get("matched_golden_id")
-        # Coherencia: tp_match exige un id de golden valido; si no, es descubrimiento.
-        if label == AdjudicationLabel.TP_MATCH and matched not in golden_ids:
+        # La ETIQUETA se DERIVA de las sub-respuestas atomicas (no la decide el modelo),
+        # para que no pueda contradecirse (decir 'corresponde a GI-3' y etiquetar tp_new).
+        cg = str(a.get("corresponde_a_golden", "")).strip()
+        matched = cg if cg in golden_ids else None
+        if matched is not None:
+            label = AdjudicationLabel.TP_MATCH
+        elif bool(a.get("es_generico")):
+            label = AdjudicationLabel.FP_GENERIC
+        elif bool(a.get("es_real")):
             label = AdjudicationLabel.TP_NEW
-            matched = None
-        if label != AdjudicationLabel.TP_MATCH:
-            matched = None
+        else:
+            label = AdjudicationLabel.FP_INCORRECT
         adjudications.append(
             Adjudication(
                 finding_id=f.id,
