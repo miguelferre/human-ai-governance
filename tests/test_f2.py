@@ -111,6 +111,27 @@ def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
 
 
 # --- orquestacion (b0 determinista, juez falso, sin API) ---
+def test_p3_buckets_cubren_todas_las_guidelines():
+    from interaction_review.approaches.p3_pipeline import BUCKETS
+
+    cubiertos = {gid for ids in BUCKETS.values() for gid in ids}
+    todas = {g.id for g in all_guidelines()}
+    assert cubiertos == todas  # sin omisiones ni ids inventados
+
+
+def test_p3_run_reid_unico(monkeypatch):
+    from interaction_review.approaches import p3_pipeline
+
+    def fake_generate(dossier, gl, *, few_shot, label):
+        return [Finding(id=f"{label}-001", title=label, guideline_ids=[gl[0].id], locus="x", evidence="y")]
+
+    monkeypatch.setattr(p3_pipeline, "generate", fake_generate)
+    out = p3_pipeline.run(_dossier(), list(all_guidelines()))
+    ids = [f.id for f in out]
+    assert len(ids) == len(set(ids)) == len(p3_pipeline.BUCKETS)  # un hallazgo por bloque, ids unicos
+    assert ids[0] == "p3-001"
+
+
 def test_run_experiment_b0_es_el_suelo(monkeypatch):
     def fake_judge(findings, golden, dossier):
         return [Adjudication(finding_id=f.id, label=AdjudicationLabel.FP_GENERIC) for f in findings]
