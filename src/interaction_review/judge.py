@@ -36,17 +36,35 @@ def adjudicate(
     if not findings:
         return []
     golden_ids = {g.id for g in golden}
-    out = llm.call_structured(
-        model=llm.judge_model(),
-        system=prompts.JUDGE_SYSTEM,
-        user=prompts.judge_user(_payload(findings), golden, dossier),
-        tool=prompts.JUDGE_TOOL,
-        temperature=0.0,  # juez determinista
-    )
-    raw = {a.get("finding_id"): a for a in out.get("adjudications", [])} if isinstance(out, dict) else {}
+    # Solo se envian al juez los hallazgos ANCLADOS; los no anclados son fp_generic por
+    # el gate estructural (abajo) y no necesitan al LLM (ahorra la llamada para B0).
+    grounded = [f for f in findings if f.is_grounded()]
+    raw: dict = {}
+    if grounded:
+        out = llm.call_structured(
+            model=llm.judge_model(),
+            system=prompts.JUDGE_SYSTEM,
+            user=prompts.judge_user(_payload(grounded), golden, dossier),
+            tool=prompts.JUDGE_TOOL,
+            temperature=0.0,  # juez determinista
+        )
+        raw = {a.get("finding_id"): a for a in out.get("adjudications", [])} if isinstance(out, dict) else {}
 
     adjudications: list[Adjudication] = []
     for f in findings:
+        # GENERICIDAD ESTRUCTURAL (gate duro, en codigo): un hallazgo sin anclaje
+        # (locus+evidencia) es generico SIEMPRE, aunque el juez diga que corresponde a
+        # un golden por la guideline citada. Sin esto, B0 (checklist vacio) se "empareja"
+        # por guideline y contamina el suelo.
+        if not f.is_grounded():
+            adjudications.append(
+                Adjudication(
+                    finding_id=f.id,
+                    label=AdjudicationLabel.FP_GENERIC,
+                    judge_rationale="(no anclado: sin locus/evidencia)",
+                )
+            )
+            continue
         a = raw.get(f.id)
         if a is None:
             # El juez no clasifico este hallazgo: por prudencia, incorrecto.

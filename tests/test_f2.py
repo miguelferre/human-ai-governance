@@ -75,8 +75,15 @@ def test_to_finding_sin_anclaje_no_grounded():
 
 
 # --- logica del juez (LLM monkeypatcheado) ---
+def _grounded(fid: str) -> Finding:
+    return Finding(id=fid, title=fid, guideline_ids=["HAX-G1"], locus="x", evidence="y")
+
+
 def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
-    findings = [Finding(id=f"x{i}", title=f"x{i}") for i in (1, 2, 3, 4, 5)]
+    # x1..x5 anclados; x6 SIN anclaje (locus/evidencia vacios).
+    findings = [_grounded(f"x{i}") for i in (1, 2, 3, 4, 5)] + [
+        Finding(id="x6", title="x6", guideline_ids=["HAX-G1"])
+    ]
     golden = [GoldenIssue(id="G1", description="d")]
 
     def fake_call(**kwargs):
@@ -89,6 +96,8 @@ def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
                 {"finding_id": "x3", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": True, "es_real": False},
                 # x4 ausente a proposito -> fp_incorrect
                 {"finding_id": "x5", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": False, "es_real": False},
+                # x6: el juez intenta emparejarlo, pero NO esta anclado -> el gate fuerza fp_generic
+                {"finding_id": "x6", "judge_rationale": "x", "corresponde_a_golden": "G1", "es_generico": False, "es_real": True},
             ]
         }
 
@@ -99,6 +108,8 @@ def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
     assert by_id["x3"].label == AdjudicationLabel.FP_GENERIC
     assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT  # ausente -> prudencia
     assert by_id["x5"].label == AdjudicationLabel.FP_INCORRECT  # ni golden, ni generico, ni real
+    # gate estructural: sin anclaje es fp_generic AUNQUE el juez diga que corresponde a G1
+    assert by_id["x6"].label == AdjudicationLabel.FP_GENERIC and by_id["x6"].matched_golden_id is None
 
 
 # --- orquestacion (b0 determinista, juez falso, sin API) ---

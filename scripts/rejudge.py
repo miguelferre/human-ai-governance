@@ -19,8 +19,8 @@ from interaction_review.report import render_metrics_md
 from interaction_review.schemas import Dossier, Finding, GoldenIssue
 
 RUNS = sys.argv[1] if len(sys.argv) > 1 else "runs/eii_k3.json"
-GOLDEN = "data/golden/caso-EII/answer_key.json"
-DOSSIER = "data/golden/caso-EII/dossier_blind.json"
+GOLDEN = sys.argv[2] if len(sys.argv) > 2 else "data/golden/caso-EII/answer_key.json"
+DOSSIER = sys.argv[3] if len(sys.argv) > 3 else "data/golden/caso-EII/dossier_blind.json"
 OUT_JSON = RUNS.replace(".json", "_rejudged.json")
 OUT_MD = RUNS.replace(".json", "_rejudged.md")
 DETERMINISTIC = {"b0"}

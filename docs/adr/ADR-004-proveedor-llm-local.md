@@ -57,6 +57,14 @@ infravaloraba el recall e inflaba la varianza (era artefacto del juez, no del ge
 pidas una conclusión que dependa de un razonamiento que aún no ha escrito; pide hechos
 atómicos y compón la conclusión tú.
 
+**Tercer endurecimiento — genericidad estructural:** en una corrida el juez empezó a
+emparejar los ítems de B0 (checklist con locus/evidencia VACÍOS) a golden POR LA GUIDELINE
+citada, contaminando el suelo (B0 recall 0,80). Causa: en la derivación, un match por
+guideline ganaba a la genericidad. Fix: **gate duro en código** — un hallazgo sin anclaje
+(`is_grounded()==False`) es `fp_generic` SIEMPRE, antes de mirar al juez; solo los anclados
+se adjudican. **B0 es el canario**: si B0 puntúa > 0, la medición está rota. Patrón: mueve
+al código todo juicio que pueda ser determinista; deja al modelo solo lo que exige criterio.
+
 `OLLAMA_NUM_CTX` (def. 16384) evita truncar el dossier + catálogo de guidelines.
 
 ## Consecuencias
