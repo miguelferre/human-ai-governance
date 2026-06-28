@@ -61,8 +61,14 @@ export ANTHROPIC_API_KEY=...   # GEN_MODEL / JUDGE_MODEL opcionales
 uv run interaction-review comparar \
     --dossier data/golden/caso-EII/dossier_blind.json \
     --golden  data/golden/caso-EII/answer_key.json \
-    --approaches b0,b1,b2 --k 3 --save runs/eii.json
+    --approaches b0,b1,p3 --k 3 --save runs/eii.json
 ```
+
+> **Nota de ejecución.** Para correr en **local** con [Ollama](https://ollama.com)
+> antepón `LLM_BACKEND=ollama` (modelos por defecto `qwen2.5:14b` para generar y juzgar;
+> ver [ADR-004](docs/adr/ADR-004-proveedor-llm-local.md)). Y si el Control de aplicaciones
+> de Windows bloquea el lanzador `interaction-review.exe`, invoca el módulo directamente:
+> `uv run python -m interaction_review.cli comparar ...` (usa `python.exe`, que sí está permitido).
 
 ## Estructura
 
