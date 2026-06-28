@@ -138,54 +138,43 @@ FINDINGS_TOOL = {
 # Juez / adjudicador (modelo y prompt distintos del generador: ADR-002).
 # --------------------------------------------------------------------------- #
 JUDGE_SYSTEM = """\
-Eres un adjudicador IMPARCIAL. Recibes hallazgos de una revision de la capa de interaccion de un sistema,
-junto con (a) el dossier del sistema y (b) un golden set de problemas conocidos.
+Eres un adjudicador IMPARCIAL. Para CADA hallazgo te damos una lista CORTA de CANDIDATOS del
+golden (preseleccionados porque comparten guideline con el hallazgo). Tu tarea es facil:
+mirar si el hallazgo describe el MISMO problema que alguno de SUS candidatos.
 
-Para CADA hallazgo responde, EN ESTE ORDEN, a preguntas concretas. NO decides una etiqueta:
-la etiqueta la derivamos nosotros de tus respuestas (asi no puedes contradecirte).
+Por hallazgo, EN ESTE ORDEN:
+1) judge_rationale: razonamiento breve.
+2) corresponde_a_candidato: si el hallazgo describe el MISMO problema que uno de SUS candidatos,
+   pon su id EXACTO (uno de los que se listan para ESE hallazgo); si ninguno encaja, pon "ninguno".
+3) es_real: SOLO importa si corresponde_a_candidato es "ninguno". true si aun asi el hallazgo es un
+   problema real y especifico apoyado en el dossier (descubrimiento nuevo); false si es incorrecto o
+   no sustentado. (Si hay candidato, deja es_real en true.)
 
-1) judge_rationale: tu razonamiento breve.
-2) corresponde_a_golden: el id EXACTO de un problema del golden con el que se corresponde el hallazgo,
-   o la cadena "ninguno". USA SOLO ids de la lista de golden que se te da. Si en tu razonamiento ves
-   que se corresponde con un golden, PON SU ID AQUI (no lo dejes en "ninguno").
-3) es_generico: true si el hallazgo NO esta anclado (locus o evidencia vacios) o si valdria para
-   cualquier sistema de IA; false en caso contrario. Se estricto: sin locus y sin evidencia => generico.
-4) es_real: true si describe un problema real del sistema apoyado en el dossier; false si es incorrecto
-   o no esta sustentado por el dossier.
-
-Varios hallazgos pueden corresponder al mismo golden (cada uno con el mismo id). Devuelve TODO mediante
-la herramienta report_adjudications, una entrada por hallazgo."""
+No decides la etiqueta: la derivamos de tus respuestas. Devuelve TODO mediante report_adjudications,
+una entrada por hallazgo."""
 
 
-def judge_user(findings_payload: list[dict], golden: list[GoldenIssue], dossier: Dossier) -> str:
-    golden_lines = [
-        f"- {g.id}: {g.description} [guidelines: {', '.join(g.guideline_ids)}]" for g in golden
-    ]
-    finding_lines = []
-    for f in findings_payload:
-        finding_lines.append(
-            f"- id={f['id']} | guidelines={f.get('guideline_ids')} | locus={f.get('locus')!r} | "
-            f"evidence={f.get('evidence')!r} | titulo={f.get('title')!r}"
-        )
-    return "\n".join(
-        [
-            "DOSSIER (para verificar que la evidencia es real):",
-            format_dossier(dossier),
-            "",
-            "GOLDEN SET (problemas conocidos):",
-            "\n".join(golden_lines),
-            "",
-            "HALLAZGOS A CLASIFICAR:",
-            "\n".join(finding_lines),
-            "",
-            "Clasifica cada hallazgo via report_adjudications.",
-        ]
-    )
+def judge_user(payload: list[dict], dossier: Dossier) -> str:
+    """`payload`: lista de hallazgos, cada uno con sus 'candidates' preseleccionados."""
+    blocks = ["DOSSIER (para verificar que la evidencia es real):", format_dossier(dossier), ""]
+    blocks.append("HALLAZGOS Y SUS CANDIDATOS:")
+    for f in payload:
+        blocks.append(f"\n- HALLAZGO {f['id']}: {f.get('title')!r}")
+        blocks.append(f"    locus: {f.get('locus')!r} | evidencia: {f.get('evidence')!r}")
+        cands = f.get("candidates", [])
+        if cands:
+            blocks.append("    candidatos del golden (elige uno o 'ninguno'):")
+            for c in cands:
+                blocks.append(f"      * {c['id']}: {c['description']}")
+        else:
+            blocks.append("    candidatos: (ninguno) -> solo puede ser nuevo o incorrecto")
+    blocks.append("\nClasifica cada hallazgo via report_adjudications.")
+    return "\n".join(blocks)
 
 
 JUDGE_TOOL = {
     "name": "report_adjudications",
-    "description": "Clasifica cada hallazgo frente al golden set.",
+    "description": "Para cada hallazgo, indica si corresponde a uno de SUS candidatos del golden.",
     "input_schema": {
         "type": "object",
         "properties": {
@@ -193,20 +182,18 @@ JUDGE_TOOL = {
                 "type": "array",
                 "items": {
                     "type": "object",
-                    # Sub-respuestas atomicas; la ETIQUETA se deriva en codigo (judge.py)
-                    # para que el modelo no pueda contradecirse (decir "corresponde a GI-3"
-                    # y etiquetar tp_new). Orden: razonar primero.
+                    # La ETIQUETA se deriva en codigo (judge.py): corresponde_a_candidato valido
+                    # -> tp_match; si "ninguno" -> tp_new/fp_incorrect segun es_real. Razonar primero.
                     "properties": {
                         "finding_id": {"type": "string"},
                         "judge_rationale": {"type": "string", "description": "Razonamiento; escribelo primero."},
-                        "corresponde_a_golden": {
+                        "corresponde_a_candidato": {
                             "type": "string",
-                            "description": "Id EXACTO del golden correspondiente, o 'ninguno'.",
+                            "description": "Id de uno de SUS candidatos, o 'ninguno'.",
                         },
-                        "es_generico": {"type": "boolean", "description": "true si no anclado o vale para cualquier sistema."},
-                        "es_real": {"type": "boolean", "description": "true si es un problema real apoyado en el dossier."},
+                        "es_real": {"type": "boolean", "description": "Solo si 'ninguno': true=nuevo real, false=incorrecto."},
                     },
-                    "required": ["finding_id", "judge_rationale", "corresponde_a_golden", "es_generico", "es_real"],
+                    "required": ["finding_id", "judge_rationale", "corresponde_a_candidato", "es_real"],
                 },
             }
         },

@@ -16,17 +16,32 @@ from interaction_review.schemas import (
 )
 
 
-def _payload(findings: list[Finding]) -> list[dict]:
-    return [
-        {
-            "id": f.id,
-            "title": f.title,
-            "guideline_ids": f.guideline_ids,
-            "locus": f.locus,
-            "evidence": f.evidence,
-        }
-        for f in findings
-    ]
+def _candidates(f: Finding, golden: list[GoldenIssue]) -> list[GoldenIssue]:
+    """Candidatos del golden para un hallazgo: los que COMPARTEN guideline con el.
+
+    Es un pre-filtro DETERMINISTA: reduce la tarea del juez de "escanea los 15" a
+    "confirma si es uno de estos 1-3". Si no comparte guideline con ninguno (raro),
+    se devuelven todos como salvaguarda para no negar un match por discrepancia de cita.
+    """
+    fg = set(f.guideline_ids)
+    cands = [g for g in golden if fg & set(g.guideline_ids)]
+    return cands if cands else list(golden)
+
+
+def _payload(grounded: list[Finding], golden: list[GoldenIssue]) -> list[dict]:
+    out = []
+    for f in grounded:
+        cands = _candidates(f, golden)
+        out.append(
+            {
+                "id": f.id,
+                "title": f.title,
+                "locus": f.locus,
+                "evidence": f.evidence,
+                "candidates": [{"id": g.id, "description": g.description} for g in cands],
+            }
+        )
+    return out
 
 
 def adjudicate(
@@ -35,16 +50,16 @@ def adjudicate(
     """Devuelve una adjudicacion por hallazgo (en el mismo orden de `findings`)."""
     if not findings:
         return []
-    golden_ids = {g.id for g in golden}
-    # Solo se envian al juez los hallazgos ANCLADOS; los no anclados son fp_generic por
-    # el gate estructural (abajo) y no necesitan al LLM (ahorra la llamada para B0).
     grounded = [f for f in findings if f.is_grounded()]
+    # Candidatos por hallazgo (para validar que el juez elige uno de SU lista).
+    cand_ids_by_finding = {f.id: {g.id for g in _candidates(f, golden)} for f in grounded}
+
     raw: dict = {}
     if grounded:
         out = llm.call_structured(
             model=llm.judge_model(),
             system=prompts.JUDGE_SYSTEM,
-            user=prompts.judge_user(_payload(grounded), golden, dossier),
+            user=prompts.judge_user(_payload(grounded, golden), dossier),
             tool=prompts.JUDGE_TOOL,
             temperature=0.0,  # juez determinista
         )
@@ -52,10 +67,8 @@ def adjudicate(
 
     adjudications: list[Adjudication] = []
     for f in findings:
-        # GENERICIDAD ESTRUCTURAL (gate duro, en codigo): un hallazgo sin anclaje
-        # (locus+evidencia) es generico SIEMPRE, aunque el juez diga que corresponde a
-        # un golden por la guideline citada. Sin esto, B0 (checklist vacio) se "empareja"
-        # por guideline y contamina el suelo.
+        # GENERICIDAD ESTRUCTURAL (gate duro, en codigo): sin anclaje => fp_generic SIEMPRE,
+        # antes de mirar al juez. Sin esto, B0 (checklist vacio) contamina el suelo.
         if not f.is_grounded():
             adjudications.append(
                 Adjudication(
@@ -67,7 +80,6 @@ def adjudicate(
             continue
         a = raw.get(f.id)
         if a is None:
-            # El juez no clasifico este hallazgo: por prudencia, incorrecto.
             adjudications.append(
                 Adjudication(
                     finding_id=f.id,
@@ -76,14 +88,11 @@ def adjudicate(
                 )
             )
             continue
-        # La ETIQUETA se DERIVA de las sub-respuestas atomicas (no la decide el modelo),
-        # para que no pueda contradecirse (decir 'corresponde a GI-3' y etiquetar tp_new).
-        cg = str(a.get("corresponde_a_golden", "")).strip()
-        matched = cg if cg in golden_ids else None
+        # La ETIQUETA se DERIVA: candidato valido -> tp_match; si "ninguno" -> tp_new/fp_incorrect.
+        cc = str(a.get("corresponde_a_candidato", "")).strip()
+        matched = cc if cc in cand_ids_by_finding.get(f.id, set()) else None
         if matched is not None:
             label = AdjudicationLabel.TP_MATCH
-        elif bool(a.get("es_generico")):
-            label = AdjudicationLabel.FP_GENERIC
         elif bool(a.get("es_real")):
             label = AdjudicationLabel.TP_NEW
         else:

@@ -79,25 +79,24 @@ def _grounded(fid: str) -> Finding:
     return Finding(id=fid, title=fid, guideline_ids=["HAX-G1"], locus="x", evidence="y")
 
 
-def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
-    # x1..x5 anclados; x6 SIN anclaje (locus/evidencia vacios).
-    findings = [_grounded(f"x{i}") for i in (1, 2, 3, 4, 5)] + [
+def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
+    # x1..x4 anclados; x6 SIN anclaje (locus/evidencia vacios).
+    findings = [_grounded(f"x{i}") for i in (1, 2, 3, 4)] + [
         Finding(id="x6", title="x6", guideline_ids=["HAX-G1"])
     ]
-    golden = [GoldenIssue(id="G1", description="d")]
+    golden = [GoldenIssue(id="G1", description="d")]  # candidato (fallback) para los anclados
 
     def fake_call(**kwargs):
-        # El modelo NO da etiqueta: da sub-respuestas y la derivamos en codigo.
+        # El modelo solo confirma candidato; la etiqueta se deriva en codigo.
         return {
             "adjudications": [
-                {"finding_id": "x1", "judge_rationale": "ok", "corresponde_a_golden": "G1", "es_generico": False, "es_real": True},
-                # id de golden inexistente -> no es match; real -> tp_new
-                {"finding_id": "x2", "judge_rationale": "x", "corresponde_a_golden": "NOPE", "es_generico": False, "es_real": True},
-                {"finding_id": "x3", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": True, "es_real": False},
+                {"finding_id": "x1", "judge_rationale": "ok", "corresponde_a_candidato": "G1", "es_real": True},
+                # candidato inexistente -> no es match; es_real True -> tp_new
+                {"finding_id": "x2", "judge_rationale": "x", "corresponde_a_candidato": "NOPE", "es_real": True},
+                {"finding_id": "x3", "judge_rationale": "x", "corresponde_a_candidato": "ninguno", "es_real": False},
                 # x4 ausente a proposito -> fp_incorrect
-                {"finding_id": "x5", "judge_rationale": "x", "corresponde_a_golden": "ninguno", "es_generico": False, "es_real": False},
                 # x6: el juez intenta emparejarlo, pero NO esta anclado -> el gate fuerza fp_generic
-                {"finding_id": "x6", "judge_rationale": "x", "corresponde_a_golden": "G1", "es_generico": False, "es_real": True},
+                {"finding_id": "x6", "judge_rationale": "x", "corresponde_a_candidato": "G1", "es_real": True},
             ]
         }
 
@@ -105,9 +104,8 @@ def test_adjudicate_deriva_etiqueta_de_subrespuestas(monkeypatch):
     by_id = {a.finding_id: a for a in judge_mod.adjudicate(findings, golden, _dossier())}
     assert by_id["x1"].label == AdjudicationLabel.TP_MATCH and by_id["x1"].matched_golden_id == "G1"
     assert by_id["x2"].label == AdjudicationLabel.TP_NEW and by_id["x2"].matched_golden_id is None
-    assert by_id["x3"].label == AdjudicationLabel.FP_GENERIC
+    assert by_id["x3"].label == AdjudicationLabel.FP_INCORRECT  # ninguno + no real
     assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT  # ausente -> prudencia
-    assert by_id["x5"].label == AdjudicationLabel.FP_INCORRECT  # ni golden, ni generico, ni real
     # gate estructural: sin anclaje es fp_generic AUNQUE el juez diga que corresponde a G1
     assert by_id["x6"].label == AdjudicationLabel.FP_GENERIC and by_id["x6"].matched_golden_id is None
 
