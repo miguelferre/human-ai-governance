@@ -25,7 +25,15 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
   construir dossier + golden y correr B1/P3/A4. Es LA prueba de overfitting. _Estado: BUSCANDO casos
   (agente de investigación en curso)._
 - **A2 — Bloques alternativos.** Re-correr P3 con una agrupación neutral (4 fases HAX + capítulos
-  PAIR, sin mano). Si P3 aguanta, la ventaja es la *descomposición*, no mis bloques. _Estado: pendiente._
+  PAIR, sin mano). Si P3 aguanta, la ventaja es la *descomposición*, no mis bloques. _Estado: ✅ HECHO
+  (2026-06-29, EII v2, k=3, nube)._
+  - **Resultado:** P3-neutral (`p3n`, 10 buckets DERIVADOS del campo `group`: 4 fases HAX + 6 capítulos
+    PAIR, sin diseño a mano) recall **0.89 ±0.03** vs P3-a-mano (`p3`) **0.82 ±0.08**. Precisión 0.99 y
+    genericidad 0.00 en ambos.
+  - **Lectura:** R-A **DESCARTADO**. La partición neutral iguala/supera a mis bloques → la ventaja es
+    *descomponer*, no el diseño manual. `p3n` es además más estable (±0.03). Coste: `p3n` genera ~2×
+    hallazgos (102 vs 56/corrida) para el mismo recall → más verboso, pero NO fabrica (precisión intacta).
+    Implicación de producto: agrupar por la taxonomía oficial (gratis, robusto) ≥ bloques a mano.
 
 ### B. ¿Son reales los números?
 - **B1 — ¿Estructura o cantidad?** Un "B1-exhaustivo" (prompt único pidiendo MUCHOS hallazgos, una
@@ -46,9 +54,24 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
   (pocos problemas). ¿Se calla o inventa para llenar bloques? Un auditor que siempre encuentra 25
   fallos es inútil. _Estado: pendiente (requiere dossier sintético de sistema "bueno")._
 - **C2 — Robustez al formato de entrada.** Variar el dossier (menos detalle, fraseo distinto) y ver
-  si los hallazgos aguantan. _Estado: pendiente._
+  si los hallazgos aguantan. _Estado: ✅ HECHO (2026-06-29, EII v2 parafraseado por LLM —misma
+  información, prosa narrativa en vez de estilo telegráfico de model-card—, k=3, nube)._
+  - **Resultado:** P3 recall **0.78 ±0.03** (parafraseado) vs **0.82 ±0.08** (original, A2); precisión
+    1.00 y grounding 1.00. B1 **0.47 ±0.33** (igual de ruidoso que sin parafrasear: 0.44 histórico).
+  - **Lectura:** P3 es **robusto al fraseo**: reformular la entrada no cambia su recall ni su precisión
+    → entiende el significado, no "pesca" formato/palabras clave. La fragilidad de B1 es intrínseca
+    (falta de estructura), no del fraseo. Refuerza P3 como candidato a producto.
 - **C3 — El nicho del agente.** A4 vs P3 con **entrada incompleta** (info repartida/ausente): único
-  régimen donde la autonomía debería ganar. _Estado: pendiente._
+  régimen donde la autonomía debería ganar. _Estado: ✅ HECHO (2026-06-29, EII v2 con dossier recortado
+  —sin voz de usuario ni logs de producción—, k=3, nube)._
+  - **Resultado:** sobre entrada incompleta, **A4 recall 0.62 ±0.08** vs **P3 0.78 ±0.13**. Frente al
+    baseline de entrada COMPLETA (A4 0.82, P3 0.78): **P3 NO cae (robusto); A4 se desploma −0.20**.
+  - **Lectura (contraintuitiva):** el nicho hipotetizado del agente NO aparece. La entrada incompleta es
+    justo donde el **barrido exhaustivo fijo de P3 más gana**: garantiza cobertura cuando la señal es
+    escasa y dispersa. A4, al decidir autónomamente cuándo parar, **corta antes** (≈30 hallazgos vs 53 de
+    P3) y se deja issues recuperables. A4 mantiene precisión altísima (0.99) pero a costa de recall.
+  - **Salvedad:** el baseline A4-completo (0.82) es de corrida previa (misma config); P3-completo sí está
+    confirmado fresco (A2: 0.82). Para blindar el delta de A4 cabría un control A4-completo fresco.
 
 ### Confirmación con varianza
 - **k=3** de los approaches clave (P3 y A4 al menos) una vez cerradas las pruebas anteriores, para
@@ -60,7 +83,13 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
 - **A1** generalización: ✅ HECHO con 2 held-out (HireVue no clínico, Epic clínico distinto) → **NO era overfitting** (patrones reproducidos). Faltan 3 held-out documentados sin construir (moderación, aviación, COMPAS).
 - **B1** estructura vs cantidad: ✅ respondido por el mapa — la estructura aporta **reliability** en casos difíciles (B1 inestable, una corrida a 0), no solo cantidad; en casos fáciles B1≈P3. (El approach `b1x` quedó implementado; su corrida local se abortó por lentitud.)
 - **C1** falsos positivos en sistema bueno: ✅ HECHO — B1/P3/A4 devuelven **0 hallazgos**; no inventan. La verbosidad de P3 es redundancia, no fabricación.
-- **A2** bloques alternativos, **C2** robustez de entrada, **C3** nicho del agente (entrada incompleta): ⬜ pendientes (refinamiento).
+- **A2** bloques alternativos: ✅ HECHO (R-A descartado: `p3n` neutral 0.89 ≥ `p3` a-mano 0.82; ver arriba).
+- **C3** nicho del agente: ✅ HECHO — el nicho NO aparece; con entrada incompleta P3 (exhaustivo) 0.78 > A4 0.62.
+- **C2** robustez de entrada: ✅ HECHO — P3 robusto al fraseo (parafraseado 0.78 ≈ original 0.82, precisión 1.00).
+
+**Batería A/C completada (2026-06-29).** A2 (overfitting de bloques) descartado · C3 (nicho del agente)
+no aparece, el agente pierde donde debía ganar · C2 (robustez al fraseo) confirmada para P3. Síntesis en
+[RESULTADOS.md](RESULTADOS.md).
 - **k=3 confirmación**: ✅ hecho en nube (todas las corridas de la tabla son k=3).
 
 **Conclusión validada en [RESULTADOS.md](RESULTADOS.md): mapa condicional** (la complejidad que paga depende de dificultad×modelo), no un ganador único.

@@ -40,8 +40,9 @@ B0 = 0.00 en todos (suelo). Todos los approaches con LLM: precisión ~1.0, gener
 3. **Caso difícil → hace falta ESTRUCTURA.** El prompt único es inestable (en EII-Claude
    una de tres corridas se fue a **0 hallazgos**): no tiene red.
    - **Modelo débil → pipeline (P3)** es lo seguro; la autonomía del agente es ruidosa ahí.
-   - **Modelo fuerte → el agente (A4) se justifica**: iguala o supera al pipeline (0.82 vs
-     0.78) y es **más conciso** (~30 vs ~55 hallazgos).
+   - **Modelo fuerte → el agente (A4) iguala** al pipeline (0.82 vs 0.78) y es **más conciso**
+     (~30 vs ~55 hallazgos) — pero **solo con entrada completa**. Esa ventaja **no es robusta**
+     (ver C3 abajo): si la entrada se degrada, A4 se desploma y P3 aguanta.
 
 Es decir: la complejidad que paga **depende de la dificultad del caso y de la capacidad
 del modelo**. No "el agente siempre sobra" ni "el agente siempre gana".
@@ -62,6 +63,28 @@ del modelo**. No "el agente siempre sobra" ni "el agente siempre gana".
 - **La adjudicación humana es imprescindible:** destapó dos sesgos de medición (juez bajo
   carga; desajuste golden↔dossier) que habrían falseado conclusiones.
 
+## Validación de robustez (A2 · C3 · C2, k=3, nube, caso difícil EII v2)
+
+Tres pruebas más para distinguir señal de artefacto y cerrar la pregunta del agente:
+
+- **A2 — ¿la ventaja del pipeline son MIS bloques (overfitting) o descomponer?** Se re-corrió P3 con una
+  partición **neutral** (la taxonomía de los autores: 4 fases HAX + 6 capítulos PAIR, derivada del dato,
+  sin diseño a mano). **0.89 ≥ 0.82** del P3 a mano → **no es overfitting de bloques**: la ventaja es
+  *descomponer*, y la partición neutral resulta además más estable (±0.03).
+- **C3 — ¿es la entrada incompleta el nicho del agente?** A4 vs P3 con el dossier recortado (sin voz de
+  usuario ni logs). Resultado **contraintuitivo**: A4 **0.62** vs P3 **0.78**; frente a entrada completa
+  (A4 0.82, P3 0.78), **P3 no cae y A4 se desploma −0.20**. El nicho hipotetizado **no existe**: la
+  entrada pobre es justo donde el barrido exhaustivo fijo más gana. A4, al decidir cuándo parar, corta
+  antes (~30 hallazgos vs 53) y se deja issues recuperables.
+- **C2 — ¿depende del fraseo exacto?** P3 sobre el dossier parafraseado (model-card telegráfica → prosa,
+  mismos hechos): **0.78 ≈ 0.82** original, precisión 1.00. **Robusto al fraseo**: entiende, no pesca
+  formato. (B1 sigue ruidoso, 0.47 ±0.33: su fragilidad es estructural, no del fraseo.)
+
+**Qué cambia en la conclusión:** la celda *"modelo fuerte → el agente se justifica"* se **debilita**. El
+agente solo iguala en el mejor caso (fácil/completo) y es más conciso, pero **no tiene un nicho robusto**:
+pierde ante el pipeline en cuanto la entrada se degrada. La complejidad que paga de forma **robusta** es la
+**descomposición fija del pipeline (P3)**, no la autonomía del agente.
+
 ## Limitaciones honestas
 
 - Golden sets pequeños y construidos por el evaluador (caso EII) o desde fuentes públicas
@@ -73,7 +96,10 @@ del modelo**. No "el agente siempre sobra" ni "el agente siempre gana".
 
 ## Próximos pasos
 
-- **Producto:** P3 + paso de **deduplicado**; y enrutado por dificultad (prompt único para
-  casos simples, estructura para los complejos).
-- **Pruebas pendientes:** A2 (bloques alternativos), C2 (robustez de entrada), C3 (nicho
-  del agente con entrada incompleta).
+- **Producto:** P3 + paso de **deduplicado** (el anti-patrón persiste: ~50-100 hallazgos para 15 reales,
+  y A2 lo agrava al subir buckets); enrutado por dificultad (prompt único para casos simples, pipeline
+  para los complejos); agrupar por la taxonomía oficial (A2) sale gratis y es más robusto que bloques a mano.
+- **Deuda de medición:** el filtro por id de guideline del juez produce falsos fallos (P3 real ≈ 14/15);
+  ampliar candidatos por grupo/similitud subiría el recall medido de todos los approaches por igual.
+- **Opcional (rigor):** control A4-completo fresco para blindar el delta de C3; y construir los 3 held-out
+  documentados restantes (moderación, aviación, COMPAS).

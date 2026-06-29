@@ -40,8 +40,9 @@ approaches: **B0** checklist determinista · **B1** prompt único · **B2** few-
 [docs/RESULTADOS.md](docs/RESULTADOS.md)):
 - El LLM bate siempre a la checklist (B0 = suelo).
 - **Caso fácil → el prompt único basta** (y es el más conciso).
-- **Caso difícil → hace falta estructura:** pipeline si el modelo es débil, **agente si el
-  modelo es fuerte** (iguala/supera al pipeline y es más conciso).
+- **Caso difícil → hace falta estructura:** el **pipeline determinista** es lo robusto; el agente solo
+  iguala en el mejor caso (entrada completa) y **no tiene un nicho robusto** — pierde con entrada
+  incompleta (ver C3 en [docs/TESTPLAN.md](docs/TESTPLAN.md)).
 - **No es overfitting:** dos held-out documentados (HireVue no clínico, Epic clínico
   distinto) reproducen los patrones; y ningún approach inventa problemas en un sistema
   bien diseñado (control de falsos positivos, C1).
