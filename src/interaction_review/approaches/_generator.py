@@ -34,10 +34,13 @@ def _to_finding(label: str, idx: int, raw: dict) -> Finding:
 
 
 def generate(
-    dossier: Dossier, guidelines: list[Guideline], *, few_shot: bool, label: str
+    dossier: Dossier, guidelines: list[Guideline], *, few_shot: bool, label: str, extra: str = ""
 ) -> list[Finding]:
-    """Una llamada al LLM -> lista de Finding. `label` prefija los ids (b1/b2)."""
-    user = prompts.generator_user(dossier, guidelines, few_shot=few_shot)
+    """Una llamada al LLM -> lista de Finding. `label` prefija los ids (b1/b2).
+
+    `extra`: instruccion adicional opcional en el prompt (p.ej. empujar exhaustividad en B1x).
+    """
+    user = prompts.generator_user(dossier, guidelines, few_shot=few_shot, extra=extra)
     out = llm.call_structured(
         model=llm.gen_model(),
         system=prompts.GENERATOR_SYSTEM,

@@ -76,7 +76,7 @@ MAL (generico, NO reportar asi) -> "Mostrar la incertidumbre del modelo."
 """
 
 
-def generator_user(dossier: Dossier, guidelines: list[Guideline], few_shot: bool) -> str:
+def generator_user(dossier: Dossier, guidelines: list[Guideline], few_shot: bool, extra: str = "") -> str:
     blocks = [
         "CATALOGO DE GUIDELINES (usa solo estos ids):",
         format_guidelines(guidelines),
@@ -87,6 +87,8 @@ def generator_user(dossier: Dossier, guidelines: list[Guideline], few_shot: bool
     ]
     if few_shot:
         blocks += [_FEWSHOT, ""]
+    if extra:
+        blocks += [extra, ""]
     blocks.append(
         "Revisa la capa de interaccion de ESTE sistema y reporta los hallazgos anclados via report_findings."
     )
