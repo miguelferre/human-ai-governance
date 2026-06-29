@@ -49,4 +49,9 @@ def generate(
         temperature=gen_temperature(),
     )
     raw_findings = out.get("findings", []) if isinstance(out, dict) else []
-    return [_to_finding(label, i, rf) for i, rf in enumerate(raw_findings, start=1)]
+    # Robustez: el tool-use de Anthropic no garantiza la estructura como el `format` local.
+    # Si 'findings' viene como dict, tomar sus valores; descartar items que no sean objeto.
+    if isinstance(raw_findings, dict):
+        raw_findings = list(raw_findings.values())
+    items = [rf for rf in raw_findings if isinstance(rf, dict)]
+    return [_to_finding(label, i, rf) for i, rf in enumerate(items, start=1)]

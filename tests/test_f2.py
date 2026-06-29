@@ -111,6 +111,17 @@ def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
 
 
 # --- orquestacion (b0 determinista, juez falso, sin API) ---
+def test_generate_robusto_ante_estructura_mala(monkeypatch):
+    # El tool-use de Anthropic puede devolver items que no son objeto -> deben ignorarse.
+    from interaction_review.approaches import _generator
+
+    bad = {"findings": ["basura-string", {"title": "t", "guideline_ids": ["HAX-G1"], "locus": "x",
+                                          "evidence": "y", "severity": "low", "rationale": "r", "recommendation": "z"}]}
+    monkeypatch.setattr(_generator.llm, "call_structured", lambda **k: bad)
+    out = _generator.generate(_dossier(), list(all_guidelines()), few_shot=False, label="t")
+    assert len(out) == 1 and out[0].is_grounded()  # solo el item-objeto sobrevive
+
+
 def test_p3_buckets_cubren_todas_las_guidelines():
     from interaction_review.approaches.p3_pipeline import BUCKETS
 

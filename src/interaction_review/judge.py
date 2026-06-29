@@ -69,7 +69,7 @@ def adjudicate(
         )
         if isinstance(out, dict):
             for a in out.get("adjudications", []):
-                if a.get("finding_id"):
+                if isinstance(a, dict) and a.get("finding_id"):
                     raw[a["finding_id"]] = a
 
     adjudications: list[Adjudication] = []
