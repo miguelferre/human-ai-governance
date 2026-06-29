@@ -65,6 +65,19 @@ guideline ganaba a la genericidad. Fix: **gate duro en código** — un hallazgo
 se adjudican. **B0 es el canario**: si B0 puntúa > 0, la medición está rota. Patrón: mueve
 al código todo juicio que pueda ser determinista; deja al modelo solo lo que exige criterio.
 
+### Addendum (2026-06-29): la batería de validación se ejecutó en NUBE
+
+El 14B local se volvió inusable para una batería grande (~10-30 min/llamada cuando el
+equipo se usa; corridas pausadas por suspensión). Decisión: **mantener local como prueba
+de "corre en tu hardware", pero ejecutar la batería de validación (held-out, k=3, casos
+externos) en NUBE (Claude: `GEN_MODEL` Haiku, `JUDGE_MODEL` Sonnet)**. Los datos lo
+permiten: el caso clínico va de-identificado y los held-out son públicos (ADR-003).
+Resultó además **clave para la conclusión**: en local (modelo débil) el agente perdía;
+en nube (modelo fuerte) el agente se justifica → la respuesta depende de la capacidad del
+modelo (ver RESULTADOS.md). Robustez añadida para el backend nube: el tool-use de Anthropic
+no garantiza la estructura como el `format` local, así que se filtran items no-dict.
+La key vive en `.env` (gitignored).
+
 `OLLAMA_NUM_CTX` (def. 16384) evita truncar el dossier + catálogo de guidelines.
 
 ## Consecuencias

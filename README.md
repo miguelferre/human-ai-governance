@@ -29,15 +29,26 @@ La complejidad solo se justifica si **gana de forma medible**.
   digestivo) es el *golden set* con respuestas conocidas. La pregunta: ¿los
   redescubre solo?
 
-## Estado
+## Estado y resultado
 
-- **F0 completada:** esquemas, HAX-18 y PAIR codificadas, métricas, B0 determinista,
-  CLI, ADRs, tests.
-- **F1 en curso:** caso clínico golden (EII → Digestivo) ingerido en `data/golden/`
-  (privado), con dossier ciego neutralizado y answer key v0 pendiente de validación.
-- **F2 implementada:** B1 (prompt único), B2 (few-shot) y LLM-juez; comando `comparar`
-  que corre k veces, adjudica y aplica la regla de decisión. Falta la primera ejecución
-  real (requiere `ANTHROPIC_API_KEY`).
+Experimento **ejecutado y validado** (local con Ollama + nube con Claude). Escalera de
+approaches: **B0** checklist determinista · **B1** prompt único · **B2** few-shot ·
+**B1x** prompt único exhaustivo · **P3** pipeline determinista por bloques (no agente) ·
+**A4** agente (bucle con control de flujo decidido por el modelo).
+
+**Conclusión: un mapa condicional, no un ganador único** (detalle en
+[docs/RESULTADOS.md](docs/RESULTADOS.md)):
+- El LLM bate siempre a la checklist (B0 = suelo).
+- **Caso fácil → el prompt único basta** (y es el más conciso).
+- **Caso difícil → hace falta estructura:** pipeline si el modelo es débil, **agente si el
+  modelo es fuerte** (iguala/supera al pipeline y es más conciso).
+- **No es overfitting:** dos held-out documentados (HireVue no clínico, Epic clínico
+  distinto) reproducen los patrones; y ningún approach inventa problemas en un sistema
+  bien diseñado (control de falsos positivos, C1).
+- Lección transversal: el **LLM-juez** (la medición) fue el eslabón frágil, no el
+  generador → barandillas deterministas en código (ver ADR-004).
+
+Plan de pruebas de validación/overfitting y su estado: [docs/TESTPLAN.md](docs/TESTPLAN.md).
 
 ## Instalación
 
