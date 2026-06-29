@@ -109,8 +109,9 @@ def _call_ollama(model, system, user, tool, temperature) -> dict[str, Any]:
 
     base = os.environ.get("OLLAMA_BASE_URL", DEFAULT_OLLAMA_URL).rstrip("/")
     payload = ollama_payload(model, system, user, tool["input_schema"], temperature)
+    timeout = float(os.environ.get("LLM_TIMEOUT", "900"))  # 15 min; en local lento conviene holgura
     try:
-        resp = httpx.post(f"{base}/api/chat", json=payload, timeout=600)
+        resp = httpx.post(f"{base}/api/chat", json=payload, timeout=timeout)
         resp.raise_for_status()
     except httpx.ConnectError as e:
         raise LLMNotConfigured(

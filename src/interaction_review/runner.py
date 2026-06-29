@@ -48,6 +48,22 @@ def run_experiment(
         n_iter = 1 if name in DETERMINISTIC else k
         gen_results[name] = [REGISTRY[name](dossier, guidelines) for _ in range(n_iter)]
 
+    # CHECKPOINT: guardar la generacion (cara) ANTES de juzgar. Si la fase 2 falla, se
+    # re-juzga desde aqui con scripts/rejudge.py sin re-generar. Estructura compatible.
+    if save_path:
+        gen_path = save_path.replace(".json", ".gen.json")
+        checkpoint = {
+            "config": {"approaches": approaches, "k": k, "gen_model": llm.gen_model(),
+                       "judge_model": llm.judge_model(), "system_name": dossier.system_name},
+            "runs": {
+                name: [{"findings": [f.model_dump() for f in fs], "adjudications": [], "metrics": {}}
+                       for fs in runs]
+                for name, runs in gen_results.items()
+            },
+        }
+        Path(gen_path).parent.mkdir(parents=True, exist_ok=True)
+        Path(gen_path).write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2), encoding="utf-8")
+
     # --- Fase 2: adjudicacion + metricas (modelo juez) ---
     aggregates: dict[str, AggregateMetrics] = {}
     runs_detail: dict[str, list[dict]] = {}

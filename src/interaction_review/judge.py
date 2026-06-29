@@ -54,16 +54,23 @@ def adjudicate(
     # Candidatos por hallazgo (para validar que el juez elige uno de SU lista).
     cand_ids_by_finding = {f.id: {g.id for g in _candidates(f, golden)} for f in grounded}
 
+    # Juzgar en LOTES pequenos: una sola llamada con 20+ hallazgos satura el limite de
+    # tiempo del 14B (paso en P3). Lotes de BATCH mantienen cada llamada corta y fiable.
     raw: dict = {}
-    if grounded:
+    BATCH = 6
+    for i in range(0, len(grounded), BATCH):
+        chunk = grounded[i : i + BATCH]
         out = llm.call_structured(
             model=llm.judge_model(),
             system=prompts.JUDGE_SYSTEM,
-            user=prompts.judge_user(_payload(grounded, golden), dossier),
+            user=prompts.judge_user(_payload(chunk, golden), dossier),
             tool=prompts.JUDGE_TOOL,
             temperature=0.0,  # juez determinista
         )
-        raw = {a.get("finding_id"): a for a in out.get("adjudications", [])} if isinstance(out, dict) else {}
+        if isinstance(out, dict):
+            for a in out.get("adjudications", []):
+                if a.get("finding_id"):
+                    raw[a["finding_id"]] = a
 
     adjudications: list[Adjudication] = []
     for f in findings:
