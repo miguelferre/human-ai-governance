@@ -200,3 +200,57 @@ JUDGE_TOOL = {
         "required": ["adjudications"],
     },
 }
+
+
+# --------------------------------------------------------------------------- #
+# Agente A4: decision autonoma de cobertura (que investigar / cuando parar).
+# --------------------------------------------------------------------------- #
+AGENT_GAPS_SYSTEM = """\
+Eres un revisor de la capa de interaccion que decide si su revision esta COMPLETA o le
+falta cubrir areas. Tienes el catalogo de guidelines y los hallazgos que llevas hasta ahora.
+
+Identifica que AREAS (guidelines del catalogo) NO has cubierto aun, o has cubierto de forma
+debil, y que merezcan una pasada enfocada adicional sobre ESTE dossier. Decide:
+- seguir: true si merece la pena otra pasada dirigida; false si ya has cubierto lo relevante.
+- guideline_ids: ids EXACTOS del catalogo a investigar ahora (vacio si seguir=false).
+- motivo: por que.
+Se honesto: si los hallazgos ya cubren los problemas reales del dossier, para (seguir=false).
+Devuelve via decidir_cobertura."""
+
+
+def agent_gaps_user(guidelines, findings_payload: list[dict]) -> str:
+    gl = "\n".join(f"- {g.id}: {g.title}" for g in guidelines)
+    cubiertas = sorted({gid for f in findings_payload for gid in f.get("guideline_ids", [])})
+    fl = "\n".join(f"- {f.get('title')!r} [{', '.join(f.get('guideline_ids', []))}]" for f in findings_payload)
+    return "\n".join(
+        [
+            "CATALOGO DE GUIDELINES:",
+            gl,
+            "",
+            f"GUIDELINES YA TOCADAS por los hallazgos: {', '.join(cubiertas) or '(ninguna)'}",
+            "",
+            "HALLAZGOS HASTA AHORA:",
+            fl or "(ninguno)",
+            "",
+            "Decide si seguir investigando y que areas, via decidir_cobertura.",
+        ]
+    )
+
+
+AGENT_GAPS_TOOL = {
+    "name": "decidir_cobertura",
+    "description": "Decide si la revision necesita otra pasada y sobre que guidelines.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "motivo": {"type": "string", "description": "Razonamiento; escribelo primero."},
+            "guideline_ids": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Ids del catalogo a investigar ahora (vacio si seguir=false).",
+            },
+            "seguir": {"type": "boolean", "description": "true si merece otra pasada dirigida."},
+        },
+        "required": ["motivo", "guideline_ids", "seguir"],
+    },
+}

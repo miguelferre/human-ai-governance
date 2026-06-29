@@ -132,6 +132,32 @@ def test_p3_run_reid_unico(monkeypatch):
     assert ids[0] == "p3-001"
 
 
+def test_a4_para_cuando_no_hay_gaps(monkeypatch):
+    from interaction_review.approaches import a4_agent
+
+    monkeypatch.setattr(
+        a4_agent, "generate",
+        lambda d, gl, *, few_shot, label: [_grounded(f"{label}")],
+    )
+    monkeypatch.setattr(a4_agent, "_assess_gaps", lambda guidelines, findings: {"seguir": False, "guideline_ids": []})
+    out = a4_agent.run(_dossier(), list(all_guidelines()))
+    assert len(out) == 1 and out[0].id == "a4-001"  # solo la pasada inicial
+
+
+def test_a4_acota_iteraciones(monkeypatch):
+    from interaction_review.approaches import a4_agent
+
+    monkeypatch.setattr(
+        a4_agent, "generate",
+        lambda d, gl, *, few_shot, label: [_grounded(f"{label}")],
+    )
+    # el modelo SIEMPRE quiere seguir -> el tope MAX_ITERS debe acotar (anti-loop)
+    monkeypatch.setattr(a4_agent, "_assess_gaps", lambda guidelines, findings: {"seguir": True, "guideline_ids": ["HAX-G1"]})
+    out = a4_agent.run(_dossier(), list(all_guidelines()))
+    assert len(out) == a4_agent.MAX_ITERS
+    assert len({f.id for f in out}) == len(out)  # ids unicos
+
+
 def test_run_experiment_b0_es_el_suelo(monkeypatch):
     def fake_judge(findings, golden, dossier):
         return [Adjudication(finding_id=f.id, label=AdjudicationLabel.FP_GENERIC) for f in findings]
