@@ -5,6 +5,9 @@ interactúa con su usuario, produce una **revisión estructurada de la capa de
 interacción**: hallazgos atados a guidelines concretas (HAX-18 de Microsoft y PAIR
 de Google), anti-patrones detectados y recomendaciones accionables.
 
+> ¿Lo quieres en lenguaje llano, sin jerga, como se lo contarías a un cliente?
+> [docs/PRODUCTO.md](docs/PRODUCTO.md) explica qué es y cómo sabemos que funciona.
+
 Casi todas las herramientas de gobernanza (watsonx.governance, Fiddler, Arize)
 auditan la **capa técnica** del modelo (métricas, sesgo, deriva, explicabilidad).
 Casi nadie audita la **capa de interacción**: cómo se presenta el resultado a la
