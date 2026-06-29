@@ -54,6 +54,17 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
 - **k=3** de los approaches clave (P3 y A4 al menos) una vez cerradas las pruebas anteriores, para
   aplicar la regla `beats` formalmente. _Estado: pendiente (coste alto en máquina local lenta)._
 
+## Estado a 2026-06-29 (ejecutado en NUBE Claude; síntesis en RESULTADOS.md)
+
+- **B2** adjudicación humana de P3: ✅ HECHO (0.80 real, infravalorado; bug del corrector documentado).
+- **A1** generalización: ✅ HECHO con 2 held-out (HireVue no clínico, Epic clínico distinto) → **NO era overfitting** (patrones reproducidos). Faltan 3 held-out documentados sin construir (moderación, aviación, COMPAS).
+- **B1** estructura vs cantidad: ✅ respondido por el mapa — la estructura aporta **reliability** en casos difíciles (B1 inestable, una corrida a 0), no solo cantidad; en casos fáciles B1≈P3. (El approach `b1x` quedó implementado; su corrida local se abortó por lentitud.)
+- **C1** falsos positivos en sistema bueno: ✅ HECHO — B1/P3/A4 devuelven **0 hallazgos**; no inventan. La verbosidad de P3 es redundancia, no fabricación.
+- **A2** bloques alternativos, **C2** robustez de entrada, **C3** nicho del agente (entrada incompleta): ⬜ pendientes (refinamiento).
+- **k=3 confirmación**: ✅ hecho en nube (todas las corridas de la tabla son k=3).
+
+**Conclusión validada en [RESULTADOS.md](RESULTADOS.md): mapa condicional** (la complejidad que paga depende de dificultad×modelo), no un ganador único.
+
 ## Notas de método
 - Máquina local lenta (~10 min/llamada cuando se usa el equipo) → runs en segundo plano con watchdog
   y checkpoint de generación. Suspensión pausa runs (desactivar o vigilar).
