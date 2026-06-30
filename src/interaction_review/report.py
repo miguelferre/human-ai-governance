@@ -18,11 +18,16 @@ def render_findings_md(dossier: Dossier, findings: list[Finding], approach: str)
     grounded = sum(1 for f in findings if f.is_grounded())
     pct = (grounded / len(findings) * 100) if findings else 0.0
     lines.append(f"- **Anclados (guideline+locus+evidencia):** {grounded}/{len(findings)} ({pct:.0f}%)")
+    # Si viene deduplicado, el informe consolida varios hallazgos crudos en cada uno.
+    raw = sum(f.merged_count for f in findings)
+    if raw > len(findings):
+        lines.append(f"- **Deduplicado:** {raw} hallazgos crudos consolidados en {len(findings)}.")
     lines.append("")
 
     for f in findings:
         flag = "OK" if f.is_grounded() else "GENERICO?"
-        lines.append(f"## [{flag}] {f.title}")
+        consolida = f" _(consolida {f.merged_count})_" if f.merged_count > 1 else ""
+        lines.append(f"## [{flag}] {f.title}{consolida}")
         lines.append("")
         lines.append(f"- **Guidelines:** {', '.join(f.guideline_ids) or '(ninguna)'}")
         lines.append(f"- **Severidad:** {f.severity.value}")

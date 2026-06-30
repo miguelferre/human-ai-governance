@@ -26,7 +26,7 @@ Y lo cuarto, que no dependiera de cómo le escribo la entrada. Reescribí entera
 
 ## Qué no es todavía
 
-Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Le falta un paso de limpieza, porque ahora mismo es repetitivo y te puede dar el mismo problema dicho de cinco formas distintas. Y los casos con los que lo he medido son pocos, los justos para fiarme de la señal pero no para presumir.
+Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Ya tiene un primer paso de limpieza que quita las repeticiones evidentes sin perder nada por el camino, y eso lo he medido: no se deja ni un problema de los que ya encontraba. Pero la limpieza fina todavía no está. El mismo problema se le puede colar dicho de dos o tres formas cuando lo mira desde guías distintas, y rebajar eso del todo ya no es cosa de reglas, pide la capa lista. Y los casos con los que lo he medido son pocos, los justos para fiarme de la señal pero no para presumir.
 
 ## La parte que igual te sorprende
 

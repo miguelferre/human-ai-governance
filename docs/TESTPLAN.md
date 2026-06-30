@@ -50,6 +50,13 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
     de todos los approaches; la comparación relativa se mantiene.
 
 ### C. ¿Es buen producto (no solo gana el benchmark)?
+- **C0 — Deduplicado (el paso de producto).** El anti-patrón vivo: P3 emite el mismo problema
+  varias veces (a menudo citando guidelines distintas). _Estado: ✅ HECHO (2026-06-30, determinista,
+  offline)._ `src/interaction_review/dedup.py` + `scripts/dedup_report.py`; expuesto como
+  `revisar --dedup`. Validado sobre runs ya juzgados: **cobertura perdida 0 en 6 escenarios**
+  (recall intacto), reducción 13-26% en p3 con impureza ~0, generaliza a los held-out, y no daña
+  lo ya conciso (b1/a4). El residual ("mismo problema vía guideline distinta") es juicio
+  irreducible → capa semántica LLM opcional. Detalle y tabla en [RESULTADOS.md](RESULTADOS.md).
 - **C1 — Falsos positivos en un sistema "bueno".** Dar a P3 el dossier de un sistema bien diseñado
   (pocos problemas). ¿Se calla o inventa para llenar bloques? Un auditor que siempre encuentra 25
   fallos es inútil. _Estado: pendiente (requiere dossier sintético de sistema "bueno")._

@@ -120,6 +120,13 @@ class Finding(BaseModel):
     severity: Severity = Severity.MEDIUM
     rationale: str = Field("", description="Por que es un problema en ESTE sistema.")
     recommendation: str = Field("", description="Accion concreta recomendada.")
+    merged_count: int = Field(
+        1,
+        ge=1,
+        description="Cuantos hallazgos crudos consolida (1 = sin consolidar). Lo fija el "
+        "paso de deduplicado; un valor >1 significa que varias pasadas describian el mismo "
+        "problema (a menudo citando guidelines distintas) y se han unido en este.",
+    )
 
     def is_grounded(self) -> bool:
         """True si el hallazgo tiene los tres anclajes (guideline + locus + evidencia).

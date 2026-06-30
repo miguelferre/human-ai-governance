@@ -85,6 +85,47 @@ agente solo iguala en el mejor caso (fácil/completo) y es más conciso, pero **
 pierde ante el pipeline en cuanto la entrada se degrada. La complejidad que paga de forma **robusta** es la
 **descomposición fija del pipeline (P3)**, no la autonomía del agente.
 
+## Deduplicado: el paso de producto (determinista, offline, k=3)
+
+El anti-patron vivo de P3/p3n: emite el MISMO problema varias veces, casi siempre
+citando una guideline DISTINTA cada vez (en un run, "onboarding sin reciclaje" aparecio
+**7 veces** via HAX-G1, HAX-G12, PAIR-UN-2, PAIR-MM-1, PAIR-EF-2, PAIR-DE-1...). Un
+auditor humano no quiere leerlo siete veces.
+
+`src/interaction_review/dedup.py` colapsa hallazgos casi-duplicados en uno que **une las
+guidelines de todos** (un hallazgo por problema, anotado con todas las que incumple). Es
+DETERMINISTA, vive en codigo, sin LLM, y **no mira el golden** (en produccion no existe):
+agrupa por similitud lexica del problema (Jaccard de titulo+locus, mas ratio de titulo con
+guarda anti-plantilla). Coherente con ADR-004: lo mecanico al codigo.
+
+Validado OFFLINE sobre runs ya juzgados (`scripts/dedup_report.py`), usando las
+adjudicaciones -que el dedup nunca ve- como vara independiente: ¿pierde cobertura? ¿funde
+problemas reales distintos (impureza)?
+
+| Caso | approach | n antes->desp | reduccion | cobertura | impuros (k=3) |
+|---|---|---|---|---|---|
+| EII (dificil) | p3 | 56 -> 44 | 21% | 12.3 intacta | 0 |
+| EII (dificil) | p3n | 102 -> 77 | 24% | 13.3 intacta | 5 |
+| EII C2 (parafraseado) | p3 | 58 -> 42 | 26% | 11.7 intacta | 4 |
+| EII C3 (incompleto) | p3 | 53 -> 39 | 25% | 11.7 intacta | 0 |
+| Epic (held-out) | p3 | 42 -> 36 | 14% | 6.7 intacta | 0 |
+| HireVue (held-out) | p3 | 41 -> 35 | 13% | 7.0 intacta | 2 |
+
+**Lo que dicen los numeros (T=0.60, calibrado por el barrido de `--sweep`):**
+- **Es SEGURO: cobertura perdida = 0 en los 6 escenarios** (recall intacto siempre; el dedup
+  no tira hallazgos, funde). Precision intacta. Y **no dana lo ya conciso**: b1 y a4 apenas
+  cambian (0-7%), no hay nada que colapsar.
+- **Generaliza:** misma ganancia en los dos held-out, no afinado a EII.
+- **El win determinista es MODESTO:** ~13-26% menos hallazgos en p3 con impureza ~0. Quita los
+  duplicados textualmente evidentes; baja la consola pero no la vacia.
+- **p3n es mas dificil de limpiar** (5 impuros, duplicacion 4.2x/golden) -> otro punto a favor de
+  **p3 como producto** frente a p3n.
+- **El residual es juicio irreducible:** "el mismo problema colado por una guideline distinta"
+  con vocabulario muy diferente no se distingue a nivel lexico de dos problemas vecinos sin
+  arriesgar conflacion (por eso T se queda en el lado seguro). Esa ultima capa pediria un paso
+  **semantico (LLM)** -> exactamente la tesis del proyecto: lo mecanico al codigo, al modelo solo
+  lo irreducible. Queda como siguiente paso de producto (opcional, gasta API).
+
 ## Limitaciones honestas
 
 - Golden sets pequeños y construidos por el evaluador (caso EII) o desde fuentes públicas
@@ -96,10 +137,13 @@ pierde ante el pipeline en cuanto la entrada se degrada. La complejidad que paga
 
 ## Próximos pasos
 
-- **Producto:** P3 + paso de **deduplicado** (el anti-patrón persiste: ~50-100 hallazgos para 15 reales,
-  y A2 lo agrava al subir buckets); enrutado por dificultad (prompt único para casos simples, pipeline
-  para los complejos); agrupar por la taxonomía oficial (A2) sale gratis y es más robusto que bloques a mano.
+- **Producto — deduplicado:** ✅ HECHO (paso determinista, ver seccion arriba). Quita las repeticiones
+  evidentes sin perder cobertura (0 en 6 escenarios) y confirma **p3 > p3n** como candidato (p3n es mas
+  sucio de limpiar). Pendiente: (a) capa **semántica (LLM)** opcional para el residual "mismo problema vía
+  guideline distinta" —gasta API—; (b) **enrutado por dificultad** (prompt único para casos fáciles,
+  pipeline+dedup para los difíciles).
 - **Deuda de medición:** el filtro por id de guideline del juez produce falsos fallos (P3 real ≈ 14/15);
   ampliar candidatos por grupo/similitud subiría el recall medido de todos los approaches por igual.
+  (Necesita re-juzgar = gasta API.)
 - **Opcional (rigor):** control A4-completo fresco para blindar el delta de C3; y construir los 3 held-out
-  documentados restantes (moderación, aviación, COMPAS).
+  documentados restantes (moderación, aviación, COMPAS). (Generación nueva = gasta API.)

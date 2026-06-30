@@ -66,6 +66,9 @@ uv sync --extra dev
 # Informe de hallazgos para un sistema descrito en un Dossier (JSON):
 uv run interaction-review revisar --dossier ruta/dossier.json --approach b0
 
+# Con --dedup consolida hallazgos casi-duplicados (recomendado con p3; ver RESULTADOS.md):
+uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup
+
 # Métricas contra un golden set (requiere adjudicaciones para recall/precisión):
 uv run interaction-review evaluar --golden data/golden/answer_key.json \
     --dossier ruta/dossier.json --approach b0 --adjudications adj.json
@@ -91,7 +94,8 @@ uv run interaction-review comparar \
 src/interaction_review/
   schemas.py            Contrato de datos (Dossier, Finding, GoldenIssue, ...)
   guidelines/           HAX-18 y PAIR como datos enlazables + loader
-  approaches/           Escalera de approaches (b0 hoy; b1/b2/p3/a4 después)
+  approaches/           Escalera de approaches (b0/b1/b1x/b2/p3/p3n/a4)
+  dedup.py              Consolidación determinista de hallazgos casi-duplicados (producto)
   metrics.py            recall, precisión, genericidad, grounding, F-beta
   report.py             Informes en markdown/texto
   cli.py                Comandos `revisar` y `evaluar`
