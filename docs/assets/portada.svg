@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1600 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">A reviewer for the human-AI interaction layer</title>
+  <desc id="dsc">Typographic cover. Title: A reviewer for the human-AI interaction layer. Subtitle: audits how an AI presents itself to its users — not the model, the interaction. Every finding anchored to HAX-18 and PAIR. A faint signal line runs underneath.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="92%">
+      <stop offset="0%" stop-color="#dee7f1"/>
+      <stop offset="55%" stop-color="#c5d1e0"/>
+      <stop offset="100%" stop-color="#aebed1"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="470" fill="url(#bg)"/>
+
+  <text x="800" y="212" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="41" font-weight="600" fill="#1f2733">A reviewer for the human-AI interaction layer</text>
+
+  <text x="800" y="274" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="21" font-weight="400" fill="#54616f">Audits how an AI presents itself to its users — not the model, the interaction.</text>
+
+  <text x="800" y="307" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16.5" font-weight="400" fill="#717e8d">Every finding anchored to HAX-18 (Microsoft) and PAIR (Google).</text>
+
+  <!-- faint signal line, in the reference style -->
+  <g opacity="0.3">
+    <path d="M 560,392 C 615,392 633,377 690,378 C 750,379 768,406 835,404 C 902,402 920,377 982,379 C 1042,381 1060,399 1110,393"
+          fill="none" stroke="#3a4452" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#3a4452">
+      <circle cx="690" cy="378" r="3"/>
+      <circle cx="982" cy="379" r="3"/>
+      <circle cx="615" cy="387" r="3"/>
+      <circle cx="1085" cy="393" r="3"/>
+    </g>
+  </g>
+  <circle cx="835" cy="404" r="13" fill="url(#halo)"/>
+  <circle cx="835" cy="404" r="3.6" fill="#2a323d"/>
+</svg>
