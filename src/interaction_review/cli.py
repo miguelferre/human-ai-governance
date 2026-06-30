@@ -12,6 +12,7 @@ from pathlib import Path
 
 from interaction_review.approaches import REGISTRY
 from interaction_review.dedup import deduplicate
+from interaction_review.dedup_llm import deduplicate_llm
 from interaction_review.guidelines import all_guidelines
 from interaction_review.llm import LLMNotConfigured
 from interaction_review.metrics import aggregate, beats, compute_run_metrics
@@ -55,7 +56,11 @@ def cmd_revisar(args: argparse.Namespace) -> int:
         )
         return 2
     findings = approach(dossier, guidelines)
-    if args.dedup:
+    if args.dedup_llm:
+        before = len(findings)
+        findings = deduplicate_llm(findings)
+        print(f"[dedup-llm] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
+    elif args.dedup:
         before = len(findings)
         findings = deduplicate(findings)
         print(f"[dedup] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
@@ -153,7 +158,12 @@ def build_parser() -> argparse.ArgumentParser:
     pr.add_argument(
         "--dedup",
         action="store_true",
-        help="Consolida hallazgos casi-duplicados (recomendado con p3/p3n; ver docs/RESULTADOS.md).",
+        help="Consolida hallazgos casi-duplicados, determinista (recomendado con p3/p3n).",
+    )
+    pr.add_argument(
+        "--dedup-llm",
+        action="store_true",
+        help="Consolidacion SEMANTICA con LLM (dedup lexico + capa LLM; gasta API). Tiene prioridad sobre --dedup.",
     )
     pr.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
     pr.set_defaults(func=cmd_revisar)

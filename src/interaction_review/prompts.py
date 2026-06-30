@@ -207,6 +207,62 @@ JUDGE_TOOL = {
 
 
 # --------------------------------------------------------------------------- #
+# Consolidador semantico (dedup LLM): el residual que el dedup lexico no junta.
+# --------------------------------------------------------------------------- #
+SEMANTIC_DEDUP_SYSTEM = """\
+Eres un consolidador de hallazgos de una auditoria de la capa de interaccion humano-IA.
+Te dan una lista numerada de hallazgos (titulo + locus + guidelines citadas). Muchos describen
+EL MISMO problema subyacente del sistema aunque esten redactados distinto o citen una guideline
+distinta (p. ej. "onboarding sin reciclaje" dicho via HAX-G1, PAIR-MM-1, PAIR-EF-2...).
+
+Tu tarea: agrupar los hallazgos que sean EL MISMO problema concreto.
+REGLAS:
+- Agrupa SOLO si es claramente el mismo problema en el mismo punto del sistema (mismo locus/fenomeno).
+- NO agrupes problemas DISTINTOS aunque pertenezcan al mismo area (p. ej. "no muestra confianza por
+  subgrupo" y "no notifica recalibraciones" son DISTINTOS aunque ambos sean de monitorizacion).
+- Un hallazgo puede ir solo; no fuerces grupos.
+Devuelve los grupos (de 2+ miembros) via consolidar. Los que no menciones quedan solos."""
+
+
+def semantic_dedup_user(findings_payload: list[dict]) -> str:
+    """`findings_payload`: lista de {id, title, locus, guideline_ids}."""
+    lines = ["HALLAZGOS A CONSOLIDAR:"]
+    for f in findings_payload:
+        gl = ", ".join(f.get("guideline_ids", []))
+        lines.append(f"- [{f['id']}] {f.get('title')!r} | locus: {f.get('locus')!r} | guidelines: {gl}")
+    lines.append("\nAgrupa los que sean el MISMO problema via consolidar (solo grupos de 2+ miembros).")
+    return "\n".join(lines)
+
+
+SEMANTIC_DEDUP_TOOL = {
+    "name": "consolidar",
+    "description": "Agrupa los hallazgos que describen el mismo problema subyacente.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "groups": {
+                "type": "array",
+                "description": "Grupos de hallazgos que son el MISMO problema (solo grupos de 2+).",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "finding_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Ids de los hallazgos del grupo (2 o mas).",
+                        },
+                        "reason": {"type": "string", "description": "Por que son el mismo problema."},
+                    },
+                    "required": ["finding_ids", "reason"],
+                },
+            }
+        },
+        "required": ["groups"],
+    },
+}
+
+
+# --------------------------------------------------------------------------- #
 # Agente A4: decision autonoma de cobertura (que investigar / cuando parar).
 # --------------------------------------------------------------------------- #
 AGENT_GAPS_SYSTEM = """\
