@@ -145,11 +145,42 @@ no perder hallazgos siguen siendo deterministas, en codigo). Validado sobre runs
 | HireVue (held-out) | 41 -> 35 -> **14** | 7.0 intacta | 9 |
 
 **Trade-off honesto, no victoria limpia:** el LLM **colapsa de verdad** (~un hallazgo por problema, lo que
-el determinista no logra) y **mantiene la cobertura** (recall intacto), pero **sobre-funde**: la impureza
-sube mucho (hasta ~2/3 de los clusters en HireVue mezclan problemas distintos). Conclusion de producto:
-el **determinista es el default seguro** (impureza ~0, reduccion modesta); el **LLM es un modo agresivo**
-que exige repaso humano de lo fusionado o un prompt mas conservador. (Cota superior: parte de la "impureza"
-puede ser ruido del juez viejo, que asigna problemas equivalentes a golden distintos.)
+el determinista no logra) y **mantiene la cobertura** (recall intacto), pero **sobre-funde** (impureza 6/5/9,
+hasta ~2/3 de clusters en HireVue mezclan problemas distintos).
+
+**Se intentaron dos levers (2026-06-30):** (1) prompt estricto "por defecto NO agrupar, ante la duda separa"
+→ apenas movio la impureza (a2 6→6, Epic 5→4). (2) **barandilla en codigo** (`SEMANTIC_LOCUS_FLOOR`: el LLM
+propone grupos, el codigo VETA al miembro con locus dispar del representante) → **baja la impureza ~a la mitad
+(a2 4, Epic 0, HireVue 5)** pero **se come la conciseness**: con barandilla el LLM queda en ~28-31, apenas
+mejor que el determinista (~36-44).
+
+**Conclusion (honesta) del frente 1b:** la capa semantica es un **trade-off fundamental**, no una mejora
+limpia — agresiva conflaciona; con barandilla apenas supera al determinista. Por eso el **dedup determinista
+es el default recomendado** (seguro, impureza ~0) y `--dedup-llm` (con barandilla 0.18 por defecto) es un
+**modo agresivo opcional con repaso**. Lo que de verdad cerraria el residual sin conflar pediria la vara
+buena: el **juez nuevo** re-juzgando estos runs (la impureza medida es cota superior, parte es ruido del
+juez viejo que parte un mismo problema en dos golden).
+
+## Enrutado por dificultad (frente b, `router.py`, `revisar --approach auto`)
+
+El mapa dice: fácil→b1 (conciso), difícil→p3 (estructura). Como la dificultad no se sabe a priori, el
+router corre b1 y **escala a p3+dedup** si el gap-check (reusado de A4) detecta áreas sin cubrir, o si b1
+viene escaso (esto último cubre su inestabilidad: la corrida a 0). Comprobación de la decisión sobre b1 ya
+generados (gap-check real):
+
+| Caso | b1→p3 conocido | decisión del router | ¿acierta? |
+|---|---|---|---|
+| EII (difícil) | 0.44→0.78 | escala a p3+dedup | ✓ b1 insuficiente |
+| COMPAS (medio) | 0.85→1.00 | escala | ✓ p3 mejora |
+| Epic (fácil) | 0.95→0.95 | escala | ~ innecesario (p3 no mejora pero no pierde; +verbosidad) |
+| HireVue (fácil) | 0.90→1.00 | se queda en b1 | ✗ deja 0.10 (p3 daría 1.00) |
+
+**Honesto:** el gap-check es **eager** → escala 3/4 (en la práctica ≈ "p3+dedup salvo que b1 ya lo cubra
+todo") y, cuando se queda en b1, puede dejar un issue sin ver (HireVue: el gap-check no detectó el hueco).
+**La dificultad NO se infiere limpio desde una sola pasada de b1.** Conclusión: la **recomendación robusta
+es p3+dedup por defecto** (nunca pierde mucho: 0.78-1.00 en todos los casos); `auto` lean-safe es útil
+(además blinda la inestabilidad de b1) pero su rama b1 tiene riesgo de miss → es una optimización de
+conciseness, no un discriminador fiable. Otro resultado honesto: la complejidad del router no se paga sola.
 
 ## Limitaciones honestas
 
@@ -163,11 +194,14 @@ puede ser ruido del juez viejo, que asigna problemas equivalentes a golden disti
 
 ## Próximos pasos
 
-- **Producto — deduplicado:** ✅ HECHO en sus **dos capas**. Determinista (seguro, ~0 impureza, reducción
-  modesta) + semántica con LLM (frente 1b: colapsa a ~un hallazgo por problema y mantiene cobertura, pero
-  sobre-funde → default determinista, LLM como modo agresivo con repaso). Confirma **p3 > p3n** como
-  candidato. Pendiente: (a) **afinar el prompt del LLM** para subir la pureza sin perder conciseness;
-  (b) **enrutado por dificultad** (prompt único para casos fáciles, pipeline+dedup para los difíciles).
+- **Producto — deduplicado:** ✅ HECHO en sus **dos capas** (determinista seguro + semántica LLM). El 1b
+  resultó un **trade-off fundamental** (ver arriba): default determinista, `--dedup-llm` como modo agresivo.
+- **Enrutado por dificultad (`auto`):** ✅ EXPLORADO (ver arriba). Resultado honesto: la dificultad no se
+  infiere limpio a priori (el gap-check sobre-escala); **p3+dedup es el default robusto**. `auto` queda como
+  opción lean-safe.
+- **Lo que de verdad cerraría el residual del dedup:** re-juzgar estos runs con el **juez nuevo** para medir
+  la impureza real (la actual es cota superior, contaminada por el juez viejo) — pero es pulido, no cambia la
+  recomendación (determinista por defecto). El experimento y el producto mínimo están **cerrados**.
 - **Deuda de medición — arreglada (2026-06-30).** El filtro de candidatos del juez solo ofrecía
   golden con guideline EXACTA compartida (muleta del juez 14B local, ADR-004): un hallazgo que citaba
   otra guideline no tenía como candidato al golden correcto → falso fallo. Ahora el juez nube (fuerte)

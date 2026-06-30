@@ -211,17 +211,23 @@ JUDGE_TOOL = {
 # --------------------------------------------------------------------------- #
 SEMANTIC_DEDUP_SYSTEM = """\
 Eres un consolidador de hallazgos de una auditoria de la capa de interaccion humano-IA.
-Te dan una lista numerada de hallazgos (titulo + locus + guidelines citadas). Muchos describen
-EL MISMO problema subyacente del sistema aunque esten redactados distinto o citen una guideline
-distinta (p. ej. "onboarding sin reciclaje" dicho via HAX-G1, PAIR-MM-1, PAIR-EF-2...).
+Te dan una lista numerada de hallazgos (titulo + locus + guidelines citadas). Algunos describen
+EL MISMO problema subyacente aunque esten redactados distinto o citen una guideline distinta
+(p. ej. "onboarding sin reciclaje" dicho via HAX-G1, PAIR-MM-1, PAIR-EF-2...).
 
-Tu tarea: agrupar los hallazgos que sean EL MISMO problema concreto.
-REGLAS:
-- Agrupa SOLO si es claramente el mismo problema en el mismo punto del sistema (mismo locus/fenomeno).
-- NO agrupes problemas DISTINTOS aunque pertenezcan al mismo area (p. ej. "no muestra confianza por
-  subgrupo" y "no notifica recalibraciones" son DISTINTOS aunque ambos sean de monitorizacion).
-- Un hallazgo puede ir solo; no fuerces grupos.
-Devuelve los grupos (de 2+ miembros) via consolidar. Los que no menciones quedan solos."""
+Tu tarea: agrupar SOLO los hallazgos que sean LITERALMENTE el mismo defecto descrito dos veces.
+
+REGLA POR DEFECTO: NO agrupar. Solo agrupa un par si un auditor diria "esto es el MISMO problema
+en el MISMO punto del sistema, redactado distinto", no solo "estan relacionados" o "son del mismo area".
+- Mismo problema = mismo fenomeno en el mismo locus (mismo punto/pantalla/paso del sistema).
+- NO agrupes dos problemas DISTINTOS del mismo area. Ejemplos de lo que va SEPARADO:
+  * "no muestra la confianza por subgrupo" vs "no notifica las recalibraciones": ambos de monitorizacion,
+    pero problemas DISTINTOS.
+  * "no explica por que" (falta de explicacion) vs "no se puede anular" (falta de override): DISTINTOS.
+- Ante la MENOR duda, deja los hallazgos SEPARADOS. Fundir dos problemas reales en uno es peor que
+  dejar un duplicado: el duplicado solo molesta, la fusion OCULTA un problema.
+
+Devuelve solo los grupos (de 2+ miembros) que cumplan esto, via consolidar. Lo que no menciones queda solo."""
 
 
 def semantic_dedup_user(findings_payload: list[dict]) -> str:

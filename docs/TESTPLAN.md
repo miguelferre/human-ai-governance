@@ -69,8 +69,13 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
   lo ya conciso (b1/a4).
   - **Capa semántica con LLM — ✅ HECHO (2026-06-30, `dedup_llm.py`, `revisar --dedup-llm`).** Para el
     residual ("mismo problema vía guideline distinta"). Colapsa fuerte (p3: 56→17, 42→15, 41→14, ~un
-    hallazgo por problema) y mantiene cobertura, PERO **sobre-funde** (impureza 6/5/9 en k=3). Trade-off:
-    determinista = default seguro; LLM = modo agresivo con repaso. Detalle en [RESULTADOS.md](RESULTADOS.md).
+    hallazgo por problema) y mantiene cobertura, PERO **sobre-funde** (impureza 6/5/9 en k=3). Probados dos
+    levers: prompt estricto (apenas movió) y **barandilla en código** (`locus_floor`: el LLM propone, el
+    código veta loci dispares) → impureza ~½ (a2 4/Epic 0/HireVue 5) pero se come la conciseness (~28-31 ≈
+    determinista). **Trade-off fundamental** → determinista = default; LLM = modo agresivo con repaso.
+  - **Enrutado por dificultad (`auto`, `router.py`) — ✅ EXPLORADO (2026-06-30).** b1 + gap-check → escala a
+    p3+dedup. El gap-check sobre-escala (3/4) y puede dejar un miss en la rama b1 (HireVue) → la dificultad no
+    se infiere limpio a priori; **p3+dedup es el default robusto**. Detalle en [RESULTADOS.md](RESULTADOS.md).
 - **C1 — Falsos positivos en un sistema "bueno".** Dar a P3 el dossier de un sistema bien diseñado
   (pocos problemas). ¿Se calla o inventa para llenar bloques? Un auditor que siempre encuentra 25
   fallos es inútil. _Estado: pendiente (requiere dossier sintético de sistema "bueno")._

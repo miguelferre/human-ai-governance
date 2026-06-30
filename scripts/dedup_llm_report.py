@@ -39,8 +39,12 @@ def _clusters_llm(findings: list[Finding]) -> list[list[Finding]]:
     for f in findings:
         if f.id not in assigned:
             clusters.append([f])
-    clusters.sort(key=lambda c: min(order[m.id] for m in c))
-    return clusters
+    # Misma barandilla que deduplicate_llm: parte grupos de loci dispares.
+    refined = []
+    for c in clusters:
+        refined.extend(dedup_llm._refine_group(c, dedup_llm.SEMANTIC_LOCUS_FLOOR))
+    refined.sort(key=lambda c: min(order[m.id] for m in c))
+    return refined
 
 
 def _eval_run(run: dict) -> dict:

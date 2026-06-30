@@ -48,6 +48,16 @@ def _emit(text: str, out: str | None) -> None:
 def cmd_revisar(args: argparse.Namespace) -> int:
     dossier = Dossier.model_validate(_load_json(args.dossier))
     guidelines = _select_guidelines(args.corpus)
+
+    # 'auto' = router de producto: elige b1 (facil) o p3+dedup (dificil) segun cobertura.
+    if args.approach == "auto":
+        from interaction_review.router import route
+
+        findings, choice = route(dossier, guidelines)
+        print(f"[router] {choice} -> {len(findings)} hallazgos.", file=sys.stderr)
+        _emit(render_findings_md(dossier, findings, f"auto ({choice})"), args.out)
+        return 0
+
     approach = REGISTRY.get(args.approach)
     if approach is None:
         print(
@@ -153,7 +163,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     pr = sub.add_parser("revisar", help="Genera un informe de hallazgos para un sistema.")
     pr.add_argument("--dossier", required=True, help="JSON con el Dossier del sistema.")
-    pr.add_argument("--approach", default="b0", help="Approach a usar (def: b0).")
+    pr.add_argument(
+        "--approach",
+        default="b0",
+        help="Approach: b0/b1/b2/p3/p3n/a4, o 'auto' (router de producto: b1 facil / p3+dedup dificil).",
+    )
     pr.add_argument("--corpus", default="hax,pair", help="Corpus: hax, pair o ambos (def: hax,pair).")
     pr.add_argument(
         "--dedup",

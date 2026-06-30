@@ -66,6 +66,9 @@ uv sync --extra dev
 # Informe de hallazgos para un sistema descrito en un Dossier (JSON):
 uv run interaction-review revisar --dossier ruta/dossier.json --approach b0
 
+# Router de producto: elige solo b1 (caso facil) o p3+dedup (caso dificil) segun cobertura:
+uv run interaction-review revisar --dossier ruta/dossier.json --approach auto
+
 # Con --dedup consolida hallazgos casi-duplicados (determinista; recomendado con p3):
 uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup
 # --dedup-llm: consolidacion semantica con LLM (mas agresiva; gasta API). Ver RESULTADOS.md.

@@ -18,8 +18,15 @@ pierde ni se duplica), aunque el modelo alucine ids o repita uno en dos grupos.
 from __future__ import annotations
 
 from interaction_review import llm, prompts
-from interaction_review.dedup import _merge, deduplicate
+from interaction_review.dedup import _merge, _representative, deduplicate, text_similarity
 from interaction_review.schemas import Finding
+
+# Barandilla anti-sobrefundido (el LLM PROPONE, el codigo COMPRUEBA): dentro de un grupo
+# que el modelo dio por "mismo problema", se VETA al miembro cuyo locus+titulo es muy
+# dispar del representante (probablemente otro problema del mismo area). Calibrado offline:
+# el prompt estricto solo no bajaba la impureza; este gate si. Floor bajo -> solo corta
+# los emparejamientos egregios, conserva los reescritos genuinos (mismo locus, otra cita).
+SEMANTIC_LOCUS_FLOOR: float = 0.18
 
 
 def _llm_groups(findings: list[Finding], model: str | None, temperature: float) -> list[list[str]]:
@@ -45,17 +52,39 @@ def _llm_groups(findings: list[Finding], model: str | None, temperature: float) 
     return groups
 
 
+def _refine_group(members: list[Finding], floor: float) -> list[list[Finding]]:
+    """Barandilla: dentro de un grupo del LLM, separa a quien tenga locus muy dispar.
+
+    Devuelve subgrupos: el nucleo (parecido al representante por titulo+locus) y cada
+    outlier suelto. Asi un grupo que mezclaba dos problemas vecinos se parte y deja de
+    conflar. No pierde hallazgos (los outliers quedan como singletons).
+    """
+    if len(members) < 2:
+        return [members]
+    rep = _representative(members)
+    sig = f"{rep.title} {rep.locus}"
+    core, outliers = [], []
+    for m in members:
+        if m.id == rep.id or text_similarity(f"{m.title} {m.locus}", sig) >= floor:
+            core.append(m)
+        else:
+            outliers.append([m])
+    return [core] + outliers
+
+
 def deduplicate_llm(
     findings: list[Finding],
     *,
     pre_dedup: bool = True,
     model: str | None = None,
     temperature: float = 0.0,
+    locus_floor: float = SEMANTIC_LOCUS_FLOOR,
 ) -> list[Finding]:
     """Deduplica con una capa semantica (LLM) sobre el dedup lexico.
 
     `pre_dedup`: aplica antes el dedup determinista (recomendado: menos items que mandar
-    al modelo y se centra en el residual dificil). Idempotente en el limite practico.
+    al modelo y se centra en el residual dificil). `locus_floor`: barandilla anti-sobrefundido
+    (el LLM propone los grupos, el codigo veta miembros con locus dispar; 0 = sin barandilla).
     """
     base = deduplicate(findings) if pre_dedup else list(findings)
     if len(base) < 2:
@@ -77,6 +106,10 @@ def deduplicate_llm(
     for f in base:
         if f.id not in assigned:
             clusters.append([f])
+    # Barandilla en codigo: parte los grupos que mezclan loci dispares.
+    refined: list[list[Finding]] = []
+    for c in clusters:
+        refined.extend(_refine_group(c, locus_floor) if locus_floor > 0 else [c])
     # Orden estable: por el indice del miembro mas temprano de cada cluster.
-    clusters.sort(key=lambda c: min(order[m.id] for m in c))
-    return [_merge(c) for c in clusters]
+    refined.sort(key=lambda c: min(order[m.id] for m in c))
+    return [_merge(c) for c in refined]
