@@ -142,8 +142,15 @@ problemas reales distintos (impureza)?
   sucio de limpiar). Pendiente: (a) capa **semántica (LLM)** opcional para el residual "mismo problema vía
   guideline distinta" —gasta API—; (b) **enrutado por dificultad** (prompt único para casos fáciles,
   pipeline+dedup para los difíciles).
-- **Deuda de medición:** el filtro por id de guideline del juez produce falsos fallos (P3 real ≈ 14/15);
-  ampliar candidatos por grupo/similitud subiría el recall medido de todos los approaches por igual.
-  (Necesita re-juzgar = gasta API.)
+- **Deuda de medición — arreglada (2026-06-30).** El filtro de candidatos del juez solo ofrecía
+  golden con guideline EXACTA compartida (muleta del juez 14B local, ADR-004): un hallazgo que citaba
+  otra guideline no tenía como candidato al golden correcto → falso fallo. Ahora el juez nube (fuerte)
+  ve **todos** los golden, con los que comparten guideline/grupo primero como pista (`judge._candidates`).
+  Re-juzgado de control (p3, a2, k=3): **media recall estable 0.82→0.82, varianza a la mitad
+  (±0.08→±0.03), precisión intacta (0.99)**. Lectura honesta: el arreglo mejora la **reproducibilidad**
+  y quita la dependencia de qué guideline se citó, pero **NO sube la media** — el "P3 real ≈14/15" era
+  una corrida con suerte (run0 baja 0.93→0.80 con el juez nuevo; runs 1-2 suben), no la verdad a k=3.
+  **Conclusiones sin cambios.** La tabla de arriba es del juez viejo; re-juzgarla entera (gasta API)
+  solo estrecharía las barras, no movería medias.
 - **Opcional (rigor):** control A4-completo fresco para blindar el delta de C3; y construir los 3 held-out
   documentados restantes (moderación, aviación, COMPAS). (Generación nueva = gasta API.)

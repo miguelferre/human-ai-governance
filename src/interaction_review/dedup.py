@@ -78,6 +78,17 @@ def _jaccard(a: set[str], b: set[str]) -> float:
     return inter / len(a | b)
 
 
+def text_similarity(a: str, b: str) -> float:
+    """Jaccard de tokens de contenido entre dos textos libres (0..1).
+
+    Reutilizable fuera del dedup: el juez la usa para AMPLIAR los candidatos del
+    golden por similitud de texto (no solo por id de guideline compartido), que es
+    la deuda de medicion documentada en TESTPLAN (un hallazgo que cita la guideline
+    'equivocada' se quedaba sin candidato y daba un falso fallo).
+    """
+    return _jaccard(_tokens(a), _tokens(b))
+
+
 def _signature_tokens(f: Finding) -> set[str]:
     # Titulo + locus: lo que identifica el PROBLEMA. La evidencia y el rationale son
     # largos y ruidosos (inflarian falsos parecidos); el titulo lleva el tema.

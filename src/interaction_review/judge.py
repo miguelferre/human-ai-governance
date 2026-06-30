@@ -6,7 +6,11 @@ salida es un pre-etiquetado que despues revisa el humano (`human_confirmed`).
 
 from __future__ import annotations
 
+from functools import lru_cache
+
 from interaction_review import llm, prompts
+from interaction_review.dedup import text_similarity
+from interaction_review.guidelines import all_guidelines
 from interaction_review.schemas import (
     Adjudication,
     AdjudicationLabel,
@@ -16,21 +20,47 @@ from interaction_review.schemas import (
 )
 
 
-def _candidates(f: Finding, golden: list[GoldenIssue]) -> list[GoldenIssue]:
-    """Candidatos del golden para un hallazgo: los que COMPARTEN guideline con el.
+@lru_cache(maxsize=1)
+def _group_by_guideline() -> dict[str, str]:
+    """id de guideline -> 'corpus:grupo' (fase HAX / capitulo PAIR)."""
+    return {g.id: f"{g.corpus.value}:{g.group}" for g in all_guidelines()}
 
-    Es un pre-filtro DETERMINISTA: reduce la tarea del juez de "escanea los 15" a
-    "confirma si es uno de estos 1-3". Si no comparte guideline con ninguno (raro),
-    se devuelven todos como salvaguarda para no negar un match por discrepancia de cita.
+
+def _shares_area(fg: set[str], f_groups: set[str], g: GoldenIssue, gmap: dict[str, str]) -> bool:
+    """El hallazgo y el golden comparten guideline EXACTA o el mismo grupo/area."""
+    if fg & set(g.guideline_ids):
+        return True
+    return bool(f_groups & {gmap[i] for i in g.guideline_ids if i in gmap})
+
+
+def _candidates(f: Finding, golden: list[GoldenIssue]) -> list[GoldenIssue]:
+    """TODOS los golden como candidatos, los PROBABLES primero.
+
+    Deuda de medicion (TESTPLAN B2): el filtro original solo ofrecia golden que
+    compartian guideline EXACTA con el hallazgo. Un hallazgo que citaba la guideline
+    'equivocada' (otra fase, u otro corpus) se quedaba sin el golden correcto entre sus
+    candidatos -> FALSO FALLO (P3 real ~14/15 medido como ~12). La 'lista corta' era una
+    muleta para el juez 14B local (ADR-004); el juez nube es fuerte y puede escanear los
+    15. Se ofrecen TODOS, con los que comparten guideline/grupo primero (pista) y el resto
+    ordenado por similitud de texto, para no negar un match por discrepancia de cita.
     """
+    gmap = _group_by_guideline()
     fg = set(f.guideline_ids)
-    cands = [g for g in golden if fg & set(g.guideline_ids)]
-    return cands if cands else list(golden)
+    f_groups = {gmap[i] for i in fg if i in gmap}
+    primary, rest = [], []
+    for g in golden:
+        (primary if _shares_area(fg, f_groups, g, gmap) else rest).append(g)
+    ftext = f"{f.title} {f.locus} {f.evidence}"
+    rest.sort(key=lambda g: text_similarity(ftext, f"{g.description} {g.locus}"), reverse=True)
+    return primary + rest
 
 
 def _payload(grounded: list[Finding], golden: list[GoldenIssue]) -> list[dict]:
+    gmap = _group_by_guideline()
     out = []
     for f in grounded:
+        fg = set(f.guideline_ids)
+        f_groups = {gmap[i] for i in fg if i in gmap}
         cands = _candidates(f, golden)
         out.append(
             {
@@ -38,7 +68,14 @@ def _payload(grounded: list[Finding], golden: list[GoldenIssue]) -> list[dict]:
                 "title": f.title,
                 "locus": f.locus,
                 "evidence": f.evidence,
-                "candidates": [{"id": g.id, "description": g.description} for g in cands],
+                "candidates": [
+                    {
+                        "id": g.id,
+                        "description": g.description,
+                        "shares_guideline": _shares_area(fg, f_groups, g, gmap),
+                    }
+                    for g in cands
+                ],
             }
         )
     return out

@@ -74,6 +74,34 @@ def test_to_finding_sin_anclaje_no_grounded():
     assert not f.is_grounded()
 
 
+# --- candidatos del juez (deuda de medicion: TESTPLAN B2) ---
+def test_candidates_incluye_todos_los_golden_probables_primero():
+    f = Finding(id="f1", title="t", guideline_ids=["HAX-G9"], locus="x", evidence="y")
+    comparte = GoldenIssue(id="G-comparte", description="d", guideline_ids=["HAX-G9"])
+    # Golden tagueado con OTRA guideline (otro corpus): antes quedaba EXCLUIDO -> falso fallo.
+    distinto = GoldenIssue(id="G-distinto", description="d", guideline_ids=["PAIR-ET-2"])
+    cands = judge_mod._candidates(f, [distinto, comparte])
+    ids = [g.id for g in cands]
+    assert set(ids) == {"G-comparte", "G-distinto"}  # ya NO se excluye al que no comparte
+    assert ids[0] == "G-comparte"  # el que comparte guideline va primero (pista al juez)
+
+
+def test_candidates_recupera_match_con_guideline_distinta(monkeypatch):
+    # El hallazgo cita HAX-G9 pero el problema real es el golden tagueado con PAIR-ET-2.
+    # Con el filtro viejo no era candidato; ahora si, y el juez puede emparejarlo.
+    f = Finding(id="f1", title="t", guideline_ids=["HAX-G9"], locus="x", evidence="y")
+    golden = [GoldenIssue(id="G-PAIR", description="mismo problema", guideline_ids=["PAIR-ET-2"])]
+
+    def fake_call(**kwargs):
+        return {"adjudications": [
+            {"finding_id": "f1", "judge_rationale": "es el mismo", "corresponde_a_candidato": "G-PAIR", "es_real": True}
+        ]}
+
+    monkeypatch.setattr(llm, "call_structured", fake_call)
+    adj = judge_mod.adjudicate([f], golden, _dossier())[0]
+    assert adj.label == AdjudicationLabel.TP_MATCH and adj.matched_golden_id == "G-PAIR"
+
+
 # --- logica del juez (LLM monkeypatcheado) ---
 def _grounded(fid: str) -> Finding:
     return Finding(id=fid, title=fid, guideline_ids=["HAX-G1"], locus="x", evidence="y")

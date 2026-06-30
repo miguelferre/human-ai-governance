@@ -140,9 +140,10 @@ FINDINGS_TOOL = {
 # Juez / adjudicador (modelo y prompt distintos del generador: ADR-002).
 # --------------------------------------------------------------------------- #
 JUDGE_SYSTEM = """\
-Eres un adjudicador IMPARCIAL. Para CADA hallazgo te damos una lista CORTA de CANDIDATOS del
-golden (preseleccionados porque comparten guideline con el hallazgo). Tu tarea es facil:
-mirar si el hallazgo describe el MISMO problema que alguno de SUS candidatos.
+Eres un adjudicador IMPARCIAL. Para CADA hallazgo te damos los CANDIDATOS del golden, con los
+mas probables PRIMERO (marcados con [comparte guideline]); el resto va despues por si el hallazgo
+describe ese problema aunque cite otra guideline. Tu tarea: mirar si el hallazgo describe el
+MISMO problema que alguno de SUS candidatos (mira tambien los no marcados, no solo los primeros).
 
 Por hallazgo, EN ESTE ORDEN:
 1) judge_rationale: razonamiento breve.
@@ -165,9 +166,10 @@ def judge_user(payload: list[dict], dossier: Dossier) -> str:
         blocks.append(f"    locus: {f.get('locus')!r} | evidencia: {f.get('evidence')!r}")
         cands = f.get("candidates", [])
         if cands:
-            blocks.append("    candidatos del golden (elige uno o 'ninguno'):")
+            blocks.append("    candidatos del golden (elige uno o 'ninguno'; [*]=comparte guideline):")
             for c in cands:
-                blocks.append(f"      * {c['id']}: {c['description']}")
+                mark = " [*]" if c.get("shares_guideline") else ""
+                blocks.append(f"      * {c['id']}{mark}: {c['description']}")
         else:
             blocks.append("    candidatos: (ninguno) -> solo puede ser nuevo o incorrecto")
     blocks.append("\nClasifica cada hallazgo via report_adjudications.")

@@ -48,6 +48,11 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
     FALSOS FALLOS cuando el generador cita la guideline "equivocada". Mitigación posible: ampliar
     candidatos por grupo/capítulo o por similitud semántica, no solo por id exacto. Sube el recall
     de todos los approaches; la comparación relativa se mantiene.
+  - **ARREGLADO (2026-06-30):** `judge._candidates` ahora ofrece TODOS los golden (los que comparten
+    guideline/grupo primero); la "lista corta" era muleta del 14B, no hace falta con juez nube fuerte.
+    Sorpresa al medir (re-juzgado control p3, k=3): la media NO sube (0.82→0.82), pero la **varianza
+    cae a la mitad (±0.08→±0.03)** con precisión intacta. El "≈14/15" era una corrida con suerte, no
+    la media. Es un win de reproducibilidad, no de recall. Detalle en [RESULTADOS.md](RESULTADOS.md).
 
 ### C. ¿Es buen producto (no solo gana el benchmark)?
 - **C0 — Deduplicado (el paso de producto).** El anti-patrón vivo: P3 emite el mismo problema
