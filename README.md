@@ -104,7 +104,7 @@ src/interaction_review/
   metrics.py            recall, precisión, genericidad, grounding, F-beta
   report.py             Informes en markdown/texto
   cli.py                Comandos `revisar` y `evaluar`
-docs/adr/               Decisiones de diseño (ADR-001..003)
+docs/adr/               Decisiones de diseño (ADR-001..006)
 data/golden/            PRIVADO, gitignored (caso clínico + answer key)
 tests/                  Tests de esquemas, guidelines y métricas
 ```

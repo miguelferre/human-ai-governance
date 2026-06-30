@@ -26,7 +26,7 @@ Y lo cuarto, que no dependiera de cómo le escribo la entrada. Reescribí entera
 
 ## Qué no es todavía
 
-Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Ya tiene un primer paso de limpieza que quita las repeticiones evidentes sin perder nada por el camino, y eso lo he medido: no se deja ni un problema de los que ya encontraba. Pero la limpieza fina todavía no está. El mismo problema se le puede colar dicho de dos o tres formas cuando lo mira desde guías distintas, y rebajar eso del todo ya no es cosa de reglas, pide la capa lista. Y los casos con los que lo he medido son pocos, los justos para fiarme de la señal pero no para presumir.
+Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Ya tiene un paso de limpieza que quita las repeticiones evidentes sin perder nada por el camino, y eso lo he medido: no se deja ni un problema de los que ya encontraba. Luego probé la limpieza fina, la que usa el modelo listo para juntar el mismo problema dicho de cinco maneras distintas. Y aquí va la parte honesta: limpia bastante más, pero de vez en cuando junta dos problemas que en realidad eran distintos, y en una auditoría eso es peor que dejar un duplicado, porque te esconde algo. Así que de momento me quedo con la limpieza segura por defecto y dejo la lista como opción para revisar a mano. Los casos con los que lo he medido ya son seis, cinco sacados de fuera y de tres mundos distintos (justicia, aviación, sanidad, moderación), así que me fío de la señal, aunque todavía no es para presumir de benchmark.
 
 ## La parte que igual te sorprende
 
