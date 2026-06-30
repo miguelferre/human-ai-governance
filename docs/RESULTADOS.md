@@ -1,6 +1,6 @@
 # Resultados del experimento — ¿hace falta un agente para revisar la capa de interacción?
 
-Síntesis a 2026-06-29. Detalle de cada corrida en `runs/` (gitignored); plan en
+Síntesis a 2026-06-30. Detalle de cada corrida en `runs/` (gitignored); plan en
 [TESTPLAN.md](TESTPLAN.md); decisiones de diseño en [docs/adr/](adr/).
 
 ## La pregunta
@@ -29,8 +29,13 @@ HAX-18/PAIR):
 | EII (clínico) | difícil (15) | Claude (Haiku/Sonnet) | 0.44 *±0.32 inestable* | 0.78 | **0.82** |
 | HireVue (held-out, NO clínico) | fácil (7) | Claude | 0.90 | **1.00** | 0.90 |
 | Epic Sepsis (held-out, clínico distinto) | fácil (7) | Claude | **0.95** | 0.95 | 0.86 |
+| COMPAS (held-out, NO clínico) | medio (9) | Claude | 0.85 | **1.00** | **1.00** |
+| MCAS aviación (held-out, NO clínico) | medio (9) | Claude | 0.96 | 0.93 | 0.96 |
+| Moderación (held-out, NO clínico) | medio (9) | Claude | 0.81 | **1.00** | 0.93 |
 
-B0 = 0.00 en todos (suelo). Todos los approaches con LLM: precisión ~1.0, genericidad 0.
+B0 = 0.00 en todos (suelo). Todos los approaches con LLM: precisión ~0.93-1.0, genericidad 0.
+Los tres últimos (held-out 2026-06-30, juez nuevo) son casos públicos documentados por fuentes
+independientes; reproducen el patrón → refuerzan "no es overfitting" (ya van **5 held-out**, 3 dominios).
 
 ## Conclusión: no es un ganador único, es un mapa
 
@@ -55,8 +60,10 @@ del modelo**. No "el agente siempre sobra" ni "el agente siempre gana".
   en código → gate estructural de genericidad → candidatos preseleccionados por guideline).
   Para gobernanza de IA es una lección en sí: *fíate del modelo para juzgar, pero pon
   barandillas deterministas*. **B0 es el canario**: si puntúa > 0, la medición está rota.
-- **No era overfitting.** Los held-out (uno NO clínico, otro clínico distinto) reproducen
-  los patrones. El alto recall del caso clínico no era un truco del caso.
+- **No era overfitting.** **Cinco** held-out en **tres dominios** (Epic Sepsis y HireVue;
+  COMPAS, MCAS-aviación y moderación de contenido, estos tres construidos desde fuentes
+  independientes citadas) reproducen los patrones. El alto recall del caso clínico no era un
+  truco del caso: P3/A4 recuperan 0.93-1.00 de problemas documentados por terceros, precisión 0.93-1.0.
 - **No hay falsa alarma (C1).** En un sistema bien diseñado, B1/P3/A4 devuelven **0
   hallazgos**: no inventan problemas. La verbosidad de P3 es **redundancia**, no
   fabricación → se arregla con un paso de deduplicado.
@@ -122,26 +129,45 @@ problemas reales distintos (impureza)?
   **p3 como producto** frente a p3n.
 - **El residual es juicio irreducible:** "el mismo problema colado por una guideline distinta"
   con vocabulario muy diferente no se distingue a nivel lexico de dos problemas vecinos sin
-  arriesgar conflacion (por eso T se queda en el lado seguro). Esa ultima capa pediria un paso
+  arriesgar conflacion (por eso T se queda en el lado seguro). Esa ultima capa pide un paso
   **semantico (LLM)** -> exactamente la tesis del proyecto: lo mecanico al codigo, al modelo solo
-  lo irreducible. Queda como siguiente paso de producto (opcional, gasta API).
+  lo irreducible.
+
+### Capa semantica con LLM (frente 1b, `dedup_llm.py`) — el trade-off
+
+Sobre el residual, una llamada al modelo agrupa por problema subyacente (el merge y la garantia de
+no perder hallazgos siguen siendo deterministas, en codigo). Validado sobre runs p3 ya juzgados:
+
+| Caso | n crudo -> lexico -> LLM | cobertura | impuros (clusters que mezclan golden, k=3) |
+|---|---|---|---|
+| EII (a2) | 56 -> 44 -> **17** | 12.3 intacta | 6 |
+| Epic (held-out) | 42 -> 36 -> **15** | 6.7 intacta | 5 |
+| HireVue (held-out) | 41 -> 35 -> **14** | 7.0 intacta | 9 |
+
+**Trade-off honesto, no victoria limpia:** el LLM **colapsa de verdad** (~un hallazgo por problema, lo que
+el determinista no logra) y **mantiene la cobertura** (recall intacto), pero **sobre-funde**: la impureza
+sube mucho (hasta ~2/3 de los clusters en HireVue mezclan problemas distintos). Conclusion de producto:
+el **determinista es el default seguro** (impureza ~0, reduccion modesta); el **LLM es un modo agresivo**
+que exige repaso humano de lo fusionado o un prompt mas conservador. (Cota superior: parte de la "impureza"
+puede ser ruido del juez viejo, que asigna problemas equivalentes a golden distintos.)
 
 ## Limitaciones honestas
 
 - Golden sets pequeños y construidos por el evaluador (caso EII) o desde fuentes públicas
-  (held-out); n de casos aún bajo.
+  (held-out); n de casos ya razonable (6 casos, 5 held-out, 3 dominios) pero aún no un benchmark.
 - El "cero" de B1 en EII-Claude podría ser un hipo puntual de la API, pero ilustra la
   falta de red del prompt único.
-- Falta confirmar A4-vs-P3 con más casos difíciles y modelos intermedios; y construir los
-  3 held-out documentados restantes (moderación, aviación, COMPAS).
+- Los 3 held-out nuevos (COMPAS/MCAS/moderación) son de dificultad **media** y bien documentados,
+  así que B1 ya rinde alto (0.81-0.96): confirman generalización pero no son casos "difíciles" como EII.
+- Falta confirmar A4-vs-P3 con más casos **difíciles** y modelos intermedios.
 
 ## Próximos pasos
 
-- **Producto — deduplicado:** ✅ HECHO (paso determinista, ver seccion arriba). Quita las repeticiones
-  evidentes sin perder cobertura (0 en 6 escenarios) y confirma **p3 > p3n** como candidato (p3n es mas
-  sucio de limpiar). Pendiente: (a) capa **semántica (LLM)** opcional para el residual "mismo problema vía
-  guideline distinta" —gasta API—; (b) **enrutado por dificultad** (prompt único para casos fáciles,
-  pipeline+dedup para los difíciles).
+- **Producto — deduplicado:** ✅ HECHO en sus **dos capas**. Determinista (seguro, ~0 impureza, reducción
+  modesta) + semántica con LLM (frente 1b: colapsa a ~un hallazgo por problema y mantiene cobertura, pero
+  sobre-funde → default determinista, LLM como modo agresivo con repaso). Confirma **p3 > p3n** como
+  candidato. Pendiente: (a) **afinar el prompt del LLM** para subir la pureza sin perder conciseness;
+  (b) **enrutado por dificultad** (prompt único para casos fáciles, pipeline+dedup para los difíciles).
 - **Deuda de medición — arreglada (2026-06-30).** El filtro de candidatos del juez solo ofrecía
   golden con guideline EXACTA compartida (muleta del juez 14B local, ADR-004): un hallazgo que citaba
   otra guideline no tenía como candidato al golden correcto → falso fallo. Ahora el juez nube (fuerte)
@@ -150,7 +176,9 @@ problemas reales distintos (impureza)?
   (±0.08→±0.03), precisión intacta (0.99)**. Lectura honesta: el arreglo mejora la **reproducibilidad**
   y quita la dependencia de qué guideline se citó, pero **NO sube la media** — el "P3 real ≈14/15" era
   una corrida con suerte (run0 baja 0.93→0.80 con el juez nuevo; runs 1-2 suben), no la verdad a k=3.
-  **Conclusiones sin cambios.** La tabla de arriba es del juez viejo; re-juzgarla entera (gasta API)
-  solo estrecharía las barras, no movería medias.
-- **Opcional (rigor):** control A4-completo fresco para blindar el delta de C3; y construir los 3 held-out
-  documentados restantes (moderación, aviación, COMPAS). (Generación nueva = gasta API.)
+  Re-juzgado además el fichero principal **EII-Claude completo (b1/p3/a4): medias IDÉNTICAS al juez viejo
+  (0.44 / 0.78 / 0.82)** → el arreglo no toca el titular. Recortado ahí: re-juzgar los otros 5 ficheros
+  de la tabla no aportaría (medias estables, solo cambia varianza). **Conclusiones sin cambios.**
+- **Control A4-completo fresco — ✅ HECHO (2026-06-30).** A4 sobre EII v2 completo, k=3 fresco: **0.80 ±0.09**
+  (precisión 1.00), frente al 0.82 previo → el delta de C3 (A4 completo 0.80-0.82 vs A4 incompleto 0.62) queda
+  **blindado**: la caída de A4 con entrada incompleta es real, no artefacto de una corrida.

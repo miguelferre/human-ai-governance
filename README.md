@@ -66,8 +66,10 @@ uv sync --extra dev
 # Informe de hallazgos para un sistema descrito en un Dossier (JSON):
 uv run interaction-review revisar --dossier ruta/dossier.json --approach b0
 
-# Con --dedup consolida hallazgos casi-duplicados (recomendado con p3; ver RESULTADOS.md):
+# Con --dedup consolida hallazgos casi-duplicados (determinista; recomendado con p3):
 uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup
+# --dedup-llm: consolidacion semantica con LLM (mas agresiva; gasta API). Ver RESULTADOS.md.
+uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup-llm
 
 # Métricas contra un golden set (requiere adjudicaciones para recall/precisión):
 uv run interaction-review evaluar --golden data/golden/answer_key.json \

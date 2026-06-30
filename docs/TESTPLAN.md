@@ -20,10 +20,16 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
 ## Batería de pruebas
 
 ### A. ¿Generaliza? (lo más importante)
-- **A1 — Casos externos held-out.** Buscar en literatura/web 2-3 casos reales con problemas de
+- **A1 — Casos externos held-out.** Buscar en literatura/web casos reales con problemas de
   interacción DOCUMENTADOS por fuentes independientes (golden objetivo, no nuestra interpretación);
-  construir dossier + golden y correr B1/P3/A4. Es LA prueba de overfitting. _Estado: BUSCANDO casos
-  (agente de investigación en curso)._
+  construir dossier + golden y correr B1/P3/A4. Es LA prueba de overfitting. _Estado: ✅ HECHO — **5
+  held-out en 3 dominios**._
+  - Epic Sepsis (clínico distinto) + HireVue (RRHH) — 2026-06-29.
+  - **COMPAS** (justicia), **MCAS-aviación** (cabina 737 MAX) y **moderación de contenido** — 2026-06-30,
+    construidos desde fuentes independientes citadas (dossier ciego neutralizado + golden de 9 issues c/u
+    en `data/external/{compas,mcas-aviacion,moderacion}/`). Resultados k=3: P3 0.93-1.00, A4 0.93-1.00,
+    B1 0.81-0.96, precisión 0.93-1.0; B0=0. **Overfitting DESCARTADO**: el patrón se reproduce en todos.
+    (Son de dificultad media → B1 ya rinde alto; no son casos "difíciles" como EII.)
 - **A2 — Bloques alternativos.** Re-correr P3 con una agrupación neutral (4 fases HAX + capítulos
   PAIR, sin mano). Si P3 aguanta, la ventaja es la *descomposición*, no mis bloques. _Estado: ✅ HECHO
   (2026-06-29, EII v2, k=3, nube)._
@@ -60,8 +66,11 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
   offline)._ `src/interaction_review/dedup.py` + `scripts/dedup_report.py`; expuesto como
   `revisar --dedup`. Validado sobre runs ya juzgados: **cobertura perdida 0 en 6 escenarios**
   (recall intacto), reducción 13-26% en p3 con impureza ~0, generaliza a los held-out, y no daña
-  lo ya conciso (b1/a4). El residual ("mismo problema vía guideline distinta") es juicio
-  irreducible → capa semántica LLM opcional. Detalle y tabla en [RESULTADOS.md](RESULTADOS.md).
+  lo ya conciso (b1/a4).
+  - **Capa semántica con LLM — ✅ HECHO (2026-06-30, `dedup_llm.py`, `revisar --dedup-llm`).** Para el
+    residual ("mismo problema vía guideline distinta"). Colapsa fuerte (p3: 56→17, 42→15, 41→14, ~un
+    hallazgo por problema) y mantiene cobertura, PERO **sobre-funde** (impureza 6/5/9 en k=3). Trade-off:
+    determinista = default seguro; LLM = modo agresivo con repaso. Detalle en [RESULTADOS.md](RESULTADOS.md).
 - **C1 — Falsos positivos en un sistema "bueno".** Dar a P3 el dossier de un sistema bien diseñado
   (pocos problemas). ¿Se calla o inventa para llenar bloques? Un auditor que siempre encuentra 25
   fallos es inútil. _Estado: pendiente (requiere dossier sintético de sistema "bueno")._
@@ -82,8 +91,9 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
     justo donde el **barrido exhaustivo fijo de P3 más gana**: garantiza cobertura cuando la señal es
     escasa y dispersa. A4, al decidir autónomamente cuándo parar, **corta antes** (≈30 hallazgos vs 53 de
     P3) y se deja issues recuperables. A4 mantiene precisión altísima (0.99) pero a costa de recall.
-  - **Salvedad:** el baseline A4-completo (0.82) es de corrida previa (misma config); P3-completo sí está
-    confirmado fresco (A2: 0.82). Para blindar el delta de A4 cabría un control A4-completo fresco.
+  - **Salvedad → RESUELTA (2026-06-30):** control A4-completo **fresco** sobre EII v2, k=3: **0.80 ±0.09**
+    (precisión 1.00) ≈ 0.82 previo. El delta de C3 (A4 completo ~0.80-0.82 vs incompleto 0.62) queda
+    **blindado**: la caída de A4 con entrada incompleta es real, no un artefacto de corrida.
 
 ### Confirmación con varianza
 - **k=3** de los approaches clave (P3 y A4 al menos) una vez cerradas las pruebas anteriores, para
@@ -92,7 +102,7 @@ Lectura provisional: el pipeline gana; el agente NO se justifica. Falta validar 
 ## Estado a 2026-06-29 (ejecutado en NUBE Claude; síntesis en RESULTADOS.md)
 
 - **B2** adjudicación humana de P3: ✅ HECHO (0.80 real, infravalorado; bug del corrector documentado).
-- **A1** generalización: ✅ HECHO con 2 held-out (HireVue no clínico, Epic clínico distinto) → **NO era overfitting** (patrones reproducidos). Faltan 3 held-out documentados sin construir (moderación, aviación, COMPAS).
+- **A1** generalización: ✅ HECHO con **5 held-out en 3 dominios** (HireVue, Epic; + COMPAS, MCAS-aviación, moderación el 2026-06-30) → **NO era overfitting** (patrones reproducidos en todos: P3/A4 0.93-1.00).
 - **B1** estructura vs cantidad: ✅ respondido por el mapa — la estructura aporta **reliability** en casos difíciles (B1 inestable, una corrida a 0), no solo cantidad; en casos fáciles B1≈P3. (El approach `b1x` quedó implementado; su corrida local se abortó por lentitud.)
 - **C1** falsos positivos en sistema bueno: ✅ HECHO — B1/P3/A4 devuelven **0 hallazgos**; no inventan. La verbosidad de P3 es redundancia, no fabricación.
 - **A2** bloques alternativos: ✅ HECHO (R-A descartado: `p3n` neutral 0.89 ≥ `p3` a-mano 0.82; ver arriba).
