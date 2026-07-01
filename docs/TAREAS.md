@@ -26,7 +26,10 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
 - [ ] **Semi-automatizar el dossier.** Ingerir la documentación de un sistema → plantillas rellenas, para
       que construir la entrada no cueste lo mismo que auditar a mano (hoy es el cuello de botella del caso
       de uso real).
-- [ ] **Informe presentable** (HTML) en vez de markdown plano.
+- [x] **Informe presentable** (HTML) — HECHO. `report_html.render_findings_html`: informe autocontenido
+      (CSS embebido, sin dependencias de red), diseño editorial sobrio para gobernanza sanitaria, imprime a
+      PDF (`@media print`). Escapa todo el texto libre (anti-inyección). `revisar --format html`
+      (combina con `--crosswalk`). Verificado en navegador. 8 tests (incl. escapado de HTML).
 
 ## Narrativa / comercial
 

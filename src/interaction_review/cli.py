@@ -21,6 +21,7 @@ from interaction_review.report import (
     render_metrics_md,
     render_regulatory_crosswalk,
 )
+from interaction_review.report_html import render_findings_html
 from interaction_review.runner import run_experiment
 from interaction_review.schemas import (
     Adjudication,
@@ -79,9 +80,12 @@ def cmd_revisar(args: argparse.Namespace) -> int:
             print(f"[dedup] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
         label = args.approach
 
-    report = render_findings_md(dossier, findings, label)
-    if args.crosswalk:
-        report = report + "\n" + render_regulatory_crosswalk(findings)
+    if args.format == "html":
+        report = render_findings_html(dossier, findings, label, include_crosswalk=args.crosswalk)
+    else:
+        report = render_findings_md(dossier, findings, label)
+        if args.crosswalk:
+            report = report + "\n" + render_regulatory_crosswalk(findings)
     _emit(report, args.out)
     return 0
 
@@ -192,7 +196,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Anexa el mapeo normativo (EU AI Act / NIST AI RMF) de los hallazgos. Orientativo (ADR-008).",
     )
-    pr.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
+    pr.add_argument(
+        "--format",
+        choices=["md", "html"],
+        default="md",
+        help="Formato del informe: md (def) o html (autocontenido, imprime a PDF).",
+    )
+    pr.add_argument("--out", default=None, help="Fichero de salida (def: stdout). Usa .html con --format html.")
     pr.set_defaults(func=cmd_revisar)
 
     pe = sub.add_parser("evaluar", help="Calcula metricas contra un golden set.")
