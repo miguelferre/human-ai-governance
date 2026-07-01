@@ -23,9 +23,12 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       timing, confianza)—; el 48% los revela también la documentación (ahí la voz da grounding, no recall).
       **Falta (API):** la corrida con voz vs sin voz para el *delta* de recall en `user_only` (el conteo es
       el techo, no el efecto). Comando listo en el doc.
-- [ ] **Semi-automatizar el dossier.** Ingerir la documentación de un sistema → plantillas rellenas, para
-      que construir la entrada no cueste lo mismo que auditar a mano (hoy es el cuello de botella del caso
-      de uso real).
+- [~] **Semi-automatizar el dossier.** Parte OFFLINE HECHA: `ingest.py` convierte las plantillas rellenas
+      (01/02/03) en un `Dossier` validado, determinista, sin API (`interaction-review ingerir --ficha … --experiencia …`).
+      Extrae nombre/dominio de la ficha, admite varios técnicos/usuarios (ids distintos), saca los documentos
+      marcados del inventario, y asigna el `kind` correcto por plantilla. Verificado end-to-end contra el formato
+      real (plantillas → dossier → `revisar`). 9 tests. **Falta (API):** ingerir documentación arbitraria (PDFs,
+      model cards) de forma inteligente → plantillas prerrellenas; eso sí necesita LLM.
 - [x] **Informe presentable** (HTML) — HECHO. `report_html.render_findings_html`: informe autocontenido
       (CSS embebido, sin dependencias de red), diseño editorial sobrio para gobernanza sanitaria, imprime a
       PDF (`@media print`). Escapa todo el texto libre (anti-inyección). `revisar --format html`

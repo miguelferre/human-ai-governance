@@ -122,6 +122,30 @@ def cmd_evaluar(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ingerir(args: argparse.Namespace) -> int:
+    from interaction_review.ingest import ingest_templates
+
+    try:
+        dossier = ingest_templates(
+            ficha=args.ficha,
+            experiencia=args.experiencia,
+            inventario=args.inventario,
+            system_name=args.system_name,
+            domain=args.domain,
+        )
+    except (ValueError, FileNotFoundError) as e:
+        print(f"[ingesta] {e}", file=sys.stderr)
+        return 2
+
+    text = json.dumps(dossier.model_dump(mode="json"), indent=2, ensure_ascii=False)
+    print(
+        f"[ingesta] {len(dossier.sources)} fuentes -> dossier de '{dossier.system_name}'.",
+        file=sys.stderr,
+    )
+    _emit(text, args.out)
+    return 0
+
+
 def cmd_comparar(args: argparse.Namespace) -> int:
     dossier = Dossier.model_validate(_load_json(args.dossier))
     golden = [GoldenIssue.model_validate(x) for x in _load_json(args.golden)]
@@ -214,6 +238,18 @@ def build_parser() -> argparse.ArgumentParser:
     pe.add_argument("--corpus", default="hax,pair", help="Corpus (def: hax,pair).")
     pe.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
     pe.set_defaults(func=cmd_evaluar)
+
+    pi = sub.add_parser(
+        "ingerir",
+        help="Convierte plantillas rellenas (01/02/03) en un Dossier JSON. Determinista, sin API.",
+    )
+    pi.add_argument("--ficha", action="append", default=[], help="Plantilla 01 rellena (repetible: varios tecnicos).")
+    pi.add_argument("--experiencia", action="append", default=[], help="Plantilla 02 rellena (repetible: varios usuarios).")
+    pi.add_argument("--inventario", default=None, help="Plantilla 03 rellena (inventario de documentos).")
+    pi.add_argument("--system-name", default=None, help="Nombre del sistema (si no, se toma de la ficha).")
+    pi.add_argument("--domain", default=None, help="Dominio (si no, se toma de la ficha).")
+    pi.add_argument("--out", default=None, help="Fichero dossier.json (def: stdout).")
+    pi.set_defaults(func=cmd_ingerir)
 
     pc = sub.add_parser(
         "comparar",
