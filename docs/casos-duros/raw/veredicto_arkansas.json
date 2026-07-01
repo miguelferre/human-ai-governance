@@ -1,0 +1,6 @@
+{"caso":"arkansas-medicaid",
+ "cubiertos":["AR-01-sin-explicacion-recorte","AR-02-enfermera-sin-discrecion","AR-04-dhs-no-entendia-su-propio-sistema","AR-05-aviso-insuficiente-cambio-normativo","AR-06-apelacion-sin-info-para-impugnar","AR-08-errores-codificacion-invisibles","AR-10-narrativa-objetividad-oculta-incertidumbre"],
+ "no_cubiertos":["AR-03-formula-secreto-comercial","AR-07-beneficios-suspendidos-durante-apelacion","AR-09-impacto-humano-sin-canal-de-feedback"],
+ "n_golden":10,
+ "recall":0.70,
+ "tp_new_aprox":6}

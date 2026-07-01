@@ -68,6 +68,32 @@ recupera **9/10 de los fallos que un órgano humano independiente identificó**,
 testimonios reales, con el modelo más barato, **sin inventar**. La circularidad inflaba **poco**
 (~0.08: de ~0.98 a 0.90).
 
+## Test duro ampliado a n=3 (2026-07-01)
+
+Para blindar el 0.90 de Robodebt con más de un caso, se construyeron **dos casos duros más** con el
+mismo diseño de **manos separadas** (un constructor deriva el golden de la fuente independiente sin ver
+el dossier; otro construye el dossier de hechos + testimonios reales sin ver el golden; ambos con
+búsqueda web y fuentes citadas), y se midió con **generador ciego (Sonnet) + juez independiente (Opus)**:
+
+| Caso | Sector | Golden | Recall |
+|---|---|---|---|
+| Robodebt | Bienestar (Australia) | 10 | 9/10 = 0.90 |
+| MiDAS | Bienestar / desempleo (EE. UU.) | 9 | 7/9 = 0.78 |
+| Arkansas ARChoices | Sanidad/discapacidad (EE. UU.) | 10 | 7/10 = 0.70 |
+| **Media (n=3)** | **3 jurisdicciones** | **29** | **~0.79** |
+
+Robodebt era el extremo alto; la media del test duro con manos separadas es **~0.79**. Los misses son
+honestos y de dos tipos: (a) problemas que sí estaban en el dossier pero el revisor no enmarcó (el
+cuestionario autoincriminatorio de MiDAS; la magnitud de la multa del 400%); (b) matices de ángulo que
+el juez estricto no dio por cubiertos (en Arkansas: negativa por secreto comercial vs. opacidad técnica;
+pérdida inmediata de horas durante la apelación; ausencia de canal de feedback). Además, el revisor
+produjo **descubrimientos legítimos fuera del golden** (tp_new: 2 en MiDAS, 6 en Arkansas): problemas de
+interacción reales y anclados que el órgano independiente no había listado. Casos en
+`data/external/{midas-michigan,arkansas-medicaid}/`; crudos y consolidado en `docs/casos-duros/`.
+
 **Limitaciones que quedan** (en [TAREAS.md](TAREAS.md), no como respaldo sino como trabajo planificado):
-sigue siendo Claude el generador (no se elimina del todo "el modelo piensa como el modelo"); es **un**
-caso duro (n=1); y falta la corrida-código con juez LLM independiente para el número reproducible.
+sigue siendo Claude el generador (no se elimina del todo "el modelo piensa como el modelo"); la corrida
+es **asistida con subagentes** (generador Sonnet ciego + juez Opus independiente, roles separados), no
+con el pipeline-código `comparar`, así que el número reproducible con ese pipeline sigue pendiente; k=1
+por caso. Los casos MiDAS y Arkansas se construyeron con búsqueda web sobre fuentes públicas citadas y
+trianguladas (auditorías, sentencias, prensa seria); no contienen PHI.

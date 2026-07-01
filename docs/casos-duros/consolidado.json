@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "experimento": "test duro con manos separadas (golden desde fuente independiente + dossier desde hechos/testimonios, constructores distintos y ciegos entre si); generador ciego (Sonnet) + juez independiente (Opus); k=1",
+    "media_recall": 0.79
+  },
+  "casos": [
+    {
+      "caso": "robodebt-hard",
+      "sector": "welfare (Australia)",
+      "golden": 10,
+      "cubiertos": 9,
+      "recall": 0.9,
+      "nota": "test duro original (RESULTADOS-testimonio); miss = dato ausente en el dossier crudo"
+    },
+    {
+      "caso": "midas-michigan",
+      "sector": "welfare (EE.UU.)",
+      "golden": 9,
+      "cubiertos": 7,
+      "recall": 0.78,
+      "nota": "misses: cuestionario autoincriminatorio, magnitud 400% no comunicada (ambos en el dossier); +2 tp_new"
+    },
+    {
+      "caso": "arkansas-medicaid",
+      "sector": "sanidad/discapacidad (EE.UU.)",
+      "golden": 10,
+      "cubiertos": 7,
+      "recall": 0.7,
+      "nota": "misses (juez estricto): negativa por secreto comercial, perdida inmediata de horas en apelacion, canal de feedback ausente; +6 tp_new"
+    }
+  ]
+}

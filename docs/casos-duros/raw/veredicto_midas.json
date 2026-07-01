@@ -1,0 +1,6 @@
+{"caso":"midas-michigan",
+ "cubiertos":["MI-01-notificacion-solo-portal","MI-03-adjudicacion-sin-revision-humana","MI-04-sin-explicacion-de-causa","MI-05-no-investiga-explicaciones-alternativas","MI-06-sancion-antes-de-poder-defenderse","MI-08-sin-senal-de-incertidumbre-del-sistema","MI-09-apelacion-obstaculizada"],
+ "no_cubiertos":["MI-02-cuestionario-autoincriminatorio","MI-07-penalizacion-400-no-comunicada"],
+ "n_golden":9,
+ "recall":0.78,
+ "tp_new_aprox":2}

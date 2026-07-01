@@ -5,12 +5,16 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
 
 ## Rigor de los resultados
 
-- [ ] **2-3 casos duros más** (golden de fuente **humana externa** + dossier **en bruto** + manos
-      separadas), como el de Robodebt (recall 0.90). Blinda el 0.90 con n>1. Candidatos: Asiana 214 con
-      el informe NTSB como golden; un clínico con un estudio que ya liste los problemas de interacción.
-- [ ] **Corrida-código reproducible.** Reponer la API key y correr `comparar` (juez LLM **independiente**)
-      sobre los 7 casos con testimonio → el número "oficial", sin que el mismo motor haga de juez y de
-      constructor. Es el cierre de la nota honesta de RESULTADOS-testimonio.
+- [x] **2-3 casos duros más** (golden de fuente humana externa + dossier en bruto + manos separadas),
+      como Robodebt (0.90). HECHO: **MiDAS** (Michigan, bienestar/desempleo; 7/9 = 0.78) y **Arkansas
+      ARChoices** (sanidad/discapacidad; 7/10 = 0.70), construidos con manos separadas y búsqueda web sobre
+      fuentes públicas citadas (auditorías, sentencias, prensa). **Test duro n=3: media ~0.79** (Robodebt
+      0.90 era el extremo alto). Casos en `data/external/{midas-michigan,arkansas-medicaid}/`; consolidado en
+      `docs/casos-duros/`. Detalle en [RESULTADOS-testimonio.md](RESULTADOS-testimonio.md).
+- [~] **Corrida-código reproducible.** El recall de los casos con testimonio ya se midió de forma
+      **asistida** (generador ciego + juez independiente, roles y modelos separados). **Falta** correrlo con
+      el pipeline-código `comparar` para el número reproducible no asistido; necesita la API key (o rehacerlo
+      con subagentes replicando el protocolo del pipeline). Cierre de la nota honesta de RESULTADOS-testimonio.
 
 ## Producto
 
