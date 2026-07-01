@@ -2,7 +2,7 @@
 
 **Audita el salpicadero de un sistema de IA, no el motor.**
 
-![A reviewer for the human-AI interaction layer — audits how an AI presents itself to its users, anchored to HAX-18 and PAIR.](docs/assets/portada.svg)
+![The ecosystem around the human-AI interaction layer: data feeds the model; the model drives connected tools and guides the user; the user acts and adapts; outcomes loop back to improve the model — all under a governance layer.](docs/assets/human-ai-ecosystem.jpg)
 
 Las herramientas de gobernanza de IA que existen hoy (watsonx.governance, Fiddler, Arize…)
 auditan el **motor**: sesgo, precisión, deriva, explicabilidad técnica. Casi nadie mira el
