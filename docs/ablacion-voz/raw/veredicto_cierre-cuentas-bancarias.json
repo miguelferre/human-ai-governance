@@ -1,0 +1,3 @@
+{"caso":"cierre-cuentas-bancarias",
+ "con_voz_cubiertos":["cc-01-sin-explicacion-al-cliente","cc-02-operador-no-entiende-la-senal","cc-03-sin-override-ni-apelacion","cc-04-automation-bias-operador","cc-05-sin-incertidumbre-ni-rendimiento","cc-06-modelo-opaco-propietario","cc-07-error-no-accionable","cc-08-sin-captura-de-discrepancia","cc-09-umbral-sesgado-a-marcar-de-mas"],
+ "sin_voz_cubiertos":["cc-01-sin-explicacion-al-cliente","cc-02-operador-no-entiende-la-senal","cc-03-sin-override-ni-apelacion","cc-04-automation-bias-operador","cc-05-sin-incertidumbre-ni-rendimiento","cc-06-modelo-opaco-propietario","cc-07-error-no-accionable","cc-08-sin-captura-de-discrepancia","cc-09-umbral-sesgado-a-marcar-de-mas"]}

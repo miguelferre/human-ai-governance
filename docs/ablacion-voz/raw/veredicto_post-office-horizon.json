@@ -1,0 +1,3 @@
+{"caso":"post-office-horizon",
+ "con_voz_cubiertos":["PO-01-deferencia-a-la-maquina","PO-02-cifra-opaca-no-auditable","PO-03-sin-explicacion-del-porque","PO-04-sin-incertidumbre-falsa-autoridad","PO-05-helpdesk-inutil-empeora","PO-06-sin-via-de-override-ni-contestacion","PO-07-discrepancia-no-capturada","PO-08-sin-abstencion-bajo-fallo"],
+ "sin_voz_cubiertos":["PO-02-cifra-opaca-no-auditable","PO-03-sin-explicacion-del-porque","PO-04-sin-incertidumbre-falsa-autoridad","PO-05-helpdesk-inutil-empeora","PO-06-sin-via-de-override-ni-contestacion","PO-07-discrepancia-no-capturada","PO-08-sin-abstencion-bajo-fallo"]}

@@ -1,0 +1,295 @@
+{
+  "_meta": {
+    "experimento": "ablacion del testimonio (voz vs sin-voz), ADR-007",
+    "metodo": "within-subject; generador ciego (Sonnet, no ve golden ni hipotesis) sobre dossier con voz y sin fuentes end_user; juez independiente (Opus, ciego a revealed_by) adjudica cobertura. Corrida asistida con subagentes, no con el pipeline `comparar`. k=1.",
+    "casos": [
+      "alert-fatigue-ehr",
+      "asiana-214",
+      "cierre-cuentas-bancarias",
+      "post-office-horizon",
+      "toeslagenaffaire"
+    ]
+  },
+  "casos": {
+    "alert-fatigue-ehr": [
+      {
+        "id": "AF-01-volumen-fatiga",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "AF-02-automation-bias-habituacion",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "AF-03-override-sin-motivo",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AF-04-temporizacion",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "AF-05-sin-onboarding",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AF-06-sin-explicacion-accionable",
+        "revealed_by": "both",
+        "con_voz": false,
+        "sin_voz": false
+      },
+      {
+        "id": "AF-07-baja-especificidad-umbral",
+        "revealed_by": "both",
+        "con_voz": false,
+        "sin_voz": true
+      },
+      {
+        "id": "AF-08-sin-controles-config",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      }
+    ],
+    "asiana-214": [
+      {
+        "id": "AS-01-modelo-mental-erroneo-del-automatismo",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "AS-02-confusion-de-modo",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-03-cambio-de-modo-sin-salience",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-04-sobreconfianza-automation-bias",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-05-expectativa-de-proteccion-inexistente",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "AS-06-formacion-insuficiente-de-modos",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-07-logica-de-modos-opaca-y-dispersa",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-08-sin-abstencion-ni-degradacion-segura",
+        "revealed_by": "tech_only",
+        "con_voz": false,
+        "sin_voz": true
+      },
+      {
+        "id": "AS-09-sin-captura-de-malentendido",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      }
+    ],
+    "cierre-cuentas-bancarias": [
+      {
+        "id": "cc-01-sin-explicacion-al-cliente",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-02-operador-no-entiende-la-senal",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-03-sin-override-ni-apelacion",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-04-automation-bias-operador",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-05-sin-incertidumbre-ni-rendimiento",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-06-modelo-opaco-propietario",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-07-error-no-accionable",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-08-sin-captura-de-discrepancia",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      }
+    ],
+    "post-office-horizon": [
+      {
+        "id": "PO-01-deferencia-a-la-maquina",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "PO-02-cifra-opaca-no-auditable",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-03-sin-explicacion-del-porque",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-04-sin-incertidumbre-falsa-autoridad",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-05-helpdesk-inutil-empeora",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-06-sin-via-de-override-ni-contestacion",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-07-discrepancia-no-capturada",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-08-sin-abstencion-bajo-fallo",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "PO-09-sin-formacion-modelo-mental",
+        "revealed_by": "user_only",
+        "con_voz": false,
+        "sin_voz": false
+      }
+    ],
+    "toeslagenaffaire": [
+      {
+        "id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-02-opacidad-tambien-para-el-operador",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "TO-04-inversion-de-la-carga-de-la-prueba",
+        "revealed_by": "user_only",
+        "con_voz": true,
+        "sin_voz": false
+      },
+      {
+        "id": "TO-05-indicadores-sensibles-no-transparentes",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-07-modelo-opaco-no-publicado",
+        "revealed_by": "tech_only",
+        "con_voz": false,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-08-todo-o-nada-sin-degradacion",
+        "revealed_by": "both",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-09-automation-bias-del-funcionario",
+        "revealed_by": "tech_only",
+        "con_voz": true,
+        "sin_voz": true
+      },
+      {
+        "id": "TO-10-perdida-de-confianza-por-trato-opaco",
+        "revealed_by": "user_only",
+        "con_voz": false,
+        "sin_voz": false
+      }
+    ]
+  }
+}

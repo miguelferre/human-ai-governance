@@ -14,15 +14,15 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
 
 ## Producto
 
-- [~] **Ablación dirigida del testimonio.** Andamiaje + resultado offline HECHOS
-      ([RESULTADOS-ablacion-testimonio.md](RESULTADOS-ablacion-testimonio.md), [ADR-007](adr/ADR-007-ablacion-del-testimonio.md)):
-      campo `revealed_by` en el esquema, control sin-voz (`ablation.without_voice`), métrica por
-      subconjunto (`metrics.recall_by_revealed_by`), los 7 goldens con testimonio etiquetados a mano y el
-      reporte de distribución (`scripts/ablacion_report.py`). **Resultado:** 12/64 (19%) de los problemas
-      solo los revela la voz —y son sistemáticamente los cognitivos (automation bias, modelo mental,
-      timing, confianza)—; el 48% los revela también la documentación (ahí la voz da grounding, no recall).
-      **Falta (API):** la corrida con voz vs sin voz para el *delta* de recall en `user_only` (el conteo es
-      el techo, no el efecto). Comando listo en el doc.
+- [x] **Ablación dirigida del testimonio.** HECHA entera
+      ([RESULTADOS-ablacion-testimonio.md](RESULTADOS-ablacion-testimonio.md), [ADR-007](adr/ADR-007-ablacion-del-testimonio.md)).
+      Andamiaje (campo `revealed_by`, `ablation.without_voice`, `metrics.recall_by_revealed_by`, `scripts/ablacion_report.py`),
+      etiquetado de los 7 goldens y **corrida del efecto voz vs sin-voz** (within-subject, generador ciego +
+      juez independiente; datos en `runs/ablacion_voz_k1.json`). **Resultado:** (1) techo — 12/64 (19%) de
+      los problemas solo los revela la voz, sistemáticamente los cognitivos; (2) efecto — el recall de
+      `user_only` cae **0.83→0.33 sin voz** (Δ−0.50), con controles planos (both −0.05, tech_only ni baja):
+      el testimonio **descubre** la capa cognitiva, no solo la refuerza. Confirma la predicción pre-registrada.
+      Corrida asistida (subagentes), k=1; la varianza con k=3 y el pipeline-código quedan como pulido.
 - [~] **Semi-automatizar el dossier.** Parte OFFLINE HECHA: `ingest.py` convierte las plantillas rellenas
       (01/02/03) en un `Dossier` validado, determinista, sin API (`interaction-review ingerir --ficha … --experiencia …`).
       Extrae nombre/dominio de la ficha, admite varios técnicos/usuarios (ids distintos), saca los documentos

@@ -1,0 +1,3 @@
+{"caso":"alert-fatigue-ehr",
+ "con_voz_cubiertos":["AF-01-volumen-fatiga","AF-02-automation-bias-habituacion","AF-03-override-sin-motivo","AF-04-temporizacion","AF-05-sin-onboarding","AF-08-sin-controles-config"],
+ "sin_voz_cubiertos":["AF-03-override-sin-motivo","AF-05-sin-onboarding","AF-07-baja-especificidad-umbral","AF-08-sin-controles-config"]}

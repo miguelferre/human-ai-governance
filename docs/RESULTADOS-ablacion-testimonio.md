@@ -74,20 +74,48 @@ override, umbrales mal calibrados). El testimonio revela la **vivencia y la cogn
 exceso de confianza, el modelo mental, la fatiga, el mal momento. Y esa capa cognitiva es
 justamente la más peligrosa en un sistema clínico y la que ninguna ficha técnica va a declarar.
 
-## Lo que falta para cerrarlo (necesita API)
+## El efecto: recall con voz vs sin voz (corrida hecha)
 
-Este conteo mide el **techo** (cuántos problemas dependen de la voz), no el **efecto** (cuánto
-cae el recall del revisor al quitarle la voz). El cierre es una corrida con el motor sobre cada
-dossier **con voz** y **sin voz** (retirando las fuentes `end_user`, `ablation.without_voice`) y
-comparar el recall del subconjunto `user_only`. El andamiaje está listo:
+El conteo de arriba mide el **techo** (cuántos problemas dependen de la voz). Esta corrida mide
+el **efecto**: cuánto cae el recall del revisor cuando le quitamos el testimonio. Diseño
+**within-subject** sobre los 5 casos con `user_only` (45 problemas):
 
-```
-uv run python scripts/ablacion_report.py compare \
-    --golden data/external/asiana-214/answer_key.json \
-    --voz runs/asiana_voz_k3.json --sin-voz runs/asiana_sinvoz_k3.json --approach p3
-```
+- **Generador ciego** (Sonnet): produce hallazgos anclados sobre el dossier **con voz** y, por
+  separado, sobre el **mismo dossier sin las fuentes `end_user`** (`ablation.without_voice`).
+  Mismo prompt; no ve el golden ni conoce la hipótesis.
+- **Juez independiente** (Opus, otro rol y modelo, ciego a `revealed_by`): adjudica qué golden
+  cubre cada conjunto, con el mismo rasero en ambas condiciones.
 
-**Predicción pre-registrada (ADR-007):** el recall de `user_only` debería desplomarse sin voz
-(el revisor no puede ver lo que ninguna fuente le cuenta). Si además el recall de `both` NO cae,
-quedaría demostrado que el testimonio **descubre** la capa cognitiva y **refuerza** el resto.
-Pendiente de reponer la API key (ver [TAREAS.md](TAREAS.md)).
+Datos en `ablacion-voz/consolidado_k1.json` (recalcula la tabla) y `ablacion-voz/raw/` (hallazgos y veredictos crudos).
+
+| revealed_by | n | recall CON voz | recall SIN voz | Δ |
+|---|---|---|---|---|
+| **user_only** | 12 | **0.83** | **0.33** | **−0.50** |
+| both (control) | 20 | 0.90 | 0.85 | −0.05 |
+| tech_only (control) | 13 | 0.85 | 1.00 | +0.15 |
+| **global** | 45 | 0.87 | 0.76 | −0.11 |
+
+**Confirma la predicción pre-registrada (ADR-007).** El recall de los problemas que solo revela
+la voz **se desploma a la mitad** (0.83 → 0.33) al retirar el testimonio, mientras los controles
+apenas se mueven: `both` −0.05 (la documentación los sostiene) y `tech_only` ni baja (el revisor
+sin voz se concentra en lo documental). El efecto está localizado en `user_only`, que es
+exactamente lo que la hipótesis predecía. El global cae solo −0.11 porque `user_only` es 12 de 45
+— coherente con C3, que miraba el agregado y por eso no veía el efecto.
+
+**Por qué el delta es defendible pese a hacerse con el propio modelo.** La circularidad (Claude
+construyó los casos y aquí genera/juzga) infla el recall *absoluto*, pero es el **mismo generador
+ciego en ambas condiciones**: la única diferencia es la presencia de la voz, así que el delta
+−0.50 es atribuible al testimonio, no al modelo. Los controles planos (both, tech_only) lo
+confirman: si fuera un artefacto del modelo, también habrían caído.
+
+**Matiz honesto (cierre-cuentas).** Es el único caso donde `user_only` no cae (3 → 3): tiene un
+*ex-programador* (fuente técnica) tan elocuente sobre el automation bias que hace de voz
+sustituta. Mismo patrón que el conteo offline (robodebt/CONCERN con 0 `user_only` por estar
+hiperdocumentados): **cuando un técnico "habla como usuario", la voz del usuario aporta menos**.
+No lo esconde el resultado; lo explica.
+
+**Salvedades.** Corrida **asistida** con subagentes (roles separados), no con el pipeline-código
+`comparar`; **k=1** (sin varianza — el efecto es lo bastante grande para verse a una corrida, pero
+la magnitud exacta se estrecharía con k=3). Dos `user_only` no se detectaron ni con voz (PO-09
+formación, TO-10 pérdida de confianza): el generador ciego no los reportó aun teniendo la voz, y
+por eso el recall con voz es 0.83 y no 1.00.
