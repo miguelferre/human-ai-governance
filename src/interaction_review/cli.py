@@ -16,7 +16,11 @@ from interaction_review.dedup_llm import deduplicate_llm
 from interaction_review.guidelines import all_guidelines
 from interaction_review.llm import LLMNotConfigured
 from interaction_review.metrics import aggregate, beats, compute_run_metrics
-from interaction_review.report import render_findings_md, render_metrics_md
+from interaction_review.report import (
+    render_findings_md,
+    render_metrics_md,
+    render_regulatory_crosswalk,
+)
 from interaction_review.runner import run_experiment
 from interaction_review.schemas import (
     Adjudication,
@@ -55,26 +59,30 @@ def cmd_revisar(args: argparse.Namespace) -> int:
 
         findings, choice = route(dossier, guidelines)
         print(f"[router] {choice} -> {len(findings)} hallazgos.", file=sys.stderr)
-        _emit(render_findings_md(dossier, findings, f"auto ({choice})"), args.out)
-        return 0
+        label = f"auto ({choice})"
+    else:
+        approach = REGISTRY.get(args.approach)
+        if approach is None:
+            print(
+                f"Approach '{args.approach}' no disponible. Disponibles: {sorted(REGISTRY)}",
+                file=sys.stderr,
+            )
+            return 2
+        findings = approach(dossier, guidelines)
+        if args.dedup_llm:
+            before = len(findings)
+            findings = deduplicate_llm(findings)
+            print(f"[dedup-llm] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
+        elif args.dedup:
+            before = len(findings)
+            findings = deduplicate(findings)
+            print(f"[dedup] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
+        label = args.approach
 
-    approach = REGISTRY.get(args.approach)
-    if approach is None:
-        print(
-            f"Approach '{args.approach}' no disponible. Disponibles: {sorted(REGISTRY)}",
-            file=sys.stderr,
-        )
-        return 2
-    findings = approach(dossier, guidelines)
-    if args.dedup_llm:
-        before = len(findings)
-        findings = deduplicate_llm(findings)
-        print(f"[dedup-llm] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
-    elif args.dedup:
-        before = len(findings)
-        findings = deduplicate(findings)
-        print(f"[dedup] {before} -> {len(findings)} hallazgos consolidados.", file=sys.stderr)
-    _emit(render_findings_md(dossier, findings, args.approach), args.out)
+    report = render_findings_md(dossier, findings, label)
+    if args.crosswalk:
+        report = report + "\n" + render_regulatory_crosswalk(findings)
+    _emit(report, args.out)
     return 0
 
 
@@ -178,6 +186,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--dedup-llm",
         action="store_true",
         help="Consolidacion SEMANTICA con LLM (dedup lexico + capa LLM; gasta API). Tiene prioridad sobre --dedup.",
+    )
+    pr.add_argument(
+        "--crosswalk",
+        action="store_true",
+        help="Anexa el mapeo normativo (EU AI Act / NIST AI RMF) de los hallazgos. Orientativo (ADR-008).",
     )
     pr.add_argument("--out", default=None, help="Fichero de salida .md (def: stdout).")
     pr.set_defaults(func=cmd_revisar)

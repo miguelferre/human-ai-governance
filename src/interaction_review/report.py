@@ -6,6 +6,32 @@ from interaction_review.metrics import AggregateMetrics
 from interaction_review.schemas import Dossier, Finding
 
 
+def render_regulatory_crosswalk(findings: list[Finding]) -> str:
+    """Seccion 'evidencia de conformidad': que requisitos del AI Act / NIST AI RMF
+    tocan los hallazgos, y por que guideline. Orientativo, no dictamen legal (ADR-008).
+    """
+    from interaction_review.regulatory import crosswalk, framework_names
+
+    cw = crosswalk(findings)
+    lines: list[str] = ["## Crosswalk normativo (orientativo)", ""]
+    if not cw:
+        lines.append("_(Los hallazgos no citan guidelines mapeadas a marco normativo.)_")
+        return "\n".join(lines)
+    lines.append(
+        "Requisitos que tocan los hallazgos de arriba, con la guideline que los ancla. "
+        "**No es dictamen legal** (ver ADR-008): aplicabilidad segun rol y si el sistema "
+        "es de alto riesgo."
+    )
+    lines.append("")
+    names = framework_names()
+    for fw, items in cw.items():
+        lines.append(f"### {names.get(fw, fw)}")
+        for ref, gids in items:
+            lines.append(f"- **{ref}**: {', '.join(gids)}")
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def render_findings_md(dossier: Dossier, findings: list[Finding], approach: str) -> str:
     """Informe de hallazgos en markdown."""
     lines: list[str] = []

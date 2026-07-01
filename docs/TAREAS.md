@@ -30,9 +30,12 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
 
 ## Narrativa / comercial
 
-- [ ] **Mapeo a marco normativo** (EU AI Act / NIST AI RMF). Convierte "informe académico HAX/PAIR" en
-      "evidencia de conformidad" que el comprador (gobernanza/calidad) reconoce y puede meter en su
-      expediente. Es extensión de *narrativa*, no del motor.
+- [x] **Mapeo a marco normativo** (EU AI Act / NIST AI RMF) — HECHO ([ADR-008](adr/ADR-008-mapeo-normativo.md)).
+      `guidelines/regulatory_map.yaml` mapea las 30 guidelines HAX/PAIR a artículos del AI Act (13, 14 —incl.
+      14(4)(b) automation bias—, 15, 26, 50, 86…) y subcategorías NIST; `revisar --crosswalk` anexa al informe
+      qué requisitos tocan los hallazgos. Orientativo, no dictamen legal (disclaimer en YAML/informe/ADR).
+      Test de integridad: todas las guidelines mapeadas, sin ids fantasma. Convierte el informe académico en
+      evidencia de conformidad situada. Extensión de narrativa, no del motor.
 - [x] README que vende el producto (hecho 2026-06-30).
 
 ## Seguridad

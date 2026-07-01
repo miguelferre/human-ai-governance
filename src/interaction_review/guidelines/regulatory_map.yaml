@@ -1,0 +1,157 @@
+# Mapeo orientativo de las guidelines HAX-18 / PAIR a marco normativo.
+#
+# PARA QUE: convierte un hallazgo "academico" (incumple HAX-G2) en lenguaje que el
+# comprador de gobernanza/calidad reconoce y puede meter en su expediente de
+# conformidad: "esto toca el Art. 13 del AI Act y la subcategoria MEASURE 2.9 del
+# NIST AI RMF". El informe deja de ser una critica de diseno y pasa a situarse en
+# el marco regulatorio.
+#
+# AVISO (no es dictamen legal). Este mapeo es una AYUDA de situacion, no una
+# opinion juridica. La aplicabilidad real del AI Act depende de si el sistema es de
+# alto riesgo (Anexo III), del rol (proveedor/responsable del despliegue) y del
+# caso concreto. Antes de usarlo como evidencia de conformidad formal, revisar con
+# asesoria juridica. Los articulos citados son del texto publicado del Reglamento.
+
+frameworks:
+  eu_ai_act:
+    name: "Reglamento (UE) 2024/1689 (EU AI Act)"
+    note: >-
+      Articulos centrales para la capa de interaccion: Art. 13 (transparencia e
+      informacion al responsable del despliegue), Art. 14 (supervision humana; el
+      14(4)(b) nombra el automation bias de forma explicita), Art. 15 (precision y
+      robustez), Art. 26 (obligaciones del responsable del despliegue), Art. 50
+      (transparencia frente a la persona), Art. 86 (derecho a explicacion de
+      decisiones individuales), Art. 9/10/72 (gestion de riesgo, datos, vigilancia).
+  nist_ai_rmf:
+    name: "NIST AI Risk Management Framework 1.0 (2023)"
+    note: >-
+      Funciones GOVERN / MAP / MEASURE / MANAGE y caracteristicas de IA confiable
+      (Accountable & Transparent, Explainable & Interpretable, Valid & Reliable,
+      Safe, Fair - with harmful bias managed).
+
+# Por cada guideline: articulos del AI Act, subcategorias/caracteristicas NIST y una
+# nota de la relacion. Un hallazgo hereda los refs de todas las guidelines que cita.
+map:
+  # --- HAX-18 ---
+  HAX-G1:
+    eu_ai_act: ["Art. 13(3)(b)(iv)", "Art. 50(1)"]
+    nist_ai_rmf: ["MAP 1.1", "Accountable & Transparent"]
+    nota: "Dejar claro que hace el sistema = informar de capacidades/limites y de que se interactua con IA."
+  HAX-G2:
+    eu_ai_act: ["Art. 13(3)(b)(ii)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "MEASURE 2.13", "Valid & Reliable"]
+    nota: "Comunicar como de bien lo hace = niveles de precision/metricas declarados y su comunicacion."
+  HAX-G3:
+    eu_ai_act: ["Art. 14(4)(a)"]
+    nist_ai_rmf: ["MAP 3.4", "Safe"]
+    nota: "Temporizar segun contexto = supervision humana adecuada al uso y al contexto operativo."
+  HAX-G4:
+    eu_ai_act: ["Art. 13(1)", "Art. 14(4)(c)"]
+    nist_ai_rmf: ["MEASURE 2.8", "Explainable & Interpretable"]
+    nota: "Informacion contextual relevante = salida interpretable en el punto de uso."
+  HAX-G5:
+    eu_ai_act: ["Art. 14(4)", "Art. 1"]
+    nist_ai_rmf: ["MAP 1.1", "Safe"]
+    nota: "Normas sociales = uso conforme a dignidad y contexto; supervision que preserva al usuario."
+  HAX-G6:
+    eu_ai_act: ["Art. 10(2)(f-g)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.11", "Fair - with harmful bias managed"]
+    nota: "Mitigar sesgos sociales = gobernanza de datos frente al sesgo y evaluacion de equidad."
+  HAX-G7:
+    eu_ai_act: ["Art. 14(4)(d)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    nota: "Invocacion eficiente = poder decidir usar la IA cuando aporta (parte del control humano)."
+  HAX-G8:
+    eu_ai_act: ["Art. 14(4)(d)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    nota: "Descarte eficiente = poder ignorar/descartar la salida (disregard/override)."
+  HAX-G9:
+    eu_ai_act: ["Art. 14(4)(d)", "Art. 26(5)"]
+    nist_ai_rmf: ["MANAGE 4.1", "MAP 3.5"]
+    nota: "Correccion eficiente = intervenir/corregir la salida; el responsable del despliegue supervisa."
+  HAX-G10:
+    eu_ai_act: ["Art. 14(4)(c)", "Art. 15(1)"]
+    nist_ai_rmf: ["MANAGE 2.1", "Valid & Reliable"]
+    nota: "Acotar ante la duda = abstencion/degradacion cuando la fiabilidad no da; robustez."
+  HAX-G11:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Explainable & Interpretable"]
+    nota: "Explicar el porque = interpretabilidad de la salida y derecho a explicacion de la decision."
+  HAX-G12:
+    eu_ai_act: ["Art. 14(4)(a)"]
+    nist_ai_rmf: ["MAP 3.4"]
+    nota: "Recordar interacciones = continuidad que sostiene la supervision humana efectiva."
+  HAX-G13:
+    eu_ai_act: ["Art. 72(1)"]
+    nist_ai_rmf: ["MANAGE 4.1"]
+    nota: "Aprender del uso = alimentar la vigilancia poscomercializacion con el comportamiento real."
+  HAX-G14:
+    eu_ai_act: ["Art. 72(1)", "Art. 15(1)"]
+    nist_ai_rmf: ["MANAGE 4.1", "GOVERN 1.5"]
+    nota: "Actualizar con cautela = control de cambios sin degradar precision/robustez."
+  HAX-G15:
+    eu_ai_act: ["Art. 14(4)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 5.1", "MANAGE 4.1"]
+    nota: "Feedback granular = canal de retroalimentacion del usuario que retroalimenta el sistema."
+  HAX-G16:
+    eu_ai_act: ["Art. 13(1)", "Art. 14(4)(c)"]
+    nist_ai_rmf: ["MEASURE 2.8"]
+    nota: "Transmitir consecuencias = que el usuario entienda el efecto de aceptar/anular la salida."
+  HAX-G17:
+    eu_ai_act: ["Art. 14(4)(d-e)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    nota: "Controles globales = anular, ajustar y (si procede) parar el sistema (stop)."
+  HAX-G18:
+    eu_ai_act: ["Art. 13(1)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 1.5"]
+    nota: "Notificar cambios = transparencia sobre actualizaciones que alteran el comportamiento."
+
+  # --- PAIR ---
+  PAIR-UN-1:
+    eu_ai_act: ["Art. 9(2)"]
+    nist_ai_rmf: ["MAP 1.1", "GOVERN 1.1"]
+    nota: "Necesidad real = encaje/proposito del sistema; entra en la gestion de riesgo y el mapeo de contexto."
+  PAIR-UN-2:
+    eu_ai_act: ["Art. 9(2)", "Art. 14(4)"]
+    nist_ai_rmf: ["MAP 1.1", "MEASURE 2.7"]
+    nota: "Coste de errores por tipo (FP/FN) = analisis de riesgo del impacto humano de cada error."
+  PAIR-MM-1:
+    eu_ai_act: ["Art. 13(1)", "Art. 26(2)"]
+    nist_ai_rmf: ["MAP 3.4"]
+    nota: "Expectativas desde el onboarding = personas de supervision competentes y formadas."
+  PAIR-MM-2:
+    eu_ai_act: ["Art. 13(3)(b)(iv)"]
+    nist_ai_rmf: ["Accountable & Transparent"]
+    nota: "Capacidades y limites honestos = informacion veraz de alcance y limitaciones al usuario."
+  PAIR-ET-1:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Explainable & Interpretable"]
+    nota: "Explicar salidas para confianza calibrada = interpretabilidad + derecho a explicacion."
+  PAIR-ET-2:
+    eu_ai_act: ["Art. 13(3)(b)(ii-iii)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Valid & Reliable"]
+    nota: "Comunicar incertidumbre = niveles de precision y sus circunstancias comunicados."
+  PAIR-ET-3:
+    eu_ai_act: ["Art. 14(4)(b)"]
+    nist_ai_rmf: ["MEASURE 2.8", "MAP 3.5"]
+    nota: "Evitar sobre-confianza = el 14(4)(b) obliga a medidas contra el automation bias de forma explicita."
+  PAIR-FC-1:
+    eu_ai_act: ["Art. 14(4)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 5.1", "MANAGE 4.1"]
+    nota: "Feedback con efecto visible = canal de retroalimentacion que se integra en la vigilancia."
+  PAIR-FC-2:
+    eu_ai_act: ["Art. 14(4)(d-e)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    nota: "Control (anular/ajustar/configurar) = nucleo de la supervision humana efectiva."
+  PAIR-EF-1:
+    eu_ai_act: ["Art. 15(1)", "Art. 9(2)"]
+    nist_ai_rmf: ["MANAGE 2.1", "Safe"]
+    nota: "Disenar para el fallo = robustez y degradacion segura ante error, parte del riesgo."
+  PAIR-EF-2:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["Explainable & Interpretable"]
+    nota: "Comunicar errores en terminos del usuario = mensajes interpretables por la persona afectada."
+  PAIR-DE-1:
+    eu_ai_act: ["Art. 10(2)(f-g)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.11", "Fair - with harmful bias managed"]
+    nota: "Evaluar por subgrupos = deteccion de sesgo por grupos y precision desagregada."
