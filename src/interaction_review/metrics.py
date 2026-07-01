@@ -19,6 +19,7 @@ from interaction_review.schemas import (
     AdjudicationLabel,
     Finding,
     GoldenIssue,
+    RevealedBy,
 )
 
 # --- Parametros pre-registrados (ADR-002) ---
@@ -100,6 +101,52 @@ def compute_run_metrics(
         meets_genericity_gate=gate,
         primary_score=fb if gate else 0.0,
     )
+
+
+class SubsetRecall(BaseModel):
+    """Recall sobre el subconjunto del golden con un `revealed_by` dado.
+
+    Es la unidad de la ablacion del testimonio (ADR-007). Comparar el mismo
+    subconjunto (p. ej. USER_ONLY) entre la condicion CON voz y SIN voz mide si el
+    testimonio del usuario aporta al recall o solo al grounding.
+    """
+
+    revealed_by: RevealedBy
+    n_golden: int
+    n_matched: int
+    recall: float
+
+
+def recall_by_revealed_by(
+    adjudications: list[Adjudication],
+    golden: list[GoldenIssue],
+) -> list[SubsetRecall]:
+    """Desglosa el recall por la fuente que revela cada GoldenIssue.
+
+    Devuelve una entrada por cada valor de `revealed_by` PRESENTE en el golden
+    (los ausentes se omiten). El matching es el mismo que en `compute_run_metrics`:
+    un golden esta emparejado si algun hallazgo lo referencia via TP_MATCH.
+    """
+    matched: set[str] = {
+        a.matched_golden_id
+        for a in adjudications
+        if a.label == AdjudicationLabel.TP_MATCH and a.matched_golden_id
+    }
+    out: list[SubsetRecall] = []
+    for rb in RevealedBy:
+        subset = [g for g in golden if g.revealed_by == rb]
+        if not subset:
+            continue
+        n_matched = sum(1 for g in subset if g.id in matched)
+        out.append(
+            SubsetRecall(
+                revealed_by=rb,
+                n_golden=len(subset),
+                n_matched=n_matched,
+                recall=n_matched / len(subset),
+            )
+        )
+    return out
 
 
 class Stat(BaseModel):

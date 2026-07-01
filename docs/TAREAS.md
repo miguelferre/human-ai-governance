@@ -14,11 +14,15 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
 
 ## Producto
 
-- [ ] **Ablación dirigida del testimonio.** Etiquetar cada `GoldenIssue` por la fuente que lo revela
-      (solo-usuario / solo-técnico / ambas) y medir el recall sobre el subconjunto *solo-usuario*, con voz
-      vs sin voz. Demuestra (o refuta con honestidad) que el testimonio del usuario es el diferencial.
-      Requiere un campo `revealed_by` en el esquema (merece su ADR). Nota: el C3 actual sugiere que en
-      recall global la voz aportó ~0; el valor estaría en los issues *solo-usuario* y en el grounding.
+- [~] **Ablación dirigida del testimonio.** Andamiaje + resultado offline HECHOS
+      ([RESULTADOS-ablacion-testimonio.md](RESULTADOS-ablacion-testimonio.md), [ADR-007](adr/ADR-007-ablacion-del-testimonio.md)):
+      campo `revealed_by` en el esquema, control sin-voz (`ablation.without_voice`), métrica por
+      subconjunto (`metrics.recall_by_revealed_by`), los 7 goldens con testimonio etiquetados a mano y el
+      reporte de distribución (`scripts/ablacion_report.py`). **Resultado:** 12/64 (19%) de los problemas
+      solo los revela la voz —y son sistemáticamente los cognitivos (automation bias, modelo mental,
+      timing, confianza)—; el 48% los revela también la documentación (ahí la voz da grounding, no recall).
+      **Falta (API):** la corrida con voz vs sin voz para el *delta* de recall en `user_only` (el conteo es
+      el techo, no el efecto). Comando listo en el doc.
 - [ ] **Semi-automatizar el dossier.** Ingerir la documentación de un sistema → plantillas rellenas, para
       que construir la entrada no cueste lo mismo que auditar a mano (hoy es el cuello de botella del caso
       de uso real).

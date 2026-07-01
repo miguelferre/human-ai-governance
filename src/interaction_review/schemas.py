@@ -139,6 +139,23 @@ class Finding(BaseModel):
 # --------------------------------------------------------------------------- #
 # Golden set y adjudicacion (evaluacion).
 # --------------------------------------------------------------------------- #
+class RevealedBy(str, Enum):
+    """Desde que TIPO de fuente del dossier es detectable un GoldenIssue.
+
+    Es el eje de la ablacion del testimonio (ADR-007): permite medir el recall
+    sobre el subconjunto de problemas que SOLO revela la voz del usuario final,
+    con y sin esas fuentes en el dossier. Si el testimonio es el diferencial del
+    producto, el recall en `USER_ONLY` debe desplomarse al quitar las fuentes
+    END_USER; si no cambia, el diferencial esta en grounding/credibilidad, no en
+    descubrir problemas nuevos.
+    """
+
+    USER_ONLY = "user_only"  # solo detectable desde testimonio de usuario final (END_USER)
+    TECH_ONLY = "tech_only"  # solo desde documentacion / perfil tecnico (DOCUMENT/TECHNICIAN)
+    BOTH = "both"            # detectable desde ambas: la doc lo describe y el usuario lo vive
+    UNKNOWN = "unknown"      # aun sin etiquetar (default: no participa en la ablacion)
+
+
 class GoldenIssue(BaseModel):
     """Un problema de interaccion conocido del caso golden (answer key).
 
@@ -151,6 +168,11 @@ class GoldenIssue(BaseModel):
     guideline_ids: list[str] = Field(default_factory=list)
     locus: str = ""
     severity: Severity = Severity.MEDIUM
+    revealed_by: RevealedBy = Field(
+        RevealedBy.UNKNOWN,
+        description="Fuente que revela el problema (ablacion del testimonio, ADR-007). "
+        "Default UNKNOWN: los golden sin etiquetar no participan en la ablacion.",
+    )
 
 
 class AdjudicationLabel(str, Enum):
