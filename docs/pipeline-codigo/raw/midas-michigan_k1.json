@@ -1,0 +1,1997 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 9,
+    "system_name": "MiDAS — Michigan Integrated Data Automated System"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 0.8888888888888888,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.9298245614035088,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.8967851099830797,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [],
+        "adjudications": [],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 0,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": true,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Auto-adjudicación de fraude sin intervención humana ni oportunidad de revisión previa",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Fase de determinación automática de fraude (octubre 2013 - agosto 2015): después de 10 días sin respuesta del solicitante, el sistema determinaba fraude de manera automática sin revisión de un empleado antes de aplicar sanciones",
+            "evidence": "Si el solicitante no respondía a tiempo (lo que ocurría con frecuencia si ya no revisaba su cuenta tras dejar de recibir prestaciones o si la carta iba a una dirección desactualizada), el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema ofrecía cero explicación accesible sobre por qué cada solicitante específico fue flagueado, qué datos exactos generaron la acusación, o por qué el algoritmo interpretó ciertos patrones como fraude. Los usuarios no podían acceder a justificación alguna que les permitiera rebatir la determinación en tiempo real. Esto eliminó toda posibilidad de error-checking preventivo y convirtió el proceso de apelación posterior en la única vía, con costos emocionales y financieros devastadores mientras el embargo ya estaba en marcha.",
+            "recommendation": "Implementar revisión humana ANTES de cualquier determinación final de fraude, particularmente cuando hay sanciones financieras severas (embargo de nóminas, retención de impuestos). La revisión debe ocurrir en la fase de notificación, no después. Específicamente: un empleado debe validar la lógica de la detección, proporcionar una explicación clara del motivo concreto del flaggeo (qué datos discreparon y cómo), y permitir corrige antes de aplicar sanciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Incertidumbre del modelo no comunicada; tasa de error del 93% nunca revelada al usuario",
+            "guideline_ids": [
+              "PAIR-ET-2",
+              "HAX-G2"
+            ],
+            "locus": "Notificación de fraude enviada al solicitante: la carta indicaba 'Usted fue determinado de cometer fraude' sin indicador alguno de confianza, margen de error, o que el sistema podía estar equivocado",
+            "evidence": "Una revisión interna de ~22.000 determinaciones encontró que el 93% resultaron incorrectas. Las notificaciones indicaban el importe del sobrepago, la multa, los intereses y el saldo pendiente, pero [el sistema no comunicaba incertidumbre].",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema presentó sus determinaciones con autoridad absoluta ('determinaba fraude de manera automática') sin revelar a los usuarios que tenía una tasa de error del 93%. Esto indujo automation bias extremo: los usuarios confiaron en las determinaciones como si fueran reviadas y verificadas humanamente, cuando en realidad eran puramente algorítmicas y altamente propensas a error. Ningún usuario supo que la probabilidad de que estuviera equivocado era abrumadoramente alta.",
+            "recommendation": "Si se mantiene el sistema, toda notificación de fraude debe incluir explícitamente: (a) una declaración de que la determinación es algorítmica y provisional, (b) la tasa de error histórica del sistema o un intervalo de confianza (ej. 'Este tipo de determinación tiene un 7% de precisión histórica'), y (c) énfasis en que el solicitante DEBE responder incluso si cree que es un error, porque el recurso es el único mecanismo de corrección. Sin embargo, dada la tasa de error del 93%, una reconfiguración o desactivación del componente es más apropiada que una corrección cosmética.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Información sobre el motivo concreto del flaggeo no accesible; explicación genérica insuficiente",
+            "guideline_ids": [
+              "HAX-G4",
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Notificación de fraude y fase de atención al usuario (10 días de plazo para responder): las cartas indicaban importe, multa e intereses, pero no explicaban qué datos específicos generaron la acusación",
+            "evidence": "Los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación, con tiempos de espera de hasta 45 minutos y múltiples transferencias. [Caso Kevin Grifka: documentó que no tuvo ingresos durante el período en que cobró desempleo, pero] el sistema había repartido incorrectamente sus ingresos de 9.407,13 dólares, percibidos antes de su despido, a lo largo de todo el trimestre.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El solicitante recibía una sentencia de fraude sin información contextualmente relevante sobre cuál había sido el criterio. El personal de la UIA tampoco podía acceder a explicaciones claras. En casos como el de Kevin Grifka, la lógica era transparentemente falsa (distribuir ingresos anteriores al despido a lo largo de meses posteriores), pero el usuario tuvo que visitarse la oficina tres veces, llevar documentación física y esperar meses para que se revirtiera. Esto impidió que los usuarios tomaran decisiones informadas sobre si impugnar.",
+            "recommendation": "Integrar en la notificación de fraude: (a) un desglose específico de qué datos se compararon y dónde se detectó la discrepancia (ej. 'Registros de nómina del empleador muestran $X en fecha Y; usted reportó no estar empleado ese período'), (b) la lógica exacta que aplicó el sistema para concluir fraude, y (c) un link o teléfono directo a un empleado capacitado que pueda explicar el caso concreto SIN esperas de 45 minutos. Esta información debe estar disponible ANTES del plazo de 10 días para responder.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Plazo de respuesta de 10 días inadecuado; no hay adaptación para usuarios con acceso limitado o información desactualizada",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Mecanismo de notificación y ventana de respuesta: cartas enviadas por correo a direcciones que podían estar desactualizado; avisos en línea en cuentas (MiWAM) que usuarios ya no revisaban tras agotar prestaciones",
+            "evidence": "Si el solicitante no respondía a tiempo (lo que ocurría con frecuencia si ya no revisaba su cuenta tras dejar de recibir prestaciones o si la carta iba a una dirección desactualizada), el sistema determinaba fraude de manera automática. [Jason Doss:] No recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema asumía que 10 días era plazo suficiente y que un aviso en una dirección de correo desactualizada o en una cuenta en línea abandonada era comunicación efectiva. Muchos usuarios no recibieron notificación alguna o la recibieron en canales que ya no monitoreaban. El determinismo automático tras el silencio castigos severamente a personas cuya falta de respuesta obedecía a factores de accesibilidad o aislamiento informacional, no a negligencia.",
+            "recommendation": "Implementar: (a) notificación multicanal obligatoria (correo postal a dirección registrada + SMS/email verificado + acceso en línea + llamada telefónica si es posible) con confirmación de entrega, (b) plazo mínimo de 30-45 días (en línea con procesos administrativos estándar), (c) mecanismo automático de extensión si no hay confirmación de entrega, y (d) después de la auto-adjudicación, envío inmediato de carta de determinación final por correo certificado a todas las direcciones disponibles. Sin mecanismo de notificación verificado, no debe haber auto-adjudicación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Lógica de detección de fraude transparentemente defectuosa sin mecanismo de override o corrección",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Motor analítico de detección: el algoritmo repartía 'ingresos puntuales de manera uniforme a lo largo de todo un trimestre', generando apariencia de doble cobro (nómina + prestaciones)",
+            "evidence": "El sistema comparaba los datos declarados por los solicitantes con los registros de nómina de los empleadores, buscando discrepancias, incluyendo casos en que repartía ingresos puntuales de manera uniforme a lo largo de todo un trimestre, generando la apariencia de que la persona había cobrado nómina mientras recibía prestaciones. [Kevin Grifka:] el sistema había repartido incorrectamente sus ingresos de 9.407,13 dólares, percibidos antes de su despido, a lo largo de todo el trimestre.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La lógica era sistemáticamente falsa: si un empleado recibía un pago acumulado (finiquito, bono, o compensación de múltiples semanas antes del despido) y lo reportaba en una sola fecha, el algoritmo lo distribuía automáticamente a lo largo de los 13 períodos de pago del trimestre, creando la ilusión de que había estado empleado todo el período. Esto generaba falsos positivos predecibles que un auditor humano instantáneamente rechazaría. El sistema no tenía mecanismo para que un empleado dijera 'esta lógica es claramente incorrecta' y corrija el resultado antes de que se sancione.",
+            "recommendation": "Auditoría inmediata de la lógica de repartición de ingresos. Implementar: (a) validación que distinga entre ingresos de un período individual vs. pagos acumulados o puntuales, (b) integración explícita de datos sobre fechas de inicio/fin de empleo del lado del empleador, (c) mecanismo de revisión humana para cualquier determinación de fraude que se base en repartición de ingresos, y (d) acceso público a documentación de cómo el algoritmo interpreta cada tipo de ingreso, para que usuarios puedan preparer rebate durante la ventana de respuesta.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Sin mecanismo de apelación interactivo durante el período de respuesta; apelación requiere proceso post-hoc separado",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G11"
+            ],
+            "locus": "Flujo de respuesta a determinación de fraude: el sistema daba 10 días para 'responder' a la notificación, pero no había mecanismo para impugnar interactivamente; toda apelación se enviaba a un proceso separado (MAHS) con plazo de 30 días",
+            "evidence": "El plazo de respuesta de 10 días [sin explicación de cómo responder]. El proceso de apelación: protesta ante la UIA, re-determinación, y audiencia ante un juez administrativo del MAHS, con plazo de 30 días.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario recibía una notificación con 10 días para 'responder', pero no tenía mecanismo claro para refutar interactivamente la determinación dentro del sistema. La única vía efectiva de recurso era un proceso formal administrativo separado (MAHS) que solo comenzaba después del silencio de 10 días. Esto creaba un cliff de determinismo: si no comprendía la notificación o no tuvo tiempo de responder, el sistema automáticamente procedía a la etapa de auto-adjudicación, y luego debía iniciar un proceso totalmente distinto. Este diseño empujaba a aceptación pasiva de la determinación sin supervición activa.",
+            "recommendation": "Integrar mecanismo de disputa interactivo dentro de los 10 días: (a) plataforma en línea donde el usuario pueda subir documentación (recibos de nómina, cartas de despido, registros bancarios) directamente contra la determinación, (b) opción de chat o correo electrónico directo con un empleado para preguntar por qué fue flagueado, (c) revisión por empleado de cualquier contestación presentada ANTES de que expire el plazo, con comunicación de resultado dentro de 5 días, (d) solo si el usuario no responde o su respuesta es rechazada, proceder a auto-adjudicación. Esto mantiene la supervición activa durante la ventana crítica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Sanciones severas (400% de multa + embargo inmediato) aplicadas antes de confirmación apelación; presión indebida para aceptación",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Fase post-determinación: una vez auto-adjudicado fraude, 'la agencia podía iniciar de inmediato el embargo de nóminas y la retención de devoluciones de impuestos' sin esperar a revisión apelación",
+            "evidence": "Tras la determinación, la legislación preveía una multa del 400% sobre el importe reclamado más intereses. La agencia podía iniciar de inmediato el embargo de nóminas y la retención de devoluciones de impuestos estatales y federales. [Casos]: Jason Doss le retuvieron más de 14.000 dólares de su nómina durante casi dos años; Robert Nevins embargo 4.000 dólares de la cuenta de ahorros y redujo su paga quincenal de 1.000 a 650 dólares; Nancy DeRocco embargo el 25% de la nómina y retuvo más de 2.000 de impuestos.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema aplicaba castigos financieros catastróficos (embargo de nóminas, retención de impuestos federales y estatales, multas del 400%) de forma inmediata tras auto-adjudicación, antes de que el usuario tuviera oportunidad de apelación formal. Esto creaba presión indebida: muchos usuarios enfrentaron crisis de liquidez inmediatas (no poder pagar hipoteca, comida, cuidado de dependientes) que los forzaban a aceptar la determinación o a entrar en procesos de bancarrota mientras esperaban audiencia en MAHS. El diseño no separaba castigo de determinación, violando principios básicos de debido proceso.",
+            "recommendation": "Implementar: (a) embargo y retención SUSPENDIDO durante el plazo de respuesta de 10 días y cualquier apelación a nivel de UIA (re-determinación), (b) embargo/retención solo si se confirma la determinación en apelación formal ante juez administrativo, (c) si embargo ocurre antes de apelación ser resuelta, implementar mecanismo rápido de restitución automática si el apelante gana (no requiere otro proceso), (d) opción de pago en cuotas sin multas si el usuario disputa durante el plazo, reduciendo presión para aceptación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Sin retroalimentación sobre correcciones de sistema; determinaciones incorrectas repetidas sin aprendizaje visible",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "Fase de notificación repetida: usuarios recibían múltiples cartas de fraude con inconsistencias sin que el sistema ajuste o explique correcciones",
+            "evidence": "[Robert Nevins:] Antes de su audiencia recibió otra carta de fraude con un nombre incorrecto y un empleador que no reconocía.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El usuario fue notificado múltiples veces de fraude con datos inconsistentes (nombre incorrecto, empleador desconocido), pero no hubo explicación de por qué se emitía una segunda notificación o cómo se corregía la primera. Esto sugiere que el sistema emitía determinaciones duplicadas sin mecanismo para suprimir o explicar las inconsistencias, reforzando la percepción de que el sistema era opaco e incompetente.",
+            "recommendation": "Implementar: (a) deduplicación automática de determinaciones para el mismo período, (b) si se emite una nueva notificación, incluir cabecera clara indicando 'Esta es una corrección de determinación anterior emitida el [fecha]' con explicación de qué cambió, (c) registro de historial de determinaciones visible al usuario en su portal, mostrando cuáles fueron revocadas o corregidas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Personal de atención al usuario sin información para explicar determinaciones concretas",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Centro de atención telefónica de la UIA: empleados que recibían llamadas de usuarios flagueados no tenían acceso a información clara sobre por qué fueron determinados de fraude",
+            "evidence": "Los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación, con tiempos de espera de hasta 45 minutos y múltiples transferencias.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema produjo determinaciones de fraude, pero no proporcionó a sus propios operadores información suficiente para explicar a usuarios por qué fueron flagueados. Esto sugiere que la salida del algoritmo no incluía justificación interpretable o accesible. Los usuarios fueron derivados a procesos cada vez más tediosos (múltiples transferencias, esperas de 45 minutos) sin resolución, reforzando la percepción de que el sistema era un 'caja negra'.",
+            "recommendation": "Diseñar salida del sistema de detección de fraude que incluya: (a) narrativa interpretable en lenguaje claro, explicando qué discrepancia fue detectada, (b) datos específicos que llevaron a la determinación (fechas, montos, fuentes), (c) lógica de por qué eso constituye fraude según los criterios del sistema, (d) capacitar personal de atención con acceso a esta información, con procedimiento estándar para explicar el caso al usuario, (e) reducir tiempo de espera mediante routing automático a empleado capacitado sin múltiples transferencias.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Determinación de fraude perjudica empleabilidad futura sin mecanismo de limpieza de antecedentes",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Información de fraude registrada en cuenta de usuario y disponible potencialmente a empleadores; sin mecanismo de eliminación después de anulación",
+            "evidence": "[Carmelita Colvin:] Le llevó casi seis años y una demanda colectiva limpiar su nombre; la determinación de fraude perjudicó repetidamente sus solicitudes de empleo, incluida una para la oficina del sheriff del condado de Wayne. Declara: 'I can't get the job I wanted, because they suggested that I was a criminal'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Una vez que el sistema determinaba fraude, esa información quedaba registrada en la cuenta del usuario de forma persistente. Incluso después de ser anulada en apelación (años más tarde), la determinación de fraude continuaba siendo una barrera invisible en futuras solicitudes de empleo. El sistema no ofrecía mecanismo para solicitar eliminación o para documentar la anulación de forma que fuera visible a terceros (empleadores, otros organismos).",
+            "recommendation": "Implementar: (a) cuando se anula una determinación de fraude en apelación, marcar la determinación original como 'REVOCADO' de forma permanente y visible en todas las versiones del registro, (b) generar 'Certificado de anulación' que el usuario pueda presentar a empleadores, (c) no compartir determinaciones anuladas con terceros sin consentimiento explícito del usuario y aclaración de que fueron revocadas, (d) revisar todas las determinaciones anuladas colectivamente y ofrecer acceso a un proceso expedito de limpieza de antecedentes para usuarios afectados por errores de en masa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Falta de validación cruzada con datos del empleador en tiempo de notificación; errores predecibles no corregidos antes de sancionar",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "Proceso de detección y notificación de fraude: el sistema comparaba registros de nómina pero no parecía validar si el período de empleo declarado coincidía con la fecha de la nómina antes de determinar fraude",
+            "evidence": "[Kevin Grifka:] Tenía documentación (recibos de nómina y notificación sindical de despido) que mostraba que no tuvo ingresos durante el período en que cobró desempleo. [El sistema había repartido incorrectamente sus ingresos de 9.407,13 dólares, percibidos antes de su despido, a lo largo de todo el trimestre.]",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema detectaba discrepancias entre reportes de desempleo y registros de nómina, pero no parecía validar información contextual (fechas de despido, finiquitos, períodos de validez de nómina) que habría eliminado los falsos positivos más obvios. Kevin Grifka tenía documentación fisica (notificación sindical de despido, recibos) que claramente mostraba que no trabajó durante el período flagueado, pero el sistema procedió a la determinación sin solicitar o revisar esta información.",
+            "recommendation": "Integrar en el flujo de detección: (a) solicitud automática de documentos de apoyo del empleador (carta de despido, FECHA exacta de fin de empleo, desglose de finiquito si es aplicable), (b) antes de enviar notificación de fraude, validar que la discrepancia persiste incluso considerando despidos, finiquitos, y pagos acumulados, (c) si hay información incompleta del empleador, enviar al usuario una notificación 'PENDIENTE DE VERIFICACIÓN' en lugar de 'DETERMINACIÓN DE FRAUDE', con plazo para aportar documentos de apoyo, (d) solo después de validación cruzada completa, emitir determinación final.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Ausencia de captura de override ante determinación de fraude automatizada",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Proceso de auto-adjudicación (octubre 2013 - agosto 2015): cuando el solicitante no responde en 10 días a la carta/cuestionario de fraude, el sistema determina fraude automáticamente sin intervención humana ni opción de override capturado.",
+            "evidence": "El dossier indica: 'Si el solicitante no respondía a tiempo... el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase.' No hay mecanismo documentado para que el usuario override la determinación automatizada durante este período, y el proceso carece de captura estructurada de motivos cuando se produce una apelación posterior.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no tenía capacidad de override durante la fase crítica de determinación inicial. Aunque existía un proceso de apelación posterior, la auto-adjudicación sin intervención humana eliminaba la oportunidad de corregir eficientemente el error en tiempo real. Además, muchos usuarios nunca se enteraban de la determinación porque los avisos se enviaban a direcciones desactualizadas o cuentas ya no monitoreadas, impidiendo incluso la posibilidad de responder en el plazo de 10 días.",
+            "recommendation": "Implementar un mecanismo de override explícito antes de la auto-adjudicación: exigir revisión humana si el usuario no responde, permitir corrección/apelación inmediata en línea con captura estructurada de la evidencia del usuario (p. ej., comprobantes de nómina, notificaciones de despido) que se registren y revisen antes de ejecutar acciones de embargo o multas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Notificación incompleta que impide ejercer derecho a respuesta",
+            "guideline_ids": [
+              "PAIR-FC-1",
+              "HAX-G9"
+            ],
+            "locus": "Canal de notificación durante auto-adjudicación: avisos de fraude publicados únicamente en cuenta en línea (MiWAM) sin garantía de entrega postal de respaldo; plazo de respuesta de 10 días.",
+            "evidence": "El dossier refiere: 'Si la carta iba a una dirección desactualizada' y 'No recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla' (caso Jason Doss). El mecanismo de notificación único en línea resultó ineficaz especialmente tras agotamiento de prestaciones, cuando muchos usuarios cesaban de revisar sus cuentas.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Muchos usuarios nunca fueron notificados de forma efectiva de la acusación de fraude, por lo que no pudieron responder en el plazo de 10 días. Esto convirtió el plazo de respuesta en una ficción legal: aunque existe nominalmente, la mayoría de usuarios no tenían oportunidad real de ejercerlo. El sistema registraba un 'no responder' que era resultado de un fallo de notificación, no de un acto volitivo del usuario.",
+            "recommendation": "Exigir notificación por correo postal certificado con acuse de recibo como complemento obligatorio a la notificación en línea en todo caso de acusación de fraude. Extender el plazo de respuesta a 30 días desde la notificación postal efectiva. Requerir confirmación de recepción antes de ejecutar auto-adjudicación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Ausencia de explicación accesible del fundamento concreto de la acusación de fraude",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Comunicación de determinación de fraude al usuario: carta/cuestionario con importe, multa e intereses, pero sin explicación clara del motivo técnico/lógico de la acusación.",
+            "evidence": "El dossier refiere: 'los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación' y en el caso de Kevin Grifka: 'el personal le decía: You got to fill out this paperwork. They might look at it', sin poder detallar por qué fue flagged. En el caso de Robert Nevins, recibió 'otra carta de fraude con un nombre incorrecto y un empleador que no reconocía', evidenciando que ni siquiera el sistema proporcionaba fundamento coherente de su propia determinación.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no comprendía por qué había sido acusado, impidiéndole ejercer su derecho a respuesta informado. Sin saber el motivo específico (p. ej., 'ingresos reportados por empleador X en mes Y distribuidos incorrectamente a trimestre Z'), no podía reunir ni presentar evidencia pertinente de refutación. El personal de la UIA tampoco podía explicarlo, lo que sugiere que el motivo lógico de la flagging no era comunicado desde el sistema a los operarios.",
+            "recommendation": "Incluir en toda notificación de fraude: (1) fecha(s) y empleador(es) específico(s) del presunto sobrepago; (2) explicación de la lógica detectada (p. ej., 'sistema detectó ingresos reportados por empleador X en semana 2-4 de abril, simultáneos a prestaciones de desempleo cobradas 1-30 de abril'); (3) montos desglosados (sobrepago alegado, multa, intereses, saldo total); (4) instrucciones paso-a-paso para refutar en línea con tipos específicos de documentación aceptada (nóminas, cartas de despido, etc.). Entrenar al personal de la UIA con acceso a la lógica exacta de la flagging.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Consecuencias de no responder en plazo opacas y no comunicadas antes de auto-adjudicación",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Comunicación de determinación y aviso de consecuencias: la carta/cuestionario no advierte explícitamente que no responder en 10 días resultará en auto-adjudicación de fraude, embargo de nómina y retención de devoluciones de impuestos.",
+            "evidence": "El dossier no documenta que la notificación inicial de fraude advirtiese con claridad y detalle las consecuencias específicas (embargo del 25% de nómina, retención de devoluciones federales y estatales, multas del 400% [luego 100%], intereses). El caso de Jason Doss ilustra que recibió notificación en línea pero 'esperaba su primer hijo y tenía dificultades con la hipoteca' una vez retenidos $14.000, sin haber comprendido la magnitud posible de las consecuencias.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no fue informado de antemano de las consecuencias financieras, legales y de vida que derivarían de la auto-adjudicación si no respondía. Esto viola el principio de transparencia causal: el sistema no comunicaba 'si no respondes en 10 días, esto es lo que ocurrirá a tu salario y devoluciones fiscales durante años'. Sin esa advertencia clara y accesible, el usuario no podía evaluar la urgencia y calibrar su respuesta.",
+            "recommendation": "La notificación inicial de acusación de fraude debe incluir, en lenguaje claro y accesible, un apartado titulado 'Lo que sucederá si no responde en 10 días', con desglose de: (1) porcentaje y monto estimado de embargo de nómina (según últimos ingresos conocidos); (2) retención automática de devoluciones de impuestos federales y estatales; (3) multa total y tasa de interés aplicable; (4) duración aproximada del embargo/retención. Incluir un ejemplo numérico con cifras realistas del caso del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Ausencia de control del usuario sobre múltiples determinaciones sucesivas de fraude",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Flujo de re-determinación y re-notificación: el sistema emitía múltiples cartas de fraude sobre el mismo período o con datos inconsistentes sin mecanismo visible para que el usuario denuncie o detenga una determinación previa incorrecta.",
+            "evidence": "El caso de Robert Nevins: 'Antes de su audiencia recibió otra carta de fraude con un nombre incorrecto y un empleador que no reconocía.' El dossier no documenta que el usuario tuviese opción de marcas estas cartas como duplicadas, incorrectas o relacionadas con determinación anterior, ni de solicitar consolidación de procesos.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Recibir múltiples acusaciones de fraude sobre el mismo período histórico, con datos inconsistentes, genera confusión y socava la confianza en el sistema. El usuario enfrenta cargas administrativas y emocionales repetidas, sin poder comunicar al sistema que ya está apelando la determinación anterior o que los datos de la nueva acusación son claramente incorrectos.",
+            "recommendation": "Implementar: (1) control visible de 'determinaciones activas' en la cuenta del usuario agrupadas por período histórico; (2) opción de marcar cartas como duplicadas o incorrectas, que se registren y bloqueen re-emisiones automáticas de la misma acusación sobre datos idénticos; (3) consolidación automática de apelaciones sobre el mismo período en un único expediente; (4) notificación al usuario de cualquier re-determinación antes de ejecutar acciones de embargo/multa derivadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Falta de feedback estructurado sobre correctitud de la acusación post-apelación",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Proceso de apelación ante MAHS y cierre de caso: el dossier refiere que del ~3.460 casos de misrepresentation apelados al MAHS, solo el 8% fueron confirmados por el tribunal, el 19% revocados y el 22% devueltos por falta de información. No hay documentación de retroalimentación al sistema de MiDAS sobre causas de error.",
+            "evidence": "El dossier estadístico refiere que entre octubre 2013 y junio 2015 se enviaron 51.207 apelaciones al MAHS, de las cuales 3.460 eran fraude; de estos, MAHS confirmó decisión de UIA en 8%, revocó en 19%, devolvió por falta de información en 22%. Esto indica que del ~93% de determinaciones auditadas internamente que resultaron incorrectas, la gran mayoría no generó captura de aprendizaje visible en el sistema sobre patrones de error.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema de MiDAS no recibía feedback estructurado sobre sus errores de clasificación. Aunque existe apelación judicial, el hallazgo de error (p. ej., 'el sistema repartió incorrectamente ingresos puntuales de 9.407 dólares a lo largo de todo el trimestre') no se capturaba de forma que fuese comunicado al motor de detección de fraude para evitar errores similares. La auditoría interna de ~22.000 casos con tasa de error del 93% no produjo revisión visible del algoritmo.",
+            "recommendation": "Implementar un circuito de retroalimentación estructurada: (1) tras cada revocación judicial o cambio de determinación por la UIA, capturar el motivo específico de error (p. ej., 'distribución incorrecta de ingresos puntuales', 'falsa coincidencia de empleador', 'notificación fallida'); (2) agregar estos motivos por categoría (tipo de error, período, región) y reportarlos mensualmente al proveedor del motor analítico (SAS/Fast Enterprises); (3) comunicar al usuario el resultado de su apelación con detalle del error hallado y la corrección ejecutada; (4) documentar acciones correctivas en el algoritmo derivadas de cada hallazgo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Demora y fricción extrema en acceso a explicación durante apelación",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1"
+            ],
+            "locus": "Proceso de respuesta de la UIA a solicitudes telefónicas de explicación: tiempos de espera hasta 45 minutos, múltiples transferencias, personal incapaz de acceder a motivos específicos de la flagging.",
+            "evidence": "El dossier refiere: 'los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación, con tiempos de espera de hasta 45 minutos y múltiples transferencias.' En el caso de Kevin Grifka: 'Visitó la oficina de la UIA tres veces; el personal le decía: You got to fill out this paperwork. They might look at it' sin poder resolver su caso in situ.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario enfrenta fricción extrema para obtener información que debería estar disponible inmediatamente. Las esperas de 45 minutos y transferencias múltiples son barreras de facto a la corrección, especialmente para trabajadores con horarios fijos. El personal no tenía acceso a la lógica de decisión del sistema, convirtiendo cualquier solicitud de explicación en un proceso administrativo largo sin resultado garantizado.",
+            "recommendation": "Implementar: (1) portal en línea de autoapelación donde el usuario vea el desglose exacto de su acusación (empleadores, fechas, montos, lógica de flagging) sin tener que llamar; (2) opción de chat/ticket en línea con SLA de respuesta de 24 horas desde personal entrenado con acceso a la lógica de decisión; (3) sesiones de videoconferencia programadas con especialista de fraude de la UIA como alternativa a esperas telefónicas; (4) carta de explicación automática generada por el sistema en la primera notificación (no al llamar), con fundamento técnico explícito.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Impacto no comunicado de determinación de fraude en búsqueda de empleo y reputación",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Determinación y notificación de fraude: la acusación se registra en expediente de desempleo accesible a empleadores potenciales sin advertencia al usuario sobre este efecto secundario.",
+            "evidence": "El caso de Carmelita Colvin: 'Le llevó casi seis años y una demanda colectiva limpiar su nombre; la determinación de fraude perjudicó repetidamente sus solicitudes de empleo, incluida una para la oficina del sheriff del condado de Wayne. Ella declaró: I can't get the job I wanted, because they suggested that I was a criminal.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La determinación de fraude de MiDAS tenía una consecuencia no comunicada explícitamente: la marca de 'criminal' en el expediente de desempleo. Aunque tal vez legalmente justificable, el usuario no fue informado de que una acusación de fraude (aun durante apelación) afectaría futuras solicitudes de empleo. Esta es una consecuencia de largo plazo que debería ser comunicada con claridad antes de auto-adjudicación.",
+            "recommendation": "En la notificación inicial de acusación de fraude, incluir apartado 'Consecuencias adicionales' que especifique: (1) la acusación será registrada en el expediente de desempleo y puede ser consultada por empleadores potenciales; (2) incluso durante apelación, el registro puede afectar futuras solicitudes de empleo; (3) se ofrece opción de apelación expedita para minimizar este período; (4) tras revocación, se promete eliminación completa del registro dentro de [plazo específico] días. Proporcionar instrucciones para solicitud de eliminación de registro una vez resuelta la apelación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Ausencia de capturas de evidencia del usuario durante determinación inicial",
+            "guideline_ids": [
+              "PAIR-FC-2",
+              "HAX-G9"
+            ],
+            "locus": "Cuestionario de fraude de 10 días: formulario que permitía respuesta pero sin mecanismo integrado para carga de documentos de soporte (nóminas, cartas de despido, recibos, notificaciones sindicales).",
+            "evidence": "El caso de Kevin Grifka: 'Tenía documentación (recibos de nómina y notificación sindical de despido) que mostraba que no tuvo ingresos durante el período en que cobró desempleo.' Visitó la oficina tres veces presentando papeles, pero el proceso de respuesta al cuestionario no incluía mecanismo claro de carga de documentos, obligando al usuario a realizar trámite en paralelo en oficina física.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El usuario tenía evidencia refutadora pero el mecanismo de respuesta en línea no facilitaba su adjunción. Esto requería que el usuario visitase la oficina física o enviase por correo papeles, añadiendo fricción. El sistema tampoco capturaba automáticamente la documentación en su base de datos, obligando a manejo paralelo.",
+            "recommendation": "Integrar en el cuestionario de fraude en línea: (1) carga directa de archivos (PDF, imágenes) con validación de tipos; (2) guía con ejemplos de documentación aceptada para cada tipo de acusación (por ej., 'recibos de nómina de empleador X', 'cartas de notificación de despido', 'declaraciones de impuestos'); (3) confirmación visible de recepción de archivo; (4) opción de cita en línea con especialista si el usuario prefiere envío en papel u asesoría en tiempo real.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Ciclo de realimentación ausente sobre configuración/ajuste del umbral de fraude",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Operación de motor de detección de fraude: no hay documentación de revisión periódica de exactitud, ajuste de parámetros u comunicación a usuarios sobre cambios en criterios de flagging.",
+            "evidence": "La auditoría interna de ~22.000 determinaciones encontró tasa de error del 93%, pero no hay documentación en el dossier de que el motor hubiese sido reconfigurado o ajustado. El hecho de que la auto-adjudicación permaneciese vigente de octubre 2013 a agosto 2015 sin revisión periódica visible sugiere ausencia de ciclo de mejora continua.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Un sistema con tasa de error del 93% debería haber sido detenido, investigado y reconfigurado inmediatamente tras detectarse el problema. La ausencia de auditoría periódica implícita en los hallazgos sugiere que ni el proveedor (Fast/SAS) ni la UIA tenían proceso formalizado de revisión de exactitud y retroalimentación. Los usuarios nunca fueron informados de cambios o mejoras en el algoritmo.",
+            "recommendation": "Implementar: (1) auditoría continua de exactitud de fraude cada 30 días, con métricas públicas (tasa de revocación judicial, tasa de error estimada); (2) comité de revisión multidisciplinario (auditoría interna, especialista de fraude, proveedor técnico, representante de usuarios) que se reúna mensualmente para revisar casos de error e identificar patrones; (3) comunicación trimestral a usuarios de resultados de auditoría y cambios de configuración del motor; (4) SLA de respuesta de 7 días a hallazgos de error sistemático, con plan de corrección publicado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Carencia de supervisión diferenciada por subgrupos vulnerable",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "Proceso de auto-adjudicación: no hay evidencia de mecanismo que identifique y proteja a grupos vulnerables (personas sin acceso consistente a correo electrónico/teléfono, sin domicilio fijo, jubilados con baja digitalización) antes de ejecutar embargo.",
+            "evidence": "El dossier documenta que los avisos se enviaban 'únicamente a su cuenta en línea' sin garantía de que fuesen recibidos, afectando especialmente a usuarios cuyas condiciones de vida habían cambiado (sin acceso a correo, domicilio desactualizado, cierre de cuenta tras fin de prestaciones). Nancy DeRocco refiere 'I couldn't understand who the heck was taking my taxes', sugiriendo incomprensión sistémica del proceso, probablemente agravada por baja alfabetización digital.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema no diferenciaba entre usuarios digitalmente alfabetizados con acceso consistente a su cuenta en línea y usuarios vulnerables (jubilados, sin hogar, con discapacidad visual, bajo dominio del inglés escrito). El mismo mecanismo de notificación en línea afectaba a ambos, resultando en discriminación de facto: los usuarios vulnerables no recibían avisos de los que dependía su derecho a respuesta.",
+            "recommendation": "Implementar supervisión diferenciada: (1) en fase de solicitud de desempleo, capturar información de preferencia de contacto (idioma, formato, canal: postal, teléfono, email, SMS, cita en persona); (2) para determinaciones de fraude de alto impacto financiero ($5.000+), exigir notificación por postal certificada si el usuario indicó baja confiabilidad de acceso en línea; (3) para usuarios sin acceso demostrado a correo en últimos 30 días, exigir notificación por teléfono en vivo; (4) extensión automática del plazo de respuesta a 30 días para usuarios de edad 65+ o con indicadores de bajo acceso digital.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Ausencia de mecanismo de escape ante impacto financiero grave no previsto",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Ejecución de embargo y multas: una vez determinado fraude automáticamente, el sistema ejecutaba embargo del 25% de nómina y retención de devoluciones de impuestos sin revisión de impacto en usuario, sin opción de aplazamiento o excepción por dificultad económica.",
+            "evidence": "El caso de Nancy DeRocco: 'El Estado embargo el 25% de la nomina de Nancy DeRocco y retuvo más de 2.000 dólares de sus devoluciones de impuestos... Solicitó una exención por dificultad económica; la UIA la denegó'. El caso de los Perry: 'Su furgoneta fue embargada' a raíz de multa de $10.000 por fraude. No hay documentación de proceso de apelación expedita de embargo basada en impacto económico grave.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema ejecutaba acciones financieras irreversibles (embargo de nómina, retención de devoluciones, embargo de activos) sin mecanismo de análisis de impacto en viabilidad económica del usuario. Una multa del 400% sobre sobrepago inexistente creaba deudas imposibles de pagar. La denegación de exención por dificultad económica sugiere ausencia de discreción administrativa de la UIA.",
+            "recommendation": "Implementar: (1) antes de cualquier embargo, análisis automático de impacto: si embargo del 25% reducería ingresos mensuales por debajo de 150% del salario mínimo de la zona, exigir revisión humana; (2) opción de apelación de embargo expedita (5 días) basada en certificación de dificultad económica extrema (insolvencia, dependencia de prestaciones, discapacidad); (3) suspensión automática del embargo durante pendencia de apelación; (4) escalada a supervisor de UIA si usuario acude a oficina en persona dentro de 10 días de embargo; (5) SLA de resolución de apelación de embargo: 30 días.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Información sobre derecho a abogado y recursos legales insuficiente o ausente en notificación inicial",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Notificación de acusación de fraude: la carta/cuestionario no documenta información clara sobre derecho a apelación judicial, cómo contactar con abogado, o disponibilidad de asistencia legal gratuita.",
+            "evidence": "El dossier refiere que muchos usuarios (Nancy DeRocco, Robert Nevins, etc.) no comprendían que tenían derecho a apelación ante juez administrativo ni cómo acceder a ella. Si bien luego ganaron en MAHS tras años de litigio, la notificación inicial no facilitaba este camino. Anthony Paris declara que representó a 'cientos de personas acusadas de fraude', sugiriendo que sin representación legal muchos no habría apelado.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El usuario necesitaba conocer de inmediato su derecho a apelación judicial y recursos disponibles. La ausencia de esta información en la notificación inicial prolongaba el tiempo de daño financiero y emocional, porque los usuarios no sabían que podían cuestionar la determinación ante un tribunal. Muchos solo descubrieron esto años después.",
+            "recommendation": "Incluir en todo aviso de determinación de fraude, destacado y en lenguaje claro: (1) 'Usted tiene derecho a apelar esta determinación ante un juez administrativo del Estado de Michigan (MAHS) dentro de 30 días'; (2) instrucciones paso-a-paso para solicitar apelación en línea o por teléfono con número directo; (3) información sobre disponibilidad de asistencia legal gratuita (pro bono, Legal Aid, Sugar Law Center) con teléfonos/URLs; (4) advertencia: 'No responder en 10 días o no apelar en 30 días no le impide apelar más tarde, pero limitará opciones de restitución'; (5) opción de solicitar copia de expediente completo para compartir con abogado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Notificaciones no entregadas a tiempo por canales inadecuados",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Distribución de cartas de determinación de fraude: envío por correo postal y publicación en cuenta MiWAM",
+            "evidence": "El dossier indica que 'Al detectar una discrepancia, generaba una carta o cuestionario de determinación de fraude, publicado en la cuenta en línea (MiWAM) y/o enviado por correo, con plazo de respuesta de 10 días'. Jason Doss 'No recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla' tras dejar de recibir prestaciones.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no sincronizaba la temporización de las notificaciones con el ciclo de vida del usuario. Una vez agotadas las prestaciones, muchos solicitantes dejaban de revisar su cuenta MiWAM. El plazo de 10 días comenzaba sin garantizar que la notificación hubiera sido recibida y revisada en contexto activo. La interrupción llegaba demasiado tarde o a un canal ya abandonado.",
+            "recommendation": "Verificar que la notificación inicial llegue por correo postal certificado antes de abrir el plazo de 10 días. Implementar una confirmación de entrega y lectura; si no hay respuesta en 3 días al primer contacto, reenviar por segundo canal. No comenzar el contador de 10 días hasta tener evidencia de lectura o intento de lectura.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Descarte de respuestas imposible tras plazo de 10 días",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Cierre automático de la oportunidad de respuesta tras 10 días sin intervención humana",
+            "evidence": "El dossier especifica: 'Si el solicitante no respondía a tiempo (lo que ocurría con frecuencia si ya no revisaba su cuenta tras dejar de recibir prestaciones o si la carta iba a una dirección desactualizada), el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no permitía al usuario descartar o cuestionar la acusación una vez expirado el plazo, incluso si la notificación nunca fue entregada. Esto genera una 'fatiga de alerta no descartable': el usuario queda acusado sin poder reabrir su caso si por cualquier razón no tuvo acceso a la notificación original.",
+            "recommendation": "Permitir que el usuario presente una solicitud de reapertura en cualquier momento antes de que se execute la determinación (embargo, retención de impuestos). Ofrecer un mecanismo explícito dentro del sistema MiWAM para disputar la acusación incluso después de los 10 días iniciales, con justificación (p. ej., 'no recibí la notificación').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Auto-determinación de fraude sin revisión humana ni explicación accesible",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Decisión final de fraude sin intervención humana y sin capacidad del solicitante de obtener explicación clara del motivo",
+            "evidence": "El dossier afirma que 'el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase'. Además: 'los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación, con tiempos de espera de hasta 45 minutos y múltiples transferencias'. Kevin Grifka 'Visitó la oficina de la UIA tres veces; el personal le decía: You got to fill out this paperwork. They might look at it'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La norma social esperada en un proceso administrativo es que el acusado entienda la acusación y pueda rebatirla basándose en información clara. El sistema emitía determinaciones sin que el personal pudiera explicar por qué, violando las expectativas de debido proceso y claridad. El usuario no recibía una explicación fundamentada del motivo específico de la acusación de fraude.",
+            "recommendation": "Generar un documento de determinación que incluya: (1) la discrepancia exacta detectada (montos, fechas, empleadores), (2) el algoritmo o regla aplicada, (3) por qué esa regla indica fraude en lugar de error administrativo. Entrenar al personal para poder reproducir esa explicación. No emitir determinación sin antes contactar al solicitante e intentar aclaración conjunta.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Distribución incorrecta de ingresos no revisada antes de acusación",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Algoritmo de comparación que reparte uniformemente ingresos puntuales en un trimestre sin validar si eso corresponde al patrón real de pago",
+            "evidence": "El dossier indica: 'el sistema comparaba los datos declarados por los solicitantes con los registros de nómina de los empleadores, buscando discrepancias, incluyendo casos en que repartía ingresos puntuales de manera uniforme a lo largo de todo un trimestre, generando la apariencia de que la persona había cobrado nómina mientras recibía prestaciones'. Kevin Grifka ejemplifica: 'el sistema había repartido incorrectamente sus ingresos de 9.407,13 dólares, percibidos antes de su despido, a lo largo de todo el trimestre'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema aplicaba una regla de distribución que generaba falsos positivos sistémicos (93% de tasa de error en ~22.000 revisiones). Esta regla no respetaba el hecho de que un ingreso puntual (p. ej., liquidación al despido) no es equivalente a nómina semanal o quincenal. La regla viola normas sociales de razonabilidad: un ingreso recibido antes del despido no debe contar como ingreso durante desempleo.",
+            "recommendation": "Modificar el algoritmo para distinguir entre: ingresos periódicos (nómina semanal/quincenal), ingresos puntuales (liquidación, finiquito, bonificación única) e ingresos irregulares. Para ingresos puntuales, no distribuir automáticamente; en su lugar, generar una consulta al solicitante explicando la discrepancia y pidiendo documentación (recibos de pago, fecha real de despido).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Invocación del proceso de apelación costosa y opaca",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Proceso de apelación ante MAHS: tres pasos (protesta ante UIA → re-determinación → audiencia ante juez administrativo) con plazo de 30 días, sin apoyo claro en MiWAM",
+            "evidence": "El dossier especifica: 'El proceso de apelación: protesta ante la UIA, re-determinación, y audiencia ante un juez administrativo del MAHS, con plazo de 30 días'. Varios testimonios muestran confusión: Robert Nevins 'No entendía por qué había sido señalado'; Kevin Grifka 'Visitó la oficina de la UIA tres veces; el personal le decía: You got to fill out this paperwork. They might look at it'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no proporcionaba una forma clara de invocar el derecho a apelación desde MiWAM. Los usuarios tenían que navegar por tres instancias diferentes sin orientación, lo que de facto hacía inaccesible el único mecanismo de corrección. El plazo de 30 días es corto si el usuario no sabe que puede apelar o cómo hacerlo.",
+            "recommendation": "Incluir en la notificación de determinación de fraude un botón visible en MiWAM ('Disputar esta determinación') que inicie automáticamente la protesta ante UIA, con instrucciones paso a paso. Enviar recordatorios a los 5 y 10 días de los 30 disponibles. Mostrar el estado de la apelación en tiempo real en MiWAM.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Falta de mecanismo para corrección antes de ejecución de sanciones",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Intervalo entre determinación de fraude y ejecución de embargo/retención: sin oportunidad de corrección rápida",
+            "evidence": "El dossier afirma: 'La agencia podía iniciar de inmediato el embargo de nóminas y la retención de devoluciones de impuestos estatales y federales'. Jason Doss 'le retuvieron más de 14.000 dólares de su nómina durante casi dos años tras una determinación de fraude de MiDAS'. Robert Nevins 'La UIA embargó 4.000 dólares de la cuenta de ahorros de Robert Nevins y redujo su paga quincenal de 1.000 a 650 dólares tras determinar que debía 21.000 dólares'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema ejecutaba sanciones económicas graves (embargo de nómina, retención de impuestos) sin dar opción de corrección rápida basada en nueva evidencia. Si el usuario descubría el error al recibir el embargo (p. ej., tenía documentación de que fue despedido antes del período en cuestión), no había mecanismo para pausar la ejecución mientras se revisaba.",
+            "recommendation": "Implementar un período de espera de 15 días entre la notificación de determinación y el embargo efectivo, durante el cual el usuario pueda presentar documentación rebatiendo la acusación. Si se presenta documentación válida, pausar el embargo pendiente re-determinación. Hacer explícito este período en la notificación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Tono de notificación punitivo sin contexto de error posible",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Texto y tono de la carta de determinación de fraude enviada a solicitantes",
+            "evidence": "Las cartas indicaban 'el importe del sobrepago, la multa, los intereses y el saldo pendiente', pero varios usuarios reportan confusión y alarma. Nancy DeRocco recibió una respuesta de la UIA: 'Your overpayment account was established due to fraud, and therefore cannot be waived', sin explicar que la determinación podría ser errónea. Robert Nevins 'Antes de su audiencia recibió otra carta de fraude con un nombre incorrecto y un empleador que no reconocía'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El tono de 'fraude determinado' presume culpabilidad antes de que haya revisión humana o contestación del acusado. En una sociedad donde el desempleo es temporal, acusar de fraude a alguien que simplemente cometió un error administrativo (o que fue víctima de un error del sistema) es una violación de normas de justicia procesal. El mensaje presume mala intención sin fundamento.",
+            "recommendation": "Cambiar el tono de la notificación a: 'Se ha detectado una discrepancia que podría indicar un error administrativo. Te pedimos que revises la siguiente información y respondas en 10 días'. Usar lenguaje neutral ('discrepancia detectada') en lugar de 'fraude determinado'. Aclarar que la discrepancia podría deberse a error del sistema o del empleador, no solo a fraude.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Ausencia total de descripción de capacidades y limitaciones en el onboarding para ciudadanos",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Fase inicial: comunicación al solicitante sobre el sistema de detección de fraude automatizado",
+            "evidence": "El sistema comparaba datos y generaba cartas de fraude publicadas en MiWAM o enviadas por correo, pero no hay evidencia en el dossier de que los solicitantes recibieran explicación previa de qué era MiDAS, cómo funcionaba el flagging automático, o que podían ser determinados culpables sin revisión humana. Las notificaciones indicaban importe y multa pero no la lógica de detección.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Los 40.000 ciudadanos acusados no podían formar un modelo mental correcto del sistema porque no se les explicó ni siquiera su existencia ni su alcance. Esto es evidenciado por testimonios que muestran desconcierto total (Robert Nevins: 'I have never had a problem with it before'; Carmelita Colvin: 'This has got to be impossible').",
+            "recommendation": "Antes de que MiDAS determine fraude, debe existir un onboarding claro dirigido al solicitante explicando: (1) que existe un sistema automatizado de comparación de datos; (2) qué discrepancias genera alertas; (3) que tiene 10 días para responder; (4) qué consecuencias tiene no responder; (5) cómo y dónde verá las notificaciones (cuenta en línea + correo postal redundante).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Comunicación deshonesta de la capacidad de auto-adjudicación sin revisión humana",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Diseño del flujo de determinación: auto-adjudicación sin intervención empleado tras vencimiento de plazo",
+            "evidence": "El sistema 'determinaba fraude de manera automática, sin intervención de un empleado en esa fase' si el solicitante no respondía en 10 días. El manual de formación interno declaraba: 'all UI functions are ultimately performed by MiDAS' (énfasis en automatización total). Una revisión posterior encontró 93% de error en ~22.000 determinaciones puramente algorítmicas.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La UIA nunca comunicó a los ciudadanos que una máquina, no un juez o empleado, determinaba su culpabilidad por fraude y ejecutaba embargos de nómina y retención de impuestos si no respondían en 10 días. Esto generó sobreventa implícita de precisión (al no revelar tasa de error futura) e infra-comunicación del proceso. Cuando se revela la verdad ('un juez administrativo revisa esto'), la tasa de error actual es 93%.",
+            "recommendation": "La notificación inicial debe ser explícita: 'Si no responde en 10 días, la determinación de fraude se hará automáticamente sin revisión de un empleado. Tendrá entonces 30 días para apelar ante un juez administrativo.' Además, el diseño debe requerir revisión humana antes de embargar o retener, no después.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Falla crítica en la confiabilidad del canal de comunicación (MiWAM + correo ineficaz)",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "Distribución y entrega de notificaciones de fraude a solicitantes",
+            "evidence": "Las notificaciones se publicaban en MiWAM (cuenta en línea) o se enviaban por correo. Jason Doss 'No recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla'. Kevin Grifka recibió notificación 'justo antes de la Navidad de 2014, primera señal de que algo iba mal'. Robert Nevins recibió una segunda carta con 'un nombre incorrecto y un empleador que no reconocía'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Si el solicitante no revisa MiWAM (especialmente tras agotadas sus prestaciones) o la notificación llega a dirección desactualizada, nunca tiene oportunidad real de responder en 10 días, pero el sistema lo determina culpable de todas formas. Esto rompe la promesa implícita de 'plazo justo para responder' y es particularmente grave porque afecta a personas que ya no están en contacto con UIA.",
+            "recommendation": "Implementar notificación redundante y verificada: (1) Correo postal certificado a dirección del INES (empleador); (2) SMS o email a número de teléfono/email registrado; (3) Solo iniciar el contador de 10 días DESPUÉS de confirmar que el solicitante ha visto la notificación (p. ej., aceptación en línea o confirmación de recepción postal). (4) Extensión automática del plazo si hay evidencia de mala entrega.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Ausencia de explicación del motivo concreto de fraude en las notificaciones iniciales",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Contenido de las cartas y cuestionarios de determinación de fraude",
+            "evidence": "Las notificaciones indicaban 'el importe del sobrepago, la multa, los intereses y el saldo pendiente, pero los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación'. Kevin Grifka 'Tenía documentación que mostraba que no tuvo ingresos durante el periodo' pero tuvo que visitar la oficina tres veces; Nancy DeRocco: 'I couldn't understand who the heck was taking my taxes'; su abogada: 'We are still scratching our heads trying to figure out how she was flagged with fraud.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin saber POR QUÉ el sistema los acusa de fraude (qué discrepancia específica detectó, cómo repartió ingresos, qué empleador/fecha conflictiva), el solicitante no puede responder efectivamente ni ejercer su derecho a defenderse. Esto viola la capacidad de respuesta significativa y reduce la legitimidad percibida de la acusación.",
+            "recommendation": "Cada notificación de fraude debe incluir: (1) La discrepancia específica detectada con fechas y montos; (2) Los registros de nómina del empleador que conflictúan con los datos declarados; (3) Cómo el sistema repartió los ingresos; (4) Un punto de contacto directo (no hotline de 45 minutos) para aclaraciones técnicas antes de vencer el plazo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Equilibrio no declarado entre falsos positivos y falsos negativos, con sesgo hacia sobre-acusación",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Parámetros de sensibilidad y umbral del motor de detección SAS (algoritmo de comparación)",
+            "evidence": "El sistema 'comparaba los datos declarados con los registros de nómina de los empleadores, incluyendo casos en que repartía ingresos puntuales de manera uniforme a lo largo de todo un trimestre'. Una revisión de ~22.000 determinaciones encontró 93% de error (esto es: ~20.460 determinaciones incorrectas de ~22.000). El MAHS confirmó la decisión de UIA en solo 8%, la revocó en 19%, y devolvió casos por falta de información en 22%.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema está claramente calibrado para maximizar la detección (baja tasa de falsos negativos), generando una tasa de falsos positivos devastadora del 93%. No hay evidencia de que la UIA, Fast Enterprises o SAS hubieran decidido conscientemente este trade-off, ni de que lo comunicaran. El costo de cada falso positivo es brutal (embargo de nómina, retención de impuestos, multas del 400%, impacto en empleabilidad futura), mientras que el costo de un falso negativo es simplemente dinero pagado incorrectamente. Este desequilibrio nunca fue explicitado en el diseño de interacción.",
+            "recommendation": "Antes de la implementación, definir explícitamente: (1) tasa aceptable de falsos positivos vs. falsos negativos; (2) procedimiento de validación manual previa a embargo (no posterior); (3) regla de decisión: si hay duda razonable, favorecer al solicitante; (4) comunicar al usuario el nivel de confianza del sistema en cada acusación (p. ej., 'alto riesgo: requiere revisión' vs. 'bajo riesgo: automático').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Falta de oportunidad de override o recursos antes de la auto-adjudicación",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "Proceso de respuesta al cuestionario de fraude y decisión automática",
+            "evidence": "El solicitante tenía 10 días para responder; si no respondía, 'el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase'. Kevin Grifka 'Visitó la oficina de la UIA tres veces; el personal le decía: You got to fill out this paperwork. They might look at it'. No había garantía de revisión previa al embargo, solo promesa de apelación posterior (30 días) ante un juez administrativo.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Aunque existía un proceso de apelación legal (MAHS), este requería abogado en muchos casos, dinero (costos legales), tiempo y conocimiento de derechos. Para ciudadanos en crisis financiera (como Jason Doss esperando su primer hijo, con dificultades hipotecarias), esperar 30+ días mientras su nómina está embargada no es un 'override' viable. El diseño no prevé un freno antes del daño, solo remedios legales después.",
+            "recommendation": "Implementar un escalón de review humano ANTES de ejecutar embargo: (1) Si el solicitante responde en los 10 días pero su respuesta es rechazada automáticamente, revisión de empleado antes de embargo; (2) Opción 'Impugnar' en línea que pause el embargo automático hasta revisión dentro de 5 días hábiles; (3) Hotline priorizado (no 45 minutos de espera) para casos en que el solicitante presenta documentación contradictoria (recibos de nómina, despido).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Ausencia de consideración de necesidades del usuario y análisis de costo-beneficio de la IA",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Decisión de implementar auto-adjudicación de fraude por máquina en lugar de revisión humana",
+            "evidence": "No hay evidencia en el dossier de que la UIA, al diseñar MiDAS, hubiera preguntado a solicitantes, empleados UIA o sindicatos: '¿cuál es la necesidad real que resuelve la auto-adjudicación sin revisión humana?' El sistema fue descrito como contrato COTS personalizado por 47 millones de dólares, reemplazando mainframe de 30 años. El manual decía 'all UI functions are ultimately performed by MiDAS' como si fuera un valor técnico, no humano.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La auto-adjudicación aceleró las determinaciones y redujo costos de procesamiento para el Estado, pero destruyó vidas (suicidios atribuidos, bancarrotas, pérdida de empleabilidad). Una alternativa no-IA (revisión por empleado en ~2 días, costo marginal bajo) habría resuelto la verdadera necesidad del usuario (solicitante): 'ser tratado justamente' y 'entender por qué'. En cambio, MiDAS priorizó eficiencia administrativa sobre precisión y justicia procedural.",
+            "recommendation": "Cualquier reimplementación debe comenzar con: (1) Entrevistas con solicitantes, empleados y sindicatos: ¿qué proceso justo requieren?; (2) Análisis coste-beneficio explícito: ¿un aumento de 2 días en determinación vale la pena para ahorrar X empleados?; (3) Principio: IA solo si mejora experiencia del usuario final, no solo del administrador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Sin mecanismo de retroalimentación o corección después de error sistémico",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "Fase posterior a la determinación de fraude: Sin proceso integrado de feedback loop para detectar errores masivos",
+            "evidence": "Durante ~22 meses (octubre 2013 - agosto 2015) la auto-adjudicación funcionó con 93% de error (~20.460 personas). El error solo fue detectado porque la UIA realizó una 'revisión interna de ~22.000 determinaciones' en 2015, meses DESPUÉS de que la demanda Cahoo fue presentada en septiembre 2015. Sin esa revisión externa/litigio, el sistema habría continuado operando indefinidamente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema carecía de monitoreo de calidad integrado: ningún dashboard mostraba tasa de error, ningún umbral de alerta se disparaba si la tasa de apelaciones exitosas superaba X%, ningún mecanismo hacía que error masivo fuera visible a operadores hasta que fue demasiado tarde. Un solicitante individual no podía reportar 'sé que esto es un error' de forma que se escalara automáticamente.",
+            "recommendation": "Implementar: (1) Monitoreo en tiempo real de tasa de appeal y reversión (MAHS); si reversal rate > 15%, pause auto-adjudicación y revise casos pendientes; (2) Opción de 'flag this as error' para solicitantes durante apelación, con análisis de patrones; (3) Auditoría mensual de muestra aleatoria de determinaciones para estimar tasa de error en vivo; (4) Dashboard visible a supervisores con alerta si tasa estimada > 5%.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Sin diferenciación de riesgo o supervisión por subgrupos de solicitantes",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "Aplicación uniforme del algoritmo a todos los solicitantes sin variación de rigor",
+            "evidence": "El sistema trataba de forma idéntica a solicitantes con historial limpio (Robert Nevins: 'I have never had a problem with it before') y a posibles riesgos. No hay evidencia de que MiDAS aplicara umbrales más altos de certeza a solicitantes vulnerables (ancianos, sin acceso a internet, discapacitados). Kevin Grifka tuvo que rellenar papeles repetidamente sin saber si serían revisados; Jason Doss no recibió correo (dependía únicamente de MiWAM).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin diferenciación, una máquina con 93% de error afecta por igual a quien tiene recursos legales (abogado privado) y a quien no. El dossier muestra que abogados del Sugar Law Center fueron quienes ganaron la demanda colectiva; ciudadanos sin representación sufrieron más tiempo. El sistema debería haber identificado casos de alto riesgo de falso positivo (p. ej., primer flagging, sin historial previo, recibos de nómina contradictorios) para revisión humana prioritaria.",
+            "recommendation": "Estratificar según riesgo de falso positivo: (1) Casos de primer flagging en solicitantes con historial limpio: 100% revisión humana antes de embargo; (2) Casos con documentación contradictoria (solicitante presenta prueba de que no trabajó): revisión expeditada dentro de 3 días; (3) Para solicitantes sin acceso verificado a MiWAM: requiere notificación postal certificada + confirmación teléfonica antes de iniciar contador de 10 días.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Notificaciones tardías y fragmentadas que impiden ejercer derecho de defensa",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "Temporización y secuencia de notificaciones, y plazo para responder",
+            "evidence": "Kevin Grifka recibió notificación 'justo antes de la Navidad de 2014, primera señal de que algo iba mal'. Robert Nevins 'Antes de su audiencia recibió otra carta de fraude con un nombre incorrecto'. Las notificaciones no daban contexto (véase hallazgo anterior sobre 'motivo concreto'). El plazo de 10 días es inapropiado si el solicitante no sabe por qué fue acusado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Recibir una acusación grave de fraude justo antes de Navidad, sin entender por qué, viola la dignidad procesal y el derecho a defensa. Recibir una SEGUNDA acusación con datos incorrectos (nombre, empleador) muestra que el sistema no se corrigió entre determinaciones. El plazo de 10 días para responder a algo que no se entiende, durante una crisis emocional, es irrazonable.",
+            "recommendation": "Protocolo mejorado: (1) No enviar notificaciones justo antes de períodos festivos sin posibilidad de comunicación con UIA; (2) Enviar notificación con máxima claridad (véase recomendación anterior sobre 'motivo concreto'); (3) Extender plazo a 20 días en lugar de 10 para permitir búsqueda de asesoría y documentación; (4) Sistema de validación de datos antes de enviar: si hay incongruencias (nombre, empleador), no enviar hasta corregir.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-042",
+            "title": "Sin mecanismo de hardship (dificultad económica) durante determinación",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Ejecución inmediata de embargo y retención sin consideración de capacidad de pago",
+            "evidence": "Nancy DeRocco 'solicitó una exención por dificultad económica; la UIA la denegó: Your overpayment account was established due to fraud, and therefore cannot be waived. Se declaró en bancarrota en octubre de 2015.' Justin Perry 'fue acusado de fraude y multado con 10.000 dólares tras perder su empleo... Sus devoluciones de impuestos fueron retenidas durante tres años consecutivos y su furgoneta fue embargada... Se declararon en bancarrota en 2017.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema ejecutaba embargo de nómina y retención de impuestos (que es dinero de compra de comida, vivienda) de forma automática sin evaluar si la persona puede pagar, especialmente en casos donde el 'fraude' era un error del sistema. La multa del 400% fue punitiva, no compensatoria. Cuando la persona solicita clemencia basada en necesidad real, la UIA rechaza diciendo 'es fraude, no sobrepago'.",
+            "recommendation": "Implementar evaluación de hardship ANTES de embargo: (1) Si embargo reduciría ingresos mensuales a <150% del umbral de pobreza federal, requerir revisión con supervisor antes de ejecutar; (2) Opción para solicitante de proponer plan de pago en lugar de embargo inmediato; (3) Si la acusación se revoca posteriormente (apelación ganada), devolución inmediata de embargos + intereses, no prolongar devolución.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-043",
+            "title": "Adjudicación automática de fraude sin revisión humana bajo alta incertidumbre",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Fase de auto-adjudicación: cuando el solicitante no respondía al cuestionario en plazo de 10 días, el sistema determinaba fraude automáticamente sin intervención de empleado",
+            "evidence": "Si el solicitante no respondía a tiempo (lo que ocurría con frecuencia si ya no revisaba su cuenta tras dejar de recibir prestaciones o si la carta iba a una dirección desactualizada), el sistema determinaba fraude de manera automática, sin intervención de un empleado en esa fase. La auto-adjudicación estuvo vigente desde octubre de 2013 hasta agosto de 2015.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema continuaba con determinación de fraude incluso cuando la incertidumbre era alta: comunicaciones no entregadas, cuentas descuidadas, contextos ambiguos (como distribuir ingresos puntuales entre trimestres). HAX-G10 exige acotar el servicio o pedir desambiguación bajo alta incertidumbre. Una revisión estatal encontró tasa de error del 93% en ~22.000 determinaciones, demostrando que la auto-adjudicación era fundamentalmente inadecuada para decisiones de esta magnitud.",
+            "recommendation": "Implementar revisión humana obligatoria ANTES de cualquier determinación de fraude final. Para comunicaciones no confirmadas o no respondidas en plazo, degradar elegantemente hacia estadios de apelación administrativo rápido en lugar de auto-adjudicar. Requerir que un empleado verifique que la notificación llegó al solicitante antes de procesar el silencio como admisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-044",
+            "title": "Fallos silenciosos y sin vía de recuperación clara en la notificación",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Sistema de envío y entrega de notificaciones: cartas reenviadas a direcciones desactualizadas o cuentas en línea (MiWAM) que ya no eran revisadas por los solicitantes",
+            "evidence": "Si la notificación se había enviado a una dirección desactualizada o a una cuenta que la persona ya no revisaba tras agotar sus prestaciones, [el sistema] determinaba fraude de forma automática, sin revisión adicional por un empleado. [...] A Jason Doss no recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no verificaba si la notificación había sido efectivamente recibida o leída. Cuando fallaba la entrega (dirección antigua, cuenta abandonada), el sistema proseguía sin aviso al solicitante, viola el derecho al debido proceso y no ofrecía camino de recuperación. Los solicitantes desconocían completamente que estaban siendo acusados hasta que experimentaban embargos de nómina.",
+            "recommendation": "Implementar confirmación de entrega multi-canal obligatoria (postal + email + mensaje SMS) antes de dar por válida una notificación. Si no se confirma entrega dentro de plazo razonable, escalar manualmente a personal UIA antes de proceder. Mantener registro visible en MiWAM de todas las comunicaciones pendientes de confirmación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-045",
+            "title": "Incapacidad del personal para explicar las determinaciones de fraude a solicitantes",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Interacción telefónica de atención al usuario: cuando los solicitantes llamaban para entender por qué habían sido acusados",
+            "evidence": "Los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación, con tiempos de espera de hasta 45 minutos y múltiples transferencias.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema generaba determinaciones que sus propios operadores no podían explicar en términos legibles para el usuario. Esto impide que el solicitante entienda su error, conteste adecuadamente, o apele efectivamente. PAIR-EF-2 exige comunicar errores de forma útil y accionable. Los tiempos de espera y transferencias repetidas demuestran falta de diseño para este caso de uso crítico.",
+            "recommendation": "Documentar internamente la lógica EXACTA de cada determinación de fraude en formato legible (no solo logs técnicos). Entrenar y dotar al personal de atención con acceso a explicaciones paso a paso de por qué el sistema flagueó un caso específico. Crear una ruta de atención prioritaria para llamadas sobre determinaciones de fraude con SLA máximo de 10 minutos de espera.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-046",
+            "title": "Algoritmo de distribución incorrecta de ingresos puntuales genera falsos positivos sistemáticos",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Motor de detección de fraude: cuando el sistema repartía ingresos puntuales de forma uniforme a lo largo de un trimestre para comparar con prestaciones",
+            "evidence": "El sistema comparaba los datos declarados por los solicitantes con los registros de nómina de los empleadores, buscando discrepancias, incluyendo casos en que repartía ingresos puntuales de manera uniforme a lo largo de todo un trimestre, generando la apariencia de que la persona había cobrado nómina mientras recibía prestaciones. [...] El sistema había repartido incorrectamente sus ingresos de 9.407,13 dólares, percibidos antes de su despido, a lo largo de todo el trimestre.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El algoritmo de normalización de ingresos introducía errores masivos: distribuía ingresos recibidos ANTES del despido a lo largo de trimestres completos, generando la ilusión de que la persona cobraba mientras recibía prestaciones. Esto es un fallo del modelo, no de los datos. Cuando la incertidumbre de la lógica es este alta, HAX-G10 demanda acotar el servicio o desambiguar. Una tasa de error del 93% demuestra que el algoritmo era estructuralmente defectuoso.",
+            "recommendation": "Auditar y desactivar o reescribir completamente el motor de distribución de ingresos. Para casos limítrofes donde la técnica de normalización pueda introducir ambigüedad (ingresos puntuales, cambios de trimestre, fechas de despido), rechazar automáticamente el flagging y marcar para revisión manual. Exigir que cualquier determinación de fraude documente la fecha exacta en que se recibieron los ingresos vs. la fecha de solicitud de prestaciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-047",
+            "title": "Falta de supervisión del comportamiento por subgrupos relevantes en producción",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Operación del sistema de octubre de 2013 a agosto de 2015: no hubo seguimiento documentado de disparidades en las tasas de error por género, raza, región o estatus laboral",
+            "evidence": "Una revisión estatal de ~22.000 determinaciones puramente algorítmicas encontró una tasa de error del 93%; unas 40.000 personas fueron acusadas en ese periodo. [No hay evidencia en el dossier de análisis de disparidades por subgrupos durante la operación; la revisión estatal fue posterior al cierre de la auto-adjudicación].",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El dossier no documenta ningún monitoreo de subgrupos durante la vigencia del sistema. Dado que MiDAS utilizaba un motor analítico de SAS basado en comparación de registros de nómina contra prestaciones, es plausible que haya habido disparidades por género, raza o sector (p. ej. trabajadores estacionales, trabajadores de limpieza como en el caso de Carmelita Colvin). Sin supervisión de subgrupos, el sistema operó 'a ciegas' y acumuló errores sistemáticos no detectados. PAIR-DE-1 exige vigilancia activa en producción.",
+            "recommendation": "Implementar monitoreo permanente de tasas de error, falsos positivos, tasas de apelación exitosa y patrones de determinación por subgrupos demográficos relevantes (género, raza, edad, sector laboral, región). Establecer umbrales de alerta si la tasa de error o la tasa de apelación exitosa diverge >10% entre subgrupos. Revisar resultados mensualmente con estatísticos independientes.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-048",
+            "title": "Ausencia de información sobre cómo apelar o desafiar determinaciones en notificaciones iniciales",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Contenido de las cartas y notificaciones de determinación de fraude enviadas a los solicitantes",
+            "evidence": "Las notificaciones indicaban el importe del sobrepago, la multa, los intereses y el saldo pendiente, pero los reclamantes que llamaban por teléfono reportaban que el personal no siempre podía explicarles el motivo concreto de la acusación. [No se menciona en el dossier que las notificaciones incluyeran un resumen claro del proceso de apelación o de cómo contactar para solicitar revisión].",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Las notificaciones priorizaban números sobre explicación. Los solicitantes recibían multas del 400% sin información clara sobre cómo desafiar la determinación inicial. Kevin Grifka tuvo que visitar la oficina tres veces sin recibir orientación clara. El proceso de apelación existía (protesta ante UIA, re-determinación, audiencia MAHS) pero no estaba comunicado en la notificación inicial. PAIR-EF-2 exige información útil y accionable en el primer punto de contacto.",
+            "recommendation": "Incluir en TODA notificación de determinación de fraude: (a) resumen en lenguaje simple del motivo específico (no solo 'discrepancia encontrada'), (b) pasos concretos para apelar, (c) plazo de apelación, (d) contacto directo de la UIA y opciones de ayuda (teléfono, email, en persona), (e) información sobre asistencia legal gratuita. Proporcionar este información también en la cuenta en línea (MiWAM) en formato destacado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-049",
+            "title": "Multas desproporcionadas (400%) sin escalado de revisión por monto",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "Cálculo automático y aplicación de multas: cuando el sistema determinaba fraude, aplicaba multa del 400% sobre el importe reclamado sin escalado manual para casos de alto impacto",
+            "evidence": "Una vez determinado el fraude, la ley preveía una multa del 400% del importe reclamado más intereses; la agencia podía iniciar de inmediato embargo de nóminas y retención de devoluciones de impuestos. [...] Nancy DeRocco, retuvo más de 2.000 dólares de sus devoluciones, por una deuda de más de 14.000 dólares. [...] Jason Doss le retuvieron más de 14.000 dólares de su nómina durante casi dos años.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema aplicaba multas severas (400%) de forma automática sin escalado por revisión manual cuando el importe total en juego era sustancial. Para cases donde la multa + intereses excedían cierto umbral (p. ej., >$5.000), HAX-G10 exige acotar el servicio o desambiguar. Los efectos financieros fueron devastadores (embargos, quiebras, dificultades con hipotecas), demostrando que la ausencia de una etapa de revisión humana para montos altos fue un error crítico de diseño.",
+            "recommendation": "Implementar escalado automático a revisión humana cualificada para determinaciones de fraude donde la multa total (sobrepago + 400% + intereses) exceda umbral preestablecido (p. ej., $5.000). Requerir que revisor humano confirme la fraude intencional (no solo discrepancia técnica) antes de proceder a embargo o retención. Permitir que el solicitante presente pruebas adicionales (recibos, contratos, comunicación sindical) durante esta ventana de revisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-050",
+            "title": "Pérdida de contexto reciente en la interacción: no seguimiento de intentos previos de resolución",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "Interacción del usuario con la UIA después de la determinación inicial: cuando el solicitante visitaba oficinas o llamaba, no había acceso a historial de lo que ya había intentado",
+            "evidence": "Kevin Grifka visitó la oficina de la UIA tres veces; el personal le decía: 'You got to fill out this paperwork. They might look at it'. [Implicación: cada vez que visitaba o llamaba, tenía que volver a explicar su caso sin que el sistema recordase sus intentos previos].",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G12 demanda mantener memoria a corto plazo de la interacción para no obligar a repetir contexto. Cuando Kevin visitaba tres veces, cada contacto parecía ser el primero: 'fill out paperwork again'. Esto obligaba a los solicitantes a re-narrar sus situaciones múltiples veces, aumentando la carga y reduciendo la efectividad de su contestación. Aunque menos grave que la auto-adjudicación, degrada significativamente la experiencia de apelación.",
+            "recommendation": "Implementar expediente integrado en MiWAM y en sistemas internos de la UIA que registre TODA comunicación del solicitante (visitas en persona, llamadas telefónicas, documentación presentada). Cuando el solicitante contacte de nuevo, el personal debe ver: fecha/hora de contacto anterior, qué documentación se solicitó, qué se completó, qué falta. Usar esto para dirigir al siguiente paso sin repetición.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-051",
+            "title": "Imposibilidad de apelar efectivamente sin comprensión del motivo de acusación",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Proceso de apelación: solicitantes intentaban apelar pero desconocían el motivo técnico preciso de su flagging",
+            "evidence": "Nancy DeRocco: 'I couldn't understand who the heck was taking my taxes'. Su abogada, Jennifer Lord: 'We are still scratching our heads trying to figure out how she was flagged with fraud. There is absolutely no evidence that she intentionally deceived anyone'. Robert Nevins recibió 'otra carta de fraude con un nombre incorrecto y un empleador que no reconocía'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Para apelar efectivamente, el solicitante debe entender QUÉ se le acusa. Sin explicación clara del motivo técnico (la distribución de ingresos, la discrepancia exacta, las fechas), la apelación es ciega. Algunos solicitantes ni siquiera reconocían a los empleadores listados (Robert Nevins). PAIR-EF-2 exige que los errores/acusaciones se comuniquen en términos útiles. La incapacidad del personal para explicar + la opacidad del algoritmo = apelación imposible para el lego.",
+            "recommendation": "Generar para cada determinación de fraude un documento de 'explicación del caso' dirigido al solicitante que detalle: (a) ingresos reportados vs. ingresos en registros de nómina, fechas exactas, empleador, (b) período en que se solapaban ingresos y prestaciones, (c) regla o umbral que se cruzó, (d) cálculo de sobrepago. Acompañar con visualización gráfica (línea de tiempo, comparación lado a lado). Proporcionar copia al solicitante automáticamente con la notificación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-052",
+            "title": "Cambios de capacidad del sistema no comunicados: nueva ola de determinaciones de fraude tras cierre de auto-adjudicación",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Período post-cierre de auto-adjudicación (agosto 2015+): el sistema continuó generando notificaciones de fraude con nuevas reglas pero sin avisar a los solicitantes de cambios en cómo operaba",
+            "evidence": "[Implicación en el dossier: tras el cierre de auto-adjudicación, la UIA continuó procesando determinaciones. Robert Nevins recibió 'otra carta de fraude con un nombre incorrecto y un empleador que no reconocía' después de ganar su primer caso.]",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Aunque el sistema desactivó la auto-adjudicación en agosto de 2015, continuó enviando notificaciones de fraude. Si cambió cómo identificaba casos o qué reglas usaba, los solicitantes no fueron informados. Robert Nevins recibió carta posterior con datos incorrectos (nombre, empleador), sugeriendo cambios o errores nuevos no comunicados. HAX-G18 exige notificar cambios de capacidad. Sin esto, los solicitantes no entienden si vuelven a estar bajo riesgo de acusación.",
+            "recommendation": "Si el sistema reintroduce o modifica criterios de detección de fraude, emitir comunicación proactiva a TODOS los solicitantes previamente acusados, explicando qué cambió y cómo les afecta. Incluir información de cómo interponer reclamo si reciben carta con datos incorrectos (nombre, empleador incorrecto). Implementar checksum o validación de identidad en notificaciones posteriores para evitar que se envíen cartas de fraude a personas equivocadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-053",
+            "title": "Ausencia de mecanismo de desagravio rápido o exención por dificultad financiera",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Proceso de recuperación tras determinación errónea: cuando los solicitantes solicitaban exención por dificultad económica derivada de embargos causados por error del sistema",
+            "evidence": "Nancy DeRocco solicitó una exención por dificultad económica; la UIA la denegó: 'Your overpayment account was established due to fraud, and therefore cannot be waived'. Se declaró en bancarrota en octubre de 2015.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando el sistema cometía un error (tasa de error 93%), no había mecanismo ágil para deshacer el daño mientras se tramitaba la apelación. Nancy fue rechazada para exención precisamente porque el sistema la había flagueado por fraude. No había reconocimiento de que el error fue del sistema, no suyo. PAIR-EF-1 exige diseñar para recuperación clara. La ausencia de una vía de desagravio provisional (suspender embargos, devolver retenciones pendientes durante apelación) para casos de error sistemático flagrante fue un fallo crítico.",
+            "recommendation": "Implementar proceso expedito de suspensión de embargos y retenciones DURANTE la apelación si: (a) la determinación de fraude es posterior a cierre de auto-adjudicación y está siendo apelada, o (b) el solicitante demuestra documentación que refuta el motivo flagging (recibos, cartas de despido, contratos). Permitir exención de multas (no solo sobrepago) en casos donde el error fue del sistema, no intención del solicitante. Revertir automáticamente embargos de refunds pendientes durante apelación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-054",
+            "title": "Impacto acumulativo no monitoreado: daño a empleabilidad y perspectivas de vida",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Operación del sistema: no supervisión de efectos secundarios de la determinación de fraude más allá del sistema mismo (empleabilidad, acceso a crédito, salud mental)",
+            "evidence": "Carmelita Colvin: 'I can't get the job I wanted, because they suggested that I was a criminal'. '[La determinación de fraude] perjudicó repetidamente sus solicitudes de empleo, incluida una para la oficina del sheriff del condado de Wayne'. Anthony Paris declaró que 'existieron al menos dos suicidios en el estado vinculados a las penalizaciones financieras derivadas de las acusaciones de fraude de MiDAS'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema determinó fraude pero nunca monitoreó (ni consideró) su impacto en empleabilidad, acceso a crédito, crédito, o salud mental de los solicitantes. Las determinaciones registradas en bases de datos públicas perjudicaban solicitudes de empleo posteriores. PAIR-DE-1 exige supervisión de impactos en subgrupos. Aunque el sistema no causó directamente los suicidios, su error cascadeó en consecuencias no supervisadas. Una revisión post-hoc de impactos de error (acceso a empleo, bancarrotas, salud mental) habría sacado a la luz el patrón.",
+            "recommendation": "Auditar regularmente (cada 6 meses) los expedientes de solicitantes cuyos casos fueron revocados/anulados, para documentar: (a) si la determinación de fraude sigue apareciendo en registros públicos/empleadores después de la revocación, (b) solicitudes de empleo rechazadas tras determinación de fraude, (c) impactos financieros duraderos (crédito, vivienda, bancarrota). Implementar proceso automático de borrado de registros de fraude cuando se revoque la determinación. Coordinar con agencias de empleo y crédito para notificar cambios en estatus de fraude.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-055",
+            "title": "Falta de control global del usuario sobre qué es monitoreado y cómo",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Configuración de MiWAM (cuenta en línea del solicitante): no hay controles visibles para que el solicitante configure preferencias de notificación, métodos de contacto, o transparencia sobre monitoreo",
+            "evidence": "A Jason Doss no recibió notificación por correo postal; los avisos se enviaron únicamente a su cuenta en línea, que dejó de revisar tras cerrarla. [El dossier no menciona opciones para el solicitante de elegir método de notificación (postal + email), frecuencia, o ver qué está siendo monitoreado].",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G17 exige proveer controles globales que permitan al usuario configurar qué monitoriza el sistema y cómo se comporta. MiWAM no parece haber ofrecido: elección de canal de notificación, preferencias de contacto, visualización de qué datos están siendo comparados o con qué frecuencia, pausas en monitoreo durante períodos sin prestaciones. La ausencia de estos controles hizo que solicitantes como Jason Doss cayeran en bucles donde el sistema continuaba monitoreando una cuenta que no revisaban.",
+            "recommendation": "Implementar en MiWAM panel de configuración que permita al solicitante: (a) elegir canal principal de notificación (postal, email, SMS) y configurar alternativas, (b) ver qué datos están siendo monitoreados (comparaciones de nómina, fechas, empleadores, ingresos), (c) pausar monitoreo activo cuando se cierre la prestación (para no recibir sorpresas meses después), (d) opciones de notificación: inmediata vs. semanal resumen. Requiere educación en onboarding sobre estos controles.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-056",
+            "title": "Sin onboarding ni educación sobre cómo funciona la detección de fraude",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Punto de entrada: cuando los solicitantes inician expediente de desempleo, no se les explica que sistema MiDAS estará monitoreando",
+            "evidence": "Robert Nevins: 'I have never had a problem with it before'. [Implicación: solicitante de larga trayectoria sin entender que un sistema nuevo (MiDAS, 2013) estaba aplicando lógica diferentes; no había educación inicial sobre cambios].",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G13 demanda aprender del comportamiento del usuario y personalizar. Pero antes de eso, es necesario establecer un modelo mental claro en el usuario sobre cómo funciona el sistema. El dossier no documenta onboarding alguno explicando que MiDAS compararía automáticamente nómina vs. prestaciones, cómo se definiría un 'solapamiento', qué plazo tenían para responder, qué ocurriría si no respondían. Sin este, el usuario no puede aprender a navegar el sistema.",
+            "recommendation": "Crear onboarding obligatorio cuando el solicitante inicia expediente de desempleo, explicando: (a) que un sistema automatizado comparará reportes de prestaciones contra registros de empleadores, (b) qué constituye 'fraude' vs. discrepancia técnica, (c) qué hacer si recibe notificación de cuestionario o determinación, (d) plazo de respuesta y consequencias del no responder, (e) cómo y dónde reportar errores o ambigüedades. Ofrecerlo en múltiples idiomas. Incluir video corto o infografía, no solo PDF.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-057",
+            "title": "Retroalimentación insuficiente cuando el usuario gana una apelación: registro de error no corregido",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "Fase post-apelación exitosa: cuando MAHS revocaba una determinación de fraude, no había claro proceso de actualización de registros internos para prevenir flagging futuro",
+            "evidence": "Robert Nevins ganó su caso en diciembre; el juez ordenó devolver 6.000 dólares y anular intereses y multas. Antes de su audiencia recibió otra carta de fraude con un nombre incorrecto y un empleador que no reconocía.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Cuando un solicitante ganaba su apelación ante MAHS, el sistema no parecía actualizar sus records internos de manera clara. Robert recibió UNA SEGUNDA carta de fraude posterior. HAX-G14 (Actualizar con cautela) implica que cambios en decisiones pasadas deben propagarse correctamente. La falta de feedback del resultado de apelación al sistema automático sugiere un desacoplamiento entre sistema judicial (MAHS) y sistema de gestión de datos (MiDAS).",
+            "recommendation": "Implementar flujo de sincronización obligatoria: cuando MAHS revoca una determinación, notificar automáticamente a MiDAS para: (a) marcar el expediente como 'apelación exitosa - revisar lógica', (b) suspender cualquier nueva determinación de fraude para ese solicitante/empleador/período hasta revisión manual, (c) generar reporte que permita auditar si la lógica que flagueó incorrectamente se está usando en otros casos. Exigir confirmación manual de cambios en registros master.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo describe específicamente que el sistema determinaba fraude de manera automática sin intervención de un empleado tras 10 días sin respuesta. Esto corresponde exactamente al candidato MI-03-adjudicacion-sin-revision-humana, que describe la adjudicación algorítmica sin intervención humana entre octubre 2013 y agosto/septiembre 2015. Aunque MI-09 y MI-06 también son relevantes, el núcleo del hallazgo es la ausencia de revisión humana en la fase de determinación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "MI-08-sin-senal-de-incertidumbre-del-sistema",
+            "judge_rationale": "El hallazgo se centra en que la notificación no comunicaba ningún indicador de confianza, margen de error ni posibilidad de que el sistema estuviera equivocado, a pesar de una tasa de error del 93%. Esto encaja directamente con MI-08-sin-senal-de-incertidumbre-del-sistema, que describe exactamente la ausencia de comunicación de grado de confianza o umbral de revisión antes de convertir una discrepancia en acusación firme, y documenta la tasa de error del 93% del Auditor General.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe que las cartas no explicaban qué datos específicos generaron la acusación, y que el personal telefónico tampoco podía explicar el motivo concreto. Esto corresponde directamente a MI-04-sin-explicacion-de-causa, que describe que el sistema no informaba al reclamante de la base concreta de la sospecha (qué discrepancia de datos la había disparado), impidiendo una respuesta orientada a los hechos reales. El caso Grifka ilustra perfectamente este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe el problema de notificaciones enviadas a cuentas o direcciones que los usuarios ya no revisaban, con un plazo de 10 días que corría sin que la persona supiera. Esto corresponde directamente a MI-01-notificacion-solo-portal, que describe exactamente que MiDAS notificaba únicamente a través del portal web y que muchos reclamantes ya no tenían motivo para revisarlo, con el plazo de 10 días corriendo sin conocimiento del afectado. El caso Jason Doss es el ejemplo citado en ambos.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe el defecto específico del algoritmo que repartía ingresos puntuales uniformemente a lo largo del trimestre, generando falsas discrepancias, sin mecanismo de corrección. Esto encaja mejor con MI-05-no-investiga-explicaciones-alternativas, que describe que MiDAS no investigaba si la discrepancia provenía de un error administrativo o disputa de buena fe antes de calificarla como fraude, tratando cualquier discrepancia como indicio suficiente. El caso Grifka (ingresos repartidos incorrectamente) es el ejemplo paradigmático de este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "MI-09-apelacion-obstaculizada",
+            "judge_rationale": "El hallazgo describe que no había mecanismo interactivo para impugnar durante el período de 10 días, y que toda apelación requería un proceso post-hoc separado ante el MAHS con plazo de 30 días. Esto corresponde a MI-09-apelacion-obstaculizada, que describe que aunque existía formalmente una vía de apelación ante un tribunal administrativo, los obstáculos procedimentales (plazos cortos, dependencia del portal, falta de explicación previa) fueron tan severos que una gran proporción de reclamantes no pudo presentar defensa efectiva a tiempo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "MI-06-sancion-antes-de-poder-defenderse",
+            "judge_rationale": "El hallazgo describe específicamente que las sanciones (400% de multa + embargo inmediato de nóminas y devoluciones fiscales) se ejecutaban antes de que el reclamante pudiera defenderse o apelar. Esto encaja directamente con MI-06-sancion-antes-de-poder-defenderse, que describe exactamente ese problema: las consecuencias económicas se activaban ligadas a la determinación algorítmica sin garantizar oportunidad real de defensa previa. MI-07 trata sobre la falta de comunicación clara de la magnitud de la penalización, no sobre la ejecución inmediata antes de apelación. MI-06 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el sistema emitía determinaciones de fraude repetidas con datos incorrectos (nombre incorrecto, empleador desconocido) sin aprender de errores previos ni ajustarse. Ninguno de los candidatos del golden describe específicamente un problema de 'ausencia de retroalimentación/aprendizaje del sistema ante determinaciones incorrectas repetidas'. El candidato más cercano sería MI-05 (no investiga explicaciones alternativas) o MI-08 (sin señal de incertidumbre), pero ninguno captura el fenómeno de notificaciones repetidas con datos erróneos distintos sin corrección. El caso de Nevins recibiendo una segunda carta con nombre e empleador incorrectos es un problema real y específico documentado en el dossier, pero no corresponde a ningún candidato del golden.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe que el personal de atención telefónica no podía explicar el motivo concreto de la acusación de fraude. Esto es una manifestación directa del problema MI-04-sin-explicacion-de-causa: el sistema no informaba de la base concreta de la sospecha, lo que impedía tanto al reclamante como al personal de atención explicar qué discrepancia había disparado la determinación. El hecho de que el personal tampoco pudiera explicarlo refuerza que la falta de explicación de causa era estructural al sistema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que la determinación de fraude perjudicaba la empleabilidad futura y que no existía mecanismo de limpieza de antecedentes tras la anulación. Ninguno de los candidatos del golden aborda específicamente el impacto en el historial de empleo/antecedentes ni la ausencia de mecanismo de eliminación de registros de fraude una vez anulados. MI-09 trata sobre obstáculos a la apelación, MI-06 sobre sanciones antes de defensa, pero ninguno captura el daño reputacional persistente en el mercado laboral. El caso de Colvin está documentado en el dossier y representa un problema real y específico no cubierto por ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe que el sistema repartía ingresos puntuales uniformemente a lo largo del trimestre, generando falsas discrepancias sin validar si los ingresos correspondían al período de desempleo. Esto encaja directamente con MI-05-no-investiga-explicaciones-alternativas: MiDAS no investigaba si la discrepancia provenía de un error administrativo (en este caso, una distribución incorrecta de ingresos puntuales) antes de calificarla como fraude. El caso Grifka es el ejemplo paradigmático de este problema documentado en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo describe la ausencia de intervención humana (override) en la fase de auto-adjudicación: cuando el solicitante no respondía en 10 días, el sistema determinaba fraude automáticamente sin posibilidad de revisión humana. Esto corresponde directamente a MI-03-adjudicacion-sin-revision-humana, que describe exactamente ese problema: MiDAS adjudicaba por algoritmo sin intervención humana posible entre octubre 2013 y agosto 2015. La mención al 'override' es simplemente otra forma de describir la ausencia de revisión humana.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe específicamente que las notificaciones de fraude se enviaban únicamente al portal en línea (MiWAM) sin garantía de entrega postal, y que muchos usuarios ya no revisaban su cuenta tras agotar prestaciones, haciendo correr el plazo de 10 días sin que la persona lo supiera. Esto encaja directamente con MI-01-notificacion-solo-portal, que describe exactamente ese problema: notificación solo por portal, sin canal proactivo alternativo, con plazo de 10 días corriendo sin conocimiento del reclamante. Los candidatos marcados [*] como MI-02, MI-03, MI-04, MI-09 describen problemas relacionados pero distintos (cuestionario autoincriminatorio, adjudicación sin humano, falta de explicación de causa, apelación obstaculizada). MI-01 no está marcado [*] pero describe el mismo problema central del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo se centra en que el sistema no informaba al reclamante del motivo concreto de la acusación: el personal telefónico no podía explicarlo, Grifka recibió instrucciones vagas, Nevins recibió carta con nombre y empleador incorrectos. Esto encaja directamente con MI-04-sin-explicacion-de-causa, que describe exactamente que el sistema no informaba de la base concreta de la sospecha, impidiendo una respuesta orientada a los hechos. Aunque no está marcado [*], es el candidato que mejor describe el mismo problema. Los marcados [*] (MI-01, MI-03, MI-06, MI-07, MI-09) abordan otros aspectos del proceso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "MI-07-penalizacion-400-no-comunicada",
+            "judge_rationale": "El hallazgo describe que la notificación inicial no advertía con claridad las consecuencias de no responder en 10 días (auto-adjudicación, embargo, multas del 400%). Esto encaja directamente con MI-07-penalizacion-400-no-comunicada, que describe que el aviso inicial no comunicaba con claridad la magnitud real de las consecuencias (penalización del 400%, la más alta del país). Aunque el hallazgo también menciona la falta de advertencia sobre la auto-adjudicación, el núcleo del problema —consecuencias no comunicadas en la notificación inicial— es el mismo que MI-07. Este candidato está marcado [*].",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el sistema emitía múltiples cartas de fraude sucesivas con datos inconsistentes (caso Nevins: carta con nombre incorrecto y empleador desconocido, recibida antes de su audiencia) sin mecanismo para que el usuario detenga o consolide determinaciones previas incorrectas. El problema más cercano es MI-03-adjudicacion-sin-revision-humana (marcado [*]), ya que la emisión automática sin revisión humana es lo que permite que se generen múltiples determinaciones erróneas sin control. Sin embargo, el hallazgo es más específico: trata la ausencia de control del usuario sobre determinaciones sucesivas y la falta de mecanismo de consolidación/corrección. Ningún candidato describe exactamente ese problema. MI-03 es el más próximo pero describe la adjudicación sin humano en general, no la multiplicidad de determinaciones sin mecanismo de corrección por el usuario. Dado que el caso Nevins está documentado en el dossier y el problema es real y específico, pero ningún candidato lo captura con precisión, se marca como ninguno/real.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de retroalimentación estructurada al sistema MiDAS sobre los resultados de las apelaciones (solo 8% confirmadas, 19% revocadas, 22% devueltas por falta de info), es decir, que los errores detectados en apelación no generaban aprendizaje ni corrección del sistema. Ninguno de los candidatos describe específicamente un bucle de retroalimentación ausente entre resultados de apelación y el sistema algorítmico. MI-09-apelacion-obstaculizada (marcado [*]) trata los obstáculos para apelar, no la ausencia de feedback al sistema. MI-08-sin-senal-de-incertidumbre es el más cercano conceptualmente (el sistema no comunicaba incertidumbre ni aprendía de errores), pero su descripción se centra en la falta de señal de confianza antes de la acusación, no en el bucle post-apelación. El hallazgo es real y documentado en el dossier (estadísticas del Auditor General), pero ningún candidato lo captura.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe la fricción extrema al intentar obtener explicación por teléfono o en persona: esperas de 45 minutos, múltiples transferencias, personal incapaz de explicar el motivo de la flagging. Esto es una manifestación del problema de falta de explicación de causa (MI-04-sin-explicacion-de-causa, marcado [*]), que describe que el sistema no informaba de la base concreta de la sospecha, impidiendo respuesta orientada a los hechos. El hallazgo añade el canal telefónico/presencial como dimensión, pero el problema subyacente es el mismo: la imposibilidad de obtener explicación del motivo concreto de la acusación. MI-04 está marcado [*] y es el candidato que mejor encaja.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre el impacto de la determinación de fraude en la reputación y búsqueda de empleo de Carmelita Colvin, específicamente que la acusación quedó registrada en su expediente y afectó sus solicitudes de trabajo durante años. Ninguno de los candidatos del golden describe este problema específico: los candidatos se centran en notificación, sanciones, cuestionario, adjudicación sin revisión humana, apelación obstaculizada, etc. El problema de que la determinación de fraude se registre en el expediente y perjudique la empleabilidad futura es un daño colateral distinto, real y documentado en el dossier (caso Colvin), pero no cubierto por ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el cuestionario de 10 días no tenía mecanismo integrado para cargar documentos de soporte, obligando al usuario a hacer trámites paralelos en oficina física. El candidato más cercano es MI-04-sin-explicacion-de-causa (el sistema no informaba la base concreta de la sospecha, impidiendo respuesta orientada a los hechos), pero el hallazgo es más específico: no es solo que no se explicara la causa, sino que no había forma de adjuntar evidencia documental en el propio formulario. MI-02-cuestionario-autoincriminatorio también es relevante (formulario de opción múltiple sin explicación de la sospecha), y MI-09-apelacion-obstaculizada cubre obstáculos procedimentales. Sin embargo, el núcleo del hallazgo —ausencia de mecanismo de carga de documentos en el cuestionario inicial— es un aspecto específico del diseño del formulario que más se aproxima a MI-02 (cuestionario mal diseñado que no permite defensa efectiva) o MI-09 (obstáculos procedimentales). MI-09 cubre los obstáculos procedimentales que impidieron defensa efectiva, lo cual engloba la imposibilidad de aportar evidencia en el proceso inicial. Pero el problema más cercano es MI-04 o MI-02. Considerando que el hallazgo se centra en la imposibilidad de aportar pruebas documentales durante el proceso del cuestionario, y que ningún candidato describe exactamente esto, pero MI-09 (apelación obstaculizada por obstáculos procedimentales) es el más amplio y cercano, y MI-02 describe el cuestionario mal diseñado: el hallazgo es un problema real documentado pero ningún candidato lo describe con exactitud. Lo más cercano es MI-09 por los obstáculos procedimentales, pero el hallazgo es sobre el cuestionario inicial, no la apelación. Ningún candidato describe específicamente la ausencia de mecanismo de carga de documentos en el cuestionario de 10 días.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la ausencia de ciclo de retroalimentación para ajustar el umbral de fraude del motor de detección: no hay evidencia de reconfiguración o ajuste del sistema a pesar de la tasa de error del 93%, y la auto-adjudicación permaneció vigente casi dos años sin revisión periódica visible. El candidato MI-08-sin-senal-de-incertidumbre-del-sistema describe que el sistema nunca comunicó un grado de confianza ni umbral de revisión antes de convertir una discrepancia en acusación firme, documentado con la tasa de error del 93%. Aunque el hallazgo se enfoca más en la ausencia de mejora continua/ajuste del sistema que en la falta de comunicación de incertidumbre al usuario, ambos apuntan al mismo problema subyacente: el sistema operó sin mecanismo de calibración o revisión de su exactitud. Sin embargo, MI-08 se centra en la falta de señal de incertidumbre comunicada al usuario, mientras que el hallazgo se centra en la ausencia de ciclo de mejora interna del sistema. Son problemas relacionados pero distintos. Ningún candidato describe exactamente la ausencia de ciclo de retroalimentación/ajuste de parámetros del motor de fraude. Es un problema real documentado en el dossier (la auto-adjudicación estuvo vigente 2 años con 93% de error sin ajuste visible), pero ningún candidato lo captura con precisión.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe la ausencia de mecanismo para identificar y proteger a grupos vulnerables (sin acceso digital, domicilio desactualizado, baja alfabetización digital) antes de ejecutar el embargo. La evidencia principal es que los avisos se enviaban solo al portal online sin garantía de recepción. El candidato MI-01-notificacion-solo-portal describe exactamente que MiDAS notificaba solo a través del portal web, sin correo postal ni canal proactivo, y que muchos reclamantes ya no revisaban el portal. Aunque el hallazgo añade el ángulo de 'grupos vulnerables', el problema central que documenta es el mismo: notificación solo por portal sin garantía de recepción, que es precisamente MI-01. El ángulo de vulnerabilidad diferencial es una extensión del mismo problema de notificación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "MI-06-sancion-antes-de-poder-defenderse",
+            "judge_rationale": "El hallazgo describe que una vez determinado el fraude automáticamente, el sistema ejecutaba embargo y multas sin revisión de impacto, sin opción de aplazamiento o excepción por dificultad económica (caso DeRocco: exención denegada porque 'fue fraude'; caso Perry: furgoneta embargada). El candidato MI-06-sancion-antes-de-poder-defenderse describe exactamente que las consecuencias (embargo de salario, retención de reembolsos fiscales) se ejecutaban ligadas directamente a la determinación algorítmica, sin garantizar que la persona hubiera tenido oportunidad real de aportar evidencia antes de que se activara el cobro. Esto es el mismo problema: sanciones ejecutadas automáticamente sin posibilidad de defensa previa ni mecanismo de escape por dificultad económica.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que la notificación inicial no informaba claramente sobre el derecho a apelación judicial, cómo contactar con un abogado, o disponibilidad de asistencia legal gratuita, lo que llevó a que muchos usuarios no supieran cómo defenderse. El candidato MI-09-apelacion-obstaculizada describe que los obstáculos procedimentales (plazos cortos, dependencia del portal, falta de explicación previa) fueron tan severos que una gran proporción de reclamantes no pudo presentar defensa efectiva a tiempo. El hallazgo es un aspecto específico de ese problema más amplio: la falta de información sobre recursos legales en la notificación inicial contribuye directamente a que la apelación sea obstaculizada. Sin embargo, MI-09 se centra en los obstáculos procedimentales del proceso de apelación en sí, mientras que el hallazgo se centra en la ausencia de información sobre derechos legales en la notificación inicial. Son problemas relacionados pero el hallazgo es más específico sobre la falta de información sobre asistencia legal. Ningún candidato describe exactamente la ausencia de información sobre derecho a abogado/asistencia legal en la notificación. Es un problema real documentado (Paris representó a cientos, sugiriendo que sin abogado muchos no apelaron), pero ningún candidato lo captura con precisión.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe que las notificaciones se enviaban al portal MiWAM y/o por correo, y que Jason Doss no recibió notificación postal porque los avisos fueron solo al portal que ya no revisaba. Esto encaja directamente con MI-01-notificacion-solo-portal, que describe exactamente ese problema: notificación solo por portal web, reclamantes que ya no lo revisan, y el plazo de 10 días corriendo sin que la persona lo supiera. Es el candidato más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo se centra en que, tras el plazo de 10 días sin respuesta, el sistema determinaba fraude automáticamente sin intervención humana. El núcleo del problema es la adjudicación algorítmica sin revisión humana cuando el plazo expira. Esto corresponde directamente a MI-03-adjudicacion-sin-revision-humana, que describe exactamente ese mecanismo: MiDAS adjudicaba por algoritmo sin intervención humana posible entre oct. 2013 y ago./sep. 2015.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo combina dos elementos: (1) la determinación automática sin intervención humana, y (2) la incapacidad del personal para explicar el motivo concreto de la acusación. El primer elemento es MI-03, el segundo es MI-04. Sin embargo, el hallazgo tiene un título compuesto ('sin revisión humana ni explicación accesible') y la evidencia principal citada incluye ambos aspectos. El elemento de 'sin revisión humana' ya fue adjudicado en p3-026 a MI-03. El segundo elemento distintivo aquí —que ni el sistema ni el personal podían explicar la causa concreta— apunta más específicamente a MI-04-sin-explicacion-de-causa. Dado que el hallazgo enfatiza también la falta de explicación accesible como problema central (Grifka visitó la oficina tres veces sin obtener respuesta clara), MI-04 es el mejor candidato para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe específicamente el error algorítmico de distribuir ingresos puntuales uniformemente a lo largo de un trimestre, generando una discrepancia artificial. Esto es un problema de lógica de comparación que trata una discrepancia (causada por un error de cálculo del propio sistema) como indicio de fraude sin investigar si tiene una explicación alternativa legítima. Esto encaja directamente con MI-05-no-investiga-explicaciones-alternativas, que describe que MiDAS no investigaba si la discrepancia provenía de un error administrativo antes de calificarla como fraude. El caso Grifka es el ejemplo paradigmático de este candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "MI-09-apelacion-obstaculizada",
+            "judge_rationale": "El hallazgo describe el proceso de apelación de tres pasos (protesta → re-determinación → audiencia MAHS) con plazo de 30 días, y la confusión y dificultad que experimentaron los reclamantes para navegar ese proceso. Esto corresponde directamente a MI-09-apelacion-obstaculizada, que describe exactamente los obstáculos procedimentales (plazos cortos, dependencia del portal, falta de explicación previa) que impedían una defensa efectiva. Es el candidato marcado con [*] que mejor encaja.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "MI-06-sancion-antes-de-poder-defenderse",
+            "judge_rationale": "El hallazgo describe que la agencia podía iniciar de inmediato el embargo de nóminas y retención de devoluciones de impuestos tras la determinación algorítmica, sin oportunidad de corrección previa. Los testimonios de Doss y Nevins ilustran embargos ejecutados antes de que pudieran defenderse. Esto corresponde directamente a MI-06-sancion-antes-de-poder-defenderse, que describe exactamente que las consecuencias económicas se ejecutaban ligadas directamente a la determinación algorítmica sin garantizar oportunidad real de aportar evidencia antes del cobro.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "MI-08-sin-senal-de-incertidumbre-del-sistema",
+            "judge_rationale": "El hallazgo describe el tono punitivo de las notificaciones, que presentaban montos, multas e intereses sin indicar que la determinación podría ser errónea, y sin explicar la causa concreta. La evidencia de DeRocco ('established due to fraud, and therefore cannot be waived') y Nevins (carta con nombre incorrecto) apunta a que el sistema no comunicaba incertidumbre ni posibilidad de error. El candidato MI-08 (sin señal de incertidumbre del sistema) encaja mejor: el sistema convertía discrepancias en acusaciones firmes sin comunicar grado de confianza ni posibilidad de error. MI-04 también es relevante pero el foco del hallazgo es el tono punitivo sin reconocer posible error, no la falta de explicación de causa. MI-08 es el más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "MI-08-sin-senal-de-incertidumbre-del-sistema",
+            "judge_rationale": "El hallazgo describe la ausencia de información previa al ciudadano sobre cómo funcionaba MiDAS, el flagging automático y la posibilidad de ser determinado culpable sin revisión humana. La evidencia señala que las notificaciones mostraban importes y multas pero no la lógica de detección. Esto encaja mejor con MI-08 (sin señal de incertidumbre del sistema), que describe que en ningún punto del proceso el sistema comunicó un grado de confianza o umbral de revisión antes de convertir una discrepancia en acusación firme. Sin embargo, el hallazgo también tiene componentes de MI-04 (sin explicación de causa) y MI-07 (penalización no comunicada). El núcleo del hallazgo es la falta de transparencia sobre el funcionamiento del sistema automatizado, lo que más se acerca a MI-08. Pero revisando más cuidadosamente: el hallazgo habla de 'onboarding' y ausencia de descripción de capacidades/limitaciones del sistema, lo que es más cercano a MI-08 (no se comunicó incertidumbre ni cómo funcionaba). MI-08 es el candidato más próximo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo describe explícitamente que el sistema determinaba fraude de manera automática sin intervención de un empleado, y cita el manual interno ('all UI functions are ultimately performed by MiDAS') y la tasa de error del 93%. Esto es exactamente lo que describe MI-03-adjudicacion-sin-revision-humana: adjudicación por algoritmo sin intervención humana posible entre oct 2013 y ago/sep 2015. El título 'comunicación deshonesta' añade un matiz, pero la evidencia central y el problema descrito corresponden directamente a MI-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe la falla en el canal de notificación: avisos enviados solo al portal web (MiWAM) que los usuarios ya no revisaban, correos a direcciones desactualizadas, y casos con datos incorrectos. Jason Doss no recibió notificación postal; los avisos fueron solo a su cuenta en línea que ya no revisaba. Esto corresponde directamente a MI-01-notificacion-solo-portal, que describe exactamente este problema: notificación únicamente a través del portal web, sin canal proactivo alternativo, con plazo de 10 días corriendo sin que la persona lo supiera.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe que las notificaciones no explicaban el motivo concreto de la acusación de fraude: los reclamantes no entendían por qué habían sido señalados, el personal telefónico tampoco podía explicarlo, y los afectados (Grifka, DeRocco) tenían que visitar oficinas múltiples veces sin obtener respuesta clara. Esto corresponde directamente a MI-04-sin-explicacion-de-causa: el sistema no informaba al reclamante de la base concreta de la sospecha, impidiendo una respuesta orientada a los hechos reales.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe el sesgo del algoritmo hacia la sobre-acusación: umbral de detección muy bajo (cualquier discrepancia, incluyendo la distribución incorrecta de ingresos puntuales), resultando en 93% de error. Esto encaja con MI-05-no-investiga-explicaciones-alternativas (trataba cualquier discrepancia como indicio suficiente sin investigar causas alternativas) y con MI-08 (sin señal de incertidumbre). Sin embargo, el foco específico del hallazgo es el equilibrio no declarado entre falsos positivos y falsos negativos y el sesgo hacia sobre-acusación, que es más precisamente el problema de MI-05: el sistema no investigaba si la discrepancia provenía de error administrativo y trataba cualquier discrepancia como indicio suficiente. MI-08 también es relevante pero MI-05 captura mejor el mecanismo de sobre-acusación descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo describe la ausencia de revisión humana o posibilidad de override ANTES de que el sistema determinara fraude automáticamente, y la falta de garantía de revisión previa al embargo (solo apelación posterior). Esto encaja mejor con MI-03-adjudicacion-sin-revision-humana, que describe exactamente la adjudicación algorítmica sin intervención humana posible entre oct 2013 y ago 2015. También hay elementos de MI-06 (sanción antes de poder defenderse) y MI-09 (apelación obstaculizada), pero el núcleo del hallazgo es la ausencia de override/revisión humana antes de la decisión, que es MI-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo trata sobre la decisión de implementar auto-adjudicación sin revisión humana, sin análisis de necesidades de usuarios ni costo-beneficio. El problema central es que se eligió un sistema que adjudicaba sin intervención humana, lo cual corresponde directamente a MI-03-adjudicacion-sin-revision-humana. Los demás candidatos abordan consecuencias específicas del sistema, pero el foco aquí es la decisión de diseño de eliminar la revisión humana. MI-03 es el candidato más cercano aunque el hallazgo añade un ángulo de 'falta de análisis previo de necesidades', que no está explícitamente en ningún candidato; sin embargo, MI-03 describe el mismo problema subyacente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_match",
+            "matched_golden_id": "MI-08-sin-senal-de-incertidumbre-del-sistema",
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo de feedback loop para detectar errores sistémicos durante los ~22 meses de operación, y que el error solo se detectó por litigio externo. Esto es más cercano a MI-08-sin-senal-de-incertidumbre-del-sistema, que habla de que el sistema nunca comunicó grado de confianza ni umbral de revisión, y documenta la tasa de error del 93%. Sin embargo, el hallazgo es más específico sobre la ausencia de monitoreo/corrección post-despliegue, no sobre señales de incertidumbre al usuario. Ningún candidato describe exactamente un 'feedback loop' de monitoreo continuo. MI-08 es el más cercano al documentar la tasa de error y la falta de mecanismos de revisión. Pero el hallazgo realmente apunta a un problema de gobernanza/monitoreo del sistema que no está capturado por ningún candidato con precisión. Dado que MI-08 es el más próximo (documenta la ausencia de señales de revisión y la tasa de error del 93%), lo adjudico a él.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe que el sistema aplicaba el mismo algoritmo uniformemente a todos los solicitantes sin diferenciación de riesgo ni umbrales más altos para casos vulnerables. Esto encaja con MI-08-sin-senal-de-incertidumbre-del-sistema (no había umbral de revisión ni grado de confianza diferenciado antes de convertir discrepancia en acusación firme) y con MI-05-no-investiga-explicaciones-alternativas (trataba cualquier discrepancia como indicio suficiente sin importar cuán trivial). El núcleo del hallazgo —aplicación uniforme sin variación de rigor según perfil de riesgo— es más cercano a MI-08, que habla de la ausencia de umbral de revisión. Sin embargo, el ángulo de 'sin diferenciación por subgrupos vulnerables' no está explícitamente en ningún candidato. MI-05 describe que trataba cualquier discrepancia igual sin investigar alternativas, lo cual es el mecanismo subyacente. Adjudico a MI-05 ya que el hallazgo describe que el sistema no distinguía entre casos triviales y graves, ni investigaba contexto, lo cual es el mismo problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe notificaciones tardías y fragmentadas que impiden el derecho de defensa: notificaciones sin contexto, plazo de 10 días inapropiado, cartas con nombres incorrectos. El candidato marcado con [*] más relevante es MI-01-notificacion-solo-portal, que describe exactamente el problema de notificaciones que no llegaban efectivamente al solicitante (solo portal, sin correo proactivo, plazo de 10 días corriendo sin que la persona supiera). El hallazgo también menciona falta de contexto (MI-04) pero el núcleo es la notificación deficiente. MI-01 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-042",
+            "label": "tp_match",
+            "matched_golden_id": "MI-06-sancion-antes-de-poder-defenderse",
+            "judge_rationale": "El hallazgo describe la ejecución inmediata de embargo y retención sin consideración de capacidad de pago ni mecanismo de hardship durante la determinación. La evidencia muestra que la UIA denegó exenciones por dificultad económica porque la deuda era 'por fraude'. Esto encaja mejor con MI-06-sancion-antes-de-poder-defenderse, que describe que las consecuencias (embargo, retención) se ejecutaban ligadas directamente a la determinación algorítmica sin garantizar oportunidad real de aportar evidencia antes del cobro. El ángulo específico de 'hardship waiver denegado' no está en ningún candidato, pero MI-06 es el más cercano al describir la ejecución inmediata de sanciones antes de poder defenderse.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-043",
+            "label": "tp_match",
+            "matched_golden_id": "MI-03-adjudicacion-sin-revision-humana",
+            "judge_rationale": "El hallazgo describe exactamente el proceso por el cual MiDAS adjudicaba fraude de forma automática sin intervención humana cuando el solicitante no respondía en 10 días. Esto corresponde directamente al candidato MI-03-adjudicacion-sin-revision-humana, que describe precisamente ese mecanismo (oct 2013 - ago/sep 2015, sin intervención humana posible). El hallazgo menciona 'alta incertidumbre' como contexto, pero el problema central es la auto-adjudicación sin revisión humana.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-044",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo se centra en que las notificaciones se enviaban únicamente al portal web (MiWAM) o a direcciones desactualizadas, y los solicitantes no las veían porque ya no revisaban su cuenta. Esto encaja directamente con MI-01-notificacion-solo-portal, que describe exactamente ese problema: notificación solo por portal, solicitantes que ya no cobraban y no tenían motivo para revisar, plazo de 10 días corriendo sin que la persona lo supiera. El testimonio de Jason Doss (avisos solo a cuenta en línea que dejó de revisar) lo confirma.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-045",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe que el personal de atención telefónica no podía explicar el motivo concreto de la acusación. Esto corresponde al candidato MI-04-sin-explicacion-de-causa: el sistema no informaba al reclamante de la base concreta de la sospecha, impidiendo una respuesta orientada a los hechos. La incapacidad del personal para explicar es una consecuencia directa de que el propio sistema no generaba ni comunicaba esa información de causa. Es el mismo problema visto desde el canal de atención al cliente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-046",
+            "label": "tp_match",
+            "matched_golden_id": "MI-05-no-investiga-explicaciones-alternativas",
+            "judge_rationale": "El hallazgo describe un fallo específico del algoritmo: distribuir ingresos puntuales uniformemente a lo largo de un trimestre, generando falsos positivos. Esto corresponde al candidato MI-05-no-investiga-explicaciones-alternativas, que señala que MiDAS no investigaba si la discrepancia provenía de un error administrativo o de una disputa de buena fe antes de calificarla como fraude, tratando cualquier discrepancia como indicio suficiente. El caso de Kevin Grifka (ingresos de 9.407,13 dólares repartidos incorrectamente) es el ejemplo concreto documentado en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-047",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo afirma que no hubo seguimiento documentado de disparidades por subgrupos (género, raza, región, estatus laboral) durante la operación. Sin embargo, el dossier no contiene ninguna evidencia de análisis de disparidades por subgrupos ni de que esto fuera un problema identificado o documentado. El hallazgo se basa en una ausencia de evidencia ('no hay evidencia en el dossier'), lo que no constituye evidencia positiva de un problema real. Ninguno de los candidatos describe este problema específico de monitoreo por subgrupos. Es un hallazgo inferido, no sustentado directamente por el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-048",
+            "label": "tp_match",
+            "matched_golden_id": "MI-09-apelacion-obstaculizada",
+            "judge_rationale": "El hallazgo describe que las notificaciones iniciales no incluían información clara sobre cómo apelar o desafiar la determinación. Esto encaja mejor con MI-09-apelacion-obstaculizada, que describe cómo los obstáculos procedimentales (plazos cortos, dependencia del portal, falta de explicación previa) impidieron que una gran proporción de reclamantes pudiera presentar defensa efectiva. La falta de información sobre cómo apelar en la notificación inicial es parte central de ese obstáculo. También hay solapamiento con MI-04, pero el foco del hallazgo es la ausencia de guía sobre el proceso de apelación, no la falta de explicación de la causa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-049",
+            "label": "tp_match",
+            "matched_golden_id": "MI-07-penalizacion-400-no-comunicada",
+            "judge_rationale": "El hallazgo describe la aplicación automática de multas del 400% sin escalado manual para casos de alto impacto. El candidato MI-07-penalizacion-400-no-comunicada trata específicamente la penalización del 400% y su falta de comunicación clara. Sin embargo, el hallazgo se centra en la ausencia de escalado de revisión por monto (aspecto de diseño del sistema), no exactamente en que no se comunicara la magnitud. El candidato MI-06-sancion-antes-de-poder-defenderse es más cercano al problema de que las consecuencias se ejecutaban sin oportunidad de defensa. Pero el núcleo del hallazgo —multa del 400% aplicada automáticamente sin revisión proporcional al monto— encaja mejor con MI-07, que es el único candidato que aborda directamente la penalización del 400% como problema central. Ningún otro candidato trata la desproporción de la multa como tema principal.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-050",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la falta de seguimiento de intentos previos de resolución: cada vez que Grifka visitaba la oficina, tenía que volver a explicar su caso. Esto no corresponde exactamente a ninguno de los candidatos del golden. Los candidatos marcados [*] (MI-01, MI-06, MI-07) tratan notificación solo por portal, sanciones antes de defensa, y penalización 400%. Los no marcados tampoco encajan: MI-04 trata la falta de explicación de causa por parte del sistema, MI-09 trata obstáculos al proceso de apelación formal. El problema descrito es específicamente la ausencia de memoria/historial de interacciones previas del usuario con el personal de la UIA, que es un problema de gestión de casos/CRM distinto a los candidatos disponibles. Está respaldado por el testimonio de Grifka en el dossier, pero no corresponde a ningún candidato del golden.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-051",
+            "label": "tp_match",
+            "matched_golden_id": "MI-04-sin-explicacion-de-causa",
+            "judge_rationale": "El hallazgo describe la imposibilidad de apelar efectivamente porque los solicitantes desconocían el motivo técnico preciso de su flagging. La evidencia (DeRocco y su abogada sin entender el motivo, Nevins con carta de empleador desconocido) apunta directamente a que el sistema no informaba de la base concreta de la sospecha. Esto encaja perfectamente con MI-04-sin-explicacion-de-causa, que describe exactamente ese problema: el sistema no informaba al reclamante de qué discrepancia había disparado la acusación, impidiendo una respuesta orientada a los hechos. También hay conexión con MI-09 (apelación obstaculizada), pero el núcleo del hallazgo es la falta de explicación de causa, no los obstáculos procedimentales en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-052",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que tras el cierre de la auto-adjudicación, el sistema continuó generando notificaciones de fraude con nuevas reglas sin avisar a los solicitantes de los cambios en su funcionamiento. La evidencia es débil: solo se apoya en que Nevins recibió otra carta después de ganar su primer caso. Ninguno de los candidatos del golden trata específicamente la falta de comunicación sobre cambios en las capacidades/reglas del sistema post-agosto 2015. Los candidatos más cercanos (MI-03 sobre auto-adjudicación, MI-08 sobre falta de señal de incertidumbre) no abordan este aspecto concreto. El hallazgo es una inferencia especulativa del dossier, no un problema documentado directamente. No hay evidencia sólida en el dossier de que el sistema cambiara sus reglas sin avisar; la carta de Nevins con nombre incorrecto podría ser simplemente otro error del sistema, no un cambio de reglas no comunicado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-053",
+            "label": "tp_match",
+            "matched_golden_id": "MI-06-sancion-antes-de-poder-defenderse",
+            "judge_rationale": "El hallazgo describe la ausencia de mecanismo de desagravio rápido o exención por dificultad financiera cuando las determinaciones eran erróneas. La evidencia central es DeRocco, a quien se denegó la exención porque 'fue establecida por fraude'. Esto es una consecuencia directa de que las sanciones se ejecutaban antes de que la persona pudiera defenderse. El candidato MI-06-sancion-antes-de-poder-defenderse encaja bien: las consecuencias se ejecutaban ligadas a la determinación algorítmica sin garantizar oportunidad real de defensa previa. Sin embargo, el hallazgo va un paso más allá: incluso después de la determinación, no había mecanismo de exención por dificultad. El candidato MI-09-apelacion-obstaculizada también es relevante. El mejor ajuste es MI-06, ya que el núcleo es que las sanciones se aplicaban sin posibilidad real de defensa o corrección previa, lo que incluye la imposibilidad de obtener exención.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-054",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe el impacto acumulativo no monitoreado: daño a empleabilidad, salud mental y perspectivas de vida más allá del sistema mismo. La evidencia (Colvin no podía conseguir empleo por la etiqueta de fraude, suicidios vinculados según Paris) es real y está en el dossier. Sin embargo, ninguno de los candidatos del golden trata específicamente la falta de monitoreo de efectos secundarios del sistema más allá de su ámbito directo (empleabilidad, crédito, salud mental). Los candidatos disponibles se centran en problemas del proceso (notificación, adjudicación, apelación, penalización, explicación de causa). El hallazgo describe un problema de diseño sistémico diferente: ausencia de evaluación de impacto de segundo orden. Está respaldado por evidencia real del dossier, pero no corresponde a ningún candidato del golden.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-055",
+            "label": "tp_match",
+            "matched_golden_id": "MI-01-notificacion-solo-portal",
+            "judge_rationale": "El hallazgo describe que los avisos se enviaban únicamente a la cuenta en línea (MiWAM) y que Jason Doss no recibió notificación postal, dejando de revisar su cuenta tras cerrarla. Esto encaja directamente con MI-01-notificacion-solo-portal, que describe exactamente ese problema: MiDAS notificaba solo a través del portal web, sin canal proactivo alternativo, y muchos reclamantes no tenían motivo para revisar el portal. La mención de 'falta de control del usuario sobre preferencias de notificación' es secundaria; el problema central documentado en el dossier es la notificación exclusiva por portal. Los demás candidatos abordan problemas distintos (sanciones, penalizaciones, adjudicación sin revisión humana, etc.).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-056",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de educación/onboarding sobre cómo funciona la detección de fraude de MiDAS al iniciar un expediente. La evidencia citada (Nevins: 'I have never had a problem with it before') sugiere que el solicitante no sabía que el nuevo sistema aplicaba lógica diferente. Ninguno de los candidatos del golden describe específicamente la falta de onboarding o educación inicial sobre el funcionamiento del sistema de detección. El candidato más cercano sería MI-04-sin-explicacion-de-causa (no informar de la base de la sospecha) o MI-08-sin-senal-de-incertidumbre, pero ambos se refieren al momento de la notificación de fraude, no a la fase de inicio del expediente. El hallazgo plantea un problema de UX/comunicación preventiva que no está recogido en ningún candidato. Sin embargo, la evidencia del dossier tampoco documenta explícitamente que hubiera (o no) un proceso de onboarding; la inferencia de Nevins es muy indirecta. El hallazgo no está suficientemente sustentado en el dossier como problema específico y diferenciado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-057",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que, tras ganar una apelación, el registro de error no se corregía y el sistema podía volver a generar nuevas cartas de fraude (Nevins recibió otra carta con nombre incorrecto y empleador desconocido incluso antes de su audiencia). Esto es un problema de persistencia de errores en el sistema y falta de actualización de registros post-apelación. Ninguno de los candidatos del golden describe exactamente este problema. MI-09-apelacion-obstaculizada se refiere a los obstáculos para apelar, no a lo que ocurre después de ganar. MI-03-adjudicacion-sin-revision-humana se refiere a la adjudicación inicial. El problema de que el sistema genere nuevas acusaciones erróneas incluso tras una resolución favorable es un hallazgo real y específico apoyado en el dossier (testimonio de Nevins), pero no corresponde a ningún candidato del golden.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 57,
+          "n_golden": 9,
+          "recall": 0.8888888888888888,
+          "precision": 0.9298245614035088,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 10,
+          "fbeta": 0.8967851099830797,
+          "meets_genericity_gate": true,
+          "primary_score": 0.8967851099830797
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1786 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 9,
+    "system_name": "Sistema de automatización de cabina de un avión comercial (autothrottle + director de vuelo / piloto automático del Boeing 777)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.7777777777777778,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.813953488372093,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Cambio de modo del autothrottle no comunicado explícitamente, induciendo modelo mental erróneo",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G2"
+            ],
+            "locus": "Transición silenciosa entre modos de autothrottle (retención vs. regulación activa de velocidad) sin aviso sonoro ni realce visual",
+            "evidence": "El modo activo se muestra en texto en la franja de anunciadores (FMA); el cambio no va acompañado de aviso sonoro ni de un realce visual prominente. El piloto a los mandos declara: 'Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto'. El piloto supervisor añade: 'El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema indujo un modelo mental incorrecto: ambos pilotos creían que el A/T siempre regularía la velocidad cuando estaba conectado. Bajo carga cognitiva (aproximación visual estresante), la FMA textual es insuficiente para detectar cambios críticos de modo. El cambio ocurre como efecto lateral de otras acciones (selección de modo de descenso) sin ser explícitamente solicitado por el piloto, amplificando la sorpresa.",
+            "recommendation": "Implementar una alerta sonora (chime/alert) cuando el A/T transiciona del modo de regulación activa de velocidad al modo de retención de empuje, especialmente en fases críticas de vuelo. Complementar con un realce visual significativo en la FMA (color, símbolos, animación) que sea perceptible sin búsqueda activa del piloto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "Ausencia de comunicación de incertidumbre sobre comportamiento automático bajo cargas cognitivas",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Panel de vuelo (FMA) durante aproximación visual bajo estrés",
+            "evidence": "La franja de modos está ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta [piloto-1]. 'La aproximación visual me resultó muy estresante; estaba muy preocupado'. El piloto supervisor: 'No vi ningún aviso que me hiciera mirar la velocidad en ese tramo'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no comunica que el cambio de modo hace que el A/T deje de regular la velocidad. En situaciones de alta carga cognitiva (aproximación visual), confiar en que el piloto lea un texto pequeño en un panel es un diseño frágil. No hay mecanismo que haga saliente o que comunique de forma destacada la transición a un estado donde la velocidad ya no está siendo regulada automáticamente.",
+            "recommendation": "Diseñar un indicador ambiental persistente y de bajo esfuerzo cognitivo (color de fondo, icono, luz indicadora) que comunique claramente cuándo el A/T está en modo de regulación activa vs. retención. Este indicador debe ser accesible periféricamente, sin requerir búsqueda activa en una franja de texto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Falta de protección degradada contra caída de velocidad en modos de retención de empuje",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Autothrottle en modo de retención de empuje durante descenso",
+            "evidence": "Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos. El piloto-1: 'Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El piloto esperaba un comportamiento de degradación elegante: que si la velocidad caía críticamente, el A/T se 'despertaría' y recuperaría empuje automáticamente. Sin embargo, en el modo activo durante este incidente, esa protección no estaba disponible. El sistema no comunica la ausencia de esta salvaguarda en cada modo, dejando al usuario con una expectativa peligrosamente incorrecta.",
+            "recommendation": "En modos donde el auto-rescate de velocidad mínima no está activo, implementar una alerta visual y sonora cuando la velocidad se aproxima a valores anómalamente bajos (p. ej., 10-15% por debajo de la de referencia), indicando explícitamente que el A/T no intervendrá automáticamente y requiere acción del piloto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Lógica de modos del autothrottle distribuida y opaca en la documentación, dificultando la comprensión del usuario",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G11"
+            ],
+            "locus": "Manuales y documentación de capacidades del A/T",
+            "evidence": "La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados. El instructor: 'En la transición a este tipo de avión, el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea'. Piloto-1: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no proporciona una explicación clara y centralizada de por qué el A/T cambia su comportamiento de regulación. La información está fragmentada en manuales, lo que dificulta la formación inicial y deja lagunas que solo se cierran con experiencia posterior. El piloto a los mandos reconoce no sentirse seguro: indicador claro de que el modelo mental nunca se formó correctamente.",
+            "recommendation": "Crear una vista consolidada y visual en la documentación y en el entrenamiento que mapee explícitamente cada modo del A/T con su comportamiento de regulación (activo vs. retención), y qué cambios previos del piloto gatillan cada transición. Incluir diagramas de transición de estados y ejemplos de secuencias reales de maniobra.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Ausencia de captura estructurada de malinterpretación del comportamiento automático durante la formación",
+            "guideline_ids": [
+              "PAIR-FC-1",
+              "HAX-G15"
+            ],
+            "locus": "Proceso de formación de tipo para pilotos",
+            "evidence": "No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza [instructor-sistema]. Esperamos que la tripulación lea esa franja y la verifique, porque es la fuente de verdad de qué está haciendo la automatización.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema confia en que la tripulación verbalize ambigüedades, pero no proporciona un canal estructurado o mecanismo de evaluación que capte malinterpretaciones silenciosas. Las expectativas erróneas del piloto ('siempre mantendría la velocidad') no fueron detectadas ni corregidas antes del vuelo crítico. El feedback granular sobre comprensión correcta/incorrecta del comportamiento del A/T es inexistente.",
+            "recommendation": "Implementar un mecanismo de evaluación estructurado en la formación inicial (check-list de conocimiento, simulador con escenarios de transición de modos) que obligue a verificar la comprensión correcta de cuándo el A/T regula vs. retiene. Registrar explícitamente si el piloto demuestra comprensión antes de acreditar el tipo de aeronave.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "Confianza excesiva inducida por presencia del A/T sin indicación de degradación funcional",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G2"
+            ],
+            "locus": "Indicación de estado del autothrottle durante aproximación",
+            "evidence": "El piloto supervisor: 'Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria... Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua'. La aeronave bajó por debajo de la senda de planeo y la velocidad cayó muy por debajo de la de referencia... El A/T estaba conectado durante el descenso.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no comunica que el A/T, aunque conectado, puede estar en un estado donde no regula la velocidad. Esto induce automation bias: la tripulación confía en que la velocidad está 'cubierta' y deja de monitorearla. El indicador de conexión del A/T no distingue entre 'regulando activamente' y 'retenido sin regular', provocando que la tripulación reduzca innecesariamente su supervisión.",
+            "recommendation": "Modificar la indicación del estado del A/T para distinguir claramente entre 'regulación activa' y 'retención'. Incluir un recordatorio visual periódico (p. ej., cada 30 segundos en modos de retención) que exija reconocimiento del piloto de que la velocidad debe ser monitoreada manualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Cambio de modo gatillado implícitamente por acciones previas, sin desambiguación explícita",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-MM-2"
+            ],
+            "locus": "Secuencia de selección de modo de descenso y sus efectos secundarios en el comportamiento del A/T",
+            "evidence": "El paso de un estado al otro puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no comunica explícitamente las consecuencias de la selección de ciertos modos (p. ej., 'si seleccionas modo de descenso X, el A/T pasará a retención de empuje'). El cambio es implícito y ocurre como efecto lateral. Esto viola la transparencia sobre cómo se comportará el sistema y obliga al piloto a deducir lógicas complejas de modos.",
+            "recommendation": "Cuando la selección de un modo causará un cambio significativo en el comportamiento del A/T (transición a retención), mostrar una confirmación explícita o un aviso que enumere qué comportamientos cambiarán y requiera reconocimiento antes de aplicar la nueva configuración.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Falta de integración entre monitoreo de velocidad y estado del autothrottle en la carga cognitiva del piloto",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-1"
+            ],
+            "locus": "Distribución de responsabilidades entre sistemas automáticos y supervisión manual en aproximación visual",
+            "evidence": "El piloto supervisor: 'No vi ningún aviso que me hiciera mirar la velocidad en ese tramo; cuando reaccionamos, ya había caído mucho por debajo de la de referencia'. El piloto a los mandos: 'La aproximación visual me resultó muy estresante; estaba muy preocupado'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no proporciona información contextualmente relevante que alerte al piloto de la necesidad de monitoreo activo de velocidad cuando el A/T está en modo de retención. En una aproximación visual de alta carga cognitiva, el piloto supervisor esperaba que una alerta lo alertara de la degradación de la velocidad, pero no la hubo. La información necesaria (A/T no regula, vigila velocidad tú) no fue presentada de forma que penetrara la carga mental actual.",
+            "recommendation": "Implementar un mecanismo de alerta predictivo que, cuando el A/T esté en modo de retención y la aeronave esté en una fase de aproximación visual (baja altitud, velocidad variable), emita periódicamente una advertencia subtil (no invasiva pero perceptible) recordando que la velocidad debe ser monitoreada manualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Discrepancia entre expectativas inducidas por otros tipos de aeronave y comportamiento real del sistema",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Diferencias de comportamiento del A/T entre fabricantes, no documentadas explícitamente en onboarding",
+            "evidence": "El piloto-1: 'Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco'. El instructor: 'el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El piloto transferido de otros tipos de aeronave llevaba expectativas sobre el comportamiento del A/T que no se alineaban con el Boeing 777. El onboarding no explicitó suficientemente estas diferencias clave respecto a competidores. Las expectativas de 'auto-rescate' que funcionaba en otros aviones no operaban aquí, pero nadie lo comunicó de forma que el piloto integrara ese aprendizaje.",
+            "recommendation": "En el onboarding de pilotos transferidos, crear una sección dedicada titulada 'Diferencias críticas en la automatización respecto a [fabricante anterior]', que enumere explícitamente comportamientos que funcionan diferente (p. ej., ausencia de auto-rescate de velocidad en ciertos modos) con ejemplos de qué sucede si se asume incorrectamente el comportamiento anterior.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Sostenimiento de modelos mentales errados sin mecanismo de verificación contínua",
+            "guideline_ids": [
+              "HAX-G13",
+              "PAIR-FC-1"
+            ],
+            "locus": "Período de línea aérea post-formación, sin verificación de comprensión del A/T",
+            "evidence": "El instructor: 'gran parte del aprendizaje fino ocurre después, con la experiencia en línea. No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza'. El piloto-1: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema delega el aprendizaje post-formación a la experiencia en línea sin verificación estructurada. Si un piloto desarrolla un modelo mental incorrecto en los primeros vuelos y nunca verbaliza su duda, la organización nunca lo detecta. El sentimiento de inseguridad del piloto-1 no fue capturado ni remediado antes del incidente.",
+            "recommendation": "Implementar un programa de feedback estructurado (p. ej., debrief post-vuelo con foco en comportamiento del A/T) o reentrenamiento periódico en simulador que incluya escenarios de transición de modos para verificar que la comprensión del piloto se mantiene correcta. Considerar alertas automáticas en la aeronave si se detecta comportamiento anómalo del piloto respecto al A/T.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Falta de comunicación de las consecuencias de las acciones previas del piloto en el comportamiento futuro del A/T",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Secuencia de selección de modo de descenso y transición implícita del A/T a retención",
+            "evidence": "El paso de un estado al otro puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Cuando el piloto selecciona un modo de descenso, el sistema cambia silenciosamente el comportamiento del A/T. El piloto no es informado explícitamente de que esa acción tiene la consecuencia de que el A/T dejará de regular la velocidad. Esto viola el principio de transparencia sobre cómo las acciones del usuario afectarán el comportamiento futuro del sistema.",
+            "recommendation": "Antes de o inmediatamente después de que el piloto seleccione un modo cuya consecuencia sea una transición del A/T a retención, mostrar un mensaje confirmatorio explícito (p. ej., 'Modo descenso activo: A/T pasará a retención de empuje. Verifique y ajuste velocidad manualmente') con opción de cancelar la acción si el piloto lo desea.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe la transición silenciosa entre modos del A/T (sin aviso sonoro ni realce visual) que lleva al piloto a creer que el A/T siempre regula la velocidad. El énfasis central está en la falta de saliencia del cambio de modo y en el modelo mental erróneo resultante. Entre los candidatos, AS-03-cambio-de-modo-sin-salience describe exactamente este problema: el cambio de estado crítico solo se refleja como texto en la FMA sin aviso sonoro ni realce visual prominente, pasando desapercibido bajo carga de trabajo. AS-01 describe el modelo mental erróneo pero el locus del hallazgo es la transición silenciosa, no el modelo mental en sí. AS-03 encaja mejor como problema principal descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo se centra en la ausencia de comunicación de incertidumbre bajo carga cognitiva alta: el piloto no leyó la FMA de forma efectiva bajo estrés y no hubo aviso que le hiciera mirar la velocidad. Esto es esencialmente el mismo problema que AS-03-cambio-de-modo-sin-salience (falta de saliencia del cambio de modo bajo carga de trabajo), pero AS-03 no está marcado con [*] para este hallazgo. Sin embargo, el hallazgo también encaja con AS-04-sobreconfianza-automation-bias (ambos pilotos no vigilaban la velocidad de forma continua confiando en la automatización) y con AS-01 (modelo mental erróneo). El núcleo del hallazgo b1-002 es que bajo estrés no se detectó el cambio de modo porque no había señal destacada — esto es más cercano a AS-03. Pero entre los candidatos marcados [*], AS-04 describe la delegación de supervisión en el sistema y la retirada del humano del lazo, que también está presente. Sin embargo, el locus específico ('ausencia de comunicación... bajo cargas cognitivas') apunta más a la falta de saliencia (AS-03). AS-03 está listado como candidato (sin [*]) para este hallazgo. Lo adjudico a AS-03-cambio-de-modo-sin-salience ya que el problema descrito es idéntico al de b1-001 pero visto desde la perspectiva del estrés/carga cognitiva, y AS-03 encaja perfectamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "AS-08-sin-abstencion-ni-degradacion-segura",
+            "judge_rationale": "El hallazgo describe que el A/T en modo de retención de empuje no recupera empuje aunque la velocidad caiga peligrosamente, y que el piloto esperaba una protección automática que no existe en ese modo. Hay dos candidatos muy relevantes: AS-08-sin-abstencion-ni-degradacion-segura (el A/T permanece conectado pero inactivo sin avisar ni recuperar empuje, falla en silencio) y AS-05-expectativa-de-proteccion-inexistente (el piloto espera protección trasladada de otro avión que no opera en el modo activo). El locus del hallazgo es 'Autothrottle en modo de retención de empuje durante descenso' y la evidencia combina ambos aspectos. Sin embargo, el título 'Falta de protección degradada contra caída de velocidad' apunta más al comportamiento del sistema (AS-08) que a la expectativa del piloto. AS-08 está marcado [*] y describe exactamente que el A/T falla en silencio sin degradar con elegancia. Lo adjudico a AS-08.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "AS-07-logica-de-modos-opaca-y-dispersa",
+            "judge_rationale": "El hallazgo describe que la lógica de modos del A/T está distribuida en varios apartados de los manuales, es opaca, y la formación es insuficiente para cubrir bien las diferencias entre fabricantes. Esto encaja directamente con AS-07-logica-de-modos-opaca-y-dispersa (lógica descrita en manuales repartida en varios apartados, sin explicación accesible en el momento de uso) y también con AS-06-formacion-insuficiente-de-modos. El título del hallazgo ('Lógica de modos distribuida y opaca en la documentación') y el locus ('Manuales y documentación') apuntan claramente a AS-07. AS-07 está marcado [*] para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo describe la ausencia de mecanismo estructurado para detectar o registrar malinterpretaciones del comportamiento automático durante la formación. La evidencia cita directamente al instructor: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad'. Esto es exactamente AS-09-sin-captura-de-malentendido, que está marcado [*] y es el único candidato que describe este problema específico.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "AS-04-sobreconfianza-automation-bias",
+            "judge_rationale": "El hallazgo describe que la presencia del A/T conectado (sin indicación de degradación funcional) induce confianza excesiva: los pilotos dan por cubierta la velocidad y dejan de vigilarla. Esto es el núcleo de AS-04-sobreconfianza-automation-bias: ambos pilotos delegan la supervisión crítica en el sistema (automation bias) y se retiran del lazo. El locus 'Indicación de estado del A/T durante aproximación' y la evidencia del piloto supervisor ('Damos por sentado que, con el A/T puesto, la velocidad está cubierta') encajan perfectamente con AS-04. AS-04 está marcado [*].",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "AS-02-confusion-de-modo",
+            "judge_rationale": "El hallazgo describe que el cambio de modo del A/T se produce implícitamente como consecuencia de acciones previas del piloto sobre otros modos, sin que el piloto lo solicite explícitamente. Esto encaja directamente con AS-02-confusion-de-modo, que describe exactamente ese mecanismo: el A/T pasa a retención de empuje como consecuencia de acciones previas sobre otros modos, y el piloto sigue creyendo que está en el modo que regula la velocidad. Aunque AS-03 (falta de saliencia) y AS-07 (lógica opaca) son también relevantes, el núcleo del hallazgo es la transición implícita que genera confusión de modo, no la falta de aviso visual ni la dispersión en manuales.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "AS-04-sobreconfianza-automation-bias",
+            "judge_rationale": "El hallazgo trata sobre la falta de integración entre el monitoreo de velocidad y el estado del A/T bajo carga cognitiva elevada: el piloto supervisor no recibió ningún aviso que le hiciera mirar la velocidad, y el piloto a los mandos estaba muy estresado. La evidencia central es que ambos pilotos dejaron de vigilar la velocidad confiando en que la automatización la cubría. Esto corresponde directamente a AS-04-sobreconfianza-automation-bias: ambos pilotos dan por cubierta la velocidad con el A/T puesto y dejan de vigilarla de forma continua, delegando la supervisión crítica en el sistema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "AS-05-expectativa-de-proteccion-inexistente",
+            "judge_rationale": "El hallazgo describe explícitamente la discrepancia entre las expectativas del piloto basadas en otros tipos de aeronave (protección automática de velocidad mínima) y el comportamiento real del sistema actual, combinado con la formación limitada sobre diferencias entre fabricantes. Esto encaja perfectamente con AS-05-expectativa-de-proteccion-inexistente, que describe exactamente ese modelo mental importado de otro sistema que sobreestima las capacidades del actual. AS-06 también es relevante pero el núcleo del hallazgo es la expectativa errónea transferida de otro avión, no la insuficiencia formativa en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo se centra en que los modelos mentales erróneos se sostienen sin mecanismo de verificación continua: el instructor reconoce que no existe mecanismo para registrar si un piloto ha entendido mal el modo, y el piloto admite que ya antes no se sentía seguro. Esto corresponde directamente a AS-09-sin-captura-de-malentendido, que describe exactamente la ausencia de mecanismo que detecte o registre malentendidos sobre qué modo regula la velocidad.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe la falta de comunicación al piloto de las consecuencias que sus acciones previas (selección de modo de descenso) tendrán en el comportamiento futuro del A/T, es decir, que el sistema no informa de que pasará a retención de empuje. Esto encaja mejor con AS-03-cambio-de-modo-sin-salience, que describe que el cambio de estado crítico del A/T carece de saliencia y pasa desapercibido. Sin embargo, el énfasis del hallazgo está en la falta de comunicación de las consecuencias causales de las acciones previas, lo que también encaja con AS-02-confusion-de-modo. Pero el candidato más preciso es AS-03, ya que el problema central es que el sistema no comunica de forma prominente el cambio de estado resultante de esas acciones previas. AS-02 describe la confusión resultante, mientras que AS-03 describe el fallo de diseño de comunicación que es exactamente lo que el hallazgo señala.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 11,
+          "n_golden": 9,
+          "recall": 0.7777777777777778,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 0,
+          "fbeta": 0.813953488372093,
+          "meets_genericity_gate": true,
+          "primary_score": 0.813953488372093
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Falta de comunicación explícita del cambio en la capacidad de regulación de velocidad",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Transición del autothrottle entre modos reguladores y modos de retención de empuje, sin aviso sonoro ni realce visual",
+            "evidence": "El modo activo se indica en texto en la franja de anunciadores del panel de vuelo (FMA), pero no hay un aviso sonoro ni una señal destacada cuando el A/T pasa de regular a no regular la velocidad. [...] El cambio de modo se refleja en la franja de anunciadores; esperamos que la tripulación lea esa franja.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La tripulación reporta que con el A/T conectado asumía que siempre mantendría la velocidad seleccionada ('daba por hecho que [...] siempre mantendría la velocidad'). El cambio de modo que revierte esta capacidad no se comunica de forma que capte la atención en el contexto de una aproximación exigente. El usuario tiene una expectativa calibrada de forma incorrecta porque el sistema no marca claramente la transición entre un comportamiento y otro, lo que facilita el automation bias y el error.",
+            "recommendation": "Implementar un aviso sonoro distinto o un realce visual (por ejemplo, intermitencia o color de alerta) cuando el A/T realiza una transición que **lo deshabilita para regular la velocidad**. Este aviso debe ser lo bastante prominente como para captar la atención durante una aproximación, y debe aclararse que el A/T sigue conectado pero ya no está regulando velocidad activamente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Expectativa no calibrada: mala comprensión del comportamiento del autothrottle en diferentes modos",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-1"
+            ],
+            "locus": "Presentación del comportamiento del A/T y sus límites en la transición a este tipo de avión (onboarding y formación de tipo)",
+            "evidence": "El comportamiento del A/T es coherente con su diseño: en el modo de retención de empuje no debe regular la velocidad, y así está documentado. [...] En la transición a este tipo de avión, el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El piloto a los mandos admite explícitamente: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más'. La formación de tipo dedica poco tiempo presencial a la lógica de modos del A/T y espera que los pilotos la dominen mediante experiencia posterior. Esto deja una brecha en la calibración de confianza: los pilotos no saben con certeza cuándo el A/T regula la velocidad y cuándo no, pero siguen confiando en que lo hace, generando automation bias.",
+            "recommendation": "Diseñar un programa de onboarding y formación de tipo que haga explícita y verificable la comprensión de cuándo y por qué el A/T cambia de comportamiento. Incluir ejercicios en simulador que fuercen transiciones de modo bajo carga (como una aproximación visual exigente) para que los pilotos experimien esa transición y puedan detectarla. Añadir un mecanismo de verificación o cuestionario que acredite que el piloto ha comprendido los límites antes de volar el tipo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Ausencia de información contextualmente relevante sobre el estado del A/T durante la aproximación",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-3"
+            ],
+            "locus": "Franja de anunciadores (FMA) como única fuente de información sobre el modo activo del A/T durante la aproximación visual",
+            "evidence": "La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta. [...] El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Durante una aproximación visual, los pilotos están bajo carga cognitiva alta. La FMA es una franja de texto pequeña y pasiva que requiere búsqueda activa. El sistema no presenta de forma contextual y prioritaria la información de que el A/T ya no está regulando velocidad, aunque esa es exactamente la información que el usuario necesita en ese momento para mantener una supervisión crítica. El diseño actual favorece que el usuario siga asumiendo que el A/T está haciendo algo que ya no está haciendo.",
+            "recommendation": "Cuando el A/T sea seleccionado para aproximación pero esté en un modo de retención de empuje (sin regulación activa de velocidad), presentar esta información de forma eminente en el PFD (Primary Flight Display) junto con la velocidad actual: por ejemplo, mediante un indicador que muestre 'A/T: retención' o similar, en lugar de esperar que el piloto lea y deduzca del FMA que el comportamiento ha cambiado. O bien, generar un aviso/inforación contextual que se active cuando el sistema detecte que la velocidad empieza a desviarse por debajo de la seleccionada mientras el A/T está en retención.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Falta de protección ante velocidad baja cuando se opera en modo de retención de empuje",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-3"
+            ],
+            "locus": "Ausencia de auto-rescate del A/T en todos los modos, específicamente en modo de retención de empuje durante aproximación",
+            "evidence": "Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos. [...] Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El piloto esperaba una protección de recuperación automática de empuje ante velocidad baja, que existe en otros aviones. Sin embargo, en el modo de retención de empuje del 777, esa protección no funciona. Esto crea un desajuste entre la expectativa del usuario (calibrada según su experiencia anterior) y el comportamiento real del sistema. Cuando el usuario no está plenamente consciente de en qué modo está operando (como en este caso), la ausencia de esta protección deja un agujero en la supervisión.",
+            "recommendation": "Implementar un mecanismo de auto-rescate del A/T en modo de retención que se active cuando la velocidad caiga por debajo de un umbral mínimo operacional (por ejemplo, Vref + X nudos), independientemente del modo. Alternativamente, si la filosofía de diseño es que el piloto siempre debe intervenir antes de alcanzar esos límites, comunicar esta diferencia frente a otros tipos de avión de forma explícita durante el onboarding, con ejemplos de lo que el sistema NO hará.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Falta de claridad sobre qué modo está activo y cómo se cambió",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Transición automática de modos del A/T sin intervención explícita del piloto (ej., tras seleccionar un modo de descenso o altitud objetivo)",
+            "evidence": "El paso de un estado al otro puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita. La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El A/T puede cambiar su comportamiento (pasar a retención de empuje) como consecuencia indirecta de acciones del piloto en otros subsistemas (seleccionar modo de descenso). El piloto no lo solicita explícitamente y, si no lee la FMA en ese preciso momento, no sabe que ocurrió. El manual distribuye esta lógica en varios apartados, lo que dificulta entenderla de forma integrada. No hay un mecanismo que aclarezca por qué ocurrió el cambio.",
+            "recommendation": "Consolidar la lógica de transición de modos en una sección clara del manual o quick reference. Más importante: cuando el A/T cambie a un modo que altere su comportamiento (regulación → retención), mostrar un mensaje en la pantalla que indique qué acción del piloto lo provocó (ej., 'A/T paso a retención tras seleccionar descenso a [altitud]'), de modo que el piloto entienda la cadena causal. Esto genera la explicación necesaria (HAX-G11) para mantener la confianza calibrada.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "No hay mecanismo de verificación de comprensión del comportamiento del A/T por parte del piloto",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-1"
+            ],
+            "locus": "Supervisión y evaluación de competencia tras la formación inicial de tipo (onboarding, evaluación en línea)",
+            "evidence": "No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "En este caso, el piloto reportó a posteriori que no estaba seguro de cómo funcionaba el A/T y que lo sabía antes del incidente. Pero no había ningún mecanismo para detectar esta laguna de comprensión antes de que ocurriera el fallo. La organización solo se entera si el piloto lo dice explícitamente, lo que no es sistemático ni proactivo.",
+            "recommendation": "Implementar controles de comprensión periódicos (ej., cada 12 meses o cada X ciclos de aproximación) mediante cuestionarios o simulador que evalúen la comprensión correcta del comportamiento del A/T en diferentes modos. Si el piloto no responde correctamente, disparar entrenamiento obligatorio antes de volver a volar el tipo. Esto es especialmente importante tras cambios de tipo de avión o tras cualquier actualización de la lógica de automatización.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Confianza no calibrada por rol: diferencias no explicitadas entre piloto al mando y supervisor",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Distribución de la supervisión del A/T y la velocidad entre piloto al mando y supervisor durante aproximación",
+            "evidence": "Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria y en encajar la aproximación visual. Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Ambos pilotos reportan que confiaban en que el A/T mantuviera la velocidad, así que **ambos** dedican atención a la trayectoria y no supervisan la velocidad de forma activa. No hay una asignación clara de roles o de quién es responsable de verificar que el A/T sigue regulando activamente en ese tramo. El sistema no comunica que en ciertos modos el A/T se convierte en pasivo, lo que debería cambiar la estrategia de vigilancia.",
+            "recommendation": "Documentar explícitamente en los procedimientos de aproximación quién es responsable de verificar el estado del A/T (modo y comportamiento) en cada fase. Considerar una llamada de cross-check que exija que el supervisor lea y verbalice el modo activo del A/T en ciertos hitos (ej., 'A/T speed hold' o equivalente) para asegurar que ambos pilotos están conscientes del estado actual. Esta práctica fuerza la supervisión crítica (PAIR-ET-3).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Cambio de comportamiento del autothrottle no es comunicado con suficiente saliencia",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Transición entre modos de autothrottle durante la aproximación visual: cuando el A/T pasa de regular activamente la velocidad a entrar en modo de retención de empuje sin acelerar aunque la velocidad caiga.",
+            "evidence": "El modo vigente se muestra en texto en la franja de anunciadores del panel de vuelo (FMA); el cambio no va acompañado de aviso sonoro ni de un realce visual prominente [doc-ficha]. El piloto a los mandos confirmó: 'No me fijé en que el modo había cambiado y que en ese estado ya no estaba regulando la velocidad. La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta' [piloto-1].",
+            "anti_pattern": "Cambio de modo que altera radicalmente el comportamiento (de regular velocidad a retenerla) se comunica solo mediante texto en una franja de anunciadores sin aviso sonoro ni realce visual prominente.",
+            "severity": "high",
+            "rationale": "El usuario no fue consciente del cambio en el comportamiento del sistema en un momento crítico (aproximación visual bajo carga). La franja de anunciadores es la única forma de comunicar que el A/T ha dejado de regular velocidad, pero su saliencia es insuficiente. Esto viola HAX-G16 (no queda claro cómo la acción anterior del piloto —selección de modo de descenso— afecta al comportamiento futuro del A/T) y PAIR-FC-1 (falta de comunicación clara de cambios en el comportamiento del sistema que el usuario pueda percibir y actuar en consecuencia).",
+            "recommendation": "Implementar un aviso sonoro o una alerta visual destacada (ej. flash, color, tono de alerta) cuando el autothrottle transiciona a un modo de retención de empuje, especialmente durante fases de vuelo donde se espera que siga regulando velocidad. Este aviso debe ocurrir en el momento del cambio, no depender de que el piloto lea la franja de anunciadores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Discrepancia entre expectativa del usuario y comportamiento real del autothrottle no es detectada ni capturada",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Momento anterior a la aproximación visual: durante el entrenamiento y la transición al Boeing 777, las expectativas del piloto sobre el funcionamiento del A/T no fueron validadas contra la lógica real del sistema.",
+            "evidence": "El piloto a los mandos declaró: 'Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto, no me dejaría caer por debajo. Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco' [piloto-1]. El instructor confirmó: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza' [instructor-sistema].",
+            "anti_pattern": "El piloto asumía un comportamiento del autothrottle (regulación continua de velocidad y auto-rescate si cae demasiado) que no corresponde al comportamiento real en ciertos modos. Esta discrepancia nunca fue detectada ni registrada antes del incidente.",
+            "severity": "high",
+            "rationale": "Existe un mecanismo implícito de 'override' o corrección: si el piloto hubiera sido confrontado con retroalimentación clara sobre su falsa expectativa (ej. en un escenario de entrenamiento, o un check), habría podido ajustar su modelo mental. Sin embargo, no hay forma de capturar ni registrar esa discrepancia, y el aprendizaje ocurre 'con la experiencia en línea'. En un sistema crítico de aviación, esto es un fallo de la capa de interacción: el sistema nunca comunica ni permite que el usuario corrija su comprensión errónea del funcionamiento. Viola HAX-G9 (no hay mecanismo para capturar y estructurar la corrección de concepciones erróneas) y PAIR-FC-2 (falta de visibilidad sobre qué está haciendo realmente el sistema para permitir al usuario ajustar su comprensión).",
+            "recommendation": "Implementar un mecanismo de validación durante el entrenamiento de tipo o en los primeros vuelos: presentar al piloto escenarios específicos (simulador o check-list interactivo) donde el autothrottle en modo de retención de empuje NO regula la velocidad, forzando que el piloto presencie y reconozca explícitamente ese comportamiento diferente. Capturar en un registro si el piloto ha confirmado haber entendido las diferencias de comportamiento entre modos antes de volar en línea.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Transición de modo de autothrottle ocurre sin solicitud explícita del piloto y sin feedback inmediato",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Momento en que el piloto selecciona un modo de descenso o ajusta altitud objetivo, sin ser consciente de que esta acción causará que el autothrottle pase a retención de empuje.",
+            "evidence": "El cambio de modo puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita [doc-ficha]. El manual describe esta lógica distribuida en varios apartados, dificultando que el piloto entienda la cadena causal [doc-ficha].",
+            "anti_pattern": "El cambio de modo del A/T se produce 'como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita', pero no hay realimentación clara sobre esa consecuencia.",
+            "severity": "high",
+            "rationale": "El piloto no puede predecir, en el momento de seleccionar un modo de descenso, que causará un cambio secundario en el comportamiento del autothrottle. Esto viola HAX-G16: las consecuencias de las acciones del usuario sobre el comportamiento futuro del sistema no quedan claras. El usuario no puede ejercer control informado sobre un sistema si las consecuencias de sus acciones son opacas. En aviación, donde cada acción tiene peso, esto es crítico.",
+            "recommendation": "Cuando el piloto seleccione un modo de descenso u otro modo que cause un cambio en el estado del autothrottle, mostrar inmediatamente un aviso informativo (ej. 'Modo seleccionado: descenso. Nota: Autothrottle pasará a retención de empuje') o proporcionar realimentación visual clara de que el comportamiento del A/T cambiará. Alternativamente, permitir que el piloto revise y confirme las consecuencias de su selección antes de que se aplique.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Lógica de comportamiento del autothrottle distribuida en manuales sin centralización clara",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Documentación y manuales del sistema de autothrottle del Boeing 777; integración de información en la cabina sobre qué modo hace qué.",
+            "evidence": "La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados [doc-ficha]. El instructor señala que en la transición al tipo, el tiempo dedicado a la lógica de modos es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea [instructor-sistema].",
+            "anti_pattern": "La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales distribuida en varios apartados, dificultando la comprensión integrada del sistema.",
+            "severity": "medium",
+            "rationale": "Aunque no es un fallo directo de la interacción en vuelo, este es un fallo de la capa de interacción en el contexto más amplio: el usuario no tiene un modelo mental claro y confiable del sistema porque la información es dispersa. Esto contribuye a las falsas expectativas del piloto. Viola HAX-G16 (no comunica claramente cómo funciona y qué puede esperar) y PAIR-FC-1 (falta de información centralizada que permita feedback y control informado).",
+            "recommendation": "Proporcionar en el manual (o en una ayuda en la cabina, ej. en la pantalla de configuración del A/T) una tabla o flujo centralizado que muestre explícitamente, para cada modo, si el autothrottle regula velocidad activamente, la retiene, o tiene protecciones de mínimo. Incluir en el entrenamiento de tipo un módulo dedicado que recorra esta lógica de forma integrada, con ejercicios prácticos en simulador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Ausencia de aviso de protección de mínimo de velocidad o de fallo en su activación",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Durante el descenso en aproximación visual, cuando el autothrottle está en un modo donde el auto-rescate no está operativo y la velocidad cae hacia el mínimo.",
+            "evidence": "Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos [doc-ficha]. El piloto supervisor asumía: 'Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria' [piloto-2], reflejando una expectativa de protección que no existe en todos los modos.",
+            "anti_pattern": "Existe en algunos modos un valor mínimo de velocidad a partir del cual el A/T despertaría para recuperar empuje (auto-rescate), pero ese auto-rescate 'no opera en todos los modos' y no hay un aviso claro cuando esa protección está inactiva o cuando se aproxima al mínimo.",
+            "severity": "high",
+            "rationale": "El usuario confía en una protección (auto-rescate) que depende del modo activo y no es consciente de cuándo esa protección está inactiva. Cuando la velocidad comienza a caer de forma peligrosa, no hay un aviso que le advierta de que el auto-rescate no está operativo o que ya ha pasado el umbral seguro. Esto viola HAX-G16 (no comunica claramente en qué modos la protección está disponible) y PAIR-FC-1 (ausencia de alerta que permita al usuario tomar control).",
+            "recommendation": "Implementar un aviso audible y visual cuando: (1) el autothrottle entra en un modo donde el auto-rescate NO está operativo (indicar explícitamente que la velocidad debe ser vigilada manualmente); (2) la velocidad se aproxima al mínimo operacional para el modo actual (alerta preventiva). Incluir en la información de modo activo, junto al texto en la FMA, una indicación de si el auto-rescate está activo o no.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Sin mecanismo de captura de feedback sobre discrepancia entre expectativa y comportamiento del sistema",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Sistema de captura de feedback y supervisión en la organización de operaciones: durante el entrenamiento y en la línea, no se registra si los pilotos han interpretado correctamente el comportamiento del autothrottle.",
+            "evidence": "No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza [instructor-sistema].",
+            "anti_pattern": "El instructor confirma que 'no disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza'. No hay forma de capturar, analizar y actuar sobre esas discrepancias antes de que causen un incidente.",
+            "severity": "high",
+            "rationale": "HAX-G15 requiere permitir feedback granular durante el uso habitual. Aunque este sistema es puramente automático, la capa de interacción incluye la supervisión y el aprendizaje organizacional. La ausencia de un mecanismo para capturar discrepancias de comprensión es un fallo del feedback loop. Si alguien experimenta una discrepancia pero no la verbaliza (como sucedió aquí hasta el incidente), el sistema nunca lo sabe y otros pilotos cometerán el mismo error. Viola PAIR-FC-1: falta un canal para que el piloto comunique su comprensión del sistema y que la organización capture y corrija esas interpretaciones erróneas.",
+            "recommendation": "Implementar un check-list interactivo o un quiz de validación en el simulador y antes de los primeros vuelos en línea, donde el piloto debe demostrar que comprende cuándo el autothrottle regula velocidad y cuándo no. Registrar los resultados. Alternativamente, incluir en los debriefings post-vuelo de los primeros 10 vuelos en el tipo, una pregunta específica sobre la comprensión del comportamiento del autothrottle en diferentes modos, capturando cualquier discrepancia para intervención formativa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Carga cognitiva alta durante aproximación visual impide lectura de información crítica en la FMA",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "Diseño de información en la cabina durante la aproximación visual: dependencia de que el piloto consulte manualmente la FMA en un momento de carga cognitiva alta.",
+            "evidence": "El piloto a los mandos: 'La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta' [piloto-1]. El piloto supervisor: 'No vi ningún aviso que me hiciera mirar la velocidad en ese tramo' [piloto-2].",
+            "anti_pattern": "La franja de anunciadores (FMA) es la única fuente de información sobre el modo activo del autothrottle, pero durante la aproximación visual bajo carga, el piloto no la monitoreó: 'con la carga de la aproximación no la leí de forma que me diera cuenta'.",
+            "severity": "high",
+            "rationale": "Confiar en que el usuario consulte una fuente de información pasiva (texto en una franja) en un momento de carga cognitiva alta es un fallo de diseño de interacción. En aviación, las alertas críticas deben ser activas y multimodales (sonido, luz, vibración) para atravesar la carga cognitiva. PAIR-FC-1 requiere que el sistema comunique cambios en su comportamiento de forma que el usuario pueda percibirlos y actuar. Delegar esa comunicación a una lectura manual durante aproximación visual es inadecuado.",
+            "recommendation": "Cambiar el modelo de comunicación: en lugar de esperar que el piloto lea la FMA, hacer que la FMA (o un elemento associado) se notifique activamente cuando hay un cambio de modo. Usar una alerta sonora breve (diferente de otras alertas para contexto) seguida de un realce visual persistente en el modo que cambió. Esto es especialmente importante durante fases de alta carga como aproximación visual.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Cambio de comportamiento del autothrottle no señalizado mediante alerta auditiva",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Transición de modo del autothrottle desde regulación activa de velocidad a retención de empuje durante la aproximación",
+            "evidence": "El autothrottle cambia de estado (de mantener activamente la velocidad seleccionada a retener el empuje sin regular) como consecuencia de acciones previas del piloto sobre otros modos, sin solicitud explícita. El cambio no va acompañado de aviso sonoro ni de un realce visual prominente. El modo vigente se muestra en texto en la franja de anunciadores (FMA).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Durante la aproximación visual, la carga cognitiva del piloto es muy alta (gestión de trayectoria, encaje visual, atención a múltiples parámetros). El cambio silencioso de comportamiento del autothrottle, que pasa de garantizar la velocidad seleccionada a no intervenir, ocurre en un contexto crítico donde el piloto opera con expectativas que ya no son válidas. La ausencia de una señal destacada en el momento del cambio —coincidiendo precisamente cuando el piloto está en mayor carga— incumple el principio de temporizar adecuadamente las alertas.",
+            "recommendation": "Implementar un aviso sonoro breve y distintivo (similar al usado para otras transiciones críticas de modo) que se active en el momento en que el autothrottle transita a un modo de retención de empuje. El aviso debe ser independiente de cambios en la FMA y debe ocurrir en tiempo real, no depender de lectura pasiva de anunciadores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Indicación de modo del autothrottle no consulta proactiva en situación de carga alta",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Franja de anunciadores (FMA) del panel de vuelo, durante aproximación visual con carga cognitiva elevada",
+            "evidence": "El modo vigente se muestra en texto en la franja de anunciadores del panel de vuelo (FMA). El piloto a los mandos refiere: 'La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta.' El piloto supervisor añade: 'El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido' y 'No vi ningún aviso que me hiciera mirar la velocidad en ese tramo.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La aproximación visual es una fase de trabajo de elevada demanda donde la atención del piloto se enfoca en la trayectoria y el encaje visual. Confiar únicamente en lectura pasiva de texto en un anunciador sin refuerzo proactivo (alerta, color destacado, símbolo vívido) en el momento crítico del cambio es incompatible con la carga de trabajo real en la cabina. La expectativa del usuario (que con A/T conectado la velocidad está 'cubierta') entra en conflicto directo con la realidad del nuevo modo, y no hay mecanismo que señale esa discrepancia en el momento oportuno.",
+            "recommendation": "Complementar la indicación textual en la FMA con una señal visual prominente y dinámica (p. ej., parpadeo, cambio de color, símbolo gráfico) que aparezca cuando el autothrottle transita a modo de retención de empuje, visible sin que el piloto deba buscarla deliberadamente. Esta señal debe persistir mientras el modo de retención esté activo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Expectativa implícita de comportamiento del autothrottle no corregida en contexto operacional",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Modelo mental del piloto sobre la función del autothrottle conectado y ausencia de mecanismo para detectar y corregir desviaciones en ese modelo durante el vuelo",
+            "evidence": "Piloto a los mandos: 'Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto, no me dejaría caer por debajo.' El instructor reconoce: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' El piloto supervisor refiere: 'Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria [...]. Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El piloto opera bajo una expectativa fundamental errada sobre qué hace el autothrottle en su estado actual. Esa expectativa no fue desafiada ni corregida durante el entrenamiento de tipo (que cubre la lógica de modos 'sobre todo en aula y manuales'), ni existe en la interacción en vuelo un mecanismo que surface esa incomprensión. El diseño de la interacción no proporciona feedback que alerte al usuario de que su modelo mental no coincide con el comportamiento real en el modo activo. La incapacidad de descartar o corregir esa expectativa implícita es un defecto grave.",
+            "recommendation": "Introduzir una verificación en cadena de lectura de modo: cuando el autothrottle entre en un modo de retención (sin regulación activa de velocidad), generar un cuadro de diálogo o prompt visual-auditivo que requiera confirmación explícita del piloto ('¿Confirma que desea retención de empuje?', con opción de 'No, regresar a regulación'). Esto rompe la asunción implícita y fuerza la conscientización.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Lógica de cambio de modo del autothrottle opaca y no coincidente con expectativa de invocación",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Mecanismo de transición de modo del autothrottle activado como consecuencia indirecta de acciones del piloto sobre otros sistemas (selección de modo de descenso, ajuste de altitud objetivo)",
+            "evidence": "El autothrottle cambia de estado 'como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita.' La lógica completa de qué modo regula la velocidad y cuál no está 'distribuida en varios apartados' de los manuales.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El cambio de comportamiento del autothrottle ocurre de forma indirecta como efecto colateral de acciones que el piloto invoca explícitamente sobre otros sistemas, sin intención directa de cambiar el comportamiento del autothrottle. Esto viola el principio de invocación explícita: el piloto no puede invocar eficientemente un cambio que ocurre sin su conocimiento. Además, la lógica está fragmentada en los manuales, dificultando que el piloto anticipe o comprenda el nexo causal.",
+            "recommendation": "Cuando una acción sobre otro modo (p. ej. descenso, altitud objetivo) vaya a afectar el comportamiento del autothrottle, señalar explícitamente ese cambio inmediato al usuario mediante una notificación clara ('Acción confirmada: Autothrottle cambiará a modo retención de empuje'). Consolidar la lógica de transición de modos en un apartado único de los manuales y en las ayudas contextuales del avión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Ausencia de redundancia de aviso ante degradación crítica de velocidad",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Nivel mínimo de velocidad y comportamiento de rescate automático durante descenso con autothrottle en modo de retención",
+            "evidence": "Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos. El piloto supervisor refiere: 'No vi ningún aviso que me hiciera mirar la velocidad en ese tramo; cuando reaccionamos, ya había caído mucho por debajo de la de referencia.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El autothrottle entra en modo de retención y ya no regula la velocidad. El mecanismo de auto-rescate que podría recuperar empuje a velocidad mínima no opera en todos los modos, lo que deja un vacío de protección. Combinado con la ausencia de una alerta clara cuando la velocidad comienza a decaer (el piloto supervisor esperaba 'un aviso que me hiciera mirar la velocidad'), el usuario es abandonado sin un mecanismo que lo invite a intervenir a tiempo. Esto exacerba el fallido en HAX-G8 (dismissal): el usuario no puede descartar o recuperarse de una situación de la que no ha sido alertado.",
+            "recommendation": "Implementar una alerta de velocidad mínima que se active cuando la velocidad indicada caiga un porcentaje específico por debajo de la velocidad de referencia (p. ej., 5 nudos) o del valor seleccionado en el autothrottle, independientemente del modo. Esta alerta debe ser auditiva y visual, y debe persistir hasta que la velocidad se recupere o el piloto la desactive explícitamente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Entrenamiento sobre lógica de modos incompleto y sin mecanismo de validación de comprensión",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Programa de entrenamiento de tipo para el Boeing 777 y fase de línea, específicamente cobertura de comportamiento del autothrottle",
+            "evidence": "El instructor refiere: 'En la transición a este tipo de avión, el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea. No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' El piloto refiere: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La invocación eficiente del servicio de automatización requiere que el usuario comprenda su comportamiento. El sistema de entrenamiento dedica tiempo limitado a la lógica de modos, confiando en aprendizaje posterior 'con la experiencia en línea'. No existe mecanismo que capture o corrija malentendidos hasta que resulten en un incidente. Un piloto puede sentirse 'no del todo seguro' pero seguir operando sin que esa incertidumbre sea detectada. Esto incumple HAX-G7: no hay invocación eficiente cuando el usuario no domina los parámetros del servicio.",
+            "recommendation": "Implementar en el programa de entrenamiento inicial un módulo interactivo que obligue al piloto a demostrar (mediante simulación o cuestionario dinámico) su comprensión de en qué modos el autothrottle regula velocidad y en cuáles no, y cuáles son los triggers para cambios de modo. Requiere aprobación antes de certificación de tipo. Después, en operación, ofrecer un recordatorio contextual en la cabina (p. ej., al conectar el autothrottle) que muestre el comportamiento esperado del modo actual.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Modelo mental erróneo: expectativa implícita de regulación permanente de velocidad",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Onboarding y formación de transición al Boeing 777; comunicación de capacidades del autothrottle",
+            "evidence": "Piloto a los mandos: 'Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto, no me dejaría caer por debajo'. Instructor: 'el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El diseño actual permite que los pilotos formen un modelo mental fundamentalmente incorrecto sobre la capacidad del autothrottle: el usuario cree que el sistema SIEMPRE regula velocidad cuando está conectado, cuando en realidad en ciertos modos solo retiene empuje sin regular. Este error no es detectado durante el onboarding porque la formación de transición es limitada y confía en el aprendizaje posterior 'con la experiencia'. En una situación de carga cognitiva alta (aproximación visual estresante), este modelo mental erróneo conduce directamente a la falta de supervisión de la velocidad y al incidente.",
+            "recommendation": "Revisar y reforzar el onboarding de transición para incluir un módulo explícito sobre la distinción entre modos reguladores y modos de retención de empuje del A/T. Utilizar simuladores o demostraciones interactivas que fuercen al piloto a experimentar el cambio de comportamiento y a verbalizarlo, no solo leerlo en manuales. Incluir verificación de comprensión (p. ej., ejercicio práctico o cuestionario) antes de operar en línea.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Capacidades implícitas y no descubiertas: transición silenciosa entre modos de autothrottle",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Indicación de cambio de modo en el panel de vuelo (FMA) y falta de retroalimentación sensorial destacada",
+            "evidence": "Dossier: 'El paso de un estado al otro puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita. El cambio no va acompañado de aviso sonoro ni de un realce visual prominente.' Piloto-2: 'El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cambio de modo del A/T que afecta críticamente al comportamiento (pasar de regular velocidad a no regular) ocurre de forma implícita como consecuencia de otras acciones, sin que el usuario lo solicite explícitamente. La única indicación es textual en una franja de anunciadores que el piloto debe buscar activamente. Bajo carga cognitiva (aproximación visual con estrés), esta capacidad implícita pasa desapercibida, en particular porque la franja no dispone de mecanismo sensorial destacado (ni sonoro ni visual prominente). El usuario descubre este comportamiento solo por ensayo y error o después de que falla.",
+            "recommendation": "Implementar retroalimentación sensorial clara cuando el autothrottle transita de un modo regulador a un modo de retención (p. ej., aviso sonoro discreto y cambio de color o realce en el indicador FMA). Documentar explícitamente en los manuales de piloto que esta transición es automática y puede ocurrir sin solicitud directa. Incluir un checklist pre-aproximación que requiera verificación activa del modo vigente del A/T.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Ausencia de comunicación clara sobre límites de protección automática (diferencias con otros fabricantes)",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Onboarding y manuales; comunicación sobre protecciones del avión (auto-rescate de velocidad)",
+            "evidence": "Piloto-1: 'Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco.' Dossier: 'Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El piloto trae un modelo mental de aviones anteriores donde existía una protección de velocidad mínima global. En el Boeing 777, esa protección es condicional (depende del modo) y no está garantizada en todos los modos de retención de empuje. Esta diferencia crítica no está comunicada de forma explícita durante la transición, lo que genera una expectativa falsa de que 'el avión me protegerá'. El piloto cuenta con esa protección que no existe en el modo activo y deja de supervisar la velocidad.",
+            "recommendation": "Elaborar una matriz explícita en los manuales de transición que compare las diferencias entre fabricantes (Airbus, Boeing, etc.) en cuanto a protecciones automáticas de velocidad mínima y en cuáles modos operan. Incluir en el onboarding de transición una sección dedicada titulada 'Diferencias en protecciones automáticas' que señale concretamente que el auto-rescate no está disponible en ciertos modos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Distribución fragmentada de la lógica de modos en los manuales sin ruta de aprendizaje clara",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Estructura de los manuales y diseño del onboarding de tipo",
+            "evidence": "Dossier: 'La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados.' Instructor: 'el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La información crítica sobre el comportamiento del autothrottle está fragmentada en varios apartados de los manuales, lo que dificulta la comprensión integral. El onboarding confía en que el piloto integre esta información distribuida a través de lectura de aula y manuales, y luego complemente el aprendizaje 'con la experiencia en línea'. Esta aproximación deja un período de riesgo donde el piloto aún no ha consolidado el modelo correcto pero ya está operando en línea.",
+            "recommendation": "Consolidar la lógica de modos del A/T en un único capítulo dedicado con una tabla o diagrama de decisión clara que muestre: (a) qué acciones cambian el modo; (b) qué comportamiento tiene cada modo respecto a regulación de velocidad; (c) cuáles modos tienen protección de velocidad mínima. Exigir que este capítulo sea parte obligatoria del onboarding presencial antes de operar en línea.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Falta de mecanismo para detectar si el modelo mental del piloto es correcto antes de operar",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Validación de competencia y onboarding de transición",
+            "evidence": "Instructor: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' Piloto-1: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Aunque el piloto reporta no sentirse seguro sobre el funcionamiento de la automatización, no existe ningún mecanismo de validación en el onboarding que detecte este déficit de comprensión antes de que vuelva a operar en línea. El instructor reconoce explícitamente que los malentendidos 'solo afloran si alguien lo verbaliza', lo que implica una validación por auto-reporte o investigación post-incidente, no preventiva. El piloto con dudas continúa operando con un modelo mental incorrecto.",
+            "recommendation": "Implementar una prueba de competencia práctica o teórica obligatoria antes de la habilitación operacional en línea. La prueba debe cubrir específicamente: (a) cambios de modo automáticos y sus disparadores; (b) comportamiento esperado del A/T en cada modo principal; (c) diferencias respecto a otras aeronaves que el piloto haya operado. Permitir que el piloto practique en simulador bajo supervisión con retroalimentación sobre errores de modelo mental antes de operar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Expectativa implícita de que el piloto supervisa activamente la FMA bajo carga cognitiva alta",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Diseño de la interacción durante la aproximación; confianza en que el piloto leerá la FMA",
+            "evidence": "Piloto-1: 'No me fijé en que el modo había cambiado y que en ese estado ya no estaba regulando la velocidad. La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta. La aproximación visual me resultó muy estresante; estaba muy preocupado.' Piloto-2: 'Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El diseño asume que el piloto verificará activamente la FMA para detectar cambios de modo, incluso bajo carga cognitiva extrema (aproximación visual estresante con múltiples demandas atencionales: trayectoria, velocidad, encaje visual). En realidad, bajo esta carga, el piloto no dispone de recursos atencionales para monitorizar una franja de texto; su atención se centra en tareas primarias. El sistema no compensa esta realidad cognitiva humana con retroalimentación automática.",
+            "recommendation": "No delegar la supervisión del cambio de modo a la lectura activa de la FMA bajo condiciones de carga. Implementar alertas automáticas cuando el A/T transita a un modo de no-regulación durante la aproximación, o bien redesñar la lógica de modos para evitar transiciones implícitas en fases críticas (aproximación y despegue). Alternativamente, requerir un paso de transición explícito que el piloto deba seleccionar activamento antes de que el A/T entre en modo de retención.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Sobre-confianza inducida por el estado 'conectado' del autothrottle sin claridad sobre su comportamiento real",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "PAIR-UN-2"
+            ],
+            "locus": "Indicación del estado del autothrottle y retroalimentación sobre su funcionamiento",
+            "evidence": "Piloto-2: 'Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua. No vi ningún aviso que me hiciera mirar la velocidad en ese tramo'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El hecho de que el A/T esté 'conectado' genera una falsa sensación de que la velocidad está bajo control. Sin embargo, 'conectado' no significa que esté 'regulando velocidad' en el modo actual. Esta ambigüedad lingüística/conceptual induce a los pilotos a reducir su supervisión de la velocidad, confiando en una capacidad que en realidad no está activa. No hay retroalimentación que corrija esta sobre-confianza: el piloto no recibe aviso alguno de que la velocidad está cayendo fuera de límites mientras confía en el A/T.",
+            "recommendation": "Cambiar la nomenclatura y la indicación: en lugar de solo mostrar 'A/T conectado', mostrar explícitamente qué está regulando (p. ej., 'A/T: REG. VELOCIDAD' vs. 'A/T: RETENCIÓN EMPUJE'). Implementar una alerta de caída de velocidad fuera de banda de seguridad durante aproximación, independientemente del estado del A/T, para detectar la divergencia entre la expectativa del piloto (velocidad controlada) y la realidad (A/T no regulando).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Ausencia de feedback de insuficiencia: piloto reporta incertidumbre previa no canalizada",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Canales de reporte de deficiencias de comprensión durante onboarding",
+            "evidence": "Piloto-1: 'Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El piloto expresa antes del incidente que tiene dudas sobre el funcionamiento de la automatización y reconoce la necesidad de más estudio. Sin embargo, no hay un mecanismo que recoja esta auto-evaluación negativa durante el onboarding o que canalice esa incertidumbre hacia remediación (p. ej., sesión adicional de simulador, revisión con instructor). El piloto continúa operando con plena habilitación a pesar de reportar dudas.",
+            "recommendation": "Incluir en el onboarding de transición un 'check de confianza' donde el piloto evalúe su comprensión de módulos clave (modos de autothrottle, protecciones). Si reporta baja confianza en algún área, requerir sesión adicional de simulador o revisión con instructor antes de habilitar operación en línea. Crear un canal normalizado para que el piloto reporte incertidumbres sin que afecte a su evaluación de competencia (es decir, diferenciar 'decir que no entiendes' de 'no ser competente').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Transición silenciosa entre modos de regulación de velocidad sin notificación destacada",
+            "guideline_ids": [
+              "HAX-G18",
+              "PAIR-EF-1"
+            ],
+            "locus": "Cambio de modo del autothrottle de regulación activa a retención de empuje durante la aproximación",
+            "evidence": "El autothrottle pasa de regular activamente la velocidad a quedar en 'retención de empuje' (conserva la palanca y NO regula velocidad) sin aviso sonoro ni realce visual prominente. El cambio aparece solo en texto en la franja de anunciadores (FMA). Ficha de modos: 'El cambio no va acompañado de aviso sonoro ni de un realce visual prominente.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Este es un cambio crítico de capacidad del sistema que altera radicalmente su comportamiento de regulación de velocidad. Los pilotos basan su modelo mental en la expectativa de que 'conectado = regulación activa de velocidad'. La transición silenciosa viola la regla de oro de notificación (HAX-G18) porque no hay mecanismo que llame la atención sobre un cambio tan fundamental. Además, incumple PAIR-EF-1 porque el sistema no anticipó el error cognitivo del usuario ni ofreció un camino de recuperación clara (una alerta visual/sonora habría permitido al piloto corregir a tiempo).",
+            "recommendation": "Implementar una alerta sonora y visual prominente (no solo textual en FMA) cuando el autothrottle transiciona de un modo que regula velocidad a uno que no lo hace. Esta alerta debe ser suficientemente evidente para ser notada incluso bajo carga cognitiva alta (aproximación visual estresante). Alternativamente, diseñar la transición de modo de forma que solo ocurra tras una acción explícita del piloto (no como consecuencia indirecta de otros ajustes).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Modelo mental del usuario no alineado con comportamiento real del sistema en modo de retención de empuje",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-2"
+            ],
+            "locus": "Expectativa del piloto sobre la garantía de regulación de velocidad cuando el autothrottle está conectado",
+            "evidence": "Piloto-1: 'Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto, no me dejaría caer por debajo.' Piloto-1 también menciona que contaba con 'una protección automática que recuperase empuje si la velocidad bajaba demasiado', que no opera en todos los modos. Instructor-sistema: 'El comportamiento del A/T es coherente con su diseño... Esperamos que la tripulación lea esa franja y la verifique, porque es la fuente de verdad'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema viola HAX-G10 al no limitarse (scoping) o avisar cuando la incertidumbre sobre el comportamiento es detectablemente alta. El piloto tiene un modelo mental fundamentalmente erróneo sobre lo que el sistema hace cuando está conectado, basado en experiencias con otros aviones. El sistema no comunica de forma proactiva que el comportamiento difiere entre modos, ni proporciona feedback claro sobre cuál es el estado actual. Incumple PAIR-EF-2: cuando el piloto entiende mal qué hará el sistema, el sistema debería comunicar explícitamente ('en este modo, el autothrottle NO regula la velocidad') en lugar de confiar en que el piloto lea y interprete correctamente la franja de modos bajo estrés.",
+            "recommendation": "Diseñar una comunicación proactiva que aclare el comportamiento esperado en cada modo antes de que el piloto lo necesite en operación. Por ejemplo: (1) en la transición a modo de retención de empuje, mostrar un mensaje textual explícito en la pantalla principal ('AUTOTHROTTLE: retención de empuje - NO regula velocidad'); (2) documentar en los manuales de instrucción una tabla comparativa clara de 'qué modo regula qué' en lugar de distribuirla por varios apartados; (3) incluir en la formación de tipo un escenario de simulación donde ocurra esta transición y se practique la respuesta correcta.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Ausencia de mecanismo de evaluación de comprensión del usuario sobre lógica de modos",
+            "guideline_ids": [
+              "PAIR-DE-1",
+              "HAX-G13"
+            ],
+            "locus": "Formación de tipo y onboarding del piloto en las diferencias de comportamiento del autothrottle entre modos",
+            "evidence": "Instructor-sistema: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' También: 'En la transición a este tipo de avión, el tiempo dedicado a la lógica de modos del A/T... es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Este es un defecto de supervisión y evaluación (PAIR-DE-1). No existe registro de si los pilotos han comprendido correctamente la lógica de modos, lo que significa que disparidades cognitivas críticas (como el malentendido de piloto-1) permanecen invisibles hasta que ocurre un incidente. HAX-G13 requiere aprender del comportamiento del usuario para mejorar la experiencia. Aquí el sistema no captura señales que indicarían una comprensión incompleta (p. ej., el piloto no inspecciona la franja de modos, o la inspecciona pero sigue confiando erróneamente en regulación de velocidad).",
+            "recommendation": "Implementar un mecanismo en simulador o en la plataforma de e-learning que evalúe explícitamente si el piloto comprende cuándo el A/T regula velocidad y cuándo no. Por ejemplo: (1) cuestionario interactivo o escenarios de simulación donde el piloto deba predecir el comportamiento del A/T en distintos modos; (2) registro de cuáles pilotos no superan cierto umbral de comprensión, con reentrenamiento obligatorio; (3) en operación, si el sistema detecta que un piloto rara vez inspecciona la franja de modos, alertarle proactivamente sobre cambios de modo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Confianza no justificada en regulación automática de velocidad bajo estrés cognitivo alto",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Distribución de atención del piloto durante aproximación visual estresante; expectativa de que el A/T cubrirá la velocidad sin supervisión",
+            "evidence": "Piloto-2: 'Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria y en encajar la aproximación visual. Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua.' Piloto-1: 'La aproximación visual me resultó muy estresante; estaba muy preocupado... no me fijé en que el modo había cambiado.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema crea una situación donde, bajo alta carga cognitiva (aproximación visual estresante), los pilotos reducen su supervisión de la velocidad porque confían en el A/T. Sin embargo, en modo de retención de empuje, esa confianza no está justificada. Incumple HAX-G10: el sistema debería reconocer que bajo esta carga, el piloto tiene incertidumbre implícita sobre el comportamiento exacto (que confirma piloto-1: 'ya antes no me sentía del todo seguro de cómo funcionaba esta parte'). En lugar de permitir un comportamiento de regulación 'condicionado' (solo en ciertos modos), debería limitar o escalonar su autonomía para mantener un margen de seguridad. PAIR-EF-1: no anticipó que el cambio de modo ocurriría silenciosamente bajo estrés.",
+            "recommendation": "Diseñar la lógica del A/T de forma que, cuando la carga de trabajo estimada es alta (basada en fase de vuelo: aproximación visual, cambios de altitud frecuentes, baja altura), el sistema no cambie automáticamente a un modo donde deje de regular velocidad. O bien: mantener un mecanismo de auto-rescate (velocidad mínima) que sí funcione en todos los modos, y comunicarlo claramente al piloto como una garantía de seguridad.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Fragmentación de documentación de lógica de modos en múltiples apartados sin visión consolidada",
+            "guideline_ids": [
+              "PAIR-EF-2",
+              "HAX-G13"
+            ],
+            "locus": "Estructura y organización de manuales de vuelo; descripción distribuida de la lógica del autothrottle",
+            "evidence": "Ficha de modos: 'La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados.' Instructor-sistema: 'el tiempo dedicado a la lógica de modos del A/T... se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La documentación fragmentada impide que el piloto construya un modelo mental coherente. PAIR-EF-2 requiere comunicar de forma útil y accionable; una lógica distribuida en varios apartados de un manual es difícil de sintetizar, especialmente bajo presión de tiempo. Contribuye al error de comprensión de piloto-1, que 'ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más' pero no tenía un recurso consolidado que aclarara la lógica.",
+            "recommendation": "Consolidar la descripción completa de la lógica de modos del autothrottle en un único apartado del manual de vuelo, con una tabla o matriz que muestre explícitamente, para cada modo: (a) si regula velocidad, (b) si regula altitud, (c) bajo qué condiciones cambia a otro modo, (d) cómo recuperarse si la velocidad cae por debajo de mínimo. Incluir ejemplos de secuencias de modo típicas (p. ej., 'después de seleccionar descenso, el A/T pasa automáticamente a retención de empuje').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Falta de señal visual/sonora en cambio de estado del autothrottle no notificado explícitamente",
+            "guideline_ids": [
+              "HAX-G18",
+              "PAIR-EF-2"
+            ],
+            "locus": "Indicación del modo activo del autothrottle; cambio de estado visible solo en franja de modos textual (FMA)",
+            "evidence": "Ficha de modos: 'El modo vigente se muestra en texto en la franja de anunciadores del panel de vuelo (FMA); el cambio no va acompañado de aviso sonoro ni de un realce visual prominente.' Piloto-2: 'El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "HAX-G18 exige notificar cambios de capacidad del sistema. El cambio de modo es un cambio de capacidad (de 'regula velocidad' a 'no regula velocidad'). Dejarlo solo en texto en una franja que el piloto debe buscar activamente no cumple con el estándar de notificación. Bajo carga cognitiva alta (aproximación visual), la atención es selectiva y el piloto no puede mantener un monitoreo exhaustivo de todas las franjas. PAIR-EF-2: comunicar cambios importantes en términos accesibles al usuario, no en un rincón de la pantalla.",
+            "recommendation": "Añadir un indicador visual destacado (cambio de color, parpadeo suave, o símbolo adicional) en la franja de modos cuando el A/T transicione a un estado donde NO regula velocidad. Opcionalmente, un tono sonoro breve (no necesariamente una alerta de advertencia, sino una notificación neutra) cuando ocurra la transición.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Ausencia de mecanismo de retroalimentación sobre disparidades entre modelo mental del piloto y comportamiento real",
+            "guideline_ids": [
+              "PAIR-DE-1",
+              "HAX-G13"
+            ],
+            "locus": "Interacción piloto-autothrottle durante aproximación; supervisión de si el piloto comprende el comportamiento real del sistema",
+            "evidence": "Instructor-sistema: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' Piloto-1: 'ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más' pero no tuvo forma de verificar su comprensión antes del vuelo real.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "PAIR-DE-1 requiere evaluar el rendimiento por subgrupos e identificar disparidades. En este caso, la disparidad es cognitiva: algunos pilotos comprenden la lógica de modos, otros no. El sistema no captura esta disparidad porque no evalúa la comprensión de forma sistemática. HAX-G13 busca aprender del comportamiento del usuario para mejorar; aquí el sistema no captura las señales que indicarían una comprensión incompleta. El piloto consciente de su propia incertidumbre (piloto-1) no tiene forma de resolverla antes de que sea crítica.",
+            "recommendation": "Implementar un sistema de feedback interactivo pre-vuelo donde el piloto, antes de una aproximación visual, pueda verificar su comprensión de la lógica de modos mediante un cuestionario breve o una simulación en cabina. Si el resultado indica comprensión incompleta (disparidad respecto al nivel esperado), ofrecer un recordatorio o refresco de la información. Alternativamente, registrar qué pilotos examinan frecuentemente la franja de modos versus cuáles no lo hacen, e identificar a los segundos como candidatos para reentrenamiento.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe que el cambio del A/T entre modos reguladores y de retención de empuje no va acompañado de aviso sonoro ni realce visual prominente, solo texto en la FMA. Esto encaja directamente con AS-03-cambio-de-modo-sin-salience, que describe exactamente ese problema: el cambio de estado crítico solo se refleja como texto en la FMA sin aviso sonoro ni realce visual, pasando desapercibido bajo carga de trabajo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "AS-06-formacion-insuficiente-de-modos",
+            "judge_rationale": "El hallazgo se centra en la expectativa no calibrada y la mala comprensión del comportamiento del A/T en diferentes modos, con énfasis en que la formación de tipo dedica tiempo limitado a la lógica de modos y diferencias entre fabricantes, confiando en la experiencia posterior. Esto encaja directamente con AS-06-formacion-insuficiente-de-modos, que describe exactamente ese problema: formación limitada en lógica de modos y diferencias entre fabricantes, con aprendizaje fino diferido a la experiencia en línea.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe que la FMA es la única fuente de información sobre el modo activo del A/T, y que bajo carga de trabajo durante la aproximación visual el cambio de modo no salta a la vista si no se busca activamente. Esto encaja directamente con AS-03-cambio-de-modo-sin-salience, que describe que el cambio de estado crítico solo se refleja como texto en la FMA sin aviso sonoro ni realce visual prominente, pasando desapercibido bajo carga de trabajo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "AS-05-expectativa-de-proteccion-inexistente",
+            "judge_rationale": "El hallazgo describe la ausencia de auto-rescate del A/T en el modo de retención de empuje, y la expectativa del piloto de que existiría una protección automática de velocidad mínima trasladada de otro tipo de aeronave. Esto encaja directamente con AS-05-expectativa-de-proteccion-inexistente, que describe exactamente ese modelo mental importado de otro sistema que sobreestima las capacidades del actual, esperando una protección que no opera en el modo activo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "AS-02-confusion-de-modo",
+            "judge_rationale": "El hallazgo describe la falta de claridad sobre qué modo está activo y cómo se produjo el cambio, destacando que la transición ocurre como consecuencia de acciones previas sobre otros modos sin que el piloto lo solicite explícitamente, y que la lógica completa está dispersa en varios apartados de los manuales. Esto encaja directamente con AS-02-confusion-de-modo (el A/T pasa a retención de empuje por acciones previas y el piloto sigue creyendo que regula la velocidad) pero también con AS-07. Sin embargo, el énfasis principal del hallazgo está en la transición implícita de modos y la confusión resultante sobre qué modo está activo, lo que corresponde mejor a AS-02-confusion-de-modo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo que detecte o registre si un piloto ha entendido mal qué modo regula la velocidad, señalando que ese malentendido solo aflora si alguien lo verbaliza. Esto encaja directamente con AS-09-sin-captura-de-malentendido, que describe exactamente esa ausencia de mecanismo de detección/registro del malentendido.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "AS-04-sobreconfianza-automation-bias",
+            "judge_rationale": "El hallazgo habla de que ambos pilotos confiaban en que la automatización cubría la velocidad y no la vigilaban de forma continua, delegando en el sistema. Esto es exactamente automation bias / sobreconfianza en la automatización. El título menciona 'confianza no calibrada por rol' pero la evidencia citada es la cita de piloto-2 sobre dar por sentado que el A/T cubre la velocidad. AS-04 describe exactamente ese problema: ambos pilotos dan por cubierta la velocidad con el A/T puesto y dejan de vigilarla. AS-01 y AS-02 son sobre modelo mental erróneo y confusión de modo, que son distintos. El hallazgo no trata de diferencias de rol explícitas sino de la sobreconfianza compartida.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo trata específicamente de que el cambio de comportamiento del A/T (de regular velocidad a retención de empuje) no se comunica con suficiente saliencia: solo texto en FMA, sin aviso sonoro ni realce visual prominente, y el piloto no lo notó bajo carga de trabajo. Esto corresponde directamente a AS-03-cambio-de-modo-sin-salience, que describe exactamente ese problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo se centra en que la discrepancia entre la expectativa del piloto y el comportamiento real del A/T no fue detectada ni capturada durante el entrenamiento/transición. La evidencia clave es la cita del instructor: 'No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza.' Esto corresponde directamente a AS-09-sin-captura-de-malentendido.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "AS-02-confusion-de-modo",
+            "judge_rationale": "El hallazgo describe que el A/T pasa a retención de empuje como consecuencia de acciones previas del piloto sobre otros modos (selección de modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite explícitamente, y sin feedback inmediato. Esto es exactamente la confusión de modo descrita en AS-02: el A/T pasa de regular la velocidad a retención de empuje como consecuencia de acciones previas sobre otros modos, y el piloto sigue creyendo que está en el modo que regula la velocidad. La mención a la lógica dispersa en manuales es secundaria en este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "AS-07-logica-de-modos-opaca-y-dispersa",
+            "judge_rationale": "El hallazgo trata de que la lógica de comportamiento del A/T está distribuida en varios apartados de los manuales sin centralización clara, dificultando que el piloto entienda qué modo hace qué. Esto corresponde directamente a AS-07-logica-de-modos-opaca-y-dispersa, que describe exactamente ese problema: la lógica está repartida en varios apartados sin explicación accesible en el momento de uso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "AS-08-sin-abstencion-ni-degradacion-segura",
+            "judge_rationale": "El hallazgo trata de la ausencia de aviso cuando la protección de mínimo de velocidad (auto-rescate) no está operativa en el modo activo, y el A/T permanece conectado pero sin recuperar empuje mientras la velocidad cae. La evidencia incluye tanto la expectativa de protección de los pilotos como el hecho de que el auto-rescate no opera en todos los modos. AS-08-sin-abstencion-ni-degradacion-segura describe exactamente esto: el A/T permanece conectado pero inactivo en un régimen de velocidad peligrosamente bajo sin abstenerse, avisar ni recuperar empuje, fallando en silencio. AS-05 es sobre la expectativa importada de otro avión, que es un factor contribuyente pero no el núcleo del hallazgo, que se centra en la ausencia del aviso/protección en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo se centra específicamente en la ausencia de un mecanismo que registre o detecte si un piloto ha entendido mal qué modo regula la velocidad, citando directamente al instructor-sistema. Esto encaja perfectamente con AS-09-sin-captura-de-malentendido, que describe exactamente ese problema: no existe mecanismo que detecte ni registre el malentendido, y solo aflora si alguien lo verbaliza.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo trata sobre la carga cognitiva alta durante la aproximación visual que impide que los pilotos lean la FMA, y la ausencia de avisos que llamen su atención. El núcleo del problema es que el cambio de modo crítico no tiene saliencia suficiente (sin aviso sonoro ni realce visual), lo que hace que pase desapercibido bajo carga de trabajo. Esto corresponde directamente a AS-03-cambio-de-modo-sin-salience. Aunque también hay elementos de automation bias, el foco principal del hallazgo es el diseño de la información (FMA pasiva, sin aviso proactivo).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe explícitamente que el cambio de comportamiento del autothrottle (de regular velocidad a retener empuje) no va acompañado de aviso sonoro ni realce visual prominente, y solo se muestra como texto en la FMA. Esto es exactamente AS-03-cambio-de-modo-sin-salience. Aunque también menciona que el cambio ocurre como consecuencia de acciones previas (elemento de AS-02), el énfasis principal está en la falta de señalización auditiva/visual del cambio.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo se centra en que la indicación del modo del A/T en la FMA requiere consulta proactiva por parte del piloto, y que bajo carga cognitiva alta esto no ocurre. El problema central es que el cambio de modo crítico solo se refleja como texto en la FMA sin aviso que llame la atención, es decir, carece de saliencia. Esto corresponde a AS-03-cambio-de-modo-sin-salience. La evidencia citada (pilotos que no leyeron la FMA porque no había nada que les hiciera mirarla) apunta directamente a la falta de saliencia del cambio de modo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "AS-01-modelo-mental-erroneo-del-automatismo",
+            "judge_rationale": "El hallazgo combina varios elementos: el modelo mental erróneo del piloto (cree que el A/T siempre mantiene la velocidad), la sobreconfianza de ambos pilotos, y la ausencia de mecanismo para detectar/corregir esa expectativa incorrecta. La evidencia cita tanto al piloto-1 (modelo mental erróneo), al piloto-2 (automation bias) y al instructor (sin mecanismo de captura). El título habla de 'expectativa implícita no corregida en contexto operacional' y el locus menciona 'ausencia de mecanismo para detectar y corregir desviaciones en ese modelo'. Esto apunta más a AS-09-sin-captura-de-malentendido (que es candidato marcado [*]) que a AS-01, ya que el foco está en que la expectativa errónea no es detectada ni corregida por ningún mecanismo del sistema. Sin embargo, el hallazgo también tiene fuerte componente de AS-01 (modelo mental erróneo). Considerando que AS-09 está marcado [*] y el locus menciona explícitamente la ausencia de mecanismo corrector, y que AS-01 no está marcado [*], pero el contenido central del hallazgo es la expectativa implícita errónea del piloto sobre el A/T conectado... El título y locus apuntan a la expectativa no corregida como problema sistémico, lo que encaja mejor con AS-09. Pero la evidencia principal es el modelo mental erróneo del piloto-1 y el automation bias del piloto-2. Revisando: AS-01 describe exactamente 'el piloto opera con un modelo mental erróneo del autothrottle: cree que, mientras esté conectado, mantendrá siempre la velocidad seleccionada'. La cita del piloto-1 es idéntica. El hallazgo p3-017 se titula 'expectativa implícita de comportamiento del autothrottle no corregida', que es el modelo mental erróneo más la falta de corrección. AS-09 cubre la parte de 'no corregida'. Dado que el hallazgo mezcla ambos pero el locus pone énfasis en 'ausencia de mecanismo para detectar y corregir desviaciones en ese modelo durante el vuelo', y AS-09 está marcado [*] mientras AS-01 no, adjudico a AS-09-sin-captura-de-malentendido. Pero espera: p3-013 ya fue adjudicado a AS-09. Cada candidato puede recibir múltiples hallazgos, así que no hay problema. Sin embargo, revisando más cuidadosamente: p3-017 tiene como evidencia principal la expectativa errónea del piloto (modelo mental), y el mecanismo de no-corrección es secundario. El candidato AS-01 describe exactamente ese modelo mental erróneo. Dado que el hallazgo se llama 'expectativa implícita de comportamiento del autothrottle no corregida en contexto operacional' y el locus menciona 'modelo mental del piloto sobre la función del autothrottle conectado', el problema central es el modelo mental erróneo (AS-01), con la falta de corrección como agravante. Adjudico a AS-01-modelo-mental-erroneo-del-automatismo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "AS-07-logica-de-modos-opaca-y-dispersa",
+            "judge_rationale": "El hallazgo describe que la lógica de cambio de modo del A/T es opaca: el cambio ocurre como consecuencia indirecta de acciones sobre otros sistemas (no solicitado explícitamente), y la lógica completa está distribuida en varios apartados de los manuales. Esto encaja directamente con AS-07-logica-de-modos-opaca-y-dispersa, que describe exactamente que la lógica de qué modo regula la velocidad y cuál no está repartida en varios apartados de los manuales sin explicación accesible en el momento de uso. El título del hallazgo ('lógica de cambio de modo opaca y no coincidente con expectativa de invocación') y la evidencia citada son una correspondencia directa con AS-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "AS-08-sin-abstencion-ni-degradacion-segura",
+            "judge_rationale": "El hallazgo habla de la ausencia de redundancia de aviso ante degradación crítica de velocidad, citando que el auto-rescate no opera en todos los modos y que el piloto supervisor no vio ningún aviso. Esto describe principalmente que el A/T permanece conectado pero no protege la velocidad ni avisa en ese modo, lo que corresponde exactamente a AS-08-sin-abstencion-ni-degradacion-segura. El candidato AS-03 también es relevante (falta de saliencia del cambio de modo), pero el núcleo del hallazgo es la falta de aviso/protección cuando la velocidad cae peligrosamente, no el cambio de modo en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "AS-06-formacion-insuficiente-de-modos",
+            "judge_rationale": "El hallazgo trata explícitamente sobre el entrenamiento incompleto sobre lógica de modos y la ausencia de mecanismo de validación de comprensión. La evidencia cita al instructor sobre tiempo limitado dedicado a la lógica de modos y al piloto que no se sentía seguro. Esto encaja perfectamente con AS-06-formacion-insuficiente-de-modos (formación limitada, aprendizaje diferido a la experiencia en línea). El segundo elemento —ausencia de mecanismo de captura de malentendido— también está presente, pero el locus principal del hallazgo es el programa de entrenamiento, no el mecanismo de captura del sistema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "AS-01-modelo-mental-erroneo-del-automatismo",
+            "judge_rationale": "El hallazgo describe directamente el modelo mental erróneo del piloto: creer que el A/T siempre mantiene la velocidad mientras esté conectado. La cita del piloto es textualmente la definición de AS-01-modelo-mental-erroneo-del-automatismo. Aunque también hay elementos de formación insuficiente (AS-06) y expectativa de protección inexistente (AS-05), el núcleo del hallazgo es el modelo mental erróneo sobre la regulación permanente de velocidad.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe la transición silenciosa entre modos del autothrottle: el cambio ocurre sin aviso sonoro ni realce visual prominente, y el piloto-2 confirma que pasa desapercibido si no se busca activamente en la franja. Esto corresponde exactamente a AS-03-cambio-de-modo-sin-salience, que aunque no está marcado con [*] en la lista de candidatos para este hallazgo, describe el mismo problema de forma precisa. Los candidatos marcados [*] (AS-01, AS-02, AS-04, AS-05, AS-06) son consecuencias o factores relacionados, pero el problema central descrito es la falta de saliencia del cambio de modo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "AS-05-expectativa-de-proteccion-inexistente",
+            "judge_rationale": "El hallazgo trata sobre la expectativa del piloto de una protección automática de velocidad mínima trasladada de otros aviones, y que esa protección no opera en el modo activo. Esto es exactamente AS-05-expectativa-de-proteccion-inexistente: modelo mental importado de otro sistema que sobreestima las capacidades del actual. La evidencia cita directamente al piloto-1 sobre su expectativa de protección similar a otros aviones.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "AS-07-logica-de-modos-opaca-y-dispersa",
+            "judge_rationale": "El hallazgo describe la distribución fragmentada de la lógica de modos en los manuales (varios apartados) y la falta de ruta de aprendizaje clara. Esto corresponde directamente a AS-07-logica-de-modos-opaca-y-dispersa, que aunque no está marcado [*] para este hallazgo, describe exactamente el mismo problema: la lógica de qué modo regula la velocidad está repartida en varios apartados de los manuales sin ser accesible en el momento de uso. La evidencia del dossier sobre la distribución en varios apartados es la misma que sustenta AS-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo se centra en la ausencia de un mecanismo para detectar si el modelo mental del piloto es correcto antes de operar. La evidencia cita directamente al instructor ('no disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza') y al piloto-1 ('sabía que necesitaba estudiarlo más'). Esto describe exactamente el problema de AS-09-sin-captura-de-malentendido: no existe mecanismo que detecte ni registre el malentendido. Aunque AS-06 también es relevante (formación insuficiente), el foco del hallazgo es la ausencia del mecanismo de detección/registro, no la insuficiencia de la formación en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe que el sistema asume implícitamente que el piloto supervisará activamente la FMA bajo alta carga cognitiva, cuando en realidad los pilotos no lo hacen. La evidencia muestra que el piloto-1 no leyó la franja bajo estrés y el piloto-2 confiaba en la automatización. Esto encaja mejor con AS-03-cambio-de-modo-sin-salience: el cambio de modo solo se refleja como texto en la FMA sin aviso sonoro ni realce visual prominente, lo que hace que pase desapercibido bajo carga de trabajo. El hallazgo apunta al diseño de la interacción (locus) y a la falta de saliencia del cambio, no al modelo mental erróneo per se.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "AS-04-sobreconfianza-automation-bias",
+            "judge_rationale": "El hallazgo describe que el estado 'conectado' del A/T induce sobreconfianza porque no queda claro que en ese estado no regula la velocidad. La evidencia del piloto-2 ('damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua') es la descripción exacta de AS-04-sobreconfianza-automation-bias: ambos pilotos dan por cubierta la velocidad con el A/T puesto y dejan de vigilarla, automation bias que retira al humano del lazo. Aunque AS-01 también es relevante, el foco del hallazgo es la sobreconfianza inducida por el estado 'conectado', no el modelo mental erróneo sobre qué hace el modo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "AS-06-formacion-insuficiente-de-modos",
+            "judge_rationale": "El hallazgo se centra en que el piloto tenía incertidumbre previa sobre el funcionamiento del sistema pero no había canal para reportarla ni corregirla. La evidencia es el piloto-1 diciendo que sabía que necesitaba estudiarlo más. Esto encaja con AS-06-formacion-insuficiente-de-modos (formación limitada, el piloto reconoce no sentirse seguro) pero también con AS-09. Sin embargo, el locus del hallazgo es 'canales de reporte de deficiencias de comprensión durante onboarding', lo que apunta más a AS-09-sin-captura-de-malentendido (no existe mecanismo que detecte ni registre el malentendido). Pero el hallazgo p3-025 ya fue adjudicado a AS-09. Revisando: p3-028 enfatiza la incertidumbre no canalizada del piloto, que es más sobre la formación insuficiente y la falta de canal de feedback. AS-06 describe exactamente que la formación es insuficiente y el piloto reconoce no sentirse seguro. AS-09 ya fue usado para p3-025 (mecanismo de detección institucional). Aquí el foco es la incertidumbre del piloto no resuelta por la formación, que corresponde a AS-06-formacion-insuficiente-de-modos.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe explícitamente la transición silenciosa entre modos sin notificación destacada: el A/T pasa de regular la velocidad a retención de empuje sin aviso sonoro ni realce visual, solo texto en la FMA. Esto es exactamente AS-03-cambio-de-modo-sin-salience. Aunque AS-08 (degradación silenciosa) también es candidato marcado con [*], el hallazgo se centra en el momento del cambio de modo y la falta de saliencia de ese cambio, no en el comportamiento posterior del A/T permaneciendo conectado sin proteger.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "AS-01-modelo-mental-erroneo-del-automatismo",
+            "judge_rationale": "El hallazgo describe que el modelo mental del piloto no está alineado con el comportamiento real del sistema: el piloto cree que el A/T siempre mantendrá la velocidad mientras esté conectado, y también espera una protección automática de velocidad mínima. La evidencia del piloto-1 es directa. Esto corresponde a AS-01-modelo-mental-erroneo-del-automatismo: el piloto opera con un modelo mental erróneo creyendo que el A/T siempre mantendrá la velocidad seleccionada cuando en modo retención no la regula. También hay elementos de AS-05 (expectativa de protección inexistente), pero el núcleo del hallazgo es el modelo mental erróneo sobre el comportamiento del A/T conectado, que es AS-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo describe específicamente la ausencia de un mecanismo que detecte o registre si un piloto ha entendido mal la lógica de modos del A/T, citando directamente al instructor. Esto encaja perfectamente con AS-09-sin-captura-de-malentendido. Aunque también toca la formación insuficiente (AS-06), el núcleo del hallazgo es la falta de mecanismo de evaluación/captura del malentendido, no la insuficiencia de tiempo de formación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "AS-04-sobreconfianza-automation-bias",
+            "judge_rationale": "El hallazgo describe cómo ambos pilotos confían en que el A/T cubre la velocidad y dejan de vigilarla, delegando la supervisión en el sistema bajo estrés cognitivo alto. Esto es exactamente automation bias (AS-04-sobreconfianza-automation-bias): dan por cubierta la velocidad con el A/T puesto y retiran al humano del lazo. Aunque el estrés y la falta de saliencia del cambio de modo contribuyen, el problema central descrito es la sobreconfianza/delegación en la automatización.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "AS-07-logica-de-modos-opaca-y-dispersa",
+            "judge_rationale": "El hallazgo trata específicamente la fragmentación de la documentación de la lógica de modos en múltiples apartados sin una visión consolidada, citando la ficha de modos. Esto corresponde directamente a AS-07-logica-de-modos-opaca-y-dispersa, que describe exactamente ese problema: la lógica repartida en varios apartados sin explicación accesible en el momento de uso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "AS-03-cambio-de-modo-sin-salience",
+            "judge_rationale": "El hallazgo describe la ausencia de aviso sonoro y realce visual prominente cuando el A/T cambia de estado, con el cambio reflejado solo como texto en la FMA. Esto es exactamente AS-03-cambio-de-modo-sin-salience: el cambio de estado crítico carece de saliencia y pasa desapercibido bajo carga de trabajo. La evidencia citada (ficha de modos y piloto-2) coincide perfectamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "AS-09-sin-captura-de-malentendido",
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo de retroalimentación que permita detectar disparidades entre el modelo mental del piloto y el comportamiento real del sistema, incluyendo que el piloto sabía que no entendía bien el sistema pero no tenía forma de verificarlo. Esto encaja con AS-09-sin-captura-de-malentendido: no existe mecanismo que detecte ni registre el malentendido. Aunque también toca AS-06 (formación insuficiente), el foco es la falta de mecanismo de detección/retroalimentación del malentendido, igual que AS-09.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 35,
+          "n_golden": 9,
+          "recall": 1.0,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 0,
+          "fbeta": 1.0,
+          "meets_genericity_gate": true,
+          "primary_score": 1.0
+        }
+      }
+    ]
+  }
+}

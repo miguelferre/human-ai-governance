@@ -1,0 +1,2023 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 10,
+    "system_name": "Esquema automatizado de recuperación de deudas de prestaciones sociales (Robodebt, Australia)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.6,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.8571428571428571,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.6382978723404255,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 0.9,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.9302325581395349,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9058882737795673,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 10,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia total de claridad sobre el método de cálculo de deuda y sus limitaciones",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Emisión del aviso de deuda y comunicación inicial al usuario",
+            "evidence": "El aviso de deuda se emitía automáticamente sin revisión previa. Madeleine Masterton declara: «No sabía de dónde había salido esa deuda de 4.000 dólares» y «Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas.» El dossier señala que el método era 'income averaging': división del ingreso anual entre quincenas sin verificar si el calendario real de percepción coincidía con el periodo de cobro.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario recibía un aviso de deuda sin ninguna explicación del mecanismo automatizado que la generaba ni de sus limitaciones fundamentales (la asunción de percepción uniforme de ingresos a lo largo del año). Esto violó el modelo mental que el usuario debería haber formado: según Colleen Taylor, «muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta». El sistema no aclaró que se basaba en un método aproximado y potencialmente incorrecto.",
+            "recommendation": "Todo aviso de deuda debe incluir: (a) explicación clara y accesible del método de cálculo utilizado (income averaging); (b) descripción explícita de sus limitaciones (no verifica calendario real de percepción); (c) ejemplo concreto de cómo se calculó la deuda específica del destinatario; (d) aclaración de que la deuda es un cálculo preliminar sujeto a revisión, no una acusación de fraude.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "No se comunica la confianza/incertidumbre del cálculo; se presenta con autoridad aparente igual a una determinación real",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Presentación del aviso de deuda inicial",
+            "evidence": "El sistema emitía automáticamente un aviso de deuda sin revisión previa de un funcionario (doc-ficha-sistema). El método de income averaging es aproximado: «dividía el ingreso anual entre las quincenas del año para obtener un ingreso quincenal estimado, sin verificar si el calendario real de percepción de ingresos coincidía». No hay evidencia de que el aviso comunicara que este cálculo era estimado, preliminar o sujeto a error sistemático.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no podía calibrar su confianza en la deuda porque el sistema la presentaba como un hecho determinado (un aviso oficial del estado) cuando en realidad era un cálculo automático basado en un método que sabidamente introduce errores (confunde el timing de ingresos con su cantidad). Esto induce automation bias: el destinatario asume que si Centrelink lo dice, debe ser correcto, sin poder evaluar la incertidumbre real.",
+            "recommendation": "El aviso debe comunicar explícitamente: (a) el nivel de confianza del cálculo ('esta es una estimación preliminar basada en un promediado de ingresos anuales'); (b) las fuentes de error conocidas del método ('puede haber discrepancias si sus ingresos no fueron uniformes a lo largo del año'); (c) instrucciones claras para verificar y refutar la deuda con documentación específica.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Obstaculización deliberada de la invocación/contacto: omisión de número de teléfono",
+            "guideline_ids": [
+              "HAX-G7",
+              "PAIR-FC-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Contacto inicial y canales de comunicación para cuestionar la deuda",
+            "evidence": "«Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse.» El dossier técnico precisa: «La decisión de no incluir un número de teléfono de contacto en los avisos enviados a través de myGov fue deliberada, con la intención de que los destinatarios respondieran a través del canal online.» La Royal Commission constató una «decisión consciente» de omitir ese número «con la intención de forzar a los destinatarios a responder por internet».",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La omisión deliberada de un número de teléfono actúa como barrera de acceso para que el usuario pueda cuestionar o aclarar la deuda. Deanna Amato «fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso», lo que sugiere que los canales de contacto eran inaccesibles o insuficientes. Esto dificulta enormemente la invocación eficiente del servicio de apelación.",
+            "recommendation": "Incluir múltiples canales de contacto inmediato en todo aviso: (a) número de teléfono con asistencia en directo (no solo menú automático); (b) opción de contacto por SMS o WhatsApp para personas con acceso limitado a internet; (c) correo electrónico con respuesta garantizada en plazo máximo; (d) dirección postal con teléfono asociado para quienes no tienen acceso digital. Validar que la dirección de envío es correcta antes de embargar.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Ausencia de explicación de por qué el sistema generó la deuda; opacidad total del razonamiento",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Contenido del aviso de deuda y acceso a la lógica de cálculo",
+            "evidence": "Madeleine Masterton: «No sabía de dónde había salido esa deuda de 4.000 dólares» y «Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente.» No hay constancia de que el aviso incluyera detalles de los ingresos específicos comparados, las fechas utilizadas o el cálculo paso a paso.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no puede entender ni refutar una deuda si no sabe cómo se calculó. La Royal Commission describió el sistema como «un mecanismo tosco y cruel [...] que hizo que muchas personas se sintieran como criminales» precisamente porque no podían comprender por qué se les acusaba de deber dinero. Sin explicación accesible, el usuario no puede tomar decisiones informadas sobre si impugnar o aceptar.",
+            "recommendation": "Todo aviso de deuda debe incluir: (a) desglose del cálculo específico (ingresos ATO utilizados, periodo de prestación, quincenas consideradas, umbral de ingresos aplicado); (b) comparación lado-a-lado de ingresos declarados a ATO vs. Centrelink por periodo; (c) acceso a un documento descargable con el cálculo completo; (d) número de referencia para consultar el expediente en línea con detalles granulares.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Falta de revisión humana previa antes de lanzar la acción coercitiva (embargo)",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1",
+              "PAIR-UN-2"
+            ],
+            "locus": "Proceso de validación antes de embargo de sueldos o devoluciones de impuestos",
+            "evidence": "«Este proceso no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso.» El aviso se generaba automáticamente. El dossier técnico indica que el esquema «fue finalmente declarado ilegal». Colleen Taylor (funcionaria de Centrelink): «Como unidad de cumplimiento, no deberíamos ser nosotros los que robáramos a nuestros clientes.»",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no acotó el servicio ante la alta incertidumbre. El método de income averaging sabidamente introduce errores (no verifica si el calendario real coincide). Sin revisión humana previa, se embargaban sueldos a personas basándose en cálculos aproximados no verificados. Esto viola el principio de no causar daño significativo sin supervisión humana en decisiones financieras coercitivas. El coste de un falso positivo (embargo incorrecto) es extremadamente alto.",
+            "recommendation": "Implementar una revisión humana obligatoria antes de cualquier embargo: (a) un funcionario debe validar manualmente que el cálculo es correcto comparando documentos primarios; (b) si hay discrepancia en el método (income averaging), se debe marcar como 'alto riesgo' y escalar; (c) no proceder al embargo sin confirmación explícita de un supervisor; (d) ofrecer al usuario la oportunidad de proporcionar documentación antes de embarguar, no después.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "Fricción extremadamente alta para corregir: carga de prueba inversa sobre el usuario",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Proceso de apelación y refutación de la deuda",
+            "evidence": "«La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás.» El dossier técnico añade: «En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos.»",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no solo debe refutar la deuda (fricción alta), sino hacerlo bajo amenaza de embargo sin poder acceso previo a su propio expediente. Esto es especialmente problemático para personas vulnerables, trabajadores con registros incompletos, o aquellos cuyos empleadores no guardan nóminas de hace 5-6 años. Masterton declara «creía haber declarado mis ingresos correctamente, en las fechas en que los recibí», sugiriendo que ni siquiera sabía qué documentación se esperaba de ella.",
+            "recommendation": "Invertir completamente la carga de prueba: (a) el sistema debe primero demostrar internamente (a través de revisión humana) que la deuda es correcta antes de cualquier acción coercitiva; (b) proporcionar al usuario un extracto detallado de todos los datos utilizados en el cálculo para que pueda revisarlos; (c) si el usuario proporciona incluso documentación parcial contradictoria, suspender el embargo hasta revisión completa; (d) no permitir embargo por falta de respuesta; solo después de apelación formal rechazada.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Modelo mental erróneo inducido: confianza excesiva en la autoridad del sistema",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-ET-3"
+            ],
+            "locus": "Toda la experiencia inicial del aviso sin contexto aclaratorio",
+            "evidence": "Colleen Taylor (funcionaria de Centrelink): «También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.» La comisionada Catherine Holmes describió el esquema como «un mecanismo tosco y cruel» que «hizo que muchas personas se sintieran como criminales».",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario modelo (un ciudadano que confía en que una agencia estatal ha hecho su trabajo correctamente) forma un modelo mental que el sistema aprovecha: asumir que si Centrelink dice que hay una deuda, entonces la hay. El sistema no solo no contradice esta suposición, sino que la refuerza por omisión (no explica que es un cálculo automático aproximado). Esto induce automation bias y falta de supervisión crítica.",
+            "recommendation": "Diseñar explícitamente para evitar este sesgo: (a) en el primer párrafo del aviso, aclarar que es resultado de un cálculo automatizado, no de una investigación humana; (b) enfatizar que el destinatario tiene derecho a refutar sin penalización; (c) incluir ejemplos de casos donde el cálculo fue incorrecto; (d) proporcionar una URL o teléfono con la leyenda 'Cuestione esta deuda aquí si no la reconoce'.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Acceso desigual por canal digital; exclusión de usuarios sin internet o sin acceso a myGov",
+            "guideline_ids": [
+              "HAX-G7",
+              "PAIR-UN-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Canal único de notificación: envío a cuenta myGov online",
+            "evidence": "«El aviso de deuda se enviaba a la cuenta online ('myGov') del destinatario.» Deanna Amato «fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver». El dossier técnico menciona que la decisión fue «con la intención de que los destinatarios respondieran a través del canal online», forzando un canal único.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Personas mayores, con discapacidades visuales, con conectividad limitada, o en zonas rurales pueden no tener acceso regular a myGov o internet confiable. Enviar un aviso de embargo exclusivamente por este canal vulnera el acceso igualitario. Deanna Amato nunca vio la carta porque fue enviada a una dirección incorrecta o inaccesible, pero aun así fue penalizada. El sistema no verifica que el usuario ha recibido o visto el aviso antes de proceder al embargo.",
+            "recommendation": "Multicanal obligatorio: (a) envío por correo postal certificado a dirección verificada como principal; (b) solo después de confirmación de recepción postal, envío a myGov como refuerzo; (c) para usuarios con perfil de riesgo (personas mayores, ingresos bajos), intentar contacto telefónico previo; (d) no proceder a embargo sin comprobante de que el usuario ha recibido y visto el aviso (firma de recepción o confirmación digital).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Ausencia de degradación elegante ante alta incertidumbre; no hay camino de revisión antes de acción coercitiva",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Lógica de decisión del sistema cuando hay discrepancia entre métodos de cálculo o datos conflictivos",
+            "evidence": "El método de income averaging sabidamente no verifica si «el calendario real de percepción de ingresos coincidía con el periodo de cobro de la prestación». Sin embargo, el sistema procedía automáticamente sin verificación. El dossier técnico subraya que «este proceso no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso».",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando hay discrepancia metodológica (ingreso anual / calendario real desconocido), la incertidumbre es inherentemente alta. El sistema debería haber sido diseñado para degradar elegantemente: no automatizar, solicitar documentación aclaratoria del usuario, o escalar a revisión humana. En cambio, procedía como si la incertidumbre no existiera.",
+            "recommendation": "Implementar lógica de degradación: (a) si el income averaging genera una deuda > umbral de confianza (ej. > 1000 dólares), marcar para revisión humana automática; (b) antes de emitir aviso, comparar ingresos declarados a Centrelink con los de ATO periodo por periodo para detectar calendarios disímiles; (c) si hay indicios de calendar mismatch, pedir al usuario documentación del calendario real de ingresos y no proceder hasta recibirla; (d) incluir en el aviso: 'Esta deuda se basa en un cálculo aproximado. Estamos requiriendo documentación de su calendario de ingresos antes de proceder.'.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Disparidad de impacto no monitoreada: vulnerabilidad especial de ciertos subgrupos",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Aplicación universal del método sin estratificación por capacidad de respuesta",
+            "evidence": "El dossier técnico menciona que aproximadamente 470.000 avisos se emitieron entre 2015 y 2019. No hay evidencia de que el sistema monitoreara si ciertos subgrupos (personas mayores, no hablantes de inglés nativos, con discapacidades, en zonas rurales, de bajos ingresos) sufrían tasas desproporcionadas de embargo o dificultades para refutar. El requerimiento de nóminas de 5-6 años atrás impacta desproporcionadamente a trabajadores precarios, autónomos y a personas que cambian de empleo frecuentemente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema aplicaba un único método y único canal de comunicación a 470.000 personas sin ajustar por vulnerabilidad. Personas con menor alfabetización digital, ingresos bajos (menos acceso a contabilidad profesional), o en contextos laborales informales tenían muchas más dificultades para reunir documentación de 5-6 años. Esto crea un sesgo de impacto no monitoreado.",
+            "recommendation": "Implementar monitoreo obligatorio de disparidad: (a) estratificar datos de embargo por edad, ingresos, ubicación, tipo de prestación; (b) detectar si ciertos grupos tienen tasas de embargo sustancialmente mayores; (c) para subgrupos vulnerables (>65 años, ingresos <25k/año, zonas rurales), requerir revisión humana obligatoria antes de embargo; (d) ofrecer asistencia específica (ayuda para reunir documentación, contacto telefónico) a usuarios identificados como de riesgo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Falta de canal de feedback granular durante el proceso; no se captura el motivo de corrección/apelación",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Proceso de apelación y corrección",
+            "evidence": "El dossier señala que «en caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos». No hay evidencia de que el sistema capturara por qué la persona apelaba, qué documentación aportaba, o cómo se usaba esa información para mejorar la precisión del método income averaging o detectar errores sistemáticos.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin captura estructurada de feedback (por qué el usuario rechaza la deuda, qué documentación aporta), el sistema no puede aprender de sus errores. Si 470.000 personas fueron contactadas y muchas apelaron, esos datos son un signal valioso de que el método falla de formas predecibles (ej. si muchas apelaciones se basan en 'recibí el ingreso en otro mes', esto indica que income averaging es fundamentalmente erróneo).",
+            "recommendation": "Crear un formulario de apelación estructurado que capture: (a) 'Mi deuda es incorrecta porque [checkbox: recibí ingresos en otro periodo / no tuve ingresos en esa fecha / mis ingresos fueron muy variables]'; (b) adjuntar automáticamente la documentación aportada al expediente del usuario; (c) análisis mensual de patrones de apelación (motivos más frecuentes) para detectar errores sistemáticos del método; (d) si >20% de apelaciones citan el mismo motivo, escalar a revisión del algoritmo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-012",
+            "title": "Ausencia de control global y configuración: usuario no puede ajustar cómo se maneja su caso de alto riesgo",
+            "guideline_ids": [
+              "HAX-G17",
+              "PAIR-FC-2"
+            ],
+            "locus": "Interfaz del usuario y opciones de configuración",
+            "evidence": "No hay evidencia de que los usuarios pudieran configurar cómo querían ser contactados, con qué frecuencia, o bajo qué condiciones se procedería al embargo. El sistema simplemente enviaba el aviso a myGov y procedía según reglas fijas.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Un usuario que sabe que sus ingresos son muy variables (autónomo, trabajador estacional) debería poder indicar: 'No aplicar income averaging a mi caso sin verificación previa' o 'Contactarme por teléfono antes de embargo'. Sin estos controles, el usuario es completamente pasivo.",
+            "recommendation": "Proporcionar controles configurables: (a) en la primera interacción con Centrelink, permitir marcar 'ingresos variables/estacionales' como bandera de riesgo; (b) para estos casos, requerir verificación humana adicional antes de income averaging; (c) permitir elegir canales de contacto prioritarios y frecuencia; (d) permitir configurar: 'Solo embargo con mi consentimiento expreso' o 'Contactarme siempre antes de embargo'.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-013",
+            "title": "Falta de notificación sobre cambios en la operativa o en los criterios de deuda",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Comunicación de cambios en el sistema entre 2015 y 2019",
+            "evidence": "El dossier menciona que la operativa cambió durante el periodo (ej. 'durante parte del periodo' no había número de teléfono). No hay evidencia de que se notificara a usuarios existentes sobre estos cambios o sobre cómo les afectaba.",
+            "anti_pattern": null,
+            "severity": "low",
+            "rationale": "Si una persona recibía un aviso en 2015 (con cierta estructura) y luego se le enviaban comunicaciones en 2017 (con cambios operativos), debería haberse informado explícitamente de esos cambios y de cómo alteraban sus derechos o procesos.",
+            "recommendation": "Implementar notificación proactiva de cambios: (a) si se añade un número de teléfono donde antes no había, notificar a todos los usuarios con deudas pendientes; (b) si cambia el proceso de apelación, enviar carta explicativa; (c) incluir en cada cambio una acción clara ('Ha cambiado cómo puede contactarnos: ahora llame al XXXX').",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-014",
+            "title": "Comunicación opaca de consecuencias: usuario no sabe que sus acciones (o falta de ellas) llevarán a embargo",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-EF-2"
+            ],
+            "locus": "Aviso de deuda y comunicaciones de escalada",
+            "evidence": "Deanna Amato «fue penalizada por no responder a cartas» que nunca recibió. No hay constancia de que antes del embargo se enviara una comunicación clara diciendo 'Si no responde en X días, procederemos al embargo de su devolución de impuestos'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no solo no entiende la deuda, sino que no entiende que su inacción tiene consecuencias automáticas y graves (embargo). Esto es especialmente grave para Deanna Amato, que nunca recibió la comunicación. El sistema debería ser explícito: 'Si no responde en [plazo], procederemos a embargar' con múltiples recordatorios.",
+            "recommendation": "Comunicación de consecuencias clara y temprana: (a) en el primer aviso: 'Tiene [X] días para responder. Si no responde, procederemos al embargo de sueldos/devoluciones de impuestos.'; (b) enviar recordatorio a los 50% y 80% del plazo, reiterando la consecuencia; (c) antes de proceder al embargo, enviar aviso de 'última llamada' con 7 días de plazo, en múltiples canales; (d) registrar prueba de que el usuario ha visto el aviso antes de proceder al embargo.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo mezcla dos elementos: la opacidad del método de cálculo (income averaging no explicado) y la falta de información al usuario sobre el origen de la deuda. El candidato RD-08 describe exactamente que las cartas presentaban la deuda como dato objetivo y definitivo sin indicar que era una estimación basada en promedios ni que podía ser errónea, lo que encaja con la queja de Masterton sobre opacidad. RD-01 también es relevante (falta de explicación del cálculo), pero RD-08 captura mejor el núcleo del hallazgo: la ausencia de comunicación de incertidumbre y la autoridad aparente del número. Sin embargo, el hallazgo también menciona explícitamente el método income averaging y su limitación, lo que apunta a RD-06. Revisando: el título del hallazgo es 'Ausencia total de claridad sobre el método de cálculo y sus limitaciones', que es más cercano a RD-08 (no se comunica que es estimación/puede ser erróneo) y RD-01 (no se explica cómo se calculó). RD-08 es el mejor ajuste porque enfatiza la presentación como dato definitivo sin advertir de la posibilidad de error, que es exactamente lo que describe el hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo trata específicamente de que el aviso presentaba la deuda con autoridad aparente igual a una determinación real, sin comunicar que el cálculo era una estimación basada en promedios sujeta a error. Esto es exactamente lo que describe RD-08: las cartas notificaban el importe como dato objetivo y definitivo, sin indicar que era una estimación basada en promedios ni que podía ser erróneo. Es el candidato marcado con [*] que mejor encaja.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe explícitamente la omisión deliberada del número de teléfono en los avisos, con la intención de forzar a los destinatarios a responder por internet. Esto corresponde exactamente a RD-02-omision-deliberada-telefono, que describe precisamente esa decisión de diseño de omitir el número de la línea de ayuda de cumplimiento para forzar la respuesta online, documentada por la Royal Commission.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe la ausencia de explicación sobre el origen y cálculo de la deuda, con el testimonio de Masterton ('no sabía de dónde había salido esa deuda') y la opacidad del sistema. Esto corresponde directamente a RD-01-aviso-sin-explicacion-calculo, que documenta que las cartas no explicaban cómo se había calculado el importe ni cuándo habría ocurrido el supuesto cobro indebido, y que el ciudadano recibía una cifra sin trazabilidad ni justificación comprensible. Es el candidato [*] más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo se centra en la ausencia de revisión humana previa antes de emitir el aviso y proceder al embargo. La evidencia citada es exactamente la que describe RD-05-ausencia-revision-humana-previa: el sistema generaba y enviaba avisos de forma completamente automatizada sin que ningún agente humano revisara el cálculo antes del envío. El testimonio de Colleen Taylor refuerza este problema. Es el candidato [*] que encaja perfectamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe la inversión de la carga de la prueba: el destinatario debía demostrar que la deuda era incorrecta aportando documentación de hasta cinco o seis años atrás, y si no podía, se procedía al embargo. Hay dos candidatos muy relevantes: RD-04-inversion-carga-de-la-prueba (que describe exactamente la inversión del deber de prueba institucional) y RD-07-documentacion-imposible-de-aportar (que describe la exigencia de documentación de hasta cinco años atrás como imposible de cumplir). El título del hallazgo es 'Fricción extremadamente alta para corregir: carga de prueba inversa sobre el usuario', lo que apunta más directamente a RD-04. Sin embargo, la evidencia citada enfatiza tanto la carga de prueba inversa como la dificultad de aportar documentación antigua. RD-04 es el candidato más preciso porque el hallazgo nombra explícitamente la 'carga de prueba inversa' como concepto central, mientras que RD-07 es más específico sobre la imposibilidad práctica de reunir la documentación. Dado que el título y la evidencia mencionan ambos aspectos, RD-04 es el mejor ajuste por ser el concepto estructural que engloba el problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo describe cómo los destinatarios asumían que la deuda era correcta porque Centrelink 'ya tenía toda la información', y cómo el esquema hacía que la gente 'se sintiera como criminal'. Esto encaja mejor con RD-08 (ausencia de incertidumbre comunicada: la deuda se presentaba como dato objetivo y definitivo, induciendo automation bias sobre el ciudadano) y con RD-10 (tono intimidatorio y trauma). Sin embargo, el núcleo del hallazgo es el 'modelo mental erróneo' inducido por la autoridad aparente del sistema, que es exactamente lo que describe RD-08: la carta no indicaba que el cálculo era una estimación, lo que llevaba al ciudadano a asumir que era correcto. RD-10 también comparte guideline y describe el efecto de sentirse criminal. Entre ambos, RD-08 captura mejor el mecanismo (confianza excesiva inducida por presentar la deuda como dato objetivo), mientras que RD-10 captura el efecto emocional. El hallazgo cita explícitamente ambas dimensiones, pero el locus ('modelo mental erróneo inducido') apunta más a RD-08. No obstante, RD-10 también está marcado con [*] y la cita de Holmes sobre 'sentirse criminales' es central. Dado que el hallazgo mezcla ambos pero el título y la evidencia principal (Taylor: 'asumirían que era correcta') apunta al sesgo de autoridad/automation bias, RD-08 es el mejor candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "RD-03-canal-unico-online-forzado",
+            "judge_rationale": "El hallazgo describe el acceso desigual por canal digital: los avisos se enviaban exclusivamente a myGov, lo que excluía a usuarios sin acceso a internet. La evidencia de Deanna Amato (penalizada por no responder a avisos en una cuenta a la que nunca tuvo acceso) y la decisión deliberada de forzar el canal online encajan directamente con RD-03 (canal único online forzado), que describe exactamente este problema: ciudadanos dirigidos exclusivamente al portal myGov, incluyendo personas sin acceso tecnológico. RD-02 (omisión deliberada del teléfono) es también relevante pero describe la ausencia del número de teléfono en las cartas, no la exclusión por canal digital. RD-03 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe la ausencia de degradación elegante: el sistema sabía que el income averaging no verificaba el calendario real de ingresos, pero procedía automáticamente sin revisión ni verificación previa. El locus es la lógica de decisión cuando hay incertidumbre/datos conflictivos. Esto encaja directamente con RD-05 (ausencia de revisión humana previa): el sistema emitía avisos automáticamente sin que ningún agente humano revisara el cálculo antes del envío, incluso cuando los datos podían ser incorrectos. También hay solapamiento con RD-06 (presunción de deuda por promedio) y RD-08, pero el núcleo del hallazgo es la ausencia de un paso de revisión/verificación antes de la acción coercitiva, que es exactamente RD-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la disparidad de impacto no monitoreada sobre subgrupos vulnerables (personas mayores, no hablantes nativos, con discapacidades, en zonas rurales, trabajadores precarios). Menciona que el requerimiento de nóminas de 5-6 años impacta desproporcionadamente a trabajadores precarios. Ninguno de los candidatos del golden describe específicamente la falta de monitoreo de impacto diferencial por subgrupos. RD-07 (documentación imposible de aportar) es el más cercano en cuanto al impacto sobre personas vulnerables, y RD-03 menciona personas sin acceso tecnológico, con discapacidades o en zonas rurales. Sin embargo, el hallazgo se centra en la ausencia de monitoreo de disparidad de impacto, que es un problema de gobernanza/evaluación distinto de los candidatos disponibles. El candidato más próximo es RD-03 (menciona explícitamente personas sin acceso tecnológico, con discapacidades, en zonas rurales) pero el hallazgo va más allá al hablar de monitoreo sistemático. RD-07 también es relevante. Dado que ningún candidato describe exactamente 'disparidad de impacto no monitoreada', pero RD-03 es el que más se acerca al mencionar subgrupos vulnerables específicos, y el dossier sí apoya que el canal online excluía a estos grupos, lo adjudico a RD-03. Sin embargo, revisando más cuidadosamente: el hallazgo habla de 'aplicación universal sin estratificación por capacidad de respuesta' y el impacto desproporcionado del requerimiento documental sobre trabajadores precarios, lo que apunta más a RD-07. Pero RD-07 no menciona monitoreo. En definitiva, ningún candidato captura exactamente el problema de 'disparidad de impacto no monitoreada' como concepto de gobernanza; el hallazgo es un problema real y específico apoyado en el dossier pero no coincide exactamente con ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la falta de canal de feedback granular durante el proceso de apelación: el sistema no capturaba por qué la persona apelaba ni usaba esa información para mejorar el método. Esto es un problema de aprendizaje institucional/mejora continua. El candidato más cercano es RD-09 (ignorancia de resoluciones del tribunal): el Departamento no trasladó el problema detectado judicialmente para corregir el esquema, lo que es análogo a no capturar feedback para mejorar. Sin embargo, RD-09 se refiere específicamente a ignorar resoluciones del AAT, no a la ausencia de captura de feedback del proceso de apelación individual. Ningún candidato describe exactamente la ausencia de mecanismo de feedback granular para mejorar el sistema. El hallazgo es un problema real apoyado en el dossier (el sistema no aprendía de las apelaciones), pero no coincide exactamente con ningún candidato disponible.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-012",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de control del usuario sobre cómo se maneja su caso: no podía configurar canal de contacto, frecuencia, ni condiciones de embargo. El sistema operaba con reglas fijas sin opciones de personalización. Esto es un problema de falta de agencia/control del usuario. Ningún candidato del golden describe específicamente la ausencia de opciones de configuración o control por parte del usuario. RD-03 (canal único online forzado) es el más cercano en cuanto a la falta de opciones de canal, pero describe el problema desde la perspectiva de la exclusión digital, no del control del usuario. RD-02 (omisión deliberada del teléfono) también es relevante pero describe la ausencia del número de teléfono en las cartas. El hallazgo como formulado (ausencia de control global y configuración por parte del usuario) no coincide exactamente con ningún candidato; es además un problema que el dossier apoya solo parcialmente (se menciona el canal único y las reglas fijas, pero no hay evidencia explícita de que los usuarios intentaran configurar preferencias y no pudieran). El hallazgo es real en cuanto al canal único, pero la formulación específica de 'control de configuración' no está bien sustentada en el dossier más allá de lo que ya captura RD-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-013",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la falta de notificación a usuarios sobre cambios en la operativa del sistema (ej. la eliminación del número de teléfono en ciertos periodos). Ninguno de los candidatos aborda específicamente la comunicación de cambios operativos a usuarios existentes. El candidato más cercano sería RD-02 (omisión deliberada del teléfono) o RD-08 (ausencia de incertidumbre comunicada), pero ninguno trata el problema de notificar cambios en la operativa. Sin embargo, revisando el dossier, la evidencia citada es débil: el dossier solo menciona 'durante parte del periodo' sin número de teléfono, pero no hay evidencia explícita de que se debiera notificar cambios ni de que esto causara un perjuicio específico documentado más allá de lo ya cubierto por RD-02. El hallazgo es una inferencia del evaluador, no un problema directamente documentado como distinto. No encaja con ningún candidato y tampoco está suficientemente sustentado como problema nuevo e independiente en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-014",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la falta de comunicación clara de las consecuencias del no-responder (embargo). La evidencia es el caso de Deanna Amato, quien fue penalizada por no responder a cartas que nunca recibió y le embargaron la devolución de impuestos. Esto se relaciona con la opacidad de las comunicaciones sobre consecuencias. Revisando los candidatos: RD-01 (aviso sin explicación del cálculo) es sobre la falta de explicación del cálculo, no de las consecuencias. RD-08 (ausencia de incertidumbre comunicada) trata sobre no informar que la deuda podía ser errónea. RD-10 (tono intimidatorio) trata el trauma emocional. Ningún candidato aborda específicamente la falta de comunicación clara de que la inacción llevaría al embargo. Sin embargo, el caso Amato está documentado en el dossier y el problema de no comunicar las consecuencias del embargo es real y específico. Es un hallazgo nuevo no cubierto por ningún candidato del golden, pero sí sustentado en el dossier.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 14,
+          "n_golden": 10,
+          "recall": 0.6,
+          "precision": 0.8571428571428571,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 3,
+          "fbeta": 0.6382978723404255,
+          "meets_genericity_gate": true,
+          "primary_score": 0.6382978723404255
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia de explicación accesible sobre el método de cálculo de deuda",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Aviso de deuda enviado a myGov; cálculo mediante 'income averaging' sin transparencia sobre la metodología",
+            "evidence": "El sistema calculaba automáticamente deudas mediante 'income averaging' (dividiendo ingresos anuales entre quincenas) sin que el aviso explicitara este método. Madeleine Masterton declara: «No sabía de dónde había salido esa deuda de 4.000 dólares; yo creía haber declarado mis ingresos correctamente, en las fechas en que los recibí.»",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no tenía acceso a una explicación sobre POR QUÉ el sistema había calculado esa deuda específica. El aviso no comunicaba la lógica subyacente (promediado de ingresos sin considerar calendario real), lo que imposibilitaba que el usuario comprendiera la base de la decisión y tomara decisiones informadas sobre si refutar la deuda.",
+            "recommendation": "El aviso de deuda debe incluir explícitamente: (1) el método de cálculo aplicado ('income averaging'), (2) los datos de entrada utilizados (ingresos anuales ATO, periodos de prestación Centrelink), (3) el desglose del cálculo quincenal estimado vs. declarado, y (4) una explicación clara de por qué ese método se aplicó y sus limitaciones (p. ej., que no verifica el calendario real de percepción de ingresos).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Incertidumbre no comunicada sobre la precisión del método de income averaging",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Cálculo automatizado y aviso de deuda; ausencia de cualificación sobre fiabilidad del método",
+            "evidence": "El sistema aplicaba 'income averaging' sin comunicar que este método asume que los ingresos se distribuyen uniformemente a lo largo del año, cuando en realidad «la carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás» (indicando que la coincidencia temporal de ingresos era un factor relevante y frecuente de disputa).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no comunicaba la incertidumbre inherente al promediado de ingresos: es un método que falla sistemáticamente cuando el calendario real de percepción no coincide con el promedio anual. El aviso no indicaba que la deuda era una *estimación sujeta a error* si el usuario había concentrado ingresos en ciertos periodos. Esto indujo a una confianza no calibrada: los usuarios asumieron que la deuda era correcta porque venía de una agencia oficial.",
+            "recommendation": "El aviso debe incluir un párrafo que explique la limitación del método: «Este cálculo asume que sus ingresos se distribuyeron uniformemente a lo largo del año. Si concentró ingresos en ciertos meses o quincenas, el cálculo puede ser incorrecto. Si dispone de nóminas o registros que muestren cuándo recibió realmente cada pago, puede refutar esta deuda con esa documentación.»",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Confianza no calibrada: presunción implícita de corrección sin mecanismo de revisión humana previa",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-3"
+            ],
+            "locus": "Aviso de deuda generado automáticamente sin revisión por funcionario antes de su emisión; comunicación de autoridad aparente sin salvedad",
+            "evidence": "«El aviso de deuda se emitía automáticamente sin que ningún funcionario revisara previamente si la deuda existía de manera efectiva.» Además, Colleen Taylor (funcionaria de Centrelink) observa: «También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.» El informe de Holmes describe el esquema como diseñado para «forzar a los destinatarios a responder por internet» sin proporcionar una vía alternativa de contacto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema emitía avisos con aparente autoridad definitiva (una decisión administrativa de una agencia oficial) sin que el usuario supiera que no había pasado por revisión humana. Esto indujo a automation bias: los usuarios asumieron que la deuda era correcta porque la 'Centrelink ya tenía toda la información'. La propia agencia sabía que ocurriría esta sobre-confianza y no implementó ningún mecanismo para contrarrestarla (como avisos que advirtieran: «Esta deuda ha sido calculada automáticamente; puede no ser correcta»).",
+            "recommendation": "Todo aviso de deuda debe incluir un aviso prominente: «Esta deuda ha sido calculada automáticamente por un sistema de detección de sobrepagos. No ha sido revisada por un funcionario. Usted tiene derecho a refutar esta deuda presentando documentación que muestre sus ingresos reales.» Además, deben incluirse ejemplos de documentación aceptable y plazos claros para responder.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Diseño deliberado para forzar un canal de respuesta único, obstaculizando el acceso a contestación",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-3"
+            ],
+            "locus": "Avisos enviados únicamente a myGov sin número de teléfono de contacto; decisión deliberada según la Royal Commission",
+            "evidence": "«Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse.» «La Royal Commission halló que hubo una 'decisión consciente' de omitir ese número de teléfono 'con la intención de forzar a los destinatarios a responder por internet'.» El caso de Deanna Amato: «Fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver. Como consecuencia, le embargaron la devolución de impuestos.»",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La omisión deliberada del número de teléfono no es una ineficiencia sino un diseño intencionado para reducir la contestación. Esto obstaculiza contextualmente el acceso a refutación: algunos usuarios no tienen acceso a myGov, no comprenden cómo usarlo, o no tienen connectividad online. El sistema presentaba información (la deuda) de forma que el usuario no podía acceder fácilmente a canales de respuesta, lo que viola HAX-G4 (información contextualmente relevante debe incluir cómo actuar sobre ella).",
+            "recommendation": "Incluir en cada aviso múltiples canales de contacto accesibles: (1) número de teléfono directo, (2) dirección postal para correspondencia, (3) opción de solicitar asistencia presencial en una oficina local, (4) dirección de correo electrónico. Los plazos para responder deben ser razonables y extendibles en caso de dificultades de acceso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Carga invertida de prueba sin asistencia: usuario debe refutar con documentación de 5-6 años sin orientación clara",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-1"
+            ],
+            "locus": "Proceso de refutación de deuda; exigencia de nóminas y registros históricos sin guía sobre cómo y dónde obtenerlos",
+            "evidence": "«La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás.» Madeleine Masterton (enfermera): «Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas.» No se describe que el aviso incluyera instrucciones sobre qué documentación es aceptable, cómo obtener registros históricos del empleador, o plazos razonables.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Aunque la carga de prueba en sí es un problema sistémico, desde la perspectiva de interacción, el aviso no proporciona información contextualmente relevante para que el usuario pueda actuar: no explica qué documentos son válidos, cómo obtener nóminas de años anteriores si el empleador ya no existe, o si existen alternativas (p. ej., declaraciones tributarias). Esto deja al usuario en la oscuridad sobre cómo refutar una deuda que no cree que deba.",
+            "recommendation": "El aviso debe incluir una sección 'Cómo refutar esta deuda' con: (1) lista explícita de documentación aceptable (nóminas, declaraciones tributarias, registros bancarios, correspondencia del empleador), (2) instrucciones sobre cómo obtener registros históricos del ATO o empleadores, (3) plazo mínimo de 30 días y opción de ampliación, (4) contacto de asistencia para personas con dificultades en la recopilación de documentación, (5) confirmación de que serán consideradas otras pruebas además de nóminas originales.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Ausencia de explicación sobre por qué se eligió income averaging como método de cálculo",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "Documentación pública y comunicación con usuarios sobre la metodología del esquema",
+            "evidence": "El dossier no indica que se haya comunicado públicamente o a los usuarios por qué el sistema utilizaba 'income averaging' en lugar de otros métodos (p. ej., cruce quincenal detallado de ingresos reales). La Royal Commission caracteriza el esquema como «un mecanismo tosco», sugiriendo una metodología simplificada sin transparencia sobre por qué se eligió.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Los usuarios no comprendían la razón técnica subyacente a los cálculos. Un usuario podría haberse opuesto a la metodología misma si hubiera comprendido que se basaba en un promediado que no reflejaba su calendario real de ingresos. La ausencia de esta explicación impidió un diálogo crítico sobre si el método era justo.",
+            "recommendation": "Publicar una explicación clara sobre por qué se utilizó income averaging: ventajas (rapidez, automatización), limitaciones conocidas, y escenarios en los que puede ser incorrecto. Incluir esta información tanto en documentación pública como en avisos individuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Sin indicadores de confianza o incertidumbre sobre la corrección individual de cada deuda",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "Aviso individual de deuda; cantidad presentada sin cuantificación de confianza o margen de error",
+            "evidence": "El aviso emitido (según la descripción) presentaba una cantidad de deuda como un hecho consumado sin ninguna cualificación sobre confianza. Madeleine Masterton reporta: «No sabía de dónde había salido esa deuda de 4.000 dólares» — la cantidad se presentó sin contexto sobre incertidumbre.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Aunque income averaging es un método determinista, su aplicabilidad a cada caso depende de variables desconocidas para el sistema (distribución real de ingresos). El aviso debería haber comunicado esto, p. ej., «Este cálculo tiene un margen de error si sus ingresos no fueron distribuidos uniformemente a lo largo del año.» Sin esta cualificación, la cantidad aparece como un hecho indiscutible.",
+            "recommendation": "Incluir en el aviso un párrafo: «Esta cantidad se ha calculado basándose en un promedio de ingresos anuales. Es posible que sea incorrecta si sus ingresos reales se distribuyeron de forma diferente durante el año. La documentación que muestre cuándo recibió realmente cada pago puede cambiar esta cantidad.»",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Falta de mecanismo de revisión o escalada crítica para usuarios que impugnan",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Proceso de contestación de deuda; no se describe un mecanismo de revisión humana tras recepción de refutación",
+            "evidence": "El dossier describe que el sistema «podía embargar sueldos y devoluciones de impuestos» en caso de no respuesta, pero no detalla qué ocurría cuando el usuario SÍ presentaba documentación refutando la deuda. No hay evidencia de que un funcionario revisara la refutación o explicara por qué era rechazada. En el caso de Deanna Amato, se embargaron fondos sin que ella pudiera ni responder a las cartas.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Si un usuario logra presentar una refutación, merece una explicación clara de por qué fue aceptada o rechazada. La ausencia de esta explicación (o de un proceso transparente de revisión) mantiene la opacidad del sistema. El usuario no sabe si su refutación fue considerada de manera justa o si hay un error en la evaluación.",
+            "recommendation": "Implementar un proceso formal de revisión humana de refutaciones en el que: (1) un funcionario revise la documentación presentada, (2) genere una explicación escrita sobre si la deuda se confirma, reduce o cancela, (3) indique claramente qué evidencia fue considerada y por qué, (4) ofrezca un recurso a un órgano independiente si el usuario desacuerda.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Comunicación de la decisión (deuda) sin contexto sobre supervivencia en situaciones de datos insuficientes",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-2"
+            ],
+            "locus": "Aviso de deuda cuando la documentación del usuario es limitada o no está disponible",
+            "evidence": "«La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás.» Para muchos usuarios, especialmente los de hace 5-6 años, obtener esa documentación es imposible. No se describe que el sistema reconociera esta limitación en el aviso o que proporcionara opciones cuando los datos no estuvieran disponibles.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema emitía una deuda (y embargaba fondos) incluso cuando era probable que el usuario no tuviera acceso a documentación antigua. Contextualmente, debería haber comunicado: «Si no puede acceder a nóminas de ese período, puede...» (p. ej., solicitar certificados del empleador, presentar declaraciones tributarias alternativas, o solicitar revisión presencial). La ausencia de estas alternativas significa que el usuario está indefenso si no conserva documentación histórica.",
+            "recommendation": "El aviso debe incluir opciones explícitas cuando la documentación histórica es difícil de obtener: (1) contacto directo con Centrelink para solicitar asistencia en la búsqueda de registros, (2) aceptación de declaraciones tributarias anuales como evidencia alternativa, (3) posibilidad de negociar un plan de pago mientras se investiga, (4) extensión de plazos para usuarios con dificultades documentales justificadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Ausencia de transparencia en el cálculo de deuda y falta de explicación del método",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Presentación del aviso de deuda remitido vía myGov al destinatario",
+            "evidence": "El usuario Madeleine Masterton declara: «Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas» y «No sabía de dónde había salido esa deuda de 4.000 dólares». El dossier indica que el sistema emitía automáticamente avisos sin incluir ninguna explicación del cálculo aplicado (income averaging).",
+            "anti_pattern": "Explicación del cálculo inexistente; usuario asume corrección del sistema sin poder verificar.",
+            "severity": "high",
+            "rationale": "El usuario nunca recibió explicación sobre cómo el sistema calculó la deuda, qué método se aplicó ni por qué su ingreso estimado (promediado) difería de su realidad de percepción. La funcionaria Colleen Taylor reconoce: «También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta». Esto viola la confianza porque el aviso generaba la impresión de certeza sin fundamentarla.",
+            "recommendation": "El aviso debe incluir: (1) el método de cálculo exacto utilizado (income averaging), (2) los ingresos anuales capturados de la ATO, (3) cómo se dividieron entre quincenas, (4) los ingresos declarados al Centrelink en comparación y (5) un enlace claro a la documentación del proceso. Esto permite al usuario entender y refutar la deuda desde el primer contacto.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Override imposible sin fricción extrema de recopilación de documentación (hasta 5-6 años atrás)",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Proceso de impugnación y corrección de la deuda: carga de prueba sobre el destinatario",
+            "evidence": "El dossier indica: «La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás». La comisionada Holmes calificó el esquema de «un mecanismo tosco y cruel».",
+            "anti_pattern": "Fricción prohibitiva para corregir; override teórico pero inaccesible; usuario forzado a aceptar por defecto.",
+            "severity": "high",
+            "rationale": "Aunque el usuario teoricamente podía refutar la deuda (override), la fricción era prohibitiva: requería reunir documentación de medio decenio, comparar quincenas específicas y probablemente obtener registros de empleadores que ya no existían. La mayoría de usuarios, especialmente los de edad avanzada o sin acceso tecnológico, abandonarían el esfuerzo y asumirían la deuda por defecto, que es exactamente lo que sucedió. Esto transforma el override teórico en inaccesible de facto.",
+            "recommendation": "Invertir la carga de prueba: el sistema debe demostrar la deuda a partir de evidencia contemporánea documentada, no obligar al usuario a refutar retrospectivamente. Si se sospecha un sobrepago, el sistema debe solicitar documentación prospectivamente (registros de pago de los últimos 3 meses máximo) en formato que el usuario pueda generar fácilmente (p. ej., talones de pago digitales o confirmaciones bancarias recientes).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Canal de contacto deliberadamente restrictivo (ausencia de teléfono, solo myGov online)",
+            "guideline_ids": [
+              "PAIR-FC-2",
+              "HAX-G9"
+            ],
+            "locus": "Aviso de deuda remitido a través de myGov sin número de teléfono de contacto",
+            "evidence": "El dossier afirma: «Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse». El proveedor técnico Centrelink lo reconoce: «La decisión de no incluir un número de teléfono de contacto en los avisos enviados a través de myGov fue deliberada, con la intención de que los destinatarios respondieran a través del canal online». La Royal Commission constató: «Hubo una 'decisión consciente' de omitir ese número de teléfono 'con la intención de forzar a los destinatarios a responder por internet'».",
+            "anti_pattern": "Canal deliberadamente restrictivo para forzar comportamiento; exclusión activa de usuarios sin acceso a internet.",
+            "severity": "high",
+            "rationale": "La omisión deliberada del teléfono de contacto restringe el control del usuario sobre cómo interactuar con el sistema. Usuarios vulnerables (adultos mayores, sin acceso a internet confiable, personas con discapacidad) quedan excluidos de la posibilidad de impugnar la deuda. Deanna Amato fue penalizada por no responder a cartas «enviadas a una dirección a la que nunca tuvo acceso». El diseño de la interacción fue deliberadamente hostil al usuario y limitó activamente su capacidad de ejercer override.",
+            "recommendation": "Proporcionar múltiples canales de contacto accesibles: teléfono con horario extendido, correo postal con sobre de respuesta prepagado, chat en línea, y contacto a través de trabajadores sociales locales para usuarios vulnerables. Aceptar y procesar impugnaciones recibidas por cualquier canal con la misma validez.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Ausencia de feedback capturado sobre desacuerdos y sin ciclo de corrección del sistema",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Proceso de respuesta a impugnaciones y captura de feedback del usuario",
+            "evidence": "El dossier indica que «En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos o de devoluciones de impuestos», pero no menciona ningún mecanismo de captura de desacuerdos usuario-sistema ni de análisis agregado de impugnaciones para ajustar el modelo de cálculo. La Royal Commission halló que el esquema operó durante ~4 años generando 470.000 avisos de deuda sin que ese volumen masivo de potenciales errores generara correcciones automáticas.",
+            "anti_pattern": "Feedback inexistente o no capturado; ausencia de ciclo de aprendizaje del sistema; mismo error replicado miles de veces sin corrección.",
+            "severity": "high",
+            "rationale": "El sistema no capturaba ni procesaba el feedback de los usuarios que impugnaban las deudas. Si bien algunos usuarios logaban refutar casos (tras enorme fricción), esas correcciones no se retroalimentaban al sistema para ajustar el método de income averaging ni para identificar patrones de error. Esto significa que el mismo error se replicaba miles de veces. HAX-G15 requiere feedback granular accesible; PAIR-FC-1 requiere que tenga efecto visible. Aquí no había ninguno de los dos.",
+            "recommendation": "Implementar un sistema de captura estructurada de impugnaciones que registre: (1) qué deuda fue impugnada, (2) por qué (causa raíz), (3) si la impugnación fue válida, (4) qué evidencia cambió la decisión. Analizar mensualmente ese feedback para detectar patrones de error en el income averaging (p. ej., ingresos estacionales no capturados) y pausar automáticamente el procesamiento de nuevas deudas mientras se valida la metodología.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Presentación de aviso opaca: falta de contexto sobre consecuencias de no responder",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Texto del aviso de deuda remitido vía myGov",
+            "evidence": "El dossier no proporciona el texto exacto del aviso, pero recoge el testimonio de usuarios: Deanna Amato «fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso». El dossier indica: «En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos o de devoluciones de impuestos».",
+            "anti_pattern": "Consecuencias de inacción opacas; usuario no comprende urgencia ni efectos; falta de confirmación de comprensión.",
+            "severity": "high",
+            "rationale": "El usuario no conocía las consecuencias de sus acciones (inacción) en tiempo real. El aviso presuntamente no explicaba de forma clara y comprensible que la no respuesta resultaría en embargo de sueldo o devoluciones de impuestos. Esto es crítico porque la mayoría de usuarios no respondieron simplemente porque no comprendieron la urgencia o las consecuencias. HAX-G16 requiere que el usuario entienda qué pasará si no actúa.",
+            "recommendation": "El aviso debe incluir un párrafo destacado en negrita explicando: (1) «Si no responde en [N días], el sistema embargará automáticamente su devolución de impuestos o descontará de su próximo sueldo»; (2) links directos a cómo impugnar; (3) confirmación de lectura interactiva (el usuario debe hacer clic explícitamente en 'He entendido las consecuencias' antes de que el contador de tiempo comience).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Decisión de emisión automática sin supervisión humana ni escalada para casos complejos",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Generación automática del aviso de deuda sin revisión humana previa",
+            "evidence": "El dossier afirma explícitamente: «Este proceso no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso». La comisionada Holmes calificó el esquema de «un mecanismo tosco y cruel, ni justo ni legal».",
+            "anti_pattern": "Decisión automatizada sin supervisión humana; sin escalada para casos complejos; ausencia de punto de veto.",
+            "severity": "high",
+            "rationale": "El income averaging es un método que depende de supuestos sobre cómo se distribuyen los ingresos en el tiempo. Usuarios con ingresos estacionales, trabajadores autónomos, personas con períodos de desempleo intercalado, o cambios de empleo durante el año pueden generar falsos positivos sistemáticos. Sin revisión humana, no hay control para detectar casos atípicos o flagrar que el método es inadecuado para ciertos perfiles. El volumen de 470.000 avisos sin un solo punto de veto humano es evidencia de falta de control.",
+            "recommendation": "Implementar escalada manual (human-in-the-loop) para: (1) casos donde la diferencia entre ingreso promediado y declarado es marginal (< 15%), (2) usuarios con ingresos muy variables año a año (coeficiente de variación > 0.5), (3) perfiles de alto riesgo de falso positivo (trabajadores estacionales, autónomos). Un funcionario debe revisar y aprobar explícitamente antes de emitir el aviso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Falta de transparencia sobre cambios en el sistema y cómo afectan al usuario",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Cambios en el esquema (p. ej., omisión de teléfono en avisos) sin comunicación a usuarios afectados",
+            "evidence": "El dossier indica: «Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono». Esto implica que en algún momento se decidió cambiar el diseño del aviso para omitir el teléfono. No hay evidencia de que se comunicara a usuarios ya en el sistema o potencialmente afectados que el canal de contacto había sido modificado.",
+            "anti_pattern": "Cambios de diseño sin comunicación; usuario no se entera de modificaciones que afectan su capacidad de respuesta.",
+            "severity": "medium",
+            "rationale": "Los usuarios que recibieron avisos después del cambio (omisión de teléfono) no fueron informados de que ese canal se había eliminado deliberadamente. Algunos usuarios probablemente buscaron el número en avisos anteriores, lo recordaban, e intentaron llamar sin éxito. La falta de comunicación sobre cambios es un antipatrón de control de usuario (PAIR-FC-2).",
+            "recommendation": "Si en el futuro se realizan cambios a los canales de contacto o procedimientos de impugnación, comunicarlos de forma proactiva a todos los usuarios con casos abiertos mediante múltiples canales (postal, email, SMS, teléfono). Incluir en el aviso una sección de «Cambios recientes» si corresponde.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Asimetría de carga probatoria: sistema asume corrección, usuario debe probar falsedad",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Marco general del flujo: de generación de aviso a impugnación",
+            "evidence": "El dossier afirma: «La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás». La funcionaria Colleen Taylor admite: «También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta».",
+            "anti_pattern": "Presunción de corrección del sistema; carga de prueba sobre usuario vulnerable; fricción extrema para override.",
+            "severity": "high",
+            "rationale": "El sistema generaba un aviso de deuda con autoridad estatal, lo que genera una presunción de corrección en la mente del usuario (como reconoce la funcionaria). Para refutar, el usuario debe desenterrar documentación antigua. Esto invierte el principio de debido proceso: debería ser el sistema quien demostrara la deuda basándose en datos que ya tiene (ATO, registros de Centrelink), no el usuario quien demuestre retrospectivamente que no está en deuda. La asimetría es especialmente grave en un sistema de beneficios sociales donde el usuario es típicamente vulnerable.",
+            "recommendation": "Cambiar el modelo: (1) el aviso debe presentarse como 'cálculo preliminar bajo revisión', no como 'deuda confirmada'; (2) el sistema debe proveer una comparación lado-a-lado de los datos de ATO y Centrelink que generaron la deuda; (3) el usuario puede click en '¿es esto correcto?' sin necesidad de documentación adicional; (4) si hay desacuerdo, el sistema busca documentación contemporánea del usuario, no la requiere que recopile. Esto invierte la carga de prueba de forma justa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Cálculo automatizado sin verificación manual previa",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Emisión del aviso de deuda inicial: el sistema genera automáticamente avisos de deuda sin que ningún funcionario revise previamente si la deuda existe efectivamente",
+            "evidence": "El sistema 'no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso'. El método de 'income averaging' se aplicaba de forma automática sin validación humana intermedia.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario receptor de un aviso de deuda no tiene oportunidad de descartar o refutar el cálculo antes de que el sistema proceda a acciones de cobro coercitivas (embarques). La sugerencia de deuda es prácticamente irreversible en la etapa inicial, violando el principio de permitir descarte eficiente. La acción automatizada (embargo) es indescartable hasta después de haber sido ejecutada.",
+            "recommendation": "Implementar una etapa de revisión humana obligatoria antes de emitir cualquier aviso de deuda. Un funcionario debe verificar que el cálculo de sobrepago es correcto según el método aplicado y que la deuda es legalmente válida antes de notificar al usuario. Solo tras esta revisión se debería enviar el aviso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Omisión deliberada de canal de contacto telefónico",
+            "guideline_ids": [
+              "HAX-G7",
+              "HAX-G5"
+            ],
+            "locus": "Envío del aviso de deuda a través de myGov sin incluir número de teléfono de contacto durante parte del período de operación",
+            "evidence": "El dossier indica: 'Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse'. El Departamento de Servicios Humanos confirmó que fue una 'decisión consciente' de omitir ese número 'con la intención de forzar a los destinatarios a responder por internet'. La Royal Commission halló esta práctica consciente y deliberada.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La omisión intencional del teléfono restringe severamente cómo el usuario puede invocar el servicio de contestación o refutación. Esto es especialmente problemático para poblaciones vulnerables (receptores de prestaciones sociales) que pueden tener acceso limitado a internet, conocimientos digitales insuficientes, o discapacidades que hacen el acceso online inviable. Viola el principio de permitir invocación eficiente en múltiples modalidades. Además, es una violación de normas sociales y expectativas razonables de accesibilidad en servicios públicos.",
+            "recommendation": "Restaurar inmediatamente el acceso telefónico como opción de contacto en todos los avisos de deuda. Incluir un número de teléfono accesible y disponible durante horarios razonables para que cualquier usuario, independientemente de su capacidad de acceso digital, pueda cuestionar la deuda. Registrar y mantener historial de todos los intentos de contacto.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Carga probatoria invertida sobre el usuario para refutar deuda",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Proceso de impugnación de deuda: el receptor debe aportar documentación de hasta 5-6 años atrás para demostrar que la deuda es incorrecta",
+            "evidence": "El dossier especifica: 'Para impugnar o refutar una deuda, el destinatario debía aportar nóminas y registros salariales de hasta cinco o seis años atrás'. El usuario debe 'presentar nóminas y registros de ingresos de hasta cinco o seis años atrás'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La carga probatoria recae enteramente sobre el usuario para descartar una acción que el sistema ha iniciado. En una situación legítima de interacción humano-IA, el sistema que emite una advertencia o acción debe facilitar su refutación con información accesible y procesos simples. Pedir documentación de 5-6 años atrás es un obstáculo prácticamente imposible para muchos ciudadanos, especialmente trabajadores precarios. El usuario está en situación de inferioridad informativa y probatoria: no sabe por qué el sistema calculó esa deuda específica ni tiene fácil acceso a sus datos históricos.",
+            "recommendation": "Invertir la carga probatoria: el sistema debe proporcionar al usuario un desglose detallado y comprensible del cálculo de deuda (qué ingresos se utilizaron, cómo se promediaron, qué quincenas se incluyeron) antes de proceder a cobro. El usuario debe poder refutar con documentación de períodos específicos en disputa, no de 6 años enteros. Facilitar acceso a copia de todos los datos que el sistema utilizó (registros de Centrelink e ingresos anuales de ATO).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Falta de transparencia en el método de cálculo",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Presentación del aviso de deuda al usuario: no se explica el método 'income averaging' ni sus limitaciones",
+            "evidence": "Usuario Madeleine Masterton: 'Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas' y 'No sabía de dónde había salido esa deuda de 4.000 dólares'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no recibe explicación clara del método aplicado (income averaging), sus supuestos o sus limitaciones conocidas. El cálculo es presentado como un hecho consumado, sin contexto. Esto viola las normas de transparencia y de respeto a la autonomía del usuario receptor de una acción perjudicial. Un ciudadano tiene derecho a entender por qué se le dice que debe dinero, especialmente cuando el cálculo es metodológicamente discutible (no refleja el calendario real de ingresos).",
+            "recommendation": "Incluir en el aviso de deuda una explicación clara en lenguaje accesible del método de cálculo utilizado (income averaging), un ejemplo concreto de cómo se aplicó a sus datos específicos, y una indicación de qué documentación puede usar para refutarlo. Proporcionar un desglose mes a mes o quincena a quincena de los ingresos considerados vs. los declarados a Centrelink.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Embargos ejecutados sin oportunidad de respuesta efectiva previa",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Ejecución de acciones coercitivas: embargo de sueldos y devoluciones de impuestos sin permitir período de respuesta o apelación previa",
+            "evidence": "El dossier indica: 'En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos o de devoluciones de impuestos'. El ejemplo de Deanna Amato: 'Fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver. Como consecuencia, le embargaron la devolución de impuestos.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no tiene un período razonable y seguro para descartar o refutar antes de que se ejecute una acción financiera grave (embargo). El sistema puede proceder a embargo solo porque 'no respondió', sin verificar si la comunicación llegó (como en el caso de Amato). Esto es un descarte ineficiente elevado al extremo: la acción perjudicial se ejecuta sin oportunidad real de descarte previo.",
+            "recommendation": "Implementar un proceso gradual: (1) Aviso claro con múltiples canales de contacto; (2) Período mínimo de 28-30 días para respuesta sin penalización; (3) Si hay respuesta pero documentación incompleta, enviar solicitud específica con plazo adicional; (4) Solo si el usuario no responde tras avisos múltiples confirmados como recibidos, proceder a embargo. Registrar evidencia de entrega confirmada antes de ejecutar cualquier acción coercitiva. Incluir mecanismo de apelación rápida y sin costo después del embargo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Notificación exclusiva a canal digital sin verificación de acceso",
+            "guideline_ids": [
+              "HAX-G7",
+              "HAX-G5"
+            ],
+            "locus": "Envío del aviso de deuda solo a myGov (plataforma online) sin verificar acceso o enviando copia por correo postal alternativo",
+            "evidence": "El dossier indica: 'El aviso de deuda se enviaba a la cuenta online ('myGov') del destinatario'. El ejemplo de Deanna Amato recibió cartas a dirección que 'nunca tuvo acceso y que nunca llegó a ver'. La decisión fue deliberada: 'con la intención de forzar a los destinatarios a responder por internet'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Para invocación eficiente del derecho de apelación, el usuario debe poder acceder al aviso. Una población receptora de prestaciones sociales es más propensa a tener acceso digital limitado, discapacidades, analfabetismo digital, o acceso a ordenadores intermitente. Enviar exclusivamente a un portal online es una barrera de acceso. Caso de Amato: ni siquiera recibió avisos en la dirección registrada. Esto incumple normas sociales de notificación justa en procedimientos administrativos con impacto financiero.",
+            "recommendation": "Enviar aviso de deuda mediante múltiples canales de forma predeterminada: (a) Correo postal a la dirección registrada con acuse de recibo; (b) Notificación a myGov; (c) Carta que incluya teléfono e instrucciones de contacto en varios idiomas. Verificar entrega confirmada en al menos uno de los canales postales antes de proceder a cualquier otra acción. Permitir al usuario actualizar su dirección y preferencias de contacto sin complicaciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Explotación de asimetría de información y confianza automatizada",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Diseño psicosocial del aviso: aprovechamiento de que los usuarios asumen que Centrelink 'ya tiene toda la información' y que el sistema debe ser correcto",
+            "evidence": "Funcionaria Colleen Taylor: 'También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.' Esta cita sugiere conocimiento deliberado de un sesgo del usuario que el sistema se aprovecha de explotar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema se aprovecha de una asimetría psicológica: los usuarios confían en que una agencia gubernamental de prestaciones ya posee información completa y correcta. El sistema explota esa confianza para emitir avisos de deuda sin explicación, contando con que muchos usuarios aceptarán pasivamente la deuda sin cuestionarla. Esto es una violación grave de las normas sociales de honestidad y lealtad esperadas entre una agencia pública y sus ciudadanos, especialmente poblaciones vulnerables.",
+            "recommendation": "Acompañar cualquier aviso de deuda con una declaración explícita: (a) 'Este cálculo puede contener errores. No asuma que es correcto'; (b) Explicación de los datos específicos utilizados y su origen; (c) Instrucciones claras sobre cómo cuestionar el cálculo. Establecer una política de que en caso de incertidumbre sobre la corrección del cálculo, la agencia revisa manualmente antes de cobro, no después. Entrenar personal de Centrelink en reconocer y comunicar incertidumbre sobre deudas calculadas automaticamente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Sin mecanismo de apelación ágil antes de la acción perjudicial",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Ausencia de proceso de apelación de urgencia / suspensión temporal del embargo mientras se revisa la impugnación",
+            "evidence": "El dossier describe: 'En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo'. No se menciona ningún mecanismo de revisión rápida o suspensión de embargo mientras se evalúa la impugnación del usuario.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Una vez emitido el aviso de deuda, el usuario no tiene forma eficiente de impugnar antes de que se ejecute el embargo. La carga probatoria (5-6 años de documentación) hace prácticamente imposible una respuesta rápida. Esto deja al usuario en situación de indefensión: sufrirá el embargo financiero mientras intenta demostrar su inocencia. Viola completamente el principio de permitir descarte eficiente.",
+            "recommendation": "Implementar un mecanismo de 'respuesta rápida' con revisión acelerada: si el usuario responde dentro de 14 días indicando que la deuda es incorrecta, se suspende automáticamente el embargo mientras se realiza revisión manual. La carga de prueba debe estar en demostrar que la deuda es correcta, no en que el usuario demuestre que es falsa. Establecer revisión dentro de 30 días. Si no se puede confirmar la deuda tras revisión manual, se retira inmediatamente y se devuelve dinero embargado con intereses.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Ausencia crítica de claridad sobre el método de cálculo en la presentación del aviso de deuda",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Aviso de deuda enviado a través de myGov sin explicación del método de 'income averaging'",
+            "evidence": "El sistema cruzaba datos de ingresos anuales de la ATO con periodos de Centrelink usando 'income averaging': dividía el ingreso anual entre quincenas del año para obtener ingreso quincenal estimado, sin verificar si el calendario real de percepción coincidía. Madeleine Masterton declara: 'No sabía de dónde había salido esa deuda de 4.000 dólares; yo creía haber declarado mis ingresos correctamente, en las fechas en que los recibí.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario no podía entender cómo se había calculado la deuda porque el aviso no explicaba el método de promediado. El usuario creía haber declarado correctamente sus ingresos (en fechas reales), pero el sistema aplicaba un método de promediado oculto que generaba deudas ficticias. Esto genera una brecha crítica entre lo que el usuario entiende que sucedió y lo que el sistema realmente hizo.",
+            "recommendation": "El aviso de deuda debe incluir una explicación clara y comprensible del método de cálculo utilizado (income averaging), mostrando: (a) el ingreso anual declarado ante la ATO, (b) cómo fue promediado entre quincenas, (c) los umbrales de ingresos declarados ante Centrelink por cada quincena, y (d) dónde divergen ambos. La explicación debe ser legible para un ciudadano sin formación técnica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Falta de onboarding inicial sobre capacidades y limitaciones del sistema de detección automática",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Etapa de inicio de uso del sistema (usuario comienza a recibir prestaciones y entra en el perímetro del esquema Robodebt)",
+            "evidence": "Colleen Taylor, funcionaria de Centrelink con 30+ años, declara: 'También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.' No existe documentación de onboarding que calibre las expectativas del usuario sobre cómo el sistema detecta sobrepagos, qué métodos usa, y en qué casos puede fallar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Los usuarios recibían prestaciones sin ser informados de que existía un sistema automático de detección de sobrepagos basado en promediado de ingresos. Esto permitía que los usuarios asumieran erróneamente que las deudas emitidas eran verificadas por humanos y, por tanto, correctas. El funcionario reconoce que sabían que esa falsa expectativa existía pero no la corrigieron.",
+            "recommendation": "Diseñar un onboarding claro en el momento en que el usuario comienza a recibir prestaciones que explique: (a) que un sistema automatizado monitoreará sus ingresos; (b) que usa el método de promediado anual (income averaging); (c) que puede generar deudas que el usuario debe impugnar si cree que son incorrectas; (d) que la carga de prueba recae en el usuario, no en la administración.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Obtaculización deliberada del acceso a canales de contacto y comunicación",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Diseño de los avisos de deuda enviados a través de myGov durante parte del período de operación (2015-2019)",
+            "evidence": "Según el Departamento de Servicios Humanos / Centrelink: 'La decisión de no incluir un número de teléfono de contacto en los avisos fue deliberada, con la intención de que los destinatarios respondieran a través del canal online.' La Royal Commission constató una 'decisión consciente' de omitir ese número 'con la intención de forzar a los destinatarios a responder por internet'. Deanna Amato fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema deliberadamente limitaba el acceso a canales de contacto alternativos (teléfono) para forzar a usuarios a usar internet. Para poblaciones vulnerables (usuarios de prestaciones sociales que pueden no tener acceso fiable a internet o competencias digitales), esto crea una barrera efectiva a la impugnación. El usuario no podía elegir su canal de comunicación preferido ni accesible.",
+            "recommendation": "Los avisos de deuda deben incluir múltiples canales de contacto claramente accesibles: número de teléfono con horario específico, dirección de correo postal, dirección de email, y opción online. Estos deben ser presentados con igual prominencia. El usuario debe poder elegir el canal que se adapte a sus circunstancias.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Ausencia de explicación de por qué la deuda ha sido calculada; opacidad sobre los datos fuente",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Contenido del aviso de deuda emitido por el sistema automático",
+            "evidence": "Madeleine Masterton describe: 'Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas.' No había transparencia sobre qué datos de la ATO se habían cruzado con los registros de Centrelink ni cómo se había ejecutado el cálculo. El usuario recibía un número de deuda sin poder entender su origen.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario recibía una deuda sin poder comprender de dónde provenía porque el aviso no revelaba: (a) qué ingresos de la ATO se habían usado; (b) qué período de Centrelink se estaba verificando; (c) cómo se había comparado la información. Esto hace imposible que el usuario refute la deuda de forma efectiva incluso si tiene datos correctos.",
+            "recommendation": "Cada aviso debe incluir: (a) ingresos brutos declarados ante la ATO en el período relevante; (b) desglose de cómo se aplicó el promediado (ingreso diario/quincenal estimado); (c) los ingresos declarados ante Centrelink por el mismo período; (d) identificación específica de las quincenas donde se detectó discrepancia; (e) cálculo de la deuda paso a paso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Carga de prueba invertida e imposible: usuario debe refutar deuda sin acceso a información del sistema",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "PAIR-UN-2"
+            ],
+            "locus": "Proceso de impugnación de deudas una vez emitido el aviso automático",
+            "evidence": "El sistema operaba bajo la regla de que 'la carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás'. El usuario debía probar que los datos de la ATO eran incorrectos, un registro que frecuentemente no estaba bajo su control. En caso de no responder o no aportar documentación, se procedía al embargo de sueldos o devoluciones de impuestos.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El equilibrio entre falsos positivos (deudas que no existen) y falsos negativos (sobrepagos que no se detectan) no fue explicitado. El sistema decidió, de facto, que los costes de los falsos positivos (deudas incorrectas emitidas a ciudadanos) eran aceptables, mientras que los costes de los falsos negativos (no recuperar sobrepagos) eran inaceptables. Sin embargo, esta decisión no fue comunicada ni justificada. El usuario debe refutar un cálculo cuya metodología desconoce, usando documentos que quizás no posee.",
+            "recommendation": "Invertir la carga de prueba o distribuirla equilibradamente: antes de emitir un aviso de deuda, el sistema debe verificar de forma razonable (mediante revisión humana muestreada o verificación de datos) que la deuda existe. Si hay discrepancia entre ATO y Centrelink, debe contactarse al usuario para que clarifique antes de emitir deuda, no después. Los avisos deben explicitar qué costes tiene la administración si el falso positivo es cierto (¿cómo puede el usuario recuperar fondos embargados injustamente?).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Falta de revisión humana antes de tomar decisiones críticas (embargo de fondos)",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Flujo de decisión automática: generación de aviso → embargo de sueldos o devolución de impuestos sin intervención humana previa",
+            "evidence": "El dossier indica que 'Este proceso no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso.' Deanna Amato 'fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver. Como consecuencia, le embargaron la devolución de impuestos.' El sistema procedía automáticamente al embargo sin verificar que el usuario había recibido o comprendido el aviso.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La cadena de decisiones que afectan directamente al patrimonio del usuario (embargo de fondos) se automatiza completamente sin que ningún funcionario verifique si la deuda es real o si el usuario ha tenido oportunidad real de responder. Esto es particularmente grave cuando el aviso no llega al usuario (como en el caso de Deanna Amato) o cuando el usuario carece de acceso al canal de comunicación designado.",
+            "recommendation": "Implementar un punto de revisión humana obligatorio antes de cualquier embargo: un funcionario debe verificar que (a) el aviso se entregó efectivamente (no solo enviado a una dirección online); (b) el usuario tuvo tiempo razonable para responder (mínimo 28 días desde entrega efectiva); (c) se intentó contacto por al menos dos canales diferentes si el primero falló; (d) el cálculo de deuda se revisa manualmente comparando ATO vs. Centrelink antes de proceder al embargo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Diseño de sistema que no resuelve una necesidad real del usuario sino que implementa recuperación de fondos públicos sin protecciones de debido proceso",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Objetivo estratégico del sistema Robodebt: automatizar detección de sobrepagos de prestaciones sociales",
+            "evidence": "El esquema se diseñó para 'aumentar la eficiencia en la detección de sobrepagos de prestaciones sociales mediante el cruce automatizado de datos'. La comisionada Holmes calificó el esquema de 'un mecanismo tosco y cruel, ni justo ni legal', que 'hizo que muchas personas se sintieran como criminales'. El gobierno acordó reembolsar aproximadamente 720 millones de dólares, indicando que una fracción muy significativa de las ~470.000 deudas fueron incorrectas.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema fue diseñado como herramienta de recuperación de fondos públicos para la administración, no para resolver una necesidad de los usuarios receptores de prestaciones. La intención de diseño era maximizar la detección de sobrepagos sin protecciones proporcionales contra falsos positivos. El hecho de que se requiriera reembolsar ~720M de dólares sugiere que el método era crudo y generaba muchas deudas incorrectas. La IA (cruce de datos + promediado) se usó como fin en sí misma (eficiencia administrativa) sin aceptar los costes de sus errores.",
+            "recommendation": "Para futuros sistemas de recuperación de deudas, diseñar primero alrededor de la necesidad del usuario (acceso a prestaciones correctas, defensa contra acusaciones injustas) y no de la eficiencia administrativa. Si se usa IA para detectar posibles sobrepagos, debe incluirse un mecanismo de verificación humana fuerte, transparencia total sobre el método, acceso real a la defensa, e inversión de la carga de prueba (administración debe probar, no ciudadano).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Comunicación de confiabilidad implícita sin calibración de expectativas sobre precisión del método",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Presentación de avisos de deuda como decisiones definitivas sin indicación de incertidumbre o posibilidad de error del sistema",
+            "evidence": "Colleen Taylor, funcionaria, reconoce: 'También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.' El aviso no contenía ninguna indicación de que el cálculo podía ser erróneo o que estaba basado en un método que requería verificación. La carga de prueba sobre el usuario sugería implícitamente que la deuda era correcta a menos que se demostrara lo contrario.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema se presentaba de forma que inducía confianza injustificada en su precisión. Un usuario recibía una deuda de una administración pública sin indicación de que podía haber un error del sistema, incluso aunque el método (promediado de ingresos) era inherentemente propenso a falsos positivos en casos con calendarios de ingresos irregulares. El usuario asumía que Centrelink ya había verificado, cuando en realidad era un cálculo automático sin revisión.",
+            "recommendation": "Todo aviso de deuda debe incluir: (a) indicación clara de que es el resultado de un cálculo automatizado, no una revisión humana; (b) advertencia de que el usuario debe verificar independientemente si la deuda es correcta; (c) explicación de las limitaciones del método usado (p. ej., 'este cálculo asume que los ingresos se distribuyeron uniformemente a lo largo del año; si sus ingresos fueron recibidos en fechas diferentes, el cálculo puede ser incorrecto'); (d) instrucciones claras sobre cómo impugnar con éxito.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Método de cálculo fundamentalmente falso sin verificación previa a la emisión de avisos",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Generación automática de avisos de deuda mediante 'income averaging' sin revisión por funcionario",
+            "evidence": "El sistema cruzaba datos anuales de la ATO dividiéndolos entre quincenas sin verificar 'si el calendario real de percepción de ingresos coincidía con el periodo de cobro de la prestación'. El proceso 'no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso'. Ante 'alta incertidumbre' (ingresos reportados en diferentes fechas, períodos parciales, etc.), el sistema debería haber acotado o degradado el servicio, pero en cambio procedía automáticamente a la emisión de avisos que desencadenaban embargos.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema operaba con incertidumbre metodológica inherente (el promediado simple ignora la variabilidad temporal real de ingresos) sin abstenerse ni solicitar desambiguación. Esto violó la premisa de HAX-G10: ante la duda, acotar el servicio. En lugar de ello, emitía avisos definitivos que generaban consecuencias legales y financieras inmediatas (embargos), sin ofrecer camino de recuperación claro ni anticipar fallos potenciales (PAIR-EF-1).",
+            "recommendation": "Implementar un umbral de incertidumbre en el cálculo: si la variabilidad de ingresos en el período reportado supera cierto margen, no generar automáticamente aviso de deuda. En su lugar, requerir revisión humana o solicitar documentación adicional (nóminas, confirmación de fechas exactas de percepción) ANTES de emitir aviso, no después como carga del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Omisión deliberada de información de contacto para forzar canal de respuesta",
+            "guideline_ids": [
+              "PAIR-EF-2",
+              "HAX-G17"
+            ],
+            "locus": "Diseño de avisos de deuda enviados vía myGov: ausencia deliberada de número de teléfono",
+            "evidence": "La Royal Commission halló que hubo una 'decisión consciente' de omitir el número de teléfono 'con la intención de forzar a los destinatarios a responder por internet'. El dossier técnico confirma que 'Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse' y que 'La decisión de no incluir un número de teléfono [...] fue deliberada, con la intención de que los destinatarios respondieran a través del canal online'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La omisión deliberada de información de contacto accesible (teléfono) para obligar a los usuarios a utilizar un canal específico (online) viola el principio de ofrecer múltiples vías de comunicación y control usuario (HAX-G17). Además, cuando el error ocurre (avisos errados), el usuario no tiene cómo contactar de forma rápida para disputarlo, lo que viola PAIR-EF-2: comunicar errores de forma útil y accionable. El usuario Deanna Amato fue penalizada 'por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso', mostrando la falta de flexibilidad en canales.",
+            "recommendation": "Incluir múltiples canales de contacto accesibles en todos los avisos (teléfono, email, dirección postal, opción de chat online). Implementar HAX-G17 genuinamente: permitir al usuario elegir su canal preferido de comunicación y confirmar recepción. Especialmente crítico en casos donde la respuesta del usuario es necesaria para refutar un error.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Carga probatoria invertida sin proporcionar información suficiente para refutar",
+            "guideline_ids": [
+              "PAIR-EF-2",
+              "HAX-G10"
+            ],
+            "locus": "Proceso de impugnación: usuario debe aportar nóminas de 5-6 años atrás sin detalles del cálculo en el aviso",
+            "evidence": "El dossier establece que 'La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás'. La usuaria Madeleine Masterton señala: 'No sabía de dónde había salido esa deuda de 4.000 dólares; yo creía haber declarado mis ingresos correctamente, en las fechas en que los recibí.' El sistema emitía avisos que 'Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando el sistema comete un error (como sucedió masivamente), la comunicación del error es opaca: el aviso no incluía detalles del método de cálculo, fechas específicas comparadas, o montos parciales. El usuario no puede refutar efectivamente sin invertir horas de búsqueda de documentación antigua. Esto viola PAIR-EF-2 (explicar errores de forma accionable) porque el usuario no recibe información suficiente para actuar. Simultáneamente, el sistema debería haber acotado el servicio ante la alta incertidumbre de si el usuario realmente debe el dinero (HAX-G10), pero en su lugar cargaba toda la carga probatoria en el usuario.",
+            "recommendation": "Cambiar la carga probatoria: ante avisos de deuda, incluir en el mismo aviso un desglose detallado (fecha de la discrepancia, ingreso anual reportado a ATO, ingreso promedio quincenal calculado, umbral de la prestación, períodos específicos comparados). Proporcionar extracto de datos de ATO y Centrelink usados. Esto convierte el aviso en accionable y reduce fricción de refutación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Presunción automática de autoridad sin validación de contexto previo",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Diseño de confianza del sistema: usuarios asumen corrección basándose en identidad de Centrelink",
+            "evidence": "Colleen Taylor (funcionaria de Centrelink de 30 años) declara: 'También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.' Madeleine Masterton señala que 'Parecía un sistema muy opaco'. La presunción de corrección se apoya en la legitimidad institucional, no en la validez del método.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema exploitaba implícitamente el sesgo de autoridad: ciudadanos asumían que avisos de Centrelink eran correctos sin verificación. La funcionaria Colleen Taylor reconoce explícitamente que 'sabíamos' de este efecto. Esto es un sesgo de subgrupo: poblaciones con menor alfabetismo digital o confianza institucional previa son más proclives a asumir corrección sin verificar. El sistema no monitoriza si subgrupos específicos (por edad, nivel educativo, dominio de idioma, acceso a internet) tienen tasas desproporcionadas de avisos errados o no responden (PAIR-DE-1). La falta de validación previa (HAX-G10) amplificó este sesgo: el método defectuoso fue tratado como autoridad definitiva.",
+            "recommendation": "Evaluar tasas de error y tasas de respuesta desglosadas por subgrupos demográficos (edad, nivel de educación, idioma principal, zona geográfica, acceso a internet). Implementar validación externa: antes de emitir aviso, enviar datos a ATO para confirmación independiente. Avisos deben incluir explícitamente: 'Esta es una estimación basada en promediado de ingresos. Si sus ingresos no fueron uniformes durante el año, esto puede ser incorrecto.'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Ausencia de degradación elegante ante datos insuficientes o ambiguos",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Manejo de períodos parciales, cambios de empleo, o ingresos no uniformes durante el año",
+            "evidence": "El método de 'income averaging' dividía 'el ingreso anual entre el número de quincenas del año para obtener un ingreso quincenal estimado', sin verificación de 'si el calendario real de percepción de ingresos coincidía con el periodo de cobro de la prestación'. Para muchas personas (trabajadores estacionales, cambios de empleo, cobros retroactivos, bonificaciones puntuales), esta asunción es fundamentalmente incorrecta, pero el sistema procedía automáticamente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no tenía lógica para detectar o escalar casos donde el método era inapropiado. Si una persona trabajó solo 6 meses del año, el promediado crea un ingreso ficticio para los otros 6 meses. Si recibió un bono puntual, el promediado lo distribuye artificialment. En todos estos casos, la incertidumbre es alta y el sistema debería haber acotado el servicio (HAX-G10) o degradado elegantemente (PAIR-EF-1), no proceder a embargo. En su lugar, emitía avisos definitivos.",
+            "recommendation": "Implementar reglas de degradación: (a) Si datos de ATO muestran cambios de empleo o períodos parciales, no aplicar income averaging; solicitar documentación específica al usuario. (b) Si discrepancia entre ingreso anual ATO e ingreso declarado quincenal es menor a cierto porcentaje (ej. <5%), resolver a favor del usuario. (c) Si no hay documentación clara, considerar el aviso como 'pendiente de revisión humana' en lugar de 'deuda confirmada', sin embargar hasta resolución.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Sin retroalimentación del usuario integrada para corregir método defectuoso",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Ciclo de operación del sistema 2015-2019: sin mecanismo de aprendizaje de disputas para mejorar cálculo",
+            "evidence": "El dossier refiere que durante aproximadamente 4 años (2015-2019) el sistema operó generando 'en torno a 470.000 avisos de deuda'. No consta en el dossier que el sistema haya aprendido de las personas que disputaban los avisos o de patrones de error. Las disputas parecen haber sido procesadas manualmente después del hecho, no para mejorar el modelo de cálculo.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "HAX-G13 exige aprender del comportamiento del usuario para personalizar y mejorar. En este caso, los miles de disputas y refutaciones exitosas deberían haber generado señales de que el método de promediado era defectuoso. La ausencia de integración de esta retroalimentación significa que el sistema continuó cometiendo el mismo error sistemático a lo largo de años. Una tasa alta de disputas exitosas (evidencia de error sistemático) debería haber disparado revisión y parada del sistema.",
+            "recommendation": "Monitorizar continuamente la tasa de disputas exitosas y de avisos revocados. Si supera cierto umbral (ej. >10%), escalar automáticamente a revisión humana de toda la política de cálculo. Usar datos de disputas para identificar patrones de error (ej. alta tasa en trabajadores estacionales) e implementar reglas específicas de exclusión o cálculo alternativo para esos subgrupos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Notificación de cambios de capacidad ausente: falta de transparencia sobre activación del sistema",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Introducción del esquema de income averaging sin comunicación previa a destinatarios potenciales",
+            "evidence": "El dossier no menciona que el Departamento de Servicios Humanos haya notificado a los beneficiarios de prestaciones sociales que un nuevo sistema automatizado de detección de deudas mediante income averaging sería activado. Los avisos llegaron de repente a través de myGov como hechos consumados.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G18 requiere notificar al usuario cuando el sistema añade o cambia capacidades. La activación del esquema Robodebt fue un cambio significativo de capacidad (creación de nuevas obligaciones automáticas de repago), pero aparentemente llegó sin aviso previo. Esto rompe modelos mentales: usuarios que creían haber cumplido correctamente con sus obligaciones se encuentran de repente con avisos de deuda.",
+            "recommendation": "Antes de activar cambios de política o nuevos mecanismos de detección de deudas, enviar notificación clara a todos los potencialmente afectados explicando: (a) qué método se usará (income averaging en este caso), (b) cuándo entrará en vigor, (c) ejemplos de cómo afecta (simulaciones de casos reales), (d) cómo impugnarlo. Esta notificación debe ser en múltiples canales (correo postal, email, mensaje en myGov, llamada telefónica para personas sin acceso online).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Fallo silencioso para usuarios sin acceso o capacidad de respuesta online",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Caso de Deanna Amato: avisos enviados solo a myGov sin confirmación de recepción o acceso",
+            "evidence": "Deanna Amato 'fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver. Como consecuencia, le embargaron la devolución de impuestos.' El sistema enviaba avisos exclusivamente a la cuenta online (myGov) sin verificar que el usuario tuviera acceso o la revisara.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no anticipaba fallos en la cadena de comunicación: usuario podría no tener acceso a internet, no revisar myGov regularmente, o no recibir notificación de que había un mensaje pendiente. Sin confirmación de recepción o alternativa offline, el usuario entra automáticamente en incumplimiento si no responde, y el sistema procede al embargo (PAIR-EF-1: fallo sin vía de recuperación clara). La ausencia de retroalimentación positiva ('tu respuesta fue recibida') deja al usuario en incertidumbre.",
+            "recommendation": "Implementar confirmación de lectura: después de 14 días de envío de aviso, si no hay confirmación de lectura, reenviar por correo postal a la dirección registrada con confirmación requerida. Permitir respuesta por múltiples canales con acuse de recibo automático. Establecer plazo de respuesta mínimo de 60 días (no implícito o variable). Si el usuario responde en el plazo pero desde un canal diferente al previsto, aceptar la respuesta.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-042",
+            "title": "Disparidad de impacto no monitorizada en subgrupos vulnerables",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Operación del esquema 2015-2019 sin evaluación de impacto diferenciado por subgrupos",
+            "evidence": "El sistema generó 'en torno a 470.000 avisos de deuda' sin que conste en el dossier evaluación alguna de si ciertos subgrupos (por edad, nivel de educación, acceso a internet, dominio del idioma inglés, situación laboral) fueron afectados desproporcionadamente. La Royal Commission describió el esquema como 'un mecanismo tosco y cruel', pero sin desglose de qué grupos sufrieron más.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "PAIR-DE-1 exige evaluar el rendimiento por subgrupos relevantes para detectar disparidades. La ausencia de esta supervisión significa que el sistema pudo haber impactado desproporcionadamente a:  personas mayores (menor uso de internet), migrantes (menor familiaridad con sistemas australianos), trabajadores estacionales (ingresos variables), personas sin dominio total del inglés. Sin datos desglosados, el Centrelink no detectó patrones de error sistemático en subgrupos específicos.",
+            "recommendation": "Implementar supervisión obligatoria de: (a) tasa de avisos por edad, nivel educativo, zona geográfica, dominio de idioma; (b) tasa de disputas exitosas por subgrupo; (c) tiempo promedio para resolver disputas por subgrupo; (d) tasa de embargo ejecutado sin respuesta previa por subgrupo. Si algún subgrupo tiene >5% más de avisos o >10% menos de tasa de resolución exitosa que la población general, escalar a revisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-043",
+            "title": "Ausencia de controles de usuario sobre parámetros críticos del cálculo",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Método de cálculo de income averaging: usuario no puede cuestionar o personalizar el método antes de embargo",
+            "evidence": "El sistema 'generaba automáticamente un aviso de deuda sin que ningún funcionario revisara previamente si la deuda existía de manera efectiva'. El usuario no tenía control sobre qué método se aplicaba (income averaging vs. otra comparación). Una vez emitido el aviso, el usuario solo podía impugnarlo, no configurar cómo se evaluaba su caso.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G17 requiere proporcionar 'controles globales': permitir al usuario configurar qué se monitoriza y cómo se comporta el sistema. En este caso, usuarios de Centrelink no tenían oportunidad de indicar 'tengo ingresos estacionales, no distribuidos uniformemente' o 'cambié de empleo en agosto'. El sistema no ofrecía opción de elegir método de cálculo o de ser excluido del esquema de promediado si era inapropiado.",
+            "recommendation": "Permitir a usuarios de Centrelink, al momento de registrarse para cambios de situación (cambio de empleo, fin de período de cobro), indicar características de su ingreso: estacional, variable, retroactivo, con bonificaciones puntuales. El sistema debería usar estos controles para eXcluir a ese usuario del income averaging automático y requerir revisión humana. Alternativamente, permitir al usuario solicitar 'no usar income averaging en mi caso' antes de que se emita aviso.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe que el aviso de deuda no explicaba cómo se había calculado el importe (método income averaging), y Masterton declara no saber de dónde salía la deuda. Esto encaja directamente con RD-01-aviso-sin-explicacion-calculo, que describe exactamente que las cartas no explicaban cómo se calculó el importe ni cuándo ocurrió el supuesto cobro indebido. RD-08 también es relevante (deuda presentada como dato objetivo sin indicar que es estimación), pero el foco principal del hallazgo es la ausencia de explicación del método de cálculo, que es el núcleo de RD-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo se centra en que el sistema no comunicó que el income averaging era una estimación con incertidumbre inherente (distribución uniforme de ingresos asumida), y que la deuda se presentó como dato definitivo sin advertir que podía ser errónea. Esto encaja mejor con RD-08-ausencia-de-incertidumbre-comunicada, que describe exactamente que las cartas notificaban la deuda como dato objetivo y definitivo sin indicar que era una estimación basada en promedios ni que podía ser errónea. RD-06 también es relevante pero describe el problema del método en sí, no la falta de comunicación de incertidumbre.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe que el aviso se emitía automáticamente sin revisión humana previa, y que los ciudadanos asumían que Centrelink ya tenía toda la información y era correcta (automation bias). El núcleo del problema es la ausencia de revisión humana antes del envío, lo que encaja directamente con RD-05-ausencia-revision-humana-previa. La mención al automation bias del ciudadano es secundaria y complementaria. RD-08 también toca el tema de la autoridad aparente, pero el locus principal del hallazgo es el proceso automatizado sin revisión.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe la decisión deliberada de omitir el número de teléfono para forzar respuesta online, con evidencia directa de la Royal Commission sobre esa 'decisión consciente', y el caso Amato como consecuencia. Esto encaja perfectamente con RD-02-omision-deliberada-telefono (omisión deliberada del número de la línea de ayuda) y también con RD-03-canal-unico-online-forzado. Sin embargo, el énfasis del hallazgo está en la omisión deliberada del teléfono como decisión de diseño, que es el núcleo exacto de RD-02. RD-03 describe más el problema de exclusión digital de usuarios sin acceso tecnológico.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "RD-07-documentacion-imposible-de-aportar",
+            "judge_rationale": "El hallazgo describe que la carga de refutar la deuda recaía sobre el destinatario, quien debía aportar documentación de 5-6 años atrás sin orientación clara sobre cómo hacerlo. Esto encaja con RD-04-inversion-carga-de-la-prueba (inversión del deber de prueba) y RD-07-documentacion-imposible-de-aportar (exigencia imposible de cumplir). El hallazgo combina ambos elementos, pero el énfasis en 'sin asistencia' y 'sin orientación clara' añade un matiz de RD-07. Sin embargo, el título y la evidencia principal apuntan a la inversión de la carga de prueba como problema central, con RD-04 siendo el candidato más preciso. RD-07 describe más la imposibilidad práctica para personas vulnerables. Dado que el hallazgo menciona explícitamente tanto la inversión de carga como la dificultad de aportar documentación histórica, RD-07 encaja bien con el aspecto de 'sin asistencia' y documentación de años atrás.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe la ausencia de explicación pública sobre por qué se eligió income averaging como método. Esto es una variante del problema de falta de transparencia sobre el método de cálculo. RD-01 cubre la falta de explicación del cálculo en los avisos. RD-06 describe el problema del método de promediado en sí (presunción de deuda por promedio), incluyendo que 'el cálculo nunca fue explicado ni cuestionado antes del envío'. El hallazgo p3-006 se diferencia de p3-001 en que pregunta por qué se eligió ese método (justificación de diseño), no solo que no se explicó en el aviso. Sin embargo, RD-06 menciona explícitamente que el cálculo nunca fue explicado, lo que es el núcleo del hallazgo. RD-01 también es candidato fuerte. El hallazgo es más sobre la falta de justificación del método que sobre la falta de explicación del cálculo individual, lo que lo acerca más a RD-06. No obstante, ningún candidato describe exactamente 'por qué se eligió income averaging'; el más cercano es RD-01 (falta de explicación del cálculo) o RD-06 (el cálculo nunca fue explicado). Opto por RD-01 ya que el problema central sigue siendo la falta de transparencia sobre el método de cálculo comunicado al usuario.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo describe que la cantidad de deuda se presentaba sin indicadores de confianza, incertidumbre o margen de error, y que el ciudadano no sabía de dónde venía la cifra. Esto encaja directamente con RD-08-ausencia-de-incertidumbre-comunicada, que describe exactamente que las cartas notificaban el importe como dato objetivo y definitivo sin indicar que era una estimación basada en promedios ni que podía ser erróneo. RD-01 trata la falta de explicación del cálculo, que es un aspecto relacionado pero distinto (trazabilidad vs. incertidumbre). El núcleo del hallazgo p3-007 es la ausencia de comunicación de incertidumbre, no la falta de explicación del método.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo de revisión o escalada cuando el usuario impugna la deuda, y menciona el caso de Deanna Amato donde se embargaron fondos sin posibilidad de respuesta. El candidato más cercano es RD-05-ausencia-revision-humana-previa, que trata la falta de intervención humana en el proceso. Sin embargo, el hallazgo se centra específicamente en la fase post-impugnación (qué pasa cuando el usuario SÍ responde), no en la fase previa al envío. RD-07-documentacion-imposible-de-aportar también es relevante pero se centra en la carga documental. El caso Amato (penalizada por no responder a cartas en dirección incorrecta) encaja mejor con RD-05 en cuanto a ausencia de revisión humana, aunque el ángulo es ligeramente distinto. Ningún candidato describe exactamente 'qué ocurre tras presentar refutación'. Sin embargo, RD-05 es el más próximo al describir la ausencia general de intervención humana significativa en todo el proceso, incluyendo la revisión de impugnaciones.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "RD-07-documentacion-imposible-de-aportar",
+            "judge_rationale": "El hallazgo se centra en que el sistema exigía documentación de 5-6 años atrás para impugnar, sin reconocer que esto podía ser imposible ni ofrecer alternativas. Esto encaja directamente con RD-07-documentacion-imposible-de-aportar, que describe exactamente que la exigencia de nóminas y extractos de hasta cinco años atrás era imposible de cumplir para personas vulnerables, y que Centrelink se negaba a revisar sin esa documentación. El hallazgo también menciona la falta de comunicación sobre esta limitación, lo que podría relacionarse con RD-08, pero el núcleo es la imposibilidad de aportar documentación, no la ausencia de indicadores de incertidumbre.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe la opacidad del sistema y la falta de explicación del método de cálculo (income averaging) en el aviso de deuda, apoyado en el testimonio de Masterton. Esto encaja directamente con RD-01-aviso-sin-explicacion-calculo, que describe exactamente que las cartas no explicaban cómo se había calculado el importe ni cuándo ocurrió el supuesto cobro indebido, y que el ciudadano recibía una cifra sin trazabilidad ni justificación comprensible. Aunque RD-08 también es relevante (presentación como dato definitivo), el núcleo del hallazgo p3-010 es la falta de transparencia y explicación del método, que es el problema central de RD-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "RD-07-documentacion-imposible-de-aportar",
+            "judge_rationale": "El hallazgo describe que el proceso de impugnación requería aportar nóminas y registros de hasta 5-6 años atrás, constituyendo una fricción extrema que hacía el override prácticamente imposible. Esto encaja directamente con RD-07-documentacion-imposible-de-aportar, que describe exactamente esta exigencia y su imposibilidad para personas vulnerables. También hay relación con RD-04-inversion-carga-de-la-prueba, pero el énfasis del hallazgo está en la fricción extrema de la recopilación documental, no en el cambio de quién debe probar. RD-07 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe explícitamente la omisión deliberada del número de teléfono en los avisos, forzando a los destinatarios a responder únicamente por el canal online myGov. Esto encaja perfectamente con RD-02-omision-deliberada-telefono, que describe exactamente esta decisión de diseño documentada por la Royal Commission. Aunque RD-03-canal-unico-online-forzado también es relevante, el hallazgo se centra específicamente en la omisión deliberada del teléfono como mecanismo de restricción, que es el problema central de RD-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo de feedback y corrección del sistema ante impugnaciones, y que el volumen masivo de errores no generó correcciones automáticas durante ~4 años. Ninguno de los candidatos del golden describe exactamente este problema (ausencia de ciclo de corrección/feedback agregado). El candidato más cercano sería RD-09 (ignorancia de resoluciones del tribunal), que toca la falta de corrección institucional, pero se centra en las resoluciones del AAT, no en la captura de feedback de usuarios. RD-04 y RD-07 tocan la impugnación pero desde la perspectiva de la carga probatoria. El hallazgo es un problema real y específico apoyado en el dossier (470.000 avisos sin corrección del modelo), pero no coincide con ningún candidato del golden.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo se centra en la opacidad del aviso respecto a las consecuencias de no responder (embargo), ilustrado con el caso de Deanna Amato. El candidato RD-08 describe que las cartas no informaban de que el cálculo era una estimación ni de la posibilidad de error, lo que es distinto. RD-10 toca el tono intimidatorio y el trauma, pero no específicamente la falta de información sobre consecuencias de no responder. RD-01 trata la falta de explicación del cálculo. El hallazgo más cercano es RD-08 (ausencia de incertidumbre comunicada) en cuanto a opacidad informativa del aviso, pero el foco específico del hallazgo es la falta de comunicación de consecuencias (embargo) por no responder, que no está cubierto exactamente por ningún candidato. Sin embargo, RD-08 es el más próximo en cuanto a opacidad del aviso. Aun así, el foco es distinto: RD-08 es sobre la certeza aparente del cálculo, no sobre las consecuencias de no responder. Ningún candidato cubre exactamente este problema. Es un hallazgo real apoyado en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe explícitamente la emisión automática de avisos de deuda sin revisión humana previa ni escalada para casos complejos. Esto coincide directamente con RD-05-ausencia-revision-humana-previa, que describe exactamente el mismo problema: el sistema generaba y enviaba avisos de forma completamente automatizada sin que ningún agente humano revisara el cálculo antes del envío.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe la falta de transparencia sobre el cambio de diseño del aviso (omisión del teléfono) sin comunicación a los usuarios afectados. El candidato RD-02-omision-deliberada-telefono describe exactamente la omisión deliberada del número de teléfono en los avisos como decisión de diseño. Aunque el hallazgo añade el ángulo de 'falta de comunicación del cambio', el problema central que identifica es la omisión del teléfono en los avisos, que es el mismo problema que RD-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe la asimetría de carga probatoria: el sistema asume que la deuda es correcta y el usuario debe probar lo contrario aportando documentación de hasta 5-6 años atrás. Esto coincide directamente con RD-04-inversion-carga-de-la-prueba, que describe exactamente esta inversión del deber de prueba institucional sobre el receptor de bienestar, con la misma evidencia (nóminas y extractos de hasta cinco años atrás). El testimonio de Colleen Taylor también refuerza este candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe el cálculo automatizado mediante 'income averaging' sin verificación manual previa, lo que generaba avisos de deuda sin validación humana. Esto coincide directamente con RD-05-ausencia-revision-humana-previa. Sin embargo, p3-015 ya fue adjudicado a RD-05. El hallazgo p3-018 pone más énfasis en el método de cálculo (income averaging sin validación) que en la ausencia de revisión humana per se, lo que podría acercarlo a RD-06-presuncion-de-deuda-por-promedio. Pero el locus y la evidencia citada ('no incluía ninguna revisión por parte de un funcionario') apuntan claramente a RD-05. Dado que ambos hallazgos (p3-015 y p3-018) describen el mismo problema de RD-05, adjudico p3-018 también a RD-05, ya que es el candidato que mejor describe el problema central del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe específicamente la omisión deliberada del número de teléfono de contacto en los avisos de deuda, con la intención de forzar la respuesta por internet. Esto encaja perfectamente con RD-02-omision-deliberada-telefono, que describe exactamente esa decisión de diseño de omitir el número de la línea de ayuda de cumplimiento. Aunque RD-03-canal-unico-online-forzado también es relevante, el foco del hallazgo es la omisión del teléfono, no la exclusividad del canal online en general.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe la carga probatoria invertida: el receptor debe aportar documentación de hasta 5-6 años atrás para refutar la deuda. Esto corresponde directamente a RD-04-inversion-carga-de-la-prueba, que describe exactamente esa inversión del deber de prueba institucional. RD-07-documentacion-imposible-de-aportar también es relevante pero se centra más en la imposibilidad práctica de cumplir la exigencia, mientras que el hallazgo enfatiza la inversión de la carga probatoria en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe la falta de transparencia en el método de cálculo: el usuario no sabe de dónde viene la deuda ni cómo se calculó. La evidencia de Masterton ('sistema muy opaco', 'no sabía de dónde había salido esa deuda') apunta directamente a RD-01-aviso-sin-explicacion-calculo, que describe que las cartas no explicaban cómo se había calculado el importe ni cuándo ocurrió el supuesto cobro indebido. RD-08-ausencia-de-incertidumbre-comunicada también es cercano, pero el foco del hallazgo es la opacidad del cálculo, no la ausencia de indicación de incertidumbre.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe embargos ejecutados sin oportunidad de respuesta efectiva previa, ilustrado con el caso de Deanna Amato (cartas a dirección inaccesible, embargo de devolución de impuestos). Ninguno de los candidatos describe específicamente el problema de ejecutar embargos sin período de respuesta o apelación previa. RD-07 trata la imposibilidad de aportar documentación, RD-04 la inversión de carga probatoria, RD-03 el canal único online. El problema específico aquí es la ejecución coercitiva sin garantía de notificación efectiva previa, que es un problema real y sustentado en el dossier pero no capturado exactamente por ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "RD-03-canal-unico-online-forzado",
+            "judge_rationale": "El hallazgo describe la notificación exclusiva a canal digital (myGov) sin verificar acceso, forzando a los destinatarios a responder por internet. Esto encaja con RD-03-canal-unico-online-forzado, que describe exactamente que los ciudadanos eran dirigidos exclusivamente al portal myGov, con la Royal Commission señalando que muchos no tenían medios para negociar un sistema en línea. El caso de Amato (cartas a dirección inaccesible) refuerza este problema de canal único sin verificación de acceso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo describe la explotación de la asimetría de información y la confianza automatizada: los usuarios asumen que Centrelink ya tiene toda la información y que el sistema es correcto, y el sistema aprovecha deliberadamente ese sesgo. La cita de Colleen Taylor es clave. El candidato más cercano es RD-08-ausencia-de-incertidumbre-comunicada, que describe cómo las cartas presentaban la deuda como dato objetivo y definitivo induciendo automation bias institucional sobre el propio ciudadano. Esto captura el mecanismo psicosocial descrito en el hallazgo. RD-10 trata el tono intimidatorio pero no la explotación del sesgo de confianza.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de un mecanismo de apelación ágil o suspensión del embargo mientras se revisa la impugnación. Ninguno de los candidatos del golden aborda específicamente este problema: los candidatos tratan sobre la falta de explicación del cálculo, omisión del teléfono, canal único online, ausencia de revisión humana previa, documentación imposible de aportar, ignorancia de resoluciones del tribunal, presunción de deuda por promedio, inversión de carga de prueba, ausencia de incertidumbre comunicada, y tono intimidatorio. El más cercano sería RD-04 (inversión de carga de prueba) o RD-07 (documentación imposible), pero el hallazgo se centra específicamente en la ausencia de suspensión cautelar del embargo durante la impugnación, que es un problema distinto y más procesal. El dossier sí menciona que el embargo procedía si no se respondía, pero no hay evidencia explícita de que existiera o no un mecanismo de apelación de urgencia con suspensión cautelar; el hallazgo infiere una ausencia que no está directamente documentada en el dossier. Es un hallazgo que no encaja con ningún candidato y además no está suficientemente sustentado en el dossier como problema específico diferenciado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe que el aviso de deuda no explicaba el método de 'income averaging' utilizado para calcularla, y que el ciudadano no podía entender de dónde venía la cifra. Esto encaja directamente con RD-01-aviso-sin-explicacion-calculo, que describe exactamente que las cartas no explicaban cómo se había calculado el importe ni cuándo ocurrió el supuesto cobro indebido. También hay solapamiento con RD-06 (presunción de deuda por promedio) y RD-08 (ausencia de incertidumbre comunicada), pero el núcleo del hallazgo es la falta de explicación del cálculo en el aviso, que es el problema central de RD-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo describe la ausencia de un 'onboarding' inicial que calibre las expectativas del usuario sobre cómo funciona el sistema de detección automática, apoyándose en la declaración de Colleen Taylor sobre que los clientes asumían que Centrelink ya tenía toda la información correcta. Este problema de expectativas incorrectas del usuario sobre el sistema es más cercano a RD-08-ausencia-de-incertidumbre-comunicada, que trata sobre la falta de información al ciudadano de que el cálculo era una estimación que podía ser errónea. Sin embargo, RD-08 se centra en el momento del aviso de deuda, mientras que el hallazgo habla de una fase anterior (onboarding al inicio de la prestación). Ningún candidato aborda específicamente la ausencia de comunicación proactiva al inicio sobre las limitaciones del sistema. El problema de 'onboarding' como concepto específico no está documentado en el dossier; lo que sí está documentado es la falta de información sobre la posibilidad de error, que es RD-08. El hallazgo es una reinterpretación de RD-08 aplicada a una fase anterior, pero el problema subyacente (usuarios no informados de que el sistema puede fallar) es el mismo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe la omisión deliberada del número de teléfono en los avisos de deuda, con la intención de forzar a los destinatarios a responder por internet, y menciona el caso de Deanna Amato penalizada por no responder a cartas que nunca recibió. Esto encaja directamente con RD-02-omision-deliberada-telefono, que describe exactamente esta decisión de diseño de omitir el número de la línea de ayuda de cumplimiento para forzar la respuesta online. La evidencia del dossier (declaración del Departamento, Royal Commission) es la misma que sustenta RD-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "RD-01-aviso-sin-explicacion-calculo",
+            "judge_rationale": "El hallazgo describe la opacidad del aviso de deuda: el usuario recibía un número de deuda sin poder entender su origen, sin transparencia sobre qué datos de la ATO se cruzaron ni cómo se ejecutó el cálculo. Esto encaja directamente con RD-01-aviso-sin-explicacion-calculo, que describe que las cartas no explicaban cómo se había calculado el importe ni cuándo ocurrió el supuesto cobro indebido, y que el ciudadano recibía una cifra sin trazabilidad ni justificación comprensible. La declaración de Masterton ('sistema muy opaco') es la misma evidencia que sustenta este candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe que la carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de hasta cinco o seis años atrás, y que en caso de no responder se procedía al embargo. Esto encaja directamente con RD-04-inversion-carga-de-la-prueba, que describe exactamente esta inversión del deber de prueba institucional. También hay solapamiento con RD-07 (documentación imposible de aportar), pero el núcleo del hallazgo es la inversión de la carga de la prueba, que es el problema central de RD-04.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo se centra en la ausencia de revisión humana antes de tomar decisiones críticas (embargo de fondos). El candidato RD-05-ausencia-revision-humana-previa describe exactamente este problema: el sistema generaba y enviaba avisos de deuda de forma completamente automatizada sin que ningún agente humano revisara el cálculo antes del envío, y las deudas basadas en datos incorrectos se emitían sin ninguna revisión. Aunque el hallazgo menciona también el embargo (paso posterior), el núcleo del problema es la ausencia de revisión humana previa, que es precisamente lo que describe RD-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe que el sistema fue diseñado para recuperar fondos públicos sin protecciones de debido proceso, calificado como 'tosco y cruel, ni justo ni legal', con ~470.000 deudas de las cuales una fracción significativa fue incorrecta (reembolso de 720M$). Esto apunta a un problema sistémico de diseño. Entre los candidatos, RD-04-inversion-carga-de-la-prueba [*] es el más cercano: describe cómo el sistema invirtió el deber de prueba institucional, haciendo que el ciudadano deba demostrar que no debe, lo cual es la ausencia de protección de debido proceso más característica del esquema. El hallazgo no encaja perfectamente en ningún candidato único, pero RD-04 captura mejor la dimensión de 'sin protecciones de debido proceso' que el hallazgo enfatiza.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "RD-08-ausencia-de-incertidumbre-comunicada",
+            "judge_rationale": "El hallazgo trata sobre la comunicación implícita de confiabilidad sin calibración de expectativas sobre la precisión del método: los avisos se presentaban como definitivos sin indicar incertidumbre, y la funcionaria Colleen Taylor reconoce que sabían que los clientes asumirían que la información era correcta. Esto corresponde directamente a RD-08-ausencia-de-incertidumbre-comunicada, que describe exactamente que las cartas notificaban el importe como dato objetivo y definitivo sin indicar que era una estimación basada en promedios ni que podía ser erróneo, induciendo automation bias.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "RD-06-presuncion-de-deuda-por-promedio",
+            "judge_rationale": "El hallazgo describe el método de cálculo fundamentalmente falso (income averaging) sin verificación previa. El núcleo es el método de promediado que generaba deudas ficticias para trabajadores con ingresos variables, sin revisión antes de emitir avisos. RD-06-presuncion-de-deuda-por-promedio describe exactamente este problema: el sistema promediaba ingresos anuales distribuyéndolos en quincenas iguales, generando deudas ficticias para trabajadores estacionales, calificado por la Royal Commission como 'esencialmente injusto'. Aunque RD-05 también es relevante (ausencia de revisión), el foco principal del hallazgo es el método de cálculo erróneo, que es RD-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "RD-02-omision-deliberada-telefono",
+            "judge_rationale": "El hallazgo describe la omisión deliberada del número de teléfono en los avisos para forzar el canal online, con evidencia directa de la Royal Commission sobre la 'decisión consciente'. Esto corresponde exactamente a RD-02-omision-deliberada-telefono, que describe precisamente esta decisión de diseño de omitir el número de la línea de ayuda de cumplimiento para forzar la respuesta por el portal online.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "RD-04-inversion-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo combina dos elementos: la carga probatoria invertida (usuario debe demostrar que no debe) y la falta de información suficiente para refutar (no se explica el cálculo, sistema opaco). El testimonio de Masterton sobre no saber de dónde salió la deuda apunta a la falta de explicación del cálculo (RD-01), pero el núcleo del hallazgo es la inversión de la carga de la prueba combinada con la exigencia de documentación de años atrás. RD-04-inversion-carga-de-la-prueba describe exactamente la inversión del deber de prueba institucional, y RD-07 describe la documentación imposible de aportar. Sin embargo, el título y locus del hallazgo ('carga probatoria invertida sin proporcionar información suficiente para refutar') apunta más directamente a RD-04, que es el candidato que describe la inversión de la carga de prueba como problema central. RD-07 es también muy relevante pero RD-04 captura mejor el problema principal enunciado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que los usuarios asumían que la deuda era correcta porque venía de Centrelink (autoridad institucional), apoyándose en la cita de Colleen Taylor y en la opacidad percibida por Masterton. Ninguno de los candidatos del golden describe exactamente este problema de 'presunción de autoridad institucional'. El candidato más cercano sería RD-08 (ausencia de incertidumbre comunicada), que habla de que las cartas presentaban la deuda como dato objetivo y definitivo induciendo automation bias, lo cual es conceptualmente próximo pero distinto: RD-08 se centra en la comunicación del aviso, no en la presunción de corrección basada en identidad institucional. RD-10 habla de tono intimidatorio y trauma. Ninguno captura el núcleo del hallazgo (confianza ciega en la autoridad de Centrelink como mecanismo de diseño). Sin embargo, RD-08 es el más cercano al describir cómo la presentación del aviso inducía que el ciudadano asumiera que la deuda era correcta. El hallazgo p3-037 se solapa parcialmente con RD-08 pero su foco es diferente (presunción de autoridad vs. ausencia de comunicación de incertidumbre). No hay candidato que describa exactamente el mismo problema. Es un hallazgo real y sustentado en el dossier (cita directa de Colleen Taylor), pero no coincide con ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "RD-06-presuncion-de-deuda-por-promedio",
+            "judge_rationale": "El hallazgo describe que el sistema aplicaba income averaging sin degradación elegante ante datos ambiguos o situaciones atípicas (trabajadores estacionales, ingresos variables), procediendo automáticamente aunque la asunción fuera incorrecta. Esto es exactamente lo que describe RD-06: el sistema promediaba ingresos anuales distribuyéndolos en quincenas iguales, generando deudas ficticias para trabajadores estacionales o con empleo variable, calificado por la Royal Commission como 'esencialmente injusto'. El hallazgo p3-038 describe el mismo problema central que RD-06, aunque lo enmarca en términos de 'degradación elegante'. La esencia es idéntica: el método de promediado genera errores sistemáticos para ingresos no uniformes.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_match",
+            "matched_golden_id": "RD-09-ignorancia-de-resoluciones-del-tribunal",
+            "judge_rationale": "El hallazgo describe que el sistema operó 4 años sin incorporar retroalimentación de las disputas para corregir el método de cálculo. El candidato más cercano es RD-09 (ignorancia de resoluciones del tribunal): el Departamento ignoró las resoluciones del AAT que anulaban deudas por el mismo método y continuó emitiendo avisos idénticos. Esto es esencialmente el mismo problema: el sistema no aprendió ni se corrigió a partir de la evidencia de sus errores (ya sea de disputas individuales o de resoluciones judiciales). RD-09 captura bien la idea de que el esquema continuó sin corrección a pesar de retroalimentación externa que señalaba el defecto. El hallazgo p3-039 es una descripción más amplia del mismo fenómeno que RD-09.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de notificación previa a los beneficiarios sobre la activación del nuevo sistema automatizado de income averaging. Ninguno de los candidatos del golden describe exactamente este problema de falta de comunicación anticipada sobre el cambio de sistema. RD-08 (ausencia de incertidumbre comunicada) se refiere a que los avisos no indicaban que el cálculo era una estimación, no a la falta de notificación previa sobre la activación del sistema. RD-01 (aviso sin explicación del cálculo) tampoco cubre esto. Ningún candidato aborda la falta de notificación previa sobre el cambio metodológico. Sin embargo, el dossier tampoco menciona explícitamente este aspecto como un problema documentado; es una inferencia del hallazgo. El dossier no contiene evidencia directa de que se haya documentado la ausencia de notificación previa como problema específico. Es una inferencia razonable pero no está directamente sustentada en el dossier con evidencia específica más allá de la ausencia de mención.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "tp_match",
+            "matched_golden_id": "RD-03-canal-unico-online-forzado",
+            "judge_rationale": "El hallazgo describe el caso de Deanna Amato, penalizada por no responder a avisos enviados a una cuenta myGov a la que nunca tuvo acceso, resultando en embargo de su devolución de impuestos. Esto corresponde directamente a RD-03 (canal único online forzado): los ciudadanos eran dirigidos exclusivamente al portal myGov, y muchos no tenían medios ni capacidad para acceder al sistema online. El caso de Amato es precisamente el ejemplo paradigmático de este problema: el aviso llegó solo por canal online sin verificación de acceso, y la consecuencia fue el embargo. RD-03 describe exactamente este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-042",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de monitorización del impacto diferenciado en subgrupos vulnerables (por edad, educación, acceso a internet, etc.) durante la operación del esquema. Ninguno de los candidatos del golden describe exactamente este problema de falta de evaluación de impacto diferenciado por subgrupos. RD-03 menciona que ciertos grupos (sin acceso tecnológico, con discapacidades, en zonas rurales) fueron afectados, pero el problema que describe es el canal único online, no la ausencia de monitorización de impacto diferenciado. El hallazgo p3-042 es un problema distinto: la falta de evaluación sistemática de disparidad de impacto. Esto no está directamente documentado en el dossier como un hallazgo específico; el dossier menciona que la Royal Commission calificó el esquema de 'tosco y cruel' pero no hay evidencia de que se haya documentado específicamente la ausencia de evaluación de impacto diferenciado. Es una inferencia válida pero no sustentada directamente en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-043",
+            "label": "tp_match",
+            "matched_golden_id": "RD-05-ausencia-revision-humana-previa",
+            "judge_rationale": "El hallazgo describe que el usuario no puede cuestionar ni personalizar el método de cálculo (income averaging) antes de que se emita el aviso de deuda, y que solo puede impugnarlo a posteriori. Esto se acerca a varios candidatos, pero el núcleo del problema descrito es la ausencia de revisión previa (ni humana ni del propio usuario) antes de emitir el aviso. Sin embargo, el énfasis específico del hallazgo está en que el usuario no tiene control sobre el método aplicado, lo cual es más cercano a RD-06 (presunción de deuda por promedio, donde el método nunca fue explicado ni cuestionado antes del envío) y a RD-05 (ausencia de revisión humana previa). El hallazgo mezcla elementos de RD-05 (sin revisión previa) y RD-06 (el método de income averaging se aplica sin posibilidad de cuestionamiento). Sin embargo, el foco principal del hallazgo es la falta de control del usuario sobre los parámetros del cálculo antes del embargo, lo que más directamente corresponde a RD-05 (automatización sin revisión previa) combinado con RD-06. Dado que RD-05 describe exactamente que no había intervención humana ni revisión antes del envío, y el hallazgo menciona explícitamente que 'el sistema generaba automáticamente un aviso de deuda sin que ningún funcionario revisara previamente', RD-05 es el candidato más cercano. No obstante, el ángulo de 'ausencia de controles de usuario sobre parámetros críticos' no está perfectamente cubierto por ningún candidato individual; RD-05 es el más próximo al describir la automatización sin revisión previa como problema central.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 43,
+          "n_golden": 10,
+          "recall": 0.9,
+          "precision": 0.9302325581395349,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 4,
+          "fbeta": 0.9058882737795673,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9058882737795673
+        }
+      }
+    ]
+  }
+}

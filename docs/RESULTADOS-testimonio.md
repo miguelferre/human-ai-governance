@@ -91,9 +91,39 @@ produjo **descubrimientos legítimos fuera del golden** (tp_new: 2 en MiDAS, 6 e
 interacción reales y anclados que el órgano independiente no había listado. Casos en
 `data/external/{midas-michigan,arkansas-medicaid}/`; crudos y consolidado en `docs/casos-duros/`.
 
-**Limitaciones que quedan** (en [TAREAS.md](TAREAS.md), no como respaldo sino como trabajo planificado):
-sigue siendo Claude el generador (no se elimina del todo "el modelo piensa como el modelo"); la corrida
-es **asistida con subagentes** (generador Sonnet ciego + juez Opus independiente, roles separados), no
-con el pipeline-código `comparar`, así que el número reproducible con ese pipeline sigue pendiente; k=1
-por caso. Los casos MiDAS y Arkansas se construyeron con búsqueda web sobre fuentes públicas citadas y
-trianguladas (auditorías, sentencias, prensa seria); no contienen PHI.
+Los casos MiDAS y Arkansas se construyeron con búsqueda web sobre fuentes públicas citadas y trianguladas
+(auditorías, sentencias, prensa seria); no contienen PHI.
+
+## Corrida-código reproducible (número no asistido)
+
+El recall de arriba se midió de forma **asistida** (subagentes). Para cerrar la nota honesta de método, se
+corrió el **pipeline-código `comparar`** —el mismo que el experimento principal— sobre los 9 casos con
+testimonio, con **backend nube: generador Haiku, juez Sonnet (modelo distinto e independiente)**, k=1. Así
+el juez es un prompt/modelo separado y el flujo es reproducible: ya no es "el agente haciendo de
+constructor y de juez". Datos crudos y consolidado en `docs/pipeline-codigo/`.
+
+| approach | recall medio | precisión media |
+|---|---|---|
+| b0 (checklist, sin LLM) | 0.00 ± 0.00 | — |
+| b1 (prompt único) | 0.68 ± 0.25 | 0.87 |
+| **p3 (pipeline, producto)** | **0.93 ± 0.09** | **0.96** |
+
+Recall de p3 por caso: robodebt 0.90 · alert-fatigue 1.00 · CONCERN 1.00 · Asiana 1.00 · cierre-cuentas
+0.78 · Post Office 1.00 · Toeslagen 1.00 · MiDAS 0.89 · Arkansas 0.80.
+
+**Lectura:**
+- **p3 recupera 0.93 de los problemas conocidos con precisión 0.96**, con juez independiente y flujo
+  reproducible. La corrida asistida daba ~0.96–1.00 (algo inflado por la circularidad); el pipeline-código
+  lo rebaja a **0.93 pero confirma la señal** — no era un artefacto del método asistido.
+- **b0 = 0.00 en los 9**: el suelo/canario perfecto (la checklist determinista no inventa nada).
+- **p3 bate a b1 (0.93 vs 0.68) por un margen muy superior al ruido** → la estructura del pipeline se
+  justifica también aquí, sobre casos de fuera del dominio de casa.
+- **MiDAS: b1 = 0.00 pero p3 = 0.89.** El prompt único no enganchó ni un problema (caso denso y muy
+  documentado) y el pipeline por descomposición los recuperó: la ilustración más clara de "caso difícil →
+  hace falta estructura".
+- Los dos casos duros nuevos dan **más** recall en p3 (MiDAS 0.89, Arkansas 0.80) que en su corrida
+  asistida de un solo tiro (0.78 / 0.70): p3 descompone por bloques y es más exhaustivo.
+
+**Limitaciones que quedan:** k=1 (sin varianza; a k=3 se estrecharían las barras, no las medias, como en
+el experimento principal); sigue siendo Claude en ambos roles, pero con modelos distintos (Haiku vs Sonnet)
+y flujo reproducible la independencia es real.

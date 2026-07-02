@@ -1,0 +1,2144 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 10,
+    "system_name": "Sistema de clasificacion de riesgo para el control de los subsidios de guarderia (administracion tributaria)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.7,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.7446808510638298,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.92,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9829059829059831,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 10,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia total de comunicación de incertidumbre y confianza del modelo al ciudadano",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Notificación de deuda al ciudadano tras asignación de puntuación de riesgo",
+            "evidence": "La familia recibe la notificación de la deuda; no se le comunica que indicadores dispararon su puntuacion. [...] La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano no tiene forma de calibrar cuán confiable es la acusación o cuál es el nivel de certeza del modelo. Recibe una demanda de devolución de dinero sin conocer la precisión, los límites ni los errores posibles del sistema que lo acusó. Esto impide cualquier evaluación racional de la solidez del caso contra él y genera confianza ciega (en el peor sentido) en una clasificación que puede ser incorrecta.",
+            "recommendation": "Incluir en toda notificación dirigida al ciudadano: (1) la puntuación de riesgo numérica o el nivel de confianza del modelo en esta clasificación, (2) un intervalo o margen de error típico del sistema, (3) una descripción clara de qué indicadores contribuyeron a su clasificación en este caso concreto, y (4) información sobre la tasa de error histórica del modelo desglosada por el tipo de indicador que disparó su puntuación.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "Opacidad total en la explicación de la decisión: ciudadano y funcionario sin acceso a los fundamentos",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Comunicación de la razón de la marca de riesgo (tanto al ciudadano como al funcionario que investiga)",
+            "evidence": "El ciudadano recibe la notificación de la deuda; no se le comunica que indicadores dispararon su puntuacion. [...] La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada. El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Tanto el ciudadano como el funcionario que ejecuta la investigación carecen de información sobre por qué fue clasificado. Esto impide: (a) que el ciudadano pueda defender su caso o corregir información errónea, (b) que el funcionario pueda evaluar críticamente si la marca es confiable antes de actuar, (c) que se detecten sesgos o errores en el modelo. La ausencia de explicación hace imposible un juicio independiente.",
+            "recommendation": "Implementar un sistema de explicación accesible que: (1) informe al ciudadano, en lenguaje claro, de cada indicador que contribuyó a su puntuación de riesgo, (2) proporcione al funcionario la lista detallada de factores ponderados en este caso antes de actuar sobre él, (3) permita acceso a la ponderación relativa de cada factor, y (4) establezca un protocolo de revisión previa en el que el funcionario pueda cuestionar la marca si observa inconsistencias.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Uso de indicadores sesgados (nacionalidad, apellido) sin supervisión explícita de disparidad de subgrupos",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Indicadores incluidos en el modelo de risk-scoring: nacionalidad, doble nacionalidad, indicios derivados del apellido",
+            "evidence": "Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido, la condicion de familia monoparental. [...] No se la comunica que indicadores dispararon su puntuacion. [...] No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El modelo incorpora explícitamente indicadores que son proxies de origen étnico y nacionalidad sin que haya evidencia en el dossier de: (a) un análisis de impacto desigual por subgrupos (origen étnico, nacionalidad, género en combinación con otros factores), (b) una justificación de por qué estos indicadores contribuyen legítimamente a predecir fraude (más allá de correlación espuria), o (c) un monitoreo continuo en producción de la tasa de falsos positivos por subgrupo. El resultado es un sistema que refuerza estereotipos (estar en una familia monoparental o tener un apellido extranjero señala al ciudadano como sospechoso de fraude) sin supervisión explícita.",
+            "recommendation": "Realizar inmediatamente: (1) un análisis de impacto desigual (disparate impact assessment) que desglose la tasa de falsos positivos, de clasificaciones erróneas y de sanciones por origen étnico, nacionalidad, género y combinaciones relevantes; (2) justificar en términos causales (no solo correlacionales) por qué cada indicador sospechoso (apellido, nacionalidad) predice fraude en este contexto y no solo selectividad étnica; (3) establecer umbrales separados o ajustes para subgrupos con disparidad comprobada; (4) monitorear mensualmente la disparidad de subgrupos en producción y generar alertas automáticas si crece.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Incapacidad del ciudadano para impugnar o descartar la marca sin fricción y sin respuesta",
+            "guideline_ids": [
+              "HAX-G8",
+              "HAX-G9",
+              "PAIR-FC-1",
+              "PAIR-FC-2"
+            ],
+            "locus": "Proceso de apelación o descargo del ciudadano tras ser marcado",
+            "evidence": "Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado. Cuando intentas defenderte, eres tu quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres. [...] No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad. Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano carece de un mecanismo accesible y con respuesta garantizada para impugnar la marca. La carga probatoria está invertida (debe demostrar inocencia en lugar de que la administración demuestre culpa), no hay una vía clara de descargo ni hay feedback sobre si su apelación fue revisada. Esto amplía el daño cuando el sistema comete un error: no hay rectificación fácil.",
+            "recommendation": "Implementar: (1) un formulario de apelación accesible que capte la impugnación del ciudadano con estructura clara (datos que refutan cada indicador de riesgo), (2) un proceso de revisión formal en el que un funcionario independiente re-evalúe la marca antes de proceder a la reclamación, con plazo máximo explícito, (3) una respuesta escrita que explique si la apelación fue aceptada o rechazada y por qué, (4) acceso a expediente completo (incluidos los datos y la ponderación usados) durante el plazo de apelación.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Falta de comunicación sobre capacidades y límites del sistema en el onboarding",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Información disponible para el ciudadano al iniciar o recibir el subsidio (onboarding implícito)",
+            "evidence": "El modelo produce, para cada beneficiario, una puntuacion de riesgo [...] La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto. [...] Nadie me explico que habia hecho mal ni que dato habia activado todo esto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "No hay evidencia de que en el momento de otorgarse el subsidio se informe al ciudadano de que será sometido a un modelo de risk-scoring automatizado, qué hace ese modelo, cuáles son sus limitaciones o cuándo podría ser marcado erróneamente. El ciudadano descubre el sistema cuando ya está acusado, sin un modelo mental previo de cómo funciona o cuáles son sus riesgos.",
+            "recommendation": "Incluir en la documentación inicial del subsidio (en el idioma del ciudadano y de forma clara): (1) descripción de que existe un sistema automatizado de evaluación de riesgo de fraude, (2) explicación de qué tipo de datos se analizan (género, nacionalidad, montos, inconsistencias formales, etc.), (3) información sobre la tasa de error histórica o falsos positivos típicos, (4) descripcción de las consecuencias si se recibe una marca de riesgo, (5) descripción de los derechos de apelación y acceso a la información.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "Régimen de sanciones binario (reclamación integral) sin graduación ante errores formales o fraude menor",
+            "guideline_ids": [
+              "PAIR-UN-2",
+              "PAIR-EF-1"
+            ],
+            "locus": "Ejecución de la sanción tras clasificación como fraude (reclamación de dinero)",
+            "evidence": "Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion. [...] Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio. Te clasifican como defraudador entero, no como alguien que cometio un fallo menor que se pueda corregir.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no diferencia entre error formal menor (firma omitida, documento tardío) y fraude sustancial. Toda irregularidad dispara la misma sanción (reclamación integral), independientemente de la severidad o intencionalidad. Esto viola el principio de proporcionalidad y amplifica el daño de los falsos positivos o errores del modelo: una discrepancia menor resulta en una deuda enorme sin escalada gradual.",
+            "recommendation": "Implementar un régimen graduado de respuestas: (1) errores formales menores → solicitud de corrección sin reclamación, (2) inconsistencias sustanciales pero sin fraude intencional comprobado → regularización proporcional del importe (p. ej., devolución de lo cobrado en exceso por el error, no del total), (3) fraude comprobado → reclamación integral. Requiere revisión por funcionario que justifique por escrito la clasificación antes de proceder a la reclamación.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Funcionario sin acceso a detalles para ejercer supervisión crítica sobre la marca",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "PAIR-FC-2"
+            ],
+            "locus": "Información disponible al funcionario que abre la investigación antes de actuar",
+            "evidence": "El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que. [...] No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario es ejecutor de una decisión automatizada sin tener información para evaluarla críticamente. No puede detectar si la marca es confiable, si hay sesgos obvios, si los indicadores son apropiados para este caso, o si cabe un descargo antes de proceder. Esto elimina un control humano esencial y permite que errores o sesgos del modelo se propaguen sin fricción.",
+            "recommendation": "Proporcionar al funcionario, antes de abrir investigación: (1) desglose completo de indicadores y ponderaciones en este caso, (2) puntuación numérica y nivel de confianza del modelo, (3) frecuencia histórica de falsos positivos en casos similares, (4) un protocolo de revisión previa obligatoria en el que pueda solicitar re-análisis o cuestionar la marca, con respuesta en plazo máximo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Inclusión en registro interno sin comunicación previa ni control del ciudadano",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Registro interno de la familia marcada como posible defraudadora",
+            "evidence": "Cuando se abre una revision, la familia es clasificada como posible defraudadora, se le suspende y reclama la devolucion integra de la ayuda recibida, y queda incluida en un registro interno. [...] Cuando el sistema te marca y te senala como criminal, te mete en una especie de lista negra de la que no sabias nada.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano no es informado de que ha sido añadido a un registro interno de sospechosos, no conoce cuáles son las consecuencias de esa inclusión (acceso a otros programas, contacto con otras administraciones, duración) y no tiene forma de controlarlo o rectificarlo. Esto vulnera la transparencia sobre las consecuencias de las acciones del sistema y dificulta la recuperación de reputación tras una acusación errónea.",
+            "recommendation": "Implementar: (1) notificación inmediata al ciudadano informando de su inclusión en el registro, (2) explicación clara de las consecuencias (plazos de retención, acceso, usos), (3) derecho a solicitar revisión o borrado si la acusación es desestimada, (4) plazo explícito de retención después del cual los datos se purgan automáticamente, (5) acceso del ciudadano a su propio registro para verificar qué información se almacena sobre él.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Indicador de familia monoparental sin justificación causal comprobada",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-MM-2"
+            ],
+            "locus": "Inclusión de 'condición de familia monoparental' como indicador de riesgo de fraude",
+            "evidence": "Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido, la condicion de familia monoparental, el importe del subsidio y pequenas inconsistencias formales en la solicitud.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "No hay evidencia en el dossier de que ser familia monoparental sea un predictor válido de fraude en subsidios de guardería. Es probable que sea un proxy de vulnerabilidad económica o de sesgo en los datos de entrenamiento. Su inclusion amplía el efecto de estereotipos (madres solas son más sospechosas) sin fundamentación causal. Aunque menos evidente que el apellido, perpetúa sesgos de género/estructura familiar.",
+            "recommendation": "Justificar con datos: (1) análisis de la correlación entre monoparentalidad y fraude real (no solo selección para revisión), (2) si la correlación es débil o espuria (mediada por vulnerabilidad), remover el indicador, (3) si es válida, documentar por qué y monitorear disparidad de género en la marca de riesgo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Lógica de ponderación no publicada ni accesible a escrutinio público",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Secreto de los pesos del modelo y criterios de puntuación",
+            "evidence": "La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin acceso a la lógica de ponderación (cuánto pesa cada indicador), es imposible que ciudadanos, activistas, investigadores o tribunales evalúen si el sistema es justo. La opacidad facilita la perpetuación de sesgos no detectados. En administración pública, donde las decisiones afectan a derechos, la transparencia es expectativa de legalidad.",
+            "recommendation": "Publicar (en formato accesible): (1) descripción completa de cada indicador incluido, (2) ponderación relativa de cada uno (como % de contribución típica a la puntuación), (3) umbrales de puntuación para cada categoría de riesgo, (4) metodología de validación (qué tasa de fraude real captura el modelo, por qué indicadores), (5) abrir revisión externa (auditoría independiente anual sobre sesgos y precisión).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Falta de información sobre cómo el feedback o apelación del usuario afecta el sistema futuro",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Canal de apelación/feedback del ciudadano y su uso posterior",
+            "evidence": "No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella. [...] La respuesta es que tienes que pagar; el por que no aparece por ningun lado.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Incluso si el ciudadano logra impugnar la acusación, no se comunica si esa impugnación sirvió para mejorar el modelo, si se utilizó como dato de entrenamiento para futuras decisiones, o si simplemente se ignoró. Esto reduce la confianza en el sistema y pierde una oportunidad de aprendizaje.",
+            "recommendation": "Implementar: (1) confirmación escrita de que la apelación ha sido recibida y se procesará, (2) respuesta final que explique si influyó en la decisión, (3) si fue desestimada, explicación de por qué la apelación no modificó la evaluación, (4) información sobre cómo se utilizarán los datos de esta apelación para mejorar futuras evaluaciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-012",
+            "title": "Ausencia de control del funcionario sobre la ejecución: debe aceptar y actuar sobre la marca sin cuestionamiento formal",
+            "guideline_ids": [
+              "PAIR-FC-2",
+              "PAIR-ET-3"
+            ],
+            "locus": "Flujo de trabajo del funcionario: recibe marca de riesgo, abre investigación, reclama dinero",
+            "evidence": "El funcionario que tramita el caso ve la marca de riesgo, pero no el detalle de por que se asigno. [...] No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El funcionario carece de un mecanismo formal para cuestionar o rechazar la marca antes de actuar. Aunque es humano, está vinculado a la salida del modelo sin independencia. Esto convierte el sistema en un despachador automático de acusaciones con apariencia de humana revisión, cuando en realidad no hay control crítico real.",
+            "recommendation": "Diseñar un flujo con control real: (1) el funcionario recibe la marca pero NO actúa hasta revisar detalles, (2) protocolo obligatorio de revisión previa (checklist: ¿son los indicadores consistentes? ¿hay contradicción con otros datos? ¿margen de confianza aceptable?), (3) derecho explícito a rechazar la marca y derivar a revisión superior con justificación, (4) registro de todos los casos en los que el funcionario rechazó actuar, para auditar el sesgo del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-013",
+            "title": "Suspensión inmediata del subsidio sin cumplimiento de debido proceso",
+            "guideline_ids": [
+              "PAIR-EF-1",
+              "HAX-G10"
+            ],
+            "locus": "Ejecución de la suspensión tras apertura de investigación",
+            "evidence": "Cuando se abre una revision, la familia es clasificada como posible defraudadora, se le suspende y reclama la devolucion integra de la ayuda recibida. [...] Recibi una carta diciendo que tenia que devolver todo lo cobrado durante anos, de golpe.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La suspensión inmediata del subsidio ante una acusación de fraude (aún no probada) causa daño irreversible a corto plazo: una familia pierde apoyo económico para guardería sin oportunidad previa de descargo. Aunque es necesario proteger fondos públicos, la ausencia de un proceso graduado (p. ej., suspensión provisional pendiente de apelación, reducción en lugar de cese) viola proporcionalidad.",
+            "recommendation": "Implementar proceso graduado: (1) ante marca de alto riesgo, notificar al ciudadano con período de apelación previo a la suspensión (p. ej., 15-30 días), (2) solo tras rechazarse la apelación, aplicar suspensión provisional, (3) durante la investigación, ofrecer subsidio reducido o vía de pago parcial mientras se resuelve, (4) reclamar solo el fraude probado, no el monto íntegro preventivamente.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo se centra en la ausencia de comunicación de incertidumbre y confianza del modelo (sin probabilidad individual, sin intervalo de error) hacia el ciudadano. Esto encaja directamente con TO-06-marca-sin-incertidumbre-ni-rendimiento, que describe exactamente la salida binaria sin probabilidad individual, sin intervalo de error y sin comunicar el rendimiento del modelo. Aunque también hay elementos de opacidad al ciudadano (TO-01), el énfasis específico en la falta de comunicación de incertidumbre/confianza apunta a TO-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe explícitamente la opacidad tanto para el ciudadano como para el funcionario: ambos desconocen los fundamentos de la marca. Aunque TO-01 cubre la opacidad al ciudadano y TO-07 la no publicación del modelo, el candidato que mejor captura la dualidad ciudadano+operador sin acceso a los fundamentos es TO-01 para el ciudadano y TO-02 para el operador. Sin embargo, el hallazgo combina ambos aspectos. El título menciona explícitamente 'ciudadano y funcionario sin acceso', lo que apunta a TO-02 como el candidato que añade la dimensión del operador (que es la más específica y diferenciadora, ya que TO-01 solo cubre al ciudadano). Pero revisando, TO-01 es el primero marcado y cubre la parte ciudadano; TO-02 cubre la parte operador. El hallazgo es una combinación. El candidato más abarcador que incluye ambas dimensiones no existe como uno solo, pero TO-01 es el más prominente en los candidatos marcados. Dado que el hallazgo enfatiza la opacidad combinada, y TO-02 es el que añade la dimensión diferencial del operador (que es lo que distingue este hallazgo de b1-001), adjudico a TO-02-opacidad-tambien-para-el-operador como el candidato que mejor captura el elemento más específico y diferenciador del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo trata específicamente el uso de indicadores sensibles (nacionalidad, doble nacionalidad, apellido) sin supervisión de disparidad de subgrupos, con evidencia de discriminación percibida ('es sencillamente racista'). Esto encaja directamente con TO-05-indicadores-sensibles-no-transparentes, que describe exactamente el uso de variables sensibles sin transparencia ni justificación comunicada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la incapacidad del ciudadano para impugnar la marca, la falta de canal real de apelación y la inversión de la carga de la prueba. El candidato TO-03-imposibilidad-de-apelar-y-defenderse encaja perfectamente: no hay canal real para impugnar la marca con pruebas y que alguien revise el caso. La evidencia citada ('no habia manera real de apelar', 'eres tu quien tiene que demostrar') apoya directamente este candidato. TO-04 también aparece en la evidencia pero el foco principal es la imposibilidad de apelar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "TO-07-modelo-opaco-no-publicado",
+            "judge_rationale": "El hallazgo habla de la falta de comunicación sobre capacidades y límites del sistema en el onboarding: el ciudadano no sabe que existe el modelo, cómo funciona, ni qué factores se usan. Esto se acerca más a TO-07-modelo-opaco-no-publicado (la lógica y existencia de los indicadores no se publican) y a TO-01 (no se comunica al ciudadano). Sin embargo, el énfasis en 'onboarding' y en que el ciudadano no fue informado de las capacidades/límites del sistema antes de ser afectado apunta a TO-07, que cubre la no publicación de la lógica del modelo. También podría ser TO-06 por la falta de comunicación de incertidumbre. Pero el locus es 'información disponible al iniciar/recibir el subsidio', lo que es más cercano a TO-07 (modelo opaco no publicado) que a TO-06 (incertidumbre). Adjudico a TO-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe exactamente el régimen binario de sanciones: una irregularidad menor lleva a reclamar la totalidad de la ayuda sin graduación ni tramo intermedio. Esto encaja perfectamente con TO-08-todo-o-nada-sin-degradacion, que describe exactamente que una irregularidad formal menor basta para clasificar el caso como fraude íntegro y reclamar toda la ayuda sin tramo intermedio.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "TO-09-automation-bias-del-funcionario",
+            "judge_rationale": "El hallazgo describe específicamente que el funcionario ve la marca de riesgo pero no tiene acceso a los detalles de por qué se asignó, y no hay canal para consultar o cuestionar el motivo antes de actuar. Esto encaja perfectamente con TO-09-automation-bias-del-funcionario, que describe exactamente ese problema: el diseño empuja al funcionario a ejecutar la decisión de la máquina por inercia sin supervisión humana efectiva. También encaja con TO-02, pero el énfasis del hallazgo está en la imposibilidad de ejercer supervisión crítica (no solo en la opacidad), lo que apunta más a TO-09.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo trata sobre la inclusión en un registro interno sin que el ciudadano lo sepa ni pueda controlarlo. El candidato más cercano es TO-03-imposibilidad-de-apelar-y-defenderse, que habla de no poder corregir, anular ni contestar la decisión. Sin embargo, el núcleo del hallazgo es la inclusión en una 'lista negra' sin comunicación previa ni control del ciudadano, lo que es un aspecto específico de la opacidad hacia el ciudadano. Ninguno de los candidatos describe exactamente el problema de la inclusión en un registro interno sin notificación ni control. TO-03 es el más cercano porque la imposibilidad de contestar la decisión incluye no poder salir del registro. Se adjudica a TO-03 como el mejor encaje disponible.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo señala específicamente el uso de 'condición de familia monoparental' como indicador de riesgo sin justificación causal comprobada. Esto es un subconjunto del problema descrito en TO-05-indicadores-sensibles-no-transparentes, que menciona explícitamente la familia monoparental como variable sensible usada sin transparencia ni justificación. El encaje es directo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "TO-07-modelo-opaco-no-publicado",
+            "judge_rationale": "El hallazgo describe que la lógica de ponderación y la existencia de los indicadores no se publican ni se comunican. Esto encaja directamente con TO-07-modelo-opaco-no-publicado, cuya descripción usa casi las mismas palabras del dossier: 'la logica de ponderacion y la propia existencia de los indicadores no se publican'. Es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo habla de la falta de canal de apelación/feedback y de cómo el ciudadano no puede influir en el sistema. La evidencia citada mezcla la imposibilidad del funcionario de cuestionar la marca y la del ciudadano de obtener explicación. El núcleo del hallazgo es la ausencia de canal real de apelación para el ciudadano, lo que encaja con TO-03-imposibilidad-de-apelar-y-defenderse. El ángulo específico de 'cómo el feedback afecta el sistema futuro' no está bien sustentado en el dossier, pero el problema subyacente (no hay canal real de impugnación) sí corresponde a TO-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-012",
+            "label": "tp_match",
+            "matched_golden_id": "TO-09-automation-bias-del-funcionario",
+            "judge_rationale": "El hallazgo describe que el funcionario debe aceptar y actuar sobre la marca sin posibilidad de cuestionamiento formal, lo que es exactamente el problema de automation bias descrito en TO-09-automation-bias-del-funcionario. Sin embargo, b1-007 ya fue adjudicado a TO-09. El hallazgo b1-012 pone el énfasis en la ausencia de control/cuestionamiento formal del funcionario sobre la ejecución, que también encaja con TO-02-opacidad-tambien-para-el-operador (el operador no puede entender ni cuestionar el motivo antes de actuar). Dado que TO-09 ya fue usado para b1-007 y b1-012 enfatiza más la ausencia de control formal (no solo el sesgo de automatización), TO-02 es el mejor candidato disponible que no ha sido asignado y describe el mismo problema desde el ángulo del operador.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-013",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe la suspensión inmediata del subsidio y la reclamación íntegra de la deuda sin un proceso intermedio, apoyándose en que una irregularidad menor lleva a clasificar el caso como fraude total sin tramo de regularización. Esto encaja directamente con TO-08-todo-o-nada-sin-degradacion, que describe exactamente ese problema: una irregularidad formal menor basta para reclamar toda la ayuda sin tramo intermedio. Aunque el hallazgo menciona 'debido proceso', la evidencia citada (carta de devolución total de golpe, sin paso intermedio) apunta al problema de la respuesta desproporcionada todo-o-nada, no principalmente a la falta de explicación, la inversión de carga de prueba, ni a la opacidad del modelo.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 13,
+          "n_golden": 10,
+          "recall": 0.7,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 0,
+          "fbeta": 0.7446808510638298,
+          "meets_genericity_gate": true,
+          "primary_score": 0.7446808510638298
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia total de comunicación de la puntuación de riesgo y sus componentes al ciudadano",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Notificación inicial al ciudadano cuando es marcado como caso de riesgo",
+            "evidence": "El ciudadano recibe la notificación de la deuda; no se le comunica que indicadores dispararon su puntuacion. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista. Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no explica por qué fue seleccionado para revisión, impidiendo que el ciudadano entienda las razones de su marcaje y que ejerza su derecho de defensa. La familia no puede calibrar si la decisión es justa ni puede cuestionar factores específicos (como el uso de indicadores discriminatorios como la nacionalidad o el apellido). Esto viola el derecho fundamental a saber las razones de una decisión administrativa que afecta sus derechos.",
+            "recommendation": "Incluir en la notificación inicial una comunicación clara y accesible de: (a) la puntuación de riesgo asignada, (b) los indicadores específicos que contribuyeron a esa puntuación en su caso concreto, (c) el peso relativo de cada factor, y (d) el umbral usado para la selección. Permitir al ciudadano acceder al detalle de cálculo antes de que se abra la investigación formal.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Indicadores discriminatorios sin transparencia: nacionalidad, apellido extranjero e inclusión de factores sensibles sin justificación comunicada",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Composición de indicadores del modelo de risk-scoring (nacionalidad, doble nacionalidad, apellido extranjero)",
+            "evidence": "Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido, la condicion de familia monoparental, el importe del subsidio y pequenas inconsistencias formales en la solicitud. No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El uso de indicadores basados en características protegidas (nacionalidad, origen étnico inferido del apellido) sin comunicar su presencia, peso o justificación crea un riesgo grave de sesgo discriminatorio. Los ciudadanos afectados descubren retroactivamente que fueron penalizados por atributos inmodificables y potencialmente ilegales bajo leyes de no-discriminación. La falta de transparencia impide tanto al ciudadano como al funcionario evaluar si la decisión es legítima.",
+            "recommendation": "Realizar una auditoría urgente del impacto diferencial de estos indicadores por grupos demográficos. Publicar la justificación regulatoria y estadística de por qué la nacionalidad y el apellido son variables válidas de riesgo (o eliminarlas si no lo son). Comunicar explícitamente a cada ciudadano si estos factores fueron usados en su caso y con qué peso. Establecer un proceso de revisión independiente de decisiones donde estos indicadores fueron activados.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Falta de comunicación de incertidumbre y tasas de error del modelo",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Presentación de la puntuación de riesgo al ciudadano y al funcionario",
+            "evidence": "La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema presenta una clasificación binaria (marcado/no marcado) sin ninguna medida de confianza, intervalo de incertidumbre o tasa de error esperada. El ciudadano y el funcionario no pueden calibrar cuánta confianza depositar en esa marca. Esto es especialmente crítico en un contexto donde la consecuencia es la reclamación del 100% de la ayuda recibida durante años, sin margen para error.",
+            "recommendation": "Comunicar junto con la marca de riesgo: (a) la probabilidad estimada de fraude asignada a ese caso, (b) el intervalo de confianza o margen de error del modelo, (c) la tasa de falsos positivos histórica del sistema, y (d) ejemplos de casos similares con su desenlace real. Permitir al funcionario ver esta incertidumbre antes de actuar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Diseño que induce automation bias: funcionario no tiene acceso a detalles de la puntuación antes de actuar",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G11"
+            ],
+            "locus": "Interfaz que recibe el funcionario de control cuando se le presenta un caso para investigar",
+            "evidence": "El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que. No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario recibe una marca de riesgo de una caja negra sin poder acceder a sus fundamentos. Esto empuja a una aceptación acrítica de la recomendación del sistema: simplemente ve 'está marcado' y procede a investigar y reclamar. No tiene información para cuestionar si la marca es apropiada, si hay errores o sesgos, o si el caso merece un tratamiento diferente. Esto es automation bias puro: la autoridad aparente del sistema desactiva la supervisión crítica del humano.",
+            "recommendation": "Modificar la interfaz del funcionario para que incluya siempre: (a) los indicadores que dispararon la marca, (b) la puntuación numérica, (c) las explicaciones de por qué cada factor fue considerado, y (d) un campo obligatorio donde el funcionario debe confirmar que ha revisado los detalles antes de proceder. Implementar un flujo donde el funcionario pueda escalar o rechazar la recomendación del sistema con justificación registrada.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Falta de información contextualmente relevante sobre el procedimiento y los derechos del ciudadano",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Notificación inicial y comunicación con el ciudadano marcado como caso de riesgo",
+            "evidence": "Te etiquetan y te tratas como un fraude, y no tienes dinero para luchar por tus derechos. Recibi una carta diciendo que tenia que devolver todo lo cobrado durante anos, de golpe. Nadie me explico que habia hecho mal ni que dato habia activado todo esto; solo que era sospechosa y que la deuda era enorme. Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La notificación se limita a comunicar una deuda reclamada sin contexto sobre: cómo se llegó a esa marca, cuál es el proceso de apelación disponible, qué derechos tiene el ciudadano, o cómo puede acceder a más información. El ciudadano recibe una sorpresa financiera devastadora (devolver años de subsidios de golpe) sin información que le permita entender qué ocurrió o cómo responder.",
+            "recommendation": "Acompañar toda notificación de riesgo o reclamación con: (a) una explicación clara en lenguaje accesible del cálculo de riesgo y los factores aplicados, (b) información sobre derechos de acceso a expediente y apelación, (c) canales de contacto para solicitar aclaraciones antes de proceder, (d) ejemplos de cómo regularizar irregularidades formales, y (e) información sobre asistencia legal disponible.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Ausencia de gradación en la respuesta: clasificación binaria como 'defraudador' sin paso intermedio para errores formales",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-1"
+            ],
+            "locus": "Lógica de decisión al clasificar un caso como fraude y determinar la reclamación",
+            "evidence": "Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion. Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio. Te clasifican como defraudador entero, no como alguien que cometio un fallo menor que se pueda corregir.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no diferencia entre error administrativo de baja intención (firma omitida, documento entregado tarde) y fraude deliberado. Cualquier irregularidad formal, una vez que el caso entra en investigación, resulta en una reclamación del 100% de la ayuda. Esto es desproporcionado y no comunica al ciudadano que había alternativas menos severas (corrección, multa parcial, etc.). La ciudadanía no puede comprender por qué un error formal se castiga como fraude integral.",
+            "recommendation": "Implementar una escala de respuesta graduada: (a) para irregularidades formales menores, ofrecer un período de regularización sin penalización, (b) para inconsistencias sin evidencia de fraude intencional, aplicar una reclamación parcial o multa proporcional, (c) reservar la reclamación integral solo para casos con evidencia clara de fraude deliberado. Comunicar al ciudadano la categoría en la que cae su caso y por qué se aplica la respuesta específica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Falta de mecanismo de apelación y revisión accesible con acceso a los detalles del cálculo",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Proceso de apelación y escalada disponible al ciudadano una vez marcado",
+            "evidence": "Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado. No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad. Cuando intentas defenderte, eres tu quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "No existe un proceso de apelación que permita al ciudadano cuestionar la puntuación de riesgo u obtener revisión independiente. El ciudadano no puede acceder a la información que genera la reclamación, con lo que no puede presentar pruebas o argumentos técnicamente válidos. La carga de la prueba recae en él (debe demostrar su inocencia) en lugar de en la administración (demostrar el fraude).",
+            "recommendation": "Crear un proceso de apelación estructurado con: (a) acceso automático a la puntuación numérica, los indicadores usados y la explicación del cálculo, (b) plazo claro y acompañado de asistencia para presentar apelación, (c) revisión por un funcionario diferente al que abrió la investigación, (d) opción de revisión técnica independiente del modelo si se alega sesgo o error sistemático, (e) presunción de buena fe durante el procedimiento de apelación (no que el ciudadano tiene que demostrar inocencia).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Comunicación que genera desconfianza en la institución por falta de transparencia en criterios públicos",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-1"
+            ],
+            "locus": "Publicidad y comunicación de los criterios del modelo de riesgo",
+            "evidence": "La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada. Y al final tambien pierdes la confianza en el propio gobierno: te acusan, no te dicen de que exactamente, y no puedes hacer nada para que te escuchen.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El modelo opera como una caja negra sin que exista documentación pública sobre sus indicadores, pesos o lógica. Incluso cuando se activa contra un ciudadano, no se comunican sus criterios. Esto erosiona la confianza en la institución porque los ciudadanos perciben un sistema arbitrario e injusto. La falta de transparencia pública también impide que abogados, defensores públicos y otros actores puedan ayudar a los afectados.",
+            "recommendation": "Publicar documentación accesible sobre: (a) la lista de indicadores usados en el modelo, (b) la justificación de por qué cada indicador se considera predictivo de fraude, (c) los pesos relativos o la importancia de cada factor, (d) la tasa de precisión, recall y falsos positivos históricos del modelo, (e) resultados de auditoría de sesgo por grupo demográfico. Permitir que defensores y abogados accedan a esta información para asesorar a clientes.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Ausencia de información sobre las tasas de error y falsos positivos del modelo",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Documentación interna y comunicación con funcionarios sobre el desempeño del modelo",
+            "evidence": "La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Ni los ciudadanos ni los funcionarios saben cuál es la tasa de falsos positivos histórica del modelo. ¿Cuántas familias fueron marcadas como casos de riesgo pero no cometieron fraude? Sin esta información, el funcionario no puede calibrar qué tan grave es la marca ni cuánta investigación adicional debe hacer antes de proceder. El ciudadano no sabe si es probable que haya sido un error del sistema.",
+            "recommendation": "Publicar y comunicar de forma clara: (a) la tasa de precisión del modelo (qué porcentaje de los casos marcados resultaron ser fraude real), (b) la tasa de falsos positivos (qué porcentaje fueron errores), (c) cómo varía esta tasa por grupo demográfico o tipo de caso, (d) la tasa de casos en los que el funcionario rechazó la marca del sistema y por qué. Incluir esta información en la interfaz del funcionario de forma prominente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Impacto diferencial no auditado en subgrupos protegidos",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Uso de indicadores como nacionalidad, doble nacionalidad y apellido extranjero sin auditoría de impacto diferencial",
+            "evidence": "Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido. No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El modelo incluye indicadores que correlacionan fuertemente con origen étnico (nacionalidad, apellido extranjero) sin evidencia comunicada de que se haya auditado su impacto diferencial. Familias inmigrantes o con origen extranjero pueden estar siendo sistemáticamente sobre-representadas en la lista de riesgo, lo que equivale a discriminación algorítmica. Los ciudadanos afectados lo interpretan (correctamente) como racismo institucionalizado.",
+            "recommendation": "Realizar una auditoría urgente de impacto diferencial desagregando las tasas de marcaje por: (a) nacionalidad/origen del ciudadano, (b) origen étnico del apellido, (c) estatus migratorio, (d) familia monoparental. Publicar los resultados. Si se confirma sobre-representación de grupos protegidos, eliminar o reponderar esos indicadores. Establecer monitoreo continuo de estas métricas como parte del control de calidad del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Ausencia total de explicacion de factores en la puntuacion de riesgo al ciudadano",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Notificacion enviada al ciudadano cuando se abre revision tras marcar el subsidio",
+            "evidence": "El ciudadano 'recibe la notificacion de la deuda; no se le comunica que indicadores dispararon su puntuacion'. La madre afectada refiere: 'Nadie me explico que habia hecho mal ni que dato habia activado todo esto; solo que era sospechosa y que la deuda era enorme'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano no comprende por que ha sido marcado ni como sus acciones o datos lo llevaron a esta situacion. Esto viola el derecho a comprender las consecuencias y la base de la decision publica que le afecta, impide toda defensa informada, y produce desorientacion y desconfianza total en la institucion (como expresa afectada-2: 'no te dicen de que exactamente, y no puedes hacer nada para que te escuchen').",
+            "recommendation": "Incluir en la notificacion inicial al ciudadano un resumen estructurado de los factores que contribuyeron a su puntuacion de riesgo (p. ej., 'Nacionalidad: X puntos; Irregularidad formal en documento Y: Z puntos'), con magnitudes relativas, umbrales aplicados y referencias a la normativa que justifica el uso de estos indicadores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "El funcionario que inicia la investigacion no tiene acceso a la justificacion de la marca de riesgo",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Interfaz de trabajo del personal de control cuando recibe un caso marcado para revision",
+            "evidence": "El funcionario 'no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que'. La administracion tributaria confirma: 'El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario opera con informacion incompleta e irresponsablemente: debe tomar una decision de enorme peso (reclamacion integra de ayuda multi-anual) sin poder evaluar la solidez de los fundamentos. Esto impide supervision significativa del sistema y facilita que se siga ciegamente la marca, sin cuestionamiento critico.",
+            "recommendation": "Proporcionar al funcionario un desglose completo y accesible de los factores que generaron la puntuacion, incluyendo pesos, indicadores presentes/ausentes en el caso concreto, y contraste con casos similares. Esto facilita que el funcionario pueda validar la marca antes de actuar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "No existe canal para que el funcionario cuestione o refute la marca de riesgo antes de reclamacion",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Proceso de tramitacion cuando funcionario recibe caso con marca de riesgo y debe decidir sobre investigacion",
+            "evidence": "Administracion tributaria: 'No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella'. Padre afectado: 'Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin mecanismo de cuestionamiento, la marca de riesgo funciona como sentencia inmutable. El funcionario no puede ejercer juicio: si la marca dice 'riesgo', procede. Esto es especialmente grave dado que muchos indicadores son formales (firma omitida, documento tardio) y facilmente corregibles, pero se tratan como fraude sin proporcion.",
+            "recommendation": "Implementar un flujo de 'override' o 'disputa interna': antes de reclamar el dinero, el funcionario debe poder registrar desacuerdos con la marca, solicitar revision manual, o aplicar criterios de proporcionalidad (p. ej., distinguir errores formales de fraude sustantivo). Capturar estas disputas para retroalimentacion al modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Ausencia de granularidad en la reclamacion: error formal equivale a fraude total",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Criterio de clasificacion y reclamacion aplicado por la administracion tras marcar el caso",
+            "evidence": "Ficha del modelo: 'Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion'. Padre afectado: 'Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio. Te clasifican como defraudador entero'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no ofrece al ciudadano oportunidad de corregir o al funcionario de discriminar entre severidades. Una firma omitida o un retraso documental no son fraude, pero generan la misma consecuencia que fraude verificado. Esto es injusto, impide correcciones simples, y genera desconfianza: la madre afectada describe la experiencia como entrar en 'una especie de lista negra de la que no sabias nada'.",
+            "recommendation": "Implementar un proceso graduado: tras marcar un caso, antes de reclamacion integra, abrir un periodo en el que el ciudadano pueda demostrar o corregir irregularidades formales. Diferenciar en la clasificacion entre 'inconsistencias formales' y 'indicios de fraude sustantivo'. Permitir regularizacion parcial sin perder todo el subsidio.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "El ciudadano no puede acceder a su expediente ni a los datos que generan la marca",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Acceso del ciudadano a la informacion sobre su caso tras recibir notificacion de deuda",
+            "evidence": "Madre afectada: 'Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado'. Administracion tributaria: 'La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin transparencia sobre los datos y el calculo, el ciudadano no puede defenderse. El resultado es una estructura de poder de una sola direccion: acusacion sin justificacion, carga invertida de prueba (la madre: 'eres tu quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres'). Esto socava el derecho administrativo basico a la defensa y a acceso a informacion.",
+            "recommendation": "Garantizar acceso del ciudadano a: (a) los datos personales usados por el modelo (nacionalidad, apellido, estructura familiar, importe, irregularidades detectadas); (b) la puntuacion o marca asignada; (c) una explicacion en lenguaje natural de los factores que contribuyeron. Este acceso debe ser proactivo (adjunto a la notificacion) o rapidamente disponible a solicitud.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Falta de canal de feedback del ciudadano para cuestionar o apelar la marca",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Interaccion del ciudadano tras ser marcado y recibir notificacion de deuda",
+            "evidence": "Padre afectado: 'Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado. No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad'. Madre afectada: 'Y al final tambien pierdes la confianza en el propio gobierno: te acusan, no te dicen de que exactamente, y no puedes hacer nada para que te escuchen'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "No existe un canal formalizado y operativo para que el ciudadano proporcione feedback, contexto, o pruebas que refuten la marca. Las llamadas y escritos no encuentran respuesta significativa. Esto viola el derecho a ser escuchado y a participar en decisiones que le afectan, y elimina una fuente valiosa de correccion: el ciudadano conoce sus datos y circunstancias mejor que cualquier modelo.",
+            "recommendation": "Crear un proceso de 'apelacion o consulta inicial' posterior a la marca pero anterior a la reclamacion, donde el ciudadano pueda: (a) presentar informacion adicional o contexto (p. ej., explicar un cambio de domicilio que causo retraso documental); (b) cuestionar la aplicabilidad de indicadores (p. ej., si el apellido esta vinculado a sospecha de fraude, permitir que el ciudadano muestre que es falso); (c) recibir respuesta razonada, no generica. Registrar estos feedbacks para evaluacion de sesgo del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Indicadores con carga potencial de sesgo (nacionalidad, apellido, estructura familiar) no acompanados de evaluacion de impacto o justificacion publica",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Conjunto de indicadores del modelo incluidos en la puntuacion de riesgo",
+            "evidence": "Ficha del modelo: indicadores incluyen 'la nacionalidad o doble nacionalidad, indicios derivados del apellido, la condicion de familia monoparental'. Madre afectada: 'No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El uso de nacionalidad, apellido (proxy para origen etnico) y estructura familiar como indicadores de riesgo de fraude es potencialmente discriminatorio y carece de justificacion publica explicitada. Estos indicadores pueden perpetuar sesgos historicos. El ciudadano no puede comprender ni cuestionar por que variables que no deberian ser criminalizadas en una sociedad igualitaria pesan en su castigo. Esto genera desconfianza institucional fundamentada.",
+            "recommendation": "Publicar y poner a consulta publica un analisis de impacto de cada indicador: (a) correlacion real con fraude verificado (no con puntuacion del modelo); (b) evaluacion de posible sesgo discriminatorio desglosado por grupos protegidos; (c) justificacion normativa de por que cada indicador es legalmente defendible. Para indicadores de alto riesgo de discriminacion (nacionalidad, apellido), o retirarlos, o acompanarlo de controles explicitados (p. ej., 'este indicador pesa solo en combinacion con evidencia sustantiva de fraude'). Permitir y procesar objeciones del publico.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "No hay comunicacion de consecuencias: como el feedback o datos del ciudadano afectaria al sistema en el futuro",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Interaccion ciudadano con el sistema tras ser marcado y cualquier feedback que intente proporcionar",
+            "evidence": "La administracion tributaria no comunica como las apelaciones, consultas o pruebas aportadas por el ciudadano influyen en el comportamiento futuro del sistema o en la evaluacion del modelo. Padre afectado: 'el por que no aparece por ningun lado' sugiere completa opacidad sobre como se usan sus datos o respuestas.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El ciudadano no sabe si su esfuerzo por defenderse tiene algun efecto. Esto reduce la probabilidad de que intente proporcionar feedback o contexto valioso. Tambien impide que el ciudadano evaluar si el sistema es corregible o es arbitrario: si no sabe si su input importa, pierde confianza en poder cambiar su situacion.",
+            "recommendation": "Comunicar explicitamente: (a) que los datos que proporciona (correcciones, contexto, desacuerdos) seran registrados y revisados por personal; (b) como se usaran para evaluar si la marca es correcta; (c) si contribuiran a mejora futura del modelo (p. ej., si detectan un falso positivo, ese caso se usa para reentrenamiento). Proporcionar respuesta al ciudadano: 'Su informacion fue procesada y considero que...' o 'Su caso se incluyera en una revision del modelo'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Falta de mecanismo de correccion del modelo basado en falsos positivos verificados",
+            "guideline_ids": [
+              "HAX-G9",
+              "HAX-G15"
+            ],
+            "locus": "Proceso de operacion y mejora continua del modelo tras identificacion de casos marcados incorrectamente",
+            "evidence": "No hay mencion en el dossier de algun proceso de captura y aprendizaje de falsos positivos (ciudadanos marcados como fraudulentos que posteriormente resultan no serlo). El padre afectado expresa frustacion sobre falta de revision genuina del caso. La administracion no reporta mecanismo para capturar cuando un override o desacuerdo del funcionario revela que la marca fue erronea.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin circuito de realimentacion desde casos resueltos (especialmente falsos positivos) al modelo, el sistema no aprende de sus errores. Si un ciudadano logra probar que no habia fraude, esa informacion se pierde: no se usa para corregir el modelo o evaluar si el indicador que genero el falso positivo debe ser revaluado. Esto perpetua sesgos y errores sistematicos.",
+            "recommendation": "Implementar un proceso formal: (a) cuando un caso es resuelto (investigacion concluida como falso positivo, ciudadano prevale en apelacion, etc.), capturar la resolucion y contrastarla con la puntuacion original; (b) usar estos casos para auditar el modelo (p. ej., 'de los 50 casos marcados en [mes], 8 resultaron ser falsos positivos; esto sugiere recalibracion'); (c) si un indicador correlaciona sistematicamente con falsos positivos, disparar revision del indicador o su peso. Hacer esto visible a funcionarios y ciudadanos: 'Este tipo de marca se ha revisado y ha mejorado' aumenta confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Ausencia de intervalo de confianza o probabilidad: la marca es binaria sin matiz",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Salida del modelo presentada al funcionario y al ciudadano: marca de riesgo (si/no) sin probabilidad",
+            "evidence": "Ficha del modelo: 'La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Una marca binaria sin probabilidad asociada oculta incertidumbre. Un caso con puntuacion 0.51 (apenas por encima del umbral) se trata identico a uno con puntuacion 0.95. El funcionario no puede calibrar cuanta confianza depositar en la marca, y el ciudadano no puede entender cuanto 'sospechoso' se lo considera. Esto facilita sobrecorreccion: se persiguen con rigurosidad casos marginal o moderadamente sospechosos como si fueran certidumbre.",
+            "recommendation": "Acompañar la marca de riesgo con: (a) la puntuacion numerica o percentil (p. ej., 'en el 85% del intervalo de riesgo'); (b) un intervalo de confianza (p. ej., +/- 5 puntos); (c) el percentil relativo a otros casos (p. ej., 'este caso esta entre los casos de riesgo bajo-moderado de este periodo'). Comunicar esto tanto al funcionario (para ayudar su juicio) como al ciudadano en formato accesible (para desmitificar la marca como una sentencia absoluta).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Falta de transparencia en los factores de riesgo: ciudadano recibe marca sin conocer qué la disparó",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Notificación al ciudadano de la deuda tras clasificación de riesgo",
+            "evidence": "El ciudadano recibe la notificacion de la deuda; no se le comunica que indicadores dispararon su puntuacion. [doc-ficha] La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto. [afectada-1] Recibi una carta diciendo que tenia que devolver todo lo cobrado durante anos, de golpe. Nadie me explico que habia hecho mal ni que dato habia activado todo esto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La norma social en procedimientos administrativos de este tipo es la claridad y explicabilidad de las decisiones que afectan derechos del ciudadano. La privación de subsidio sin explicación del motivo viola la expectativa cultural y legal de transparencia en actos administrativos. El ciudadano no puede conocer si la marca obedece a un error de datos, a un indicador legítimo o a una correlación problemática (como nacionalidad o apellido).",
+            "recommendation": "Modificar la notificación al ciudadano para incluir: (a) lista específica de indicadores que contribuyeron a su puntuación en ese caso concreto; (b) valor de cada indicador en la ponderación final; (c) umbral de riesgo aplicado. Proporcionar esta información en la misma carta de notificación de deuda.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Discriminación potencial no observable por el usuario: indicadores que correlacionan con características protegidas (nacionalidad, apellido)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Construcción del modelo y variables de entrada",
+            "evidence": "[doc-ficha] Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido. [afectada-2] No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El uso de nacionalidad y derivaciones del apellido como indicadores de fraude viola normas sociales y legales sobre igualdad de trato y no discriminación. El ciudadano no puede detectar ni objetar esta fuente de sesgo porque no se le comunica. En contexto administrativo holandés, esto es especialmente grave porque afecta desproporcionadamente a familias inmigrantes o de minorías étnicas. El modelo genera una correlación entre estatus migratorio/origen cultural y presunción de fraude sin que el afectado pueda siquiera enterarse de que ese es el motivo.",
+            "recommendation": "Eliminar o reformular radicalmente los indicadores 'nacionalidad', 'doble nacionalidad' e 'indicios del apellido' del modelo. Si se mantienen variables relacionadas con residencia o documentación, asegurar que: (a) sean explícitamente justificables por su conexión con fraude documentado (no por correlación demográfica); (b) se comuniquen transparentemente al ciudadano si han pesado en su caso; (c) se sometan a auditoría de sesgo antes de su aplicación operativa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Ausencia de retroalimentación explicativa al funcionario que abre investigación",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Interfaz de presentación del caso al personal de control / funcionario",
+            "evidence": "[admin-tributaria] El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario debe actuar sobre la marca de riesgo pero sin información del por qué. Esto viola la norma social de que quien ejecuta una decisión importante (abrir investigación por fraude, reclamar dinero) debe comprender su fundamento. Sin esa información, el funcionario no puede: (a) evaluar críticamente si la marca es correcta; (b) explicarla al ciudadano; (c) detectar errores del modelo. Esto perpetúa la marca sin control intermedio.",
+            "recommendation": "Incluir en la interfaz del funcionario, junto a la marca de riesgo: (a) los indicadores específicos presentes en ese caso y su contribución relativa a la puntuación; (b) el percentil de riesgo comparado con la población; (c) un botón para consultar la lógica del modelo y solicitar revisión antes de actuar. Establecer un protocolo por el que el funcionario pueda cuestionar la marca sin que se cierre automáticamente el caso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Descarte imposible de la marca de riesgo sin mecanismo formal de apelación efectiva",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Procedimiento post-clasificación: imposibilidad de revertir o disputar la marca",
+            "evidence": "[afectada-1] Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado. Cuando intentas defenderte, eres tu quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres. [afectado-3] Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado. No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Una vez marcada la familia, no existe un canal accesible y efectivo para descartar esa marca o para que la persona afectada impugne los hechos en que se basa. La marca genera una 'cadena de consecuencias' (suspensión, reclamación íntegra) que no se puede frenar sin explicación ni apelación real. Esto genera fatiga y desamparo: el ciudadano no puede defenderse porque desconoce los cargos y no hay quién le escuche. Viola el derecho administrativo básico al debido proceso.",
+            "recommendation": "Establecer un procedimiento formal de apelación con las siguientes características: (a) el ciudadano recibe detalles completos de los indicadores que causaron la marca; (b) puede solicitar revisión en plazo determinado (ej. 30 días) enviando pruebas de error o contexto atenuante; (c) esa revisión la realiza un funcionario diferente, con acceso al modelo y sus detalles; (d) la suspensión del subsidio se paraliza mientras está en apelación; (e) la carga de prueba se distribuye equitativamente (el sistema debe demostrar el indicio, no el ciudadano su inocencia).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Escalada binaria sin tramo intermedio: de subsidio completo a devolución íntegra por irregularidad menor",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Decisión de consecuencias tras investigación: reclamación de importe",
+            "evidence": "[doc-ficha] Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion. [admin-tributaria] La devolucion exigida es por el importe integro de la ayuda; el procedimiento aplicado no contempla, en la practica, devolver una parte proporcional ni corregir un error formal sin clasificarlo como fraude. [afectado-3] Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La escalada automática de una infracción administrativa menor (firma omitida, documento tarde) a fraude y reclamación íntegra es desproporcionada y viola normas sociales de proporcionalidad en sanciones. El ciudadano espera que un error formal se corrija sin castigo severo, no que se penalice como fraude. Esto es especialmente grave cuando el modelo ya ha aumentado el riesgo de ser marcado por factores como familia monoparental o estatus migratorio.",
+            "recommendation": "Introducir un tramo intermedio: (a) si la irregularidad es formal menor (documentación incompleta, plazo), ofrecer regularización con pequeña penalización administrativa, no reclamación íntegra; (b) solo si hay indicios de intención defraudatoria (cambios en datos, omisiones múltiples o calculadas) proceder a reclamación completa; (c) permitir que el ciudadano presente contexto atenuante (error administrativo, dificultad de acceso a servicios) antes de escalar a devolución.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Invocación de apelación o revisión coercitivamente inaccesible",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Disponibilidad de canales para solicitar explicación o revisión del caso",
+            "evidence": "[afectada-1] Pedi ver el expediente y el motivo, pero no habia forma de acceder. [afectado-3] Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "No existe un canal formal, claro y bien publicado por el que el ciudadano pueda solicitar explicación de la marca o revisión del caso. La respuesta a llamadas/escritos es que 'tiene que pagar', sin dirección hacia un procedimiento de apelación. Esto hace que invocar el derecho a saber el motivo sea prácticamente imposible, especialmente para ciudadanos sin recursos legales.",
+            "recommendation": "Crear y comunicar explícitamente un canal de apelación: (a) incluir en la notificación inicial de deuda un apartado titulado 'Derecho a explicación y apelación' con instrucciones claras, teléfono, correo electrónico y formulario en línea; (b) establecer plazo mínimo de respuesta (ej. 15 días) con rastreo de solicitud; (c) indicar que el ciudadano puede solicitar acceso a su expediente antes de proceder al cobro; (d) entrenar al personal de atención al público para remitir a este canal en lugar de rechazar de plano las consultas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Registro permanente sin mecanismo de eliminación o rehabilitación",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Gestión del registro interno post-clasificación",
+            "evidence": "[afectada-2] Cuando el sistema te marca y te senala como criminal, te mete en una especie de lista negra de la que no sabias nada. [afectada-1] queda incluida en un registro interno.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La familia marcada queda registrada como 'defraudadora' sin saber cómo acceder ni cómo limpiar ese registro. Esto genera una marca permanente de desconfianza que afecta futuros trámites administrativos. La imposibilidad de 'descartar' o rehabilitarse crea fatiga de estigma: una vez marcado, siempre bajo sospecha.",
+            "recommendation": "Implementar política de eliminación o rehabilitación: (a) si la apelación prospera, eliminar la marca del registro; (b) si se resuelve el caso como error administrativo, borrar toda referencia; (c) si el caso se cierra sin hallazgos de fraude, establecer plazo (ej. 2 años) tras el cual se elimine la marca; (d) permitir al ciudadano consultar si figura en ese registro y solicitar su revisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Lógica de ponderación y existencia de indicadores no publicada ni comunicada",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Transparencia del modelo y sus criterios",
+            "evidence": "[doc-ficha] La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin acceso a cómo funciona el modelo (qué indicadores existen, cómo se pesan), el ciudadano no puede anticipar, entender ni impugnar su uso. Viola la norma social y legal de transparencia en decisiones administrativas automatizadas. En contexto público donde se limitan derechos (subsidio), la opacidad del sistema es inaceptable.",
+            "recommendation": "Publicar un documento técnico accesible que describa: (a) lista completa de indicadores usados; (b) metodología de ponderación (puede ser de forma agregada, sin revelar coeficientes exactos si hay riesgo de gaming); (c) umbral de riesgo y justificación; (d) resultado de auditorías de sesgo y equidad; (e) enviar este documento a cada familia al solicitar el subsidio y cuando se les marque.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Pérdida de confianza institucional por falta de explicabilidad y due process",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Experiencia general de interacción con el sistema y la administración",
+            "evidence": "[afectada-2] Y al final tambien pierdes la confianza en el propio gobierno: te acusan, no te dicen de que exactamente, y no puedes hacer nada para que te escuchen.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La acumulación de falta de transparencia, imposibilidad de apelación y escalada desproporcionada erosiona la confianza en la administración pública. El ciudadano experimenta un proceso que se siente opaco, injusto e inmutable, lo que es emocionalmente dañino y socialmente destructivo. Esto es especialmente grave en un contexto de subsidios a familias vulnerables (monoparentales, con recursos limitados).",
+            "recommendation": "Más allá de cambios técnicos, se requiere revisión de la filosofía del sistema: (a) cambiar de 'detección de fraude a posteriori mediante scoring automático' a 'verificación de elegibilidad con oportunidad de corrección'; (b) incluir en cada comunicación con el ciudadano una explicación clara y empática de qué se está verificando y por qué; (c) establecer un servicio de atención especializado que responda consultas en plazo y con detalle; (d) realizar auditoría pública de impacto en familias afectadas y comunicar resultados.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Ausencia total de transparencia sobre factores de riesgo en la notificación al ciudadano",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Notificación de deuda a la familia / comunicación inicial del resultado del scoring",
+            "evidence": "El ciudadano recibe la notificacion de la deuda; no se le comunica que indicadores dispararon su puntuacion. [...] Nadie me explico que habia hecho mal ni que dato habia activado todo esto; solo que era sospechosa y que la deuda era enorme. Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La familia no puede entender por qué ha sido marcada como de riesgo. Viola ambas directrices: HAX-G1 exige que el usuario sepa qué puede hacer el sistema y cuáles son sus límites, pero aquí la lógica de clasificación es opaca; PAIR-MM-2 exige honestidad sobre capacidades y límites. Sin información sobre qué factores pesaron, el ciudadano no puede formar un modelo mental correcto ni rebatir la decisión. El impacto es severo: una familia recibe una reclamación de miles de euros sin poder entender su origen.",
+            "recommendation": "Incluir en la notificación inicial una comunicación clara de: (a) los factores específicos que dispararon la marca de riesgo en ese caso (ej. 'Indicador de apellido extranjero, puntuación ≥75'), (b) el rango de puntuación individual sin revelar umbrales exactos, (c) una explicación comprensible de qué significa 'riesgo' en este contexto y (d) derechos de acceso al expediente y de apelación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Falta de especificación del equilibrio entre falsos positivos y falsos negativos en el diseño del procedimiento",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Lógica de decisión tras la marca de riesgo: paso de investigación a reclamación íntegra sin tramos de corrección",
+            "evidence": "Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion. [...] Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no especifica explícitamente cuál es el coste aceptable de falsos positivos (marcar erróneamente a familias honestas) versus falsos negativos (no detectar fraude real). El procedimiento actual penaliza severamente los falsos positivos pero de forma oculta: una irregularidad menor, que podría ser un error administrativo o un falso positivo del sistema, dispara la reclamación íntegra. Esto sugiere una ponderación entre FP/FN que nunca fue explicitada ni calibrada conscientemente.",
+            "recommendation": "Documentar y comunicar conscientemente el equilibrio FP/FN aceptado. Implementar procedimientos escalonados: (a) irregularidad formal menor → oportunidad de corrección sin penalización, (b) indicadores de riesgo moderado → inspección temática antes de reclamación, (c) solo fraude confirmado → reclamación íntegra. Diferencias entre un fallo administrativo y fraude intencional.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Indicadores discriminatorios (nacionalidad, apellido) sin justificación transparente en el modelo mental del usuario",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Inclusión de nacionalidad, doble nacionalidad e indicadores derivados del apellido como variables de puntuación de riesgo",
+            "evidence": "Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido [...] No se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto. La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada. [...] No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El uso de nacionalidad y apellido como predictores de fraude crea un modelo mental erróneo y potencialmente discriminatorio. Las familias no son informadas de que estos factores se utilizan, por lo que no pueden entender (ni rebatir) cómo se les ha clasificado. Cuando descubren a posteriori que el apellido o la nacionalidad influyeron, pierden confianza en el sistema y en la administración. La falta de transparencia sobre estos indicadores específicos viola PAIR-MM-1 (expectativas correctas desde el inicio) y PAIR-MM-2 (honestidad sobre limitaciones del modelo).",
+            "recommendation": "Si el modelo utiliza nacionalidad y apellido: (a) Publicar explícitamente su uso, ponderación relativa y justificación estadística en documentos de acceso público; (b) Incluir en toda notificación a ciudadanos una mención clara de que estos factores se consideran y una solicitud de análisis de impacto discriminatorio (AIPD o similar); (c) Alternativa: eliminar estos indicadores si no están plenamente justificados como predictores de fraude (no como proxies de rasgos poblacionales). Someter el modelo a auditoría de sesgo antes de su aplicación continuada.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Falta de información al funcionario que ejecuta la investigación",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Información disponible al personal de control que abre la investigación",
+            "evidence": "El funcionario que tramita el caso ve la marca de riesgo, pero no el detalle de por que se asigno. [...] El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que. No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario que decide si proceder a la investigación y reclamación no tiene acceso a los factores que dispararon la marca de riesgo. Esto impide que pueda: (a) entender si la priorización es justificada para ese caso, (b) identificar si el sistema ha cometido un error, (c) aplicar criterio profesional o de proporcionalidad. Viola HAX-G1 (el usuario debe entender qué hace el sistema) y PAIR-MM-1 (modelo mental correcto). El funcionario opera en la oscuridad respecto a la lógica del sistema que alimenta su toma de decisiones.",
+            "recommendation": "Garantizar que el funcionario reciba junto con la marca de riesgo: (a) los factores individuales concretos que contribuyeron a la puntuación (ej. 'doble nacionalidad +15 pts, irregularidad formal +10 pts, ...'), (b) el intervalo de error o confianza del modelo si está disponible, (c) un canal directo para cuestionar la marca antes de proceder. Entrenar al personal en la interpretación correcta de las puntuaciones y sus límites.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Ausencia de claridad sobre la proporción de la reclamación versus el error cometido",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Decisión de reclamación íntegra sin proporcionalidad a la falta cometida",
+            "evidence": "El procedimiento aplicado no contempla, en la practica, devolver una parte proporcional ni corregir un error formal sin clasificarlo como fraude. [...] Recibi una carta diciendo que tenia que devolver todo lo cobrado durante anos, de golpe. [...] Te clasifican como defraudador entero, no como alguien que cometio un fallo menor que se pueda corregir.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "PAIR-UN-2 exige decidir conscientemente el coste relativo de falsos positivos y falsos negativos. En este sistema, cualquier hallazgo (incluso un error formal menor) conlleva reclamación íntegra de años de subsidios. Esto implica un coste extraordinariamente alto de un falso positivo o de un error menor. El diseño no refleja una decisión consciente de proporcionalidad, sino una regla binaria: 'si entras en la lista de riesgo y se identifica cualquier inconsistencia, devuelves todo'.",
+            "recommendation": "Implementar una escala de respuesta proporcional: (a) irregularidad puramente formal (error administrativo, documento tarde) → corrección administrativa sin clawback; (b) discrepancia menor en datos (ej. ingresos del hogar ligeramente mal declarados) → regularización + posible pago parcial; (c) incumplimiento intencional claro → reclamación íntegra. Documentar el coste político y social aceptable de cada tipo de error.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Falta de definición de éxito del sistema y necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Especificación del objetivo del sistema y métrica de éxito",
+            "evidence": "El sistema existe para detectar y prevenir el uso indebido de los subsidios de guarderia y proteger el dinero publico. Selecciona los casos a revisar [...] La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "PAIR-UN-1 establece que la IA debe resolver una necesidad real del usuario. Aquí, el 'usuario' es la administración pública, cuya necesidad es detectar fraude. Sin embargo, el dossier no aclara: (a) cuál es la tasa real de fraude en este subsidio, (b) cuántos de los casos marcados resultan en fraude confirmado versus falsos positivos, (c) si existen métricas de precisión/recall del modelo publicadas. Esto sugiere que el sistema se implanta sin una validación clara de que resuelve la necesidad de forma efectiva y sin daño colateral desproporcionado.",
+            "recommendation": "Publicar métricas de rendimiento del modelo: precision, recall, tasa de falsos positivos confirmados, tasa de reclamaciones erróneamente realizadas. Definir explícitamente qué significa 'éxito' en términos de fraude detectado versus daño a ciudadanos inocentes. Realizar auditorías regulares de los casos marcados que no resultaron en fraude confirmado para entender el coste del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Sin oportunidad de apelación efectiva o explicación detallada antes de la acción",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Procedimiento de apelación / acceso a explicación antes de la reclamación",
+            "evidence": "Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado. [...] Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado. No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "HAX-G1 exige que el usuario entienda sin ensayo-error. Aquí, la familia no puede acceder a una explicación de por qué fue marcada hasta después de recibir la reclamación. PAIR-MM-2 exige honestidad; aquí, el ciudadano es privado de la información necesaria para verificar esa honestidad. Sin acceso a la lógica del scoring ni a un proceso de apelación significativo antes de la acción, el ciudadano queda en una posición de impotencia total.",
+            "recommendation": "Instituir un procedimiento de apelación previo a la reclamación: (a) La familia recibe notificación de la marca de riesgo con un resumen de factores; (b) Tiene un plazo (ej. 30 días) para solicitar acceso al expediente completo y a un análisis detallado; (c) Un funcionario diferente revisa el caso antes de proceder a la reclamación; (d) Si hay errores formales, se ofrece corrección antes de clasificación como fraude. Garantizar que el ciudadano pueda presentar pruebas de que los indicadores no aplican.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Comunicación imprecisa sobre la naturaleza de la acción (investigación frente a acusación)",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "Mensajería en la notificación inicial y registro administrativo",
+            "evidence": "Te etiquetan y te tratan como un fraude [...] Cuando el sistema te marca y te senala como criminal, te mete en una especie de lista negra de la que no sabias nada. [...] y queda incluida en un registro interno.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "PAIR-MM-1 exige fijar expectativas correctas. El modelo mental que forma el ciudadano es: 'He sido acusado de fraude, he sido declarado culpable, aparezco en un registro criminal'. En realidad, la marca es una recomendación para revisar, no una acusación. Sin embargo, la acción inmediata (suspensión, reclamación, inclusión en registro) refuerza el modelo mental erróneo de 'soy un defraudador' en lugar de 'soy un caso a revisar'. La nomenclatura y el procedimiento no distinguen claramente entre investigación y acusación confirmada.",
+            "recommendation": "Usar lenguaje preciso: la marca de riesgo es una recomendación para investigación, no una acusación ni una sentencia. Diferenzar en la comunicación y el registro: (a) 'Caso seleccionado para inspección' frente a (b) 'Fraude confirmado tras investigación'. No suspender los subsidios ni incluir en registro de fraude hasta que la investigación haya concluido. Si se suspenden preventivamente, comunicar explícitamente que es temporal y que no implica culpa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Falta de transparencia en indicadores de riesgo que incluyen variables que pueden reforzar sesgos",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "Asignación de puntuación de riesgo y comunicación al ciudadano",
+            "evidence": "El modelo usa 'la nacionalidad y la doble nacionalidad, indicios derivados del apellido' como variables que alimentan la puntuación. La madre afectada refiere: 'No se me pasó por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas así, te das cuenta de que es sencillamente racista.' Además, 'La lógica de ponderación y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema incluye variables como nacionalidad y derivados del apellido en la puntuación de riesgo sin transparencia ni explicación. Aunque el objetivo es detectar fraude, estas variables pueden reforzar estereotipos y sesgos sociales contra grupos con apellidos extranjeros. La imposibilidad de cuestionar o comprender por qué se fue seleccionado agrava el impacto del sesgo. En administración pública, esto afecta derechos fundamentales.",
+            "recommendation": "Realizar auditoría específica de sesgo por subgrupo (nacionalidad, origen del apellido) para demostrar o desmentir que estas variables producen disparidades de trato. Si se confirma disparidad, excluir estas variables o rebalancear su peso. En todo caso, comunicar al ciudadano explícitamente si estas características influyeron en su puntuación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "No se monitorea el sesgo de subgrupo en la interacción operativa",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Supervisión y evaluación del comportamiento del sistema en producción",
+            "evidence": "No hay evidencia en el dossier de que se realice evaluación periódica del rendimiento del sistema por subgrupos (nacionalidad, estructura familiar, origen del apellido). El dossier no menciona controles de disparidad de trato ni auditorías de sesgo en ejecución.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema impacta directamente en derechos económicos de familias. La inclusión de variables potencialmente discriminatorias (nacionalidad, apellido) sin monitoreo de disparidades por subgrupo significa que sesgos no detectados pueden afectar sistemáticamente a grupos minoritarios. Las historias de las afectadas sugieren que el sesgo es percibido como real.",
+            "recommendation": "Implementar dashboard de evaluación obligatoria de tasas de activación de riesgo por subgrupos (nacionalido, estructura familiar, tramo de ayuda). Reportar mensualmente disparidades significativas. Establecer alertas si la tasa de activación de riesgo para un subgrupo difiere más de un umbral definido (ej. 1.5x) de la media.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Ausencia de incertidumbre y degradación ante puntuaciones de riesgo limítrofes",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "Asignación de puntuación de riesgo y entrada en lista de revisión",
+            "evidence": "El dossier señala: 'La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompaña de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto.' El sistema usa un umbral binario sin margen de incertidumbre.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Un modelo de risk-scoring siempre tiene incertidumbre inherente. Usar un corte binario sin banda de incertidumbre es particularmente problemático en un contexto de derechos económicos. Familias justo por encima del umbral pueden ser tratadas como fraude confirmado cuando la certeza es baja. El sistema no degrada elegantemente ante incertidumbre; impone la acción máxima (suspensión + reclamación integral).",
+            "recommendation": "Definir una banda de incertidumbre (ej. casos con probabilidad estimada entre 0.40 y 0.60): para estos, exigir revisión manual de experto antes de actuar, o aplicar acción intermedia (auditoría suave, solicitud de aclaraciones) en lugar de reclamación integral. Comunicar al funcionario y a la familia si el caso cae en zona de incertidumbre.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Ausencia total de explicabilidad de la puntuación al ciudadano",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Notificación al ciudadano de la marca de riesgo",
+            "evidence": "Madre afectada (afectada-1): 'Nadie me explicó qué había hecho mal ni qué dato había activado todo esto; solo que era sospechosa y que la deuda era enorme. Pedí ver el expediente y el motivo, pero no había forma de acceder a por qué me habían señalado.' Dossier: 'El ciudadano recibe la notificación de la deuda; no se le comunica que indicadores dispararon su puntuación.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano recibe una acción punitiva (suspensión y reclamación) sin saber qué información la detonó. Esto vulnera el principio de transparencia y derecho a ser escuchado en administración pública. Sin explicación, es imposible defenderse o corregir datos erróneos. El impacto es financiero inmediato y grave.",
+            "recommendation": "Incluir en la notificación inicial al ciudadano una explicación clara y accesible de: (a) los 3-5 factores con mayor peso en su puntuación; (b) los valores específicos de esos factores en su caso; (c) un rango de scores similares para contextualizar; (d) información sobre cómo apelar o solicitar revisión manual. Garantizar acceso al expediente técnico completo bajo solicitud.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-042",
+            "title": "Falta de explicabilidad al funcionario que ejecuta la acción",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Interfaz del funcionario que abre la investigación",
+            "evidence": "Dossier: 'El funcionario que recibe el caso y abre la investigación no tiene acceso a ningún detalle sobre qué información se usó como base para asignar esa puntuación de riesgo concreta: ve que la familia ha sido señalada, pero no por qué.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El funcionario es quien debe ejecutar la decisión más grave (apertura de investigación, reclamación integral), pero actúa sin fundamento transparente. Esto reduce la capacidad de ejercer juicio profesional informado y detectar errores o sesgos en el modelo. Es imposible cuestionar una recomendación que no se comprende.",
+            "recommendation": "Mostrar al funcionario el score completo (no solo la marca binaria), los factores principales que lo componen con sus valores, y una recomendación de acción graduada (auditoría suave, auditoría normal, investigación completa) basada en la confianza. Habilitar un flujo de retroalimentación donde el funcionario pueda reportar si los factores indicados no se alinean con lo que encuentra en la investigación real.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-043",
+            "title": "Ausencia de camino de recuperación o apelación efectiva",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Procedimiento post-marcado de riesgo",
+            "evidence": "Padre afectado (afectado-3): 'No había manera real de apelar con mis pruebas y que alguien revisara el caso de verdad.' Dossier: 'No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema no contempla vía clara de apelación o revisión antes de ejecutar la acción más grave (reclamación integral). Cuando un ciudadano detecta un error de datos o quiere cuestionar la puntuación, no hay mecanismo establecido. Esto impide recuperarse de fallos del sistema.",
+            "recommendation": "Establecer un protocolo de apelación formal post-notificación: (a) el ciudadano puede solicitar revisión manual dentro de 30 días; (b) un revisor diferente examina los datos y la puntuación; (c) suspender o reducir la reclamación mientras se resuelve; (d) documentar y comunicar la decisión de apelación. Integrar también un canal previo para el funcionario: si durante la investigación inicial encuentra inconsistencias con los factores reportados por el modelo, debe poder cuestionar la marca antes de actuar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-044",
+            "title": "Escalada disruptiva de acción sin pasos intermedios (irregularidad menor → fraude total)",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Clasificación de fraude y cálculo de la reclamación",
+            "evidence": "Padre afectado (afectado-3): 'Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio. Te clasifican como defraudador entero, no como alguien que cometió un fallo menor que se pueda corregir.' Dossier: 'Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularización.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema salta de la detección de una inconsistencia formal leve (firma omitida, documento tardío) directamente a 'fraude' y reclamación integral. No hay degradación elegante ni proporcionalidad. Para irregularidades administrativas menores, esto es desproporcionado y cierra caminos de recuperación.",
+            "recommendation": "Implementar lógica de severidad graduada: (a) inconsistencias formales menores → contacto para corrección, sin reclamación; (b) inconsistencias sustanciales o sospecha de ocultación → auditoría y reclamación proporcional al monto dudoso; (c) solo fraude intencional demostrado → reclamación integral. Comunicar al ciudadano qué nivel se ha identificado y cuál es la acción correspondiente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-045",
+            "title": "Carga invertida de prueba sin explicación de la acusación",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Procedimiento de reclamación y defensa",
+            "evidence": "Madre afectada (afectada-1): 'Cuando intentas defenderte, eres tú quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres.' Aunque esto es parcialmente un asunto de derecho administrativo, la falta de comunicación del motivo de acusación por parte del sistema agrava la situación.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Aunque la carga de prueba es una decisión de política legal, el sistema la hace insoportable porque el ciudadano no sabe qué probar. Se acusa de fraude sin explicar en qué consiste. Esto viola principios de audiencia justa y transparencia; el ciudadano no puede preparar una defensa contra acusaciones invisibles.",
+            "recommendation": "En la comunicación inicial, detallar explícitamente: (a) qué datos o comportamientos activan la sospecha; (b) qué pruebas específicas se requieren para desmentir esa sospecha; (c) un plazo razonable (ej. 60 días) para aportar documentación. Esto no cambia la carga legal, pero la hace operativa y justa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-046",
+            "title": "Falta de memoria de contexto: pérdida de historial de la familia en el sistema",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "Evaluación del riesgo a lo largo del tiempo",
+            "evidence": "El dossier no describe un mecanismo explícito de seguimiento del comportamiento pasado de la familia (cumplimiento previo, correcciones previas, resolución de casos anteriores). El sistema parece puntuar independientemente para cada ciclo sin aprender del historial de cada beneficiario.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Una familia que cumplió correctamente durante años pero tiene una irregularidad menor ahora no debería ser tratada igual que una con patrón de violaciones. Sin memoria del contexto reciente positivo, el sistema no puede calibrar el riesgo de forma proporcional.",
+            "recommendation": "Incorporar en la puntuación un factor de historial: años de cumplimiento previo, ausencia de reclamaciones anteriores, rapidez en corregir errores pasados. Mostrar al funcionario este contexto: si la familia tiene 10 años limpio y un error puntual, eso debe influir en la decisión de investigación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-047",
+            "title": "Ausencia de controles globales para el ciudadano: no sabe que está siendo monitoreado",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Onboarding y transparencia del monitoreo",
+            "evidence": "Afectada-2: 'Cuando el sistema te marca y te señala como criminal, te mete en una especie de lista negra de la que no sabías nada.' El dossier no menciona que se comunique al solicitante de subsidio que entra en monitoreo automático de riesgo o cuáles son los criterios de ese monitoreo.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Los ciudadanos que reciben subsidio no saben que están siendo evaluados continuamente por un sistema de puntuación de riesgo, ni qué variables se monitorean. Esto es una falta de transparencia fundamental. Tampoco hay forma de que el ciudadano acceda a su propio score o configure qué información prefiere no compartir.",
+            "recommendation": "En el proceso de solicitud del subsidio, comunicar claramente: (a) que la administración usa un sistema automático de evaluación de riesgo; (b) qué tipos de factores pueden influir (ingresos, estructura familiar, datos formales); (c) que pueden solicitar su score y explicación en cualquier momento. Ofrecer un portal donde el ciudadano vea su puntuación actual y el cambio a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-048",
+            "title": "Cambio de estado (entrada en lista de riesgo) no transparente; sin notificación previa",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Transición del ciudadano a 'caso de riesgo'",
+            "evidence": "Madre afectada (afectada-2): 'Cuando el sistema te marca y te señala como criminal, te mete en una especie de lista negra de la que no sabías nada.' Madre afectada (afectada-1): 'Recibí una carta diciendo que tenía que devolver todo lo cobrado durante años, de golpe.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El ciudadano aprende que está en una 'lista negra' solo cuando recibe la notificación de reclamación. No hay comunicación intermedia cuando entra en la lista de revisión, ni oportunidad de aclarar datos antes de que se abra formalmente la investigación.",
+            "recommendation": "Implementar notificación de cambio de estado en dos fases: (1) cuando el sistema automático lo marca como riesgo (antes de que el funcionario lo vea), avisar al ciudadano que entra en revisión y ofrecerle 15 días para aportar documentación aclaratoria; (2) solo después, si se mantiene la marca, proceder a investigación formal. Esto respeta el cambio de estatus y permite reacción temprana.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-049",
+            "title": "Ausencia de evaluación del modelo en subgrupos relevantes (por nacionalidad, estructura familiar)",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Desarrollo y validación del modelo de risk-scoring",
+            "evidence": "El dossier describe las variables del modelo (nacionalidad, apellido, familia monoparental, etc.) pero no menciona que se haya evaluado el rendimiento del modelo por estos subgrupos para detectar disparidades de precisión o sesgo.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El modelo incluye variables sensibles (nacionalidad, apellido, estructura familiar). Es imperativo validar que el modelo no tiene tasas de falso positivo desproporcionadamente altas para ciertos grupos. Sin esta validación, el sesgo no se detecta ni se documenta.",
+            "recommendation": "Realizar análisis de fairness post-hoc: (a) dividir el dataset histórico por nacionalidad, estructura familiar, tramo de ingresos; (b) calcular tasa de reclamación real vs. puntuación predicha por subgrupo; (c) medir disparidad de falsos positivos (familias marcadas como riesgo pero que cumplieron); (d) documentar hallazgos y ajustar o reentrenar el modelo si se detectan disparidades significativas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-050",
+            "title": "Error del sistema en datos personales: sin mecanismo visible de corrección",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Manejo de datos erróneos en el modelo de puntuación",
+            "evidence": "El dossier menciona que irregularidades formales (firma omitida, documento tardío) se usan en la puntuación. Si los datos de entrada al modelo son incorrectos (ej. apellido registrado mal, nacionalidad errónea), no hay indicación de que el ciudadano pueda detectarlo fácilmente o solicitar corrección antes de que afecte a la puntuación.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el sistema usa datos erróneos de registro administrativo y estos alimentan el modelo, la puntuación de riesgo será injusta. Sin acceso a su score y factores, el ciudadano no puede detectar este error. Cuando lo detecta (al recibir la reclamación), es tarde.",
+            "recommendation": "Antes de la notificación de reclamación, permitir que el ciudadano verifique y cuestione los datos de entrada (nacionalidad, estructura familiar, datos formales) que el modelo utilizó. Incluir en la notificación un resumen de estos datos. Si detecta error, permitir corrección y recálculo del score antes de proceder a investigación.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe específicamente que el ciudadano no recibe información sobre qué indicadores dispararon su puntuación, y no puede acceder al motivo de su marcaje. Esto encaja perfectamente con TO-01-sin-explicacion-del-porque-al-ciudadano, que describe exactamente ese problema: la decisión es una caja negra para la persona afectada que no puede saber por qué fue señalada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo se centra en el uso de variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificación comunicada, y la percepción de discriminación racial. Esto encaja directamente con TO-05-indicadores-sensibles-no-transparentes, que describe exactamente el uso de proxies protegidos sin publicación ni auditoría frente al ciudadano.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo describe que la salida del modelo es una marca binaria sin probabilidad individual, sin intervalo de error y sin lista de factores. Esto encaja perfectamente con TO-06-marca-sin-incertidumbre-ni-rendimiento, que describe exactamente esa ausencia de información sobre incertidumbre y rendimiento del modelo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "TO-09-automation-bias-del-funcionario",
+            "judge_rationale": "El hallazgo describe que el funcionario ve la marca pero no tiene acceso a los detalles de por qué se asignó, y no puede consultar ni cuestionar el motivo antes de actuar. Esto encaja perfectamente con TO-09-automation-bias-del-funcionario, que describe cómo el diseño empuja al funcionario a ejecutar la decisión de la máquina por inercia sin supervisión humana efectiva. También podría ser TO-02, pero el énfasis del hallazgo está en el sesgo de automatización inducido por el diseño, no solo en la opacidad para el operador.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano no recibe explicación de qué hizo mal, no puede acceder al expediente ni al motivo, y no puede defenderse. El énfasis está en la falta de información al ciudadano sobre el procedimiento y sus derechos. Aunque TO-10 (pérdida de confianza) está marcado como [*], el núcleo del hallazgo es más cercano a TO-01-sin-explicacion-del-porque-al-ciudadano: la caja negra para la persona afectada que no puede saber por qué fue señalada. Sin embargo, TO-01 ya fue adjudicado a p3-001. El hallazgo p3-005 tiene un matiz diferente: se centra en la falta de información sobre el procedimiento y los derechos (no solo sobre los indicadores), lo que lo acerca más a TO-03-imposibilidad-de-apelar-y-defenderse o TO-10. Dado que la evidencia menciona 'no tienes dinero para luchar por tus derechos', 'no habia forma de acceder', y la incapacidad de defenderse, TO-03 encaja bien aunque no esté marcado con [*]. Pero revisando, TO-10 (pérdida de confianza por trato opaco) sí está marcado [*] y la evidencia menciona el trato como acusación sin explicación. Sin embargo, el foco principal del hallazgo es la ausencia de información contextualmente relevante sobre el procedimiento y derechos, lo que es más TO-01 o TO-03. Dado que TO-01 ya fue usado, y el hallazgo tiene un locus diferente (notificación y comunicación), lo adjudico a TO-01 igualmente ya que describe el mismo problema desde la perspectiva del ciudadano que no recibe explicación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe que una irregularidad menor lleva a clasificar el caso como fraude íntegro y reclamar toda la ayuda sin paso intermedio. Esto encaja perfectamente con TO-08-todo-o-nada-sin-degradacion, que describe exactamente ese problema: el sistema no degrada con elegancia ante un error pequeño.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la imposibilidad de apelar con pruebas y que alguien revise el caso de verdad, junto con la inversión de la carga de la prueba. El núcleo del hallazgo es la falta de un canal real de impugnación. TO-03-imposibilidad-de-apelar-y-defenderse encaja perfectamente: 'no hay un canal real para impugnar la marca con pruebas y que alguien revise el caso de verdad'. Aunque también hay elementos de TO-01 (falta de explicación) y TO-04 (inversión de carga), el foco principal es la imposibilidad de apelar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "TO-10-perdida-de-confianza-por-trato-opaco",
+            "judge_rationale": "El hallazgo se centra en la falta de publicación de criterios y la pérdida de confianza resultante. La evidencia cita explícitamente que 'la logica de ponderacion y la propia existencia de esos indicadores no se publican' y la pérdida de confianza en el gobierno. TO-10-perdida-de-confianza-por-trato-opaco describe exactamente cómo la opacidad erosiona la confianza en la institución. Sin embargo, el locus del hallazgo es 'publicidad y comunicación de los criterios del modelo', lo que apunta más a TO-07-modelo-opaco-no-publicado. Pero el título y la evidencia combinan ambos aspectos; el énfasis en la 'comunicación que genera desconfianza' apunta a TO-10. TO-10 no está marcado con [*] pero es el candidato que mejor describe el problema combinado de opacidad comunicativa y pérdida de confianza. TO-07 también encaja bien en el locus. Dado que el título es 'Comunicación que genera desconfianza' y la evidencia termina con la pérdida de confianza, TO-10 es el mejor ajuste.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo trata específicamente la ausencia de probabilidad individual, intervalo de error y lista de factores en la salida del modelo. Esto es exactamente lo que describe TO-06-marca-sin-incertidumbre-ni-rendimiento: 'salida es una marca binaria de riesgo sin probabilidad individual, sin intervalo de error y sin comunicar el rendimiento del modelo'. La evidencia citada es textualmente del doc-ficha y coincide palabra por palabra con la descripción de TO-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo describe el uso de indicadores sensibles (nacionalidad, doble nacionalidad, apellido extranjero) sin auditoría de impacto diferencial, con evidencia de percepción de discriminación racial. TO-05-indicadores-sensibles-no-transparentes encaja perfectamente: 'la puntuacion usa variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificacion comunicada; el uso de proxies protegidos no se publica ni se audita frente al ciudadano'. El título del hallazgo menciona 'impacto diferencial no auditado' que es precisamente lo que describe TO-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano no recibe explicación de qué indicadores dispararon su puntuación. El locus es la notificación al ciudadano. TO-01-sin-explicacion-del-porque-al-ciudadano describe exactamente este problema: 'el ciudadano recibe la marca de riesgo y la reclamacion de la deuda sin que se le comunique que indicadores dispararon su puntuacion: la decision es una caja negra para la persona afectada'. Aunque TO-03 está marcado con [*], el problema central aquí no es la imposibilidad de apelar sino la ausencia de explicación en la notificación. TO-01 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe que el funcionario que inicia la investigación no tiene acceso a la justificación de la marca de riesgo. TO-02-opacidad-tambien-para-el-operador describe exactamente este problema: 'el funcionario que tramita el caso ve la marca de riesgo pero no tiene acceso a ningun detalle sobre que informacion se uso para asignarla'. Aunque TO-03 está marcado con [*], el foco del hallazgo es la opacidad para el operador, no la imposibilidad de apelar del ciudadano. TO-02 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe específicamente que el funcionario no tiene canal para cuestionar o refutar la marca de riesgo antes de actuar. Esto encaja perfectamente con TO-02-opacidad-tambien-para-el-operador, que describe exactamente que el operador no puede entender ni cuestionar el motivo antes de actuar. TO-09 también es relevante (automation bias), pero el foco del hallazgo es la ausencia de canal para el funcionario, no el sesgo de automatización en sí. TO-02 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe que un error formal menor equivale a fraude total, sin tramo intermedio de regularización. Esto es exactamente lo que describe TO-08-todo-o-nada-sin-degradacion: una irregularidad formal menor basta para clasificar el caso como fraude íntegro y reclamar toda la ayuda, sin tramo intermedio. La correspondencia es directa y precisa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo se centra en que el ciudadano no puede acceder a su expediente ni a los datos que generaron la marca. Esto corresponde más directamente a TO-01-sin-explicacion-del-porque-al-ciudadano, que describe que la decisión es una caja negra para la persona afectada que no puede saber por qué fue señalada. TO-03 habla de imposibilidad de apelar, pero el foco aquí es el acceso a la información/explicación, no el canal de apelación. TO-07 habla de opacidad del modelo en general. TO-01 es el más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la falta de canal para que el ciudadano apele o cuestione la marca con pruebas. Esto encaja directamente con TO-03-imposibilidad-de-apelar-y-defenderse, que describe exactamente que no hay canal real para impugnar la marca con pruebas y que alguien revise el caso. La evidencia citada ('No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad') es casi literal al candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo describe el uso de indicadores con carga potencial de sesgo (nacionalidad, apellido, estructura familiar) sin evaluación de impacto ni justificación pública. Esto corresponde directamente a TO-05-indicadores-sensibles-no-transparentes, que describe exactamente el uso de variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificación comunicada. La evidencia del dossier y el testimonio de la madre afectada lo confirman.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que no se comunica cómo el feedback o datos del ciudadano afectarían al sistema en el futuro. Esto es un ángulo específico sobre la opacidad del sistema respecto al ciudadano. El candidato más cercano es TO-10-perdida-de-confianza-por-trato-opaco (que habla de opacidad en la comunicación y falta de escucha), pero el hallazgo es más específico: trata sobre la ausencia de comunicación de consecuencias del feedback del ciudadano sobre el sistema. Sin embargo, revisando todos los candidatos, ninguno describe específicamente la falta de comunicación sobre cómo el feedback del ciudadano influye en el sistema futuro. TO-07 habla de opacidad del modelo pero no de este aspecto. El hallazgo además se apoya en inferencias débiles del dossier ('sugiere completa opacidad'). No hay evidencia directa en el dossier de que se haya comunicado o no cómo el feedback afecta al sistema; es una extrapolación. El hallazgo no está bien sustentado como problema específico y diferenciado en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo habla de la ausencia de un mecanismo de corrección del modelo basado en falsos positivos verificados, es decir, que no hay retroalimentación para mejorar el modelo cuando se detectan errores. Ninguno de los candidatos del golden describe exactamente este problema: los candidatos cubren opacidad al ciudadano, opacidad al operador, imposibilidad de apelar, modelo no publicado, todo-o-nada, automation bias, marca sin incertidumbre, pérdida de confianza, inversión de carga de prueba e indicadores sensibles. Ninguno trata el proceso de mejora continua del modelo mediante captura de falsos positivos. La evidencia en el dossier es débil: el padre afectado menciona frustración por falta de revisión genuina, pero no hay evidencia directa de un proceso de retroalimentación del modelo. El dossier no menciona ningún mecanismo de aprendizaje o corrección del modelo, lo que podría considerarse un problema real, pero la evidencia específica sobre 'captura de falsos positivos para mejorar el modelo' no está explícitamente sustentada en el dossier más allá de inferencias. Es un problema real pero no bien sustentado como proceso específico de mejora del modelo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo describe exactamente que la salida del modelo es una marca binaria (sí/no) sin probabilidad individual ni intervalo de error. Esto coincide perfectamente con TO-06-marca-sin-incertidumbre-ni-rendimiento, que describe precisamente que la salida es una marca binaria sin probabilidad individual, sin intervalo de error y sin comunicar el rendimiento del modelo. La evidencia citada (doc-ficha) es directa y específica.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano recibe la marca de riesgo y la reclamación de deuda sin que se le comunique qué indicadores la dispararon. Esto coincide exactamente con TO-01-sin-explicacion-del-porque-al-ciudadano, que describe precisamente que el ciudadano recibe la marca y la reclamación sin que se le comunique qué indicadores dispararon su puntuación. Aunque los candidatos marcados con [*] son TO-05 y TO-10, el candidato TO-01 (sin [*] pero listado) describe el mismo problema de forma más precisa. El hallazgo no trata principalmente de indicadores sensibles (TO-05) ni de pérdida de confianza (TO-10), sino de la falta de explicación al ciudadano.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo describe el uso de indicadores que correlacionan con características protegidas (nacionalidad, apellido) sin que el usuario pueda observarlo, y la percepción de discriminación. Esto coincide exactamente con TO-05-indicadores-sensibles-no-transparentes, que describe el uso de variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificación comunicada. Este candidato está marcado con [*] y es el más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe que el funcionario que abre la investigación no recibe retroalimentación explicativa sobre qué información se usó para asignar la puntuación: ve la marca pero no el motivo. Esto coincide exactamente con TO-02-opacidad-tambien-para-el-operador, que describe precisamente que el funcionario ve la marca pero no tiene acceso a ningún detalle sobre qué información se usó para asignarla. Aunque TO-09 (automation bias) también es relevante, el núcleo del hallazgo es la opacidad para el operador, no el sesgo de automatización.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la imposibilidad de revertir o disputar la marca de riesgo: no hay canal real de apelación, el ciudadano no puede acceder al motivo ni presentar pruebas efectivamente. Esto coincide exactamente con TO-03-imposibilidad-de-apelar-y-defenderse, que describe precisamente que no hay canal real para impugnar la marca con pruebas y que alguien revise el caso de verdad. Este candidato está marcado con [*] y es el más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe específicamente la escalada binaria: una irregularidad menor lleva a reclamar la totalidad de la ayuda sin tramo intermedio. Esto encaja exactamente con TO-08-todo-o-nada-sin-degradacion, que describe precisamente ese problema (firma omitida o documento tarde → fraude íntegro sin degradación). Los candidatos marcados con [*] (TO-05, TO-10) no describen este problema específico.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo trata sobre la imposibilidad de acceder a canales de apelación o revisión real: pedir el expediente y no poder acceder, llamar y escribir sin obtener explicación. Esto encaja directamente con TO-03-imposibilidad-de-apelar-y-defenderse, que describe exactamente la ausencia de canal real para impugnar la marca con pruebas y que alguien revise el caso. Está marcado con [*] y es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo habla de un registro permanente (lista negra) del que la persona no sabía nada y sin mecanismo de eliminación o rehabilitación. Ninguno de los candidatos del golden describe específicamente el problema de un registro permanente sin mecanismo de salida o rehabilitación. El más cercano sería TO-03 (imposibilidad de apelar) o TO-10 (pérdida de confianza), pero ninguno captura el problema específico de la persistencia del registro y la ausencia de mecanismo de eliminación. Es un problema real y específico apoyado en el dossier (afectada-2 menciona la lista negra, el resumen menciona el registro interno), pero distinto de todos los candidatos.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "TO-07-modelo-opaco-no-publicado",
+            "judge_rationale": "El hallazgo describe que la lógica de ponderación y la existencia de los indicadores no se publican ni se comunican. Esto es exactamente lo que describe TO-07-modelo-opaco-no-publicado: la lógica de ponderación y la existencia de los indicadores no se publican, impidiendo inspeccionar cómo se calcula la puntuación. Aunque no está marcado con [*], es el candidato que describe el mismo problema de forma literal.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "TO-10-perdida-de-confianza-por-trato-opaco",
+            "judge_rationale": "El hallazgo describe la pérdida de confianza institucional derivada de la falta de explicabilidad y due process. Esto encaja directamente con TO-10-perdida-de-confianza-por-trato-opaco, que describe exactamente cómo el trato (acusación sin explicar, sin posibilidad de ser escuchado) erosiona la confianza en la institución. Está marcado con [*] y es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe la ausencia de transparencia sobre los factores de riesgo en la notificación al ciudadano: no se le comunica qué indicadores dispararon su puntuación, no puede acceder al expediente ni al motivo. Esto encaja exactamente con TO-01-sin-explicacion-del-porque-al-ciudadano, que describe precisamente que el ciudadano recibe la marca y la reclamación sin que se le comunique qué indicadores dispararon su puntuación. Aunque no está marcado con [*], es el candidato que describe el mismo problema de forma más precisa y directa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe que una irregularidad menor basta para clasificar el caso como fraude íntegro y reclamar toda la ayuda sin tramo intermedio de corrección. Esto encaja perfectamente con TO-08-todo-o-nada-sin-degradacion, que describe exactamente ese problema: una irregularidad formal menor lleva a clasificar el caso como fraude íntegro sin degradación gradual. El título del hallazgo menciona 'falsos positivos/negativos' pero la evidencia citada apunta claramente al problema de la respuesta todo-o-nada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo describe el uso de indicadores discriminatorios (nacionalidad, apellido) sin justificación transparente. Esto encaja directamente con TO-05-indicadores-sensibles-no-transparentes, que describe exactamente el uso de variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificación comunicada. Aunque el título del hallazgo menciona 'modelo mental del usuario', la evidencia y el problema central son los indicadores sensibles no publicados.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe que el funcionario que ejecuta la investigación solo ve la marca de riesgo pero no tiene acceso a los detalles de por qué se asignó, y no puede consultar ni cuestionar el motivo antes de actuar. Esto encaja perfectamente con TO-02-opacidad-tambien-para-el-operador, que describe exactamente ese problema: el operador ve la marca pero no puede entender ni cuestionar el motivo antes de actuar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe la ausencia de proporcionalidad entre el error cometido y la reclamación íntegra: se reclama todo lo cobrado durante años aunque el fallo sea menor, sin tramo intermedio. Esto encaja directamente con TO-08-todo-o-nada-sin-degradacion, que describe exactamente ese problema: una irregularidad formal menor lleva a reclamar toda la ayuda sin proporcionalidad ni corrección parcial.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo habla de 'falta de definición de éxito del sistema y necesidad real del usuario', citando que la salida es una marca binaria sin probabilidad individual, sin intervalo de error. Aunque el título menciona métricas de éxito, la evidencia citada apunta al problema de que la marca se presenta sin incertidumbre ni información sobre el rendimiento del modelo. TO-06-marca-sin-incertidumbre-ni-rendimiento describe exactamente eso: salida binaria sin probabilidad individual, sin intervalo de error, presentada como hecho objetivo. Es el candidato que mejor encaja con la evidencia citada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la ausencia de un canal real de apelación efectiva: el ciudadano no puede acceder al motivo de la marca, no puede presentar pruebas y que alguien revise el caso de verdad. Esto encaja directamente con TO-03-imposibilidad-de-apelar-y-defenderse, que describe exactamente ese problema: no hay canal real para impugnar la marca con pruebas y que alguien revise el caso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_match",
+            "matched_golden_id": "TO-10-perdida-de-confianza-por-trato-opaco",
+            "judge_rationale": "El hallazgo habla de 'comunicación imprecisa sobre la naturaleza de la acción (investigación frente a acusación)' y cita que el ciudadano es etiquetado como fraude/criminal y metido en una lista negra sin saberlo. Esto encaja mejor con TO-10 (pérdida de confianza por trato opaco, acusación sin explicar, sin posibilidad de ser escuchado, comunicación que no se ajusta a normas sociales esperables) que con TO-07 (opacidad del modelo en sí). El núcleo del hallazgo es la forma en que la notificación trata al ciudadano como acusado sin explicación, lo que erosiona la confianza, que es exactamente TO-10.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "TO-05-indicadores-sensibles-no-transparentes",
+            "judge_rationale": "El hallazgo trata específicamente del uso de variables sensibles (nacionalidad, apellido) sin transparencia ni justificación, y cita la percepción de racismo de la afectada. Esto es exactamente TO-05-indicadores-sensibles-no-transparentes, que es además el candidato marcado con [*] que mejor encaja: uso de proxies protegidos sin publicación ni auditoría frente al ciudadano.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo señala la ausencia de monitoreo de sesgo por subgrupos (nacionalidad, estructura familiar, apellido) en producción. Ninguno de los candidatos del golden describe exactamente este problema de falta de auditoría/monitoreo de disparidad en ejecución. TO-05 habla de falta de transparencia en indicadores sensibles pero no de monitoreo en producción. TO-06 habla de falta de incertidumbre/rendimiento comunicado pero no de auditoría de sesgo por subgrupos. El hallazgo describe un problema real y específico apoyado en el dossier (ausencia de controles de disparidad), pero ningún candidato lo captura con precisión suficiente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_match",
+            "matched_golden_id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo se centra en la ausencia de probabilidad individual, intervalo de error y umbral binario sin margen de incertidumbre. Esto es exactamente TO-06-marca-sin-incertidumbre-ni-rendimiento, aunque no está marcado con [*]. Los candidatos [*] (TO-01, TO-02, TO-03, TO-07, TO-08, TO-09) no capturan el núcleo específico del hallazgo, que es la falta de expresión de incertidumbre en la salida del modelo. TO-06 encaja perfectamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano no recibe ninguna explicación de qué indicadores dispararon su puntuación, citando directamente a la afectada y al dossier. Esto es exactamente TO-01-sin-explicacion-del-porque-al-ciudadano, que aunque no está marcado con [*], describe el mismo problema de forma precisa: la decisión es una caja negra para la persona afectada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-042",
+            "label": "tp_match",
+            "matched_golden_id": "TO-02-opacidad-tambien-para-el-operador",
+            "judge_rationale": "El hallazgo describe que el funcionario que ejecuta la acción no tiene acceso a ningún detalle sobre qué información se usó para asignar la puntuación. Esto es exactamente TO-02-opacidad-tambien-para-el-operador, que aunque no está marcado con [*], describe el mismo problema con precisión: el operador ve la marca pero no el motivo, y no puede entender ni cuestionar la decisión antes de actuar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-043",
+            "label": "tp_match",
+            "matched_golden_id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+            "judge_rationale": "El hallazgo describe la ausencia de un canal real para impugnar la marca con pruebas y que alguien revise el caso de verdad. Esto encaja directamente con TO-03-imposibilidad-de-apelar-y-defenderse, que describe exactamente ese problema. Aunque el hallazgo también menciona que el funcionario no puede cuestionar la marca (TO-02), el núcleo del hallazgo es la imposibilidad de apelación efectiva por parte del ciudadano.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-044",
+            "label": "tp_match",
+            "matched_golden_id": "TO-08-todo-o-nada-sin-degradacion",
+            "judge_rationale": "El hallazgo describe explícitamente que una irregularidad menor (casilla mal puesta, papel entregado tarde) lleva directamente a clasificar el caso como fraude total y reclamar toda la ayuda, sin pasos intermedios. Esto es exactamente lo que describe TO-08-todo-o-nada-sin-degradacion: el sistema no degrada con elegancia ante un error pequeño.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-045",
+            "label": "tp_match",
+            "matched_golden_id": "TO-04-inversion-de-la-carga-de-la-prueba",
+            "judge_rationale": "El hallazgo describe que es la familia quien debe demostrar que no defrauda, no la administración quien prueba que sí. Esto encaja directamente con TO-04-inversion-de-la-carga-de-la-prueba, que describe exactamente ese problema de presunción de culpabilidad y traslado de la carga probatoria al ciudadano.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-046",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo plantea que el sistema no tiene memoria del historial de comportamiento previo de la familia (cumplimiento pasado, correcciones anteriores). Este problema no está descrito en ninguno de los candidatos del golden: ninguno habla de falta de memoria de contexto o de historial longitudinal del beneficiario. Además, el dossier no proporciona evidencia directa de este mecanismo (o su ausencia); el hallazgo se basa en una inferencia por ausencia de mención. No está suficientemente sustentado en el dossier como problema específico y real.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-047",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano no sabe que está siendo monitorizado ni cuáles son los criterios de ese monitoreo. Esto se solapa con TO-01-sin-explicacion-del-porque-al-ciudadano (la decisión es una caja negra para el afectado) pero también con TO-07-modelo-opaco-no-publicado (la lógica y existencia de los indicadores no se publican). Sin embargo, el núcleo del hallazgo es que el ciudadano no sabe que existe el sistema de monitoreo ni que está siendo evaluado, lo cual es más cercano a TO-01 (el ciudadano no recibe información sobre qué disparó su puntuación ni sobre el proceso). TO-07 habla de la no publicación del modelo en general. TO-01 encaja mejor porque el foco es la opacidad hacia el ciudadano afectado. No obstante, el hallazgo añade el matiz de 'no saber que está siendo monitoreado' (antes de la marca), que es ligeramente distinto a 'no saber por qué fue marcado'. Aun así, TO-01 es el candidato más próximo al problema descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-048",
+            "label": "tp_match",
+            "matched_golden_id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+            "judge_rationale": "El hallazgo describe que el ciudadano no recibe notificación previa al entrar en la lista de riesgo y que la primera comunicación es directamente la carta de reclamación de deuda, sin explicación de qué indicadores dispararon la puntuación. Esto encaja directamente con TO-01-sin-explicacion-del-porque-al-ciudadano: la decisión es una caja negra para el afectado, que no puede saber por qué fue señalado. El énfasis en la falta de notificación previa y la ausencia de explicación del motivo es el núcleo de TO-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-049",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo habla de ausencia de evaluación del modelo en subgrupos (por nacionalidad, estructura familiar) para detectar disparidades de precisión o sesgo. Esto se acerca más a TO-05-indicadores-sensibles-no-transparentes, que trata el uso de variables sensibles (nacionalidad, apellido, familia monoparental) sin transparencia ni auditoría frente al ciudadano. La falta de evaluación por subgrupos es una dimensión de la falta de auditoría/transparencia sobre el uso de esos indicadores sensibles. No encaja bien en TO-06 (que trata la incertidumbre de la salida), ni en los demás candidatos. TO-05 es el más próximo aunque el hallazgo enfatiza la evaluación técnica interna más que la comunicación al ciudadano; sin embargo, ningún otro candidato describe mejor este problema. Aun así, el hallazgo describe un problema técnico de validación interna (bias en subgrupos) que no está directamente cubierto por ningún candidato del golden, que se centran en transparencia externa, opacidad para el operador, carga de la prueba, etc. El candidato TO-05 habla de falta de auditoría frente al ciudadano, no de evaluación técnica de sesgo en subgrupos. Ningún candidato describe exactamente 'ausencia de evaluación del modelo en subgrupos'. Es un hallazgo nuevo y real (el dossier describe variables sensibles sin mencionar evaluación de sesgo), por lo que corresponde a 'ninguno' con es_real=true.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-050",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la posibilidad de que datos personales erróneos (apellido mal registrado, nacionalidad incorrecta) alimenten el modelo sin que el ciudadano pueda detectarlo ni corregirlo antes de que afecte su puntuación. Esto no encaja exactamente con ningún candidato: TO-08 trata la respuesta desproporcionada ante irregularidades formales (todo-o-nada), TO-04 trata la inversión de la carga de la prueba, TO-01 trata la falta de explicación al ciudadano, TO-03 trata la imposibilidad de apelar. El hallazgo es específico sobre datos de entrada erróneos y ausencia de mecanismo de corrección previo, lo cual es un problema distinto. Sin embargo, TO-03 (imposibilidad de apelar y defenderse) es el más cercano en tanto que el ciudadano no puede corregir ni contestar la decisión. Pero TO-03 se centra en impugnar la marca ya asignada, no en corregir datos de entrada erróneos antes de que afecten la puntuación. El dossier no menciona explícitamente datos erróneos ni mecanismo de corrección de datos de entrada; el hallazgo extrapola un escenario no directamente evidenciado. Por tanto, corresponde a 'ninguno' y, dado que el dossier no sustenta específicamente este escenario (solo menciona irregularidades formales reales, no datos erróneos del sistema), es_real=false.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 50,
+          "n_golden": 10,
+          "recall": 1.0,
+          "precision": 0.92,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 3,
+          "fbeta": 0.9829059829059831,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9829059829059831
+        }
+      }
+    ]
+  }
+}

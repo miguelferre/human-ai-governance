@@ -11,10 +11,12 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       fuentes públicas citadas (auditorías, sentencias, prensa). **Test duro n=3: media ~0.79** (Robodebt
       0.90 era el extremo alto). Casos en `data/external/{midas-michigan,arkansas-medicaid}/`; consolidado en
       `docs/casos-duros/`. Detalle en [RESULTADOS-testimonio.md](RESULTADOS-testimonio.md).
-- [~] **Corrida-código reproducible.** El recall de los casos con testimonio ya se midió de forma
-      **asistida** (generador ciego + juez independiente, roles y modelos separados). **Falta** correrlo con
-      el pipeline-código `comparar` para el número reproducible no asistido; necesita la API key (o rehacerlo
-      con subagentes replicando el protocolo del pipeline). Cierre de la nota honesta de RESULTADOS-testimonio.
+- [x] **Corrida-código reproducible.** HECHA con el pipeline-código `comparar` (backend nube: gen Haiku /
+      juez Sonnet **independiente**), k=1, sobre los 9 casos con testimonio. **Resultado: p3 (producto)
+      recall 0.93 ± 0.09, precisión 0.96; b1 0.68; b0 0.00 (canario).** Confirma —sin la circularidad del
+      método asistido— la señal previa (que daba ~0.96–1.00). Notable: en MiDAS b1=0.00 pero p3=0.89 ("caso
+      difícil → hace falta estructura"). Consolidado y crudos en `docs/pipeline-codigo/`; detalle en
+      [RESULTADOS-testimonio.md](RESULTADOS-testimonio.md). Cierra la nota honesta de método.
 
 ## Producto
 

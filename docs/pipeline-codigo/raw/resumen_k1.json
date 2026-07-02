@@ -1,0 +1,128 @@
+{
+  "robodebt-hard": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.6,
+      "precision": 0.857
+    },
+    "p3": {
+      "recall": 0.9,
+      "precision": 0.93
+    }
+  },
+  "alert-fatigue-ehr": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.875,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 1.0,
+      "precision": 0.975
+    }
+  },
+  "concern-cds": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.778,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 1.0,
+      "precision": 0.976
+    }
+  },
+  "asiana-214": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.778,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 1.0,
+      "precision": 1.0
+    }
+  },
+  "cierre-cuentas-bancarias": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.889,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 0.778,
+      "precision": 0.976
+    }
+  },
+  "post-office-horizon": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.778,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 1.0,
+      "precision": 0.978
+    }
+  },
+  "toeslagenaffaire": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.7,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 1.0,
+      "precision": 0.92
+    }
+  },
+  "midas-michigan": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "p3": {
+      "recall": 0.889,
+      "precision": 0.93
+    }
+  },
+  "arkansas-medicaid": {
+    "b0": {
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "b1": {
+      "recall": 0.7,
+      "precision": 1.0
+    },
+    "p3": {
+      "recall": 0.8,
+      "precision": 0.983
+    }
+  }
+}

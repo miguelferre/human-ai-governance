@@ -1,0 +1,1931 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 9,
+    "system_name": "Sistema predictivo de deterioro hospitalario basado en aprendizaje automático (tipo CONCERN)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.7777777777777778,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.813953488372093,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.975609756097561,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9950248756218906,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia de explicación de qué variables del paciente individual han movido el riesgo",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Pantalla de presentación del indicador de riesgo en el historial del paciente",
+            "evidence": "El sistema 'devuelve para cada paciente un nivel de riesgo' mediante 'un indicador de color' pero 'no muestra qué datos del paciente concreto han movido el nivel'. El médico declara: 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "En un contexto clínico de decisión crítica, la opacidad sobre las variables que han elevado el riesgo impide que el clínico haga un juicio informado y contraste la predicción con su observación directa. Esto erosiona la confianza calibrada y el override eficiente: el médico no sabe si discrepar del sistema tiene sentido.",
+            "recommendation": "Exponer en el punto de uso los 3-5 factores principales del historial de ESTE paciente (p. ej., 'Frecuencia cardíaca >110, cambio de consciencia documentado hace 2h, saturación en descenso') que han contribuido al nivel actual, junto con un indicador visual de peso de cada factor.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "No se comunica el rendimiento (sensibilidad, especificidad, tasas de error) del modelo en el punto de uso",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-MM-2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Pantalla de trabajo del clínico; documentación ofrecida en el punto de cuidado",
+            "evidence": "La ficha técnica señala: 'No se acompaña de una probabilidad numérica para ese paciente, de un intervalo de confianza, ni de una explicación de qué variables han elevado o bajado el nivel. No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso.' El responsable añade: 'su exactitud, cómo se comporta por tipo de unidad o de paciente figura en la documentación del proyecto, pero no la mostramos en la pantalla de trabajo para no recargarla.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El médico necesita calibrar su confianza en la herramienta en tiempo real. Sin información sobre cuán bien funciona en su unidad/tipo de paciente (ej. 'sensibilidad 87% en UCI, 62% en planta'), no puede evaluar cuándo es prudente seguir la predicción y cuándo confiar en su juicio. El médico-1 afirma: 'no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta'. Esta ausencia de incertidumbre comunicada abre la puerta a automation bias (o a descarte infundado).",
+            "recommendation": "Mostrar junto al indicador de riesgo de cada paciente un resumen de confianza calibrado por contexto (ej. 'Rendimiento en unidad de medicina: sensibilidad 76%, especificidad 71%. Este paciente: riesgo medio con probabilidad 0.64'). Alternativamente, incluir en el onboarding acceso fácil a métricas de rendimiento por unidad/tipo de paciente, actualizado regularmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Falta de formación estructurada sobre qué alimenta el modelo y cómo interpretarlo",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Onboarding e ingreso al sistema para personal nuevo",
+            "evidence": "El responsable declara: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso.' La enfermera-1 expresa: 'Yo soy la que mete los datos en el historial, pero no tengo claro si los estoy metiendo de la forma que el algoritmo espera. Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que escribo cambia el nivel del paciente.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin modelo mental correcto del sistema, los usuarios (especialmente enfermeros que alimentan los datos) actúan a ciegas. Esto tiene dos consecuencias: (1) la enfermera no documenta de forma óptima para el modelo, comprometiendo la calidad de la entrada; (2) los médicos construyen modelos mentales erróneos a través de ensayo y error, generando desconfianza. En medicina, un modelo mental incorrecto puede llevar a subestimar señales de alerta.",
+            "recommendation": "Crear un programa de onboarding estructurado que incluya: (a) explicación clara de qué datos/patrones de documentación alimentan el modelo (ej. 'frecuencia de registros de constantes, cambios detectados en texto libre, palabras clave como disnea'); (b) ejemplos visuales de cómo cambios en la documentación alteran el nivel; (c) ejercicios cortos para verificar comprensión; (d) referencia rápida accesible en el punto de trabajo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Falta de explicación de cómo el modelo se comporta diferente por tipo de unidad/paciente; riesgo de expectativas no calibradas",
+            "guideline_ids": [
+              "PAIR-DE-1",
+              "HAX-G2"
+            ],
+            "locus": "Despliegue del sistema en múltiples unidades (UCI, medicina general, etc.) sin adaptación de mensajes",
+            "evidence": "El responsable señala que 'la validación del modelo (su exactitud, cómo se comporta por tipo de unidad o de paciente) figura en la documentación del proyecto, pero no la mostramos en la pantalla.' Los médicos de diferentes unidades no reciben información sobre disparidades de rendimiento.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Los modelos de ML entrenados con datos históricos a menudo tienen rendimiento desigual por subgrupos. Si el sistema funciona mejor en UCI que en planta (o viceversa), y no se comunica, los clínicos en la unidad de peor rendimiento pueden sobre-confiar en una predicción que es menos fiable. Esto es especialmente crítico en sanidad donde el contexto clínico es muy variable.",
+            "recommendation": "Cuando se despliegue en una nueva unidad, mostrar en el onboarding local un resumen de: 'rendimiento de este modelo en unidades similares: sensibilidad X%, especificidad Y%' e idealmente, tras 3-6 meses de uso local, actualizar con métricas locales reales. Incluir si es relevante una nota como 'rendimiento inferior en pacientes >75 años' si existe disparidad conocida.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Ausencia de recomendaciones de acción asociadas a cada nivel de riesgo",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-UN-2"
+            ],
+            "locus": "Presentación del indicador de riesgo (bajo/medio/alto) sin recomendaciones clínicas",
+            "evidence": "El dossier señala: 'El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo.' El médico-2 declara: 'Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color... tengo que interpretar yo qué significa y qué se supone que debo hacer. Como no viene con ninguna recomendación ni con el motivo, a menudo lo miro por encima y sigo con mi criterio de siempre.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema deja al clínico con una señal aislada sin contexto de acción. Aunque es correcto que 'la decisión sigue siendo del profesional' (no es automatización), la ausencia de sugerencias de acción adaptadas al contexto (p. ej., 'riesgo alto: considerar monitorización aumentada, contacto a médico supervisorz') aumenta la fricción cognitiva y puede llevar a ignorar la señal. El médico-2 admite que 'a menudo lo miro por encima' porque no sabe qué hacer con la información.",
+            "recommendation": "Acompañar cada nivel de riesgo con 2-3 opciones de acción contextuales sin ser prescriptivas, ej. 'Riesgo ALTO: algunas opciones: revisar constantes en detalle, contactar a equipo médico, aumentar frecuencia de valoración de enfermería. Tú decides según tu valoración clínica.' Las acciones deben estar diseñadas con clinicians para ser relevantes.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "No se captura ni registra el feedback del clínico (acuerdo/desacuerdo con la predicción) ni el desenlace real",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1",
+              "HAX-G15"
+            ],
+            "locus": "Interacción diaria del clínico con el indicador; gestión del sistema a largo plazo",
+            "evidence": "El responsable declara: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción.' Esto significa que no hay data de override o corrección visible.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin captura de feedback, el sistema no tiene mecanismo para (1) detectar cuándo los clínicos discrepan sistemáticamente (signo de falta de confianza o model drift), (2) mejorar el modelo con datos de outcome real, (3) permitir supervisión de si hay patrones en los overrides. En medicina, saber que un médico constantemente ignora una predicción es información crítica sobre la salud del sistema.",
+            "recommendation": "Implementar un mecanismo granular de feedback que permita al clínico marcar rápidamente (1 click o menos) cuando discrepa del sistema. Capturar: timestamp, nivel predicho, motivo breve (opcional), y desenlace del paciente (si deterioró/no deterioró) en los días siguientes. Usar estos datos para (a) alertar si hay sistemático desacuerdo en una unidad, (b) reentrenar el modelo, (c) analizar si hay subgrupos donde la predicción falla.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Falta de comunicación clara sobre cómo la entrada del enfermero impacta el modelo y la predicción",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-MM-1"
+            ],
+            "locus": "Interacción del enfermero con el sistema de documentación; ausencia de retroalimentación sobre el impacto de sus datos",
+            "evidence": "La enfermera-1 afirma: 'no tengo claro si los estoy metiendo de la forma que el algoritmo espera' y 'Si supiera qué mira para subir el riesgo, documentaría con más cuidado esas cosas; así, a ciegas, hago mi registro normal.' El responsable no menciona feedback al documentador sobre cómo sus registros afectan el cálculo.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El enfermero es un usuario crítico pero invisible en el loop: es quien alimenta los datos. Sin entender qué patrones de documentación el modelo utiliza, o sin ver cómo sus registros afectan el output (feedback de ciclo cerrado), el enfermero no optimiza su input. Esto reduce la calidad de la predicción. Además, el enfermero percibe falta de control sobre un sistema que depende de su trabajo.",
+            "recommendation": "Mostrar al enfermero, tras completar un registro de constantes o una valoración, cómo ha cambiado el riesgo del paciente (ej. 'Frecuencia cardíaca 105 + falta de aire documentada han movido el riesgo de Medio a Alto'). Incluir en el onboarding ejemplos de qué cambios en la documentación movilizan más peso en el modelo. Esto empodera al enfermero y mejora la entrada.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "El nivel de riesgo es opaco a cambios en documentación; el modelo no es debuggeable por el clínico",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-ET-1"
+            ],
+            "locus": "Presentación del indicador; falta de transparencia sobre cómo el modelo toma decisiones",
+            "evidence": "El dossier señala: 'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario.' Esto impide que el clínico o el enfermero entiendan por qué el sistema se comporta como lo hace en un caso concreto.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin visibilidad sobre la lógica, los usuarios no pueden (1) debuggear predicciones sorprendentes, (2) detectar si el modelo está siendo alimentado incorrectamente, (3) confiar en la predicción sobre la base de entender su razonamiento. En contextos clínicos, un sistema opaco genera desconfianza porque el clínico no puede verificar si 'tiene sentido' médicamente.",
+            "recommendation": "Exponer de forma accesible (sin requerir datos técnicos) cómo el modelo calcula el riesgo para cada paciente. Mínimo viable: listar los 3-5 factores principales detectados en el historial que han movido el riesgo. Ideal: mostrar un gráfico de serie temporal de cómo el riesgo ha evolucionado conforme se ha documentado, indicando qué eventos movieron el nivel.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Falta de umbrales o degradación explícita ante datos insuficientes; riesgo de predicción en contextos débiles",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Comportamiento del modelo cuando hay pocos datos o documentación escasa en un paciente",
+            "evidence": "El dossier no menciona cómo se comporta el modelo con pacientes recién ingresados o con documentación escasa. El responsable señala que 'el nivel depende de cómo y con qué frecuencia se documenta', pero no hay indicación de si el sistema se abstiene o degrada ante incertidumbre.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el modelo está entrenado con patrones en documentación densa, es probable que falle o sea poco fiable en pacientes con registros escasos (ej. recién ingresados, pacientes estables con menos monitorización). Sin señalar este límite, el clínico podría usar la predicción en contextos donde no es válida. En medicina, esto puede tener consecuencias.",
+            "recommendation": "Implementar un indicador de confianza que degrade o se abstenga cuando hay datos insuficientes. Por ejemplo: si hay <3 registros en las últimas 24h, mostrar el riesgo atenuado con un disclaimer ('predicción de baja confianza por documentación escasa'). Alternativamente, mostrar la cantidad de datos que alimentan cada predicción para que el clínico juzgue.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Calibración de confianza no diferenciada por clínico o por experiencia; riesgo de automation bias desigual",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G2"
+            ],
+            "locus": "Experiencia uniforme para todos los usuarios sin adaptación a su nivel de familiaridad o expertise",
+            "evidence": "El dossier presenta dos médicos con perspectivas distintas: médico-1 dice 'Cuanto más exacto compruebo que es, más confianza tengo', sugiriendo que aprende por experiencia propia; médico-2 dice 'a menudo lo miro por encima y sigo con mi criterio de siempre', sugiriendo escepticismo. El sistema no adapta su presentación para ayudar a ambos a calibrar su confianza.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Algunos clínicos tenderán a over-confiar (automation bias), otros a under-confiar (descarte de información valiosa). Sin información sobre el rendimiento concreto, cada uno calibra según su experiencia anecdótica. Esto lleva a usos muy dispares del mismo sistema.",
+            "recommendation": "Incluir en el onboarding o en la configuración personal una opción para que el clínico vea su propia tasa de 'acuerdos' con el sistema a lo largo del tiempo (si se captura el feedback), y calibre sus expectativas. Alternativamente, mostrar explícitamente: 'Este sistema acierta en X% de casos en tu unidad; úsalo como apoyo, no como decisión'.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Sin protocolo de override: no está claro cómo el clínico actúa cuando discrepa, ni cómo se registra esa decisión",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Punto de decision del clínico cuando ve un color de riesgo que no concuerda con su juicio",
+            "evidence": "Médico-1: 'a menudo el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda de si esto hay que creérselo o no.' No existe protocolo descrito de cómo un médico puede 'anular' la predicción o documentar que discrepa.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Un sistema CDS (Clinical Decision Support) sin protocolo explícito de override es un sistema que olvida que es apoyo, no automatización. El clínico necesita poder decir 'entiendo la predicción, pero en este caso mi juicio es X, y eso tiene que quedar registrado'. Sin esto, el override es invisible y el aprendizaje del sistema es imposible.",
+            "recommendation": "Implementar un mecanismo simple de override asociado a cada predicción: un botón o menú que diga 'Confío/Desconfío de este nivel'. Al activarlo, capturar: (1) nivel predicho, (2) nivel que el clínico cree es correcto, (3) motivo breve (opcional), (4) desenlace del paciente en 48-72h. Registrarlo en un log visible para auditoría y reentrenamiento.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-012",
+            "title": "Cambios en el comportamiento del modelo no son notificados a los usuarios; riesgo de ruptura del modelo mental",
+            "guideline_ids": [
+              "HAX-G14",
+              "HAX-G18"
+            ],
+            "locus": "Mantenimiento y evolución del sistema; ausencia de proceso de notificación de cambios",
+            "evidence": "El dossier no menciona un proceso de notificación cuando el modelo sea reentrenado, actualizado o cuando cambie su comportamiento. El responsable habla de futuro aprendizaje ('mejorar el modelo con datos de outcome real') pero no de cómo comunicaría estos cambios.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el modelo es reentrenado (p. ej., después de capturar feedback de overrides), su rendimiento y comportamiento pueden cambiar de forma sutil. Si los clínicos no son notificados, su modelo mental ('el sistema es así de fiable') se vuelve incorrecto silenciosamente. Esto puede llevar a automation bias no calibrado.",
+            "recommendation": "Establecer un protocolo de notificación: cuando el modelo sea actualizado, enviar un mensaje a los usuarios explicando en términos simples qué cambió (ej. 'El modelo ahora detecta mejor cambios en saturación, pero puede ser menos específico en pacientes mayores'). Idealemte, acompañar de métricas locales actualizadas si el cambio es significativo.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo describe específicamente la ausencia de explicación de qué variables del paciente individual han movido el riesgo. Esto encaja directamente con CN-02-discordancia-score-juicio-sin-explicacion, que trata exactamente el problema de que cuando hay discordancia entre el score y el juicio clínico, el clínico no puede reconciliarlo porque no se le explica por qué se asignó ese nivel a ESTE paciente. La evidencia citada ('No me dice por qué ha puesto ese nivel a ESTE paciente') es la misma que describe CN-02. CN-06 también es relevante (opacidad del modelo), pero el foco del hallazgo es la incapacidad de reconciliar la discordancia por falta de explicación individual, que es el núcleo de CN-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo trata específicamente la no comunicación del rendimiento del modelo (sensibilidad, especificidad, tasas de error) en el punto de uso. Esto es exactamente lo que describe CN-01-confianza-atada-a-precision-no-comunicada: la confianza del clínico se calibra solo por la exactitud percibida porque el sistema no comunica su rendimiento en el punto de uso. La evidencia citada (ficha técnica y responsable de implantación) coincide perfectamente con ese candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo describe la falta de formación estructurada sobre qué alimenta el modelo y cómo interpretarlo. Esto encaja directamente con CN-07-sin-onboarding-interpretacion, que describe exactamente la ausencia de formación reglada para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretar el nivel. La evidencia del responsable ('No existe un programa formal de formación') y de la enfermera-1 son las mismas que sustentan CN-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo trata la falta de comunicación sobre cómo el modelo se comporta diferente por tipo de unidad/paciente, generando expectativas no calibradas. Esto es una manifestación específica de CN-01-confianza-atada-a-precision-no-comunicada: el rendimiento varía por unidad/tipo de paciente pero no se comunica en el punto de uso, por lo que la confianza no está bien calibrada. CN-07 también es relevante pero se centra más en onboarding general. El núcleo del hallazgo es la no comunicación del rendimiento diferencial, que es el problema de CN-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo describe directamente la ausencia de recomendaciones de acción asociadas a cada nivel de riesgo. Esto encaja perfectamente con CN-03-sin-actionability, que es el único candidato marcado con [*] y describe exactamente este problema: el sistema entrega solo el nivel de riesgo sin asociar ninguna acción recomendada, lo que reduce su utilidad y empuja a ignorarlo. La evidencia del médico-2 es la misma que sustenta CN-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe la ausencia de captura del feedback del clínico (acuerdo/desacuerdo) y del desenlace real. Esto encaja directamente con CN-08-sin-captura-acuerdo-ni-desenlace, que es el candidato marcado con [*] y describe exactamente este problema: el sistema no registra cuándo el clínico está de acuerdo o en desacuerdo ni el desenlace real frente a la predicción. La evidencia del responsable es idéntica a la que sustenta CN-08.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo describe específicamente que la enfermera no sabe cómo su documentación afecta el modelo (lazo input→output opaco para enfermería). Esto encaja perfectamente con CN-04-lazo-input-opaco-para-enfermeria, que describe exactamente ese problema: la enfermera alimenta el modelo pero no sabe de qué se alimenta ni cómo lo que documenta cambia el nivel. CN-06 es más general (opacidad para todos los usuarios), mientras que CN-04 es específico del rol de enfermería y el lazo input→output, que es el foco del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "CN-06-modelo-opaco-sin-explicabilidad",
+            "judge_rationale": "El hallazgo se centra en que el modelo es opaco y no debuggeable: la lógica de cálculo no se divulga al usuario, impidiendo entender por qué el sistema se comporta como lo hace. Esto encaja directamente con CN-06-modelo-opaco-sin-explicabilidad, que describe exactamente que el modelo es un desarrollo opaco cuya lógica no se divulga, bloqueando la confianza calibrada y la contestación. Los demás candidatos marcados [*] son consecuencias o aspectos parciales de esta opacidad, pero CN-06 es el candidato central que describe el mismo problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la ausencia de umbrales o degradación explícita cuando hay datos insuficientes (pacientes recién ingresados, documentación escasa), y el riesgo de que el modelo prediga en contextos débiles sin señalarlo. Ninguno de los candidatos del golden describe específicamente este problema: CN-05 habla de falta de incertidumbre por paciente (más cercano, pero enfocado en la ausencia de probabilidad/intervalo de confianza en general, no en el comportamiento ante datos escasos). CN-06 habla de opacidad general. El problema específico de comportamiento del modelo ante datos insuficientes/degradación no está cubierto por ningún candidato. Es un hallazgo real y específico apoyado en el dossier (el responsable confirma que el nivel depende de la frecuencia de documentación, pero no hay mención de comportamiento ante escasez de datos).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo describe que la calibración de confianza varía entre clínicos (uno aprende por experiencia, otro es escéptico) y que el sistema no adapta su presentación para ayudar a calibrar. El núcleo del problema es que la confianza se calibra solo por experiencia percibida, no por información objetiva del sistema. Esto encaja con CN-01-confianza-atada-a-precision-no-comunicada, que describe exactamente que la confianza se calibra solo por la exactitud percibida con el uso porque el sistema no comunica su rendimiento. El ángulo de 'diferenciación por usuario' es una variante del mismo problema raíz. CN-09 y CN-07 son consecuencias, pero CN-01 es el candidato más directo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe la ausencia de protocolo de override y de registro cuando el clínico discrepa del sistema. Tiene dos componentes: (1) la discordancia sin explicación (CN-02) y (2) la falta de captura de esa discrepancia (CN-08). El énfasis principal del hallazgo está en que no existe protocolo para documentar el desacuerdo ni registrar la decisión de override, lo que apunta más directamente a CN-08-sin-captura-acuerdo-ni-desenlace. Sin embargo, la evidencia citada (médico-1 con la duda de creérselo o no) también apunta a CN-02. El locus 'sin protocolo de override ni registro' es el núcleo, y CN-08 describe exactamente que el sistema no registra cuándo el clínico está de acuerdo o en desacuerdo. CN-02 describe la incapacidad de reconciliar la discordancia, que es el antecedente. CN-08 es el candidato más preciso para el problema de falta de registro de la discrepancia.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-012",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la ausencia de notificación a usuarios cuando el modelo cambia (reentrenamiento, actualizaciones), con riesgo de ruptura del modelo mental. Ninguno de los candidatos del golden describe específicamente este problema de comunicación de cambios del modelo. CN-08 habla de falta de captura de acuerdo/desenlace. CN-07 habla de falta de onboarding inicial. CN-01 habla de falta de comunicación del rendimiento en el punto de uso. Ninguno aborda el proceso de notificación de cambios/actualizaciones del modelo. Es un hallazgo real (el dossier menciona mejora futura del modelo sin proceso de comunicación de cambios), pero no corresponde a ningún candidato del golden.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 12,
+          "n_golden": 9,
+          "recall": 0.7777777777777778,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 2,
+          "fbeta": 0.813953488372093,
+          "meets_genericity_gate": true,
+          "primary_score": 0.813953488372093
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia de comunicación de incertidumbre y tasas de error del modelo",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Pantalla de trabajo: indicador de color de riesgo sin acompañamiento de métricas de rendimiento",
+            "evidence": "El médico-1 declara: 'veo un color, pero no sé con qué frecuencia acierta'. La ficha técnica confirma: 'No se acompaña de una probabilidad numérica para ese paciente, de un intervalo de confianza, ni de una explicación de qué variables han elevado o bajado el nivel en ese caso. No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El médico no puede calibrar su confianza en la predicción porque desconoce la tasa de acierto del sistema. Sin esta información, el clínico no sabe si una predicción de 'alto riesgo' es fiable en su contexto clínico específico o es un falso positivo frecuente. Esto viola el principio de confianza calibrada y deja al usuario sin herramientas para tomar decisiones informadas.",
+            "recommendation": "Mostrar en el punto de uso (junto al indicador de color) al menos: (a) la probabilidad numérica de deterioro para ESTE paciente; (b) la sensibilidad/especificidad del modelo en la cohorte o unidad equivalente; o (c) un intervalo de confianza que indique cuán seguro es el sistema. Si el contexto lo permite, añadir una nota breve como 'Este modelo acierta en el 85% de los casos de alto riesgo en unidades similares'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Falta de explicación local de por qué el sistema asignó este nivel de riesgo a este paciente",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Indicador de color del riesgo para cada paciente en la lista de trabajo",
+            "evidence": "El médico-1 afirma: 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama.' La ficha técnica lo confirma: 'no se acompaña de... una explicación de qué variables han elevado o bajado el nivel en ese caso. El modelo es un desarrollo opaco: no muestra qué datos del paciente concreto han movido el nivel.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin saber qué datos o patrones dispararon la predicción en un paciente concreto, el clínico no puede validar la lógica del sistema contra su juicio clínico. El médico-1 describe la experiencia: 'a menudo [el riesgo] marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda.' Sin explicación local es imposible resolver esa duda o confiar en la herramienta.",
+            "recommendation": "Al seleccionar o expandir la tarjeta de un paciente, mostrar un desglose legible de los factores de documentación que más han contribuido a elevar o bajar el riesgo (p. ej., 'Frecuencia de toma de constantes aumentada', 'Nota de enfermería con términos de preocupación', 'Ausencia de complicaciones registradas en últimas 6 horas'). No requiere explicar la mecánica interna del modelo, solo las entradas (datos del paciente) que han tenido mayor peso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Falta de información sobre el impacto de la documentación en el cálculo del riesgo",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Entorno de documentación de enfermería; interfaz de entrada de datos",
+            "evidence": "La enfermera-1 declara: 'no tengo claro si los estoy metiendo de la forma que el algoritmo espera' y 'Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que documento cambia el nivel del paciente.' La ficha técnica añade: 'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La enfermera es quien introduce los datos que alimentan el modelo, pero desconoce qué variables o patrones de documentación son relevantes para el cálculo. Esto impide que documente de manera consistente y confiable, y puede degradar la calidad de los datos que el modelo recibe. La enfermera-1 explica: 'Si supiera qué mira para subir el riesgo, documentaría con más cuidado esas cosas.'",
+            "recommendation": "Incluir en la interfaz de documentación (o en un apoyo contextual junto a los campos críticos) una breve guía sobre qué tipos de información son relevantes para el sistema de riesgo de deterioro (p. ej., 'Se registran cambios en constantes vitales, frecuencia de respiración, nivel de consciencia'). Esto no requiere revelar el algoritmo, solo las entradas que el sistema monitoriza, para que la enfermera sepa dónde poner énfasis.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Ausencia de recomendaciones de acción asociadas a cada nivel de riesgo",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-ET-1"
+            ],
+            "locus": "Indicador de riesgo en la lista de trabajo; punto de decisión clínica tras ver el color",
+            "evidence": "El médico-2 dice: 'Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color... Como no viene con ninguna recomendación ni con el motivo, a menudo lo miro por encima y sigo con mi criterio de siempre.' La ficha técnica confirma: 'El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema deja toda la carga interpretativa al clínico. Sin orientación sobre qué pasos tomar ante cada nivel de riesgo en el contexto de la unidad, el médico-2 admite que ignora la señal y vuelve a su criterio habitual. Esto reduce el valor práctico del sistema y puede llevar a que se ignore la alerta incluso cuando sea válida (automation bias de sesgo inverso).",
+            "recommendation": "En coordinación con los clínicos de la unidad, definir y mostrar (junto a cada nivel de riesgo) una breve pauta contextual, p. ej.: 'Riesgo alto: considerar intensificación de monitorización cada 2 horas; revisar constantes en las últimas 4 horas; valorar consulta a médico.' No se trata de automatizar decisiones, sino de proporcionar un marco interpretativo que haga la señal procesable.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Falta de retroalimentación clínica: sin registro de aciertos/desacuerdos con las predicciones",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Sistema de seguimiento post-predicción; no se registran resoluciones de pacientes",
+            "evidence": "El implantador clínico declara: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción.' El médico-1 añade: 'El problema es que no tengo forma de saber lo buena que es en el momento.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin un mecanismo que cierre el bucle (desenlace real vs. predicción), ni el clínico ni el equipo de mantenimiento del modelo pueden aprender sobre la fiabilidad real del sistema en su contexto. El médico no puede calibrar su confianza a partir de la experiencia acumulada, y el modelo nunca recibe señal de cuándo falló. Esto perpetúa la incertidumbre y debilita la oportunidad de mejora.",
+            "recommendation": "Implementar un registro simple (puede ser junto a la revisión de notas clínicas al alta o a las 24-48h) donde el clínico indique si el riesgo predicho coincidió con el desenlace real (p. ej., un checkbox: 'Sí deterioró' / 'No deterioró' / 'Sin datos'). Con anonimización, usar esta información para calcular tasas de error reales por unidad/periodo y retroalimentarlas a los usuarios.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Formación insuficiente sobre la interpretación del modelo y sus limitaciones",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-3"
+            ],
+            "locus": "Onboarding y formación del personal clínico",
+            "evidence": "El implantador declara: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso.' El médico-1 y la enfermera-1 muestran incertidumbre sobre cómo confiar e interpretar el sistema.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin una formación estructurada que explique los alcances y limitaciones del modelo, cada usuario forma su propia hipótesis sobre el sistema a través de la experiencia anecdótica. Esto conduce a una confianza mal calibrada (puede ser excesiva o insuficiente según los primeros encuentros) y a malas interpretaciones (p. ej., la enfermera-1 asume que quizá está documentando 'mal' para el algoritmo, cuando el problema es la falta de claridad).",
+            "recommendation": "Desarrollar un programa formal de inducción (15-20 min) que cubra: (a) qué es el sistema y qué NO es (apoyo, no sustituto); (b) en qué datos se basa (documentación de enfermería, patrones); (c) cuál es su exactitud aproximada (sensibilidad/especificidad); (d) qué hacer cuando el color no casa con el juicio clínico (justificación a través de explicación local). Repetir anualmente o cuando cambie el modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Riesgo de automation bias inverso: sistema ignorado por falta de credibilidad o claridad",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Comportamiento de usuario post-alerta: el médico-2 admite ignorar el sistema",
+            "evidence": "El médico-2 afirma: 'a menudo lo miro por encima y sigo con mi criterio de siempre.' El médico-1 menciona la incertidumbre: 'entonces te quedas con la duda de si esto hay que creérselo o no.' La ficha técnica subraya la opacidad: 'El modelo es un desarrollo opaco... no se acompaña de una probabilidad numérica... ni de una acción recomendada.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema es tan opaco y descontextualizado que los clínicos racionales descuentan su valor y recurren a su experiencia previa. Esto no es automation bias en el sentido clásico (confiar ciegamente), sino su inverso: la opacidad genera desconfianza y hace que se ignore una herramienta potencialmente útil. El diseño debe combatir esto, no fomentarlo.",
+            "recommendation": "Las mejoras en explicación local, en comunicación de rendimiento y en recomendaciones de acción (hallazgos anteriores) son también antídotos contra este sesgo. Adicionalmente, incluir en el panel de control de supervisores un contador de 'alertas vistas vs. actuadas' para detectar si el sistema está siendo ignorado sistemáticamente, e investigar las causas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Presentación del indicador sin contexto sobre variabilidad entre unidades o tipos de pacientes",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Indicador de color; válido en todos los contextos clínicos sin matización",
+            "evidence": "La ficha técnica menciona: 'La validación del modelo (su exactitud, cómo se comporta por tipo de unidad o de paciente) figura en la documentación del proyecto, pero no la mostramos en la pantalla de trabajo.' El implantador agrega: 'no la mostramos en la pantalla de trabajo para no recargarla.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El mismo indicador de color se usa en todas las unidades sin comunicar si el modelo ha sido validado de forma distinta en cada una. Un paciente con el mismo perfil puede tener riesgo diferente en una unidad de cuidados intensivos que en una planta general, pero el sistema no lo diferencia. Esto impide que el clínico calibre su confianza según el contexto local.",
+            "recommendation": "Sin sobrecargar la interfaz, al hovear o expandir el indicador mostrar una nota breve como: 'Validado en unidades de medicina interna con tasa de acierto del 82%; el desempeño en urgencias puede variar.' O, si es técnicamente viable, usar el histórico local para recalibrar el nivel mostrado según la unidad actual (p. ej., aplicar factores de corrección).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Ausencia de explicación del razonamiento del modelo por caso concreto",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Interfaz de resultado: el indicador de color en la lista de pacientes no se acompaña de información sobre qué datos del paciente individual han influido en el nivel mostrado",
+            "evidence": "El médico-1 afirma: 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama.' El dossier técnico confirma: 'No se acompaña de una explicación de qué variables han elevado o bajado el nivel en ese caso.'",
+            "anti_pattern": "Falta de transparencia sobre el impacto de variables específicas en la predicción individual",
+            "severity": "high",
+            "rationale": "Sin explicación del razonamiento, el médico no puede ejercer corrección eficiente (HAX-G9): no sabe si está en desacuerdo por incompetencia del modelo o por contexto clínico no capturado. El médico-1 relata: 'muchas veces el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda de si esto hay que creérselo o no.' Esto también viola PAIR-FC-2 porque el usuario no puede ajustar su confianza en el sistema ni validar la pertinencia de la salida.",
+            "recommendation": "Incluir en la interfaz, al lado del indicador de color, una lista breve de los factores documentados más relevantes que han contribuido al nivel calculado (p. ej.: 'Riesgo alto: frecuencia de tomas de constantes ↑, notas de enfermería con términos X, Y'). Permite al clínico contrastar con su observación sin sobrecargar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Ausencia de captura estructurada de discrepancias entre predicción y juicio clínico",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1"
+            ],
+            "locus": "Flujo de corrección: cuando un médico está en desacuerdo con el nivel del sistema, no existe un canal para registrar ese desacuerdo ni el motivo",
+            "evidence": "El responsable de implantación declara: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción.' El médico-1 describe el escenario: 'muchas veces el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés.'",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura",
+            "severity": "high",
+            "rationale": "La ausencia de registro de discrepancias impide tanto la corrección eficiente (HAX-G9) como el feedback operativo (PAIR-FC-1). Cuando el sistema yerra pero no hay forma de capturar y estructurar ese desacuerdo, el sistema permanece invisible para el aprendizaje y supervisión. El médico-1 directamente lo expresa: si el sistema falla, 'dejaría de mirarla'—pero en realidad el error nunca se captura formalmente.",
+            "recommendation": "Añadir junto al indicador de color un botón/opción discreta ('Discrepo', 'Revisar', o similar) que permita al clínico registrar que considera que el nivel no es apropiado y, opcionalmente, anotar el motivo (p. ej.: 'Contexto clínico de recuperación', 'Documentación incompleta'). Estructurar esos registros como datos de supervisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "No se comunican las consecuencias del feedback del usuario ni la forma de ejercer control",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1",
+              "PAIR-FC-2"
+            ],
+            "locus": "Toda la interacción: el sistema no explica al usuario cómo sus datos, discrepancias o feedback afectan al funcionamiento futuro del sistema ni qué controles tiene el usuario",
+            "evidence": "El responsable de implantación señala: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo.' La enfermera-1 expresa: 'no tengo claro si los estoy metiendo de la forma que el algoritmo espera' y 'Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que documento cambia el nivel del paciente.' Esto aplica también a la falta de feedback: 'No registramos... el desenlace real del paciente frente a la predicción.'",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas; Override ausente, ignorado o no registrado",
+            "severity": "high",
+            "rationale": "Incumple HAX-G16 (consecuencias opacas), PAIR-FC-1 (feedback sin efecto visible) y PAIR-FC-2 (falta de controles). La enfermera no entiende cómo sus acciones documentales influyen en el modelo, por lo que no puede ejercer control consciente. Los médicos no reciben información sobre si su feedback (en la forma limitada que existe) ha incidido en el sistema. Esto erosiona la confianza y la responsabilidad compartida.",
+            "recommendation": "Implementar un programa de onboarding que explique: (a) qué variables del historial alimentan el modelo y cómo ponderan, (b) cómo los registros de enfermería se reflejan en el riesgo, (c) si existe retro-alimentación y a qué escala temporal. Para médicos, comunicar mensualmente o en cambios de versión del modelo qué ajustes se han hecho y si hubo capturas de discrepancias que motivaron iteraciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Ausencia de transparencia sobre el desempeño del modelo en punto de uso",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Interfaz de trabajo clínico: cuando se presenta el indicador de riesgo, no se proporcionan métricas de exactitud, ni en global ni por subgrupo o contexto clínico",
+            "evidence": "El dossier técnico declara: 'No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso.' El responsable de implantación añade: 'La validación del modelo (su exactitud, cómo se comporta por tipo de unidad o de paciente) figura en la documentación del proyecto, pero no la mostramos en la pantalla de trabajo.' El médico-1 sintomatiza: 'Cuanto más exacto compruebo que es, más confianza tengo en la herramienta... pero no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta.'",
+            "anti_pattern": "El rendimiento del modelo (sensibilidad, especificidad, tasas de error) no se muestra al usuario en contexto",
+            "severity": "high",
+            "rationale": "Viola PAIR-FC-2 porque el usuario no tiene información para ejercer control ni ajuste sobre su confianza. El médico-1 describe una dialéctica imposible: solo mediante experiencia acumulada (y fallos) puede calibrar confianza, pero sin datos de rendimiento no puede hacerlo de forma racional. Esto es especialmente grave en sistemas de apoyo clínico donde la calibración de confianza impacta directamente en la seguridad del paciente.",
+            "recommendation": "Mostrar en el punto de uso, de forma accesible (tooltip, modal expandible), métricas agregadas clave: 'En esta unidad, el modelo identifica correctamente el 85% de los deterioros reales (sensibilidad 85%, especificidad 72%)' y, si es posible, cómo varía por tipo de paciente o patología. Actualizar anualmente y comunicar cambios.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Canal de feedback granular inexistente; retroalimentación de resultados no capturada",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Ciclo de seguimiento: el sistema no permite a los médicos y enfermeras evaluar de forma estructurada si el riesgo predicho se materializó o no, ni registrar los resultados de su intervención",
+            "evidence": "El responsable de implantación: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción.' El médico-2 señala: 'Solo me da el color... tengo que interpretar yo qué significa.'",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos; No se registra el desenlace real frente a la predicción",
+            "severity": "medium",
+            "rationale": "Incumple HAX-G15 (no hay canal de feedback granular durante uso habitual) y PAIR-FC-1 (feedback sin captura efectiva). Sin desenlaces reales, el sistema no puede aprender, y el usuario no puede calibrar su confianza con datos reales. La falta de un mecanismo simple para decir 'el riesgo fue alto y el paciente se deterioró' o 'fue alto pero no pasó nada' es una oportunidad de mejora continua perdida.",
+            "recommendation": "Añadir un formulario muy breve (2-3 preguntas) que aparezca 24-48h después de un alta o escalada de cuidados, capturando: ¿Se materializó el riesgo? ¿Qué actuación clínica se realizó? ¿Fue oportuna? Agrupar esos datos por nivel predicho para visibilizar la exactitud real.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Ausencia de acciones recomendadas asociadas al riesgo; usuario queda sin orientación operativa",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Presentación del resultado: junto al indicador de color, no se ofrecen acciones sugeridas ni controles ajustables por nivel de riesgo",
+            "evidence": "El dossier técnico: 'El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo.' El responsable de implantación justifica: 'El sistema no propone acciones por nivel de riesgo porque la actuación depende del contexto clínico.' El médico-2 lo sintetiza: 'Me serviría que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color... a menudo lo miro por encima y sigo con mi criterio de siempre.'",
+            "anti_pattern": "El sistema señala riesgo pero no sugiere qué hacer; el usuario debe interpretar y decidir sin apoyo",
+            "severity": "medium",
+            "rationale": "Aunque es cierto que el contexto clínico importa y la decisión es del profesional (HAX-G9, PAIR-FC-2), la ausencia total de orientación operativa deja al usuario sin apoyo. El médico-2 ilustra el resultado: el sistema es visto como ruido ('lo miro por encima'). PAIR-FC-2 requiere que el usuario mantenga control pero también que tenga opciones para ajustar su uso. Sugerir acciones no genéricas sino vinculadas al nivel (p. ej., 'riesgo alto: considerar monitorización continua, evaluación médica en las próximas 2h') facilita que el clínico ejerza control informado.",
+            "recommendation": "Mostrar, junto a cada nivel de riesgo, un conjunto de acciones clínicas comúnmente aconsejadas (no imperativas) basadas en protocolos hospitalarios existentes. Ejemplo: 'Riesgo alto: [☑] Monitorización continua [☑] Notificar a médico urgentemente [☑] Valorar escalada de cuidados.' El clínico puede desmarcar las no aplicables en su contexto y generar un registro de lo que decidió hacer.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Falta de transparencia sobre dependencia del modelo en la calidad y frecuencia de documentación",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Comunicación general: no se advierte a enfermeras y médicos que el riesgo depende crucialmente de la frecuencia y detalle de los registros de enfermería",
+            "evidence": "El dossier técnico: 'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario.' La enfermera-1 expresa incertidumbre: 'no tengo claro si los estoy metiendo de la forma que el algoritmo espera' y 'Si supiera qué mira para subir el riesgo, documentaría con más cuidado esas cosas; así, a ciegas, hago mi registro normal y ya está.'",
+            "anti_pattern": "El modelo es sensible a cómo se documenta, pero esa dependencia no se comunica al usuario",
+            "severity": "medium",
+            "rationale": "Infringe HAX-G16 (consecuencias de acciones opacas). La enfermera no entiende que su documentación es la entrada del sistema, por lo que no puede ejercer control consciente (PAIR-FC-2). Si un paciente muestra riesgo bajo solo porque la enfermera documenta poco (no porque esté realmente bien), el sistema es inútil o engañoso. La enfermera merece saber que su acción documentacional tiene consecuencias directas en la predicción.",
+            "recommendation": "En la formación y en un aviso visible en el historial, comunicar: 'El riesgo de deterioro se calcula a partir de los registros que documentan. Una documentación incompleta o poco frecuente puede subestimar el riesgo real. Asegúrate de registrar cambios en constantes, observaciones significativas y preocupaciones.' Específicamente, advertir de factores que el modelo pondera fuertemente (ej. si sabe que la frecuencia de tomas pondera mucho, mencionarlo).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Ausencia de formación estructurada sobre interpretación del modelo; aprendizaje por ensayo-error",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Onboarding y formación continua: no hay un programa formal que enseñe al personal nuevo (enfermeras, médicos) cómo interpretar y usar el sistema",
+            "evidence": "El responsable de implantación: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso.' Médico-1 y médico-2, así como enfermera-1, todos señalan confusión sobre el funcionamiento del sistema.",
+            "anti_pattern": "No existe un programa formal de capacitación; el personal aprende 'con el uso', sin estructura",
+            "severity": "medium",
+            "rationale": "Incumple HAX-G16 porque los usuarios no reciben información clara sobre cómo sus acciones (leer el color, interpretar el nivel, documentar) tendrán consecuencias. PAIR-FC-2 requiere control informado, que es imposible sin formación. El aprendizaje por ensayo-error en un sistema de salud es riesgoso porque el feedback es lento (resultados del paciente) e indirecto.",
+            "recommendation": "Crear un módulo de formación obligatorio (30-45 min) para todo nuevo personal que cubra: (a) cómo funciona el modelo (qué datos, cómo se pondera), (b) cómo interpretar el indicador en el contexto clínico, (c) qué hacer si discrepas, (d) cómo tu documentación o tu feedback afecta el sistema. Ofrecerlo on-boarding y en refrescos semestrales.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Falta de explicación específica del paciente impide contraste con juicio clínico",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Indicador de color en lista de trabajo sin acompañamiento de explicación individual",
+            "evidence": "El médico-1 afirma: 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama'; la ficha técnica corrobora: 'No se acompaña de... una explicación de qué variables han elevado o bajado el nivel en ese caso'",
+            "anti_pattern": "Sistema opaco que no revela qué variables han movido el nivel de riesgo en cada caso concreto",
+            "severity": "high",
+            "rationale": "En un contexto clínico donde el profesional debe tomar decisiones sobre pacientes reales, la falta de explicación específica del caso concreto impide establecer la norma social esperada de transparencia médica (el profesional debe entender el fundamento de cualquier información que afecte su decisión). Esto viola la expectativa cultural de un sistema de apoyo a decisión clínica que explique su razonamiento.",
+            "recommendation": "Acompañar cada indicador de color con un desglose de las variables clave que han influido en el nivel de riesgo para ese paciente específico (p. ej., 'Riesgo ALTO: frecuencia de toma de constantes cada 4h, dos registros de inquietud en últimas 24h, descenso de SatO2 documentado'). La explicación no requiere exponer el modelo completo, solo las señales principales del caso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Ausencia de intervalo de confianza o probabilidad numérica genera incertidumbre no resuelta",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Indicador de color (bajo/medio/alto) sin acompañamiento numérico",
+            "evidence": "Ficha técnica: 'No se acompaña de una probabilidad numérica para ese paciente, de un intervalo de confianza'; médico-1: 'El problema es que no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta'",
+            "anti_pattern": "Presentación de predicción categórica sin cuantificación de certeza",
+            "severity": "high",
+            "rationale": "En medicina, la incertidumbre es norma social esperada y debe comunicarse explícitamente. El profesional describe una experiencia de duda permanente ('te quedas con la duda de si esto hay que creérselo o no') porque no puede calibrar su confianza en la predicción. Sin información de certeza, el clínico no puede aplicar el juicio contextual apropiado (un 'alto riesgo' con 55% de confianza demanda respuesta muy distinta de uno con 92%).",
+            "recommendation": "Mostrar junto al color una probabilidad de deterioro (p. ej., '78%') o un intervalo de confianza (p. ej., '60–85%'). Esto permite al clínico calibrar su respuesta y cumple la norma clínica de transparencia sobre certeza diagnóstica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Falta de feedback sobre desempeño del modelo en el punto de uso impide confianza fundamentada",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Interfaz de trabajo (lista de pacientes con indicadores de color)",
+            "evidence": "Médico-1: 'Cuanto más exacto compruebo que es, más confianza tengo en la herramienta; si me fallara un par de veces dejaría de mirarla. El problema es que no tengo forma de saber lo buena que es en el momento'; ficha técnica: 'No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso'; implementador clínico: 'La validación del modelo... figura en la documentación del proyecto, pero no la mostramos en la pantalla de trabajo'",
+            "anti_pattern": "Validación de modelo no mostrada en pantalla; usuario no puede observar aciertos/errores",
+            "severity": "high",
+            "rationale": "El profesional declara explícitamente que su confianza se basa en comprobaciones empíricas locales ('cuanto más exacto compruebo que es'), pero carece de mecanismo para registrarlas o comprender el desempeño del modelo en su contexto. La norma social en medicina es que las herramientas de apoyo demuestren su utilidad y fiabilidad en el contexto de uso específico. La validación guardada en documentación lejana no cumple esta expectativa de transparencia en el lugar de trabajo.",
+            "recommendation": "Incluir en o accesible desde la pantalla de trabajo un resumen simple de desempeño del modelo para la unidad/contexto del usuario (p. ej., 'En esta unidad, este sistema acierta en 8 de 10 deterioros reales; genera 2 alertas falsas por cada 10 pacientes/semana'). Alternativamente, registrar automáticamente en el historial los episodios en que el clínico confirma o rechaza la predicción para construir retroalimentación local.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Falta de recomendación de acción asociada a cada nivel deja trabajo interpretativo al clínico sin guía",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Niveles de riesgo (bajo/medio/alto) sin acompañamiento de acciones recomendadas",
+            "evidence": "Médico-2: 'Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color... Como no viene con ninguna recomendación ni con el motivo, a menudo lo miro por encima y sigo con mi criterio de siempre'; ficha técnica: 'El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo'",
+            "anti_pattern": "Sistema comunica riesgo pero no sugiere acciones contextuales",
+            "severity": "medium",
+            "rationale": "Aunque el implementador justifica que 'la actuación depende del contexto clínico', el profesional real reporta que esta falta de guía le lleva a ignorar la herramienta ('a menudo lo miro por encima'). Esto viola la norma de interacción efectiva: una herramienta que no comunica su propósito de acción se vuelve invisible. El contexto clínico justifica opciones múltiples, pero no justifica ausencia total de sugerencias orientativas.",
+            "recommendation": "Acompañar cada nivel de riesgo con acciones ejemplares contextuales (no prescriptivas) que respeten la autonomía clínica. Por ejemplo: 'Riesgo MEDIO: considerar aumento de frecuencia de monitorización, revisión de medicación, o consulta a intensivista según contexto'. El clínico retiene decisión final pero recibe orientación sobre qué tipos de intervención son típicamente relevantes.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Falta de transparencia sobre dependencia de documentación genera incertidumbre en origen de dato",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Interfaz de indicador de riesgo; proceso de documentación de enfermería",
+            "evidence": "Ficha técnica: 'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario'; enfermera-1: 'Yo soy la que meto los datos en el historial, pero no tengo claro si los estoy metiendo de la forma que el algoritmo espera... Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que documento cambia el nivel del paciente'",
+            "anti_pattern": "El usuario no entiende que el score depende de cómo se documenta, sin información sobre este vínculo",
+            "severity": "high",
+            "rationale": "La documentación de enfermería es entrada del sistema, pero ninguno de los usuarios (ni enfermeras ni médicos) entiende esta relación. Las enfermeras documentan sin conocimiento de cómo sus registros afectan el score; los médicos ven el score sin saber si refleja estado real del paciente o solo intensidad de documentación. Esto viola la norma de transparencia en sistemas que dependen de humanos como entrada: deben entender cómo su trabajo alimenta el sistema.",
+            "recommendation": "Explicitar en la interfaz que 'el riesgo se calcula a partir de los registros documentados en enfermería (frecuencia, patrones, signos)' y proporcionar guía breve a enfermeras sobre qué tipos de observación el sistema considera (p. ej., 'El sistema detecta cambios en constantes vitales, anotaciones de inquietud o cambio de estado'). Esta transparencia mejora tanto la documentación como la interpretación del score.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Ausencia de programa formal de formación genera aprendizaje incidental y desigual",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Onboarding e introducción del sistema al personal (enfermeras, médicos)",
+            "evidence": "Implementador clínico: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso'",
+            "anti_pattern": "Sistema aprende 'con el uso' sin estructura de onboarding o entrenamiento",
+            "severity": "medium",
+            "rationale": "La falta de formación estructurada viola la norma de interacción con sistemas expertos complejos: el usuario debe tener acceso a información suficiente sobre el modelo (qué es, qué no es, cómo se usa) antes de depender de él. El aprendizaje incidental ('con el uso') es lento, incompleto y crea disparidades: usuarios nuevos o en otras unidades operan sin comprensión común, lo que afecta calidad y consistencia de las decisiones.",
+            "recommendation": "Diseñar e impartir un programa breve de onboarding que cubra: (i) qué predice el sistema y qué no, (ii) cómo se alimenta de documentación, (iii) cómo interpretar el indicador de color, (iv) qué limitaciones tiene, (v) ejemplos de uso correcto e incorrecto. Integrarlo en sesiones de formación obligatoria para personal nuevo y en refrescos anuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Sistema registra score pero no captura validación clínica, impidiendo mejora de desempeño",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Retroalimentación post-decisión: sin mecanismo de confirmación o refutación del score",
+            "evidence": "Implementador clínico: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción'",
+            "anti_pattern": "No se registra si el clínico está de acuerdo o en desacuerdo con la predicción, ni el desenlace real",
+            "severity": "medium",
+            "rationale": "En un sistema de apoyo a decisión clínica, la falta de feedback cerrado impide tanto mejorar el modelo como proporcionar información de desempeño al usuario. El clínico no puede verificar si sus decisiones fueron correctas respecto a la predicción; el equipo no puede refinar el modelo. Esto viola la norma de sistemas adaptativos y reforzadores de aprendizaje en contextos de alto riesgo como sanidad.",
+            "recommendation": "Implementar un mecanismo simple de feedback (p. ej., botón 'Acuerdo/Desacuerdo' junto al score, o etiquetado posterior de desenlaces reales en el historial) que registre: (i) si la predicción fue válida según criterio clínico, (ii) qué desenlace real tuvo el paciente. Usar esta información para informar al usuario sobre desempeño local y para reentreno periódico del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Ausencia de explicación del cálculo del riesgo por paciente individual",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Interfaz de presentación del indicador de riesgo en la lista de pacientes del historial electrónico",
+            "evidence": "El médico refiere: 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama.' La ficha técnica confirma: 'No se acompaña de una probabilidad numérica para ese paciente, de un intervalo de confianza, ni de una explicación de qué variables han elevado o bajado el nivel en ese caso.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin explicación del cálculo concreto para cada paciente, el clínico no puede formar un modelo mental correcto sobre si el algoritmo está actuando en base a datos relevantes. Esto impide la calibración de confianza (no sabe si creer el color) y dificulta la validación crítica del resultado contra el juicio clínico, que es esencial en medicina.",
+            "recommendation": "Mostrar en el punto de uso, junto al indicador de color, al menos los 3-5 factores documentados más influyentes en el cálculo de riesgo para ese paciente (p. ej. 'Frecuencia de control de constantes elevada', 'Cambio en nivel de conciencia documentado') con una indicación somera de su peso relativo en la decisión.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Falta de comunicación del rendimiento del modelo en el punto de uso",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Interfaz de trabajo clínico donde aparece el indicador de riesgo (lista de pacientes)",
+            "evidence": "La ficha técnica refiere: 'No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso.' El médico refiere: 'El problema es que no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El usuario declara explícitamente su incapacidad para calibrar confianza ('cuanto más exacto compruebo que es, más confianza tengo...si me fallara un par de veces dejaría de mirarla'). Sin métricas de rendimiento visibles, cada clínico debe inferirlas por prueba y error, lo que lleva a decisiones inconsistentes y a riesgo de abandono de la herramienta tras fallos puntuales.",
+            "recommendation": "Mostrar en la interfaz de trabajo (o en un resumen accesible con un clic) métricas de rendimiento del modelo contextualizadas: sensibilidad y especificidad globales, y si es posible, rendimiento segmentado por tipo de unidad o perfil de paciente (p. ej. 'En UCI, este modelo detecta el 92% de deterioros, con un 15% de falsas alarmas').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Onboarding ausente o insuficiente sobre las fuentes de datos y el funcionamiento del modelo",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G1"
+            ],
+            "locus": "Proceso de formación inicial del personal (incluye enfermería, médicos de planta y otras unidades)",
+            "evidence": "El responsable de implantación refiere: 'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso.' La enfermera refiere: 'No tengo claro si los estoy metiendo de la forma que el algoritmo espera...Nadie me ha explicado de qué se alimenta exactamente.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La enfermera (quien introduce los datos clave) desconoce cómo su documentación afecta el modelo, lo que impide que sea consciente del rol que juega en la cadena de predicción. A su vez, los médicos no reciben calibración explícita sobre qué significa cada nivel de riesgo ni en qué contextos esperar fallos, llevando a desconfianza y a decisiones basadas en suposiciones individuales.",
+            "recommendation": "Implementar un programa de onboarding obligatorio (incluyendo módulos específicos para enfermería y para clínicos) que cubra: (1) qué datos de la documentación alimentan el modelo (p. ej. cambios en constantes vitales, anotaciones de signos de preocupación), (2) cómo interpretar cada nivel de riesgo, (3) tasas de error esperadas por contexto, y (4) cuándo el modelo es más y menos confiable.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Desalineación entre capacidades del sistema y expectativas de acción del usuario",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "PAIR-UN-1"
+            ],
+            "locus": "Especificación de capacidades del sistema en documentación y punto de uso",
+            "evidence": "Médico de otra unidad refiere: 'Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color.' El responsable de implantación aclara: 'El sistema no propone acciones por nivel de riesgo porque la actuación depende del contexto clínico.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Existe una brecha entre lo que el usuario espera (recomendaciones de acción asociadas al riesgo) y lo que el sistema entrega (solo indicador de color). Aunque la decisión debe ser del clínico, la ausencia de una recomendación explícita (incluso general, tipo 'riesgo alto: evaluar estabilidad hemodinámica') lleva a que algunos clínicos ignoren el sistema ('a menudo lo miro por encima y sigo con mi criterio de siempre').",
+            "recommendation": "En el onboarding, explicitar claramente que el sistema señala riesgo pero NO recomienda acciones específicas (la actuación queda en manos del juicio clínico según contexto). En la interfaz, cuando aparezca un nivel alto o medio, acompañar con un texto breve y prescriptivo, p. ej. 'Riesgo alto detectado: revisar estatus clínico y constantes. La decisión de intervención es responsabilidad del equipo.')",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Dependencia no comunicada del indicador de riesgo respecto a la calidad/frecuencia de documentación",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Interfaz de indicador de riesgo en lista de pacientes; sin aclaración sobre factores que afectan el cálculo",
+            "evidence": "La ficha técnica refiere: 'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario.' La enfermera refiere: 'A veces pienso: no sé si estoy metiendo los datos de la forma que el algoritmo espera...no tengo claro si los estoy metiendo bien.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el indicador de riesgo depende de la frecuencia de documentación, pero esto no se comunica, un nivel bajo podría deberse a que el paciente mejora O a que simplemente no se ha documentado recientemente. Esto introduce ambigüedad en la interpretación y riesgo de falsos negativos, particularmente si la enfermera no documenta de forma consistente.",
+            "recommendation": "Indicar visualmente en la interfaz cuándo fue la última actualización del score y, en caso de inactividad de documentación prolongada, mostrar una advertencia tipo 'Indicador basado en documentación de hace X horas; los datos pueden no reflejar el estado actual del paciente'. En el onboarding para enfermería, enfatizar que la calidad y periodicidad de la documentación afecta directamente la fiabilidad del indicador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Ausencia de feedback o validación respecto a aciertos/errores del modelo",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "PAIR-UN-2"
+            ],
+            "locus": "Sistema de seguimiento y aprendizaje del sistema (no existe registro en el punto de uso)",
+            "evidence": "El responsable de implantación refiere: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción.' El médico refiere: 'Cuanto más exacto compruebo que es, más confianza tengo...Si me fallara un par de veces dejaría de mirarla.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin captura sistemática de desacuerdos o desenlaces, el sistema no se beneficia del feedback clínico para mejorar, y el clínico individual no puede reforzar o erosionar su confianza sobre bases sólidas (solo intuición). Esto también impide la validación post-implantación en el contexto real de use.",
+            "recommendation": "Implementar un mecanismo simple (p. ej. un botón 'Este nivel es inexacto en mi criterio' o un registro de desenlace a las 24/72h) que capture decisiones de los clínicos respecto al modelo. Usar este feedback no solo para mejorar el modelo a largo plazo, sino para mostrar períodicamente al equipo métricas de concordancia (p. ej. 'El 88% de los riesgos altos fueron confirmados por el equipo clínico en los últimos 30 días').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Falta de claridad sobre el equilibrio de falsos positivos vs. falsos negativos en el diseño",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Definición del modelo y comunicación de sus características en punto de uso",
+            "evidence": "La ficha técnica no especifica si el modelo está calibrado hacia sensibilidad (detectar más deterioros, incluso con falsas alarmas) o especificidad (evitar falsas alarmas, aceptando algunos deterioros no detectados). El médico refiere: 'muchas veces el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda de si esto hay que creérselo o no.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "En un contexto clínico donde los costos de falsos negativos (deterioro no detectado) y falsos positivos (alarma innecesaria) son diferentes, la falta de transparencia sobre este equilibrio deja al clínico sin información para contextualizar el indicador. Un modelo muy sensible (muchos falsos positivos) puede saturar al equipo; uno poco sensible puede perder deterioros críticos.",
+            "recommendation": "Especificar explícitamente en documentación y onboarding el equilibrio de sensibilidad/especificidad del modelo (p. ej. 'Este modelo está calibrado para máxima sensibilidad (detecta el 95% de deterioros) aceptando un 20% de falsas alarmas, porque el costo de una alarma innecesaria es menor que el de un deterioro no detectado'). Mostrar en la interfaz una nota como 'Este sistema tiende a sobremarcar riesgo; úsalo como disparador de evaluación, no como diagnóstico.'",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Ausencia de explicación de razonamiento en predicción individual del paciente",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Pantalla de lista de pacientes con indicador de color de riesgo",
+            "evidence": "El modelo 'no muestra qué datos del paciente concreto han movido el nivel, ni una probabilidad numérica, ni una acción recomendada'; el médico reporta 'No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama'.",
+            "anti_pattern": "Comunicar errores o señales de riesgo sin explicación accionable",
+            "severity": "high",
+            "rationale": "El clínico no tiene forma de interpretar de manera informada si el nivel de riesgo es confiable en ese caso específico. Sin explicación, no puede validar la predicción contra su propio juicio clínico ni tomar una decisión más segura. La opacidad del modelo debilita la confianza pragmática.",
+            "recommendation": "Incorporar en la visualización una explicación simple y orientada al usuario (ej: 'Tensión elevada + baja saturación + documento reciente de alerta') que muestre los principales factores que han elevado la clasificación, sin recargar la pantalla (ej: desplegable o tooltip).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Falta de información de rendimiento y confianza en el punto de uso",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Interfaz de trabajo clínico donde se muestra el indicador de color",
+            "evidence": "'No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso'; médico reporta 'no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta'.",
+            "anti_pattern": "Ocultar métricas de confianza que permitan al usuario calibrar su confianza",
+            "severity": "high",
+            "rationale": "Sin visibilidad sobre el desempeño del modelo (ej: sensibilidad, especificidad, tasas de error), el clínico no puede calibrar cuánto peso dar a la predicción. Esto lleva a un uso inconsistente: el médico declara que si la herramienta fallara un par de veces dejaría de mirarla, pero sin datos no puede hacer ese juicio informado.",
+            "recommendation": "Mostrar en la pantalla de trabajo (ej: junto al indicador de color o en un panel colapsable) métricas clave del modelo filtradas por contexto relevante (ej: 'En esta unidad, este sistema detecta el 85% de deterioros reales, con un 10% de falsas alarmas'). Actualizar periódicamente estas métricas con datos de validación reciente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Ausencia de acción recomendada asociada a cada nivel de riesgo",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Presentación del resultado de riesgo (bajo/medio/alto) sin recomendación de actuación",
+            "evidence": "'El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo'; médico reporta 'Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color... a menudo lo miro por encima y sigo con mi criterio de siempre'.",
+            "anti_pattern": "Presentar un hallazgo o riesgo sin guiar al usuario en una acción posible o consideración clave",
+            "severity": "high",
+            "rationale": "El clínico recibe una señal pero debe hacer todo el trabajo cognitivo de decidir qué hacer. Sin una recomendación estructurada (incluso si el médico puede rechazarla), muchos clínicos ignoran la señal y vuelven a su práctica habitual. Esto reduce la efectividad del sistema en la práctica.",
+            "recommendation": "Añadir a la visualización una sugerencia de acción contextualizada (ej: 'Riesgo Alto: considerar revisión de parámetros vitales y evaluación de deterioro'; 'Riesgo Medio: monitorizar más frecuentemente los cambios en documentación'). Dejar claro que es sugerencia, no mandato, para respetar autonomía clínica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Falta de formación y comprensión de la lógica del modelo por parte del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2",
+              "HAX-G13"
+            ],
+            "locus": "Onboarding e formación inicial para nuevo personal clínico",
+            "evidence": "'No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso'; la enfermera reporta 'Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que documento cambia el nivel del paciente'.",
+            "anti_pattern": "Desplegar un sistema predictivo sin garantizar comprensión básica de sus inputs y lógica",
+            "severity": "high",
+            "rationale": "Sin formación, el personal (especialmente quien documenta) no entiende cómo usar ni qué alimenta al modelo. Esto genera incertidumbre sobre la calidad de los datos que introducen, reduce la confianza en el sistema, y aumenta el riesgo de mal uso. La enfermera no sabe si documenta de la forma que el algoritmo espera.",
+            "recommendation": "Diseñar e implementar un programa de formación obligatorio (online, 15-20 min) para nuevos usuarios que cubra: (a) qué tipos de datos del historial alimentan el modelo (constantes, observaciones, palabras clave), (b) por qué no se muestran estos detalles en la pantalla, (c) ejemplos concretos de cómo un cambio en la documentación afecta el nivel. Ofrecer sesiones presenciales o Q&A periódicas para clarificar dudas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Dependencia de la calidad y frecuencia de documentación sin retroalimentación de impacto",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Entrada de datos en el historial electrónico que alimenta el modelo",
+            "evidence": "'El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario'; enfermera: 'Si supiera qué mira para subir el riesgo, documentaría con más cuidado esas cosas; así, a ciegas, hago mi registro normal y ya está'.",
+            "anti_pattern": "No aprovechar señales de comportamiento ni dar retroalimentación para mejorar calidad de input",
+            "severity": "medium",
+            "rationale": "El modelo depende críticamente de cómo se documente, pero el personal no recibe retroalimentación sobre cómo su documentación impacta el algoritmo. Sin esta señal, no hay incentivo para mejorar la precisión o completud de la documentación dirigida a los factores que realmente importan al modelo.",
+            "recommendation": "Implementar un mecanismo de retroalimentación (ej: cuando se documenta un evento, mostrar cómo ese registro afectó o no el nivel de riesgo del paciente). Ofrecer reportes periódicos al personal de enfermería sobre patrones de documentación por unidad (ej: 'En esta unidad, la documentación de síntomas respiratorios aumentó el riesgo en el 60% de casos'). Esto permite que el usuario aprenda a documentar en alineación con lo que el modelo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Ausencia de monitoreo de rendimiento por subgrupos clínicos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Validación y supervisión contínua del modelo en producción",
+            "evidence": "'La validación del modelo (su exactitud, cómo se comporta por tipo de unidad o de paciente) figura en la documentación del proyecto, pero no la mostramos en la pantalla'; 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción'.",
+            "anti_pattern": "Ausencia de supervisión de subgrupos o disparidades en producción",
+            "severity": "high",
+            "rationale": "El sistema predice para múltiples tipos de unidades y pacientes, pero no hay un proceso visible o contínuo de monitoreo de rendimiento por subgrupo (ej: ¿funciona igual en UCI que en planta? ¿En pacientes jóvenes vs. mayores?). Sin esto, disparidades de rendimiento pueden pasar desapercibidas y socavar la confianza en ciertos contextos.",
+            "recommendation": "Establecer un programa formal de validación contínua en producción que: (a) segmente el rendimiento por unidad clínica, grupo de edad, comorbilidades u otros factores relevantes; (b) calcule y publique (internamente, para responsables clínicos) sensibilidad, especificidad y tasas de error por subgrupo con periodicidad mensual; (c) genere alertas si el rendimiento cae significativamente en algún subgrupo; (d) registre automáticamente acuerdo/desacuerdo clínico con las predicciones para alimentar ese análisis.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Incertidumbre alta sin degradación de servicio ni alcance limitado",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "Situaciones de documentación insuficiente o inconsistente que generan predicción poco confiable",
+            "evidence": "'El nivel depende de cómo y con qué frecuencia se documenta'; médico reporta incertidumbre: 'muchas veces el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda de si esto hay que creérselo o no'.",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre",
+            "severity": "medium",
+            "rationale": "El sistema entrega una clasificación (alto/medio/bajo) sin indicador de confianza. En situaciones donde la documentación es escasa, inconsistente o el caso es atípico, la predicción puede ser poco confiable, pero el clínico no lo sabe. Esto puede llevar a sobre-confianza en una predicción débil o a desconfianza injustificada en una predicción sólida.",
+            "recommendation": "Añadir un indicador visual de confianza (ej: barra de confianza junto al color, o ícono de incertidumbre) que refleje: (a) si hay suficientes datos recientes para una predicción estable, (b) si el caso es atípico respecto al conjunto de entrenamiento. Cuando la confianza sea baja, mostrar explícitamente (ej: 'Predicción con baja confianza: pocos datos recientes') y degradar el prominencia visual del indicador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Sin retroalimentación de desenlace real vs. predicción para validación clínica",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Ciclo de feedback post-predicción en el tiempo",
+            "evidence": "'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción'.",
+            "anti_pattern": "Supervisión de subgrupos manual o ausente",
+            "severity": "high",
+            "rationale": "Sin registrar desenlaces y comparar con predicciones, es imposible saber si el sistema realmente está identificando deterioros o generando falsas alarmas en la práctica. El sistema vive en una caja negra de producción sin loop de validación que permita ajustar confianza o detectar degeneración del modelo.",
+            "recommendation": "Implementar un registro automático de: (a) cada predicción emitida (paciente, nivel, timestamp), (b) eventual desenlace real (sí/no hubo deterioro en las 24-48h siguientes), (c) acciones tomadas por el clínico como respuesta. Usar estos datos para: calcular periódicamente sensibilidad/especificidad real en producción, informar al equipo clínico del rendimiento observado, detectar cambios en la población que degraden el modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Falta de transparencia sobre cambios en lógica o entrenamiento del modelo",
+            "guideline_ids": [
+              "HAX-G14",
+              "HAX-G18"
+            ],
+            "locus": "Actualizaciones o cambios en el comportamiento del sistema a lo largo del tiempo",
+            "evidence": "'El modelo y su lógica de cálculo no se divulgan al usuario'; no hay evidencia de notificación de cambios en capacidades o reentrenamiento.",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental; cambios de capacidad no notificados",
+            "severity": "medium",
+            "rationale": "Si el modelo se reentorna, se añaden nuevas fuentes de datos, o cambia su lógica, el clínico seguirá interpretándolo según el modelo mental que se formó antes del cambio. Sin notificación explícita, puede confiar en un modelo que ya no funciona como espera.",
+            "recommendation": "Establecer un proceso de comunicación explícita cuando: (a) el modelo es reentrenado (comunicar qué cambió: datos nuevos, ajuste de ponderaciones, nuevas variables), (b) se añaden nuevas fuentes de datos al historial que alimentan el modelo, (c) cambia la interpretación de rangos o umbrales. Comunicar mediante: aviso en la interfaz, mensaje en reuniones de equipo, documentación de cambios accesible. Especificar si el cambio afecta interpretación de predicciones pasadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Ausencia de controles globales de configuración para el usuario final",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Opciones de control del comportamiento del sistema por el usuario clínico",
+            "evidence": "No hay mención de opciones de configuración, umbrales personalizables, o controles que permita al usuario o unidad ajustar el comportamiento del sistema a su contexto.",
+            "anti_pattern": "Ausencia de controles globales de configuración",
+            "severity": "low",
+            "rationale": "Diferentes unidades clínicas pueden tener diferentes tolerancias al riesgo o diferentes contextos (ej: UCI vs. planta de cirugía). Sin controles globales, el sistema opera con una lógica única que puede no ser óptima para todos los contextos.",
+            "recommendation": "Permitir a administradores o coordinadores de unidad configurar: (a) umbrales de sensibilidad del sistema (ej: 'priorizar sensibilidad en UCI, especificidad en planta'), (b) frecuencia de recálculo de riesgo (ej: contínuo vs. a intervalo fijo), (c) qué información adicional se muestra junto al indicador de riesgo. Documentar cómo estos cambios afectan el comportamiento esperado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Sesgo de documentación sin monitoreo por subgrupos demográficos o clínicos",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Comportamiento del modelo respecto a pacientes de diferentes edades, géneros, comorbilidades",
+            "evidence": "'El nivel depende de cómo y con qué frecuencia se documenta'; no hay evidencia de análisis de sesgo demográfico o clínico ni de monitoreo de disparidades en predicciones por subgrupo.",
+            "anti_pattern": "Sesgo de subgrupo no monitorizado en la interacción; disparidad de subgrupo no monitorizada en producción",
+            "severity": "medium",
+            "rationale": "Si la documentación de síntomas o constantes varía sistemáticamente por grupo demográfico o tipo de paciente (ej: menor documentación de síntomas en pacientes de edad avanzada, o diferentes normas de documentación por género), el modelo puede heredar o amplificar esos sesgos. Sin monitoreo explícito, esto pasa desapercibido.",
+            "recommendation": "Incluir en el programa de validación contínua un análisis de equidad que calcule rendimiento del modelo (sensibilidad, especificidad, tasa de falsas alarmas) por grupos demográficos relevantes (edad, género) y clínicos (tipo de diagnóstico, comorbilidades). Publicar resultados internamente y establecer alertas si se detectan disparidades significativas. Investigar raíces (datos de entrenamiento sesgados, documentación diferencial) e iterar.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo se centra en que el sistema no comunica métricas de rendimiento (sensibilidad, especificidad, tasas de error) en el punto de uso, y el médico no sabe con qué frecuencia acierta. Esto encaja directamente con CN-01, que describe exactamente que la confianza del clínico no está bien calibrada porque el sistema no comunica su rendimiento en el punto de uso. CN-05 también es relevante (ausencia de probabilidad/intervalo de confianza por paciente), pero el hallazgo se enfoca más en las métricas globales de rendimiento del modelo que en la incertidumbre por paciente individual.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo trata específicamente de la falta de explicación local de por qué el sistema asignó ese nivel a ESE paciente concreto, impidiendo al clínico contrastar la señal con su juicio a pie de cama. Esto encaja perfectamente con CN-02, que describe exactamente la situación de discordancia entre el score y el juicio clínico sin posibilidad de reconciliación por falta de explicación local. CN-06 también es relevante (opacidad del modelo), pero CN-02 captura mejor el problema específico del hallazgo: la discordancia irresoluble por falta de explicación por paciente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo describe que la enfermera no sabe cómo su documentación afecta al cálculo del riesgo, no conoce de qué se alimenta el algoritmo, y el lazo input→output es opaco para ella. Esto encaja directamente y de forma precisa con CN-04, que describe exactamente este problema: la enfermera alimenta el modelo pero no sabe de qué se alimenta ni cómo lo que documenta cambia el nivel.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo trata de la ausencia de recomendaciones de acción asociadas a cada nivel de riesgo: el sistema solo da el color y deja toda la interpretación y decisión al clínico, lo que lleva a ignorarlo. Esto encaja perfectamente con CN-03-sin-actionability, que describe exactamente este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe que el sistema no registra cuándo el clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción. Esto encaja directamente con CN-08-sin-captura-acuerdo-ni-desenlace, que describe exactamente este problema. Aunque CN-01 también aparece en la evidencia (el médico no sabe lo buena que es la herramienta), el núcleo del hallazgo es la ausencia de captura de acuerdo/desacuerdo y desenlace.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo describe la ausencia de un programa formal de formación para que el personal entienda de qué se alimenta el score y cómo interpretarlo, aprendiéndose solo con el uso. Esto encaja directamente con CN-07-sin-onboarding-interpretacion, que describe exactamente este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "CN-09-riesgo-infraconfianza-abandono",
+            "judge_rationale": "El hallazgo describe el riesgo de que el sistema sea ignorado por falta de credibilidad o claridad, con evidencia de médico-2 que lo mira por encima y sigue su criterio, y médico-1 que duda si creérselo. Esto encaja perfectamente con CN-09-riesgo-infraconfianza-abandono, que describe exactamente ese escenario: la falta de explicación y confianza lleva al clínico a dejar de mirar la herramienta o revisarla solo por encima. El hallazgo también toca CN-01 y CN-02, pero el núcleo es el riesgo de abandono/infraconfianza.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo se centra en que el indicador se presenta sin contexto sobre variabilidad entre unidades o tipos de pacientes, y que la información de validación (exactitud por unidad/tipo de paciente) existe pero no se muestra en el punto de uso. Esto es esencialmente el mismo problema que CN-01-confianza-atada-a-precision-no-comunicada: el sistema no comunica su rendimiento en el punto de uso, lo que impide una confianza bien calibrada. La especificidad sobre 'variabilidad entre unidades' es un matiz del mismo problema de no mostrar métricas de rendimiento contextualizado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo trata específicamente la ausencia de explicación del razonamiento del modelo para el caso concreto del paciente individual. La evidencia cita al médico-1 diciendo que no puede contrastar el nivel con lo que ve a pie de cama porque no sabe por qué se asignó ese nivel a ESE paciente. Esto corresponde directamente a CN-02-discordancia-score-juicio-sin-explicacion, que describe exactamente la incapacidad de reconciliar la discrepancia entre el score y el juicio clínico por falta de explicación por caso. CN-06 también es relevante pero es más general (opacidad del modelo en global); CN-02 captura mejor el foco en el caso concreto.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe la ausencia de un canal estructurado para registrar discrepancias entre la predicción del sistema y el juicio clínico, con evidencia directa del responsable de implantación ('No registramos cuándo un clínico está de acuerdo o en desacuerdo'). Esto es exactamente CN-08-sin-captura-acuerdo-ni-desenlace, que describe precisamente que el sistema no registra acuerdo/desacuerdo ni desenlace real, impidiendo la supervisión y el aprendizaje del modelo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo abarca la falta de comunicación sobre cómo el feedback del usuario afecta al sistema y qué controles tiene el usuario. La evidencia mezcla: (a) la enfermera no sabe cómo su documentación afecta al nivel (lazo input-output opaco), y (b) no hay formación formal. El núcleo del hallazgo es más amplio que cualquier candidato individual, pero el aspecto más específico y central —la enfermera no sabe cómo su documentación alimenta el modelo— corresponde a CN-04-lazo-input-opaco-para-enfermeria. Sin embargo, el hallazgo también incorpora fuertemente CN-07 (falta de onboarding). Revisando: el título habla de 'consecuencias del feedback' y 'control', que es más cercano a CN-04 (lazo input→output opaco). CN-04 es el candidato más específico para el problema central descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo trata específicamente la ausencia de transparencia sobre el desempeño del modelo (sensibilidad, especificidad, tasas de error) en el punto de uso clínico. La evidencia es directa: la ficha técnica confirma que no se muestran métricas de rendimiento, y el médico-1 expresa que no sabe con qué frecuencia acierta. Esto corresponde exactamente a CN-01-confianza-atada-a-precision-no-comunicada, que describe precisamente que el sistema no comunica su rendimiento en el punto de uso, impidiendo una confianza bien calibrada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe que el sistema no registra el acuerdo/desacuerdo del clínico ni el desenlace real del paciente frente a la predicción. Esto encaja perfectamente con CN-08-sin-captura-acuerdo-ni-desenlace, que describe exactamente ese problema: la discrepancia no se captura, no alimenta la supervisión y el modelo no aprende de sus errores. La evidencia citada (impl-clinico: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo...') es la misma que sustenta CN-08.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo describe que el sistema no asocia ninguna acción recomendada a cada nivel de riesgo, dejando al clínico sin orientación operativa. Esto encaja directamente con CN-03-sin-actionability, que describe exactamente ese problema: el sistema entrega solo el nivel y deja toda la interpretación y decisión al clínico, lo que reduce su utilidad y empuja a ignorarlo. La cita del médico-2 ('si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color') es la evidencia central de CN-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo se centra en que la enfermera no sabe de qué se alimenta el modelo ni cómo su documentación cambia el nivel ('no tengo claro si los estoy metiendo de la forma que el algoritmo espera'). Esto encaja directamente con CN-04-lazo-input-opaco-para-enfermeria, que describe exactamente ese problema: el lazo input→output es opaco para la enfermera, que no puede documentar de forma informada. Aunque CN-06 también es relevante (opacidad general del modelo), el foco específico del hallazgo es la relación input-documentación-output para enfermería, que es el núcleo de CN-04.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo describe la ausencia de un programa formal de formación para que el personal nuevo entienda cómo interpretar y usar el sistema, con aprendizaje por ensayo-error. Esto encaja perfectamente con CN-07-sin-onboarding-interpretacion, que describe exactamente ese problema: no hay formación reglada y cada profesional improvisa su modelo mental con el uso ('se aprende sobre la marcha'). La evidencia del impl-clinico es la misma que sustenta CN-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo describe que el sistema no explica por qué ha asignado ese nivel a ESTE paciente concreto, impidiendo al clínico contrastar la señal con su juicio a pie de cama. Esto encaja directamente con CN-02-discordancia-score-juicio-sin-explicacion, que describe exactamente ese problema: cuando el nivel discrepa del juicio clínico, el clínico no puede reconciliarlo porque no se le explica por qué se asignó ese nivel a ese paciente. La cita del médico-1 ('No me dice por qué ha puesto ese nivel a ESTE paciente') es la evidencia central de CN-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "CN-05-sin-incertidumbre-por-paciente",
+            "judge_rationale": "El hallazgo describe que el indicador de color no va acompañado de probabilidad numérica ni intervalo de confianza, generando incertidumbre no resuelta sobre cuánto fiarse del nivel en cada caso concreto. Esto encaja directamente con CN-05-sin-incertidumbre-por-paciente, que describe exactamente ese problema: el nivel categórico sin probabilidad individual ni intervalo de confianza genera falsa precisión e impide calibrar cuánto fiarse de cada caso. La evidencia de la ficha técnica y del médico-1 son las mismas que sustentan CN-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo se centra en que el rendimiento del modelo (sensibilidad, especificidad, tasas de error) no se muestra en el punto de uso, lo que impide que el clínico tenga una confianza bien calibrada. Esto encaja directamente con CN-01-confianza-atada-a-precision-no-comunicada, que describe exactamente ese problema: la confianza se calibra solo por la exactitud percibida porque el sistema no comunica su rendimiento en el punto de uso. CN-09 es secundario (consecuencia), CN-03 habla de actionability (distinto foco).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo describe explícitamente que el sistema no asocia ninguna acción recomendada a cada nivel de riesgo, dejando todo el trabajo interpretativo al clínico, quien acaba ignorando la señal. Esto es una correspondencia exacta con CN-03-sin-actionability, que es además el candidato marcado con [*] y describe el mismo problema palabra por palabra.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo se centra en que la enfermera no sabe de qué se alimenta el modelo ni cómo su documentación cambia el nivel del paciente: el lazo input→output es opaco para ella. Esto encaja perfectamente con CN-04-lazo-input-opaco-para-enfermeria, que describe exactamente ese problema. CN-06 es más general (opacidad del modelo para todos), pero el foco específico del hallazgo es el lazo de documentación de enfermería.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo describe la ausencia de un programa formal de formación para que el personal entienda de qué se alimenta el score y cómo interpretarlo, aprendiendo solo con el uso. Esto es una correspondencia directa con CN-07-sin-onboarding-interpretacion, que describe exactamente ese problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo describe que el sistema no registra el acuerdo/desacuerdo del clínico con el nivel mostrado ni el desenlace real del paciente frente a la predicción, impidiendo la mejora del modelo. Esto encaja directamente con CN-08-sin-captura-acuerdo-ni-desenlace, que describe exactamente ese problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo se centra en que no se explica por qué se ha asignado ese nivel a ESTE paciente concreto (qué variables lo han movido), lo que impide al clínico contrastar la señal con su juicio a pie de cama. Aunque la ficha también menciona la ausencia de probabilidad numérica (CN-05), el núcleo del hallazgo es la falta de explicación de las variables que determinan el nivel para ese paciente específico, lo que corresponde a CN-02-discordancia-score-juicio-sin-explicacion. CN-06 habla de opacidad general del modelo; CN-02 captura específicamente la incapacidad de reconciliar la discrepancia entre score y juicio clínico por falta de explicación del caso individual.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo trata específicamente de que el rendimiento del modelo (sensibilidad, especificidad, tasas de error) no se comunica en el punto de uso, lo que impide al clínico calibrar su confianza. Esto encaja directamente con CN-01-confianza-atada-a-precision-no-comunicada, que describe exactamente ese problema: la confianza se calibra solo por la exactitud percibida porque el sistema no comunica su rendimiento en el punto de uso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo trata de la ausencia de formación formal para que el personal entienda de qué se alimenta el score y cómo interpretarlo, con evidencia directa del responsable de implantación ('se aprende con el uso') y de la enfermera ('nadie me ha explicado de qué se alimenta'). Esto encaja perfectamente con CN-07-sin-onboarding-interpretacion, que describe exactamente la falta de formación reglada y el aprendizaje improvisado sobre la marcha.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo describe que el sistema solo entrega el nivel de riesgo (color) sin asociar ninguna acción recomendada, y que el médico esperaría orientación del tipo 'si el riesgo pasa de tal nivel, haz esta actuación'. Esto encaja directamente con CN-03-sin-actionability, que describe exactamente que el sistema no asocia acciones recomendadas a cada nivel, dejando toda la interpretación y decisión al clínico.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo trata de que el indicador de riesgo depende de cómo y con qué frecuencia se documenta, pero esta dependencia no se comunica al usuario, y la enfermera no sabe si está documentando de la forma que el algoritmo espera. Esto encaja directamente con CN-04-lazo-input-opaco-para-enfermeria, que describe exactamente que la enfermera alimenta el modelo sin saber de qué se alimenta ni cómo lo que documenta cambia el nivel.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo trata de que no se registran los acuerdos/desacuerdos del clínico con el nivel mostrado ni los desenlaces reales frente a la predicción, lo que impide el aprendizaje del modelo y la supervisión. Esto encaja directamente con CN-08-sin-captura-acuerdo-ni-desenlace, que describe exactamente ese problema: la discrepancia no se captura, no alimenta la supervisión y el modelo no aprende de sus errores.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata de que no se comunica si el modelo está calibrado hacia sensibilidad o especificidad, lo que genera confusión cuando el score discrepa del juicio clínico ('¿hay que creérselo o no?'). Ninguno de los candidatos describe específicamente el problema del equilibrio FP/FN no comunicado. El candidato más cercano sería CN-05-sin-incertidumbre-por-paciente (falsa precisión del nivel categórico) o CN-01 (rendimiento no comunicado), pero el hallazgo es más específico: trata del trade-off sensibilidad/especificidad del diseño del modelo, que es un aspecto distinto. Sin embargo, CN-01 habla de no comunicar tasas de error en el punto de uso, lo que incluye implícitamente FP/FN. Aun así, el foco del hallazgo es la falta de comunicación del balance FP vs FN como característica de diseño, que es un matiz más específico que CN-01 (que se centra en la calibración de confianza del clínico). Revisando más cuidadosamente: CN-01 menciona explícitamente 'sensibilidad, especificidad ni tasas de error' en su descripción del problema, y el hallazgo p3-025 ya fue adjudicado a CN-01. El hallazgo p3-030 es distinto: se centra en el trade-off de diseño FP/FN y su impacto en la interpretación clínica cuando hay discordancia. CN-02-discordancia-score-juicio-sin-explicacion describe la situación de discordancia sin poder reconciliarla, que es lo que experimenta el médico. Pero el núcleo del hallazgo es la falta de comunicación del balance FP/FN, que no está cubierto por ningún candidato de forma precisa. Es un hallazgo real y específico apoyado en el dossier, pero ningún candidato lo captura exactamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo se centra en que el sistema no explica por qué se ha asignado un nivel de riesgo a un paciente concreto, impidiendo al clínico contrastar la señal con su juicio a pie de cama. Esto encaja directamente con CN-02-discordancia-score-juicio-sin-explicacion, que describe exactamente ese problema: cuando hay discrepancia entre el score y el juicio clínico, el clínico no puede reconciliarla porque no se le explica por qué se asignó ese nivel a ESE paciente. CN-03 trata la falta de acción recomendada (distinto problema) y CN-06 trata la opacidad general del modelo, pero el foco del hallazgo es la explicación individual por paciente y la imposibilidad de reconciliar discordancias.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "CN-01-confianza-atada-a-precision-no-comunicada",
+            "judge_rationale": "El hallazgo trata específicamente la ausencia de información de rendimiento del modelo (sensibilidad, especificidad, tasas de error) en el punto de uso, lo que impide al clínico saber con qué frecuencia acierta el sistema. Esto corresponde exactamente a CN-01-confianza-atada-a-precision-no-comunicada, que describe que la confianza del clínico se calibra solo por la exactitud percibida porque el sistema no comunica su rendimiento en el punto de uso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "CN-03-sin-actionability",
+            "judge_rationale": "El hallazgo describe directamente que el sistema no asocia ninguna acción recomendada a cada nivel de riesgo, dejando al clínico sin orientación sobre qué hacer, lo que le lleva a ignorarlo. Esto es una correspondencia exacta con CN-03-sin-actionability, que es además el candidato marcado con [*] (comparte guideline) y describe exactamente este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "CN-07-sin-onboarding-interpretacion",
+            "judge_rationale": "El hallazgo se centra en la ausencia de formación formal para que el personal nuevo entienda de qué se alimenta el score y cómo interpretarlo, aprendiendo solo con el uso. Esto corresponde exactamente a CN-07-sin-onboarding-interpretacion, que describe precisamente la falta de formación reglada y el aprendizaje improvisado sobre la marcha.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "CN-04-lazo-input-opaco-para-enfermeria",
+            "judge_rationale": "El hallazgo trata que la enfermera alimenta el modelo con su documentación pero no sabe qué variables mira el algoritmo ni cómo su documentación cambia el nivel, por lo que no puede documentar de forma informada. Esto corresponde exactamente a CN-04-lazo-input-opaco-para-enfermeria, que describe precisamente ese problema: el lazo input→output es opaco y la enfermera no puede documentar de forma informada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo trata la ausencia de monitoreo de rendimiento por subgrupos y la falta de registro de acuerdos/desacuerdos clínicos y desenlaces reales frente a predicciones. La evidencia cita explícitamente 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción', que es la descripción exacta de CN-08-sin-captura-acuerdo-ni-desenlace. Aunque el hallazgo añade el matiz de 'subgrupos clínicos', el núcleo del problema descrito en la evidencia es la falta de captura de acuerdo/desacuerdo y desenlace.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_match",
+            "matched_golden_id": "CN-02-discordancia-score-juicio-sin-explicacion",
+            "judge_rationale": "El hallazgo describe la incertidumbre que surge cuando el sistema marca un nivel de riesgo que discrepa del juicio clínico a pie de cama y el clínico no puede reconciliarlo ('te quedas con la duda de si esto hay que creérselo o no'). Esto encaja directamente con CN-02-discordancia-score-juicio-sin-explicacion, que describe exactamente ese problema: discrepancia entre el nivel del sistema y el juicio clínico sin explicación que permita reconciliarlos. Aunque CN-05 y CN-06 también son relevantes, el núcleo del hallazgo es la discordancia sin explicación por paciente concreto.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+            "judge_rationale": "El hallazgo trata específicamente de la ausencia de registro del desenlace real frente a la predicción y del acuerdo/desacuerdo del clínico. La evidencia citada es literal: 'No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción'. Esto es exactamente lo que describe CN-08-sin-captura-acuerdo-ni-desenlace.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_match",
+            "matched_golden_id": "CN-06-modelo-opaco-sin-explicabilidad",
+            "judge_rationale": "El hallazgo se centra en que la lógica del modelo no se divulga al usuario y no hay evidencia de notificación de cambios o reentrenamientos. El núcleo es la opacidad del modelo. CN-06-modelo-opaco-sin-explicabilidad describe exactamente este problema: el modelo es opaco y su lógica no se divulga al usuario. La parte sobre 'cambios en entrenamiento' es una extensión del mismo problema de opacidad, no un problema distinto con candidato propio. CN-06 es el mejor ajuste.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de opciones de configuración, umbrales personalizables o controles para que el usuario ajuste el comportamiento del sistema a su contexto. Ninguno de los candidatos del golden describe este problema específico: los candidatos tratan de opacidad del modelo, falta de explicabilidad, falta de formación, falta de feedback, falta de actionability, etc. La ausencia de controles de configuración para el usuario final es un problema distinto no cubierto por ningún candidato. Está sustentado en el dossier (no hay mención alguna de opciones de configuración), por lo que es un hallazgo real nuevo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata del sesgo de documentación sin monitoreo por subgrupos demográficos o clínicos. Ninguno de los candidatos del golden aborda específicamente el análisis de sesgo por subgrupos demográficos o clínicos ni el monitoreo de disparidades en predicciones. CN-04 trata la opacidad del lazo input-output para enfermería, CN-06 la opacidad del modelo en general, pero ninguno menciona el análisis de equidad o sesgo por subgrupo. Sin embargo, la evidencia en el dossier es indirecta: solo se menciona que el nivel depende de la documentación, pero no hay ninguna fuente que mencione explícitamente análisis de sesgo demográfico ni su ausencia. El hallazgo infiere la ausencia de monitoreo de sesgo, lo cual no está directamente sustentado en el dossier más allá de la opacidad general del modelo. Es un hallazgo especulativo no suficientemente sustentado en evidencia directa del dossier.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 41,
+          "n_golden": 9,
+          "recall": 1.0,
+          "precision": 0.975609756097561,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 2,
+          "fbeta": 0.9950248756218906,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9950248756218906
+        }
+      }
+    ]
+  }
+}

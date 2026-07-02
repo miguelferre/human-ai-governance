@@ -1,0 +1,1970 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 9,
+    "system_name": "Sistema automático de detección de actividad sospechosa para prevención de fraude y blanqueo (antifraude/AML)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.8888888888888888,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9090909090909091,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 0.7777777777777778,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.9761904761904762,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.8107344632768362,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia total de transparencia sobre capacidades y límites del modelo en el onboarding",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Experiencia inicial del cliente y conocimiento previo de cómo el sistema de scoring de antifraude funciona",
+            "evidence": "El cliente declara: 'Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo'. El ex-programador confirma: 'No hay ninguna humanización en todo esto... Es una lista de comprobación que se ejecuta sola... Nadie se sienta a mirar tu caso concreto como una persona'. El operador añade: 'en la pantalla no tengo el porqué'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Los clientes no saben que existe un sistema automático de scoring que monitoriza sus transacciones ni bajo qué criterios pueden ser marcados como 'sospechosos'. Cuando la acción (cierre) ocurre, no han podido formar un modelo mental correcto de cómo funciona el sistema. Esto causa choque total y desconfianza. El cliente no puede calibrar su propio comportamiento ni entender qué actividades son problemáticas.",
+            "recommendation": "Añadir en el onboarding (aviso en el contrato, portal digital, comunicaciones periódicas) una explicación clara de: (1) que existe un sistema automático de monitoreo de transacciones, (2) qué tipos de actividad disparan alertas (importes inusuales, frecuencia atípica, transferencias internacionales, depósitos en efectivo, desviaciones del patrón histórico), (3) que el cierre puede ser consecuencia de una alerta si se confirma sospecha de fraude/blanqueo, (4) que por ley no se puede revelar el detalle de la sospecha pero que existe un proceso de revisión. Permitir que el cliente consulte si ha sido marcado (respetando la ley).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "No comunicación de incertidumbre ni confianza del modelo al operador y cliente",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2",
+              "PAIR-MM-2"
+            ],
+            "locus": "Salida que recibe el operador y decisión de cierre de cuenta comunicada al cliente",
+            "evidence": "Ficha del sistema: 'La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad'. Operador: 'en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca'. Cliente recibe 'una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema produce una señal de riesgo con cierta confianza interna, pero esa confianza no se comunica. Esto induce dos problemas: (1) el operador no sabe si debe estar preocupado o si es probablemente un falso positivo, y 'acaba confiando en que la máquina tendrá razón' (automation bias declarado), (2) el cliente no sabe si fue un error o una decisión fundamentada. Sin información de confianza, ambos actores sobreconfían en la decisión del modelo.",
+            "recommendation": "El sistema debe exponer internamente (al operador) un score de confianza o probabilidad asociado a cada alerta. Ese score debe ser visible y exigido en la revisión manual. Usar umbrales de confianza: si confianza < X%, el sistema debe pedir desambiguación o escalado antes de recomendar cierre. Comunicar al cliente (en general, sin entrar en el detalle sospechoso por ley) que la decisión se basa en patrones anómalos detectados automáticamente pero revisados manualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Explicación del motivo de cierre completamente ausente para el usuario final",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Notificación de cierre de cuenta enviada al cliente",
+            "evidence": "Cliente: 'Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo... me repetían que era una decisión del banco y que no podían dar detalles'. Ficha: 'El cliente no recibe ninguna explicación: la normativa antiblanqueo obliga a la entidad a no revelar que ha cursado un reporte de operación sospechosa'. Ex-programador: 'La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La prohibición legal de 'tipping-off' (no revelar que existe un SAR) es real, pero la entidad está usando esa prohibición para no explicar NADA de por qué la cuenta fue revisada o cerrada. Esto deja al cliente sin información accionable para apelar, corregir su comportamiento futuro o entender la decisión. El cliente experimenta esto como falta de transparencia total, debilita la confianza en la entidad y crea la percepción de decisiones arbitrarias ('contra eso no puedo presentar pruebas ni pedir que reconsideren').",
+            "recommendation": "Dentro del marco legal de prohibición de tipping-off, comunicar al cliente un nivel de explicación que respete la ley pero maximice la transparencia: (1) decir que la cuenta fue marcada por patrones atípicos detectados automáticamente (no entrar en la sospecha de blanqueo), (2) describir de forma genérica qué patrones fueron detectados sin atribuirlos específicamente a transacciones particulares ('actividad con características inusuales respecto a tu patrón histórico'), (3) ofrecer un proceso de apelación o revisión donde el cliente pueda presentar contexto o correcciones. Investigar con cumplimiento qué nivel de detalle es posible revelar sin incumplir tipping-off.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Operador no tiene herramienta de override ni visibilidad para rechazar marcas erróneas",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Pantalla y controles disponibles para el operador que atiende la alerta de SAR",
+            "evidence": "Operador: 'No tengo un botón para decir esto es un error, parad el cierre; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada'. Ficha: 'El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo'. Ex-programador: 'el modelo decide qué es sospechoso y el resto es papeleo para ejecutar lo que el modelo ya ha dicho'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es un actor de supervisión crítica, pero no tiene control sobre la decisión. No puede descartar un caso rechazando la recomendación del modelo de forma explícita y documentada. Cuando intenta 'escalarlo', el sistema ya ha avanzado hacia el cierre. Esto es fricción tan alta que el operador renuncia a ejercer juicio crítico y se convierte en administrador de proceso, no revisor. Además, no hay retroalimentación sistemática: no se captura si el operador creía que era un error, por lo que el modelo no aprende de esos casos falsos positivos.",
+            "recommendation": "Implementar en la pantalla del operador: (1) un botón 'Rechazar / Falso positivo' que abra una form breve donde el operador documente por qué cree que la marca es errónea (ej: 'Cliente mostró documentación de legalidad de la actividad', 'Patrón es consistente con comportamiento anterior').(2) Ese rechazo debe ser capturado, analizado y compartido con el equipo de modelado para mejorar el modelo. (3) Las formas de escalado deben tener SLA definido para revisión antes de ejecutar el cierre. (4) Entrenar al operador a ser crítico: mostrar que hay casos marcados que después resultan siendo legítimos.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Ausencia de información sobre confianza y tasas de error por tipo de actividad/subgrupo",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-DE-1",
+              "PAIR-UN-2"
+            ],
+            "locus": "Diseño del sistema de scoring y métricas visibles internamente",
+            "evidence": "Ficha: 'Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles; el método exacto es secreto comercial'. Ex-programador: 'Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca'. Cumplimiento: 'el volumen es enorme y los plazos son cortos', lo que sugiere un sistema sin ajuste de umbral por riesgo verdadero.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "No hay visibilidad de cuál es la tasa real de falsos positivos (clientes legítimos cerrados), ni si esa tasa es diferente por perfil de cliente (ej: emprendedores con ingresos variables, trabajadores autónomos, migrantes con envíos internacionales frecuentes). La ausencia de estos datos hace imposible detectar si el sistema tiene sesgo contra ciertos subgrupos o si está siendo demasiado restrictivo. El incentivo declarado es 'marcar de más antes que de menos' sin medir el coste real en clientes cerrados erróneamente.",
+            "recommendation": "Recopilar y monitorizar internamente: (1) tasa de falsos positivos (casos de SAR que después se desestiman) por subgrupo de cliente (perfil de riesgo, sector, geografía, tipo de actividad). (2) Distribución de confianza del modelo: ¿cuántos casos están a confianza alta vs. baja? (3) Análisis de errores: para los FP confirmados, ¿qué patrones causaron la marca? (4) Usar esos datos para recalibrar umbrales y ponderaciones por subgrupo, evitando sobreexposición a un grupo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "El cliente no tiene canal de apelación ni corrección visible",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Proceso de cierre de cuenta y experiencia del cliente afectado",
+            "evidence": "Cliente: 'No hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad'. Cumplimiento: 'por ley no podemos avisar al cliente de que existe un reporte (la prohibición de tipping-off), de modo que la carta de cierre no explica el motivo'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cliente es el afectado directo pero es excluido completamente del proceso de revisión y corrección. No tiene forma de informar al banco de que la marca es errónea, de presentar documentación sobre la legalidad de su actividad, o de solicitar que reviesen su caso. Esto viola tanto el principio de control del usuario como el de dignidad procesal: hay una acción severa (cierre de cuenta) sin opción de defensa.",
+            "recommendation": "Implementar un canal de apelación del cliente: (1) Cuando la cuenta está en riesgo de cierre pero aún dentro del plazo (treinta días), informar al cliente de que puede presentar un recurso. (2) Crear un formulario donde el cliente pueda subir documentación, contexto o explicación de su actividad. (3) Ese material debe llegar a un revisor humano que verifique si la marca sigue siendo válida a la luz de la evidencia adicional. (4) Comunicar la decisión final al cliente. (5) Si se desestima la alerta, no cerrar la cuenta. Esto respeta la ley (no revela detalles de SAR) pero da al cliente oportunidad de defensa.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Degradación sin elegancia ante fallo: el cierre es irreversible y sin vía de recuperación clara",
+            "guideline_ids": [
+              "PAIR-EF-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Proceso de ejecución del cierre y estados posteriores de la cuenta",
+            "evidence": "Cliente: 'para entonces la cuenta ya suele estar cerrada'. Operador: 'No tengo un botón para decir esto es un error, parad el cierre; lo único que puedo hacer es escalarlo y esperar'. Cumplimiento: 'Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando el sistema comete un error (marca falso positivo que lleva a cierre), no hay mecanismo de recuperación ágil. El cliente pierde acceso a su cuenta, sus fondos están bloqueados, y una vez cerrada la cuenta es muy lento reabrirla (si se hace). El cierre es el punto final irreversible sin escalada clara ni SLA de revisión. Esto es falta de resiliencia ante fallo.",
+            "recommendation": "Implementar un proceso de recuperación del fallo: (1) Definir estados intermedios de cuenta antes del cierre final (ej: 'Cuenta en revisión', 'Fondos congelados, operaciones detenidas, cliente notificado, 10 días para apelación'). (2) Solo tras 10 días sin apelación o con apelación rechazada, ejecutar cierre irreversible. (3) Si se descubre error post-cierre (ej: el operador recibe evidencia de legalidad), tener un protocolo rápido de reapertura (máx 5 días). (4) Avisar al cliente que la cuenta está en revisión, no simplemente informar del cierre final sin oportunidad de respuesta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Modelo no se personaliza ni adapta al perfil histórico del cliente; reglas uniformes para todos",
+            "guideline_ids": [
+              "HAX-G13",
+              "PAIR-DE-1"
+            ],
+            "locus": "Scoring del sistema: lógica de detección de anomalías y banderas rojas",
+            "evidence": "Ficha: 'Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles'. Ex-programador: 'Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca'. Ficha: 'El sistema procesa... desviaciones del patrón histórico' (menciona que analiza patrón histórico pero no que lo use para personalizar umbrales).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema compara contra el patrón histórico del cliente, pero usa reglas iguales para todos al evaluar si algo es 'sospechoso'. Un cliente con histórico de transferencias internacionales frecuentes no debería saltar la misma alerta que uno que de repente comienza transferencias internacionales. Un emprendedor con ingresos variables no debería compararse contra un trabajador con nómina estable. Esto conduce a falsos positivos en clientes con perfil variable pero legítimo.",
+            "recommendation": "Implementar segmentación de cliente en el scoring: (1) Clasificar clientes por perfil de riesgo y comportamiento normal (ej: 'Autónomo con ingresos variables', 'Nómina estable', 'Empresa con operaciones internacionales'). (2) Ajustar los umbrales de anomalía y los pesos de las banderas según el perfil. (3) Un depósito en efectivo inusual para un trabajador asalariado es rojo; para un empresario puede ser normal. (4) Comunicar al operador cuál es el perfil del cliente y cómo eso afecta a la interpretación de la marca.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Falta de canales de feedback granular: no se captura si operador considera que marca es error",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Pantalla de revisión de SAR para el operador y sistema de logging",
+            "evidence": "Ficha: 'El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo'. Operador: 'No tengo un botón para decir esto es un error'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El operador, tras revisar el caso, forma una opinión sobre si la marca es correcta o no, pero esa opinión nunca se documenta ni se retroalimenta al modelo. Esto es pérdida de información valiosa: los operadores ven patrones que el modelo no captura, y esos aprendizajes nunca se usan para mejorar. El sistema no tiene mecanismo de aprendizaje desde la experiencia de supervisión humana.",
+            "recommendation": "Añadir a la pantalla de revisión de SAR un campo de feedback obligatorio o altamente incentivado: 'En mi opinión, esta marca es: [Correcta] [Probablemente correcta] [Dudosa] [Probablemente error] [Claro error]' con comentario libre opcional. Usar este feedback para entrenar un modelo secundario de meta-detección (¿cuándo el operador discrepa del modelo?) y para reentrenar el modelo principal con las opiniones de los supervisores expertos.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Secreto comercial del modelo impide auditoría interna y comprensión del funcionamiento",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Metodología de scoring y transparencia interna en la entidad",
+            "evidence": "Ficha: 'La metodología de scoring es propietaria del proveedor... el método exacto es secreto comercial'. Ex-programador: 'La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La entidad (banco) no entiende completamente cómo funciona su propio sistema. Esto impide: (1) que el operador explique decisiones, (2) que la entidad detecte sesgos o errores sistemáticos, (3) que haya supervisión genuina (el operador no puede verificar la lógica porque no la ve), (4) que se mejore el sistema basándose en análisis interno. El secreto comercial, aunque legítimo, es usado como escudo para no responsabilizarse de decisiones defectuosas.",
+            "recommendation": "Negociar con el proveedor un nivel mínimo de transparencia modelo: (1) proporcionar a la entidad un documento técnico de arquitectura de alto nivel (qué señales se usan, cómo se combinan, qué pesos relativos tienen). (2) Crear un mecanismo de 'caja blanca parcial' donde el sistema puede mostrar, caso a caso, qué factores contribuyeron más a la marca (feature importance). (3) Si el proveedor no accede, considerar implementar un sistema de scoring interno con metodología conocida en lugar de depender de caja negra externa. (4) Requerimiento contractual: derecho de auditoría anual del modelo (test de sesgo, tasa de FP/FN) antes de renovación.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Cambios en comportamiento del modelo no notificados; riesgo de ruptura del modelo mental del usuario",
+            "guideline_ids": [
+              "HAX-G14",
+              "HAX-G18"
+            ],
+            "locus": "Mantenimiento y evolución del sistema de scoring en el tiempo",
+            "evidence": "Ficha: 'Las reglas y ponderaciones las fija el proveedor... el método exacto es secreto comercial'. No hay evidencia en el dossier de notificación a clientes cuando el proveedor actualiza el modelo.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El proveedor puede cambiar el scoring (ajustar ponderaciones, añadir nuevas señales) sin que la entidad lo sepa con detalle. Si el cliente tenía un comportamiento que antes no disparaba alerta, puede repentinamente empezar a hacerlo, sin aviso. El cliente no sabe que las reglas cambiaron. Esto es opaco y puede causar cierres sin precedentes aparentes.",
+            "recommendation": "Establecer con el proveedor: (1) notificación previa (mínimo 30 días) de cambios significativos en el modelo (nuevas señales, cambios de umbral, actualizaciones). (2) Período de prueba/coexistencia con modelo anterior. (3) Comunicar a clientes de alto riesgo cuando hay cambios de política de detección. (4) Monitorizar en producción si la tasa de SAR aumenta post-cambio, como indicador de que la actualización fue disruptiva.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-012",
+            "title": "No hay controles globales visibles para que el usuario maneje su riesgo",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Opciones de configuración disponibles para el cliente en el portal o contacto con el banco",
+            "evidence": "No hay evidencia en el dossier de que el cliente pueda ajustar qué monitoriza el sistema o cómo se aplica (ej: 'no monitorices mi actividad internacional', 'mi patrón es variable, baja el umbral de tolerancia'). El cliente descubre el sistema solo cuando es cerrado.",
+            "anti_pattern": null,
+            "severity": "low",
+            "rationale": "El cliente no tiene controles para gestionar cómo es monitoreado. Aunque algunos de estos controles tienen límites legales (el banco debe cumplir AML), al menos podrían existir opciones como 'notificarme antes de tomar acción' o 'préstame para apelar antes de cerrar'. El cliente experimenta el sistema como algo que le sucede, no como algo que puede influenciar.",
+            "recommendation": "Ofrecer controles básicos al cliente: (1) Opción de 'notificación temprana': avisar al cliente cuando su cuenta entra en estado de revisión por patrón anómalo (antes de cierre definitivo). (2) Configuración de 'actividad planeada': si el cliente sabe que va a hacer una actividad inusual (ej: comprar una propiedad, grande recepción de fondos), puede notificarlo al banco para que lo tenga en contexto. (3) Preferencia de comunicación: avisos por SMS, email, portal, para que el cliente no pierda comunicaciones importantes.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-013",
+            "title": "Incentivo perverso: entidad prefiere falsos positivos (clientes cerrados sin culpa) antes que falsos negativos (no detectable fraude)",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Diseño del balance de riesgos del sistema y los incentivos institucionales",
+            "evidence": "Cumplimiento: 'el incentivo es marcar de más antes que de menos... Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El balance entre falsos positivos (cliente legítimo cerrado) y falsos negativos (fraude no detectado) no ha sido decidido equilibradamente en términos del daño a las partes. El banco sufre sanciones regulatorias por falsos negativos, pero no por falsos positivos. El cliente sufre los falsos positivos directamente (cierre de cuenta, pérdida de fondos temporales). Esto crea un incentivo para ser agresivo en marcas, sabiendo que el coste lo paga el cliente, no el banco. El sistema es intencionadamente restrictivo sin que esto sea compensado por beneficio al cliente.",
+            "recommendation": "Reconfigurar explícitamente el equilibrio FP/FN: (1) Definir formalmente: 'Aceptamos un máximo de 1 FP (cliente inocente cerrado) por cada X FN que prevenimos (fraude detectado).' (2) Monitorizar ese balance real en producción. (3) Si se alcanza el límite de FP, ajustar umbral del modelo hacia lo conservador. (4) Implementar compensación al cliente por FP confirmado: reactivación de cuenta + intereses por tiempo de congelamiento + servicio recuperación de pagos fallidos. Esto alinea el incentivo de la entidad con no ser gratuitamente restrictiva.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo habla de 'ausencia total de transparencia sobre capacidades y límites del modelo en el onboarding', pero la evidencia citada se centra en que el cliente no recibe explicación del cierre, el operador no tiene el porqué en pantalla, y el ex-programador describe la automatización sin revisión humana. Esto no encaja con el onboarding específicamente; la evidencia real apunta a la opacidad de la salida del modelo hacia el operador (cc-02) y hacia el cliente (cc-01). El candidato cc-02 describe exactamente que el operador actúa sin ver qué movimiento disparó la marca, con qué certeza ni qué factores pesaron, que es lo que la evidencia citada ilustra principalmente. El locus menciona 'experiencia inicial' pero la evidencia es sobre el momento del cierre, no del onboarding. El candidato más cercano al núcleo de la evidencia es cc-02 (operador no entiende la señal), aunque cc-01 también aplica. cc-02 es el más específico al problema descrito en la evidencia (operador sin porqué + cliente sin explicación desde la perspectiva del operador).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "cc-05-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo se centra específicamente en la no comunicación de incertidumbre ni confianza del modelo, tanto al operador como al cliente. La evidencia cita explícitamente 'sin qué probabilidad', 'ni con qué nivel de certeza, ni cómo de fiable es la marca'. Esto encaja directamente con cc-05-sin-incertidumbre-ni-rendimiento, que describe exactamente que la marca se entrega como hecho binario sin nivel de confianza ni tasa de falsos positivos. Aunque cc-02 también es relevante, el foco específico en la incertidumbre/confianza no comunicada apunta a cc-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo describe explícitamente la ausencia de explicación del motivo de cierre para el usuario final, con evidencia directa del cliente ('sin un solo motivo') y de la ficha (normativa tipping-off). Esto encaja perfectamente con cc-01-sin-explicacion-al-cliente, que describe exactamente que el cliente recibe la notificación sin ningún motivo y no puede entender qué disparó la marca. Es el candidato más directo y específico.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el operador no tiene herramienta de override ni visibilidad para rechazar marcas erróneas. La evidencia cita directamente al operador diciendo 'No tengo un botón para decir esto es un error, parad el cierre' y que solo puede escalar y esperar. Esto encaja perfectamente con cc-03-sin-override-ni-apelacion, que describe exactamente la inexistencia de mecanismo real para anular o frenar el cierre, con el operador solo pudiendo escalar y la cuenta cerrándose antes.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo trata sobre la ausencia de información sobre confianza y tasas de error por tipo de actividad/subgrupo, con evidencia sobre reglas iguales para todos los perfiles y el incentivo a marcar de más. El núcleo del problema es el desequilibrio entre falsos positivos y falsos negativos por incentivo legal y la falta de ajuste por riesgo verdadero, lo que apunta a cc-09-umbral-sesgado-a-marcar-de-mas. Sin embargo, la mención de 'tasas de error por tipo de actividad/subgrupo' y 'ausencia de información sobre confianza' también apunta a cc-05. El título menciona explícitamente 'tasas de error por tipo' y la evidencia sobre reglas iguales para todos los perfiles sugiere falta de calibración por subgrupo, pero el argumento central de la evidencia (marcar de más por incentivo legal, volumen enorme sin ajuste de umbral) encaja mejor con cc-09. No obstante, cc-05 también comparte guideline y describe la falta de nivel de confianza y tasa de falsos positivos. El hallazgo es más específico sobre el desequilibrio de errores por incentivo legal, lo que lo acerca más a cc-09.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el cliente no tiene canal de apelación ni corrección visible. La evidencia cita al cliente diciendo 'No hay a quién recurrir... contra eso no puedo presentar pruebas ni pedir que reconsideren'. Esto encaja directamente con cc-03-sin-override-ni-apelacion, que describe exactamente que el cliente no tiene a quién apelar con pruebas y que no existe mecanismo real de corrección. Aunque cc-01 y cc-07 también son relevantes, el foco específico en la ausencia de canal de apelación para el cliente apunta a cc-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "cc-07-error-no-accionable",
+            "judge_rationale": "El hallazgo describe que el cierre es irreversible y no hay vía de recuperación clara: el operador no puede parar el cierre, solo escalar, y la cuenta ya suele estar cerrada. Esto encaja perfectamente con cc-07-error-no-accionable (fallo sin degradación elegante ni mensaje accionable, sin vía de recuperación) y también con cc-03-sin-override-ni-apelacion. Sin embargo, el énfasis del hallazgo está en la irreversibilidad y la falta de vía de recuperación (degradación sin elegancia), que es exactamente lo que describe cc-07. cc-03 se centra más en el override/apelación. El título del hallazgo ('degradación sin elegancia') apunta directamente a cc-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el modelo aplica reglas uniformes para todos los perfiles sin personalización, aunque menciona que analiza el patrón histórico. Ninguno de los candidatos del golden describe específicamente el problema de falta de personalización/adaptación al perfil individual del cliente. Los candidatos más cercanos (cc-06, cc-09) tratan la opacidad del modelo o el sesgo hacia marcar de más, no la uniformidad de reglas. Este es un problema real y específico apoyado en el dossier (ficha y ex-programador lo confirman), pero no coincide con ninguno de los candidatos listados.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo describe específicamente que el sistema no captura si el operador considera que la marca es un falso positivo, citando directamente la ficha ('no recoge si el operador consideró que la marca era un falso positivo') y al operador ('no tengo un botón para decir esto es un error'). Esto es exactamente lo que describe cc-08-sin-captura-de-discrepancia. Aunque cc-03 también es candidato marcado con [*], el foco del hallazgo es la falta de captura del feedback del operador, no la ausencia de override/apelación en sí.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "cc-06-modelo-opaco-propietario",
+            "judge_rationale": "El hallazgo describe que el secreto comercial del modelo impide la auditoría interna y la comprensión del funcionamiento, citando que la metodología es propietaria y que la lógica fina casi nunca se puede reconstruir. Esto encaja directamente con cc-06-modelo-opaco-propietario, que describe exactamente ese problema: lógica de scoring como secreto comercial, no auditable por quienes lo sufren o ejecutan.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que los cambios en el comportamiento del modelo no se notifican, lo que puede romper el modelo mental del usuario. La evidencia se basa en que las reglas las fija el proveedor (secreto comercial) y no hay evidencia de notificación de actualizaciones. Esto es más específico que cc-06 (que trata la opacidad general del modelo) y ningún candidato describe específicamente el problema de falta de notificación de cambios/actualizaciones del modelo. Es un problema real apoyado en el dossier, pero ningún candidato lo captura específicamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-012",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el cliente no tiene controles globales visibles para gestionar su riesgo (no puede ajustar qué monitoriza el sistema ni cómo se aplica), y descubre el sistema solo cuando es cerrado. Ninguno de los candidatos del golden describe específicamente la ausencia de controles de usuario para gestionar la exposición al sistema de monitorización. Los candidatos más cercanos (cc-01, cc-03, cc-07) tratan la falta de explicación, override o vía de recuperación, pero no la ausencia de controles preventivos del cliente. Es un problema real y específico apoyado en el dossier, pero no coincide con ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-013",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo describe exactamente el desequilibrio entre falsos positivos y falsos negativos motivado por el incentivo legal de marcar de más, trasladando el coste del error al cliente. Esto coincide de forma precisa con el candidato cc-09-umbral-sesgado-a-marcar-de-mas, que describe ese mismo balance asimétrico fijado por incentivo legal sin que se gestione explícitamente para el afectado. La evidencia del dossier (cumplimiento: 'el incentivo es marcar de más antes que de menos... el coste de equivocarnos por exceso recae en el cliente, no en nosotros') lo sustenta directamente.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 13,
+          "n_golden": 9,
+          "recall": 0.8888888888888888,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 3,
+          "fbeta": 0.9090909090909091,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9090909090909091
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia de explicación de decisión al cliente final",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Comunicación con el cliente tras cierre de cuenta",
+            "evidence": "El cliente recibe una notificación de cierre sin explicación del motivo (la normativa antiblanqueo prohíbe a la entidad revelar que se ha presentado un reporte). El cliente expresa: 'Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo. Llamé y nadie supo (o nadie quiso) decirme qué había disparado aquello'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cliente carece completamente de acceso a la lógica de decisión. Si bien la normativa de tipping-off restringe legalmente la revelación de que existe un reporte, el sistema no comunica siquiera qué características o comportamientos genéricos del usuario dispararon la alerta (sin mencionar transacciones concretas). Esto impide al usuario comprender su situación, recurrir efectivamente o aprender de la decisión. La explicación ausente elimina la posibilidad de calibrar confianza o identificar errores sistémicos.",
+            "recommendation": "Diseñar una comunicación que, sin violar la prohibición de tipping-off, explique al cliente qué dimensión de su comportamiento fue relevante (ej: 'patrón anómalo de importes', 'actividad internacional detectada', 'desviación del histórico') de forma genérica pero accionable. Permitir al cliente una vía de reclamación que se base en datos factuales sobre su actividad, no en suposiciones.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Falta de transparencia sobre confianza e incertidumbre del modelo en la interfaz del operador",
+            "guideline_ids": [
+              "PAIR-ET-2",
+              "HAX-G2"
+            ],
+            "locus": "Interfaz del operador que revisa la alerta de actividad sospechosa",
+            "evidence": "El operador declara: 'A mí me llega un aviso de que la cuenta está marcada y que procede el cierre, pero en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca'. La ficha del sistema confirma: 'La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador recibe una decisión binaria (marca presente/ausente) sin información sobre el nivel de confianza, la probabilidad de fraude, o los falsos positivos esperados. Esto induce directamente a automation bias: el operador declara 'Acabo confiando en que la máquina tendrá razón, porque no me dan forma de comprobar si la tiene'. Sin información sobre incertidumbre, no puede ejercer la revisión crítica que la normativa AML exige del operador humano.",
+            "recommendation": "Exponer en la interfaz del operador: (1) la confianza del modelo (ej: score 0-100 o probabilidad de fraude); (2) el margen de error histórico del modelo (falsos positivos, tasa de rechazo) para este tipo de patrón; (3) comparativa con el comportamiento típico de cuentas legítimas. Implementar un control que fuerce al operador a documentar su razonamiento antes de confirmar el cierre, especialmente en casos de baja confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Lógica de decisión completamente opaca para el operador y sin trazabilidad de factores",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Procesamiento y presentación de la razón de la alerta al equipo de cumplimiento",
+            "evidence": "La ficha del sistema indica: 'sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad'. El ex-programador explica: 'La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador'. El responsable de cumplimiento reconoce: 'Cuando el modelo abre un caso, lo revisamos, pero el volumen es enorme y los plazos son cortos'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin acceso a qué combinación de transacciones o características específicas activó la alerta, el operador no puede evaluar de forma independiente si la marca es legítima. Esto es especialmente grave en AML, donde la supervisión regulatoria del operador es un requisito legal. El sistema fuerza un estado de dependencia cognitiva del modelo, impidiendo la revisión real.",
+            "recommendation": "Desglosar la salida del modelo en componentes explicables: listar las transacciones o patrones que contribuyeron a la marca (ej: '3 transferencias internacionales en 5 días', 'depósitos en efectivo 150% por encima de histórico'), indicar el peso relativo de cada factor, y mostrar si existen conflictos entre factores (ej: importes altos pero históricamente registrados vs. nuevas contrapartes). Implementar un sistema de auditoría que capture qué factores el operador consideró y por qué tomó su decisión final.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Confianza no calibrada por perfil de cliente",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Aplicación de reglas de scoring uniforme a todos los perfiles de cuenta",
+            "evidence": "La ficha del sistema afirma: 'Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles'. El ex-programador refuerza: 'Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca y el caso avanza hacia el cierre'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Un cliente que opera un negocio legítimo con alta rotación de efectivo, transferencias internacionales frecuentes o contrapartes variadas será indistinguiblemente marcado con el mismo modelo que uno con patrones sospechosos. Sin calibración por segmento (pyme, freelancer, operador de remesas, etc.), el sistema genera falsos positivos sistemáticos en ciertas poblaciones legítimas. Esto viola el principio de comunicar cómo de bien funciona el sistema (HAX-G2): no comunica que la confianza difiere según el tipo de perfil.",
+            "recommendation": "Segmentar el modelo por perfil de cliente (ej: pyme, autónomo, empleado, jubilado, operador internacional) y calibrar umbrales y ponderaciones para cada segmento. Exponer explícitamente al operador el segmento asignado y, si es posible, la tasa de falsos positivos específica del segmento en casos similares. Permitir al operador escalar o revisar manualmente en segmentos donde el modelo es conocidamente menos confiable.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Ausencia de mecanismo de override o corrección inmediata por el operador",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Flujo de decisión tras la alerta del modelo hasta la ejecución del cierre",
+            "evidence": "El operador declara: 'No tengo un botón para decir «esto es un error, parad el cierre»; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador no puede pausar o revertir una decisión del modelo aunque identifique que es un falso positivo. Esto es un diseño que empuja a la aceptación pasiva (automation bias) e impide la supervisión crítica requerida por PAIR-ET-3. En AML, donde la revisión humana es un control obligatorio, la ausencia de un mecanismo para que el operador detenga una acción incorrecta es un fallo grave de gobernanza.",
+            "recommendation": "Implementar un estado 'pendiente revisión operador' entre la alerta del modelo y el cierre efectivo. Permitir al operador marcar la alerta como 'sospecha de falso positivo' con justificación (datos que contradicen la marca: histórico consistente, contrapartes conocidas, justificación de importes), con escalada automática a un equipo de revisión senior si el operador se opone al cierre. Registrar y auditar todas las instancias de override.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Información contextualmente irrelevante para el operador (motivo genérico sin detalles de transacción)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Contenido de la alerta presentada en la pantalla del operador",
+            "evidence": "La ficha del sistema especifica: 'La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El operador recibe información genérica ('actividad sospechosa detectada') sin contexto específico de la tarea (qué debe verificar, qué evidencia contradice la marca, qué referencias normativas aplicar). Para tomar una decisión informada sobre si ejecutar el cierre, necesita información relevante a la tarea concreta (este cliente, esta cuenta, estas transacciones), no etiquetas genéricas.",
+            "recommendation": "Estructurar la alerta para incluir: (1) transacciones específicas que dispararon la alerta (fechas, importes, contrapartes); (2) contexto del cliente (antigüedad de cuenta, histórico limpio, sector de actividad declara); (3) justificación breve de por qué cada factor se considera sospechoso en este contexto; (4) referencias a la normativa AML aplicable (ej: GAFI recomendación 10, preocupaciones PEP, etc.).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "No se registra feedback del operador para mejorar o validar el modelo",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Sistema de registro y retroalimentación del modelo tras la acción del operador",
+            "evidence": "La ficha del sistema afirma: 'El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin capturar la evaluación del operador sobre si la alerta fue correcta, el sistema no puede medir su desempeño real (tasa de falsos positivos, cobertura de fraude real) ni mejorar. Esto es un incumplimiento indirecto de HAX-G2: el sistema no comunica (ni siquiera internamente valida) cómo de bien funciona realmente, porque no recolecta datos de validación de la precisión.",
+            "recommendation": "Introducir un campo de revisión post-cierre donde el operador registre: (1) ¿fue la marca correcta?; (2) ¿qué evidencia observó?; (3) ¿debería haberse tomado otra acción?. Utilizar estos datos para calcular periódicamente la precisión real del modelo, la tasa de falsos positivos por segmento, y ajustar umbrales. Comunicar estas métricas internamente al equipo de cumplimiento para recalibrar la confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Incapacidad del cliente de recurrir o presentar pruebas de inocencia",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "Proceso de reclamación o recurso disponible al cliente tras cierre",
+            "evidence": "El cliente expresa: 'No hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cliente carece de un mecanismo accesible para apelar o proporcionar evidencia que contradiga la decisión del modelo (ej: justificantes de ingresos, prueba de actividad legítima, rectificaciones de datos erróneos). Sin acceso a explicaciones detalladas de por qué fue cerrado, no puede formular una apelación informada. PAIR-ET-1 exige explicaciones que ayuden a decidir cuándo confiar; aquí ni el usuario final ni el operador pueden confiar porque no tienen información en la que basar esa decisión.",
+            "recommendation": "Crear un proceso de reclamación accesible donde el cliente pueda: (1) solicitar una explicación estructurada de qué factores dispararon la marca; (2) proporcionar evidencia contradictoria (ej: contrato de cliente, factura, historial de transacciones legítimas con esa contraparte); (3) acceder a una revisión manual por un equipo diferente del que ejecutó el cierre inicial, con criterios transparentes. Establecer un SLA para respuesta (ej: 15 días hábiles).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Incentivos desalineados: sobre-marcar para evitar responsabilidad",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Estructura de incentivos implícita en el sistema (supervisión de cumplimiento)",
+            "evidence": "El responsable de cumplimiento explica: 'Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros. El sistema existe para cumplir la obligación legal de detectar y reportar operaciones sospechosas; no reportar a tiempo expone a la entidad a sanciones cuantiosas, así que el incentivo es marcar de más antes que de menos.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La arquitectura de riesgos incentiva la sobre-confianza en el modelo ('marcar de más antes que de menos') porque la sanción regulatoria por falso negativo (fraude no detectado) recae en la entidad, mientras que el coste del falso positivo (cliente legítimo cerrado) recae en el cliente. Esto viola PAIR-ET-2 (comunicar incertidumbre) porque el sistema no comunica este sesgo de incentivos ni lo compensa con transparencia extra sobre confianza baja. El cliente no sabe que la decisión tiene un sesgo conocido hacia falsos positivos.",
+            "recommendation": "Diseñar la comunicación y el proceso de override para compensar este sesgo: (1) elevar explícitamente el umbral de confianza requerido para el cierre (ej: requerir 85%+ de confianza, no 51%); (2) comunicar al operador que existe un sesgo conocido hacia falsos positivos y que debe escalar casos con confianza media; (3) implementar un 'período de observación' antes del cierre irreversible, donde la cuenta se restringe pero no se cierra, para validar la marca con datos adicionales; (4) monitorear internamente la tasa de falsos positivos y aplicar sanciones o incentivos inversos si superan un umbral.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Ausencia de mecanismo de override o corrección efectiva por parte del operador",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Interfaz del operador de atención al cliente ante la alerta SAR",
+            "evidence": "El operador declara: 'No tengo un botón para decir esto es un error, parad el cierre; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada.' Además, el ex-programador confirma: 'el modelo decide qué es sospechoso y el resto es papeleo para ejecutar lo que el modelo ya ha dicho.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador carece de herramientas para señalar que la marca es un falso positivo o para ajustar la decisión. Aunque el dossier indica que 'el sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo', esto evidencia que las correcciones operacionales no son ni capturadas ni posibles de manera estructurada. El operador está forzado a confiar en la máquina por falta de control.",
+            "recommendation": "Implementar un flujo explícito en la interfaz del operador que permita: (a) marcar una alerta como 'revisada y descartada' o 'requiere investigación adicional' con justificación registrada; (b) diferir o bloquear el cierre automático mientras la revisión está en curso; (c) capturar estas correcciones de forma estructurada en el sistema para retroalimentación al modelo y auditoría de falsos positivos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Opacidad total de la lógica de scoring para el operador responsable de ejecutar la decisión",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Pantalla de información que recibe el operador al procesar una alerta SAR",
+            "evidence": "Ficha del sistema: 'La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad.' El operador expresa: 'en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca.' Ex-programador: 'La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador ejecuta cierres de cuenta sin visibilidad de los factores concretos que desencadenaron la alerta. Esto impide que verifique la corrección de la decisión, evalúe la confianza del modelo en ese caso específico, o identifique patrones de error. El operador no puede ejercer discernimiento humano porque no tiene información suficiente para hacerlo; debe asumir que la máquina acierta.",
+            "recommendation": "Enriquecer la pantalla del operador con: (a) lista detallada de transacciones/comportamientos que contribuyeron a la alerta, con sus pesos o scores individuales; (b) banda de confianza o probabilidad del modelo para ese cliente; (c) comparativa: cómo se desvía el patrón de este cliente respecto a su histórico y respecto a la cohorte; (d) si es viable, mostrar qué reglas o factores pesaron más en la decisión. Esto faculta al operador para ejercer control humano genuino.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Prohibición normativa de explicación al cliente crea asimetría total en la capacidad de impugnar la decisión",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1",
+              "PAIR-FC-2"
+            ],
+            "locus": "Comunicación del banco hacia el cliente (carta de cierre) y atención del cliente ante consultas",
+            "evidence": "Dossier: 'El cliente no recibe ninguna explicación: la normativa antiblanqueo obliga a la entidad a no revelar que ha cursado un reporte de operación sospechosa.' Cliente afectado: 'Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo [...] no hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad.' Operador: 'el cliente me llama desesperado preguntando qué ha hecho mal y yo, sinceramente, no lo sé y, aunque lo supiera, tengo prohibido contárselo.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La restricción legal de 'tipping-off' es real, pero el sistema interactúa de forma que deja al cliente sin opción de respuesta. El cliente no puede proporcionar contexto (p. ej., 'esos depósitos en efectivo son para nómina del negocio familiar'), verificar si hay un error en los datos, o ejercer control sobre cómo se interpreta su actividad. La interacción es unidireccional: el sistema marca, el banco cierra, el cliente recibe la noticia sin remedio.",
+            "recommendation": "Dentro de los límites legales, implementar un canal de feedback/apelación estructurado: (a) permitir al cliente presentar documentación o contexto (comprobantes, explicaciones) ante un proceso de revisión humana de 2ª instancia sin comprometer el reporte legal (que se mantendría confidencial); (b) ofrecer la opción de que un oficial de cumplimiento interno revise el caso de nuevo con la perspectiva del cliente antes de ejecutar el cierre; (c) comunicar plazos y criterios de revisión de forma clara. Esto no viola tipping-off (no se revela que hubo reporte) pero devuelve algo de control al usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Falta de captura de correcciones humanas en el registro del sistema",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Sistema de registro y auditoría de casos SAR",
+            "evidence": "Ficha del sistema: 'El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin registro de valoraciones operacionales (falso positivo, revisión adicional requerida, etc.), el sistema pierde retroalimentación crítica para mejorar. Impide que se detecten patrones de sobre-alarma, que se audite la calibración del modelo, y que se entrene sobre casos reales de decisiones humanas acertadas. La feedback granular no existe porque no hay canal para capturarla.",
+            "recommendation": "Ampliar el esquema de registro para incluir: (a) etiqueta del operador sobre la corrección de la alerta (confirmada, falso positivo, requiere más datos, contexto conocido, etc.); (b) notas de investigación del operador si las hay; (c) resultado final (cuenta cerrada, reinstanciada, abierta bajo supervisión); (d) tiempo entre alerta y cierre. Estos datos deben ser accesibles para auditoría y para retroalimentar el modelo de scoring.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Ausencia de comunicación sobre cómo el feedback del operador afecta el comportamiento futuro del sistema",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Interfaz del operador y políticas de ajuste del modelo",
+            "evidence": "No hay evidencia en el dossier de que el operador reciba información sobre si sus correcciones o valoraciones influyen en futuras decisiones del modelo, ni cómo se integran en reentrenamientos o ajustes de thresholds. El ex-programador indica que 'el modelo decide qué es sospechoso y el resto es papeleo', implicando una separación total entre operación y aprendizaje.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Aunque el operador dispusiese de un canal de corrección (que no tiene), sin visibilidad sobre cómo su input afecta al sistema, no hay incentivo real para usarlo ni confianza en que el esfuerzo importe. El operador no sabe si sus reportes de falso positivo alimentan mejoras reales o se pierden.",
+            "recommendation": "Comunicar explícitamente al operador: (a) que los registros de correcciones se utilizan en auditoría y mejora del modelo; (b) con qué frecuencia se reentresa o se ajustan los thresholds basándose en feedback operacional; (c) mostrar ejemplos anonimizados de cómo correcciones pasadas evitaron cierres futuros similares, para cerrar el ciclo de aprendizaje visible.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Volumen y presión temporal impiden revisión humana significativa de las alertas",
+            "guideline_ids": [
+              "PAIR-FC-2",
+              "HAX-G9"
+            ],
+            "locus": "Flujo de revisión operacional de alertas SAR",
+            "evidence": "Responsable de cumplimiento: 'Cuando el modelo abre un caso, lo revisamos, pero el volumen es enorme y los plazos son cortos.' Operador de atención: 'para entonces la cuenta ya suele estar cerrada' (refiriéndose al tiempo que tarda un escalado).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Incluso si existiesen mecanismos de override, el contexto operacional (alta presión regulatoria, volumen, plazos cortos) obliga a aceptar las decisiones del modelo por defecto. El operador no puede ejercer control genuino porque la fricción temporal lo fuerza a delegar en la máquina. La interacción se vuelve pasiva: el operador confirma órdenes de cierre en lugar de revisar y decidir.",
+            "recommendation": "Implementar ajustes en la cadencia de trabajo: (a) priorizar alertas por nivel de confianza del modelo, para que la revisión humana se enfoque en casos de riesgo moderado (donde más importa el criterio); (b) automatizar parcialmente la confirmación de cierre solo para casos de confianza muy alta; (c) establecer SLAs que garanticen tiempo de revisión humana (ej: 2-3 días) antes de ejecutar cierre irreversible; (d) crear un backlog visible para evitar que plazos cortos empujen a aceptar por defecto.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Ningún mecanismo de feedback granular o loop de corrección disponible para el cliente",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Canales de comunicación abiertos entre cliente y banco después del cierre",
+            "evidence": "Cliente afectado: 'No hay a quién recurrir [...] contra eso no puedo presentar pruebas.' Operador: 'tengo prohibido contárselo [el motivo], no tengo forma de comprobar si la [máquina] tiene [razón].' No hay mención en el dossier de procesos de apelación, revisión externa, o canales de feedback post-decisión.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cliente está completamente excluido del loop de feedback. No puede reportar errores en los datos (transacciones malinterpretadas), aportar contexto, o solicitar una segunda revisión humana. Después del cierre, la interacción termina. Esto viola el principio de permitir feedback granular: no existe ningún canal.",
+            "recommendation": "Establecer un proceso de revisión de apelación: (a) crear un formulario de apelación post-cierre donde el cliente pueda presentar documentación o contexto; (b) derivarlo a un oficial de cumplimiento diferente al original (al menos 2ª instancia); (c) ofrecer plazo límite para revisión (ej: 30 días) con comunicación clara de criterios; (d) comunicar el resultado de la revisión, incluso si se mantiene el cierre, para cerrar el ciclo interactivo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Configuración y límites del sistema (thresholds, reglas) no son accesibles para ajuste supervisado",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Parámetros de sensibilidad y reglas del modelo de scoring",
+            "evidence": "Ficha del sistema: 'Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles; el método exacto es secreto comercial.' Ex-programador: 'No hay ninguna humanización en todo esto [...] si tu actividad encaja con el patrón, salta la marca.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El banco no puede ajustar los parámetros del modelo para su contexto operacional específico. Un cliente con perfil legítimo pero atípico (p. ej., negociante de arte que realiza transacciones grandes e irregulares) está atrapado en reglas fijas diseñadas genéricamente. No hay control de configuración que el banco pueda ejercer.",
+            "recommendation": "Negociar con el proveedor: (a) acceso a parámetros de threshold por perfil de cliente o tipología de actividad (ej: pequeñas empresas, autónomos, clientes de alto patrimonio) para que el banco pueda calibrar sin perder protección; (b) si no es viable con el proveedor actual, migrar a una solución que permita ajuste supervisado; (c) documentar la razón de cada configuración elegida para auditoría.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Ausencia total de explicación en la comunicación al usuario final sobre el motivo de cierre de cuenta",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Notificación de cierre enviada al cliente",
+            "evidence": "El cliente recibe una notificación de cierre sin explicación del motivo (la normativa antiblanqueo prohíbe a la entidad revelar que se ha presentado un reporte). Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo.",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso; falta de transparencia en la decisión automatizada",
+            "severity": "high",
+            "rationale": "En el contexto de un producto financiero crítico, cerrar una cuenta sin justificación alguna viola la norma social de trato justo y transparencia. El cliente experimenta la decisión como injusta e inexplicable, reforzado por la prohibición legal de tipping-off que hace que parezca opaca de propósito. Esto genera desconfianza y desprotección percibida.",
+            "recommendation": "Estudiar con asesoría legal si es posible comunicar al cliente un nivel mínimo de información (p. ej., categoría amplia del tipo de riesgo detectado: \"patrones de transacciones\", \"coincidencia con listas\") que respete la prohibición de tipping-off pero ofrezca algún anclaje comprensible para el cliente. Alternativa: proporcionar un procedimiento de apelación que permita al cliente presentar su caso sin exponer el reporte.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Operador de atención carece de información sobre el motivo de la alerta y no puede verificar si es correcta",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Interfaz del operador que recibe la alerta de actividad sospechosa",
+            "evidence": "A mí me llega un aviso de que la cuenta está marcada y que procede el cierre, pero en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca. La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad.",
+            "anti_pattern": "Falta de explicabilidad de la decisión del modelo; operador actúa sin poder validar la señal",
+            "severity": "high",
+            "rationale": "El operador actúa como intermediario entre el modelo y el cliente, pero sin información suficiente para ejecutar un juicio humano sobre la razonabilidad de la decisión. El ex-programador confirma que 'la lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador'. Esto rompe la capacidad del operador de ejercer supervisión cualitativa y genera que confíe ciegamente en la máquina (Acabo confiando en que la máquina tendrá razón, porque no me dan forma de comprobar si la tiene).",
+            "recommendation": "Modificar la interfaz del operador para incluir: (1) desglose de qué transacciones específicas dispararon banderas rojas, (2) peso o contribución relativa de cada factor al score final, (3) distribución de scores históricos para ese tipo de cliente (contexto de normalidad), (4) opción explícita de marcar el caso como falso positivo con anotación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Ausencia de mecanismo para que el operador revierta o pause una decisión de cierre automatizada",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Flujo de cierre de cuenta tras activación de alerta",
+            "evidence": "No tengo un botón para decir 'esto es un error, parad el cierre'; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada. El sistema funciona así: oye, has marcado estas casillas que son una bandera roja, estás fuera. Es una lista de comprobación que se ejecuta sola.",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar; falta de control humano sobre la ejecución",
+            "severity": "high",
+            "rationale": "El operador no tiene control directo para descartar la alerta o pausar la ejecución de cierre. Aunque el cliente reconozca el problema o el operador lo identifique como error, el único camino es 'escalarlo y esperar', durante el cual el cierre ya se ejecuta. Esto viola la capacidad de dismissal eficiente y deja al operador sin autoridad sobre una acción irreversible que ejecuta en base a señales que no puede validar.",
+            "recommendation": "Implementar un mecanismo de override operacional que permita marcar un caso como 'bajo revisión - pausar cierre pendiente validación', con escalada paralela y SLA de revisión manual antes de ejecutar el cierre. El operador debe tener potestad explícita de pausar, no solo de escalar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Política de scoring uniforme (mismas reglas y ponderaciones para todos los perfiles) sin adaptación al contexto del cliente",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Configuración del modelo de scoring antifraude/AML",
+            "evidence": "Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles; el método exacto es secreto comercial. El sistema procesa el flujo de transacciones y rasgos de la cuenta [...] produce una señal de riesgo con marcas («banderas rojas»).",
+            "anti_pattern": "Falta de ajuste a normas sociales y contexto; aplicación ciega de reglas genéricas",
+            "severity": "medium",
+            "rationale": "Un depósito de efectivo o una transferencia internacional pueden ser completamente normales para un cliente empresario o un trabajador que recibe remesas, pero disparar una bandera roja en otro contexto. La aplicación uniforme de reglas ignora que lo 'sospechoso' es relativo al perfil. Esto es especialmente problemático en un sistema que no permite al cliente comprender la lógica: le parece que el banco le trata por defecto como criminal.",
+            "recommendation": "Segmentar las reglas de scoring según el perfil del cliente (trabajador por cuenta propia, empresario, receptor de remesas, jubilado, etc.). Documentar por qué ciertas transacciones que son comunes en el segmento del cliente no disparan banderas. Comunicar al cliente (en la carta de onboarding o políticas) qué tipos de actividad son esperados en su segmento y no activarán alertas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Sin registro de si el operador validó o rechazó la marca como falso positivo",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Sistema de logging y auditoría del modelo",
+            "evidence": "El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo.",
+            "anti_pattern": "Falta de feedback loop; el sistema no aprende de las correcciones humanas",
+            "severity": "medium",
+            "rationale": "Sin registro de validación humana, el modelo no puede calibrarse ni mejorar. El sistema perpetúa errores porque no hay trazabilidad de qué alertas eran incorrectas. Además, impide accountability: si un operador identifica un error pero no hay forma de registrarlo formalmente, la organización no puede analizar si hay patrones de falsos positivos por segmento de cliente o tipo de actividad.",
+            "recommendation": "Crear campo de validación obligatorio en la interfaz del operador: {Validado | Falso positivo | Incertidumbre}. Registrar la decisión, la justificación si aplica, y vincularla al caso y al score original. Usar estos datos para análisis de calibración mensual del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Incentivo organizacional hacia falsos positivos sin penalización de coste para la institución",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Diseño del flujo de cierre de cuenta y criterios de éxito del modelo",
+            "evidence": "Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros. El incentivo es marcar de más antes que de menos. Cuando el modelo abre un caso, lo revisamos, pero el volumen es enorme y los plazos son cortos.",
+            "anti_pattern": "Asimetría de riesgo: sobre-alertado beneficia al compliance, errores recaen en cliente",
+            "severity": "high",
+            "rationale": "El sistema crea un perverso incentivo: la institución sufre sanciones por NO reportar, pero no sufre daño directo por cerrar cuentas de clientes inocentes. El operador está desbordado (volumen enorme, plazos cortos) y sin herramientas para validar, así que tiende a aceptar la marca. El cliente soporta el coste completo (cierre de cuenta, daño financiero, reputacional). En el contexto de normas sociales, esto es profundamente injusto e incumple con el principio de proporcionalidad.",
+            "recommendation": "Implementar métricas de falsos positivos como indicador de performance del modelo y de gobernanza: seguimiento de tasa de apelaciones de clientes, de sobreseimiento de casos una vez revisados, de quejas regulatorias. Vincular bonificación de equipos de cumplimiento no solo a 'reportes a tiempo' sino también a 'reportes de calidad / baja tasa de falsos positivos'. Esto alinea incentivos con precisión, no solo recall.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Cliente sin mecanismo de apelación o revisión de decisión de cierre",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Comunicación al cliente y procedimiento post-cierre",
+            "evidence": "No hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad. Llame y nadie supo (o nadie quiso) decirme qué había disparado aquello.",
+            "anti_pattern": "Falta de control o override por parte del usuario afectado",
+            "severity": "high",
+            "rationale": "El cliente no tiene forma de descartar o impugnar la decisión. A diferencia del operador, que al menos ve un aviso, el cliente recibe una notificación de cierre ejecutada sin poder conocer el fundamento ni ofreciendo un cauce formal de revisión. En un sistema que actúa sobre un activo crítico (la cuenta bancaria), la ausencia de apelación es incompatible con normas de equidad y procedimiento debido.",
+            "recommendation": "Establecer un procedimiento de apelación post-cierre con: (1) plazo explícito para que el cliente solicite revisión, (2) equipo independiente del de cumplimiento original, (3) comunicación clara al cliente sobre qué pueden aportar (documentación de origen de fondos, facturas, justificativas de actividad), (4) resolución por escrito con indicación de si la apelación fue acogida o rechazada. Aunque no se pueda revelar detalles del reporte, sí se puede comunicar si la revisión consideró que el cliente presentó evidencia suficiente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Metodología de scoring propietaria sin transparencia sobre qué factores se ponderan",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Documentación del modelo y acceso a reglas de scoring",
+            "evidence": "La metodología de scoring es propietaria del proveedor. El método exacto es secreto comercial. La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador.",
+            "anti_pattern": "Black box: cliente y operador sin acceso a lógica; confianza ciega en modelo",
+            "severity": "medium",
+            "rationale": "Aunque es comprensible proteger IP del proveedor, la falta total de transparencia sobre qué factores influyen en el scoring impide que la institución cumpla con estándares de gobernanza de IA y, más importante, que cliente y operador comprendan cómo funciona la decisión. Esto normaliza una confianza ciega en la máquina y desconecta la toma de decisiones de responsabilidad.",
+            "recommendation": "Negociar con el proveedor un nivel de transparencia compatible con protección de IP: (1) publicar documento de 'Factores considerados en el scoring de riesgo' sin revelar pesos exactos, (2) comunicar al cliente qué categorías de actividad pueden disparar banderas (depósitos en efectivo, transferencias internacionales, cambios de patrón, etc.), (3) entrenar al operador en interpretación del score y banderas para que pueda ejercer juicio informado. Alternativamente, considerar modelo interno si la opacidad del proveedor es insostenible.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Ausencia total de comunicación de capacidades y limites al cliente usuario final",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Notificación de cierre de cuenta entregada al cliente",
+            "evidence": "El cliente recibe una carta diciendo que cerraban sus cuentas en treinta días, sin un solo motivo. La normativa antiblanqueo prohíbe a la entidad revelar que se ha presentado un reporte.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El cliente jamás tuvo la oportunidad de entender qué puede y no puede hacer el sistema (HAX-G1) ni de formar un modelo mental correcto sobre cómo funciona la detección de riesgo (PAIR-MM-1). La prohibición legal de 'tipping-off' existe, pero el sistema no comunica NINGÚN aspecto de sus capacidades, umbrales, factores o lógica incluso en términos generales. El cliente no sabe si está siendo evaluado, cuáles son los factores que lo pueden poner en riesgo, ni el hecho de que existe una evaluación automática.",
+            "recommendation": "Implementar un aviso claro en el contrato y en canales de onboarding inicial (portal, app, sucursal) que comunique: (a) la existencia de un sistema de monitoreo automático de transacciones; (b) los tipos de patrones generales que disparan alertas (sin revelar la lógica exacta ni el umbral, para proteger contra evasión legal, pero sí los factores conceptuales: depósitos en efectivo recurrentes, transferencias internacionales súbitas, desviaciones del patrón histórico, coincidencias con listas); (c) el derecho del cliente a solicitar información sobre el cierre si ocurre (mediante canales internos de defensa). Esto no viola la prohibición de 'tipping-off' (que aplica cuando un reporte ya se ha presentado) sino que informa sobre el sistema desde el inicio.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Sobreventa implícita de capacidad de detección sin comunicación clara de límites",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Metodología de scoring propietaria y mensaje implícito al operador de que 'la máquina tendrá razón'",
+            "evidence": "La metodología de scoring es propietaria del proveedor. Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles; el método exacto es secreto comercial. El operador manifiesta: 'No tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca. Acabo confiando en que la máquina tendrá razón'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema comunica certeza (una marca = cierre de cuenta) sin comunicar nunca sus límites, tasa de falsos positivos, o confiabilidad. El operador interno mismo no recibe información sobre el nivel de confianza de la marca, convirtiéndolo en ejecutor ciego. El ex-programador confirma: 'Nadie se sienta a mirar tu caso concreto como una persona; el modelo decide qué es sospechoso y el resto es papeleo para ejecutar lo que el modelo ya ha dicho'. Esto genera sobreventa implícita: la ausencia de información sobre límites es equivalente a pretender que el sistema no los tiene.",
+            "recommendation": "Publicar (internamente para operadores, externamente para clientes en términos generales) las métricas de confianza del sistema: tasa de falsos positivos estimada, validación cruzada con casos revisados manualmente, intervalos de confianza por tipo de alerta. El cierre de cuenta no debería ser automático; debería requerir confirmación manual si existe margen de incertidumbre. Para el operador: mostrar explícitamente el nivel de confianza o score numérico asociado a la alerta, no solo el código de motivo genérico.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Desequilibrio diseñado entre coste de falsos positivos y falsos negativos sin explicitación",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Incentivo institucional y arquitectura de escalado",
+            "evidence": "El responsable de cumplimiento expresa: 'No reportar a tiempo expone a la entidad a sanciones cuantiosas, así que el incentivo es marcar de más antes que de menos. Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros.' El operador reporta: 'No tengo un botón para decir esto es un error, parad el cierre; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema está diseñado explícitamente con un desequilibrio: minimizar falsos negativos (fallar en detectar fraude = sanción regulatoria para el banco) incluso a costa de aumentar falsos positivos (clientes inocentes con cuentas cerradas). Este trade-off NUNCA se comunica al cliente, al operador, ni se documenta formalmente. El cliente afectado expresa: 'No hay a quién recurrir; no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad'. El operador no tiene herramientas para revertir un cierre falso.",
+            "recommendation": "Formalizar y documentar explícitamente el balance FP/FN elegido (p. ej., aceptamos 10 falsos positivos por cada falso negativo evitado). Diseñar un proceso de apelación accesible al cliente donde pueda: (a) solicitar revisión manual de su caso por un analista humano diferente del operador que ejecutó el cierre; (b) presentar pruebas (p. ej., documentación del origen lícito de fondos, antecedentes de la actividad); (c) obtener retroalimentación sobre si el caso fue reclasificado. Esto no viola 'tipping-off' si ocurre DESPUÉS de que ya se ha cerrado la cuenta. Implementar un 'override' manual para operadores cuando la evidencia de falso positivo es clara, con auditoría de esos overrides.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Falta de transparencia en la salida del modelo para el operador intermedio",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Interfaz del operador de atención (pantalla de alerta)",
+            "evidence": "La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad. El operador reporta: 'A mí me llega un aviso de que la cuenta está marcada y que procede el cierre, pero en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es un usuario intermedio del sistema que debe tomar decisiones (escalado, confirmación, posible cierre) pero NO recibe suficiente información para entenderlo. HAX-G1 requiere que el usuario entienda de qué es capaz el sistema; sin saber cuál fue el factor que disparó la alerta, el operador no puede ni calibrar su propia confianza ni evaluar si el caso merece revisión adicional. PAIR-MM-1 requiere fijar expectativas correctas; el operador no puede tener un modelo mental correcto si ignora la lógica.",
+            "recommendation": "Rediseñar la interfaz del operador para incluir: (a) listado de las transacciones específicas que contribuyeron a la alerta (con fechas, montos, contrapartes); (b) descomposición de la marca (p. ej., «70% por desviación del patrón histórico de depósitos, 25% por coincidencia parcial con lista, 5% por depósito en efectivo recurrente»); (c) score numérico o nivel de confianza (bajo/medio/alto); (d) ventana temporal analizada. Esto permite al operador ejercer juicio informado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Ausencia de mecánica de feedback y revisión para corregir falsos positivos",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "Proceso post-cierre y falta de registro de validación",
+            "evidence": "El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo. El dossier no menciona ningún proceso de validación a posteriori ni de feedback del resultado real al modelo.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin mecanismo de feedback, el sistema no aprende de sus errores y el operador no tiene forma de registrar o documentar que una alerta fue un falso positivo. Esto impide la mejora continua y deja cicatrizado un desequilibrio de error no medido. HAX-G1 exige que el usuario entienda qué puede hacer el sistema; para eso es necesario que el sistema mismo sepa qué hace mal, lo cual requiere capturar y analizar falsos positivos confirmados.",
+            "recommendation": "Implementar un registro obligatorio post-revisión: cuando un operador cierra una cuenta o la mantiene abierta tras una alerta, capturar un checkbox o clasificación («alerta correcta», «falso positivo sospechoso», «falso positivo confirmado», «sin resolución»). Establecer un proceso trimestral de análisis: analizar cohortes de casos reclasificados como falso positivo, extraer patrones (p. ej., cuentas recientemente abiertas con depósito inicial grande suelen ser falsos positivos) y ajustar umbrales o pesos. Comunicar los cambios al equipo de operadores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Desalineación entre necesidad regulatoria y necesidad del usuario: IA como fin en sí misma",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Propósito del sistema y fricción impuesta al usuario",
+            "evidence": "El sistema existe para cumplir la obligación legal de detectar y reportar operaciones sospechosas; no reportar a tiempo expone a la entidad a sanciones cuantiosas. El cliente es cerrado sin explicación. El cliente reporta: 'Llevo años con la nómina y los recibos del negocio ahí y de repente me quedo sin operar, sin saber qué hice mal ni cómo demostrar que no hice nada'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "PAIR-UN-1 establece que la IA debe resolver una necesidad real del usuario. En este caso, la necesidad del BANCO es regulatoria, pero la del CLIENTE es poder usar una cuenta bancaria de forma confiable. El sistema antifraude es legítimo, pero su implementación actual prioriza absolutamente la necesidad regulatoria del banco sin ninguna fricción de diálogo con el cliente: los cierres son unilaterales, irreversibles en la ventana inicial, y sin oportunidad de defensa. Esto es IA no como herramienta del usuario sino como herramienta contra el usuario (aunque legítima regulatoriamente).",
+            "recommendation": "Rediseñar el flujo de cierre como diálogo, no como decisión unilateral: (a) notificar al cliente EN SIMULTÁNEO con la alerta (o con máximo 3-5 días de anticipación) que la cuenta ha sido marcada y será revisada, sin revelar detalles del reporte pero sí permitiendo que el cliente se prepare; (b) ofrecer una llamada de revisión con un operador antes del cierre efectivo (plazo de 15-30 días); (c) permitir al cliente aportar documentación o contexto (p. ej., «esta transferencia internacional fue para pagar matrícula universitaria, aquí está el comprobante»); (d) si la revisión interna mantiene la marca pero el cliente cuestiona, escalar a un ombudsman interno independiente. Esto no compromete la obligación regulatoria pero humaniza el proceso.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Automatismo en la ejecución de cierre sin puntos de control intermedio",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "Transición de alerta a cierre efectivo de cuenta",
+            "evidence": "El ex-programador explica: 'Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca y el caso avanza hacia el cierre. Nadie se sienta a mirar tu caso concreto como una persona'. El operador reporta: 'No tengo un botón para decir esto es un error, parad el cierre; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema está configurado para ejecutar el cierre de cuenta de forma prácticamente automática una vez que se abre el caso. HAX-G1 requiere que el usuario (en este caso, el cliente y el operador intermedio) entienda de qué es capaz el sistema; pero cuando la capacidad del sistema es cerrar cuentas sin intervención manual consciente (el operador no tiene control real), la transparencia es insuficiente. El cliente no sabía que esto podía ocurrir; el operador no tiene herramientas para evitarlo incluso si detecta un error.",
+            "recommendation": "Implementar puntos de control manual obligatorios: (a) una alerta de alto riesgo NO debe ejecutar cierre automático, debe generar un caso de revisión; (b) la revisión inicial debe hacerla un analista humano (no el operador de atención al cliente) con acceso a la descomposición detallada de la alerta y con autoridad para cerrar el caso sin cierre de cuenta; (c) solo si la revisión mantiene la marca, se notifica al cliente y se abre un plazo de 30 días antes del cierre; (d) durante esos 30 días, el cliente y el operador pueden escalar o apelar. El operador debe tener un botón para «mantener abierta durante revisión adicional».",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Falta de explicabilidad local para justificar cierre ante el cliente",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Comunicación con el cliente después del cierre",
+            "evidence": "El cliente reporta: 'Llamé y nadie supo (o nadie quiso) decirme qué había disparado aquello; me repetían que era una decisión del banco y que no podían dar detalles'. La normativa antiblanqueo prohíbe a la entidad revelar que se ha presentado un reporte.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "PAIR-MM-2 exige comunicar de forma honesta qué el sistema puede y no puede hacer. El cliente pregunta qué disparó el cierre; la respuesta es «no podemos decirte». Aunque la prohibición de 'tipping-off' es legal, la implementación actual no ofrece NINGÚN nivel de explicación alternativa. El cliente no entiende si cometió un error, si es un falso positivo, si puede evitarlo en el futuro, o si tiene algún camino para apelar. Esto es deshonestidad por omisión: no comunicar el límite (la prohibición legal) equivale a pretender que el sistema es infalible.",
+            "recommendation": "Comunicar honestamente los límites dentro del marco legal: (a) en la carta de cierre inicial, declarar explícitamente que «por regulación antilavado de dinero, no podemos revelar los motivos exactos de esta decisión»; (b) ofrecer un punto de contacto (ombudsman, defensor del cliente bancario) a quien el cliente puede escribir para solicitar una revisión confidencial de su caso; (c) si se trata de un falso positivo confirmado (p. ej., tras apelar), comunicar al cliente que la decisión fue revertida, sin necesidad de explicar por qué se cometió el error (eso queda interno), pero sí confirmando que fue un error; (d) en casos muy claros (p. ej., cliente con depósitos iniciales grandes documentados), considerar una explicación genérica («actividad atípica en el período inicial de la cuenta» sin revelar la lógica del modelo ni del reporte específico). La prohibición legal no impide transparencia sobre la existencia de límites.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Ausencia de explicabilidad de la decisión de cierre al cliente",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Notificación de cierre de cuenta enviada al cliente",
+            "evidence": "«El cliente no recibe ninguna explicación: la normativa antiblanqueo obliga a la entidad a no revelar que ha cursado un reporte de operación sospechosa»; cliente afectado: «Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo»; operador: «ni qué movimiento lo disparó, ni con qué nivel de certeza»",
+            "anti_pattern": "Fallo silencioso o sin vía de recuperación; comunicación opaca de la decisión",
+            "severity": "high",
+            "rationale": "Aunque la normativa de tipping-off limita lo que se puede revelar, el cliente recibe un cierre definitivo sin ningún contexto sobre qué comportamientos o patrones el sistema interpretó como riesgo. Esto impide al cliente comprender la decisión, impugnarla o corregir comportamientos futuros, violando el derecho a entender acciones que afectan derechos financieros críticos.",
+            "recommendation": "Diseñar una notificación que comunique al cliente, en términos del modelo de negocio (sin detallar la metodología propietaria), qué categorías de comportamiento se interpretaron como sospechosas (p. ej., «patrones de transferencia internacional fuera de tu histórico», «depósitos en efectivo frecuentes»), sin revelar el reporte específico a autoridades. Consultar con legal/AML para el máximo nivel de detalle compatible con tipping-off.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Operador sin herramienta ni autoridad para revisar o anular una decisión del modelo",
+            "guideline_ids": [
+              "PAIR-EF-1",
+              "HAX-G17"
+            ],
+            "locus": "Interfaz del operador de atención al cliente al revisar la alerta de «actividad sospechosa»",
+            "evidence": "Operador: «No tengo un botón para decir 'esto es un error, parad el cierre'; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada»; «Acabo confiando en que la máquina tendrá razón, porque no me dan forma de comprobar si la tiene»; ex-programador: «Nadie se sienta a mirar tu caso concreto como una persona; el modelo decide qué es sospechoso y el resto es papeleo»",
+            "anti_pattern": "Fallo sin vía de recuperación clara; ausencia de control del usuario sobre la acción del sistema",
+            "severity": "high",
+            "rationale": "El operador es la última línea de contacto con el usuario antes del cierre irrevocable, pero no posee ni información suficiente (la lógica del modelo es opaca) ni control (no puede detener o revisar en profundidad). Esto genera falsos positivos sin recuperación: el sistema decide, el operador ejecuta, el cliente pierde acceso financiero sin posibilidad de apelación real.",
+            "recommendation": "Implementar un flujo de revisión manual con autoridad de parada: (1) mostrar al operador los factores clave que dispararon la alerta (transacciones específicas, desviaciones del patrón, coincidencias con listas) con confidencia/certeza; (2) permitir al operador marcar la alerta como «revisada y falso positivo» antes del cierre si encuentra justificación (p. ej., actividad legítima del cliente conocida); (3) requerir una segunda opinión de un analista humano si el operador objeta la marca. Registrar esas objeciones para mejorar el modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Ausencia de transparencia de la lógica del modelo hacia el operador",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Pantalla de alerta que el operador ve al abrir un caso de «actividad sospechosa»",
+            "evidence": "«La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad»; ex-programador: «La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador»",
+            "anti_pattern": "Fallo de explicabilidad; decisión de caja negra sin acceso a motivos",
+            "severity": "high",
+            "rationale": "Sin visibilidad en los motivos concretos, el operador no puede validar si la alerta es correcta, discriminatoria o un falso positivo. Reduce la capacidad de supervisión humana sobre una decisión de alto impacto (cierre de cuenta).",
+            "recommendation": "Enriquecer la interfaz del operador con: (1) listado de transacciones/comportamientos específicos que dispararon banderas (p. ej., «3 transferencias internacionales en 5 días, vs. promedio histórico de 1 cada 2 meses»); (2) puntuación parcial o score de riesgo por categoría (transferencias, depósitos, frecuencia, etc.) para visualizar dónde se concentra el riesgo; (3) percentil o comparativa («este patrón cae en el 5% más alto de riesgo entre cuentas similares»). Mantener secreto comercial de la fórmula exacta, pero transparentar la aplicación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "No hay registro de objeciones o falsos positivos confirmados por operadores",
+            "guideline_ids": [
+              "HAX-G13",
+              "PAIR-DE-1"
+            ],
+            "locus": "Sistema de registro de casos de «actividad sospechosa» y cierres ejecutados",
+            "evidence": "«El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo»; operador: «Acabo confiando en que la máquina tendrá razón»",
+            "anti_pattern": "Ausencia de feedback de validación; imposibilidad de aprender del error",
+            "severity": "high",
+            "rationale": "Sin señal de falsos positivos confirmados, el modelo no puede aprender de sus errores ni el equipo de AML puede medir la tasa de precisión real. Esto impide mejorar la capacidad del sistema y perpetúa errores.",
+            "recommendation": "Implementar un campo de «validación operador» en cada caso: permitir al operador marcar si (1) confirmó la sospecha como fundada, (2) la consideró falso positivo, (3) quedó sin resolver. Agregar estos datos y reportar mensualmente la tasa de falsos positivos al equipo técnico y de AML. Usar esa retroalimentación para afinar umbrales y ponderaciones del modelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Sesgo hacia el sobre-reporte sin supervisión por subgrupos",
+            "guideline_ids": [
+              "PAIR-DE-1",
+              "HAX-G6"
+            ],
+            "locus": "Estrategia global de configuración de umbrales y incentivos del sistema",
+            "evidence": "Responsable de cumplimiento: «El incentivo es marcar de más antes que de menos. Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros»",
+            "anti_pattern": "Disparidad de subgrupo no monitorizada; incentivo perverso que genera falsos positivos",
+            "severity": "high",
+            "rationale": "El sistema está configurado deliberadamente con sesgo hacia el falso positivo (recordar cliente: «Me llegó una carta diciendo que cerraban mis cuentas»). Sin supervisión de la tasa de cierres por subgrupos (género, edad, sector, región), es probable que ciertos colectivos (p. ej., autónomos, migrantes, pequeños negocios en sectores de efectivo) sean sobre-marcados desproporcionadamente, perpetuando discriminación indirecta.",
+            "recommendation": "Medir y reportar mensualmente: (1) tasa de marcas y cierres por sector de actividad, origen, y perfil demográfico; (2) tasa de falsos positivos por subgrupo (si el cliente posteriormente demuestra legítima actividad); (3) porcentaje de cierres vs. amonestaciones. Si se detectan disparidades significativas (p. ej., autónomos cerrados 3x más que empleados con patrones similares), ajustar umbrales o ponderaciones para equilibrar especificidad entre subgrupos. Documentar el análisis anualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Configuración uniforme sin adaptación al perfil del cliente",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Algoritmo de scoring que aplica las mismas reglas y umbrales a todos los clientes",
+            "evidence": "«Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles»; ex-programador: «Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca»",
+            "anti_pattern": "No aprovechar señales de comportamiento para personalizar; falta de aprendizaje de patrón legítimo",
+            "severity": "medium",
+            "rationale": "Un cliente autónomo con ingresos irregulares en efectivo o un importador con transferencias internacionales frecuentes tendrán patrones legítimos que desencadenarán banderas genéricas. El sistema no aprende del comportamiento histórico ni del contexto del negocio del cliente para adaptar umbrales de manera inteligente.",
+            "recommendation": "Implementar un perfil de «patrón esperado» por cliente: (1) construir una línea base de comportamiento normal en los primeros 6-12 meses (importes típicos, frecuencia, contrapartes recurrentes, fuentes de ingresos); (2) usar ese perfil para personalizar umbrales de desviación (p. ej., un autónomo con ingresos de 500-1000€ en efectivo cada 3 días no debe disparar la alarma si eso es consistente con su histórico); (3) marcar transacciones que se desvíen sustancialmente del patrón personal, no del patrón poblacional. Revisar y ajustar el perfil anualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Sin capacidad de recuperación o apelación para el cliente post-cierre",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Proceso de cierre de cuenta y comunicación al cliente",
+            "evidence": "Cliente: «No hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad»; operador: «lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada»",
+            "anti_pattern": "Fallo sin vía de recuperación; decisión irreversible sin instancia de apelación",
+            "severity": "high",
+            "rationale": "Aunque la normativa AML requiere reportar operaciones sospechosas, no justifica negar al cliente un canal de apelación. El cliente cierra sin poder demostrar la legitimidad de sus transacciones o rebatir la decisión, generando daño financiero e injusticia procesal.",
+            "recommendation": "Diseñar un proceso de apelación post-cierre: (1) enviar al cliente junto con la notificación de cierre un canal de contacto con un revisor (no el operador de atención inicial) que pueda re-evaluar el caso si el cliente proporciona documentación (facturas, contratos, declaraciones de impuestos); (2) permitir que el cliente contextualize su actividad sin revelar el reporte específico a autoridades (p. ej., «estos depósitos corresponden a ingresos de mi negocio de consultoría»); (3) establecer un plazo de revisión (30-45 días) con posibilidad de revertir el cierre si se resuelve la sospecha. Documentar estos recursos y su resultado.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Ausencia de notificación de cambios en el comportamiento del sistema",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Actualizaciones o cambios en la metodología del modelo de scoring proporcionado por el proveedor",
+            "evidence": "«La metodología de scoring es propietaria del proveedor»; responsable de cumplimiento: «Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles»",
+            "anti_pattern": "Cambios de capacidad o lógica no notificados; modelo opaco que puede mutar sin aviso",
+            "severity": "medium",
+            "rationale": "Si el proveedor actualiza el modelo, cambia umbrales o añade nuevos patrones de detección, ni el cliente ni la entidad ni los operadores son notificados. Un cliente que antes no disparaba alertas podría ser marcado sin cambiar su comportamiento, generando cierre sorpresivo e injustificado.",
+            "recommendation": "Requerir al proveedor que notifique por escrito a la entidad cualquier cambio significativo en la metodología, umbrales o patrones de detección. La entidad debe comunicar a los operadores y AML: «el modelo ahora penaliza transfers internacionales con mayor severidad» o similar. Mantener un log de versiones del modelo. Si es posible, notificar al cliente cuando se actualicen criterios que podrían afectar su cuenta (p. ej., «el sistema de detección ahora valora de forma diferente las transferencias a determinados países»).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-042",
+            "title": "Sin control global del cliente sobre qué se monitoriza y cómo",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Contrato y configuración de cuenta bancaria del cliente",
+            "evidence": "El cliente «no tiene a quién recurrir» y la decisión es «del sistema» sin opción de intervención o configuración. No hay mención de controles o preferencias del cliente sobre el alcance de la monitorización.",
+            "anti_pattern": "Ausencia de controles globales de configuración; imposibilidad de opt-in/out de vigilancia",
+            "severity": "medium",
+            "rationale": "El cliente no puede decidir qué aspectos de su actividad desea que se monitoricen con mayor o menor sensibilidad, ni puede configurar excepciones legítimas (p. ej., avisos previos de transferencias internacionales planificadas). Aumenta el riesgo de falsos positivos por falta de contexto previo.",
+            "recommendation": "Ofrecer al cliente controles opcionales como: (1) «notificarme antes de marcar una transacción como sospechosa para que pueda contextualizarla»; (2) «marcar transferencias internacionales recurrentes a beneficiarios conocidos para excluirlas de futuras alertas»; (3) «informarme cuando mi patrón de actividad se desvíe significativamente de mi histórico» (alerta de cambio, no de sospecha). Estos controles no eximen del reporte legal, pero humanizarían la experiencia y reducirían falsos positivos.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo describe específicamente que el cliente recibe la notificación de cierre sin ningún motivo explicado, citando tanto la normativa de tipping-off como la experiencia directa del cliente. Esto encaja perfectamente con cc-01-sin-explicacion-al-cliente, que trata exactamente la opacidad total del «por qué» hacia el cliente afectado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "cc-05-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo se centra en que el operador no recibe nivel de certeza ni fiabilidad de la marca, y la ficha confirma que no hay probabilidad ni detalle de factores. El núcleo del problema es la ausencia de información sobre incertidumbre/confianza en la interfaz del operador, lo que corresponde directamente a cc-05-sin-incertidumbre-ni-rendimiento (marca entregada como hecho binario sin nivel de confianza ni tasa de falsos positivos). Aunque cc-02 también es relevante, el énfasis del hallazgo está en «con qué nivel de certeza» y «cómo de fiable es la marca», que es el núcleo de cc-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe que la lógica fina de la decisión no puede reconstruirse desde la pantalla del operador, que no hay detalle de qué transacciones ni combinación de factores dispararon el caso. Esto apunta directamente a cc-02-operador-no-entiende-la-senal, que trata exactamente la ausencia de explicación para el operador interno sobre qué movimiento disparó la marca, con qué certeza y qué factores pesaron.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo señala que las reglas son las mismas para todos los perfiles (sin personalización por perfil de cliente) y que el sistema se ejecuta como lista de comprobación uniforme. Esto no encaja perfectamente con ningún candidato: cc-05 habla de ausencia de nivel de confianza comunicado (no de uniformidad de reglas), cc-06 habla de opacidad propietaria, cc-09 habla del sesgo a marcar de más. El problema específico de «reglas uniformes sin calibración por perfil» es un problema real sustentado en el dossier pero no está capturado por ninguno de los candidatos listados.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe explícitamente que el operador no tiene un mecanismo para detener o anular el cierre, solo puede escalar y esperar mientras la cuenta ya se cierra. Esto corresponde directamente a cc-03-sin-override-ni-apelacion, que trata exactamente la inexistencia de un mecanismo real para anular o frenar el cierre cuando la marca es un falso positivo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe que el operador recibe solo una marca y un código de motivo genérico, sin detalle de qué transacciones ni qué combinación de factores dispararon el caso. Esto es exactamente el problema de cc-02-operador-no-entiende-la-senal: el operador actúa sobre una marca sin ver qué movimiento la disparó ni qué factores pesaron, no puede contextualizar ni explicar la decisión.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo se centra específicamente en que el sistema no registra si el operador consideró la marca un falso positivo, es decir, la discrepancia humana no se captura ni retroalimenta el modelo. Esto encaja directamente con cc-08-sin-captura-de-discrepancia, cuya descripción es exactamente esa: el sistema registra cierres pero no recoge si el operador consideró la marca un falso positivo, y esa discrepancia no alimenta la supervisión ni la mejora del umbral.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo trata sobre la incapacidad del cliente de recurrir o presentar pruebas de inocencia: no hay a quién apelar, no puede presentar pruebas ni pedir reconsideración. Esto encaja mejor con cc-03-sin-override-ni-apelacion, que describe exactamente la ausencia de mecanismo real para anular o frenar el cierre y que el cliente no tiene a quién apelar con pruebas. Aunque cc-01 trata la falta de explicación, el foco aquí es la imposibilidad de recurrir, no la opacidad de la notificación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo describe explícitamente que el incentivo legal lleva a marcar de más, trasladando el coste del error al cliente. Esto es exactamente lo que describe cc-09-umbral-sesgado-a-marcar-de-mas: el equilibrio entre falsos positivos y negativos se fija por incentivo legal (marcar de más para evitar sanciones), trasladando el coste al cliente sin que ese desequilibrio se explicite ni gestione.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo se centra en que el operador no tiene un mecanismo efectivo para detener o anular el cierre (no hay botón de override, solo puede escalar y la cuenta ya suele estar cerrada), y el ex-programador confirma que el modelo decide y el resto es papeleo. Esto encaja directamente con cc-03-sin-override-ni-apelacion: no existe mecanismo real para anular o frenar el cierre, el operador solo puede escalar y esperar, y la cuenta suele cerrarse antes.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe que el operador recibe solo una marca y un código genérico, sin detalle de qué transacciones, qué combinación de factores ni con qué probabilidad dispararon el caso. El foco es la opacidad de la señal para el operador que debe ejecutar la decisión. Esto encaja directamente con cc-02-operador-no-entiende-la-senal: el operador actúa sobre una marca sin ver qué movimiento la disparó, con qué certeza ni qué factores pesaron.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo trata sobre la prohibición normativa (tipping-off) que impide explicar al cliente el motivo del cierre, creando una asimetría total en su capacidad de impugnar. El cliente no recibe ningún motivo y no puede defenderse. Aunque hay elementos de cc-03 (no poder recurrir), el núcleo del hallazgo es la opacidad total hacia el cliente y su incapacidad de entender qué disparó la marca para defenderse, lo que encaja mejor con cc-01-sin-explicacion-al-cliente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo se centra específicamente en que el sistema no registra si el operador consideró la marca un falso positivo, es decir, la discrepancia humana no se captura en el registro. Esto encaja directamente con cc-08-sin-captura-de-discrepancia, que describe exactamente ese problema: el sistema registra cierres pero no recoge el desacuerdo del operador, sin que esa información alimente la supervisión o mejora del umbral. cc-03 habla de la ausencia de override/apelación, que es un problema relacionado pero distinto (mecanismo de frenado, no de registro).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo trata sobre la ausencia de comunicación al operador sobre si su feedback influye en el modelo, y la separación total entre operación y aprendizaje. Esto es una extensión del problema de cc-08-sin-captura-de-discrepancia: si la discrepancia no se captura, tampoco puede haber loop de retroalimentación. El hallazgo añade el ángulo de 'el operador no sabe si sus correcciones importan', pero el núcleo del problema es que el desacuerdo/corrección humana no se captura ni integra, que es exactamente cc-08. No hay un candidato que hable específicamente de comunicación sobre el loop de reentrenamiento, pero cc-08 es el más cercano al describir que la discrepancia no alimenta la supervisión o mejora del umbral.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el volumen enorme y los plazos cortos impiden una revisión humana significativa, y que el escalado llega tarde (la cuenta ya está cerrada). Esto encaja mejor con cc-03-sin-override-ni-apelacion: el operador solo puede escalar y esperar, y la cuenta suele cerrarse antes. El problema central es que el mecanismo de corrección/override es ineficaz porque los tiempos no permiten actuar. Ningún otro candidato captura específicamente la presión temporal como causa de que el override sea ineficaz, pero cc-03 describe el resultado exacto: el cierre ocurre antes de que se pueda frenar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el cliente no tiene a quién recurrir, no puede presentar pruebas, y no hay procesos de apelación o canales de feedback post-decisión. Esto es el problema central de cc-03-sin-override-ni-apelacion: no existe mecanismo real para apelar con pruebas, el cliente no tiene a quién recurrir. El hallazgo también menciona al operador que no puede comprobar si la máquina tiene razón, pero el foco principal es la ausencia de vía de corrección/apelación para el cliente, que es exactamente cc-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "cc-06-modelo-opaco-propietario",
+            "judge_rationale": "El hallazgo se centra en que las reglas, ponderaciones y thresholds los fija el proveedor como secreto comercial, sin posibilidad de ajuste supervisado por la entidad. Esto encaja directamente con cc-06-modelo-opaco-propietario: la lógica es secreto comercial del proveedor, no auditable ni impugnable. Aunque cc-03 y cc-08 son candidatos marcados con [*], el problema específico aquí no es el override ni la captura de discrepancia, sino la opacidad propietaria que impide cualquier inspección o ajuste de los parámetros del modelo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo describe exactamente que el cliente recibe una carta de cierre sin ningún motivo explicado, lo cual es el problema central y literal de cc-01-sin-explicacion-al-cliente. La evidencia citada (carta sin motivo, nadie supo o quiso decir qué disparó el cierre) corresponde perfectamente a ese candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe exactamente que el operador recibe la marca sin saber qué movimiento la disparó, sin nivel de certeza ni fiabilidad. Esto encaja perfectamente con cc-02-operador-no-entiende-la-senal, que describe precisamente la ausencia de explicación para el operador interno sobre qué factores pesaron y con qué certeza.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo se centra en la ausencia de un mecanismo para que el operador revierta o pause el cierre ('no tengo un botón para decir esto es un error, parad el cierre'). Esto corresponde directamente a cc-03-sin-override-ni-apelacion, que describe exactamente que el operador solo puede escalar y esperar mientras la cuenta ya se cierra, sin mecanismo real de anulación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre que las reglas y ponderaciones son las mismas para todos los perfiles (política uniforme sin adaptación al contexto). Ninguno de los candidatos del golden describe específicamente el problema de uniformidad/falta de personalización del modelo. El candidato más cercano sería cc-06-modelo-opaco-propietario (secreto comercial, no auditable), pero ese candidato no aborda la uniformidad de reglas para todos los perfiles. Este es un problema real y específico sustentado en el dossier (doc-ficha lo confirma explícitamente), pero ningún candidato lo captura.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo describe exactamente que el sistema no registra si el operador consideró la marca un falso positivo. Esto es una correspondencia directa y literal con cc-08-sin-captura-de-discrepancia, cuya descripción usa prácticamente las mismas palabras del dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo describe el incentivo organizacional a marcar de más (falsos positivos) porque el coste recae en el cliente y no en la institución. Esto encaja perfectamente con cc-09-umbral-sesgado-a-marcar-de-mas, que describe exactamente ese desequilibrio entre falsos positivos y falsos negativos fijado por incentivo legal, trasladando el coste al cliente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el cliente no tiene a quién recurrir, no puede presentar pruebas ni pedir reconsideración. Esto corresponde directamente a cc-03-sin-override-ni-apelacion, que describe que el cliente no tiene a quién apelar con pruebas y que no existe mecanismo real de corrección. Aunque cc-01 también es relevante (opacidad), el núcleo del hallazgo es la ausencia de vía de apelación para el cliente, que es exactamente cc-03.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "cc-06-modelo-opaco-propietario",
+            "judge_rationale": "El hallazgo describe que la metodología de scoring es propietaria/secreto comercial y que la lógica fina no se puede reconstruir desde la pantalla del operador. Esto encaja directamente con cc-06-modelo-opaco-propietario, que describe exactamente ese problema: lógica de scoring como secreto comercial del proveedor, no auditable ni por operador ni por cliente. Los demás candidatos describen consecuencias derivadas (automation bias, falta de explicación al cliente, etc.) pero el núcleo del hallazgo es la opacidad del modelo propietario.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo se centra en que el cliente recibe la carta de cierre sin ningún motivo explicado, y que la normativa AML prohíbe revelar el reporte. Esto encaja perfectamente con cc-01-sin-explicacion-al-cliente, que describe exactamente esa opacidad total hacia el cliente afectado. Los candidatos marcados con [*] (cc-02, cc-04, cc-05, cc-06) se refieren principalmente al operador o a la confianza/incertidumbre, no al problema central de la notificación al cliente sin explicación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "cc-05-sin-incertidumbre-ni-rendimiento",
+            "judge_rationale": "El hallazgo habla de 'sobreventa implícita de capacidad de detección' y del operador que acaba confiando en que 'la máquina tendrá razón' porque no tiene nivel de certeza ni fiabilidad de la marca. Esto encaja mejor con cc-05-sin-incertidumbre-ni-rendimiento (la marca se entrega como hecho binario sin nivel de confianza, presentación con falsa autoridad) que con cc-04-automation-bias (que es consecuencia). Sin embargo, la evidencia central —el operador confiando ciegamente porque no tiene información de fiabilidad— también apunta a cc-05. Pero revisando más cuidadosamente: el título 'sobreventa implícita' y la ausencia de comunicación de límites/certeza apunta directamente a cc-05. cc-04 describe el bias resultante, cc-05 describe la causa (no se comunica incertidumbre). El hallazgo mezcla ambos pero su núcleo es la falta de comunicación de incertidumbre/rendimiento que lleva a la falsa autoridad.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo describe explícitamente el desequilibrio diseñado entre falsos positivos y falsos negativos por incentivo legal (marcar de más para evitar sanciones), con el coste recayendo en el cliente. Esto es exactamente cc-09-umbral-sesgado-a-marcar-de-mas, que es además el candidato marcado con [*]. La evidencia del responsable de cumplimiento es directa y específica sobre este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe que el operador recibe solo una marca y un código genérico, sin detalle de qué transacciones, qué combinación de factores ni con qué probabilidad dispararon el caso. Esto encaja directamente con cc-02-operador-no-entiende-la-senal, que describe exactamente ese problema: el operador actúa sobre la marca sin ver qué movimiento la disparó, con qué certeza ni qué factores pesaron. Es el candidato [*] más específico para este locus (interfaz del operador).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo describe que el sistema no recoge si el operador consideró la marca un falso positivo, y que no hay proceso de validación a posteriori ni feedback al modelo. Esto encaja directamente con cc-08-sin-captura-de-discrepancia, que describe exactamente ese problema: la discrepancia humana no se captura ni alimenta la supervisión o mejora del umbral. Es el candidato más específico para este locus (proceso post-cierre y falta de registro de validación).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo habla de que el sistema existe para cumplir obligaciones legales (no para el usuario) y que el cliente sufre el cierre sin explicación. La evidencia citada se centra en el desequilibrio entre el incentivo institucional (marcar de más para evitar sanciones) y el coste que recae en el cliente. Esto encaja directamente con cc-09-umbral-sesgado-a-marcar-de-mas, que describe exactamente ese desequilibrio de incentivos donde el coste del error se traslada al cliente. El título 'IA como fin en sí misma' es algo distinto conceptualmente, pero la evidencia concreta apunta al sesgo de umbral y al coste asimétrico del error.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el proceso avanza hacia el cierre de forma automática sin puntos de control intermedios, y que el operador no tiene mecanismo para detenerlo ('no tengo un botón para decir esto es un error, parad el cierre'). Esto encaja perfectamente con cc-03-sin-override-ni-apelacion, que describe exactamente la ausencia de mecanismo real para anular o frenar el cierre. Aunque cc-04 (automation bias) también aparece en la evidencia, el núcleo del hallazgo es la ausencia de override/control intermedio, no el sesgo cognitivo del operador.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "El hallazgo se centra en que el cliente no puede obtener explicación de por qué se cerró su cuenta, y la evidencia cita tanto la prohibición legal (tipping-off) como el hecho de que nadie supo decirle qué disparó la decisión. Esto corresponde directamente a cc-01-sin-explicacion-al-cliente, que describe la opacidad total del 'por qué' para el cliente afectado. Aunque cc-02 y cc-06 también son candidatos, el foco del hallazgo es la falta de explicación al cliente, no la opacidad hacia el operador ni el secreto comercial del modelo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "cc-01-sin-explicacion-al-cliente",
+            "judge_rationale": "Este hallazgo también trata la ausencia de explicación al cliente en la notificación de cierre, citando la carta sin motivos y la prohibición normativa. Es prácticamente idéntico en contenido a p3-033 y apunta al mismo problema central: cc-01-sin-explicacion-al-cliente. La evidencia adicional del operador ('ni qué movimiento lo disparó, ni con qué nivel de certeza') añade el ángulo del operador, pero el locus declarado es la notificación al cliente, lo que confirma cc-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe que el operador no tiene herramienta ni autoridad para revisar o anular la decisión del modelo, solo puede escalar y esperar mientras la cuenta ya se cierra. Esto encaja con cc-03-sin-override-ni-apelacion (override inexistente/ineficaz). También hay evidencia de automation bias (confiar en la máquina), pero el núcleo del hallazgo es la ausencia de mecanismo de override para el operador, que es exactamente cc-03. El locus es la interfaz del operador y su falta de control.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "cc-02-operador-no-entiende-la-senal",
+            "judge_rationale": "El hallazgo describe que el operador solo recibe la marca y un código genérico, sin detalle de qué transacciones o factores dispararon el caso ni con qué probabilidad, y que la lógica fina no se puede reconstruir desde su pantalla. Esto encaja directamente con cc-02-operador-no-entiende-la-senal, que describe exactamente la ausencia de explicación para el operador interno. Aunque cc-06 (modelo opaco propietario) también es relevante, el locus es la pantalla del operador y su incapacidad de entender la señal, lo que apunta más a cc-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_match",
+            "matched_golden_id": "cc-08-sin-captura-de-discrepancia",
+            "judge_rationale": "El hallazgo se centra en que el sistema no registra si el operador consideró la marca un falso positivo, y que el operador acaba confiando en la máquina. El núcleo del hallazgo es la ausencia de captura de discrepancia/falsos positivos en el registro, lo que encaja directamente con cc-08-sin-captura-de-discrepancia. El elemento del automation bias es secundario aquí; el foco principal es que la discrepancia humana no se captura.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+            "judge_rationale": "El hallazgo describe el sesgo hacia el sobre-reporte motivado por el incentivo legal, donde el coste del error recae en el cliente y no en la entidad. Esto encaja perfectamente con cc-09-umbral-sesgado-a-marcar-de-mas, que describe exactamente ese desequilibrio entre falsos positivos y falsos negativos fijado por incentivo legal, trasladando el coste al cliente. La mención de 'sin supervisión por subgrupos' añade un matiz, pero el problema central es el umbral sesgado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que las reglas y ponderaciones son las mismas para todos los perfiles, sin adaptación al perfil del cliente. Esto no encaja perfectamente con ningún candidato del golden: cc-06 trata la opacidad/secreto comercial, no la uniformidad de reglas; cc-09 trata el sesgo de umbral. La uniformidad de configuración sin personalización es un problema real y sustentado en el dossier ('las mismas para todos los perfiles'), pero ningún candidato lo describe como problema central. Es un hallazgo nuevo y real.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_match",
+            "matched_golden_id": "cc-03-sin-override-ni-apelacion",
+            "judge_rationale": "El hallazgo describe la ausencia de mecanismo de apelación o recuperación para el cliente post-cierre: no puede presentar pruebas, no hay a quién recurrir, el operador solo puede escalar y la cuenta ya está cerrada. Esto encaja directamente con cc-03-sin-override-ni-apelacion, que describe exactamente la inexistencia de mecanismo real para anular o frenar el cierre y la falta de vía de corrección para el cliente. cc-07 también es relevante pero cc-03 es el más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "tp_match",
+            "matched_golden_id": "cc-06-modelo-opaco-propietario",
+            "judge_rationale": "El hallazgo trata la ausencia de notificación sobre cambios en la metodología del modelo, dado que es propietaria del proveedor. El candidato más cercano es cc-06-modelo-opaco-propietario, que describe la lógica como secreto comercial no auditable. Sin embargo, el hallazgo específico sobre 'notificación de cambios' no está bien sustentado en el dossier: el dossier menciona que la metodología es propietaria y las reglas son las mismas para todos, pero no hay evidencia de que haya habido cambios sin notificar. El problema real documentado es la opacidad del modelo propietario, que sí encaja con cc-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-042",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que el cliente no tiene control sobre qué se monitoriza ni cómo. El dossier no menciona explícitamente controles o preferencias del cliente sobre el alcance de la monitorización; la evidencia citada ('no tiene a quién recurrir', 'decisión del sistema') se refiere más a la falta de apelación que a la falta de control sobre la monitorización. Ningún candidato del golden describe específicamente la ausencia de control del cliente sobre el alcance de la monitorización. Además, en un sistema AML regulado, la monitorización es obligatoria por ley y no configurable por el cliente, por lo que el hallazgo tal como está formulado no está bien sustentado como problema de diseño del sistema IA. Es un hallazgo no suficientemente respaldado por el dossier.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 42,
+          "n_golden": 9,
+          "recall": 0.7777777777777778,
+          "precision": 0.9761904761904762,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 3,
+          "fbeta": 0.8107344632768362,
+          "meets_genericity_gate": true,
+          "primary_score": 0.8107344632768362
+        }
+      }
+    ]
+  }
+}

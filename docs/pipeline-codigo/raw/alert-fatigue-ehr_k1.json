@@ -1,0 +1,1875 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 8,
+    "system_name": "Sistema de alertas clínicas interruptivas del historial electrónico (HCE/EHR)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.875,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.8974358974358975,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.975,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9948979591836734,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 8,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia de comunicación de incertidumbre y confianza de las alertas",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Presentación visual de alertas modales durante prescripción y revisión del historial.",
+            "evidence": "Según la ficha técnica (doc-ficha): 'Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad.' El residente (medico-junior-1) reporta: 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar.'",
+            "anti_pattern": "Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad.",
+            "severity": "high",
+            "rationale": "Sin gradación de severidad, el clínico no puede calibrar su nivel de atención ni distinguir entre alertas críticas (ej. alergia grave) y avisos menores (ej. duplicidad de bajo riesgo). Esto contribuye directamente a la desensibilización: todas se ven igual, luego todas se tratan igual (cancel reflex).",
+            "recommendation": "Implementar un sistema visual de severidad (ej. rojo/amarillo/azul o etiquetas explícitas: 'Crítico/Importante/Informativo') que permita al clínico priorizar mentalmente y ajustar su grado de atención según el riesgo comunicado en la alerta misma.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "Falta de explicación de por qué se dispara cada alerta",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Contenido de la alerta modal durante prescripción.",
+            "evidence": "El residente (medico-junior-1) dice: 'al día siguiente ya no recuerdas ni qué fármacos mencionaba'. Esto implica que o la información no está clara en la alerta, o no es suficientemente distintiva. El responsable de TI (impl-clinico) menciona: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha.'",
+            "anti_pattern": "No se comunica la razón específica de la alerta (qué fármacos interactúan, qué alergia es, qué duplicidad existe).",
+            "severity": "high",
+            "rationale": "Sin explicación clara de qué medicamento interactúa con cuál, o por qué se activa la alerta, el clínico no puede evaluar la relevancia real para su caso. Esto es especialmente crítico en médicos junior que aún no tienen la experiencia para inferir la razón de la alerta; se ven obligados a decidir sin información suficiente, lo que propicia el override automático.",
+            "recommendation": "Enriquecer cada alerta con un párrafo breve y específico: 'Posible interacción entre [fármaco A] y [fármaco B] por mecanismo [X]. Riesgo: [descripción]. Sugiere: [acción]'. Debe ser legible en <30 segundos.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "Ausencia de captura del motivo del override y falta de retroalimentación al usuario",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1",
+              "PAIR-FC-2"
+            ],
+            "locus": "Acción de cancelar/anular una alerta y seguimiento posterior.",
+            "evidence": "Ficha técnica (doc-ficha): 'El sistema registra cuántas alertas se disparan y cuántas se cancelan (la tasa de override suele superar el 90% según la literatura del producto), pero no recoge el motivo de cada cancelación.' Responsable de TI (impl-clinico): 'Registramos el número de overrides para auditoría, aunque no pedimos el motivo porque ralentizaría el trabajo.'",
+            "anti_pattern": "El sistema registra cuántas alertas se cancelan (>90%) pero no recoge el motivo. No hay feedback visible al usuario sobre cómo su override afecta al sistema.",
+            "severity": "high",
+            "rationale": "Sin captura del motivo, el sistema no puede aprender por qué se descartan las alertas; no sabe si es porque (a) la alerta es falsa, (b) el clínico ya lo sabía, (c) el riesgo es aceptable en el contexto, o (d) la regla es demasiado sensible. Esto bloquea cualquier mejora de las reglas y deja al usuario sin poder comunicar su decisión de forma estructurada. Además, la ausencia de feedback visible ('esto que hiciste contribuyó a mejorar el sistema') desmoraliza y no refuerza el comportamiento deseado.",
+            "recommendation": "Implementar un flujo donde, tras un override, aparezca un pequeño modal con opciones mutables como '¿Por qué descartaste esto?' con opciones tipo: 'Ya lo sabía', 'No relevante para este paciente', 'Riesgo aceptable', 'Regla muy sensible'. Capturar la selección y comunicar: 'Tu feedback ayuda a ajustar las alertas para tu equipo' (si es posible).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Temporización inapropiada de alertas que interrumpen tareas prioritarias del clínico",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Momento de disparo de alertas modales durante el flujo de trabajo del clínico.",
+            "evidence": "Residente (medico-junior-2): 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir.'",
+            "anti_pattern": "Las alertas se disparan sin considerar el contexto inmediato del usuario (ej. actualizar orden de resucitación salta cuando el clínico está revisando historial con otro objetivo urgente).",
+            "severity": "high",
+            "rationale": "El carácter modal de las alertas las convierte en interrupciones forzosas que rompen el flujo de trabajo. Si un clínico abre el historial para ver los últimos parámetros de oxígeno de un paciente crítico, una alerta sobre actualizar el DNR no solo es inoportuna (puede esperar), sino que obliga al usuario a tomar una decisión sobre algo irrelevante en ese momento, lo que conduce a override automático sin pensar.",
+            "recommendation": "Implementar un sistema de priorización temporal: (a) alertas críticas (alergia, interacción de alto riesgo) → modal inmediato; (b) alertas de mantenimiento (actualizar órdenes, recordatorios de protocolo) → bandeja lateral o notificación no modal que aparece cuando el clínico termina la tarea actual, o umbrales de tiempo (ej. 'recordatorio pendiente: actualizar orden de resucitación, hace X días'); (c) permitir 'snooze' de tareas administrativas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Ausencia de onboarding y entrenamiento formal en la interpretación de alertas",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Incorporación de nuevos clínicos (residentes) al uso del sistema de alertas.",
+            "evidence": "Responsable de TI (impl-clinico): 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha.' Residente (medico-junior-1): 'Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues.'",
+            "anti_pattern": "No existe programa formal para enseñar a residentes nuevos cómo interpretar y responder a las alertas; se aprende por ensayo y error.",
+            "severity": "high",
+            "rationale": "Sin onboarding, los médicos junior no forman un modelo mental correcto de qué representa cada tipo de alerta, cuál es la acción esperada, y cuándo es legítimo hacer override. Esto propicia que aprendan por imitación (copiar a colegas) o por ensayo y error, lo que conduce a patrones no óptimos como el override automático reflex.",
+            "recommendation": "Crear un módulo de inducción de ~20-30 minutos para residentes nuevos que cubra: (a) qué tipos de alertas existen (interacción, alergia, duplicidad, rango, protocolo) y por qué cada una importa; (b) cómo leer la alerta (qué campos mirar primero); (c) ejemplos de casos reales de cada tipo; (d) cuándo es apropriado hacer override y cómo documentarlo. Incluir una 'tarjeta rápida' de referencia en el escritorio.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "Tasa de override >90% sin mecanismo para entender o ajustar las reglas",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-UN-2",
+              "PAIR-FC-2"
+            ],
+            "locus": "Configuración global y mantenimiento de reglas de alertas a lo largo del tiempo.",
+            "evidence": "Ficha técnica (doc-ficha): 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.' Responsable de TI (impl-clinico): 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.' Residente (medico-junior-2): 'Tampoco puedo quitar las que sé que no me sirven.'",
+            "anti_pattern": "Las reglas vienen configuradas por el proveedor y son idénticas para todos los servicios y perfiles. Los umbrales no se ajustan según el feedback real de uso. Ajustar una regla exige cambio central rara vez solicitado.",
+            "severity": "high",
+            "rationale": "Un override rate >90% indica que la mayoría de alertas no son percibidas como útiles por los clínicos reales. Sin mecanismo para capturar por qué se descartan, ni forma de ajustar reglas a nivel local (servicio/especialidad), el sistema se enquista en un estado de bajo valor. Los clínicos sienten que no tienen control y aprenden a ignorar todo, lo que erosiona la confianza incluso en alertas potencialmente críticas.",
+            "recommendation": "Implementar un panel de control donde los líderes de servicio o farmacéuticos del hospital puedan: (a) revisar dashboards de override por tipo de alerta y por clínico; (b) ajustar umbrales de severidad localmente (ej. aumentar el límite de rango de dosis para UCI vs. medicina general); (c) desactivar temporalmente reglas de baja utilidad con justificación (ej. 'Esta regla tiene 85% override hace 6 meses, ¿desactivar para revisar?'). Vincular este feedback a cambios reales y comunicar: 'Basado en vuestro uso, hemos ajustado X regla en el servicio Y'.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Desensibilización progresiva sin mecanismo de recuperación o recalibración",
+            "guideline_ids": [
+              "HAX-G14",
+              "PAIR-ET-3"
+            ],
+            "locus": "Experiencia sostenida del usuario con alertas a lo largo de semanas/meses.",
+            "evidence": "Residente (medico-junior-1): 'Cuando llevas un tiempo, es mecánico... La primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas... Después de un tiempo te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí, que sí a todas las casillas.'",
+            "anti_pattern": "El usuario reporta un ciclo: primero atiende alertas, después las cancela automáticamente, luego 'te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí' (aceptando sin leer).",
+            "severity": "high",
+            "rationale": "Este es un patrón bien conocido de 'alert fatigue': exceso de alertas que no discriminan bien lleva a que el usuario deje de procesarlas. Lo alarmante aquí es que describe un ciclo de desensibilización donde no solo ignora alertas, sino que empieza a aceptarlas sin leer (automation bias completo). Sin mecanismo que rotile expectativas (recordarle por qué las alertas importan, mostrar evidencia de errores evitados, cambiar formato), el sistema entra en degradación permanente.",
+            "recommendation": "Implementar una estrategia de 'recalibración continua': (a) cada 30 días, mostrar al clínico un resumen: 'Este mes has visto 150 alertas, descartado 135. Aquí están los 3 tipos que descartaste más. ¿Siguen siendo relevantes?'; (b) gamificación leve de calidad (ej. 'Tu tasa de override está en 92%, promedio del hospital 88%. ¿Quieres revisar tus patrones?'); (c) mostrar casos reales cada trimestre: 'Esta semana, un colega del servicio de cardiología descartó una alerta de interacción que luego resultó en mala praxis evitada por poco. ¿Quieres revisar tu política?'. Esto sin culpabilizar, sino invitando a reflexión.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Ausencia de información diferenciada por contexto (qué alertas importan según el servicio/especialidad)",
+            "guideline_ids": [
+              "HAX-G4",
+              "PAIR-MM-2"
+            ],
+            "locus": "Contenido y relevancia de alertas en función del servicio médico del usuario.",
+            "evidence": "Ficha técnica (doc-ficha): 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.' Residente (medico-junior-1): 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar' (implicando que ignora alertas que no son relevantes para su especialidad).",
+            "anti_pattern": "Todas las alertas son idénticas para todos los servicios y perfiles, sin adaptación contextual a la especialidad del clínico.",
+            "severity": "medium",
+            "rationale": "Un cardiólogo en UCI tiene necesidades de alerta muy distintas a un médico de cabecera en consultas externas. Sin contexto de especialidad, el sistema genera ruido irrelevante: el cardiólogo ve alertas sobre rango de dosis pediátrico (no aplica), el médico de medicina interna ve protocolos de cardiología (no son suyos). El clínico aprende rápidamente a ignorar categorías enteras.",
+            "recommendation": "Permitir que los líderes de servicio (o farmacéuticos) configuren qué alertas son activas/visibles para su unidad. Ej. 'En Cardiología, activar: interacción + alergia + duplicidad + rango de dosis cardíaco. Desactivar: recordatorios de protocolo de cirugía.' Esto reduce ruido y aumenta relevancia percibida.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Falta de explicación clara de las consecuencias del override en el contexto del usuario",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Comunicación de las consecuencias del override (qué queda registrado, cómo impacta en auditoría/seguridad).",
+            "evidence": "Residente (medico-junior-2): 'Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar.' Esto sugiere que no ve conexión entre su acción (override) y sus consecuencias. Responsable de TI (impl-clinico): 'Registramos el número de overrides para auditoría, aunque no pedimos el motivo porque ralentizaría el trabajo' (implicando que los clínicos no saben que se registra).",
+            "anti_pattern": "El usuario no entiende cómo su decisión de cancelar una alerta se documenta, si queda constancia, o cómo afecta al cuidado del paciente.",
+            "severity": "medium",
+            "rationale": "Si el clínico no sabe que su override se registra para auditoría, no entiende la importancia de su decisión. Esto puede llevar a decisiones descuidadas. Además, si no entiende que su override sin motivo es 'invisible' (no hay explicación documentada para revisores posteriores), puede no apreciar la gravedad.",
+            "recommendation": "Al hacer override, mostrar un tooltip/notificación breve: 'Tu decisión se registra en el expediente del paciente para auditoría. Si en el futuro algo sale mal, esto podría revisarse. Considera documentar brevemente por qué descartaste la alerta' (opcional pero animado, no obligatorio).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Ausencia de controles locales para gestionar alertas molestas o irrelevantes",
+            "guideline_ids": [
+              "HAX-G8",
+              "PAIR-FC-2"
+            ],
+            "locus": "Opciones disponibles al usuario para gestionar alertas persistentes durante el flujo de trabajo diario.",
+            "evidence": "Residente (medico-junior-2): 'Tampoco puedo quitar las que sé que no me sirven.' Responsable de TI (impl-clinico): 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.'",
+            "anti_pattern": "El usuario no puede desactivar, snooze, o ajustar alertas que reconoce como crónicas o irrelevantes para su trabajo.",
+            "severity": "medium",
+            "rationale": "Si un clínico identifica que una alerta es crónica, irrelevante, o basada en datos obsoletos (ej. alergia falso positivo), no tiene forma de decirle al sistema 'no me muestres esto'; debe seguir viéndola. Esto fuerza el override repetido, que contribuye a la fatiga y a la desensibilización. El usuario siente falta de control.",
+            "recommendation": "Implementar un botón 'No mostrar esta alerta para [este paciente/este tipo/esta semana]' con opciones: (a) 'Snooze 24h'; (b) 'Desactivar para este paciente (revisar en 7 días)'; (c) 'Reportar como falso positivo'. Capturar estos reportes centralmente para que el equipo de farmacia/TI revise. Esto da al usuario agencia y proporciona datos valiosos.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Incumplimiento de objetivos de reducción de error farmacológico sin mecanismo de medición",
+            "guideline_ids": [
+              "PAIR-UN-2",
+              "PAIR-DE-1"
+            ],
+            "locus": "Evaluación del impacto real del sistema de alertas en la seguridad de medicación.",
+            "evidence": "Responsable de TI (impl-clinico): 'Las alertas existen para reducir errores de medicación y mejorar la seguridad del paciente, y cubren un requisito de acreditación. Sabemos que se cancelan muchas, pero asumimos que el clínico valora cada una antes de cerrarla.' (Nota: 'asumimos' sugiere ausencia de validación empírica.)",
+            "anti_pattern": "El sistema existe para reducir errores de medicación (requisito de acreditación), pero con 90%+ override, no hay evidencia de que esté logrando ese objetivo. No hay medición del impacto real.",
+            "severity": "high",
+            "rationale": "El sistema tiene un objetivo claro: reducir errores. Pero con 90%+ override, ese objetivo se cuestiona. Sin medir el impacto real (ej. 'en el último año, ¿cuántos errores evitó la alerta?', '¿cuántos errores pasaron a pesar de la alerta?'), el sistema vive en un limbo: los líderes 'asumen' que funciona, pero los usuarios ignoran las alertas. Esto es especialmente grave en medicina donde los errores tienen consecuencias.",
+            "recommendation": "Establecer un programa de medición del impacto: (a) revisar mensualmente una muestra de override + casos clínicos posteriores (¿hubo evento adverso?); (b) seguimiento de 'sentinel events' (errores graves) que correspondan a alertas desactivadas/ignoradas; (c) encuesta trimestral a clínicos: '¿cuál fue la última vez que una alerta te previno de un error?'. Comunicar hallazgos y ajustar reglas en consecuencia. Si el impacto es muy bajo, reimaginar el enfoque.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo se titula 'Ausencia de comunicación de incertidumbre y confianza de las alertas' y su evidencia central es que todas las alertas tienen el mismo formato visual sin gradación de severidad, lo que lleva al clínico a tratarlas de forma mecánica por categoría ('es una de ECG, cancelar'). Esto describe principalmente el fenómeno de habituación/automation bias: el clínico deja de leer y procesa automáticamente. El candidato AF-02-automation-bias-habituacion encaja directamente con la conducta descrita. La falta de gradación visual es el mecanismo que facilita esa habituación. AF-06-sin-explicacion-accionable también es relevante, pero el foco del hallazgo es la respuesta automática del clínico, no la falta de explicación accionable. AF-02 es el mejor ajuste.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "AF-06-sin-explicacion-accionable",
+            "judge_rationale": "El hallazgo se titula 'Falta de explicación de por qué se dispara cada alerta'. La evidencia cita que el residente no recuerda qué fármacos mencionaba la alerta al día siguiente, y que no hay formación formal. El núcleo del problema es que la alerta no explica de forma accionable por qué salta en ese caso concreto, lo que encaja directamente con AF-06-sin-explicacion-accionable. La mención a la falta de formación es secundaria y apoya AF-05, pero el locus es el contenido de la alerta modal, no el onboarding. AF-06 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo describe explícitamente que el sistema registra cuántas alertas se cancelan pero no captura el motivo de cada override, y que esto no alimenta la supervisión ni la mejora de reglas. Esto es una correspondencia directa y exacta con AF-03-override-sin-motivo, que es además candidato marcado con [*]. La evidencia del dossier (doc-ficha e impl-clinico) sustenta perfectamente este candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe que las alertas interrumpen en mal momento, con el ejemplo concreto del aviso de orden de resucitación cuando el clínico abrió el historial con otro objetivo. Esto es una correspondencia exacta con AF-04-temporizacion, que además está marcado con [*] y usa exactamente el mismo ejemplo del dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "AF-05-sin-onboarding",
+            "judge_rationale": "El hallazgo describe explícitamente la ausencia de un programa formal de onboarding para que los residentes aprendan a interpretar las alertas, con evidencia directa del responsable de TI y del residente. Esto encaja de forma exacta con AF-05-sin-onboarding, candidato marcado con [*].",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo combina dos elementos: la tasa de override >90% (que apunta a AF-03-override-sin-motivo o AF-07-baja-especificidad-umbral) y la imposibilidad de ajustar reglas (que apunta a AF-08-sin-controles-config). El locus es 'configuración global y mantenimiento de reglas' y la evidencia central es que las reglas son las mismas para todos los servicios/perfiles y que cambiarlas exige un proceso central que rara vez ocurre, y que el clínico no puede quitar las que no le sirven. Esto describe principalmente AF-08-sin-controles-config. La tasa de override es el síntoma que motiva el hallazgo, pero el problema identificado es la falta de mecanismo para ajustar reglas. AF-08 es el mejor ajuste entre los candidatos marcados con [*].",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo describe cómo el clínico, tras exposición prolongada, cancela alertas de forma automática sin leerlas ('sí, sí, sí a todas las casillas') y la desensibilización reaparece. Esto encaja directamente con AF-02-automation-bias-habituacion, que describe exactamente ese patrón de habituación/desensibilización progresiva y cancelación automática sin supervisión crítica. El matiz de 'sin mecanismo de recuperación' es secundario; el núcleo del problema es la habituación/automation bias.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "AF-07-baja-especificidad-umbral",
+            "judge_rationale": "El hallazgo se centra en que las reglas y umbrales son los mismos para todos los servicios y perfiles, generando alertas irrelevantes para la especialidad del usuario (el residente cancela mecánicamente las de ECG o ACD porque no son de su servicio). Esto encaja directamente con AF-07-baja-especificidad-umbral, que describe exactamente que los umbrales del proveedor sin ajuste local generan alertas irrelevantes para el contexto, erosionando la atención.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo trata sobre que el clínico no ve conexión entre su acción de override y sus consecuencias (auditoría, seguridad), y que el sistema no comunica qué queda registrado. Sin embargo, los candidatos disponibles no incluyen exactamente este problema de 'transparencia sobre consecuencias del override'. El más cercano es AF-03-override-sin-motivo, que habla de que el sistema no captura el motivo del override y no alimenta la mejora. El hallazgo b1-009 tiene un ángulo diferente (el clínico no sabe qué se registra ni qué impacto tiene), pero el problema subyacente más próximo es AF-03: la falta de registro útil del override. Sin embargo, el hallazgo pone el foco en la falta de feedback al usuario sobre consecuencias, lo que se acerca más a AF-06-sin-explicacion-accionable (la alerta no explica qué se espera ni qué implica la acción). Aun así, AF-03 es el candidato que más se solapa con el registro de overrides. Considerando que el núcleo del hallazgo es la desconexión entre la acción del override y sus consecuencias (registro, auditoría), y que AF-03 trata precisamente de que el override no se registra de forma útil, AF-03 es el mejor candidato, aunque el ángulo es ligeramente distinto (usuario vs. sistema). Lo adjudico a AF-03-override-sin-motivo como el más próximo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe explícitamente que el clínico no puede quitar o silenciar alertas que sabe que no le sirven, y que cambiar una regla exige un cambio central. Esto es una correspondencia directa y exacta con AF-08-sin-controles-config, que describe precisamente la falta de controles de configuración para el usuario.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la ausencia de validación empírica del impacto real del sistema (el responsable 'asume' que los clínicos valoran cada alerta, sin medirlo). Esto no encaja perfectamente con ningún candidato del golden. AF-03-override-sin-motivo es el más cercano: si no se captura el motivo del override, tampoco se puede medir si el sistema realmente reduce errores. El hallazgo añade la dimensión de 'incumplimiento de objetivos sin medición', que es un problema real y específico apoyado en el dossier ('asumimos que el clínico valora cada una'), pero ningún candidato describe exactamente la ausencia de evaluación de impacto/efectividad del sistema. AF-03 se acerca por el lado del registro insuficiente, pero el foco es distinto. Lo adjudico a 'ninguno' como descubrimiento nuevo real, ya que ningún candidato describe la falta de mecanismo de medición del impacto en seguridad.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 11,
+          "n_golden": 8,
+          "recall": 0.875,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 1,
+          "fbeta": 0.8974358974358975,
+          "meets_genericity_gate": true,
+          "primary_score": 0.8974358974358975
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia de gradación de severidad en alertas: todas presentadas con la misma autoridad visual",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Presentación visual de alertas en las ventanas modales del sistema de prescripción",
+            "evidence": "Ficha técnica: 'Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad'. Testimonio médico-junior-1: 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Al no diferenciar visualmente entre alertas críticas (p. ej., alergia comprobada) y recordatorios administrativos (p. ej., actualizar orden de resucitación), el clínico no puede calibrar su nivel de atención. Esto contribuye directamente a la desensibilización y al override automático del 90%.",
+            "recommendation": "Implementar un esquema de gradación visual (color, icono, tamaño) basado en el riesgo clínico real de cada tipo de alerta. Las alergias comprobadas y las interacciones farmacológicas graves deben destacar; los recordatorios de protocolo deben ser menos invasivos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Confianza del usuario no calibrada: sistema asume que cada override es deliberado cuando mayoritariamente es automatizado",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Lógica de registro de overrides y suposición de validación manual del clínico",
+            "evidence": "Ficha técnica: 'El sistema registra cuántas alertas se disparan y cuántas se cancelan (la tasa de override suele superar el 90% según la literatura del producto), pero no recoge el motivo de cada cancelación'. Testimonio médico-junior-1: 'Cuando llevas un tiempo, es mecánico... solo sabes que no es relevante para ti y la cierras automáticamente'. Testimonio médico-junior-2: 'Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El responsable clínico asume ('Sabemos que se cancelan muchas, pero asumimos que el clínico valora cada una antes de cerrarla') que un 90% de overrides reflejan decisiones conscientes del clínico, cuando la evidencia del dossier indica que son en gran medida automáticas y sin lectura real. Esto crea una falsa impresión de que el sistema está siendo validado por expertos, cuando en realidad hay fatiga de alertas masiva.",
+            "recommendation": "Implementar muestreo post-alert: tras un override, solicitar al clínico que confirme en lenguaje natural o mediante opción cerrada por qué descartó esa alerta específica (p. ej., '¿Por qué cancelaste?': 'No relevante para mi tarea actual', 'Ya lo sé', 'Falso positivo conocido'). Usar estos datos para reentrenar umbrales y desactivar reglas que generan overrides >80% sin justificación clínica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Umbrales y reglas idénticos para todos los servicios y perfiles: sin calibración por especialidad ni experiencia",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "Configuración centralizada de reglas de alerta aplicadas uniformemente a todos los servicios y médicos",
+            "evidence": "Ficha técnica: 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario'. Testimonio médico-junior-2: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Una alerta de orden de resucitación puede ser crítica para internistas pero irrelevante en el contexto de una consulta de oftalmología o durante una prescripción de rutina. La ausencia de contextualización por especialidad genera ruido que acelera la fatiga de alertas y el override automático, especialmente en médicos junior que no tienen la experiencia para discriminar.",
+            "recommendation": "Permitir configuración local de alertas por servicio/especialidad y por rol (residente vs. especialista). Ej.: las alertas de RCP solo se activen en servicios de medicina interna, urgencias y cuidados críticos; desactivarlas en oftalmología. Introducir umbrales más altos de confianza para perfiles senior y más bajos para junior, con alertas más prominentes.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Ausencia de explicación contextual en el momento de la alerta: el clínico no recibe información sobre por qué esa alerta es relevante ahora",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Contenido de la ventana modal de alerta durante prescripción y consulta",
+            "evidence": "Testimonio médico-junior-1: 'La primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas ni qué fármacos mencionaba; solo sabes que no es relevante para ti y la cierras automáticamente'. Implementador: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Las alertas no comunican por qué se han disparado en este paciente específico. Un clínico junior no sabe si una alerta de interacción farmacológica se refiere a los fármacos que acaba de escribir o a algo previo; tampoco sabe si la alerta es específica de este paciente (p. ej., alergia documentada) o genérica (rango de dosis poblacional). Sin esta información, la alerta es inútil y genera desconfianza.",
+            "recommendation": "Incluir en cada alerta: (1) el motivo exacto del disparo (p. ej., 'Interacción entre [fármaco A] que ya está prescrito y [fármaco B] que estás escribiendo ahora: riesgo de [síntoma específico]'); (2) el origen de los datos (alergia documentada en este paciente vs. regla poblacional); (3) contexto clínico si está disponible (función renal, edad, alergias previas). Esto permite al clínico validar mentalmente si la alerta es pertinente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Falta de mecanismo para el clínico descarte o desactive alertas que sabe que no le sirven",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Interfaz de interacción con alertas: opciones disponibles al usuario (aceptar/cancelar/anular)",
+            "evidence": "Implementador: 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita'. Testimonio médico-junior-2: 'Tampoco puedo quitar las que sé que no me sirven'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El clínico no tiene control directo sobre las alertas que recibe. Si un pediatra sabe que una alerta de rango de dosis no es relevante en su especialidad (p. ej., dosificación pediátrica distinta), no puede silenciarla. Esto refuerza el comportamiento de override automático como única estrategia de defensa disponible, incrementando la fatiga y la pérdida de confianza en el sistema.",
+            "recommendation": "Permitir al clínico desactivar o snooze alertas específicas por tiempo limitado (p. ej., '¿Desactivar esta alerta para pediatría durante los próximos 30 días?' con auditoría posterior). Esto requiere ajustar el modelo de permisos, pero permite que expertos locales que conocen el contexto de su especialidad reduzcan el ruido sin eliminar controles globales críticos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Falta de información sobre el motivo del override: no se captura por qué el clínico descartó cada alerta",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Sistema de registro y auditoría de overrides",
+            "evidence": "Ficha técnica: 'El sistema registra cuántas alertas se disparan y cuántas se cancelan (la tasa de override suele superar el 90% según la literatura del producto), pero no recoge el motivo de cada cancelación. Implementador: 'No tenemos un programa formal... No pedimos el motivo porque ralentizaría el trabajo'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin conocer el motivo del override, es imposible distinguir entre: (1) alertas que son válidas pero el clínico las ignora por fatiga (problema real de seguridad); (2) alertas que son falsos positivos y se pueden desactivar (oportunidad de mejora); (3) alertas que el clínico entiende pero rechaza deliberadamente (validación exitosa). Sin esta información, no hay feedback para mejorar las reglas y continúa el ciclo de ruido.",
+            "recommendation": "Solicitar, tras cada override, una razón breve mediante opciones cerradas: 'Esta alerta se descartó porque: [ya lo sabía / no es relevante para mi tarea / falso positivo / otras]. Usar estos datos para iterar sobre umbrales y desactivar reglas que acumulan >70% de 'no relevante' de usuarios específicos. Esto requiere un pequeño cambio UX (1-2 segundos extra por alerta) pero aportará datos críticos para calibración.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Alertas modales sin contexto de tarea: interrumpen el flujo con tareas no relacionadas a la actual",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "Disparo de alertas de recordatorios de protocolo durante prescripción o consulta",
+            "evidence": "Testimonio médico-junior-2: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema dispara alertas de RCP cuando abre el historial, independientemente de la tarea que el clínico estaba realizando. Si está prescribiendo un analgésico, la orden de RCP es información contextualmente irrelevante en ese momento. Esta desconexión genera frustración, refuerza el override automático y erosiona la confianza en alertas que pudieran ser realmente críticas.",
+            "recommendation": "Implementar contexto de tarea: disparar alertas de recordatorios de protocolo solo si el clínico está navegando por secciones relevantes del historial (p. ej., solo mostrar RCP si abre la sección 'Ordenes avanzadas') o al inicio de la consulta, no durante prescripciones. Las alertas farmacológicas sí deben ser síncronas con la prescripción (críticas), pero los recordatorios administrativos pueden ser asíncronos o diferidos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Desensibilización progresiva sin vigilancia: sistema no detecta cambio en patrón de atención del clínico",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Comportamiento de override a lo largo del tiempo y falta de feedback adaptativo",
+            "evidence": "Testimonio médico-junior-1: 'Cuando llegas a día 2 ya no recuerdas ni qué fármacos mencionaba; solo sabes que no es relevante para ti y la cierras automáticamente. Después de un tiempo te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí, que sí a todas las casillas'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El clínico describe un proceso de desensibilización típico del 'alert fatigue': el primer día lee alertas, el segundo día no, el tercero acepta todas sin leer. El sistema no detecta este cambio de comportamiento ni adapta la estrategia (p. ej., aumentando la prominencia o cambiando la formulación) ni alerta a supervisión. Esto es un riesgo de seguridad puro: el clínico que decía 'sí, sí, sí' a todas las casillas potencialmente está pasando por alto una alerta crítica.",
+            "recommendation": "Implementar monitoreo de patrón de override: si un clínico acumula >85% de overrides en un servicio/especialidad específica dentro de una semana, generar alerta a su supervisor (p. ej., médico senior o farmaceuta clínico) para revisar. Ej.: 'El Dr. X ha descartado 47 de 50 alertas de interacción esta semana; revisar entrenamiento o recalibración de reglas'. Esto mantiene supervisión crítica sin eliminar automatización.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Falta de formación estructurada sobre interpretación de alertas: aprendizaje ad-hoc sin guía",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "Onboarding de residentes nuevos y entrenamiento continuo sobre uso de alertas",
+            "evidence": "Implementador: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha'. Testimonio médico-junior-1: 'Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin formación explícita, los residentes aprenden por prueba y error y cargan con falsos modelos mentales sobre qué significa cada alerta. Esto genera inseguridad ('nadie lo sabe') y favorece el override automático como estrategia defensiva. Un residente que entienda cuándo una alerta es crítica vs. informativa tendrá una relación más consciente con el sistema.",
+            "recommendation": "Crear un módulo de onboarding de 15-30 minutos (interactivo) para residentes nuevos: (1) tipos de alertas (farmacológicas, administrativas) y qué acción esperada es cada una; (2) cómo leer la alerta (qué datos importan); (3) cuándo overridear (con ejemplos de escenarios clínicos reales de la especialidad). Incluir en el módulo casos reales donde un override fue correcto y casos donde resultó en error. Repetir anualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Override sin captura de motivo ni estructura",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-1"
+            ],
+            "locus": "Registro de cancelaciones/overrides en el sistema de alertas",
+            "evidence": "El sistema registra cuántas alertas se cancelan (tasa >90%), pero no recoge el motivo de cada cancelación. El responsable de farmacia indica: 'Registramos el número de overrides para auditoría, aunque no pedimos el motivo porque ralentizaría el trabajo.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin conocer el motivo de cada override, el sistema no captura la lógica clínica detrás de la cancelación. Esto impide que el equipo supervise si los overrides son producto de una evaluación consciente o de desensibilización. La tasa >90% sin contexto es opaca: no se sabe si reflejan alertas mal calibradas o desprofesionalismo. Además, sin estos datos, no hay retroalimentación estructurada para ajustar las reglas.",
+            "recommendation": "Implementar un campo ligero (menú desplegable o categorías predefinidas) que capture el motivo del override en el momento de la cancelación: p. ej. 'Ya evaluada', 'Paciente ya en tratamiento', 'Contraindica a este paciente', 'Relevancia clínica baja', etc. Registrar esta información de forma que sea observable por supervisores de seguridad sin que ralentice significativamente el flujo del clínico.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Falta de gradación de severidad visible en presentación de alertas",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-2"
+            ],
+            "locus": "Presentación visual y formato de las alertas modales",
+            "evidence": "Ficha técnica: 'Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad.' Responsable de farmacia: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas.' Médico junior 1: 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La ausencia de gradación visual (p. ej. crítica, moderada, informativa) hace que alertas sobre interacciones graves se traten igual que recordatorios administrativos. Esto acelera la habituación y la desensibilización. El médico junior describe un patrón de aprendizaje sin guía: aprende a reconocer alertas específicas por nombre, no por su importancia clínica, y las cancela de forma automática.",
+            "recommendation": "Diferenciar visualmente las alertas por severidad: usar colores (rojo/naranja/amarillo), iconografía o una barra de prioridad clara que comunique el riesgo. Acompañar cada nivel con una breve justificación del por qué es crítica (p. ej. 'Interacción grave documentada' vs. 'Recordatorio administrativo'). Esto permite que el clínico ajuste su nivel de atención sin leer cada alerta completa.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Falta de control granular para desactivar o personalizar alertas por perfil de usuario",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "Configuración de reglas y umbrales del sistema de alertas",
+            "evidence": "Ficha técnica: 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.' Responsable de farmacia: 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.' Médico junior 2: 'Tampoco puedo quitar las que sé que no me sirven.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El clínico no tiene control sobre qué alertas se le presentan. Cuando una alerta (como la orden de resucitación) no es relevante para su contexto de trabajo en ese momento, se ve forzado a suprimirla pero sin poder cambiar su configuración permanente. Esto genera fricción repetida y acelera la automatización de la respuesta (pulsar sin leer). La centralización de cambios desincentiva mejoras locales.",
+            "recommendation": "Permitir que los médicos (o equipos de servicios) configuren qué alertas ven y con qué frecuencia: p. ej. 'Desactivar alertas de orden de resucitación durante consultas de urgencia', 'Aumentar umbral de duplicidades de fármacos', etc. Implementar controles a nivel de rol/unidad que no requieran cambios centrales. Registrar estas preferencias y comunicar al equipo de farmacia cómo se usan.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Consecuencias de overrides opacas: sin retroalimentación visible sobre cómo influyen en el sistema",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Comunicación post-override (feedback al usuario sobre el efecto de su acción)",
+            "evidence": "Ficha técnica: 'El sistema registra cuántas alertas se disparan y cuántas se cancelan' pero no hay mención de cómo se comunica al clínico qué sucede después del override. Responsable de farmacia: 'Asumimos que el clínico valora cada una antes de cerrarla' (suposición sin verificación). El dossier no describe ningún mecanismo que devuelva información al clínico sobre las consecuencias de sus overrides.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El clínico no sabe si su patrón de overrides es registrado, evaluado o si influye en futuras reglas. Sin esta información, no hay incentivo para usar el override de forma reflexiva. Esto refuerza la actitud automática descrita por los médicos juniors: 'pulsar sin pensar' porque no hay consecuencia visible.",
+            "recommendation": "Comunicar al clínico, al menos mensualmente o al cierre de sesión, un resumen de sus patrones de override (p. ej. 'Ha cancelado 87 alertas esta semana; las 3 principales son: orden de resucitación 45%, interacción ECG 32%, duplicidad 10%'). Acompañarlo con un mensaje que vincule estos datos a mejoras futuras o auditoría: 'Su feedback ayuda a ajustar las alertas para su equipo.' Esto refuerza la consecuencia visible de la acción.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Ausencia de feedback granular estructurado durante el uso habitual",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "Canales de feedback en el flujo de trabajo ordinario cuando el clínico usa las alertas",
+            "evidence": "Ficha técnica: no menciona ningún mecanismo para que el clínico proporcione feedback sobre la relevancia o calidad de una alerta en el momento. Responsable de farmacia: 'No tenemos un programa formal para enseñar a los residentes nuevos' y no describe canal alguno para que los clínicos reporten alertas problemáticas. Médico junior 1: 'Nadie me explicó qué hacer con ellas; nadie lo sabe.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Las alertas se presentan como un flujo unidireccional (del sistema al clínico) sin oportunidad estructurada para que el clínico aporte inteligencia local en tiempo real. Esto impide que problemas como alertas falsas positivas, mal calibradas o intempestivas sean capturados sistemáticamente. El feedback solo ocurre si el clínico inicia un proceso formal y complejo (cambio central), que rara vez sucede.",
+            "recommendation": "Añadir un botón discreto junto a cada alerta ('¿Relevante para ti?', 'Esta alerta no ayuda', etc.) que permita al clínico dar feedback rápido sin romper el flujo. Agregar este feedback por tipo de alerta y servicio. Mostrar al equipo de farmacia un resumen mensual de alertas con baja relevancia para re-evaluar sus reglas. Cerrar el ciclo: comunicar cambios derivados del feedback de clínicos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Fricción estructural y temporal en alertas no contextualizadas",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "Presentación modal bloqueante de alertas sin contexto temporal o de prioridad",
+            "evidence": "Médico junior 2: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir.' Sistema de alertas: modales que 'bloquean la pantalla hasta que el usuario actúa'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Las alertas son forzosamente síncronas y modales, se disparan sin considerar el contexto o la intención actual del clínico. Esto introduce fricción repetida que el clínico resuelve rápidamente (cancelar sin leer) en lugar de suprimiendo la causa. El médico junior describe el síndrome exacto: habituación acelerada por interrupción no relevante.",
+            "recommendation": "Implementar lógica de contexto para alertas de baja severidad o administrativas: en lugar de modal bloqueante, mostrarlas como notificación no bloqueante, con opción de aplazamiento ('Recordarme en 30 min', 'Después de esta consulta'). Las alertas críticas (interacciones graves, alergias) sí mantienen el modal. Esto reduce fricción innecesaria sin sacrificar seguridad.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Desensibilización acelerada por volumen y falta de distinción de relevancia",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Volumen y distribución de alertas por tipo y severidad, sin filtrado contextual",
+            "evidence": "Médico junior 1: 'Después de un tiempo te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí, que sí a todas las casillas.' Médico junior 2: 'Si una alerta saltara solo cuando de verdad importa, le haría caso; pero como saltan siempre, acaban no significando nada. Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema lanza alertas indiscriminadamente (>90% override según el dossier). Sin filtrado o priorización local, cada alerta consume atención e incita a la automatización de respuesta. Los médicos describen explícitamente un ciclo de desensibilización: inicialmente leen, después ignoran. Esto erosiona el valor de seguridad de todo el sistema.",
+            "recommendation": "Analizar la composición de alertas por tipo y servicio. Identificar y suprimir o re-calibrar aquellas con tasa de override >95% (indicio de falso positivo masivo). Implementar umbrales dinámicos: si un clínico ha rechazado 5 alertas del mismo tipo en una sesión, postergar la siguiente similar hasta cambio de contexto. Esto reduce el ruido sin eliminar alertas críticas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Alertas modales no descartables permiten desensibilización crónica",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Flujo de prescripción y consulta del historial: ventanas modales que bloquean la pantalla y exigen acción inmediata para continuar",
+            "evidence": "Las alertas se presentan como ventanas modales que bloquean la pantalla hasta que el usuario actúa. Para continuar, el usuario pulsa «cancelar»/«anular» o «aceptar». El médico residente reporta: 'Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar... Tampoco puedo quitar las que sé que no me sirven.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El carácter modal y obligatorio de las alertas, sin mecanismo para que el clínico las desactive o les ajuste la relevancia, genera fatiga cognitiva y desensibilización. El clínico no puede distinguir entre alertas críticas (riesgo real) y triviales (ya evaluadas y descartadas en contextos previos), lo que viola el principio de despido eficiente: una alerta que no se puede descartar permanentemente en contextos donde ya no es relevante es una carga persistente que erosiona la confianza.",
+            "recommendation": "Implementar un mecanismo de 'descartar por contexto' o 'relevancia por usuario/servicio': permitir que el clínico marque una alerta específica como 'no aplicable para mí' o 'ya evaluada' durante un período (sesión, turno, o configurable) sin que vuelva a saltar. Alternativa: permitir que el servicio/farmacia configure umbrales de severidad y desactive reglas de bajo riesgo en su contexto, en lugar de usar la misma configuración central para todos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Alertas disparadas sin temporización al contexto de la tarea del usuario",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Disparo de alertas durante la consulta del historial: recordatorios sobre orden de resucitación que se lanzan cuando el clínico tiene una tarea distinta",
+            "evidence": "Médico residente: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema lanza alertas sin considerar el contexto o la intención del usuario. El clínico abre el historial con un objetivo específico (p. ej., revisar medicación actual) y una alerta sobre resucitación (tarea separada) interrumpe bruscamente el flujo. Esto viola HAX-G3: no hay temporización al momento relevante. La interrupción no sincronizada genera fragmentación cognitiva y contribuye a que el clínico cierre la alerta sin reflexión.",
+            "recommendation": "Agrupar alertas por tipo y contexto de disparo: reservar recordatorios administrativos (como orden de resucitación) para momentos explícitos (ej. entrada del paciente, cambio de estado) en lugar de mostrarlos cada vez que se abre el historial. O, de forma alternativa, permitir que el clínico indique qué tipo de alerta desea ver ahora vs. luego, según su tarea actual.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Ausencia de gradación visual de severidad favorece automatización sin discriminación",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Presentación visual uniforme de todas las alertas en la interfaz de prescripción/consulta",
+            "evidence": "Ficha técnica: 'Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad.' Médico residente: 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar. Es como el whack-a-mole... la primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas ni qué fármacos mencionaba; solo sabes que no es relevante para ti y la cierras automáticamente.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La uniformidad visual incumple la norma social esperada en un contexto clínico donde la distinción entre alertas de alto riesgo (interacción farmacológica grave) y bajo riesgo (duplicidad menor) es crucial. Sin diferenciación visual de severidad, el clínico no tiene apoyo perceptual para modular su atención y, tras exposición repetida a alertas triviales, automatiza el cierre sin discriminación, violando la capacidad de tomar decisiones informadas en cada caso.",
+            "recommendation": "Introducir codificación visual (colores, iconos, tamaños, o paneles distintos) que distinga alertas por severidad: críticas (rojo, bloquea prescripción), moderadas (amarillo, advierte) e informativas (gris, solo notifica). Los médicos residentes deben recibir onboarding que explique la escala y le enseñe a priorizar según el código visual.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Tasa de override >90% sin captura de motivos ni ajuste de reglas",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Sistema de registro de alertas: se cuenta el número de overrides (cancelaciones) pero no se registra el motivo ni se ajustan las reglas en función de las cancelaciones persistentes",
+            "evidence": "Ficha técnica: 'La tasa de override suele superar el 90% según la literatura del producto... El sistema registra cuántas alertas se disparan y cuántas se cancelan... pero no recoge el motivo de cada cancelación.' Responsable de informática clínica: 'Sabemos que se cancelan muchas, pero asumimos que el clínico valora cada una antes de cerrarla... Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Un 90% de tasa de override indica que el sistema está generando muchas alertas que el clínico no considera relevantes. Sin información sobre por qué se cancelan, no hay retroalimentación para ajustar las reglas o umbrales. Esto impide que el sistema mejore la relación señal-ruido y perpetúa la fatiga de alerta. Además, la dificultad ('requiere cambio central') para desactivar reglas locales hace que sea más fácil ignorar la alerta que resolver el problema, consolidando HAX-G8 de forma negativa.",
+            "recommendation": "Capturar brevemente el motivo de cada override (ej. 'ya evaluado', 'no aplica a este paciente', 'tasa dosis correcta', 'alerta duplicada') sin ralentizar el workflow. Usar estos datos para identificar reglas con >X% de cancelación y permitir que la farmacia del servicio las ajuste o desactive localmente, sin requerir cambio central. Establecer ciclos mensuales de revisión de reglas por servicio.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Falta de onboarding formal sobre interpretación de alertas contribuye a desensibilización precoz",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Onboarding de residentes nuevos: no existe programa formal de capacitación sobre cómo interpretar y actuar sobre las alertas",
+            "evidence": "Responsable de informática clínica: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha.' Médico residente: 'Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Sin instrucción clara sobre el propósito, severidad y procedimiento esperado para cada tipo de alerta, los residentes desarrollan estrategias ad hoc e informales ('si es ECG, cancelar'). Esto es una violación de la norma social: un sistema clínico crítico debería garantizar que todo usuario nuevo entienda cómo interactuar con él. La falta de onboarding acelera la desensibilización y la automatización ciega.",
+            "recommendation": "Crear un programa de onboarding obligatorio para residentes que cubra: (a) categorías de alertas y su severidad relativa, (b) cuándo es seguro cancelar vs. cuándo requiere reflexión, (c) cómo consultar con farmacia o supervisor si hay dudas. Incluir ejercicios interactivos o simulaciones. Documentar el programa en el manual de procedimientos del servicio.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Configuración centralizada uniforme ignora heterogeneidad de servicios y perfiles",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Reglas de disparo de alertas: 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.'",
+            "evidence": "Ficha técnica: 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.' Los médicos reportan que alertas que son relevantes en un contexto (ej. oncología) no lo son en otro (ej. medicina general).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Diferentes servicios clínicos (oncología, pediatría, medicina general) tienen perfiles de riesgo y patrones de prescripción distintos. Una alerta de 'duplicidad de analgésico' puede ser crítica en cirugía pero trivial en cuidados paliativos. Al aplicar las mismas reglas a todos, el sistema genera ruido excesivo en servicios de bajo riesgo relativo, acelerando la desensibilización sin beneficio. Esto incumple HAX-G5: no respeta el contexto y las normas operativas de cada servicio.",
+            "recommendation": "Permitir que la farmacia y jefatura de cada servicio adapten los umbrales y activen/desactiven reglas específicas (ej. desactivar 'duplicidad de AINE' en servicios donde se prescriben múltiples NSAIDs por protocolo). Implementar un panel de administración local con cambios auditables, sin requerer intervención central para ajustes menores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Ausencia de calibración de expectativas sobre relevancia contextual de alertas",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "Onboarding y formación inicial de residentes ante el sistema de alertas modales",
+            "evidence": "Según el responsable de informática clínica: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha.' Médico junior 1 afirma: 'Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El onboarding del sistema es inexistente o meramente incidental. Los residentes no reciben instrucción sobre qué alertas son críticas en su contexto de trabajo, qué pueden ignorar, o qué procedimiento seguir. Esto produce un modelo mental erróneo (todas las alertas parecen igualmente importantes, aunque el contexto clínico varía) que acelera la desensibilización y el override automático.",
+            "recommendation": "Diseñar un protocolo estructurado de onboarding para cada perfil de usuario (residentes, especialistas, enfermería) que explique: (a) qué alertas existen y su propósito clínico específico, (b) en qué contextos son críticas o suplementarias, (c) cómo interpretar y responder a cada tipo, (d) ejemplos de casos donde la alerta cambió la decisión clínica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Presentación visual indiferenciada de alertas con severidad y urgencia heterogénea",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Formato visual y jerarquía de las alertas modales durante prescripción y consulta",
+            "evidence": "Ficha técnica del sistema: 'Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad.' Médico junior 1: 'Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar.' Médico junior 2: 'Si una alerta saltara solo cuando de verdad importa, le haría caso; pero como saltan siempre, acaban no significando nada.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Mezclar alertas de severidad y urgencia distintas (interacción farmacológica grave vs. recordatorio de actualizar orden de resucitación) en un mismo formato visual sin gradación lleva a que el clínico no pueda calibrar su respuesta. Esto induce una expectativa falsa de que todas merecen el mismo nivel de atención, acelerando la trivialización de las críticas.",
+            "recommendation": "Introducir gradación visual clara (color, icono, animación, posición) que comunique la severidad relativa de cada alerta. Ejemplo: rojo/bloqueante para interacción farmacológica grave; amarillo/informativo para recordatorios. Validar la nueva escala con al menos dos perfiles de clínicos antes del despliegue.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Falta de ajuste contextual: alertas disparadas sin considerar la tarea inmediata del clínico",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Lógica de disparo de alertas modales durante la consulta del paciente",
+            "evidence": "Médico junior 2: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema dispara alertas de forma independiente del contexto de la tarea del clínico. Cuando un clínico consulta el historial con un propósito clínico concreto (p. ej., revisar radiografías), una alerta sobre orden de resucitación interrumpe sin ser relevante en ese momento. Esto no resuelve la necesidad del usuario en ese instante y contribuye a que sea percibida como ruido.",
+            "recommendation": "Implementar detección de contexto de tarea (si es posible) o permitir al clínico posponer alertas no-bloqueantes (p. ej., 'recordarme en 30 min') para que continúe con su tarea inmediata. Las alertas críticas para la prescripción (p. ej., interacción farmacológica) deben permanecer bloqueantes; las de protocolo pueden diferirse.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Ausencia de retroalimentación sobre el motivo del override: el sistema no aprende ni adapta",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "Sistema de registro y seguimiento de overrides; falta de captura del motivo de cada cancelación",
+            "evidence": "Ficha técnica: 'El sistema registra cuántas alertas se disparan y cuántas se cancelan (la tasa de override suele superar el 90% según la literatura del producto), pero no recoge el motivo de cada cancelación.' Responsable: 'Registramos el número de overrides para auditoría, aunque no pedimos el motivo porque ralentizaría el trabajo.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin conocer el motivo de cada override, el sistema no puede distinguir entre: (a) override válido (clínico informado rechaza la alerta con razón clínica), (b) override por desensibilización (clínico no la leyó), (c) override por irrelevancia contextual. Esto impide ajustar las reglas a la realidad de uso y perpetúa la generación de alertas que sabe que serán canceladas sin valor añadido.",
+            "recommendation": "Introducir un campo de motivo breve (p. ej., menú desplegable: 'Irrelevante para este paciente', 'Ya lo sabía', 'Interacción no real en mi criterio clínico', 'Emergencia, sin tiempo') sin que ralentice significativamente el flujo. Usar los datos para: (1) identificar reglas que generan overrides sistemáticos sin valor, (2) adaptar la presentación a patrones de uso reales, (3) detectar desensibilización anómala en un clínico.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Configuración centralizada uniforma todas las alertas sin reconocer variabilidad clínica",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Gestión de umbrales y reglas de disparo; configuración centralizada del proveedor igual para todos los servicios",
+            "evidence": "Ficha técnica: 'Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario.' Responsable: 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "La configuración uniforme ignora que distintos servicios (p. ej., UCI vs. oncología) tienen perfiles de riesgo, poblaciones de pacientes y prioridades clínicas diferentes. Un residente de cardiología puede necesitar alertas sobre ritmo que son irrelevantes para un colega de dermatología. Sin flexibilidad, el clínico debe procesar alertas que no son pertinentes en su contexto, aumentando el ruido.",
+            "recommendation": "Permitir configuración a nivel de servicio/especialidad (no solo central). Ej.: ICU puede activar alertas de rango de dosis más estrictas; especialidades electivas pueden relajar recordatorios de protocolo urgentes. Requerir validación del médico jefe/farmacéutico de servicio para cada cambio, con auditoría de cambios.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Desensibilización acelerada por volumen y modalidad bloqueante sin control de exposición",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-UN-2"
+            ],
+            "locus": "Diseño interactivo: alertas modales de alto volumen diario sin mecanismo de control de frecuencia o fatiga",
+            "evidence": "Médico junior 1: 'Es como el whack-a-mole, vas quitando todo lo más rápido que puedes. La primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas ni qué fármacos mencionaba; solo sabes que no es relevante para ti y la cierras automáticamente. Después de un tiempo te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí, que sí a todas las casillas.'",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El volumen alto de alertas (docenas por clínico/día según el resumen) combinado con la modalidad bloqueante (debe interactuar con cada una) y la ausencia de gradación produce fatiga cognitiva y desensibilización acelerada. El clínico mismo reconoce que pasa de leer cuidadosamente a aceptar/cancelar automáticamente. Esto erosiona la efectividad de las alertas legítimas.",
+            "recommendation": "Implementar límites de exposición: (a) agrupar alertas similares (p. ej., varias interacciones de un mismo paciente en un único modal), (b) ofrecer modo 'resumen' donde se listan alertas pero no son bloqueantes, permitiendo que el clínico revise solo las de su interés, (c) establecer un máximo de alertas bloqueantes por hora/paciente para evitar acumulación. Medir el impacto en tiempo de prescripción y tasa de override.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Falta de transparencia sobre la lógica de disparo: el clínico no sabe por qué saltó la alerta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "Contenido y claridad de cada alerta modal individual",
+            "evidence": "Médico junior 1: 'al día siguiente ya no recuerdas ni qué fármacos mencionaba' (indicando que la alerta no comunica claramente qué hizo saltar el sistema). Médico junior 2: 'Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el contenido de la alerta es vago o no explica claramente la razón del disparo (p. ej., qué fármacos interactúan, cuál es el riesgo clínico, por qué en este paciente), el clínico no puede evaluar si el aviso es relevante. Esto favorece la cancelación automática sin procesamiento real.",
+            "recommendation": "Cada alerta debe incluir: (1) qué condición se detectó (p. ej., 'Interacción: Warfarina + AINE'), (2) por qué es relevante para este paciente específico (p. ej., edad, función renal), (3) cuál es el riesgo clínico (p. ej., 'Aumento de sangrado'), (4) qué acciones se recomiendan. Validar que el clínico comprenda el contenido con una prueba de lectura (p. ej., en onboarding).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Sin mecanismo para desactivar alertas personalizadas según perfil o experiencia del clínico",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "Funcionalidad de preferencias y control del usuario sobre el sistema de alertas",
+            "evidence": "Médico junior 2: 'Tampoco puedo quitar las que sé que no me sirven.' Responsable: 'Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita.'",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El clínico no tiene agencia sobre cuáles alertas ve. Un especialista experimentado puede saber que cierta regla no aporta valor para su práctica, pero no puede desactivarla localmente. Esto fuerza overrides repetitivos en lugar de resolver el problema en la fuente. Los cambios centrales son lentos, desincentivando solicitudes.",
+            "recommendation": "Permitir que el clínico (o su especialidad) desactive alertas específicas con justificación breve registrada. Ejemplo: 'Quito alerta de duplicidad de drogas para mis pacientes oncológicos porque poliquimioterapia es estándar.' La auditoría registra quién desactivó qué y cuándo; el farmacéutico de servicio revisa periódicamente para validar o revertir.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Falta de diferenciación de severidad visual entre alertas heterogéneas",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "Presentación de alertas en ventanas modales durante prescripción y revisión del historial",
+            "evidence": "Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad (doc-ficha). Las alertas varían desde interacciones críticas hasta recordatorios de protocolo (como actualizar orden de resucitación), pero no hay diferenciación visual.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema lanza alertas sobre temas heterogéneos (farmacológicas, alergias, recordatorios administrativos) con la misma presentación sin gradación. Esto viola HAX-G10 porque no hay acotamiento del servicio ni degradación elegante según la importancia real: una alerta baja (recordatorio) interrumpe igual que una interacción potencialmente peligrosa, lo que entrena al clínico a ignorar todas por igual.",
+            "recommendation": "Implementar una gradación visual de severidad en las alertas (p. ej. rojo para criticas/interacciones, amarillo para dudosas, gris para recordatorios). Las alertas de baja criticidad (recordatorios) deben ser no-modales o diferidas; solo las interacciones farmacológicas verificadas deben bloquear.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Pérdida de contexto y aprendizaje por falta de retroalimentación sobre cancelaciones",
+            "guideline_ids": [
+              "HAX-G12",
+              "HAX-G13"
+            ],
+            "locus": "Gestión de cancelaciones de alertas: el sistema registra override pero no el motivo",
+            "evidence": "No recoge el motivo de cada cancelación porque ralentizaría el trabajo (impl-clinico). Médicos reportan que tras días, ya no recuerdan qué fármacos mencionaba la alerta (medico-junior-1).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "HAX-G12 exige mantener memoria a corto plazo para no obligar a repetir contexto. Aquí ocurre lo opuesto: cada alerta se ve una sola vez y sin explicación del motivo de su cancelación, el clínico pierden el contexto de por qué desestimó alertas similares ayer. Esto viola HAX-G13 porque no se aprovechan las señales de comportamiento (qué alertas cancela y por qué) para personalizar y mejorar.",
+            "recommendation": "Capturar al menos una clasificación rápida de motivos al cancelar (p. ej. 'conocido', 'no aplica', 'dosis correcta', 'ya manejado'). Usar estos datos para: (a) ajustar reglas por especialidad/clínico y (b) mostrar historial de alertas recientes sobre el mismo paciente/fármaco para no perder contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Ausencia de control global para desactivar o adaptar reglas por especialidad o perfil",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Configuración de reglas: umbrales y reglas vienen configurados por proveedor y son iguales para todos los servicios y perfiles",
+            "evidence": "Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario (doc-ficha). Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita (impl-clinico).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "HAX-G17 requiere que el usuario pueda configurar globalmente qué monitoriza y cómo se comporta el sistema. Aquí los clínicos (ni sus supervisores locales) pueden ajustar qué alertas ven. Un cardiólogo no debería ver alertas genéricas sobre ECG si su especialidad es bien conocida. Esto impulsa el override mecánico porque las reglas globales no reflejan el contexto local.",
+            "recommendation": "Crear un panel de control por especialidad/unidad para ajustar umbrales de reglas conocidas como no relevantes (p. ej. desactivar recordatorios de ECG en cardiología si la unidad lo prefiere). Permitir que supervisores locales (jefes de farmacia, directores clínicos) configuren sin necesidad de cambio central.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Desensibilización por sobrecarga de alertas modales no priorizadas",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Volumen y modalidad de alertas durante la prescripción y consulta",
+            "evidence": "Volumen diario de alertas por clínico es alto (resumen). Médicos reportan: 'Es como el whack-a-mole, vas quitando todo lo más rápido que puedes' (medico-junior-1). 'Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar' (medico-junior-2). La tasa de override suele superar el 90% (doc-ficha).",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "PAIR-EF-1 requiere anticipar errores y ofrecer caminos de recuperación claros. HAX-G10 pide acotar cuando hay duda. El sistema hace lo opuesto: bombardea con alertas sin jerarquía, lo que causa desensibilización cognitiva ('alert fatigue'). Con un 90% de override, la mayoría de alertas se ignoran sin procesamiento real, anulando su valor como salvaguardia.",
+            "recommendation": "Limitar a máximo 2-3 alertas modales por sesión de prescripción. Las demás deben ser no-modales (ej. bandeja lateral, notificación al final). Usar machine learning con los datos de override para detectar cuáles alertas 'falsas' están generando ruido en cada contexto y reducir su frecuencia o cambiarlas a modo no-modal.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Falta de explicación de motivos y accionabilidad en alertas",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Contenido y formato de la alerta modal: falta de explicación del motivo y pasos recomendados",
+            "evidence": "Médicos reportan: 'Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues' (medico-junior-1). Las alertas se presentan como ventanas modales sin información sobre por qué se lanzan o qué hacer (doc-ficha).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "PAIR-EF-2 exige comunicar errores/limitaciones del sistema en términos útiles y accionables. Aquí una alerta (p. ej. 'Interacción farmacológica') carece de: (a) por qué el sistema la lanza, (b) qué acciones concretas recomienda (p. ej. 'cambiar dosis', 'usar alternativa', 'aceptar riesgo'), (c) a quién contactar si es incierta. Esto obliga al clínico a adivinar, reforzando el override mecánico.",
+            "recommendation": "Expandir cada alerta con: (1) breve explicación del riesgo (p. ej. 'Riesgo de hipokaliemia con este diurético'); (2) acciones sugeridas (p. ej. 'considerar alternativa X', 'verificar K+ base'); (3) enlace a protocolo o farmacéutico de guardia. Mantener la brevedad pero ser explícito en la recomendación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Ausencia de notificación sobre cambios en reglas de alertas",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "Cambios en reglas y umbrales de alertas: no hay mecanismo de notificación",
+            "evidence": "No se menciona en el dossier un proceso de notificación cuando el proveedor modifica reglas o umbrales. Los clínicos asumen que si no ven una alerta es igual a antes, pero pueden haber cambios no comunicados.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G18 requiere notificar al usuario cuando el sistema añade o cambia capacidades. Si el proveedor habilita una nueva regla de interacción (p. ej. detectar conflicto con un nuevo fármaco) o modifica un umbral, los clínicos deben saberlo para recalibrar su expectativa. Sin esto, cambios silencios erosionan confianza.",
+            "recommendation": "Implementar notificaciones en el inicio de sesión cuando hay cambios en reglas (p. ej. banner: 'Nueva regla: alertas de hipoglucemia en diabéticos añadida a partir de hoy'). Mantener un histórico de cambios accesible y comunicar cambios significativos en reuniones de equipo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Falta de supervisión de equidad por subgrupos de clínicos",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Monitorización de disparidades en la interacción con alertas entre residentes, especialidades y experiencia",
+            "evidence": "Se registra el número de overrides para auditoría (impl-clinico), pero no se analiza si hay disparidades entre residentes nuevos vs. experimentados, o entre especialidades. Médicos junior reportan comportamiento muy diferente (medico-junior-1 vs. medico-junior-2).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "PAIR-DE-1 requiere medir y vigilar el comportamiento del sistema en subgrupos. Aquí no hay análisis de si los residentes nuevos ignoran más alertas que los experimentados, o si algunas especialidades tienen patrones de override muy distintos. Esto oculta si el sistema es equitativo y dónde hay desensibilización más severa.",
+            "recommendation": "Reportes mensuales de override rate por: (a) antigüedad del clínico (primer mes, meses 2-6, >6 meses); (b) especialidad; (c) tipo de alerta. Alerta a supervisores si un residente tiene override >95% o si hay divergencias entre especialidades. Usar estos datos para intervención (ej. reentrenamiento).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Alertas contextuales intempes­tivas que ignoran prioridad del clínico",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "Timing y contexto de disparo de alertas: recordatorios (p. ej. orden de resucitación) sin diferimiento",
+            "evidence": "Médico reporta: 'Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir' (medico-junior-2).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G10 pide acotar el servicio ante la duda y limitar cuando la incertidumbre es alta. Aquí se lanzan alertas (p. ej. recordatorios) en momentos intempes­tivos sin considerar el flujo actual del clínico. Un recordatorio de actualizar orden de resucitación es válido, pero no debe ser modal cuando el clínico abre el historial para prescribir. Esto causa resentimiento y override automático.",
+            "recommendation": "Separar alertas por contexto: (a) críticas (interacciones verificadas): modal inmediato; (b) recordatorios: cola no-modal visible al final de la sesión o en barra lateral; (c) considerar horas de diferimiento (ej. no lanzar recordatorios si el clínico está en medio de prescripción).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Ausencia de formación sistemática sobre uso e interpretación de alertas",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Onboarding y educación continuada: 'se aprende sobre la marcha'",
+            "evidence": "Responsable clínico: 'No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha' (impl-clinico). Médico junior: 'Nadie me explicó qué hacer con ellas' (medico-junior-1).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G13 pide aprender del comportamiento del usuario. Un componente clave es enseñar al usuario a usar bien el sistema. Sin formación, residentes no saben cómo priorizar alertas, qué significa cada tipo o cuándo confiar. Esto causa aprendizaje por error (override acrítico) en lugar de aprendizaje guiado.",
+            "recommendation": "Crear módulo de onboarding obligatorio (15 min) para nuevos residentes sobre: (a) tipos de alerta y qué riesgo representan; (b) cuándo confiar vs. cuestionar (ej. 'Si reconoces el fármaco, probablemente sea falsa'); (c) cómo contactar farmacia si hay duda. Refrescar en reuniones mensuales de equipo con casos reales.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Sesgo de subgrupo no monitorizado en aplicación de reglas globales",
+            "guideline_ids": [
+              "HAX-G6",
+              "PAIR-DE-1"
+            ],
+            "locus": "Aplicación uniforme de umbrales y reglas a servicios y perfiles distintos",
+            "evidence": "Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario (doc-ficha). Un cardiólogo ve alertas de ECG ('una de ECG, cancelar') que no son relevantes en su contexto (medico-junior-1).",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "HAX-G6 requiere evitar reforzar estereotipos o sesgos indeseados. Aquí las reglas globales pueden sesgar la práctica: si la cardiología recibe constantemente alertas sobre ECG irrelevantes, puede desensibilizar a cambios reales. PAIR-DE-1 pide supervisar disparidades por subgrupos: algunas especialidades pueden tener disparidades no detectadas (ej. alertas de dosis que aplican a pediatría pero se usan también en geriatría).",
+            "recommendation": "Auditar las reglas por especialidad para detectar si hay disparidades de falsos positivos. Implementar una versión contextual de reglas que considere diagnóstico principal, especialidad y edad del paciente. Reportar mensualmente disparidades de alert rate entre servicios.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que todas las alertas se presentan con el mismo formato visual sin gradación de severidad, lo que lleva al clínico a procesarlas de forma categórica ('es una de ECG, cancelar'). Esto encaja mejor con AF-07-baja-especificidad-umbral (ruido sin gestión) pero el núcleo del hallazgo es la ausencia de diferenciación visual de severidad. Sin embargo, entre los candidatos, el más cercano es AF-02-automation-bias-habituacion, ya que la evidencia citada muestra que la falta de gradación conduce directamente a la cancelación automática sin lectura. No obstante, el hallazgo se centra en el DISEÑO visual (ausencia de gradación), no en el comportamiento de habituación per se. Revisando todos los candidatos, ninguno describe específicamente 'ausencia de gradación visual de severidad' como problema central. AF-02 describe el comportamiento resultante (habituación/automatismo), no la causa de diseño. AF-07 describe umbrales que generan falsos positivos, no la presentación visual uniforme. El hallazgo es un problema real y específico apoyado en el dossier (ficha técnica lo confirma explícitamente), pero ningún candidato lo describe como problema principal. Es un descubrimiento nuevo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo describe que el sistema asume que cada override es deliberado cuando en realidad es automatizado (habituación). La evidencia cita la tasa de override >90% sin captura de motivo, y los testimonios de cancelación automática sin leer. Esto tiene dos dimensiones: (1) el comportamiento de habituación/automatismo (AF-02) y (2) la falta de registro del motivo del override (AF-03). El título del hallazgo enfatiza la 'confianza no calibrada del sistema' y la suposición errónea de que el override es deliberado, lo que apunta más a AF-03 (el sistema no captura el motivo, por lo que no puede distinguir override deliberado de automático). Sin embargo, la evidencia también apunta fuertemente a AF-02. El locus ('lógica de registro de overrides y suposición de validación manual') apunta a AF-03. Pero el problema central descrito es la habituación que hace que los overrides sean automáticos, que es AF-02. Considerando que AF-02 está marcado [*] y describe exactamente el comportamiento de cancelación automática sin supervisión crítica, y que el hallazgo lo ilustra con los mismos testimonios, AF-02 es el mejor candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "AF-07-baja-especificidad-umbral",
+            "judge_rationale": "El hallazgo describe que los umbrales y reglas son idénticos para todos los servicios y perfiles, sin calibración por especialidad ni experiencia. La evidencia de la ficha técnica lo confirma directamente. Esto encaja perfectamente con AF-07-baja-especificidad-umbral, que describe exactamente que los umbrales y reglas del proveedor sin ajuste local generan muchas alertas irrelevantes para el contexto. El testimonio de medico-junior-2 sobre la alerta de resucitación en mal momento también apunta a AF-04, pero el núcleo del hallazgo es la falta de calibración por servicio/perfil, que es AF-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "AF-06-sin-explicacion-accionable",
+            "judge_rationale": "El hallazgo describe que el clínico no recibe información sobre por qué esa alerta es relevante en ese momento concreto, y que tras la primera vez ya no lee el contenido. La evidencia del testimonio de medico-junior-1 ('la primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas ni qué fármacos mencionaba') y del implementador ('se aprende sobre la marcha') apuntan a la falta de explicación accionable en el momento. AF-06-sin-explicacion-accionable [*] describe exactamente esto: la alerta interrumpe pero no explica de forma accionable por qué salta en este caso concreto ni qué se espera que el clínico haga. Es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe que el clínico no tiene mecanismo para descartar o desactivar alertas que sabe que no le sirven, con evidencia directa del implementador ('cambio central que rara vez se solicita') y del médico ('tampoco puedo quitar las que sé que no me sirven'). Esto encaja perfectamente con AF-08-sin-controles-config, que describe exactamente la falta de controles de configuración para el usuario. Aunque no está marcado [*], es el candidato que describe el mismo problema de forma más precisa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo describe que el sistema no captura el motivo de cada override, con evidencia directa de la ficha técnica ('no recoge el motivo de cada cancelación') y del implementador ('no pedimos el motivo porque ralentizaría el trabajo'). Esto encaja perfectamente con AF-03-override-sin-motivo [*], que describe exactamente que el sistema cuenta cancelaciones pero no captura el motivo, impidiendo la supervisión y mejora de reglas.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe específicamente que las alertas interrumpen al clínico cuando está realizando una tarea con un objetivo concreto (abrir el historial) y le fuerzan a lidiar con una tarea no relacionada (actualizar la orden de resucitación). Esto encaja perfectamente con AF-04-temporizacion, que describe exactamente ese problema: alertas que interrumpen en mal momento cortando la tarea en curso, con el mismo ejemplo de la orden de resucitación.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo describe la desensibilización progresiva del clínico: al principio lee las alertas, pero rápidamente pasa a cancelarlas automáticamente sin leerlas ('sí, sí, sí a todas las casillas'), y el sistema no detecta ni responde a este cambio de patrón. Esto corresponde directamente a AF-02-automation-bias-habituacion, que describe exactamente la habituación y cancelación automática sin supervisión crítica, con la misma cita textual.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "AF-05-sin-onboarding",
+            "judge_rationale": "El hallazgo trata exclusivamente sobre la ausencia de formación estructurada para residentes sobre cómo interpretar y actuar ante las alertas, con aprendizaje ad-hoc. Esto encaja directamente con AF-05-sin-onboarding, que describe exactamente ese problema: no hay formación formal y cada residente improvisa ('nadie me explicó, nadie lo sabe').",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo describe que el sistema registra el número de overrides pero no captura el motivo de cada cancelación, lo que impide la supervisión y mejora de las reglas. Esto corresponde exactamente a AF-03-override-sin-motivo, que describe el mismo problema con la misma evidencia (tasa >90%, no se pide motivo para no ralentizar el trabajo).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que todas las alertas se presentan con el mismo formato visual sin gradación de severidad, lo que impide al clínico distinguir las críticas de las irrelevantes. Ninguno de los candidatos del golden describe específicamente la ausencia de gradación visual de severidad como problema central. AF-06-sin-explicacion-accionable se acerca (la alerta no informa adecuadamente), pero su foco es la falta de explicación accionable, no la ausencia de jerarquía visual. AF-01-volumen-fatiga y AF-02 son consecuencias, no el mismo problema. Este es un hallazgo real y específico apoyado en la ficha técnica, pero no coincide con ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe que los clínicos no pueden ajustar ni desactivar alertas que saben que no les sirven, y que cambiar una regla requiere un proceso central que rara vez ocurre. Esto encaja directamente con AF-08-sin-controles-config, que describe exactamente la falta de controles de configuración para el usuario, con la misma evidencia de la ficha técnica y los testimonios.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo habla de 'consecuencias de overrides opacas' y 'sin retroalimentación visible sobre cómo influyen en el sistema'. La evidencia citada es que el sistema registra overrides pero no captura el motivo ni devuelve información al clínico. El candidato AF-03-override-sin-motivo describe exactamente esto: el sistema cuenta cancelaciones pero no captura el motivo de cada override, lo que impide la supervisión y mejora de reglas. Aunque el hallazgo añade el ángulo de 'feedback al usuario', el núcleo del problema es el mismo: la falta de registro útil del motivo del override. AF-03 es el mejor ajuste.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo trata sobre la 'ausencia de feedback granular estructurado durante el uso habitual', es decir, que no hay canal para que el clínico reporte sobre la relevancia de alertas ni mecanismo de feedback en el flujo. La evidencia incluye que no hay programa formal de formación y que 'nadie me explicó qué hacer con ellas'. El candidato AF-03-override-sin-motivo encaja parcialmente (no se captura el motivo del override), pero el hallazgo se centra más en la ausencia de canal de feedback bidireccional. Sin embargo, AF-03 es el candidato que más se acerca al problema de que la discrepancia del clínico no se registra de forma útil. AF-05-sin-onboarding cubre la falta de formación pero no el feedback en el flujo. Ningún candidato describe exactamente 'ausencia de canal de feedback granular en el flujo ordinario' como problema central. El más cercano es AF-03 (no se registra el motivo del override = no hay feedback útil del clínico al sistema), pero el hallazgo también mezcla elementos de onboarding. Dado que el locus es 'canales de feedback en el flujo de trabajo ordinario' y la evidencia principal es la falta de mecanismo para reportar alertas problemáticas, AF-03 es el mejor ajuste disponible.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe 'fricción estructural y temporal en alertas no contextualizadas': alertas modales que interrumpen cuando el clínico tiene otro objetivo (ejemplo: orden de resucitación al abrir el historial con otro fin). La evidencia es directamente la cita del médico junior 2 sobre la orden de resucitación. Esto corresponde exactamente a AF-04-temporizacion, que describe alertas que interrumpen en mal momento cortando la tarea en curso, con el mismo ejemplo concreto.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo trata sobre 'desensibilización acelerada por volumen y falta de distinción de relevancia'. La evidencia son las citas de ambos médicos junior sobre decir 'sí a todas las casillas' y que 'como saltan siempre, acaban no significando nada'. Esto describe el fenómeno de automation bias/habituación (AF-02) pero también el volumen (AF-01). El núcleo del hallazgo es la desensibilización crónica por habituación, que es exactamente AF-02-automation-bias-habituacion. La mención de 'falta de distinción de relevancia' apunta también a AF-07, pero el problema central descrito es la desensibilización y el comportamiento automático, no los umbrales del proveedor. AF-02 es el mejor ajuste.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe 'alertas modales no descartables que permiten desensibilización crónica'. La evidencia combina el diseño modal bloqueante con la incapacidad de quitar alertas irrelevantes ('Tampoco puedo quitar las que sé que no me sirven') y el comportamiento automático resultante. El candidato AF-08-sin-controles-config describe exactamente la incapacidad del clínico de ajustar o silenciar tipos de alerta que sabe que no le sirven. Aunque hay elementos de AF-02 (desensibilización) y AF-01 (volumen), el locus específico del hallazgo es la falta de controles de configuración para el usuario, que es AF-08.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe alertas disparadas sin temporización al contexto de la tarea del usuario, con el ejemplo exacto de la orden de resucitación que salta cuando el clínico tiene otro objetivo. Esto corresponde directamente a AF-04-temporizacion, que usa exactamente el mismo ejemplo y describe el mismo problema: alertas que interrumpen en mal momento cortando la tarea en curso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo se centra en que todas las alertas tienen el mismo formato visual sin gradación de severidad, lo que favorece que el clínico las cancele automáticamente sin discriminar. Esto encaja directamente con AF-02-automation-bias-habituacion (cancelar de forma automática sin leer, desensibilización). Sin embargo, el núcleo del hallazgo es la ausencia de gradación visual como causa de la automatización. Entre los candidatos, AF-02 describe exactamente el comportamiento resultante (cancelar automáticamente, 'sí a todas las casillas') y la evidencia citada (whack-a-mole, desensibilización) es la misma que define AF-02. AF-07 habla de umbrales/reglas que generan ruido, no de la presentación visual. AF-01 habla de volumen. El hallazgo describe el mismo problema que AF-02: habituación y automation bias derivados de la uniformidad visual.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo trata específicamente de que el sistema registra el número de overrides (>90%) pero no captura el motivo de cada cancelación, y que las reglas no se ajustan en función de esas cancelaciones persistentes. Esto es exactamente lo que describe AF-03-override-sin-motivo: el sistema cuenta cancelaciones pero no captura el motivo, la discrepancia no alimenta la mejora de reglas. La evidencia citada (ficha técnica + responsable de informática) coincide perfectamente con ese candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "AF-05-sin-onboarding",
+            "judge_rationale": "El hallazgo describe la ausencia de un programa formal de onboarding para residentes sobre cómo interpretar y actuar sobre las alertas, con la consecuencia de desensibilización precoz. La evidencia citada ('no tenemos un programa formal', 'nadie me explicó') es exactamente la que define AF-05-sin-onboarding. Encaja directamente.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "AF-07-baja-especificidad-umbral",
+            "judge_rationale": "El hallazgo se centra en que los umbrales y reglas son configurados por el proveedor y son los mismos para todos los servicios y perfiles, ignorando la heterogeneidad contextual. Esto genera alertas irrelevantes según el contexto (oncología vs. medicina general). Esto encaja directamente con AF-07-baja-especificidad-umbral: umbrales del proveedor sin ajuste local generan muchas alertas irrelevantes para el contexto. AF-08 habla de la imposibilidad del usuario de ajustar, pero el núcleo del hallazgo es la uniformidad de reglas sin ajuste local, que es AF-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "AF-05-sin-onboarding",
+            "judge_rationale": "El hallazgo describe la ausencia de calibración de expectativas sobre la relevancia contextual de las alertas durante el onboarding de residentes. La evidencia y el locus son idénticos a los de AF-05-sin-onboarding ('no tenemos un programa formal', 'nadie me explicó qué hacer con ellas'). Aunque el título añade el matiz de 'calibración de expectativas sobre relevancia contextual', el problema descrito es el mismo: falta de formación sobre cómo interpretar las alertas. Este hallazgo es un duplicado funcional de p3-021 y corresponde al mismo candidato AF-05-sin-onboarding.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo describe que todas las alertas se presentan con el mismo formato visual sin gradación de severidad ni urgencia, lo que lleva a que el clínico no distinga entre ellas y las cancele indiscriminadamente. La evidencia citada (ficha técnica sobre formato uniforme, médico junior 1 sobre cancelar por tipo, médico junior 2 sobre que 'como saltan siempre, acaban no significando nada') apunta a un problema de diseño visual que contribuye al automation bias. Esto es muy similar a p3-019 y encaja con AF-02-automation-bias-habituacion. Sin embargo, el foco del hallazgo es la presentación indiferenciada como causa de que el clínico no discrimine, lo que también podría encajar con AF-07 (ruido que erosiona la atención). Pero el candidato más preciso es AF-02, ya que la evidencia central describe el comportamiento automático de cancelación sin discriminación por habituación. Ningún candidato específico habla de 'gradación visual' como problema aislado; AF-02 es el que mejor captura el fenómeno descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe específicamente que las alertas se disparan en momentos inoportunos (cuando el clínico tiene otro objetivo inmediato), interrumpiendo la tarea en curso. Esto encaja directamente con AF-04-temporizacion, que describe exactamente ese problema: alertas que interrumpen en mal momento, como forzar la actualización de la orden de resucitación cuando el clínico abrió el historial con otro objetivo. Aunque AF-07 y AF-01 son candidatos marcados con [*], el núcleo del hallazgo no es el volumen ni los falsos positivos, sino el momento inadecuado del disparo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo trata exclusivamente de que el sistema no captura el motivo de cada override, lo que impide aprender y mejorar las reglas. Esto es una correspondencia exacta con AF-03-override-sin-motivo, que describe precisamente ese problema: el sistema cuenta cancelaciones pero no registra el motivo, impidiendo la supervisión y mejora de reglas.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo se centra en que la configuración centralizada del proveedor aplica las mismas reglas a todos los servicios y perfiles, sin posibilidad de ajuste local. Esto encaja mejor con AF-07-baja-especificidad-umbral (umbrales sin ajuste local generan alertas irrelevantes para el contexto) y con AF-08-sin-controles-config. Sin embargo, el énfasis del hallazgo está en la falta de ajuste por servicio/perfil y la dificultad de cambiar reglas centralmente, lo que apunta más directamente a AF-08-sin-controles-config (cambiar una regla exige un cambio central que rara vez se solicita). AF-07 se refiere más al resultado (falsos positivos/ruido), mientras que AF-08 describe la causa estructural que el hallazgo señala.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "AF-02-automation-bias-habituacion",
+            "judge_rationale": "El hallazgo describe la desensibilización progresiva por el alto volumen de alertas modales, con el clínico cerrándolas mecánicamente ('whack-a-mole', 'sí, sí, sí a todas las casillas'). Esto combina dos candidatos: AF-01-volumen-fatiga (volumen alto, despacho en serie) y AF-02-automation-bias-habituacion (cancelación automática sin leer, desensibilización). El título del hallazgo enfatiza la 'desensibilización' y el 'automation bias', pero la evidencia citada mezcla ambos. AF-02 describe más precisamente el mecanismo cognitivo (habituación, automation bias, desensibilización reaparece) que es el núcleo del hallazgo, mientras que AF-01 es la causa. El hallazgo se titula 'desensibilización acelerada' y cita el comportamiento automático, lo que apunta a AF-02 como el problema principal descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "AF-06-sin-explicacion-accionable",
+            "judge_rationale": "El hallazgo describe que el clínico no sabe por qué saltó la alerta ni qué se espera que haga, lo que lleva a ignorarla. La evidencia citada ('no recuerdas ni qué fármacos mencionaba') sugiere que la alerta no comunica claramente su lógica. Esto encaja con AF-06-sin-explicacion-accionable, que describe exactamente que la alerta no explica de forma accionable por qué salta ni qué se espera del clínico. Aunque la evidencia también muestra habituación (AF-02), el locus del hallazgo es el 'contenido y claridad de cada alerta', apuntando a AF-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe directamente la imposibilidad del clínico de desactivar o personalizar las alertas según su perfil o experiencia ('Tampoco puedo quitar las que sé que no me sirven'). Esto es una correspondencia exacta con AF-08-sin-controles-config, que describe precisamente la falta de controles de configuración para el usuario y que cambiar una regla exige un cambio central.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe que todas las alertas se presentan con el mismo formato visual sin gradación de severidad, mezclando alertas críticas con recordatorios de protocolo. Esto no encaja exactamente con ninguno de los candidatos marcados con [*] (volumen-fatiga, override-sin-motivo, sin-explicacion-accionable). El candidato más cercano sería AF-07-baja-especificidad-umbral (ruido/falsos positivos) o AF-01-volumen-fatiga, pero el núcleo del hallazgo es la ausencia de diferenciación visual de severidad. Ningún candidato describe específicamente la falta de gradación visual de severidad entre alertas heterogéneas. Es un problema real y específico apoyado en el dossier (doc-ficha lo confirma explícitamente).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "AF-03-override-sin-motivo",
+            "judge_rationale": "El hallazgo describe que el sistema no captura el motivo de cada cancelación/override, lo que impide aprendizaje y mejora de reglas. Esto corresponde directamente a AF-03-override-sin-motivo, que describe exactamente ese problema: el sistema cuenta cancelaciones pero no captura el motivo, sin alimentar supervisión ni mejora de reglas. La evidencia del dossier (impl-clinico, medico-junior-1) lo sustenta.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "AF-08-sin-controles-config",
+            "judge_rationale": "El hallazgo describe que los umbrales y reglas vienen configurados por el proveedor iguales para todos los servicios y perfiles, y que cambiar una regla exige un cambio central que rara vez se solicita. Esto encaja directamente con AF-08-sin-controles-config, que describe exactamente la imposibilidad del clínico de ajustar o silenciar tipos de alerta y la necesidad de cambio central. Es el candidato [*] más específico para este problema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "AF-01-volumen-fatiga",
+            "judge_rationale": "El hallazgo describe desensibilización por sobrecarga de alertas modales: los médicos las despachan mecánicamente ('whack-a-mole', 'pulsar casillas sin mirar'), con tasa de override >90%. Esto encaja con AF-01-volumen-fatiga (fatiga por sobrecarga, despachar en serie sin procesar) pero también con AF-02-automation-bias-habituacion (cancelar automáticamente sin leer, desensibilización). El hallazgo mezcla ambos conceptos, pero el énfasis principal está en el volumen y la sobrecarga que lleva a la desensibilización mecánica, lo que es el núcleo de AF-01-volumen-fatiga. Sin embargo, la desensibilización y el comportamiento automático ('sí, sí, sí a todas las casillas') es el núcleo de AF-02. El título dice 'desensibilización' y la evidencia cita el comportamiento automático, lo que apunta más a AF-02-automation-bias-habituacion. Pero AF-01 también está marcado [*] y describe el mismo patrón whack-a-mole. Dado que el hallazgo enfatiza tanto el volumen como la desensibilización resultante, y AF-01 describe exactamente el patrón whack-a-mole citado en la evidencia, AF-01 es el mejor candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "AF-06-sin-explicacion-accionable",
+            "judge_rationale": "El hallazgo describe que las alertas no explican por qué se lanzan ni qué debe hacer el clínico, y que los médicos improvisan ('nadie me explicó qué hacer'). La evidencia mezcla dos problemas: la falta de contenido accionable en la alerta (AF-06-sin-explicacion-accionable) y la falta de formación/onboarding (AF-05-sin-onboarding). El locus y el título apuntan al contenido de la alerta ('falta de explicación de motivos y accionabilidad'), lo que corresponde a AF-06-sin-explicacion-accionable. La cita de medico-junior-1 ('nadie me explicó') podría apuntar a AF-05, pero el contexto del hallazgo es sobre el contenido de la alerta en sí, no sobre la formación. AF-06 encaja mejor.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo describe la ausencia de notificación cuando el proveedor modifica reglas o umbrales, de modo que los clínicos no saben si ha habido cambios. El dossier no menciona explícitamente este mecanismo de notificación, pero el hallazgo lo infiere como ausente. Ninguno de los candidatos describe específicamente la falta de comunicación sobre cambios en reglas. AF-08-sin-controles-config trata sobre la imposibilidad del usuario de ajustar reglas, no sobre notificaciones de cambios. Este es un problema inferido que no está directamente sustentado en el dossier (ninguna fuente menciona que los clínicos hayan sido sorprendidos por cambios no comunicados); es una extrapolación no respaldada explícitamente. Por tanto, es 'ninguno' y no es un hallazgo real sustentado en el dossier.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo habla de falta de análisis de disparidades entre subgrupos de clínicos en los datos de override. Aunque menciona que se registran overrides sin motivo (AF-03), el núcleo del hallazgo es que no se analiza si hay diferencias entre perfiles. Ninguno de los candidatos describe exactamente este problema de 'equidad por subgrupos'; AF-03 es el más cercano porque trata la falta de utilidad del registro de overrides para supervisión y mejora, pero el hallazgo va más allá hacia análisis de disparidades. Sin embargo, AF-03 es el candidato que más se aproxima: el sistema registra overrides pero no los analiza de forma útil ni alimenta la supervisión. El ángulo de 'disparidades entre subgrupos' es una extensión no cubierta por ningún candidato. Aun así, la evidencia principal citada (impl-clinico: registramos overrides para auditoría pero no pedimos motivo) encaja directamente con AF-03. El hallazgo es real pero su framing específico de 'equidad por subgrupos' no está cubierto por ningún candidato; es un descubrimiento nuevo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "AF-04-temporizacion",
+            "judge_rationale": "El hallazgo describe alertas que interrumpen en mal momento, específicamente cuando el clínico tiene otro objetivo (orden de resucitación saltando al abrir el historial con otro fin). La evidencia citada es exactamente el ejemplo de AF-04-temporizacion ('forzar la actualización de la orden de resucitación cuando el clínico abrió el historial con otro objetivo'). Encaja perfectamente con AF-04-temporizacion.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_match",
+            "matched_golden_id": "AF-05-sin-onboarding",
+            "judge_rationale": "El hallazgo trata la ausencia de formación formal para residentes sobre cómo interpretar y usar las alertas, con evidencia directa de impl-clinico ('no tenemos un programa formal') y medico-junior-1 ('nadie me explicó qué hacer con ellas'). Esto encaja perfectamente con AF-05-sin-onboarding ('no hay formación sobre cómo interpretar las alertas ni qué hacer con ellas; cada residente improvisa su criterio').",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_match",
+            "matched_golden_id": "AF-07-baja-especificidad-umbral",
+            "judge_rationale": "El hallazgo describe que los umbrales y reglas son los mismos para todos los servicios y perfiles, generando alertas irrelevantes para contextos específicos (p.ej. cardiólogo con alertas de ECG). Esto encaja directamente con AF-07-baja-especificidad-umbral ('los umbrales y reglas del proveedor, sin ajuste local, generan muchas alertas irrelevantes para el contexto del paciente'). El framing de 'sesgo de subgrupo no monitorizado' es secundario; el problema central es la falta de especificidad de los umbrales por perfil/servicio.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 40,
+          "n_golden": 8,
+          "recall": 1.0,
+          "precision": 0.975,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 4,
+          "fbeta": 0.9948979591836734,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9948979591836734
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,2043 @@
+{
+  "config": {
+    "approaches": [
+      "b0",
+      "b1",
+      "p3"
+    ],
+    "k": 1,
+    "gen_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-4-6",
+    "n_golden": 9,
+    "system_name": "Sistema informático de contabilidad de sucursal para puntos de atención al público (tipo terminal de caja de oficina)"
+  },
+  "aggregates": {
+    "b0": {
+      "approach": "b0",
+      "k": 1,
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "b1": {
+      "approach": "b1",
+      "k": 1,
+      "recall": {
+        "mean": 0.7777777777777778,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.813953488372093,
+        "std": 0.0
+      }
+    },
+    "p3": {
+      "approach": "p3",
+      "k": 1,
+      "recall": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.9777777777777777,
+        "std": 0.0
+      },
+      "genericity_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "grounding_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "primary_score": {
+        "mean": 0.9954751131221717,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": {
+    "b0": [
+      {
+        "findings": [
+          {
+            "id": "b0-001",
+            "title": "Revisar guideline: Dejar claro que puede hacer el sistema (Make clear what the system can do)",
+            "guideline_ids": [
+              "HAX-G1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de descripcion de capacidades/alcance en el onboarding.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: El usuario debe poder entender de que es capaz el sistema de IA antes y durante el uso, sin tener que descubrirlo por ensayo y error.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-002",
+            "title": "Revisar guideline: Dejar claro como de bien lo hace (Make clear how well the system can do what it can do)",
+            "guideline_ids": [
+              "HAX-G2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No comunicar incertidumbre ni tasas de error.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Comunicar el rendimiento y sus limites (cuando puede equivocarse) para calibrar la confianza del usuario y evitar sobre-confianza (automation bias).",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-003",
+            "title": "Revisar guideline: Temporizar el servicio segun el contexto (Time services based on context)",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Interrupciones mal temporizadas que cortan el flujo de trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Actuar o interrumpir en el momento adecuado segun la tarea y el entorno del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-004",
+            "title": "Revisar guideline: Mostrar informacion contextualmente relevante (Show contextually relevant information)",
+            "guideline_ids": [
+              "HAX-G4"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Informacion generica no adaptada a la tarea concreta.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G4.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Presentar la informacion pertinente a la tarea y al contexto actuales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-005",
+            "title": "Revisar guideline: Ajustarse a las normas sociales relevantes (Match relevant social norms)",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Tono o registro inapropiado para el contexto de uso.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G5.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-006",
+            "title": "Revisar guideline: Mitigar los sesgos sociales (Mitigate social biases)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Refuerzo de estereotipos en lenguaje o decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G6.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-007",
+            "title": "Revisar guideline: Permitir invocacion eficiente (Support efficient invocation)",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Invocacion del servicio costosa o escondida.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G7.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-008",
+            "title": "Revisar guideline: Permitir descarte eficiente (Support efficient dismissal)",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sugerencias persistentes que no se pueden descartar.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G8.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir ignorar o descartar facilmente las sugerencias no deseadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-009",
+            "title": "Revisar guideline: Permitir correccion eficiente (Support efficient correction)",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override no capturado o capturado sin motivo/estructura.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G9.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Facilitar que el usuario edite, refine o anule (override) la salida cuando discrepa, y capturar esa correccion de forma util.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-010",
+            "title": "Revisar guideline: Acotar el servicio ante la duda (Scope services when in doubt)",
+            "guideline_ids": [
+              "HAX-G10"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G10.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar o desactivar el servicio (o pedir desambiguacion) cuando la incertidumbre es alta.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-011",
+            "title": "Revisar guideline: Dejar claro por que hizo lo que hizo (Make clear why the system did what it did)",
+            "guideline_ids": [
+              "HAX-G11"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de explicacion accesible de las decisiones.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G11.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir acceder a una explicacion de por que el sistema actuo como actuo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-012",
+            "title": "Revisar guideline: Recordar interacciones recientes (Remember recent interactions)",
+            "guideline_ids": [
+              "HAX-G12"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Perdida de contexto reciente que obliga a repetir trabajo.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G12.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mantener memoria a corto plazo de la interaccion para no obligar a repetir contexto.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-013",
+            "title": "Revisar guideline: Aprender del comportamiento del usuario (Learn from user behavior)",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "No aprovechar senales de comportamiento para mejorar la experiencia.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G13.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-014",
+            "title": "Revisar guideline: Actualizar y adaptarse con cautela (Update and adapt cautiously)",
+            "guideline_ids": [
+              "HAX-G14"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios disruptivos no gestionados que rompen el modelo mental.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G14.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-015",
+            "title": "Revisar guideline: Fomentar feedback granular (Encourage granular feedback)",
+            "guideline_ids": [
+              "HAX-G15"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Canales de feedback inexistentes o demasiado gruesos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G15.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario dar feedback detallado durante el uso habitual.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-016",
+            "title": "Revisar guideline: Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Consecuencias de las acciones del usuario opacas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G16.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dejar claro como las acciones o el feedback del usuario afectaran al comportamiento futuro del sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-017",
+            "title": "Revisar guideline: Proveer controles globales (Provide global controls)",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Ausencia de controles globales de configuracion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G17.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario configurar globalmente que monitoriza y como se comporta el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-018",
+            "title": "Revisar guideline: Notificar los cambios (Notify users about changes)",
+            "guideline_ids": [
+              "HAX-G18"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Cambios de capacidad no notificados.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de HAX-G18.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Informar al usuario cuando el sistema anade o cambia capacidades.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-019",
+            "title": "Revisar guideline: La IA debe resolver una necesidad real del usuario",
+            "guideline_ids": [
+              "PAIR-UN-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "IA como fin en si misma, sin necesidad de usuario clara.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Usar IA solo cuando aporta valor real frente a una solucion no-IA; centrarse en la necesidad, no en la tecnologia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-020",
+            "title": "Revisar guideline: Definir el reward y el coste de los errores por tipo",
+            "guideline_ids": [
+              "PAIR-UN-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Equilibrio FP/FN no explicitado en el diseno de la interaccion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-UN-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos segun su coste para las personas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-021",
+            "title": "Revisar guideline: Fijar expectativas correctas desde el onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Onboarding ausente o que no calibra expectativas.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ayudar al usuario a formar un modelo mental correcto de que hace y que no hace el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-022",
+            "title": "Revisar guideline: Comunicar capacidades y limites de forma honesta",
+            "guideline_ids": [
+              "PAIR-MM-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Sobreventa de capacidades.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-MM-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-023",
+            "title": "Revisar guideline: Explicar las salidas para construir confianza calibrada",
+            "guideline_ids": [
+              "PAIR-ET-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Explicaciones ausentes o no accionables.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Ofrecer explicaciones utiles que ayuden a decidir cuando confiar y cuando no.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-024",
+            "title": "Revisar guideline: Comunicar la incertidumbre / confianza del modelo",
+            "guideline_ids": [
+              "PAIR-ET-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Incertidumbre no comunicada.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Mostrar la confianza de forma que el usuario pueda calibrar su propia decision.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-025",
+            "title": "Revisar guideline: Evitar la sobre-confianza / automation bias",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Diseno que empuja a aceptar la IA sin revision (automation bias).",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-ET-3.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Disenar para que el usuario mantenga supervision critica y no acepte la IA por inercia.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-026",
+            "title": "Revisar guideline: Permitir feedback del usuario y que tenga efecto visible",
+            "guideline_ids": [
+              "PAIR-FC-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Feedback sin captura o sin efecto visible.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Dar canales para corregir/valorar la salida y comunicar como influye en el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-027",
+            "title": "Revisar guideline: Dar control: anular, ajustar y configurar",
+            "guideline_ids": [
+              "PAIR-FC-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Override ausente, ignorado o no registrado.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-FC-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Permitir al usuario mantener el control (override, ajustes, limites) sobre el sistema.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-028",
+            "title": "Revisar guideline: Disenar para el fallo y degradar con elegancia",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Fallo silencioso o sin via de recuperacion.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Anticipar errores del modelo y del contexto; ofrecer caminos de recuperacion claros.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-029",
+            "title": "Revisar guideline: Comunicar los errores en terminos del usuario",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Mensajes de error opacos o tecnicos.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-EF-2.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Cuando el sistema se equivoca o no puede actuar, explicarlo de forma util y accionable.",
+            "merged_count": 1
+          },
+          {
+            "id": "b0-030",
+            "title": "Revisar guideline: Evaluar el rendimiento por subgrupos relevantes",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "",
+            "evidence": "",
+            "anti_pattern": "Supervision de subgrupos manual o ausente.",
+            "severity": "medium",
+            "rationale": "Comprobacion generica del cumplimiento de PAIR-DE-1.",
+            "recommendation": "Verificar manualmente si el sistema cumple: Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b0-001",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-002",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-003",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-004",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-005",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-006",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-007",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-008",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-009",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-010",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-011",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-012",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-013",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-014",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-015",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-016",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-017",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-018",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-019",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-020",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-021",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-022",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-023",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-024",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-025",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-026",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-027",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-028",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-029",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b0-030",
+            "label": "fp_generic",
+            "matched_golden_id": null,
+            "judge_rationale": "(no anclado: sin locus/evidencia)",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b0",
+          "n_findings": 30,
+          "n_golden": 9,
+          "recall": 0.0,
+          "precision": 0.0,
+          "genericity_rate": 1.0,
+          "grounding_rate": 0.0,
+          "tp_new": 0,
+          "fbeta": 0.0,
+          "meets_genericity_gate": false,
+          "primary_score": 0.0
+        }
+      }
+    ],
+    "b1": [
+      {
+        "findings": [
+          {
+            "id": "b1-001",
+            "title": "Ausencia de desglose transaccional en la presentación del descuadre",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Pantalla de cierre de caja cuando se presenta el descuadre",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. El operador no ve el detalle de las transacciones que han producido la diferencia ni puede recalcular el origen por su cuenta.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador necesita entender POR QUÉ el sistema le imputa un descuadre que luego asume con su patrimonio. Sin desglose transaccional, no puede ejercer supervisión crítica ni detectar errores del sistema (que según el dossier ya ha duplicado operaciones o no las ha completado). La falta de explicación lo deja sin herramientas para calibrar confianza en una decisión que tiene consecuencias económicas directas.",
+            "recommendation": "Modificar la pantalla de cierre para que muestre el detalle de las transacciones cuyas sumas no coinciden con el recuento físico. Incluir filtros por tipo de operación y fecha para facilitar la auditoría local del operador.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-002",
+            "title": "Sin indicador de confianza o margen de error del cálculo del sistema",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Presentación del saldo teórico y la diferencia en el cierre",
+            "evidence": "La pantalla muestra el importe que falta, pero no [...] indica margen de error o probabilidad de fallo del propio cálculo. El sistema puede registrar entradas duplicadas o no completarlas y aun así arrojar un saldo aparentemente cerrado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema tiene un historial documentado de errores propios (duplicaciones, operaciones incompletas). Sin embargo, presenta sus cálculos con autoridad total, induciendo al operador a confiar en la cifra incluso cuando sus propias cuentas discrepan. El operador no recibe calibración sobre cuál es la tasa real de error del sistema, generando automation bias: acepta por inercia lo que 'dice el programa'.",
+            "recommendation": "Comunicar la confianza del cálculo o señalar cuando la cadena de procesamiento ha contenido errores conocidos (p. ej., si hubo transacciones incompletas o duplicadas ese día). Usar indicadores visuales (p. ej., 'Diferencia detectada: verificación manual recomendada') en lugar de presentar toda cifra con la misma autoridad.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-003",
+            "title": "No hay opción para disputar o marcar la diferencia como sospechosa",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Flujo de cierre: el operador solo puede 'aceptar' la diferencia, sin alternativa",
+            "evidence": "El sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador está obligado a elegir entre dos opciones que no le favorecen: (a) aceptar la diferencia que no entiende y asumir la deuda, o (b) no poder cerrar la caja y quedarse sin operar. No hay override inteligente ni captura del desacuerdo. Esto viola el derecho del usuario a mantener control sobre decisiones que afectan su patrimonio y a dejar constancia de su discrepancia.",
+            "recommendation": "Añadir una opción 'Disputar esta diferencia' que permita al operador cerrar el período SIN asumir la cifra, dejando constancia formal de la discrepancia para revisión posterior. Registrar la disputa junto con la acción del operador (fecha, hora, motivo breve) para auditoría.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-004",
+            "title": "Acceso centralizado a logs: el operador no puede reconstruir ni auditar el cálculo localmente",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Arquitectura de datos y acceso: 'Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso'",
+            "evidence": "Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando el operador discrepa con el saldo, no tiene medio para investigar de forma independiente. Está completamente dependiente del proveedor para acceso a los datos que sustentan la acusación de descuadre. Esto crea una asimetría de información que impide al operador ejercer supervisión y lo deja vulnerable a errores o a cierre injusto de su cuenta.",
+            "recommendation": "Proporcionar al operador acceso a una vista auditada (read-only) de las transacciones de su período en la terminal local o a través de un portal seguro. Como mínimo, enviar junto con el descuadre un desglose detallado de transacciones que explique el cálculo, no solo la cifra final.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-005",
+            "title": "Soporte telefónico orienta al error de la sucursal sin compartir evidencia",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1",
+              "PAIR-EF-2"
+            ],
+            "locus": "Interacción con línea de soporte del proveedor cuando se reporta descuadre",
+            "evidence": "Atendemos las llamadas de las sucursales cuando el balance no cuadra. [...] No solemos entregar al operador el detalle transaccional ni los logs que tenemos en el centro de datos: esa información se gestiona internamente. Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El soporte parte de un sesgo preconcebido: asume que el error es del operador sin investigar. No proporciona explicación ni evidencia para justificar la cifra, obligando al operador a aceptar un diagnóstico sin transparencia. Además, las instrucciones del soporte han causado que el descuadre aumente (caso documentado: 2.000 → 4.000 libras), pero no hay canal para registrar ese feedback como fallo del sistema.",
+            "recommendation": "Protocolo de soporte revisado: (1) Compartir con el operador el detalle transaccional relevante antes de hacer sugerencias, (2) Investigar primero la posibilidad de error del sistema (duplicaciones, operaciones incompletas), no solo culpa del operador, (3) Si se instruye al operador en pasos que podrían cambiar el descuadre, capturar el antes/después y la razón, y escalarlo a revisión si la cifra empeora.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-006",
+            "title": "Falta de canal formal para registro de desacuerdo / disputa",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Sistema general: no existe feedback mechanism para contestar cifras impugnadas",
+            "evidence": "No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra. Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador acepta descuadres bajo presión (necesita cerrar y operar) sin poder dejar registro de su objeción. Eso impide que el proveedor detecte patrones de error en el sistema o que el operador tenga protección contractual si después se prueba que el sistema se equivocó. La ausencia de feedback granular deja al sistema sin visibilidad sobre sus fallos.",
+            "recommendation": "Implementar un módulo de 'Disputa de Descuadre' en el sistema: cuando el operador objete una cifra, obligar a capturar (fecha, importe, motivo breve) y enviar automáticamente a un equipo de revisión. Comunicar al operador el resultado de la revisión por escrito (no solo verbalmente por teléfono).",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-007",
+            "title": "Sin explicación de cómo acciones del operador (pasos de soporte) afectan el cálculo futuro",
+            "guideline_ids": [
+              "HAX-G16"
+            ],
+            "locus": "Interacción con helpdesk: instrucciones para 'resolver' descuadres sin transparencia de consecuencias",
+            "evidence": "En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador. Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador sigue instrucciones de soporte confiando en que mejora la situación, pero nadie le explica que ciertos pasos afectarán la cifra de descuadre o podrían empeorarla. Cuando descubre que la deuda ha duplicado, no entiende por qué ni tiene forma de revertir la acción. Esto viola la responsabilidad de comunicar consecuencias de las acciones propias.",
+            "recommendation": "Antes de ejecutar pasos de 'resolución' de descuadres, el sistema o el soporte deben avisar: 'Este paso puede modificar el descuadre calculado. El nuevo saldo será X. ¿Desea continuar?' Mantener un historial de qué pasos se ejecutaron y cómo afectaron la cifra, accesible para disputa.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-008",
+            "title": "Incapacidad del operador para verificar si sus propias cuentas son correctas contra los datos del sistema",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Diseño: el operador mantiene registros locales pero no puede compararlos contra el sistema de forma estructurada",
+            "evidence": "Yo sabía que esa cantidad no era la correcta, pero no sabía qué hacer. [...] no tenía manera de ver de dónde salía la cifra ni de demostrar que estaba mal. Yo llevaba años con mis libros cuadrados y de repente la pantalla decía lo contrario, sin que nadie pudiera enseñarme el cálculo.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador tiene registros propios que cuadran pero el sistema le dice lo contrario. Sin un mecanismo para comparar línea por línea sus registros contra los del sistema, no puede diagnosticar dónde radica la discrepancia. El diseño no proporciona vía de recuperación ante conflicto de datos: solo acepta lo que dice el terminal.",
+            "recommendation": "Crear un módulo de 'Reconciliación Detallada' donde el operador pueda importar o registrar sus propias transacciones (o verlas en paralelo) y comparar contra el cálculo del sistema de forma transacción por transacción, identificando diferencias concretas.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-009",
+            "title": "Automatización del cierre sin astenencia cuando hay incertidumbre alta",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Flujo de cierre: el sistema fuerza el cierre incluso cuando hay un descuadre no explicado",
+            "evidence": "Para completar el cierre, el operador debe pulsar que acepta esa diferencia; el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. [...] o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Cuando hay un descuadre significativo y sin explicación clara (caso: 2.000 libras), el sistema aún obliga a la aceptación. HAX-G10 establece que ante alta incertidumbre se debe limitar o pedir desambiguación. Aquí se hace lo opuesto: se fuerza la decisión sobre el operador bajo presión de no poder operar.",
+            "recommendation": "Implementar un umbral: si el descuadre supera un % del saldo esperado (p. ej., >5%) O ha habido errores previos del sistema ese día, bloquear el cierre simple y requerir escalada formal a revisión antes de que el operador asuma la cifra.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-010",
+            "title": "Sin calibración de expectativas sobre tasa de error del sistema en onboarding",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "HAX-G2"
+            ],
+            "locus": "Onboarding / primeras interacciones: el operador no es informado de que el sistema puede tener errores propios",
+            "evidence": "El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado. [Sin mención de cómo se comunica esto al operador en onboarding]",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Un operador nuevo asume que todo descuadre es error suyo (confirma el caso: 'Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos'). Si el onboarding hubiera comunicado que el sistema tiene tasas conocidas de error (duplicaciones, etc.), el operador habría sabido desconfiar selectivamente de la autoridad del terminal.",
+            "recommendation": "Incluir en el onboarding una sección sobre 'Errores conocidos del sistema' con ejemplos (duplicación de transacciones, operaciones incompletas) y cómo detectarlos. Instruir al operador para que reporte descuadres atípicos como posibles fallos del sistema, no solo como errores locales.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-011",
+            "title": "Asimetría de responsabilidad: operador responde con patrimonio pero no tiene control ni visibilidad",
+            "guideline_ids": [
+              "PAIR-UN-2",
+              "PAIR-FC-2"
+            ],
+            "locus": "Modelo contractual / interacción global: el operador asume riesgo financiero sin poder controlar el sistema",
+            "evidence": "Contractualmente, el operador responde con su propio patrimonio de los descuadres que el sistema le imputa. [...] La diferencia aceptada queda registrada como deuda del operador.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es responsabilizado financieramente por cifras que no puede auditar, no puede explicar y no puede disputar eficientemente. El equilibrio de FP/FN (falsos descuadres vs. descuadres no detectados) no es explícito en el diseño: todo error se carga al operador. Esto es una violación de PAIR-UN-2: el coste del error de IA recae completamente en la persona, sin que haya tenido voz en esa decisión.",
+            "recommendation": "Renegociar el modelo de responsabilidad: establecer claramente quién responde de qué tipo de error (error del sistema vs. error de operador) basándose en auditoría, no en aceptación forzada. Implementar protecciones: descuadres inconsistentes o causados por fallos del sistema no deben ser deuda del operador.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-012",
+            "title": "Falta de transparencia sobre errores del sistema que ya han ocurrido",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-MM-2"
+            ],
+            "locus": "Comunicación general: el operador no es informado de que el sistema ha tenido fallos específicos",
+            "evidence": "El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado. [Sin indicación de si esto se comunica a los operadores afectados]",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si un operador sufre un descuadre y después se descubre que fue por una duplicación conocida del sistema, no hay evidencia de que le hayan comunicado ese hallazgo. Ello perpetúa desconfianza en sus propias capacidades ('Llegué a dudar de mí mismo antes que del programa') cuando el fallo era del sistema.",
+            "recommendation": "Cuando se detecte un error del sistema (duplicaciones, operaciones incompletas), rastrear qué operadores fueron afectados e informarles por escrito que el descuadre fue imputable al sistema, no a su gestión. Revisar descuadres anteriores del mismo tipo.",
+            "merged_count": 1
+          },
+          {
+            "id": "b1-013",
+            "title": "Persistencia y falta de descarte del 'descuadre abierto' obliga a seguir pagando deuda sin cierre real",
+            "guideline_ids": [
+              "HAX-G8",
+              "PAIR-EF-1"
+            ],
+            "locus": "Gestión del descuadre después de aceptado: el operador no puede descartar ni 'cerrar' verdaderamente la incidencia",
+            "evidence": "Para poder cerrar y seguir operando [el operador debe aceptar la diferencia]. Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Aunque el operador 'cierre' el período aceptando la diferencia, si esa diferencia es errónea, queda registrada como deuda. No hay forma de descartar un descuadre posterior si el operador tiene evidencia de que fue error del sistema. La aceptación forzada no es un cierre real; es un aplazamiento de la disputa.",
+            "recommendation": "Permitir que el operador marque un descuadre aceptado como 'bajo revisión' o 'en disputa' para que no se acumule con períodos siguientes mientras se investiga. Establecer un plazo formal para resolución de disputas (p. ej., 30 días).",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "b1-001",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo describe específicamente que la pantalla muestra solo el importe total sin desglose de transacciones individuales ni margen de error. Esto encaja perfectamente con PO-02-cifra-opaca-no-auditable, que describe exactamente ese problema: el descuadre como cifra única sin desglose y sin acceso a registros detallados. PO-03 y PO-04 también son relevantes pero PO-02 es el candidato más preciso para la ausencia de desglose transaccional.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-002",
+            "label": "tp_match",
+            "matched_golden_id": "PO-04-sin-incertidumbre-falsa-autoridad",
+            "judge_rationale": "El hallazgo se centra en la ausencia de indicador de confianza o margen de error, y en que el sistema puede registrar duplicados o entradas incompletas y aun así mostrar un saldo cerrado. Esto encaja directamente con PO-04-sin-incertidumbre-falsa-autoridad, que describe exactamente la falsa precisión: la cifra se muestra como dato contable cierto sin margen de error ni señal de que el cálculo pueda fallar.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-003",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe que el operador no tiene opción de marcar la cifra como disputada ni de cerrar sin asumirla, y que 'o la aceptaba, o no podía cerrar'. Esto es exactamente lo que describe PO-06-sin-via-de-override-ni-contestacion. Es el candidato más preciso y directo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-004",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo describe que los logs y registros transaccionales residen en servidores centrales del proveedor y el operador no puede acceder a ellos para auditar ni reconstruir el cálculo. Esto encaja directamente con PO-02-cifra-opaca-no-auditable, que incluye explícitamente que los registros detallados están en los servidores del proveedor sin acceso para el operador, impidiendo auditar o reconstruir el cálculo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-005",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe que el soporte telefónico parte de la premisa de que el error es del operador, no comparte evidencia (logs/detalle transaccional) y en algunos casos los pasos indicados empeoran la situación (de 2.000 a 4.000 libras). Esto encaja perfectamente con PO-05-helpdesk-inutil-empeora, que describe exactamente ese patrón: el canal de ayuda no resuelve, parte de que el fallo es del operador, no entrega el detalle y en algunas llamadas aumenta el importe reclamado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-006",
+            "label": "tp_match",
+            "matched_golden_id": "PO-07-discrepancia-no-capturada",
+            "judge_rationale": "El hallazgo describe la ausencia de un canal formal para que el operador deje constancia de su desacuerdo con la cifra. Hay dos candidatos muy cercanos: PO-06 (no puede marcar como disputada ni cerrar sin asumir) y PO-07 (no hay mecanismo para dejar constancia formal del desacuerdo). El hallazgo enfatiza específicamente el 'registro formal de desacuerdo' y que la discrepancia no queda registrada, lo que apunta más a PO-07-discrepancia-no-capturada. PO-06 ya fue asignado a b1-003. PO-07 es el candidato más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-007",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo se centra específicamente en que las instrucciones del helpdesk no solo no resuelven el problema sino que lo empeoran (de 2.000 a 4.000 libras), sin transparencia sobre las consecuencias de los pasos indicados. Esto encaja perfectamente con PO-05-helpdesk-inutil-empeora, que describe exactamente ese fallo: el canal de ayuda parte de que el error es del operador, no entrega el detalle y en algunas llamadas los pasos indicados aumentan el importe reclamado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-008",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo trata sobre la incapacidad del operador para verificar sus propias cuentas contra los datos del sistema, porque no tiene acceso al desglose transaccional ni puede reconstruir el cálculo. La evidencia ('no tenía manera de ver de dónde salía la cifra', 'nadie pudiera enseñarme el cálculo') apunta directamente a PO-02-cifra-opaca-no-auditable: el descuadre se presenta como cifra única sin desglose y los registros están en servidores del proveedor sin acceso para el operador.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-009",
+            "label": "tp_match",
+            "matched_golden_id": "PO-08-sin-abstencion-bajo-fallo",
+            "judge_rationale": "El hallazgo habla de que el sistema fuerza el cierre incluso con descuadre no explicado, sin posibilidad de abstenerse o marcar como dudoso. La evidencia ('o la aceptaba, o no podía cerrar') encaja con dos candidatos, pero el ángulo principal es que el sistema no se abstiene ni degrada con elegancia ante incertidumbre alta (operaciones duplicadas o incompletas), forzando un saldo confiado. PO-08-sin-abstencion-bajo-fallo describe exactamente esto. PO-06 se centra más en la falta de vía de contestación/override. El locus del hallazgo ('fuerza el cierre incluso cuando hay un descuadre no explicado') apunta más a PO-08.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-010",
+            "label": "tp_match",
+            "matched_golden_id": "PO-09-sin-formacion-modelo-mental",
+            "judge_rationale": "El hallazgo se centra en la falta de calibración de expectativas durante el onboarding sobre la tasa de error del sistema. Esto encaja con PO-09-sin-formacion-modelo-mental, que describe la ausencia de formación que ayude al operador a entender qué hace el sistema, cuándo puede equivocarse o qué hacer ante un descuadre. El ángulo de 'onboarding / primeras interacciones' y 'no informado de que el sistema puede tener errores propios' es el núcleo de PO-09.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-011",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe la asimetría entre responsabilidad patrimonial del operador y su falta de control/visibilidad. La evidencia apunta a que el operador está obligado a asumir la cifra sin poder contestarla ni auditarla. El candidato más cercano es PO-06-sin-via-de-override-ni-contestacion (obligado a aceptar para poder cerrar, sin vía de contestación), pero el hallazgo añade la dimensión contractual/patrimonial. Sin embargo, entre los candidatos disponibles, PO-06 es el que mejor captura la imposibilidad de contestar la cifra que se le imputa como deuda. No hay un candidato específico sobre asimetría contractual, pero PO-06 es el más próximo al problema descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-012",
+            "label": "tp_match",
+            "matched_golden_id": "PO-04-sin-incertidumbre-falsa-autoridad",
+            "judge_rationale": "El hallazgo trata sobre la falta de comunicación al operador de que el sistema ha tenido fallos específicos (duplicados, operaciones incompletas). Esto encaja con PO-04-sin-incertidumbre-falsa-autoridad: la cifra se muestra como dato contable cierto sin margen de error ni señal de que el propio cálculo pueda fallar (duplica o no completa operaciones y aun así cierra). La evidencia del dossier ('puede registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado') es exactamente la que sustenta PO-04.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "b1-013",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo se titula 'Persistencia y falta de descarte del descuadre abierto obliga a seguir pagando deuda sin cierre real' y su locus apunta a que el operador no puede descartar ni cerrar verdaderamente la incidencia. La evidencia citada menciona que el operador debe aceptar la diferencia para poder cerrar y seguir operando, y que tras llamar al helpdesk el importe pasó de 2.000 a 4.000 libras. El núcleo del hallazgo no es la opacidad del cálculo (PO-02), ni la falta de explicación (PO-03), ni la falsa autoridad (PO-04), ni la deferencia a la máquina (PO-01), ni la falta de formación (PO-09), ni la abstención bajo fallo (PO-08). Tampoco encaja perfectamente con PO-05 (helpdesk que empeora), aunque la evidencia lo menciona. El problema central descrito es que el operador no tiene ninguna vía para anular, marcar como disputada o cerrar sin asumir la cifra —'o la aceptaba, o no podía cerrar'—, lo que corresponde exactamente a PO-06-sin-via-de-override-ni-contestacion. La mención del helpdesk que empeora es evidencia secundaria que ilustra la imposibilidad de contestar, no el foco principal del hallazgo.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "b1",
+          "n_findings": 13,
+          "n_golden": 9,
+          "recall": 0.7777777777777778,
+          "precision": 1.0,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 0,
+          "fbeta": 0.813953488372093,
+          "meets_genericity_gate": true,
+          "primary_score": 0.813953488372093
+        }
+      }
+    ],
+    "p3": [
+      {
+        "findings": [
+          {
+            "id": "p3-001",
+            "title": "Ausencia de visualización de incertidumbre y confianza en el cálculo del descuadre",
+            "guideline_ids": [
+              "HAX-G2",
+              "PAIR-ET-2"
+            ],
+            "locus": "Pantalla de cierre de balance: presentación del importe que falta",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. El operador de sucursal reporta: 'La máquina afirmaba que faltaba dinero [...] al final acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema presenta una cifra de descuadre con autoridad aparente absoluta, sin comunicar su margen de error, probabilidad de fallo o confianza subyacente. Dado que el terminal puede registrar entradas duplicadas o incompletas y aun así arrojar un saldo aparentemente cerrado, la incertidumbre es real pero no se comunica. Esto induce al operador a confiar por defecto en una máquina que tiene datos centralizados, erosionando su juicio propio incluso cuando sus propias cuentas divergen. El operador-2 explicita este sesgo: 'Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos'.",
+            "recommendation": "Acompañar la cifra de descuadre con un indicador explícito de confianza o rango de incertidumbre (ej: 'Diferencia detectada: £2.000 ± £150'; 'Confianza: 85%'). Si el sistema es consciente de que ha detectado registros duplicados o incompletos, comunicarlo junto con la diferencia.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-002",
+            "title": "Imposibilidad de acceder a explicación sobre el origen de la diferencia",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Cierre de balance y línea de soporte del proveedor",
+            "evidence": "La pantalla no desglosa qué transacciones individuales originan la diferencia. Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente. Operador-2 afirma: 'Pedía explicaciones y nadie me daba el porqué; me limitaban a decirme que el sistema tenía razón y que el dinero faltaba [...] Nunca me ofrecieron una vía para contestar la cifra'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador asume contractualmente la responsabilidad económica por descuadres, pero no tiene acceso a la información que sustenta la acusación. No puede reconstruir el cálculo, auditar transacciones ni entender por qué el sistema afirma una diferencia. El soporte indica: 'No solemos entregar al operador el detalle transaccional ni los logs que tenemos en el centro de datos'. Esta asimetría de información viola el derecho del operador a comprender decisiones que le afectan financieramente.",
+            "recommendation": "Implementar un desglose transaccional accesible en la pantalla de cierre (filtrable por fecha, tipo de operación, monto) que permita al operador reconstruir el cálculo. Como mínimo, proporcionar un reporte detallado descargable con todas las transacciones del periodo, junto con la explicación de qué registros contribuyen a la diferencia detectada.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-003",
+            "title": "Diseño que fuerza aceptación automática sin opción de disputar",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G2"
+            ],
+            "locus": "Flujo de cierre: botón de aceptación obligatoria sin alternativa de disputa",
+            "evidence": "Para completar el cierre, el operador debe pulsar que acepta esa diferencia; el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. Operador-1 reporta: 'tuve que asumirla para poder cerrar y seguir abriendo la sucursal'. El helpdesk confirma: 'el procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia que muestra la pantalla para no dejar la cuenta abierta'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema elimina la capacidad del operador de mantener supervisión crítica. No hay ruta de contestación ni evidencia grabada de desacuerdo. El operador se ve obligado a aceptar para seguir operando, creando presión automática que incentiva confianza sin revisión (automation bias). El contexto comercial (no poder cerrar = no poder seguir operando) amplifica el sesgo.",
+            "recommendation": "Implementar una opción explícita 'Aceptar diferencia' y 'Marcar como disputada / Consultar' que permita cerrar el periodo sin asumir económicamente la cifra de forma inmediata. Toda disputa debe quedar registrada con marca de tiempo y descripción, y debe generar automáticamente un ticket de auditoría para el equipo de compliance del proveedor.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-004",
+            "title": "Presunción de culpabilidad del operador sin base probatoria accesible",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Línea de soporte y procedimiento de resolución de descuadres",
+            "evidence": "El helpdesk indica: 'Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal, así que orientamos en esa dirección.' El operador-2 reporta: 'Durante doce semanas seguidas me aparecieron diferencias que no había forma de entender.' Contractualmente, 'el operador responde con su propio patrimonio de los descuadres que el sistema le imputa'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema actúa bajo presunción de que el fallo está en el operador, sin ofrecer evidencia que sustente esa conclusión. El operador-2 refiere que 'nadie pudiera enseñarme el cálculo', lo que impide refutación. La orientación del soporte ('el error esté en el manejo de la sucursal') es presuntiva sin análisis de logs. Además, el helpdesk admite que 'En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba', evidenciando que el proceso de investigación carece de rigor.",
+            "recommendation": "Implementar un protocolo de auditoría transparente: cuando aparezca una diferencia, el sistema debe registrar automáticamente qué transacciones específicas (duplicadas, incompletas, etc.) la originan. El soporte debe ser obligado a presentar ese desglose antes de atribuir culpa. Implementar un mecanismo de revisión independiente (segunda opinión técnica) para descuadres por encima de un umbral.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-005",
+            "title": "Sin mecanismo formal de registro de desacuerdo del operador",
+            "guideline_ids": [
+              "PAIR-ET-3"
+            ],
+            "locus": "Sistema de cierre y línea de soporte",
+            "evidence": "El sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. El helpdesk afirma: 'No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra'. Operador-2 destaca: 'Nunca me ofrecieron una vía para contestar la cifra'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin registro formal de disputa, el operador no tiene evidencia de que ha cuestionado la cifra, lo que debilita futuras reclamaciones. La ausencia de un canal crea asimetría de poder: el sistema declara, el operador asume, sin posibilidad de dejar constancia de desacuerdo. Esto es especialmente grave dado que el operador es financieramente responsable.",
+            "recommendation": "Implementar un botón 'Registrar disputa' accesible desde la pantalla de cierre que permita al operador documentar su desacuerdo con firma electrónica y marca de tiempo. Toda disputa debe generar automáticamente una solicitud de auditoría y un ticket de escalada al equipo de compliance.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-006",
+            "title": "Falta de transparencia sobre defectos conocidos del sistema (registros duplicados/incompletos)",
+            "guideline_ids": [
+              "HAX-G2",
+              "HAX-G4"
+            ],
+            "locus": "Pantalla de cierre y comunicación al operador",
+            "evidence": "El dossier documenta que 'El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado.' Sin embargo, no hay evidencia de que esta limitación se comunique al operador en el contexto de un descuadre.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema tiene defectos conocidos (registros duplicados/incompletos) que pueden generar descuadres imputables al software, no al operador. El operador no es informado de estas limitaciones, por lo que cuando aparece una diferencia, asume automáticamente que es su error. Esto es un incumplimiento de transparencia: el sistema conoce sus propios fallos pero no los comunica contextualmente cuando los resultados los afectan.",
+            "recommendation": "En la pantalla de cierre de balance, si se detecta un descuadre, incluir un aviso contextual: 'El sistema ha detectado que algunas transacciones pueden haber sido registradas múltiples veces o no completadas. Consulte el desglose detallado de transacciones antes de aceptar esta diferencia.' Proporcionar acceso directo al operador a un log de operaciones potencialmente duplicadas o incompletas en el periodo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-007",
+            "title": "Degradación de la calidad de resolución durante el soporte técnico",
+            "guideline_ids": [
+              "HAX-G11",
+              "PAIR-ET-1"
+            ],
+            "locus": "Procedimiento de resolución vía helpdesk del proveedor",
+            "evidence": "Operador-1 reporta: 'Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000'. El helpdesk admite: 'En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El procedimiento de soporte no solo no resuelve, sino que empeora la situación. El operador actúa siguiendo instrucciones del proveedor y la diferencia se duplica. Esto erosiona completamente la confianza y demuestra que ni el operador ni el soporte comprenden realmente el origen de la discrepancia. La falta de explicación clara sobre por qué los pasos escalaron el problema (no hay log compartido, no hay análisis causal) viola PAIR-ET-1.",
+            "recommendation": "Implementar un protocolo de soporte que requiera que cada paso recomendado sea explicado con el impacto esperado. Antes de ejecutar pasos, obtener un desglose detallado de la diferencia actual. Después de cada acción, mostrar al operador cómo cambió la cifra y por qué. Si la diferencia aumenta, el procedimiento debe pausarse automáticamente y requerir revisión técnica antes de continuar.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-008",
+            "title": "Erosión de autonomía y confianza del operador sin mecanismo de recuperación",
+            "guideline_ids": [
+              "PAIR-ET-3",
+              "HAX-G2"
+            ],
+            "locus": "Experiencia general de interacción con el sistema y el soporte",
+            "evidence": "Operador-2 afirma: 'Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra.' Operador-1 reporta: 'acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas, aunque sabía que no era la correcta'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema, al no permitir disputa y no transparentararse, induce al operador a desconfiar de su propia auditoría (sus libros) en favor de la máquina, incluso cuando sus propias contas están cuadradas. Esto es automation bias severo agravado por la presunción de culpabilidad del operador. A largo plazo, erosiona la capacidad de supervisión crítica del operador y lo coloca en vulnerabilidad psicológica.",
+            "recommendation": "Implementar un mecanismo de validación paralela: si un operador cuestiona repetidamente descuadres y proporciona sus propios registros cuadrados, el sistema debe generar automáticamente una auditoría técnica independiente del lado del proveedor, con reporte compartido al operador en plazo máximo de 5 días hábiles. Esto recuperaría autonomía y permitiría al operador tomar decisiones informadas.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-009",
+            "title": "Aceptación obligatoria de descuadres sin opción de disputa formal",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Flujo de cierre de balance: cuando aparece descuadre, la pantalla solo permite aceptar la diferencia para completar el cierre.",
+            "evidence": "El sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. El procedimiento estándar del soporte es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia que muestra la pantalla para no dejar la cuenta abierta. No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador enfrenta una fricción máxima para corregir o disputar: la única opción presentada es 'aceptar', lo que fuerza la aceptación por defecto de un cálculo que puede ser erróneo. Esto viola el principio de permitir override o correccion eficiente. Contractualmente, el operador responde con su patrimonio de las cifras que el sistema le imputa, pero no tiene mecanismo para dejar constancia formal de desacuerdo antes de ser obligado a cerrar. Esto lo convierte en un acto de aceptación coercitivo, no informado.",
+            "recommendation": "Implementar un flujo de cierre que permita: (a) marcar explícitamente una diferencia como 'disputada' sin cerrar automáticamente; (b) generar un registro formal (con timestamp) del desacuerdo del operador que quede en el historial local y se remita al proveedor; (c) permitir un cierre temporal o 'tentativo' que no asuma la deuda hasta que se resuelva la investigación.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-010",
+            "title": "Falta de desglose transaccional en la interfaz de descuadre",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Pantalla de cierre: presentación de la diferencia de caja.",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Sin visibilidad del desglose de operaciones que generó la diferencia, el operador no puede validar el cálculo ni identificar el origen del error. Esto impide una corrección eficiente: no puede refutar la cifra con base en datos concretos. El operador relataba: 'no sabía qué hacer... como el detalle no lo tengo yo, al final acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas'. Esto viola HAX-G9 al imposibilitar el análisis independiente previo a la aceptación forzada.",
+            "recommendation": "Mostrar en la pantalla de cierre: (a) listado de transacciones del período con monto, tipo y timestamp; (b) cálculo paso a paso que llegue a la cifra de saldo teórico; (c) opción de expandir cada transacción para ver detalles (origen, acción realizada, cuenta afectada). Permitir que el operador exporte este desglose localmente para auditoria independiente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-011",
+            "title": "Incapacidad de auditoria local: registros centralizados sin acceso del operador",
+            "guideline_ids": [
+              "HAX-G9",
+              "PAIR-FC-2"
+            ],
+            "locus": "Arquitectura de datos: los registros transaccionales y logs se almacenan solo en servidores centrales del proveedor.",
+            "evidence": "Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente. El operador refiere: 'no tenía manera de ver de dónde salía la cifra ni de demostrar que estaba mal'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es responsable contractual de los descuadres pero carece de acceso a los datos necesarios para validarlos o refutarlos. Esto es asimétrico: el sistema tiene la 'última palabra' porque es el único que puede mostrar pruebas. Ante un descuadre, el operador no puede ejercer control ni override informado porque no accede a los registros. El operador 'llegó a dudar de sí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra'.",
+            "recommendation": "Proporcionar al operador: (a) una copia local (o acceso seguro) del registro transaccional completo del período, actualizada en tiempo real en el terminal; (b) un archivo de log descargable al cierre que documente cada operación registrada; (c) una opción de 'exportar para auditoria externa' que genere un fichero verificable que terceros (contador, auditor) puedan revisar independientemente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-012",
+            "title": "Procedimiento de soporte que incrementa pasivos del operador en lugar de resolverlos",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Línea de soporte / helpdesk del proveedor: pasos indicados para resolver descuadres.",
+            "evidence": "En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador. El operador refiere: 'Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador busca ayuda esperando que se resuelva la discrepancia, pero los pasos recomendados por soporte actúan como un agente que empeora la situación. No hay mecanismo de validación previo (por ej., revisión del especialista antes de indicar acciones correctivas) ni de reversión si el procedimiento aumenta el pasivo. Esto viola HAX-G16 porque las consecuencias de seguir las indicaciones no son claras ni comunicadas: el operador ejecuta acciones sin saber que pueden aumentar su deuda. Además, no hay canal para reportar que el consejo empeoró la situación.",
+            "recommendation": "Rediseñar el procedimiento de soporte: (a) antes de indicar pasos correctivos, que el especialista revise el detalle transaccional y valide la causa probable; (b) comunicar explícitamente al operador: 'los siguientes pasos pueden modificar el saldo mostrado; se registrarán y podrán revertirse si resulta necesario'; (c) implementar un 'modo de ensayo' en el terminal donde el operador pueda simular pasos de corrección sin que afecten al saldo final hasta confirmar; (d) crear un registro de todas las acciones indicadas por soporte y sus resultados, accesible al operador para verificar si mejoraron o empeoraron el descuadre.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-013",
+            "title": "Falta de información sobre márgenes de error o confiabilidad del cálculo",
+            "guideline_ids": [
+              "HAX-G9"
+            ],
+            "locus": "Pantalla de cierre de balance: presentación de la diferencia.",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. Además, el terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El sistema es capaz de errores (duplicados no detectados, operaciones incompletas) pero la interfaz no advierte de estos riesgos ni comunica un nivel de confianza en la cifra presentada. El operador enfrenta un saldo que aparenta estar 'cerrado' (sin indicadores de incertidumbre) pero que puede contener errores sistemáticos no visibles. Sin esta información, la aceptación de la diferencia es ciega respecto a la confiabilidad del dato.",
+            "recommendation": "Incluir en la pantalla de cierre: (a) un indicador de confiabilidad ('Alta', 'Media', 'Baja') basado en si se detectaron anomalías en el período (duplicados, operaciones incompletas, reintentos fallidos); (b) una nota si el período incluye correcciones manuales o reintegraciones; (c) un margen de error estimado (ej., '±50 libras') derivado del historial de discrepancias en ese terminal o similares; (d) adviso explícito si la diferencia es atípica respecto a períodos anteriores.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-014",
+            "title": "Suposición sistemática de culpabilidad del operador sin evidencia presentada",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Procedimiento de soporte: criterio de investigación y comunicación.",
+            "evidence": "Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal, así que orientamos en esa dirección. El operador refiere: 'Pedía explicaciones y nadie me daba el porqué; me limitaban a decirme que el sistema tenía razón y que el dinero faltaba'.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador recibe como respuesta una asunción de culpa ('el error está en tu manejo') sin que se haya investigado ni presentado evidencia. Esto viola HAX-G16 porque no se comunican las consecuencias ni la base del juicio. El operador describe un efecto psicológico perverso: 'Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra'. Sin una investigación transparente que muestre qué transacciones causaron la diferencia, la acusación implícita es infundada y socava la confianza.",
+            "recommendation": "Cambiar el procedimiento a: (a) cuando se reporte un descuadre, el soporte investiga PRIMERO los registros centrales (transacciones, logs, patrones de error históricos del terminal) ANTES de contactar al operador; (b) en la primera comunicación, presenta hallazgos concretos: 'encontramos X transacciones incompletas en la fecha Y', 'el terminal reportó un error de sincronización el Z', etc.; (c) solo después de esta presentación, solicitar la versión del operador; (d) documentar ambas versiones y cualquier discrepancia en el archivo del caso para futuras auditorias.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-015",
+            "title": "Ausencia de feedback granular sobre qué mejoras podrían prevenir descuadres futuros",
+            "guideline_ids": [
+              "HAX-G15",
+              "PAIR-FC-1"
+            ],
+            "locus": "Interacción post-cierre: después de aceptar un descuadre, no hay análisis retrospectivo ofrecido al operador.",
+            "evidence": "La diferencia aceptada queda registrada como deuda del operador. No hay mención en el dossier de un análisis post-incidente ni de feedback sobre causas o medidas preventivas. El operador refiere: 'Durante doce semanas seguidas me aparecieron diferencias que no había forma de entender. Pedía explicaciones y nadie me daba el porqué'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Aunque cada descuadre se resuelve (por aceptación forzada), no hay retroalimentación que ayude al operador a identificar si sus acciones contribuyeron al error o a mejorarse. Si el error es sistemático del terminal (duplicados, operaciones incompletas), el operador nunca lo sabrá y seguirá siendo responsabilizado. Si hay un patrón en el manejo del operador, nunca se comunica constructivamente. Esto viola HAX-G15 al no crear un canal de aprendizaje durante el uso habitual.",
+            "recommendation": "Implementar un reporte post-cierre: (a) después de resolver un descuadre, enviar al operador un resumen: 'investigamos la diferencia de X libras; la causa fue [operación incompleta / duplicado del sistema / acción incorrecta en Y]'; (b) incluir una recomendación específica: 'para evitar esto, asegúrate de confirmar cada transacción antes de pasar a la siguiente' o 'el terminal tiene un bug conocido; actualización en proceso'; (c) permitir que el operador responda si está de acuerdo con la causa identificada o si tiene otra explicación; (d) agreguen los datos a un dashboard de tendencias por sucursal para detectar patrones (ej., 'descuadres crecientes en horario X', 'duplicados en tipo de operación Y').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-016",
+            "title": "Falta de transparencia sobre cómo el feedback (o disputa) del operador influirá en el sistema futuro",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Ciclo de vida de la disputa de un descuadre: el operador no sabe qué pasará con su reclamación ni cómo influirá.",
+            "evidence": "No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra. El operador relata que, incluso cuando intentaba objetar, 'no tenía manera de ver de dónde salía la cifra ni de demostrar que estaba mal, y aun así tuve que asumirla para poder cerrar y seguir abriendo la sucursal'.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El operador no tiene un mecanismo para formular una disputa que quede registrada. Aunque lo hiciera (ej., por correo informal), no sabe: ¿se investigará? ¿cuándo? ¿quién decide? ¿puedo revertir la aceptación si se prueba que me equivoqué? ¿influirá en futuras decisiones del sistema?. Esta opacidad viola HAX-G16 porque las consecuencias de 'protestar' no se comunican. El operador acaba aceptando por defecto porque no sabe si protestar sirve de algo.",
+            "recommendation": "Crear un flujo formal de disputa: (a) desde la pantalla de cierre, botón 'disputar esta diferencia'; (b) abre un formulario donde el operador documenta: por qué cree que es incorrecta, qué datos propios apoyan su posición, si solicita investigación; (c) genera un ticket automático visible en un panel ('mis disputas activas') que muestre: estado (abierta, en investigación, resuelta), fecha límite para respuesta del proveedor, y resultado cuando esté disponible; (d) comunicar explícitamente: 'si los datos respaldan tu disputa, la diferencia será invertida y se reembolsará; además, usaremos este caso para mejorar el sistema'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-017",
+            "title": "Sin visibilidad de cambios o mejoras implementadas tras problemas reportados",
+            "guideline_ids": [
+              "HAX-G16",
+              "PAIR-FC-1"
+            ],
+            "locus": "Comunicación sobre actualizaciones y correcciones de errores del sistema.",
+            "evidence": "El dossier menciona que el terminal puede registrar entradas duplicadas o dejarlas incompletas, pero no indica que se comunique al operador cuándo se ha corregido ese fallo o cómo afectará a sus cálculos futuros. El operador refiere problemas durante 'doce semanas seguidas' sin explicación de por qué ocurrían ni indicación de resolución.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si el sistema descubre que un bug (ej., duplicados) causó descuadres en el pasado, el operador merece saber: (a) que fue identificado, (b) cuándo se corrigió, (c) si tenía derecho a una corrección retroactiva. Sin esta comunicación, las 'deudas' aceptadas pueden permanecer basadas en errores sistémicos ya conocidos por el proveedor pero no comunicados. Viola HAX-G16 porque no se transmiten las consecuencias de las acciones correctivas del proveedor sobre el estado del operador.",
+            "recommendation": "Implementar un registro de cambios: (a) cada actualización o corrección de bugs se documenta con fecha, descripción técnica en términos simples, y lista de sucursales potencialmente afectadas; (b) notificar explícitamente a los operadores afectados: 'encontramos un error que pudo haber causado descuadres en tu sucursal entre X e Y; hemos corregido el bug; revisa si alguno de tus descuadres de ese período puede ser revertido'; (c) abrir un periodo de 'apelación retroactiva' donde el operador puede revisar descuadres aceptados e impugnar si la causa identificada ahora se ha corregido.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-018",
+            "title": "Ausencia de opción de rechazo o disputa del resultado del cálculo",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Pantalla de cierre del balance: cuando el sistema presenta la diferencia y requiere aceptación",
+            "evidence": "El sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan. No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador se enfrenta a un descuadre que no puede descartar, impugnar ni ignorar de forma eficiente. La única opción es aceptarlo o no poder cerrar la caja, lo que genera una trampa: o asume una cifra que cree errónea, o deja la operación incompleta. Esto infringe directamente HAX-G8 (permitir descarte eficiente) porque no hay vía para rechazar una sugerencia/imposición del sistema.",
+            "recommendation": "Implementar un botón o flujo explícito que permita al operador marcar la diferencia como 'disputada' o 'bajo investigación', con la opción de cerrar el balance temporalmente sin asumir el pasivo. Registrar esa disputa formalmente en los logs para auditoría posterior. El sistema no debe bloquear la operación diaria por desacuerdo con una cifra; la resolución puede ser asincrónica.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-019",
+            "title": "Falta de desglose transaccional y explicación del origen de la diferencia",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Pantalla de presentación del descuadre: el sistema muestra solo una cifra agregada sin contexto",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. El operador no ve el detalle de las transacciones que han producido la diferencia ni puede recalcular el origen por su cuenta.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "En un contexto profesional y financiero (Reino Unido, red comercial minorista), la norma social y profesional esperada es que una acusación de deuda venga acompañada de un desglose auditable. El operador está siendo responsabilizado personalmente de una cifra de la que no obtiene justificación verificable. Al nivel de gravedad (responsabilidad patrimonial del operador sobre los descuadres), no mostrar el origen es un incumplimiento de la norma de trazabilidad esperada en contabilidad. HAX-G5 exige respetar normas sociales y culturales; en este contexto, eso significa justificación transparente.",
+            "recommendation": "En la misma pantalla de cierre, proporcionar un árbol expandible (o acceso rápido) que muestre las transacciones del período agrupadas por tipo (giros, sellos, pagos, ingresos, reintegros) y el saldo parcial tras cada grupo. Permitir que el operador navegue y coteje contra sus propios registros. Si hay transacciones duplicadas o incompletas, señalarlas explícitamente con su hora y descripción.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-020",
+            "title": "Falta de acceso a registros y logs transaccionales por parte del operador",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Acceso a datos: el operador no tiene acceso a los registros de transacciones ni a logs del sistema; están centralizados en el proveedor",
+            "evidence": "Los registros completos los guarda el proveedor del software de forma centralizada. Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es responsable personalmente (contractualmente) de los descuadres y está obligado a asumir cifras de deuda sin poder verificar su base de cálculo. Esto crea una asimetría de poder informativo inaceptable en una relación de trabajo y contabilidad. Aunque sea norma legal que los registros estén centralizados, la norma de operación justa exige que el responsable financiero tenga acceso a la justificación de los cargos que se le imputan. Sin esto, la relación de confianza se deteriora y es imposible verificar fallos del sistema.",
+            "recommendation": "Proporcionar al operador un portal o función de 'auditoría local' con acceso de lectura a sus propios registros transaccionales y logs de cierre. No es necesario dar acceso al código fuente o a datos de otras sucursales, pero sí a la información de su período contable. Esto permite que el operador valide el cálculo y, si detecta un fallo, tenga evidencia para disputarlo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-021",
+            "title": "Instrucciones de soporte que pueden aumentar la magnitud del error reportado",
+            "guideline_ids": [
+              "HAX-G8"
+            ],
+            "locus": "Proceso de soporte telefónico: cuando el operador llama por un descuadre y sigue los pasos indicados por el helpdesk",
+            "evidence": "En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador. Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador intenta descartar/resolver un problema siguiendo el canal oficial de soporte, y en lugar de mejorar, empeora. Esto destruye la confianza en el sistema y en el proceso de remediación. El operador no tiene forma de descartar la recomendación del soporte (no puede ignorarla, porque necesita resolver el descuadre para operar) y la secuencia de pasos indicada lo pone en peor situación. Infringe HAX-G8 porque el operador no puede escapar del ciclo de 'soluciones' que empeoran su situación.",
+            "recommendation": "Implementar validación y prueba de pasos de soporte antes de indicarlos. El helpdesk debe confirmar con el operador el estado inicial (descuadre X) antes de indicar pasos, y después de cada paso, verificar que el resultado es consistente con lo esperado. Si un paso causa un empeoramiento, detener inmediatamente y escalar a revisión manual. Documentar el procedimiento de soporte estándar y auditar las llamadas donde el resultado empeoró.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-022",
+            "title": "Asimetría de presunción de culpa: el sistema presume error del operador, no del cálculo",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Línea de soporte / diálogo con el operador: actitud y presunción de responsabilidad",
+            "evidence": "Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal, así que orientamos en esa dirección. Me limitaban a decirme que el sistema tenía razón y que el dinero faltaba. Llegué a dudar de mí mismo antes que del programa.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "La norma social y profesional esperada en un contexto de contabilidad y responsabilidad compartida es presunción de inocencia: ante una discrepancia, se investiga sin prejuicio. Aquí hay una presunción sistemática de que el operador es quien está equivocado, lo que socava su confianza y su capacidad de respuesta. El operador se ve obligado a dudar de sus propios registros (que mantiene cuadrados desde hace años) por una máquina. Esto viola HAX-G5 al no respetar la norma profesional de neutralidad ante un conflicto de cálculo.",
+            "recommendation": "Entrenar al equipo de soporte para adoptar un enfoque de investigación neutral: 'Ayudemos a identificar dónde está la diferencia' en lugar de 'El sistema tiene razón, usted está equivocado'. Cuando un operador reporta una discrepancia, abrir un caso formal donde se solicite acceso a sus registros, se revisen los logs del sistema, y se investigue si hay transacciones duplicadas, registros incompletos o fallos de software. Documentar la conclusión y comunicarla al operador con evidencia.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-023",
+            "title": "Invocación del soporte bloqueada por falta de canal formal de disputa",
+            "guideline_ids": [
+              "HAX-G7"
+            ],
+            "locus": "Canales de remediación: llamada a helpdesk como única vía disponible, pero sin registro formal de disputa",
+            "evidence": "No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra. Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador necesita invocar soporte o disputa cuando cree que la cifra es errónea, pero no existe una invocación 'eficiente' en el sentido de HAX-G7. Una llamada telefónica es cara, informal y no queda constancia auditada. Más aún: incluso si llama, el sistema luego le obliga a aceptar la cifra de todas formas para cerrar. Esto impide que el operador invoque el servicio de revisión de forma estructurada y oficial.",
+            "recommendation": "Crear un botón o formulario en la interfaz de cierre que permita al operador 'Disputar esta cifra' sin obligarlo a aceptarla. El formulario debe permitir que describa la discrepancia percibida, adjunte fotos o registros locales, y envíe la disputa al proveedor. El sistema debe permitir cerrar temporalmente el balance 'en disputa' y generar un ticket de caso para investigación posterior dentro de un plazo definido (ej. 5 días laborales).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-024",
+            "title": "Presencia de fallos conocidos en registros transaccionales sin comunicación clara al operador",
+            "guideline_ids": [
+              "HAX-G5"
+            ],
+            "locus": "Comportamiento del sistema ante fallos: el terminal puede registrar transacciones duplicadas o incompletas, pero los operadores no son informados de que esta es una causa posible del descuadre",
+            "evidence": "El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "Si el sistema tiene un fallo conocido (duplicación o incompletitud de registros), la norma social y de confianza exige que esto sea comunicado claramente al operador cuando se le imputa una diferencia. No hacerlo equivale a ocultar la causa. El operador es responsabilizado por un error que el sistema sabe que puede ocurrir, pero no lo dice. Esto viola HAX-G5 al no ser transparente sobre los límites y fallos conocidos del sistema.",
+            "recommendation": "Cuando el sistema detecte un descuadre, ejecutar un chequeo interno de fallos conocidos (buscar transacciones duplicadas, registros incompletos, timestamps inconsistentes). Si se encuentran evidencias de estos fallos, comunicarlas explícitamente al operador: 'Se detectó una transacción duplicada en operación X (hora Y). Esto podría explicar la diferencia de Z libras.' Si no se encuentran, la diferencia debe ser investigada por el proveedor antes de ser imputada al operador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-025",
+            "title": "Flujo de cierre bloqueado durante disputa: fuerza aceptación para poder operar",
+            "guideline_ids": [
+              "HAX-G3"
+            ],
+            "locus": "Temporización del cierre: el sistema obliga a aceptar o rechazar la diferencia en el momento de cierre, sin opción a diferir",
+            "evidence": "Para completar el cierre, el operador debe pulsar que acepta esa diferencia; el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. O la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "En el contexto de operación diaria de una sucursal, el cierre es crítico y urgente: el operador no puede dejar la caja abierta indefinidamente. Obligar a una decisión contable definitiva (aceptar deuda) en ese momento, bajo presión temporal, viola HAX-G3 (temporizar según contexto). La decisión sobre un descuadre debería poder diferirse o marcarse como pendiente, permitiendo que el operador cierre operacionalmente sin comprometerse contablemente a una cifra que cree errónea.",
+            "recommendation": "Permitir tres opciones de cierre: (1) Aceptar la diferencia como deuda; (2) Marcar como 'bajo investigación' y cerrar temporalmente; (3) Escoger una cifra intermedia si el operador admite una discrepancia parcial. Solo la opción (1) debe comprometer la deuda al operador. Las opciones (2) y (3) permiten cerrar la sucursal sin paralizar operaciones, mientras se resuelve la disputa en paralelo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-026",
+            "title": "Ausencia de transparencia en el origen del descuadre: falta desglose transaccional",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Pantalla de cierre del balance / resolución de discrepancias",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. (doc-ficha). El operador-2 afirma: Pedía explicaciones y nadie me daba el porqué; me limitaban a decirme que el sistema tenía razón y que el dinero faltaba.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es responsable contractualmente del descuadre y debe asumirlo obligatoriamente para cerrar, pero no tiene acceso a los datos transaccionales que originan la diferencia (residen en servidores centrales del proveedor). Esto impide que el usuario forme un modelo mental correcto de dónde viene el error y crea una asimetría critica: el sistema afirma una cifra sin poder demostrarlo. El usuario no puede verificar ni refutar el cálculo, generando desconfianza e incertidumbre racional.",
+            "recommendation": "Implementar un desglose visible en la pantalla de cierre que muestre las transacciones que contribuyen a la diferencia (últimas N transacciones por tipo, resumen por categoría), o al menos proporcionar un informe descareable que el operador pueda revisar localmente antes de aceptar. Alternativa: si los datos no pueden mostrarse en el terminal, establecer un mecanismo de acceso temporal seguro a logs detallados para auditoría operacional.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-027",
+            "title": "Modelo mental inducido erróneo: atribución de culpa sin evidencia",
+            "guideline_ids": [
+              "PAIR-MM-1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Procedimiento de soporte telefónico y framing del descuadre",
+            "evidence": "Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal, así que orientamos en esa dirección. (prov-soporte). El operador-1 refiere: acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas. Operador-2: Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El soporte comunica implícitamente que los descuadres son culpa del operador (el error 'probablemente' está en el manejo), cuando el dossier documenta que el sistema puede registrar duplicados o incompletudes ('puede registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado'). Esto distorsiona el modelo mental del usuario, quien asume responsabilidad por fallos potenciales del sistema. El operador-2 internaliza dudas sobre sus propias cuentas, que llevaba años cuadradas, frente a un algoritmo que no puede explicar.",
+            "recommendation": "Cambiar el framing del procedimiento de soporte: comunicar explícitamente que los descuadres pueden originarse en fallos del sistema (duplicados, registros incompletos) y no asumir culpabilidad del operador. Calibrar la expectativa en onboarding: 'El sistema puede cometer errores; los descuadres no siempre indican un problema en la sucursal'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-028",
+            "title": "Ausencia de capacidad para disputar o marcar como no aceptado un descuadre",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Flujo de cierre del balance / opciones de resolución",
+            "evidence": "Para completar el cierre, el operador debe pulsar que acepta esa diferencia; el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. (doc-ficha). Operador-2: Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El contrato especifica que el operador responde con su patrimonio por los descuadres. Sin embargo, el sistema le fuerza a elegir entre aceptar una cifra que no entiende o no poder cerrar la sucursal y seguir operando. No existe una tercera vía (reclamar, marcar como en disputa, escalar). Esto convierte la aceptación en coercitiva, no consentida.",
+            "recommendation": "Añadir un estado intermedio que permita al operador 'aceptar temporalmente para cerrar' (bloqueando la sucursal para nuevas operaciones) mientras marca la diferencia como 'bajo revisión / disputada', con un ticket de auditoría automático dirigido al proveedor. Esto preserva la operatividad diaria mientras garantiza que la reclamación queda registrada.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-029",
+            "title": "Falta de indicación de incertidumbre o margen de error en el cálculo",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Presentación de la cifra de descuadre en pantalla",
+            "evidence": "La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. (doc-ficha). Operador-1: la máquina afirmaba que faltaba dinero y, como el detalle no lo tengo yo, al final acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema presenta una cifra única de descuadre como un hecho sin matices, cuando internamente puede contener errores de duplicación o incompletitud. El operador, sin información sobre la fiabilidad del cálculo, sobre-confía en la pantalla incluso cuando sus propios registros difieren. Comunicar incertidumbre calibrante reduciría esta sobre-confianza irracional.",
+            "recommendation": "Acompañar la cifra de descuadre con un indicador de confianza o nota: ej. 'Diferencia detectada: £2.000 | Nota: si hay transacciones duplicadas o no completadas puede haber un error de ±N%. Si no identifica el origen, contacte soporte e indique este ID: [ticket]'.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-030",
+            "title": "Falta de onboarding sobre capacidades y limitaciones del sistema",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-1"
+            ],
+            "locus": "Implementación inicial y uso diario del terminal",
+            "evidence": "No se documenta en el dossier un proceso de onboarding que comunique al operador las capacidades y limitaciones del sistema antes del primer uso. Operador-2: Durante doce semanas seguidas me aparecieron diferencias que no había forma de entender. (Implica que nunca fue informado de cómo el sistema calcula o qué errores puede cometer.)",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador debe entender que el sistema puede cometer ciertos errores (duplicados, registros incompletos) ANTES de confiar en él. Sin este conocimiento inicial, forma un modelo mental incorrecto: asume que la máquina es siempre correcta y que si hay diferencia, es culpa suya. Después de 12 semanas de descuadres, esto genera desconfianza sistémica.",
+            "recommendation": "Crear un onboarding obligatorio (antes del primer cierre) que comunique: 1) qué operaciones el sistema registra y cómo; 2) qué errores conocidos puede cometer (duplicados, registros incompletos); 3) qué hacer si aparece un descuadre; 4) cómo acceder a soporte con evidencia; 5) que los descuadres no siempre indican error del operador.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-031",
+            "title": "Procedimiento de soporte que agrava el descuadre en lugar de resolverlo",
+            "guideline_ids": [
+              "PAIR-UN-2",
+              "PAIR-MM-2"
+            ],
+            "locus": "Línea de soporte telefónica / procedimiento estándar",
+            "evidence": "El procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia. En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador. (prov-soporte). Operador-1 relata: Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El equilibrio entre falsos positivos (descuadres ficticios causados por errores del sistema) y falsos negativos (descuadres no detectados) no está diseñado explícitamente. El procedimiento de soporte asume que los pasos que indica son seguros, pero la evidencia muestra que pueden DUPLICAR la diferencia. Esto indica que el procedimiento no ha sido validado con casos reales y que el soporte no tiene instrumentos de verificación antes de indicar pasos correctivos.",
+            "recommendation": "Auditar el procedimiento de soporte para identificar qué pasos generan amplificación del descuadre. Implementar un mecanismo de 'checkpoint' antes de pasos críticos: ej. 'antes de aceptar, el operador debe confirmar que el descuadre coincide con el mostrado antes de esta llamada'. Registrar y revisar sistemáticamente las llamadas que resultan en aumento de la cifra.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-032",
+            "title": "Asimetría de datos: operador no tiene acceso a registros transaccionales completos",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Arquitectura de datos / acceso a logs del operador",
+            "evidence": "Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente. (doc-ficha). Prov-soporte: No solemos entregar al operador el detalle transaccional ni los logs que tenemos en el centro de datos: esa información se gestiona internamente.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El operador es responsable contractualmente del descuadre, pero no tiene acceso a los datos que probablían su culpabilidad o inocencia. El proveedor retiene la información centralizada y 'la gestiona internamente'. Esto crea una situación de asimetría total: el operador debe asumir cifras que no puede verificar, contradiciendo PAIR-MM-2 (ser transparente sobre capacidades y límites) y HAX-G1 (permitir que el usuario entienda cómo funciona el sistema).",
+            "recommendation": "Establecer un derecho de auditoría operacional: el operador debe poder solicitar (y recibir en plazo máximo de 48-72 horas) un informe detallado de transacciones del periodo en cuestión. Si el proveedor tiene restricciones de privacidad u operacionales, crear un tercero neutral (ej. auditor externo) que pueda acceder a los logs y mediar en disputas. Documentar esto contractualmente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-033",
+            "title": "Falta de un canal formal para disputar o apelar un descuadre",
+            "guideline_ids": [
+              "PAIR-MM-2",
+              "HAX-G1"
+            ],
+            "locus": "Gestión de incidencias / resolución de disputas",
+            "evidence": "No existe en el procedimiento estándar una opción de marcar la cifra como disputada. No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra. (prov-soporte). Operador-2: Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.",
+            "anti_pattern": null,
+            "severity": "high",
+            "rationale": "El contrato estipula que el operador responde con patrimonio por los descuadres. Sin embargo, el sistema interactivo no ofrece una vía formal y documentada para que el operador exprese desacuerdo o levante una apelación. Esto viola el principio de transparencia y honestidad: se le dice que responde económicamente, pero no se le permite participar en un proceso de apelación. La única opción es aceptar o bloquear la operación.",
+            "recommendation": "Implementar un canal formal de apelación accesible desde la pantalla de cierre: 'En desacuerdo con esta cifra? Pulse aquí para abrir una reclamación'. Esto generaría un ticket con timestamp, que registraría la reclamación del operador antes de que sea obligado a aceptar, dando evidencia de que no fue consentida.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-034",
+            "title": "Ambigüedad en la definición de éxito: ¿el objetivo es cerrar la caja o verificar la exactitud?",
+            "guideline_ids": [
+              "PAIR-UN-1",
+              "PAIR-UN-2"
+            ],
+            "locus": "Diseño del flujo de cierre y objetivos del sistema",
+            "evidence": "El procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia que muestra la pantalla para no dejar la cuenta abierta. (prov-soporte). El operador es obligado a aceptar para poder cerrar y seguir operando.",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "El sistema enfrenta dos objetivos potencialmente conflictivos: 1) cerrar operativamente la sucursal al fin del día, 2) garantizar que la cifra contable es correcta. Cuando hay descuadre, se prioriza el cierre (para no dejar la sucursal bloqueada) sobre la verificación de exactitud. Esto no ha sido explicitado en el diseño de la interacción. El operador no sabe si se le pide que 'acepte que cierre aunque no cuadre' o 'confirme que la cifra es correcta'.",
+            "recommendation": "Explicitar en onboarding y en el flujo de cierre qué significa 'aceptar' la diferencia: ej. 'Aceptar significa que asume esta cifra como deuda personal para poder cerrar operativamente. Esto no implica que confirme que está correcta'. Considerar un modo 'cierre temporal' que permita cerrar la sucursal sin asumir responsabilidad formal por la diferencia, mientras se escala a auditoría.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-035",
+            "title": "Presentación de resultados sin contexto: descuadres recurrentes sin investigación acumulada",
+            "guideline_ids": [
+              "HAX-G1",
+              "PAIR-MM-2"
+            ],
+            "locus": "Pantalla de cierre / histórico de descuadres",
+            "evidence": "Operador-2: Durante doce semanas seguidas me aparecieron diferencias. (Implica que el sistema mostró 12 descuadres sin vincularlos entre sí ni ofrecer patrón o contexto). Operador-1: Cada semana el sistema me decía cuánto debería tener yo. (El sistema repite la cifra semanal sin mostrar si hay un patrón.)",
+            "anti_pattern": null,
+            "severity": "medium",
+            "rationale": "Si aparecen descuadres recurrentes en la misma sucursal (12 semanas consecutivas), esto sugiere un problema sistémico (del sistema o del proceso), no errores aislados del operador. Sin embargo, el sistema muestra cada descuadre de forma aislada, sin contexto histórico. El operador no recibe la información que le permitiría detectar que hay un patrón y escalarla como un defecto recurrente del sistema.",
+            "recommendation": "En la pantalla de cierre, mostrar un resumen histórico breve: 'Últimas 8 semanas: X descuadres, variación promedio £Y, cambio vs. semana anterior £Z'. Si hay 3+ descuadres en 8 semanas, generar automáticamente una escalada a auditoría. Esto ayuda al operador a detectar patrones y justifica una investigación de la causa raíz en lugar de asumir culpa repetida.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-036",
+            "title": "Obligación de aceptar diferencias sin opción de disputa formal",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-1"
+            ],
+            "locus": "Pantalla de cierre de caja: el operador no puede marcar la cifra como disputada ni cerrar sin aceptarla.",
+            "evidence": "Del dossier: 'el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla'. Y del operador-2: 'Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar.'",
+            "anti_pattern": "No abstenerse ni degradar con elegancia bajo alta incertidumbre; Fallo sin vía de recuperación clara",
+            "severity": "high",
+            "rationale": "Cuando el sistema detecta una diferencia, la incertidumbre es inherente (puede deberse a error del sistema, error del operador, o ambos). Sin embargo, el diseño obliga al operador a aceptar la cifra o quedarse atrapado sin poder cerrar la sucursal. No existe degradación elegante ni camino de recuperación; solo capitulación o parálisis operativa. Esto viola el principio de acotar el servicio ante la duda, pues el sistema no se abstiene de exigir conclusión cuando debería.",
+            "recommendation": "Implementar una tercera opción de estado: 'Diferencia disputada - pendiente de revisión'. Permitir que el operador cierre el periodo operativamente sin asumir la deuda, pero marcando la cifra como en disputa. Esto permite que la sucursal siga funcionando mientras se investiga, y deja constancia formal de desacuerdo.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-037",
+            "title": "Ausencia de desglose transaccional y opacidad del cálculo",
+            "guideline_ids": [
+              "PAIR-EF-2"
+            ],
+            "locus": "Pantalla de diferencia: muestra solo un importe total, no las transacciones que lo originan ni margen de error.",
+            "evidence": "Del dossier: 'La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo'. Y del operador-2: 'Pedía explicaciones y nadie me daba el porqué... sin que nadie pudiera enseñarme el cálculo.'",
+            "anti_pattern": "Mensajes de error opacos; No apoderamiento del usuario para entender y verificar",
+            "severity": "high",
+            "rationale": "Cuando el sistema reporta una diferencia, el operador responde con su patrimonio. Sin embargo, no puede ver el detalle técnico detrás de la cifra (qué transacciones, en qué orden, qué cálculo exacto). Esto es especialmente grave porque el dossier indica que 'El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado'. Ante esa vulnerabilidad conocida, la opacidad es inaceptable. El operador no puede actuar de forma informada.",
+            "recommendation": "Integrar en la pantalla de diferencia un desglose por tipo de transacción (giros, sellos, pagos, ingresos, reintegros) y mostrar el recuento teórico vs. físico por cada categoría. Además, si el margen de error de la propia maquinaria es conocido, mostrarlo junto a la diferencia (ej: 'Diferencia: £2.000 ± £500 rango de tolerancia del sistema').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-038",
+            "title": "Inacceso del operador a registros transaccionales completos",
+            "guideline_ids": [
+              "HAX-G17"
+            ],
+            "locus": "Arquitectura de datos: los registros detallados y logs residen en servidores centrales; el operador no tiene acceso local para auditarlos ni reconstruir el cálculo.",
+            "evidence": "Del dossier: 'Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente.'",
+            "anti_pattern": "Ausencia de controles y transparencia para auditoría del usuario",
+            "severity": "high",
+            "rationale": "El operador es responsable legal de la cifra que acepta ('Contractualmente, el operador responde con su propio patrimonio de los descuadres que el sistema le imputa'). Sin embargo, no posee control sobre la información que determina esa cifra. Esto viola el principio de controles globales: el usuario no puede inspeccionar ni verificar el comportamiento del sistema que lo afecta económicamente. Además, cuando aparecen problemas conocidos como 'entradas duplicadas o incompletas' (mencionadas en el dossier), el operador está desarmado para detectarlos o documentarlos.",
+            "recommendation": "Proporcionar al operador descarga local (o acceso controlado) a los registros transaccionales de su sucursal para cada periodo de cierre. Esto no requiere acceso a código fuente ni arquitectura central; es un derecho de auditoría mínimo sobre datos que le afectan directamente.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-039",
+            "title": "Soporte orientado al cierre forzado, no a la resolución del problema",
+            "guideline_ids": [
+              "PAIR-EF-2",
+              "PAIR-DE-1"
+            ],
+            "locus": "Línea de soporte / helpdesk del proveedor: 'el procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia'.",
+            "evidence": "Del dossier (prov-soporte): 'El procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia que muestra la pantalla para no dejar la cuenta abierta. No solemos entregar al operador el detalle transaccional ni los logs [...]. Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal.'",
+            "anti_pattern": "Procedimiento estándar que prioriza cerrar sobre investigar; sesgo hacia asumir error del operador",
+            "severity": "high",
+            "rationale": "El soporte tiene un sesgo incorporado: asumir culpa del operador sin evidencia. Más grave aún: el dossier registra que 'En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador' (operador-1: seguir los pasos de soporte convirtió £2.000 en £4.000). Esto sugiere que el procedimiento de cierre forzado puede enmascarar y amplificar errores. Bajo PAIR-DE-1, no hay supervisión de cómo el soporte afecta a diferentes operadores o sucursales.",
+            "recommendation": "Rediseñar el procedimiento: (1) Ante descuadre, la línea de soporte debe primero examinar los logs centrales antes de asumir culpa del operador. (2) Si el operador sigue pasos indicados y la diferencia aumenta, revertir automáticamente a estado anterior y escalalar a investigación técnica. (3) Implementar seguimiento: medir si las llamadas de soporte correlacionan con aumento de descuadres, y supervisar por sucursal (HAX-G12, PAIR-DE-1).",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-040",
+            "title": "Falta de transparencia sobre márgenes de error conocidos del sistema",
+            "guideline_ids": [
+              "HAX-G10",
+              "PAIR-EF-2"
+            ],
+            "locus": "Pantalla de cierre y documentación del sistema: no indica que 'el terminal puede registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado'.",
+            "evidence": "Del dossier: 'El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado.' Este defecto conocido no se comunica al operador ni aparece en alertas o documentación del cierre.",
+            "anti_pattern": "No comunicar límites y fallos potenciales; ocultar vulnerabilidades conocidas",
+            "severity": "high",
+            "rationale": "Si el sistema tiene un fallo conocido que puede generar descuadres fantasma (duplicados o incompletos), esto es información crítica que el operador debe saber. La ocultación impide que el operador pueda evaluar si un descuadre es legítimo o un artefacto técnico. Bajo HAX-G10, ante incertidumbre sobre si el error es del sistema o del operador, el sistema debería acotar o degradar el servicio; informar del riesgo es parte de esa degradación elegante.",
+            "recommendation": "Cuando se presenta una diferencia, incluir en la pantalla un aviso de diagnóstico que indique: 'Nota: Este sistema puede ocasionalmente registrar transacciones duplicadas o incompletas. Si la diferencia parece anómala, solicite investigación técnica antes de aceptar.' Además, mantener un log de diagnóstico local que flagee patrones de duplicados detectados.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-041",
+            "title": "Efecto psicológico de autoridad sin recurso (operador cuestiona su propia percepción)",
+            "guideline_ids": [
+              "HAX-G6"
+            ],
+            "locus": "Dinámica de interacción en cierre: cuando operador ve discrepancia entre su recuento físico y la cifra del sistema, sin vía de recurso.",
+            "evidence": "Del operador-2: 'Yo llevaba años con mis libros cuadrados y de repente la pantalla decía lo contrario, sin que nadie pudiera enseñarme el cálculo. Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra.'",
+            "anti_pattern": "Diseño que genera sesgo de autoridad donde el operador desconfía de sí mismo sobre datos que puede verificar físicamente",
+            "severity": "medium",
+            "rationale": "Este es un sesgo social derivado del diseño: el operador tiene información (su recuento físico) que contradice el sistema, pero como el sistema no muestra su lógica y el soporte asume culpa del operador, termina dudando de sus propias observaciones. Esto no es solo psicológicamente dañino; es un riesgo: si el operador desconfía de su propia auditoría, puede pasar por alto errores reales. Bajo HAX-G6, el sistema no debe reforzar dinámicas que socavan la confianza legítima del usuario en sus propias competencias.",
+            "recommendation": "Implementar un mensaje de confianza en cierre: 'Su recuento físico es: £X. El sistema reporta: £Y. Si difieren significativamente, ambas cifras pueden ser válidas. Marque esta diferencia como 'bajo revisión' y escálela a auditoría antes de aceptarla.' Esto reafirma que la percepción del operador es información valiosa, no un error presunto.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-042",
+            "title": "Falta de retroalimentación sobre resolución de disputas",
+            "guideline_ids": [
+              "PAIR-EF-1"
+            ],
+            "locus": "Línea de soporte: 'No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra.'",
+            "evidence": "Del dossier (prov-soporte): 'No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra.'",
+            "anti_pattern": "Ausencia de un canal para dejar constancia formal de desacuerdo; sin cierre de bucle",
+            "severity": "medium",
+            "rationale": "Incluso si se implementaran las correcciones anteriores, sin un canal de disputa formal no hay vía de recuperación completa. El operador no puede documentar su desacuerdo de forma que genera una obligación de respuesta del proveedor. Bajo PAIR-EF-1, cuando falla una transacción crítica (en este caso, el cálculo de diferencia), debe haber un camino claro de recuperación.",
+            "recommendation": "Crear un formulario de disputa integrado en el sistema: al aceptar una diferencia, el operador puede marcar 'Disputar esta cifra' y dejar un comentario. Esto genera un ticket de soporte con prioridad que obliga a investigación técnica con plazo (ej: 48h). El ticket es visible en el portal de operador con estado de resolución.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-043",
+            "title": "Persistencia de descuadres sin aprendizaje o adaptación",
+            "guideline_ids": [
+              "HAX-G13"
+            ],
+            "locus": "Comportamiento del sistema en el tiempo: operador-2 reporta 'doce semanas seguidas me aparecieron diferencias que no había forma de entender'.",
+            "evidence": "Del operador-2: 'Durante doce semanas seguidas me aparecieron diferencias que no había forma de entender. Pedía explicaciones y nadie me daba el porqué.'",
+            "anti_pattern": "Recurrencia de problemas sin que el sistema adapte su comportamiento ni aprenda patrones",
+            "severity": "medium",
+            "rationale": "Si un operador específico experimenta descuadres recurrentes durante doce semanas sin cambio ni investigación, esto indica dos fallos: (1) El sistema no aprende patrones de problemas por sucursal. (2) El soporte no escala problemas recurrentes a investigación técnica. Bajo HAX-G13, el sistema debe usar señales de comportamiento (en este caso, reincidencia) para mejorar la experiencia, no ignorarlas.",
+            "recommendation": "Implementar un monitor de anomalías: si una sucursal reporta más de 2 descuadres significativos en 4 semanas, el sistema genera automáticamente una investigación técnica y se asigna un punto de contacto dedicado en soporte. Esto personaliza la respuesta a operadores problemáticos.",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-044",
+            "title": "Cambio en el comportamiento del sistema sin notificación ni consenso",
+            "guideline_ids": [
+              "HAX-G14",
+              "HAX-G18"
+            ],
+            "locus": "Transición del comportamiento del sistema: el dossier implica que problemas como duplicados registrados surgieron sin previo aviso.",
+            "evidence": "Del dossier: 'El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado.' No hay evidencia de que esto se haya notificado a operadores o que haya habido versiones de software claramente comunicadas.",
+            "anti_pattern": "Cambios disruptivos no gestionados; falta de notificación de cambios de capacidad",
+            "severity": "medium",
+            "rationale": "Bajo HAX-G14 y HAX-G18, cuando el sistema tiene defectos que emergen (o cambios que afectan comportamiento de cálculo), debe notificarse explícitamente. El operador forma un modelo mental de cómo funciona el sistema; cambios silenciosos lo rompen. Si duplicados o incompletitudes emergieron tras una actualización, eso debería haberse anunciado.",
+            "recommendation": "Implementar: (1) Log de versiones visibles en el terminal (ej: 'Última actualización: 2024-01-15. Cambios: Mejora en procesamiento de reintegros'). (2) Notificación al operador al abrir sesión si hay cambios relevantes. (3) Documentación clara de defectos conocidos y su estado (ej: 'Se investigó problema de duplicados en v2.3; resuelto en v2.4').",
+            "merged_count": 1
+          },
+          {
+            "id": "p3-045",
+            "title": "Disparidades no monitorizadas en cómo el soporte trata a diferentes operadores",
+            "guideline_ids": [
+              "PAIR-DE-1"
+            ],
+            "locus": "Línea de soporte / procedimiento de resolución de diferencias: no hay evidencia de supervisión por perfil de operador (experiencia, sucursal, frecuencia de problemas).",
+            "evidence": "Del dossier (prov-soporte): 'Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal'. Sin datos de supervisión por subgrupos, no se sabe si operadores con más experiencia reciben trato distinto, o si sucursales con mayor volumen están mejor protegidas.",
+            "anti_pattern": "Ausencia de supervisión de subgrupos; sesgo implícito en procedimientos de soporte",
+            "severity": "medium",
+            "rationale": "Bajo PAIR-DE-1, debe evaluarse el rendimiento del sistema (en este caso, del soporte) por subgrupos relevantes. Sin esto, hay riesgo de que operadores noveles, sucursales pequeñas, o ciertos tipos de operaciones reciban investigación menos rigurosa. El procedimiento 'asumir error del operador' puede afectar desproporcionadamente a grupos menos capaces de argumentar o escalar.",
+            "recommendation": "Recopilar y revisar mensualmente: (1) Tasa de descuadres por sucursal y antigüedad del operador. (2) Tiempo de resolución en soporte por tipo de problema. (3) Tasa de aumento de diferencia durante llamada de soporte (como en el caso de operador-1: £2.000 → £4.000). Publicar hallazgos con medidas correctivas si hay disparidades.",
+            "merged_count": 1
+          }
+        ],
+        "adjudications": [
+          {
+            "finding_id": "p3-001",
+            "label": "tp_match",
+            "matched_golden_id": "PO-04-sin-incertidumbre-falsa-autoridad",
+            "judge_rationale": "El hallazgo se centra en que la pantalla no muestra margen de error ni probabilidad de fallo del cálculo, presentando la cifra como dato cierto cuando el sistema puede fallar. Esto encaja directamente con PO-04-sin-incertidumbre-falsa-autoridad, que describe exactamente la falsa precisión de la cifra sin señal de que el cálculo pueda fallar. Aunque también toca PO-01 (deferencia) y PO-02 (opacidad), el núcleo del hallazgo es la ausencia de indicadores de incertidumbre/confianza, que es el problema central de PO-04.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-002",
+            "label": "tp_match",
+            "matched_golden_id": "PO-03-sin-explicacion-del-porque",
+            "judge_rationale": "El hallazgo trata específicamente de la imposibilidad de acceder a una explicación sobre el origen de la diferencia: el operador pide el porqué, nadie se lo da, los logs están en servidores del proveedor sin acceso. Esto encaja perfectamente con PO-03-sin-explicacion-del-porque (caja negra sin explicación accesible) y también con PO-02 (opacidad/no auditable). Sin embargo, el énfasis del hallazgo está en la falta de explicación del porqué (no solo en la opacidad de la cifra), lo que lo alinea más con PO-03. La evidencia de operador-2 ('Pedía explicaciones y nadie me daba el porqué') es el núcleo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-003",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe explícitamente que el diseño del flujo de cierre obliga al operador a aceptar la diferencia sin posibilidad de marcarla como disputada ni cerrar sin asumirla. Esto es exactamente PO-06-sin-via-de-override-ni-contestacion. Aunque no está marcado con [*], es el candidato que describe el mismo problema de forma precisa: no hay override ni contestación posible.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-004",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo se centra en que el helpdesk parte de la presunción de que el error es del operador, sin base probatoria accesible, y que contractualmente el operador responde con su patrimonio. El candidato más cercano es PO-05-helpdesk-inutil-empeora, que describe cómo el canal de ayuda parte de que el fallo es del operador y no entrega el detalle. Sin embargo, el núcleo del hallazgo es la presunción de culpabilidad sin evidencia accesible, que es un aspecto del comportamiento del helpdesk descrito en PO-05. También podría encajar en PO-01 o PO-04, pero PO-05 es el que más directamente describe este problema desde el helpdesk.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-005",
+            "label": "tp_match",
+            "matched_golden_id": "PO-07-discrepancia-no-capturada",
+            "judge_rationale": "El hallazgo trata específicamente de la ausencia de un mecanismo formal para que el operador registre su desacuerdo con la cifra. Esto encaja directamente con PO-07-discrepancia-no-capturada, que describe exactamente que no hay mecanismo para dejar constancia formal del desacuerdo y que la discrepancia se pierde. Aunque PO-06 también es relevante, PO-07 es el candidato que describe el problema de registro/captura del desacuerdo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-006",
+            "label": "tp_match",
+            "matched_golden_id": "PO-08-sin-abstencion-bajo-fallo",
+            "judge_rationale": "El hallazgo se centra en que el sistema tiene defectos conocidos (registros duplicados/incompletos) que no se comunican al operador, presentando la cifra como fiable cuando el cálculo puede estar viciado. Esto encaja directamente con PO-08-sin-abstencion-bajo-fallo, que describe que ante operaciones registradas mal el sistema no se abstiene ni degrada con elegancia sino que fuerza un saldo confiado. También toca PO-04 (falsa autoridad), pero el núcleo es la falta de abstención/degradación ante fallos conocidos del propio sistema.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-007",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe específicamente que el procedimiento del helpdesk empeora la situación: los pasos indicados aumentaron el importe reclamado de 2.000 a 4.000 libras. Esto encaja perfectamente con PO-05-helpdesk-inutil-empeora, que describe exactamente ese fallo de recuperación que empeora el estado. Aunque el hallazgo se titula 'degradación de calidad de resolución', el contenido es idéntico al candidato PO-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-008",
+            "label": "tp_match",
+            "matched_golden_id": "PO-01-deferencia-a-la-maquina",
+            "judge_rationale": "El hallazgo describe cómo el operador termina dudando de sí mismo y deferiendo a la máquina por encima de su propio conocimiento contable ('acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas'). Esto es exactamente el automation bias descrito en PO-01-deferencia-a-la-maquina. Aunque el título menciona 'erosión de autonomía', el núcleo del problema es la deferencia a la máquina sobre el juicio propio.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-009",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe que el sistema no ofrece opción de marcar la cifra como disputada ni de cerrar sin asumirla, y que no hay canal para dejar constancia formal de desacuerdo. Esto encaja directamente con PO-06-sin-via-de-override-ni-contestacion, que describe exactamente la obligación de aceptar la diferencia sin posibilidad de override ni contestación formal.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-010",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo se centra en que la pantalla solo muestra el importe total sin desglosar las transacciones individuales que lo originan, y que los registros detallados están en servidores centrales sin acceso del operador. Esto es exactamente lo que describe PO-02-cifra-opaca-no-auditable. Aunque también hay elementos de PO-03 y PO-04, el núcleo del hallazgo (falta de desglose + inaccesibilidad de registros) corresponde a PO-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-011",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo se enfoca específicamente en la arquitectura de datos: los registros y logs están centralizados en servidores del proveedor sin acceso local para el operador, impidiendo auditar o reconstruir el cálculo. Aunque comparte elementos con PO-02, el locus y la evidencia son idénticos a PO-02-cifra-opaca-no-auditable, que describe precisamente que los registros detallados están en los servidores del proveedor sin acceso para el operador. Es el mismo problema que p3-010 pero enfocado en la arquitectura; sigue siendo PO-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-012",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe que los pasos del helpdesk incrementaron el importe reclamado de 2.000 a 4.000 libras, es decir, el canal de ayuda no solo no resuelve sino que empeora el estado del operador. Esto corresponde directamente a PO-05-helpdesk-inutil-empeora, que aunque no está marcado con [*] en este hallazgo, describe exactamente el mismo problema: fallo de recuperación que empeora el estado con ese mismo ejemplo concreto.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-013",
+            "label": "tp_match",
+            "matched_golden_id": "PO-04-sin-incertidumbre-falsa-autoridad",
+            "judge_rationale": "El hallazgo se centra en que la pantalla no muestra margen de error ni señal de que el cálculo pueda fallar (duplicados, incompletos), presentando la cifra como dato cierto. Esto encaja directamente con PO-04-sin-incertidumbre-falsa-autoridad, que describe exactamente la falsa precisión sin margen de error. Aunque PO-02 y PO-08 también son relevantes, el núcleo del hallazgo es la ausencia de indicación de incertidumbre/confiabilidad del cálculo, que es el problema específico de PO-04.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-014",
+            "label": "tp_match",
+            "matched_golden_id": "PO-03-sin-explicacion-del-porque",
+            "judge_rationale": "El hallazgo describe que el soporte parte sistemáticamente de que el error es del operador sin presentar evidencia, y el operador solo recibe 'el sistema tiene razón'. Esto encaja mejor con PO-03-sin-explicacion-del-porque: el sistema (y el soporte) no explica por qué hay descuadre, simplemente afirma que el sistema tiene razón. PO-05 también es relevante pero el foco aquí es la ausencia de explicación y la asunción de culpa sin evidencia, no el empeoramiento del importe.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-015",
+            "label": "tp_match",
+            "matched_golden_id": "PO-09-sin-formacion-modelo-mental",
+            "judge_rationale": "El hallazgo trata sobre la ausencia de análisis retrospectivo o feedback post-cierre que ayude al operador a entender causas y prevenir futuros descuadres. Esto encaja con PO-09-sin-formacion-modelo-mental: no hay formación ni información que ayude al operador a entender qué hace el sistema, cuándo puede equivocarse, o qué hacer; el operador acaba dudando de sí mismo. La falta de feedback granular post-incidente es una manifestación de la ausencia de modelo mental calibrado.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-016",
+            "label": "tp_match",
+            "matched_golden_id": "PO-07-discrepancia-no-capturada",
+            "judge_rationale": "El hallazgo se centra en que no existe canal formal para que el operador deje constancia de su desacuerdo, y no sabe qué pasará con su reclamación. Esto encaja directamente con PO-07-discrepancia-no-capturada: no hay mecanismo para registrar el desacuerdo formal del operador, la discrepancia se pierde y no alimenta ninguna supervisión. PO-06 también es relevante pero PO-07 captura mejor el aspecto de 'qué pasa con la disputa/feedback del operador en el sistema'.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-017",
+            "label": "tp_new",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo trata sobre la falta de comunicación al operador sobre correcciones de errores del sistema (duplicados, incompletos) y mejoras implementadas. Ninguno de los candidatos del golden describe específicamente la ausencia de comunicación sobre actualizaciones/correcciones del sistema al operador. PO-07 y PO-08 son los más cercanos pero no capturan este problema específico de transparencia sobre el ciclo de vida de correcciones del software. Es un hallazgo real apoyado en el dossier (12 semanas de problemas sin explicación ni notificación de resolución), pero no coincide con ningún candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-018",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe explícitamente que no existe opción de marcar la cifra como disputada ni de cerrar sin asumirla, y no hay canal formal de desacuerdo. Esto encaja directamente con PO-06-sin-via-de-override-ni-contestacion: el operador está obligado a aceptar la diferencia para poder cerrar, sin vía real de override ni contestación. Es el candidato más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-019",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo describe específicamente que la pantalla muestra solo una cifra agregada sin desglose de transacciones individuales ni margen de error. Esto encaja con dos candidatos: PO-02 (cifra sin desglose, sin acceso a registros) y PO-04 (falsa precisión, sin indicación de posible fallo). Sin embargo, el énfasis principal del hallazgo es la falta de desglose transaccional y la imposibilidad de recalcular el origen, lo que corresponde más directamente a PO-02. La mención de 'no indica margen de error o probabilidad de fallo' también toca PO-04, pero el locus y la evidencia principal apuntan a la opacidad del cálculo y la falta de acceso al detalle, que es el núcleo de PO-02.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-020",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo se centra exclusivamente en que los registros transaccionales y logs están centralizados en el proveedor y el operador no tiene acceso para auditarlos ni reconstruir el cálculo localmente. Esto es exactamente el segundo componente de PO-02 (registros detallados en servidores del proveedor sin acceso para el operador, no puede auditar ni reconstruir el cálculo). Aunque PO-02 también incluye la falta de desglose en pantalla (cubierta por p3-019), el aspecto de acceso a logs/registros es parte integral de ese mismo candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-021",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe que las instrucciones del helpdesk pueden aumentar el importe reclamado (de 2.000 a 4.000 libras), lo que es un fallo de recuperación que empeora el estado. Esto coincide exactamente con PO-05-helpdesk-inutil-empeora, que menciona explícitamente que 'en algunas llamadas los pasos indicados aumentan el importe reclamado (de 2.000 a 4.000 libras)'. La evidencia y el locus del hallazgo son idénticos a los de ese candidato.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-022",
+            "label": "tp_match",
+            "matched_golden_id": "PO-01-deferencia-a-la-maquina",
+            "judge_rationale": "El hallazgo describe la presunción sistemática de que el error es del operador (no del sistema), lo que lleva al operador a dudar de sí mismo antes que del programa. Esto encaja con PO-01-deferencia-a-la-maquina (automation bias: el operador acaba fiándose de la pantalla por encima de su propio juicio) y con PO-05 (helpdesk parte de que el fallo es del operador). Sin embargo, el núcleo del hallazgo es la actitud de presunción de culpa que induce al operador a deferir a la máquina ('llegué a dudar de mí mismo antes que del programa'), lo que es el fenómeno central de PO-01. PO-05 cubre el fallo del helpdesk en general, pero la asimetría de presunción de culpa como causa del automation bias es el corazón de PO-01.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-023",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe que no existe canal formal para que el operador deje constancia de su desacuerdo con la cifra, y que la única opción es aceptar o no poder cerrar. Esto encaja directamente con PO-06-sin-via-de-override-ni-contestacion (no puede marcar como disputada, obligado a aceptar para cerrar) y con PO-07-discrepancia-no-capturada (no hay mecanismo para dejar constancia formal del desacuerdo). La evidencia cita explícitamente 'no disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo' y 'o la aceptaba, o no podía cerrar'. El locus del hallazgo enfatiza la falta de canal formal de disputa, que es el núcleo de PO-06 (override/contestación) más que PO-07 (captura de discrepancia para supervisión). PO-06 es el candidato más preciso.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-024",
+            "label": "tp_match",
+            "matched_golden_id": "PO-08-sin-abstencion-bajo-fallo",
+            "judge_rationale": "El hallazgo describe que el sistema puede registrar entradas duplicadas o incompletas y aun así arrojar un saldo aparentemente cerrado, sin informar al operador de que esto es una causa posible del descuadre. Esto encaja con PO-08-sin-abstencion-bajo-fallo (ante operaciones mal registradas, no se abstiene ni degrada con elegancia, fuerza un saldo confiado) y con PO-04 (falsa precisión sin señal de que el cálculo pueda fallar). El locus del hallazgo enfatiza el comportamiento del sistema ante fallos conocidos sin comunicación al operador, lo que es exactamente PO-08. PO-04 cubre la falsa autoridad de la cifra, pero PO-08 es más específico sobre la falta de abstención/degradación elegante ante fallos de registro.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-025",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe específicamente que el flujo de cierre obliga al operador a aceptar la diferencia sin opción de marcarla como disputada ni de cerrar sin asumirla. Esto encaja exactamente con PO-06-sin-via-de-override-ni-contestacion, que describe precisamente la ausencia de vía de override o contestación y la obligación de aceptar para poder cerrar. Los demás candidatos abordan problemas relacionados pero distintos (automation bias, opacidad, helpdesk, etc.).",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-026",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo se centra en que la pantalla muestra solo una cifra global sin desglose de las transacciones que originan el descuadre, y que el operador no puede obtener explicación del porqué. Esto encaja mejor con PO-02-cifra-opaca-no-auditable (cifra sin desglose, registros en servidores del proveedor, imposibilidad de auditar) y con PO-03-sin-explicacion-del-porque. Sin embargo, el núcleo del hallazgo es la falta de desglose transaccional y la opacidad del cálculo, lo que corresponde directamente a PO-02-cifra-opaca-no-auditable. PO-03 también encaja pero PO-02 es el más preciso para 'ausencia de transparencia en el origen del descuadre: falta desglose transaccional'.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-027",
+            "label": "tp_match",
+            "matched_golden_id": "PO-01-deferencia-a-la-maquina",
+            "judge_rationale": "El hallazgo describe cómo el soporte parte de la premisa de que el error es del operador, y cómo esto lleva a los operadores a dudar de sí mismos antes que del programa. Esto encaja con PO-01-deferencia-a-la-maquina (automation bias, el operador defiere a la máquina sobre su propio conocimiento) y con PO-09-sin-formacion-modelo-mental. El framing del hallazgo es 'modelo mental inducido erróneo: atribución de culpa sin evidencia', que apunta más al automation bias y a la deferencia a la máquina (PO-01) que a la falta de formación (PO-09). PO-01 describe exactamente que el operador acaba fiándose de la pantalla por encima de sus propias cuentas, que es el efecto central descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-028",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe la ausencia de capacidad para disputar o marcar como no aceptado un descuadre, con evidencia directa de que el operador debe aceptar o no puede cerrar. Esto es exactamente PO-06-sin-via-de-override-ni-contestacion. Aunque p3-025 ya fue adjudicado a este mismo candidato, el hallazgo p3-028 describe el mismo problema desde el ángulo de la disputa formal, que sigue siendo el mismo candidato golden.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-029",
+            "label": "tp_match",
+            "matched_golden_id": "PO-04-sin-incertidumbre-falsa-autoridad",
+            "judge_rationale": "El hallazgo se centra en que la cifra se presenta sin margen de error ni indicación de incertidumbre, lo que lleva al operador a fiarse de la pantalla. Esto encaja directamente con PO-04-sin-incertidumbre-falsa-autoridad, que describe exactamente la falsa precisión: la cifra se muestra como dato contable cierto sin margen de error ni señal de que el cálculo pueda fallar. El efecto de deferencia del operador es consecuencia de esta falsa autoridad.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-030",
+            "label": "tp_match",
+            "matched_golden_id": "PO-09-sin-formacion-modelo-mental",
+            "judge_rationale": "El hallazgo describe la falta de onboarding sobre capacidades y limitaciones del sistema, lo que lleva a los operadores a no entender qué hace el sistema ni cuándo puede equivocarse. Esto encaja directamente con PO-09-sin-formacion-modelo-mental, que describe exactamente la ausencia de formación que ayude al operador a entender el sistema, cuándo puede equivocarse y qué hacer ante un descuadre, resultando en que el operador duda de sí mismo antes que del programa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-031",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe específicamente que el procedimiento de soporte agrava el descuadre (de 2.000 a 4.000 libras) en lugar de resolverlo. Esto encaja perfectamente con PO-05-helpdesk-inutil-empeora, que describe exactamente ese fallo: el canal de ayuda parte de que el fallo es del operador, no entrega el detalle y en algunas llamadas los pasos indicados aumentan el importe reclamado (de 2.000 a 4.000 libras). Es el candidato más preciso para este hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-032",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo trata específicamente la asimetría de datos: el operador no tiene acceso a los registros transaccionales completos porque residen en los servidores del proveedor. Esto encaja directamente con PO-02-cifra-opaca-no-auditable, que describe exactamente que los registros detallados están en los servidores del proveedor sin acceso para el operador, quien no puede auditar ni reconstruir el cálculo. Aunque los candidatos marcados con [*] son PO-01, PO-04 y PO-09, PO-02 describe el mismo problema central del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-033",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe la falta de un canal formal para disputar o apelar un descuadre. Esto encaja con dos candidatos: PO-06 (no puede marcar como disputada ni cerrar sin aceptar) y PO-07 (no hay mecanismo para dejar constancia formal del desacuerdo). Sin embargo, el hallazgo enfatiza la ausencia de canal formal de disputa/apelación y la cita directa 'o la aceptaba, o no podía cerrar', lo que apunta más a PO-06-sin-via-de-override-ni-contestacion como el problema central descrito.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-034",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo plantea una 'ambigüedad en la definición de éxito': el sistema prioriza cerrar el periodo sobre verificar la exactitud, forzando al operador a aceptar la diferencia para poder cerrar. Esto se acerca más a PO-08-sin-abstencion-bajo-fallo (el sistema no se abstiene ni degrada con elegancia ante posibles errores propios, fuerza un saldo confiado) o a PO-06. Sin embargo, el núcleo del hallazgo es que el diseño del flujo de cierre equipara 'cerrar' con 'aceptar la deuda', sin posibilidad de cerrar sin asumir. Esto es más cercano a PO-06-sin-via-de-override-ni-contestacion. Pero PO-06 ya fue asignado a p3-033. Revisando: el hallazgo p3-034 enfatiza el diseño del objetivo del sistema (cerrar vs. verificar exactitud), lo que es distinto del mero hecho de no poder disputar. Ningún candidato describe exactamente 'ambigüedad en la definición de éxito del sistema'. El candidato más cercano sería PO-08 (el sistema fuerza un saldo confiado en lugar de marcar que el cálculo es dudoso) o PO-06. Dado que el hallazgo describe que el sistema obliga a aceptar para cerrar (diseño del flujo), PO-06 es el más cercano aunque ya usado en otro hallazgo; los candidatos son independientes por hallazgo. PO-06 describe exactamente 'para cerrar el periodo está obligado a aceptar y asumir la diferencia'. El hallazgo p3-034 describe el mismo problema desde el ángulo del diseño del objetivo. Asigno PO-06.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-035",
+            "label": "tp_match",
+            "matched_golden_id": "PO-07-discrepancia-no-capturada",
+            "judge_rationale": "El hallazgo describe que los descuadres recurrentes (12 semanas seguidas) se presentan sin contexto acumulado, sin vincularlos entre sí ni ofrecer patrón. Esto es más cercano a PO-07-discrepancia-no-capturada (la discrepancia no alimenta ninguna supervisión, no hay mecanismo para registrar el desacuerdo) o a PO-02 (cifra opaca). Sin embargo, el ángulo específico es que el sistema no agrega ni contextualiza los descuadres recurrentes para detectar patrones. Esto no encaja perfectamente con ningún candidato. PO-07 habla de que la discrepancia no se registra formalmente ni alimenta supervisión, lo que es lo más cercano al problema de que 12 semanas de descuadres no generan investigación acumulada. Asigno PO-07-discrepancia-no-capturada.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-036",
+            "label": "tp_match",
+            "matched_golden_id": "PO-06-sin-via-de-override-ni-contestacion",
+            "judge_rationale": "El hallazgo describe explícitamente la obligación de aceptar diferencias sin opción de disputa formal, citando directamente que 'el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla'. Esto es exactamente PO-06-sin-via-de-override-ni-contestacion. Aunque PO-06 ya fue asignado a otros hallazgos, cada hallazgo se evalúa independientemente contra los candidatos. PO-06 es el candidato que describe el mismo problema central.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-037",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo describe que la pantalla muestra solo un importe total sin desglose de transacciones ni margen de error, y el operador no puede entender el origen del descuadre. Esto encaja perfectamente con PO-02-cifra-opaca-no-auditable (cifra sin desglose, registros inaccesibles) y con PO-03-sin-explicacion-del-porque (caja negra sin explicación). Sin embargo, el foco principal del hallazgo es la opacidad del cálculo y la ausencia de desglose transaccional, lo que corresponde más directamente a PO-02-cifra-opaca-no-auditable. Pero PO-03 también comparte guideline y describe exactamente la queja del operador-2 citada en la evidencia ('pedía explicaciones y nadie me daba el porqué'). El título del hallazgo es 'Ausencia de desglose transaccional y opacidad del cálculo', que combina ambos, pero la evidencia principal cita la pantalla sin desglose (PO-02) y la falta de explicación del porqué (PO-03). PO-03 está marcado [*] y describe exactamente la caja negra sin explicación accesible, que es el núcleo del hallazgo. PO-02 también encaja muy bien. Dado que el hallazgo enfatiza tanto la falta de desglose (PO-02) como la falta de explicación (PO-03), y PO-03 está marcado [*] y es el primero listado, pero PO-02 describe más precisamente la arquitectura de opacidad (cifra única sin desglose + registros inaccesibles), elijo PO-02 como el más específico al locus descrito ('pantalla de diferencia: muestra solo un importe total, no las transacciones').",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-038",
+            "label": "tp_match",
+            "matched_golden_id": "PO-02-cifra-opaca-no-auditable",
+            "judge_rationale": "El hallazgo trata específicamente del inacceso del operador a los registros transaccionales completos, que residen en servidores centrales del proveedor. Esto es exactamente el segundo componente de PO-02-cifra-opaca-no-auditable: 'los registros detallados están en los servidores del proveedor sin acceso para el operador: no puede auditar ni reconstruir el cálculo'. El locus y la evidencia coinciden palabra por palabra con la descripción de PO-02. Es el candidato más directo y está listado primero.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-039",
+            "label": "tp_match",
+            "matched_golden_id": "PO-05-helpdesk-inutil-empeora",
+            "judge_rationale": "El hallazgo describe que el soporte telefónico orienta al operador a cerrar el periodo aceptando la diferencia, no entrega el detalle transaccional, y parte de la premisa de que el error es del operador. Esto encaja directamente con PO-05-helpdesk-inutil-empeora, que describe exactamente este comportamiento: el canal de ayuda no resuelve la incidencia, parte de que el fallo es del operador, no entrega el detalle, y en algunas llamadas los pasos indicados aumentan el importe reclamado. PO-05 está marcado [*] y es el segundo candidato listado. El hallazgo se centra en el procedimiento estándar del helpdesk orientado al cierre forzado, que es el núcleo de PO-05.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-040",
+            "label": "tp_match",
+            "matched_golden_id": "PO-08-sin-abstencion-bajo-fallo",
+            "judge_rationale": "El hallazgo describe que el sistema puede registrar entradas duplicadas o incompletas y aun así arrojar un saldo aparentemente cerrado, sin comunicar este defecto conocido al operador. Esto encaja directamente con PO-08-sin-abstencion-bajo-fallo (el sistema no se abstiene ni degrada con elegancia ante operaciones mal registradas, fuerza un saldo confiado) y con PO-04-sin-incertidumbre-falsa-autoridad (la cifra se muestra como dato cierto sin margen de error ni señal de que el cálculo pueda fallar). El título 'Falta de transparencia sobre márgenes de error conocidos del sistema' y el locus apuntan más a PO-04 (falsa precisión, no se indica margen de error ni posibilidad de fallo). Sin embargo, PO-08 está marcado [*] y describe el mismo fenómeno desde el ángulo del comportamiento del sistema bajo fallo. El hallazgo enfatiza que el defecto conocido (duplicados/incompletos) no se comunica, lo que es la esencia de PO-04 (falsa autoridad, sin señal de que el cálculo pueda fallar). PO-04 no está marcado [*] pero describe exactamente el problema. PO-08 [*] también encaja. Dado que el locus y título apuntan a la falta de comunicación del margen de error (falsa precisión = PO-04), pero PO-08 [*] describe el mismo escenario de duplicados/incompletos sin abstención, elijo PO-08 por ser el candidato marcado [*] que describe más específicamente el escenario de fallos de registro sin degradación elegante.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-041",
+            "label": "tp_match",
+            "matched_golden_id": "PO-01-deferencia-a-la-maquina",
+            "judge_rationale": "El hallazgo describe el efecto psicológico por el cual el operador, ante la autoridad del sistema, duda de su propio juicio contable y defiere a la máquina. La evidencia cita directamente al operador-2: 'Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra.' Esto es exactamente PO-01-deferencia-a-la-maquina: automation bias del operador que defiere a la máquina sobre su propio conocimiento contable. Es el primer candidato listado y describe con precisión el fenómeno del hallazgo.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-042",
+            "label": "tp_match",
+            "matched_golden_id": "PO-07-discrepancia-no-capturada",
+            "judge_rationale": "El hallazgo describe la ausencia de un canal formal para que el operador deje constancia de su desacuerdo con la cifra. La evidencia cita directamente al proveedor de soporte: 'No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra.' Esto encaja perfectamente con PO-07-discrepancia-no-capturada: el sistema no ofrece mecanismo para que el operador deje constancia formal de su desacuerdo, la discrepancia se pierde y no alimenta ninguna supervisión. Aunque PO-07 no está marcado [*], describe exactamente el problema del hallazgo. También encaja con PO-06-sin-via-de-override-ni-contestacion, pero PO-07 es más específico sobre la captura formal del desacuerdo. El hallazgo se titula 'Falta de retroalimentación sobre resolución de disputas' y el locus es la ausencia de canal formal de contestación, que es el núcleo de PO-07.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-043",
+            "label": "tp_match",
+            "matched_golden_id": "PO-03-sin-explicacion-del-porque",
+            "judge_rationale": "El hallazgo describe que durante doce semanas seguidas aparecieron diferencias que el operador no podía entender, pedía explicaciones y solo le decían que 'el sistema tiene razón'. El núcleo del hallazgo es la falta de explicación sobre el origen del descuadre: el operador pide el porqué y no lo recibe. Esto encaja directamente con PO-03-sin-explicacion-del-porque, que describe exactamente que el sistema no explica por qué aparece el descuadre y que la salida es una caja negra sin explicación accesible. El título 'persistencia sin aprendizaje' es secundario; la evidencia citada apunta a la opacidad explicativa.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-044",
+            "label": "tp_match",
+            "matched_golden_id": "PO-08-sin-abstencion-bajo-fallo",
+            "judge_rationale": "El hallazgo trata sobre que el sistema puede registrar duplicados o no completar operaciones y aun así arrojar un saldo aparentemente cerrado, sin notificar al operador. La evidencia citada es exactamente la frase del doc-ficha sobre duplicados/operaciones incompletas. El hallazgo se enmarca como 'cambio sin notificación', pero la evidencia real apunta a que el sistema falla internamente (duplicados, operaciones incompletas) y aun así presenta un saldo confiado sin señal de error. Esto encaja mejor con PO-08-sin-abstencion-bajo-fallo, que describe precisamente que ante operaciones registradas mal el sistema no se abstiene ni degrada con elegancia, sino que fuerza un saldo confiado. PO-04 también es relevante (falsa precisión), pero PO-08 captura más directamente el comportamiento de no-abstención ante fallo interno.",
+            "human_confirmed": false
+          },
+          {
+            "finding_id": "p3-045",
+            "label": "fp_incorrect",
+            "matched_golden_id": null,
+            "judge_rationale": "El hallazgo plantea que no hay supervisión de cómo el soporte trata a distintos operadores según perfil, experiencia o volumen. Sin embargo, el dossier no contiene evidencia de disparidades por subgrupos ni de ausencia de monitorización diferencial; lo que sí documenta es que el helpdesk parte de la premisa de que el error es del operador y no entrega el detalle. El hallazgo extrapola hacia una hipótesis de disparidad no monitorizada que no está sustentada en el dossier. Ninguno de los candidatos describe este problema específico de disparidad por subgrupos. El candidato más cercano sería PO-05-helpdesk-inutil-empeora, pero ese candidato describe el fallo del helpdesk en general (no resuelve, empeora), no la disparidad por perfil de operador. El hallazgo como formulado (disparidades no monitorizadas por perfil) no está respaldado por evidencia concreta en el dossier, por lo que es 'ninguno' y no es real.",
+            "human_confirmed": false
+          }
+        ],
+        "metrics": {
+          "approach": "p3",
+          "n_findings": 45,
+          "n_golden": 9,
+          "recall": 1.0,
+          "precision": 0.9777777777777777,
+          "genericity_rate": 0.0,
+          "grounding_rate": 1.0,
+          "tp_new": 1,
+          "fbeta": 0.9954751131221717,
+          "meets_genericity_gate": true,
+          "primary_score": 0.9954751131221717
+        }
+      }
+    ]
+  }
+}
