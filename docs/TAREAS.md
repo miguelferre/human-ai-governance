@@ -17,6 +17,10 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       método asistido— la señal previa (que daba ~0.96–1.00). Notable: en MiDAS b1=0.00 pero p3=0.89 ("caso
       difícil → hace falta estructura"). Consolidado y crudos en `docs/pipeline-codigo/`; detalle en
       [RESULTADOS-testimonio.md](RESULTADOS-testimonio.md). Cierra la nota honesta de método.
+      **k=3 (2026-07-02):** repetida con 3 pasadas por approach y caso; confirma que las medias no se
+      mueven (p3 0.91 ± 0.055 recall / 0.965 precisión) y estrecha la barra entre casos (0.086 → 0.055).
+      Añade la estabilidad intra-caso que k=1 no medía: p3 ±0.043 vs b1 ±0.152 (el pipeline es 3-4x más
+      consistente que el prompt único). `consolidado_k3.json` + raws `*_k3.json`.
 
 ## Producto
 

@@ -124,6 +124,32 @@ Recall de p3 por caso: robodebt 0.90 · alert-fatigue 1.00 · CONCERN 1.00 · As
 - Los dos casos duros nuevos dan **más** recall en p3 (MiDAS 0.89, Arkansas 0.80) que en su corrida
   asistida de un solo tiro (0.78 / 0.70): p3 descompone por bloques y es más exhaustivo.
 
-**Limitaciones que quedan:** k=1 (sin varianza; a k=3 se estrecharían las barras, no las medias, como en
-el experimento principal); sigue siendo Claude en ambos roles, pero con modelos distintos (Haiku vs Sonnet)
-y flujo reproducible la independencia es real.
+**Limitaciones que quedan:** sigue siendo Claude en ambos roles, pero con modelos distintos (Haiku vs
+Sonnet) y flujo reproducible la independencia es real. (La antigua salvedad de k=1 quedó cerrada con la
+corrida k=3 de abajo.)
+
+### Confirmación con k=3 (2026-07-02)
+
+La corrida de arriba era k=1 (una sola pasada por approach y caso, sin varianza). Se repitió con **k=3**
+—mismos 9 casos, mismos modelos (Haiku generador, Sonnet juez independiente), pipeline-código `comparar`—
+para comprobar la promesa: subir k **no mueve las medias**, solo pone barras a lo que antes era un número
+a secas. Datos en `docs/pipeline-codigo/consolidado_k3.json` (+ raws por caso).
+
+| approach | recall medio (k=1 → k=3) | precisión (k=1 → k=3) | estabilidad intra-caso (k=3) |
+|---|---|---|---|
+| b0 (checklist, sin LLM) | 0.00 → 0.00 | — | 0.00 |
+| b1 (prompt único) | 0.68 → 0.65 ± 0.22 | 0.87 → 0.81 | 0.15 |
+| **p3 (pipeline, producto)** | 0.93 → **0.91** ± 0.055 | 0.96 → **0.965** | **0.043** |
+
+Recall de p3 por caso (k=3): robodebt 0.83 · alert-fatigue 0.96 · CONCERN 0.89 · Asiana 1.00 ·
+cierre-cuentas 0.89 · Post Office 0.96 · Toeslagen 0.93 · MiDAS 0.89 · Arkansas 0.83.
+
+**Lectura:**
+- **La media no se mueve:** p3 pasa de 0.93 a **0.91** (dentro de la barra), precisión de 0.96 a **0.965**.
+  El número reproducible aguanta con más muestras; no era suerte de una sola pasada.
+- **La barra entre casos se estrecha**, como se predijo: la dispersión de p3 baja de ±0.086 (k=1) a
+  **±0.055** (k=3).
+- **Estabilidad intra-caso (lo que k=1 no podía ver):** remuestrear al LLM mueve el recall de p3 solo
+  **±0.043** de media dentro de un mismo caso. Y p3 no solo gana en media a b1, es **3-4× más estable**
+  (0.043 vs 0.152): el prompt único baila (en MiDAS y Arkansas su recall varía ±0.29–0.37 entre corridas),
+  el pipeline por descomposición da casi lo mismo cada vez. La estructura compra media **y** consistencia.

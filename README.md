@@ -68,7 +68,9 @@ discapacidad):
 | **Número del producto**, medido con el pipeline reproducible y un **juez independiente** (otro modelo) | p3: recall **0.93**, precisión **0.96** |
 
 El último es el que más me importa, porque no lo mide el mismo motor que genera. El juez es otro
-modelo y el flujo es reproducible. Y lo hace con un **modelo barato** de generador.
+modelo y el flujo es reproducible. Y lo hace con un **modelo barato** de generador. Repetido con **k=3**
+pasadas el número aguanta (0.91 ± 0.055 de recall, 0.965 de precisión) y la barra entre casos se estrecha:
+no era suerte de una sola corrida.
 
 Y lo del testimonio no es una corazonada. Si al dossier le quitas la voz del usuario y dejas solo
 la documentación técnica, el revisor deja de ver los problemas que solo esa voz revela: su recall

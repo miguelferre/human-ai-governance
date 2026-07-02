@@ -36,7 +36,7 @@ Lo cuarto, que no dependiera de cómo le escribo la entrada. Reescribí entera l
 
 Y luego subí la exigencia todo lo que pude. Cogí tres casos donde la respuesta correcta no la puse yo, sino un órgano independiente que ya los había investigado a fondo. Una comisión real, un auditor estatal, un tribunal federal. Le di el material en bruto y con las manos separadas, o sea sin que yo tocara ni la pregunta ni la solución. Aun así recupera entre el 70 y el 90% de lo que ellos señalaron, con una media cerca del 80%. Encuentra por su cuenta lo que encontró gente que se dedica a esto profesionalmente.
 
-Hay un número que es el que más me importa de todos, porque no lo pongo yo. El que corrige el examen es otro modelo distinto del que genera, para que no se apruebe a sí mismo, y todo el proceso está montado para que cualquiera lo repita y le salga lo mismo. Ahí el revisor pilla el 93% de los problemas y, de lo que dice, el 96% es de verdad. Y ojo, con un modelo barato haciendo el trabajo pesado.
+Hay un número que es el que más me importa de todos, porque no lo pongo yo. El que corrige el examen es otro modelo distinto del que genera, para que no se apruebe a sí mismo, y todo el proceso está montado para que cualquiera lo repita y le salga lo mismo. Ahí el revisor pilla el 93% de los problemas y, de lo que dice, el 96% es de verdad. Y ojo, con un modelo barato haciendo el trabajo pesado. Y no es de una sola tirada: lo he repetido tres veces por caso y sale prácticamente lo mismo, así que descarto que sea un golpe de suerte.
 
 ## La voz del usuario, que es la parte que más me gusta
 
@@ -54,7 +54,7 @@ Y si hay que enseñarlo en una reunión, saca el informe en una página autocont
 
 Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Ya tiene un paso de limpieza que quita las repeticiones evidentes sin perder nada por el camino, y eso lo he medido, no se deja ni un problema de los que ya encontraba. Luego probé la limpieza fina, la que usa el modelo listo para juntar el mismo problema dicho de cinco maneras distintas. Y aquí va la parte honesta. Limpia bastante más, pero de vez en cuando junta dos problemas que en realidad eran distintos, y en una auditoría eso es peor que dejar un duplicado, porque te esconde algo. Así que de momento me quedo con la limpieza segura por defecto y dejo la otra como opción para revisar a mano.
 
-Lo que queda es más de acabado que de fondo. Estrechar un poco los márgenes de las medidas repitiendo más veces cada prueba, y llevar el prerrelleno desde PDF, que ya cubre bien la ficha técnica, a las otras dos plantillas. Nada que cambie la conclusión, cosas de que dé gusto usarlo.
+Lo que queda es más de acabado que de fondo, sobre todo llevar el prerrelleno desde PDF, que ya cubre bien la ficha técnica, a las otras dos plantillas. Nada que cambie la conclusión, cosas de que dé gusto usarlo.
 
 ## La parte que igual te sorprende
 
