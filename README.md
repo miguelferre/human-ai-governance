@@ -73,11 +73,13 @@ modelo y el flujo es reproducible. Y lo hace con un **modelo barato** de generad
 pasadas el número aguanta (0.91 ± 0.055 de recall, 0.965 de precisión) y la barra entre casos se estrecha:
 no era suerte de una sola corrida.
 
-Y lo del testimonio no es una corazonada. Si al dossier le quitas la voz del usuario y dejas solo
-la documentación técnica, el revisor deja de ver los problemas que solo esa voz revela: su recall
-en ese grupo cae de **0.83 a 0.33**. Son justo los cognitivos, el exceso de confianza en la
-máquina, el modelo mental equivocado, la alerta que salta en mal momento. La capa que ninguna
-ficha técnica te va a contar.
+Y lo del testimonio no es una corazonada, está medido con juez independiente. Si al dossier le quitas
+la voz del usuario y dejas solo la documentación técnica, el revisor pierde recall justo en los problemas
+que solo esa voz revela: cae de **0.83 a 0.56**, mientras los controles no se mueven. Y los más
+vivenciales, la deferencia a la máquina, sentirse culpable ante el sistema, la confianza erosionada, caen
+**a cero** sin la voz, porque ninguna ficha técnica los insinúa. Cuánto baja el agregado depende de cuánto
+infiera el generador de la propia doc (con uno más conservador la caída llegaba a 0.33), pero el núcleo
+duro, lo que la persona vive, solo lo trae la voz.
 
 Detalle y método: **[docs/RESULTADOS.md](docs/RESULTADOS.md)** (el experimento) ·
 **[docs/RESULTADOS-testimonio.md](docs/RESULTADOS-testimonio.md)** (casos con testimonio real, test

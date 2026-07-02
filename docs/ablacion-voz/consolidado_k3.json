@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "experimento": "ablacion del testimonio (voz vs sin-voz), ADR-007 - version pipeline-codigo",
+    "metodo": "pipeline-codigo `comparar` (reproducible), approach p3, generador Haiku / juez Sonnet independiente; k=3. within-subject sobre los 5 casos con user_only. Confirma la corrida asistida k=1 (que uso Sonnet/Opus) sin subagentes ad-hoc.",
+    "k": 3,
+    "casos": [
+      "alert-fatigue-ehr",
+      "asiana-214",
+      "cierre-cuentas-bancarias",
+      "post-office-horizon",
+      "toeslagenaffaire"
+    ]
+  },
+  "n_por_subconjunto": {
+    "user_only": 12,
+    "both": 20,
+    "tech_only": 13
+  },
+  "recall": {
+    "con_voz": {
+      "user_only": [
+        0.8333,
+        0.0
+      ],
+      "both": [
+        0.9667,
+        0.0236
+      ],
+      "tech_only": [
+        0.9487,
+        0.0363
+      ],
+      "global": [
+        0.9259,
+        0.021
+      ]
+    },
+    "sin_voz": {
+      "user_only": [
+        0.5556,
+        0.0393
+      ],
+      "both": [
+        0.95,
+        0.0
+      ],
+      "tech_only": [
+        1.0,
+        0.0
+      ],
+      "global": [
+        0.8593,
+        0.0105
+      ]
+    }
+  },
+  "delta_user_only": 0.2777
+}

@@ -40,9 +40,9 @@ Hay un número que es el que más me importa de todos, porque no lo pongo yo. El
 
 ## La voz del usuario, que es la parte que más me gusta
 
-Antes te decía que la joya es la voz del que usa la IA. Eso no es una corazonada mía, lo he medido a propósito. Cogí los expedientes y les quité esa voz, dejando solo la documentación técnica, la que tendría cualquiera. Y el revisor se queda medio ciego. Los problemas que solo se ven desde la experiencia de quien lo usa pasan de encontrarse ocho de cada diez a apenas tres de cada diez.
+Antes te decía que la joya es la voz del que usa la IA. Eso no es una corazonada mía, lo he medido a propósito y con un juez independiente. Cogí los expedientes y les quité esa voz, dejando solo la documentación técnica, la que tendría cualquiera. Y el revisor se queda más ciego justo donde importa: los problemas que solo se ven desde la experiencia de quien lo usa pasan de encontrarse ocho de cada diez a poco más de cinco. Y los más de piel, el sentirte culpable ante la máquina o el fiarte de ella hasta dudar de ti mismo, esos desaparecen del todo sin la voz.
 
-Y no es un grupo cualquiera de problemas. Son justo los de la cabeza. El exceso de confianza en la máquina, el fiarse a ciegas, el modelo mental equivocado de lo que la IA hace de verdad, la alerta que salta en mal momento. Nada de eso está en una ficha técnica. Solo lo cuenta quien lo sufre. Por eso insisto tanto con esa segunda plantilla, no es relleno.
+Aquí va el matiz honesto: cuánto se pierde depende del modelo. Uno muy listo deduce de la ficha técnica parte de lo cognitivo aunque el usuario no lo cuente, así que la caída se suaviza; con uno más justito se hunde más (ahí llegaba a tres de cada diez). Pero lo puramente vivido, lo que ninguna ficha insinúa, solo lo trae la voz. Por eso insisto tanto con esa segunda plantilla, no es relleno.
 
 ## Para el que firma la compra
 

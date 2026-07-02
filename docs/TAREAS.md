@@ -32,7 +32,11 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       los problemas solo los revela la voz, sistemáticamente los cognitivos; (2) efecto — el recall de
       `user_only` cae **0.83→0.33 sin voz** (Δ−0.50), con controles planos (both −0.05, tech_only ni baja):
       el testimonio **descubre** la capa cognitiva, no solo la refuerza. Confirma la predicción pre-registrada.
-      Corrida asistida (subagentes), k=1; la varianza con k=3 y el pipeline-código quedan como pulido.
+      Corrida asistida (subagentes), k=1. **Rehecha con el pipeline-código y k=3 (2026-07-02):** confirma la
+      dirección (user_only 0.83→0.56, controles planos) pero recalibra la magnitud frente a la asistida
+      (−0.28 vs −0.50): el generador Haiku infiere de la doc parte de lo cognitivo. Lo puramente vivencial
+      (deferencia, carga de prueba, confianza) cae a cero sin voz en ambas. `docs/ablacion-voz/consolidado_k3.json`;
+      detalle en [RESULTADOS-ablacion-testimonio.md](RESULTADOS-ablacion-testimonio.md).
 - [x] **Semi-automatizar el dossier.** Parte OFFLINE HECHA: `ingest.py` convierte las plantillas rellenas
       (01/02/03) en un `Dossier` validado, determinista, sin API (`interaction-review ingerir --ficha … --experiencia …`).
       Extrae nombre/dominio de la ficha, admite varios técnicos/usuarios (ids distintos), saca los documentos

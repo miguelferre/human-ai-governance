@@ -114,8 +114,46 @@ sustituta. Mismo patrón que el conteo offline (robodebt/CONCERN con 0 `user_onl
 hiperdocumentados): **cuando un técnico "habla como usuario", la voz del usuario aporta menos**.
 No lo esconde el resultado; lo explica.
 
-**Salvedades.** Corrida **asistida** con subagentes (roles separados), no con el pipeline-código
-`comparar`; **k=1** (sin varianza — el efecto es lo bastante grande para verse a una corrida, pero
-la magnitud exacta se estrecharía con k=3). Dos `user_only` no se detectaron ni con voz (PO-09
-formación, TO-10 pérdida de confianza): el generador ciego no los reportó aun teniendo la voz, y
-por eso el recall con voz es 0.83 y no 1.00.
+**Salvedades de esta corrida (asistida).** Fue **asistida** con subagentes (roles separados), no con el
+pipeline-código `comparar`, y **k=1**. Para cerrarlo se rehízo con el pipeline-código reproducible y k=3
+(ver abajo), que confirma la dirección y recalibra la magnitud. Dos `user_only` no se detectaron ni con voz
+(PO-09 formación, TO-10 pérdida de confianza): el generador ciego no los reportó aun teniendo la voz, y por
+eso el recall con voz es 0.83 y no 1.00.
+
+## Confirmación con el pipeline-código (k=3, 2026-07-02)
+
+Se rehízo la corrida con el flujo **reproducible** (pipeline-código `comparar`, no subagentes), approach p3,
+**generador Haiku / juez Sonnet independiente**, k=3, sobre los mismos 5 casos. Datos en
+`docs/ablacion-voz/consolidado_k3.json` (+ raws por caso y condición).
+
+| revealed_by | n | recall CON voz | recall SIN voz | Δ (sin − con) |
+|---|---|---|---|---|
+| **user_only** | 12 | **0.83** | **0.56** | **−0.28** |
+| both (control) | 20 | 0.97 | 0.95 | −0.02 |
+| tech_only (control) | 13 | 0.95 | 1.00 | +0.05 |
+| **global** | 45 | 0.93 | 0.86 | −0.07 |
+
+**La dirección se confirma; la magnitud se recalibra.** El efecto sigue **localizado en `user_only`** (los
+controles no se mueven), pero cae **−0.28** en vez del −0.50 asistido. La diferencia es el **generador**: la
+corrida asistida usaba Sonnet (conservador, que sin la voz no reportaba lo cognitivo); esta usa **Haiku, que
+infiere de la documentación técnica** parte de esos problemas. Parte del −0.50 era artefacto del generador
+conservador, no efecto puro del testimonio.
+
+**Issue a issue** —en cuántas de las 3 corridas SIN voz sigue detectándose cada `user_only`— sale una lectura
+más fina y más útil:
+
+- **Caen a cero sin la voz (0/3), los puramente vivenciales:** la deferencia a la máquina (PO-01, *"llegué a
+  dudar de mí mismo antes que del programa"*), la carga de la prueba invertida y vivida (TO-04, *"eres tú
+  quien tiene que demostrar que no eres una defraudadora"*), la erosión de confianza (TO-10). Ningún generador
+  los infiere de una ficha técnica: **solo la voz los revela**.
+- **Haiku los recupera sin la voz (3/3), los cognitivo-estructurales:** automation bias donde la doc dice que
+  se cierran alertas (AF-02, cc-04), fatiga donde dice alertas horarias (AF-04), falta de override donde no
+  hay apelación (cc-03), expectativa de protección (AS-05). Ahí la voz aporta **grounding**, no
+  descubrimiento: un modelo capaz los deduce de la estructura ya documentada.
+
+**Conclusión refinada.** El testimonio es **imprescindible para la capa vivencial-emocional** (invisible en
+cualquier documento; cae a cero sin la voz en ambas corridas) y **aporta grounding para la capa
+cognitivo-estructural** (que un generador capaz infiere de la doc). Por eso la magnitud del efecto depende de
+cuán inferente sea el generador —de ahí el −0.50 con Sonnet frente al −0.28 con Haiku— pero el diferencial del
+testimonio se sostiene medido con método independiente, y su núcleo duro (lo que la persona *vive* y ninguna
+ficha declara) es exactamente lo que desaparece sin ella.
