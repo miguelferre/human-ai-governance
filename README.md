@@ -41,26 +41,52 @@ partes interesadas:
 - **[Inventario de documentos](templates/03_inventario_documentos.md)**.
 
 Esas tres respuestas **son** la entrada. El diferencial está en la segunda: cruzar lo que el
-equipo técnico *cree* que pasa con lo que el usuario *vive* — porque ese desajuste es, en sí
+equipo técnico *cree* que pasa con lo que el usuario *vive*, porque ese desajuste es, en sí
 mismo, una señal de la capa de interacción.
+
+Y no hay que tocar JSON. Rellenas las plantillas en markdown y `interaction-review ingerir` te
+arma el dossier solo, así construir la entrada no cuesta lo mismo que auditar a mano.
 
 ## ¿Funciona?
 
 Sí, y está medido contra **casos held-out documentados por fuentes independientes**, en
-**6 sectores** (sanidad, aviación, justicia, finanzas, administración pública, RRHH):
+**8 sectores** (sanidad, aviación, justicia, finanzas, administración pública, RRHH, bienestar,
+discapacidad):
 
 | Prueba | Resultado |
 |---|---|
-| Caso clínico real (golden de un experto humano) | redescubre **13-14 de 15** problemas; precisión ~100% |
-| 5+ held-out (justicia, aviación, RRHH, sanidad, moderación) | recall **0.80-1.00** — no es overfitting |
-| Sistema **bien diseñado** (control de falsos positivos) | **0 hallazgos** — no inventa para parecer productivo |
-| Robustez al fraseo (mismo caso, otras palabras) | recall estable — entiende, no pesca palabras clave |
-| **Test duro**: golden de la *Royal Commission* + dossier en bruto | **9/10** — recupera lo que un órgano humano independiente señaló |
+| Caso clínico real (golden de un experto humano) | redescubre **13-14 de 15** problemas, precisión ~100% |
+| Held-out en varios sectores (justicia, aviación, RRHH, sanidad, moderación) | recall **0.80-1.00**, no es overfitting |
+| Sistema **bien diseñado** (control de falsos positivos) | **0 hallazgos**, no inventa para parecer productivo |
+| Robustez al fraseo (mismo caso, otras palabras) | recall estable, entiende y no pesca palabras clave |
+| **Test duro**, n=3: golden de un órgano independiente (Royal Commission, un auditor estatal, un tribunal federal) + dossier en bruto, manos separadas | recall **0.70-0.90** (media ~0.79): recupera lo que señalaron sin verlo |
+| **Número del producto**, medido con el pipeline reproducible y un **juez independiente** (otro modelo) | p3: recall **0.93**, precisión **0.96** |
 
-Y lo hace con un **modelo barato**: no necesita la maquinaria más cara para funcionar.
+El último es el que más me importa, porque no lo mide el mismo motor que genera. El juez es otro
+modelo y el flujo es reproducible. Y lo hace con un **modelo barato** de generador.
+
+Y lo del testimonio no es una corazonada. Si al dossier le quitas la voz del usuario y dejas solo
+la documentación técnica, el revisor deja de ver los problemas que solo esa voz revela: su recall
+en ese grupo cae de **0.83 a 0.33**. Son justo los cognitivos, el exceso de confianza en la
+máquina, el modelo mental equivocado, la alerta que salta en mal momento. La capa que ninguna
+ficha técnica te va a contar.
 
 Detalle y método: **[docs/RESULTADOS.md](docs/RESULTADOS.md)** (el experimento) ·
-**[docs/RESULTADOS-testimonio.md](docs/RESULTADOS-testimonio.md)** (7 casos con testimonio real, 6 sectores).
+**[docs/RESULTADOS-testimonio.md](docs/RESULTADOS-testimonio.md)** (casos con testimonio real, test
+duro n=3 y el número reproducible) · **[docs/RESULTADOS-ablacion-testimonio.md](docs/RESULTADOS-ablacion-testimonio.md)** (el efecto de la voz).
+
+## En el idioma de quien te compra
+
+HAX y PAIR son el estándar de diseño, pero quien aprueba la compra (gobernanza, calidad,
+cumplimiento) no razona en HAX-G2, razona en AI Act y NIST. Así que el informe se traduce solo.
+Con `--crosswalk`, cada hallazgo sale también mapeado a los artículos del **EU AI Act** (el 13 de
+transparencia, el 14 de supervisión humana, que nombra el *automation bias* de forma explícita, el
+86 de derecho a explicación) y a las subcategorías del **NIST AI RMF**. Deja de ser una crítica de
+diseño y pasa a ser evidencia de conformidad que entra en su expediente. Es orientativo, no
+dictamen legal, y así está dicho en el propio informe.
+
+Y si hay que enseñarlo, `--format html` saca un informe autocontenido y presentable que imprime a
+PDF sin depender de nada externo.
 
 ## Es un experimento con método, no humo
 
@@ -87,8 +113,14 @@ uv sync --extra dev
 ## Uso
 
 ```bash
-# Informe de hallazgos para un sistema descrito en un Dossier (JSON):
-uv run interaction-review revisar --dossier data/examples/dossier_demo.json --approach p3 --dedup
+# De las tres plantillas rellenas al Dossier (determinista, sin API):
+uv run interaction-review ingerir \
+    --ficha templates/01_relleno.md --experiencia templates/02_relleno.md \
+    --inventario templates/03_relleno.md --out ruta/dossier.json
+
+# Informe de hallazgos, con el mapeo normativo y en HTML listo para imprimir a PDF:
+uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup \
+    --crosswalk --format html --out informe.html
 
 # 'auto' (router de producto): b1 si el caso es fácil, p3+dedup si es difícil:
 uv run interaction-review revisar --dossier ruta/dossier.json --approach auto
@@ -101,7 +133,9 @@ uv run interaction-review comparar \
 
 Approaches: `b0` (checklist, sin LLM) · `b1` (prompt único) · `p3` (pipeline, **el producto**) ·
 `a4` (agente). `--dedup` consolida casi-duplicados (determinista); `--dedup-llm` es la capa
-semántica opcional (gasta API). El comando `comparar` requiere `ANTHROPIC_API_KEY` (salvo solo `b0`).
+semántica opcional (gasta API). `--crosswalk` añade el mapeo a EU AI Act / NIST; `--format html`
+saca el informe presentable. El comando `comparar` requiere `ANTHROPIC_API_KEY` (salvo solo `b0`),
+o corre en local con `LLM_BACKEND=ollama`.
 
 > **Local / Windows.** Para correr en local con [Ollama](https://ollama.com) antepón
 > `LLM_BACKEND=ollama`. Si el Control de aplicaciones de Windows bloquea el lanzador `.exe`,
@@ -112,14 +146,18 @@ semántica opcional (gasta API). El comando `comparar` requiere `ANTHROPIC_API_K
 ```
 src/interaction_review/
   schemas.py        Contrato de datos (Dossier, Finding, GoldenIssue, ...)
-  guidelines/       HAX-18 y PAIR como datos enlazables (hax18.yaml, pair.yaml)
+  guidelines/       HAX-18 y PAIR como datos enlazables + regulatory_map.yaml (AI Act / NIST)
   approaches/       Escalera de approaches (b0/b1/b2/p3/p3n/a4)
+  ingest.py         Plantillas rellenas -> Dossier (determinista, sin API)
   dedup.py          Consolidación determinista de hallazgos (producto)
   dedup_llm.py      Capa semántica opcional (LLM)
   router.py         Enrutado 'auto' por dificultad
-  metrics.py        recall, precisión, genericidad, grounding, F-beta
-  cli.py            Comandos revisar / evaluar / comparar
-docs/adr/           Decisiones de diseño (ADR-001..006)
+  regulatory.py     Crosswalk de los hallazgos a EU AI Act / NIST AI RMF
+  ablation.py       Ablación del testimonio (dossier con voz vs sin voz)
+  metrics.py        recall, precisión, genericidad, grounding, F-beta, recall por fuente
+  report.py         Informe markdown · report_html.py Informe HTML autocontenido
+  cli.py            Comandos ingerir / revisar / evaluar / comparar
+docs/adr/           Decisiones de diseño (ADR-001..008)
 data/external/      Casos held-out públicos (dossier + golden por caso)
 data/golden/        PRIVADO, gitignored (caso clínico real)
 templates/          Las tres plantillas de entrada
