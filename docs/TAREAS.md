@@ -43,8 +43,12 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       localizar los huecos ✍️, reconstruir el markdown) en código; al modelo solo el mapeo, con la regla de no
       inventar (pregunta sin soporte en el documento → hueco vacío). El humano revisa antes de `ingerir`. Verificado
       end-to-end contra nube (Haiku) sobre una model card sintética, cerrando el círculo con `ingerir`; 10 tests
-      deterministas (LLM monkeypatcheado), incl. el round-trip prerrelleno → `extract_answers`. Mecanismo genérico
-      a las tres plantillas (`--tipo`); verificada la ficha (01). Pulido: extender/verificar 02 y 03.
+      deterministas (LLM monkeypatcheado), incl. el round-trip prerrelleno → `extract_answers`. Verificadas
+      end-to-end contra nube las dos plantillas con fuente natural: `ficha` (01) desde un PDF/model card, y
+      `experiencia` (02) desde una transcripción de entrevista con el usuario (ambas cierran el círculo con
+      `ingerir`). El `inventario` (03) es lista de casillas + datos logísticos, no info narrativa: no encaja
+      con el prerrelleno y se rellena a mano; `--tipo` se restringió a ficha/experiencia (queda `--plantilla`
+      para forzar cualquier plantilla).
 - [x] **Informe presentable** (HTML) — HECHO. `report_html.render_findings_html`: informe autocontenido
       (CSS embebido, sin dependencias de red), diseño editorial sobrio para gobernanza sanitaria, imprime a
       PDF (`@media print`). Escapa todo el texto libre (anti-inyección). `revisar --format html`

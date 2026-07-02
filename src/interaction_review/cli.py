@@ -284,10 +284,16 @@ def build_parser() -> argparse.ArgumentParser:
     pp.add_argument(
         "--tipo",
         default="ficha",
-        choices=["ficha", "experiencia", "inventario"],
-        help="Plantilla a prerrellenar (def: ficha).",
+        choices=["ficha", "experiencia"],
+        help="Plantilla a prerrellenar: 'ficha' (desde PDF/model card) o 'experiencia' (desde "
+        "transcripcion de entrevista con el usuario). El inventario (03) es una lista de casillas: "
+        "se rellena a mano.",
     )
-    pp.add_argument("--plantilla", default=None, help="Ruta de plantilla a usar (override de --tipo).")
+    pp.add_argument(
+        "--plantilla",
+        default=None,
+        help="Ruta de plantilla a usar (override de --tipo; para prerrellenar cualquier plantilla).",
+    )
     pp.add_argument("--model", default=None, help="Modelo generador (def: el de LLM_BACKEND).")
     pp.add_argument("--out", default=None, help="Fichero .md de salida (def: stdout).")
     pp.set_defaults(func=cmd_prerrellenar)

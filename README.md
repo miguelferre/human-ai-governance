@@ -47,10 +47,11 @@ mismo, una señal de la capa de interacción.
 Y no hay que tocar JSON. Rellenas las plantillas en markdown y `interaction-review ingerir` te
 arma el dossier solo, así construir la entrada no cuesta lo mismo que auditar a mano.
 
-¿Ya tienes un PDF o una model card? `interaction-review prerrellenar` se lo pasa al LLM para que
-rellene la plantilla con lo que consta en el documento, y **solo eso**: lo que no aparece lo deja
-en blanco, no se lo inventa. Tú revisas y corriges, y de ahí a `ingerir`. Este paso sí usa API;
-la ingesta de plantillas ya rellenas, no.
+¿Ya tienes un PDF, una model card o la transcripción de una entrevista con el usuario?
+`interaction-review prerrellenar` se lo pasa al LLM para que rellene la plantilla (la **ficha** desde el
+documento técnico, la **experiencia** desde la entrevista) con lo que consta, y **solo eso**: lo que no
+aparece lo deja en blanco, no se lo inventa. Tú revisas y corriges, y de ahí a `ingerir`. Este paso sí
+usa API; la ingesta de plantillas ya rellenas, no.
 
 ## ¿Funciona?
 
@@ -120,8 +121,9 @@ uv sync --extra dev
 ## Uso
 
 ```bash
-# (Opcional) De un PDF/model card a una plantilla prerrellena con el LLM (revísala luego):
-uv run interaction-review prerrellenar --doc ruta/model_card.pdf --tipo ficha --out templates/01_relleno.md
+# (Opcional) De un documento a una plantilla prerrellena con el LLM (revísala luego):
+uv run interaction-review prerrellenar --doc ruta/model_card.pdf --tipo ficha       --out templates/01_relleno.md
+uv run interaction-review prerrellenar --doc ruta/entrevista.txt  --tipo experiencia --out templates/02_relleno.md
 
 # De las tres plantillas rellenas al Dossier (determinista, sin API):
 uv run interaction-review ingerir \
