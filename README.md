@@ -47,6 +47,11 @@ mismo, una señal de la capa de interacción.
 Y no hay que tocar JSON. Rellenas las plantillas en markdown y `interaction-review ingerir` te
 arma el dossier solo, así construir la entrada no cuesta lo mismo que auditar a mano.
 
+¿Ya tienes un PDF o una model card? `interaction-review prerrellenar` se lo pasa al LLM para que
+rellene la plantilla con lo que consta en el documento, y **solo eso**: lo que no aparece lo deja
+en blanco, no se lo inventa. Tú revisas y corriges, y de ahí a `ingerir`. Este paso sí usa API;
+la ingesta de plantillas ya rellenas, no.
+
 ## ¿Funciona?
 
 Sí, y está medido contra **casos held-out documentados por fuentes independientes**, en
@@ -113,6 +118,9 @@ uv sync --extra dev
 ## Uso
 
 ```bash
+# (Opcional) De un PDF/model card a una plantilla prerrellena con el LLM (revísala luego):
+uv run interaction-review prerrellenar --doc ruta/model_card.pdf --tipo ficha --out templates/01_relleno.md
+
 # De las tres plantillas rellenas al Dossier (determinista, sin API):
 uv run interaction-review ingerir \
     --ficha templates/01_relleno.md --experiencia templates/02_relleno.md \
@@ -149,6 +157,7 @@ src/interaction_review/
   guidelines/       HAX-18 y PAIR como datos enlazables + regulatory_map.yaml (AI Act / NIST)
   approaches/       Escalera de approaches (b0/b1/b2/p3/p3n/a4)
   ingest.py         Plantillas rellenas -> Dossier (determinista, sin API)
+  smart_ingest.py   Documento (PDF/model card) -> plantilla prerrellena (LLM; el humano revisa)
   dedup.py          Consolidación determinista de hallazgos (producto)
   dedup_llm.py      Capa semántica opcional (LLM)
   router.py         Enrutado 'auto' por dificultad

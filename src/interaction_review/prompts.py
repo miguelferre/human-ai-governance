@@ -320,3 +320,71 @@ AGENT_GAPS_TOOL = {
         "required": ["motivo", "guideline_ids", "seguir"],
     },
 }
+
+
+# --------------------------------------------------------------------------- #
+# Prerrelleno de plantillas desde un documento (ingesta inteligente de PDFs).
+# El LLM extrae de un documento arbitrario (PDF/model card) las respuestas a las
+# preguntas de una plantilla; SOLO lo que consta, sin inventar. El humano revisa
+# el markdown antes de `ingerir`. Coherente con la tesis: lo mecanico (leer el
+# PDF, reconstruir el markdown) al codigo; al modelo, solo el mapeo irreducible.
+# --------------------------------------------------------------------------- #
+PREFILL_SYSTEM = """\
+Eres un asistente que PRERRELLENA una plantilla de auditoria a partir de un documento
+(model card, ficha tecnica, documentacion de un sistema de IA). Te dan el texto del documento
+y una lista NUMERADA de preguntas. Para cada pregunta, responde con lo que diga el documento.
+
+REGLAS (no negociables):
+- Usa UNICAMENTE informacion presente en el documento. No inventes, no supongas, no completes con
+  conocimiento general. Si el documento no responde a una pregunta, devuelve answer = "" (cadena vacia).
+- Prefiere parafrasis fiel o cita breve. Sin adornos.
+- Texto plano, una o dos frases por respuesta. Nada de markdown, vinetas ni saltos de linea.
+- No incluyas datos personales de individuos aunque aparezcan.
+- Responde a CADA pregunta por su numero de slot. Es mejor un "" honesto que un relleno inventado.
+
+Devuelve TODO mediante la herramienta rellenar_plantilla."""
+
+
+def prefill_user(doc_text: str, slots_payload: list[dict], max_chars: int = 24000) -> str:
+    """`slots_payload`: lista de {slot, section, question}. Trunca el documento si excede max_chars."""
+    doc = doc_text.strip()
+    truncated = len(doc) > max_chars
+    if truncated:
+        doc = doc[:max_chars]
+    blocks = [
+        "DOCUMENTO FUENTE" + (" (truncado)" if truncated else "") + ":",
+        doc,
+        "",
+        "PREGUNTAS (responde por numero de slot, SOLO con lo que conste en el documento):",
+    ]
+    for s in slots_payload:
+        sec = f"[{s['section']}] " if s.get("section") else ""
+        blocks.append(f"  {s['slot']}. {sec}{s['question']}")
+    blocks.append('\nDevuelve una respuesta por slot via rellenar_plantilla (answer="" si no consta).')
+    return "\n".join(blocks)
+
+
+PREFILL_TOOL = {
+    "name": "rellenar_plantilla",
+    "description": "Devuelve la respuesta a cada pregunta de la plantilla, basada solo en el documento.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "answers": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "slot": {"type": "integer", "description": "Numero de la pregunta."},
+                        "answer": {
+                            "type": "string",
+                            "description": 'Respuesta basada SOLO en el documento; "" si no consta.',
+                        },
+                    },
+                    "required": ["slot", "answer"],
+                },
+            }
+        },
+        "required": ["answers"],
+    },
+}

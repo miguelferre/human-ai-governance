@@ -20,6 +20,8 @@ Esa voz, la del que convive con la máquina, es la pieza que ningún otro audito
 
 Rellenas las tres plantillas, ejecutas `ingerir` y te arma el expediente solo, sin tocar JSON ni nada por el estilo. Así preparar la entrada no te cuesta lo mismo que hacer la auditoría a mano.
 
+Y si ya tienes un PDF o una model card del sistema, ni copiar a mano hace falta. El comando `prerrellenar` se lo pasa al modelo, que rellena la ficha con lo que pone en el documento y deja en blanco lo que no aparece, sin inventárselo. Tú lo repasas y a correr. Es el único paso de la entrada que usa el modelo; rellenar las plantillas a mano sigue sin gastar nada.
+
 ## Cómo sé que funciona
 
 Y ahora lo importante, que es cómo sé que esto va en serio y no es humo.
@@ -52,7 +54,7 @@ Y si hay que enseñarlo en una reunión, saca el informe en una página autocont
 
 Seamos honestos. No es un producto cerrado con su botón bonito. Es un motor que funciona y un método que se sostiene. Ya tiene un paso de limpieza que quita las repeticiones evidentes sin perder nada por el camino, y eso lo he medido, no se deja ni un problema de los que ya encontraba. Luego probé la limpieza fina, la que usa el modelo listo para juntar el mismo problema dicho de cinco maneras distintas. Y aquí va la parte honesta. Limpia bastante más, pero de vez en cuando junta dos problemas que en realidad eran distintos, y en una auditoría eso es peor que dejar un duplicado, porque te esconde algo. Así que de momento me quedo con la limpieza segura por defecto y dejo la otra como opción para revisar a mano.
 
-Lo que queda es más de acabado que de fondo. Estrechar un poco los márgenes de las medidas repitiendo más veces cada prueba, y que sepa tragarse un PDF de golpe en vez de plantillas ya rellenas. Nada que cambie la conclusión, cosas de que dé gusto usarlo.
+Lo que queda es más de acabado que de fondo. Estrechar un poco los márgenes de las medidas repitiendo más veces cada prueba, y llevar el prerrelleno desde PDF, que ya cubre bien la ficha técnica, a las otras dos plantillas. Nada que cambie la conclusión, cosas de que dé gusto usarlo.
 
 ## La parte que igual te sorprende
 

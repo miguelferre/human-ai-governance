@@ -15,6 +15,9 @@ dependencies = [
     # Backend local (Ollama /api/chat). Ya venia transitiva via anthropic; se
     # declara explicita porque se usa directamente (ADR-004).
     "httpx>=0.27,<1",
+    # Lectura de PDF para la ingesta inteligente (documento -> plantilla prerrellena).
+    # Puro Python, sin binarios; solo se usa en `prerrellenar`.
+    "pypdf>=4,<6",
 ]
 
 [project.optional-dependencies]

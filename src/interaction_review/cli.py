@@ -146,6 +146,30 @@ def cmd_ingerir(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_prerrellenar(args: argparse.Namespace) -> int:
+    from interaction_review.smart_ingest import prefill_document
+
+    try:
+        filled = prefill_document(
+            args.doc, tipo=args.tipo, template_file=args.plantilla, model=args.model
+        )
+    except (ValueError, FileNotFoundError) as e:
+        print(f"[prerrellenar] {e}", file=sys.stderr)
+        return 2
+    except LLMNotConfigured as e:
+        print(f"[LLM no configurado] {e}", file=sys.stderr)
+        return 3
+
+    print(
+        f"[prerrellenar] plantilla '{args.tipo}' prerrellenada desde {Path(args.doc).name}. "
+        "REVISA las respuestas antes de 'ingerir': el modelo puede haberse dejado o "
+        "malinterpretado algo, y los huecos vacios son campos que el documento no cubria.",
+        file=sys.stderr,
+    )
+    _emit(filled, args.out)
+    return 0
+
+
 def cmd_comparar(args: argparse.Namespace) -> int:
     dossier = Dossier.model_validate(_load_json(args.dossier))
     golden = [GoldenIssue.model_validate(x) for x in _load_json(args.golden)]
@@ -250,6 +274,23 @@ def build_parser() -> argparse.ArgumentParser:
     pi.add_argument("--domain", default=None, help="Dominio (si no, se toma de la ficha).")
     pi.add_argument("--out", default=None, help="Fichero dossier.json (def: stdout).")
     pi.set_defaults(func=cmd_ingerir)
+
+    pp = sub.add_parser(
+        "prerrellenar",
+        help="Prerrellena una plantilla (01/02/03) desde un documento (PDF/model card) con el LLM. "
+        "Requiere ANTHROPIC_API_KEY salvo LLM_BACKEND=ollama.",
+    )
+    pp.add_argument("--doc", required=True, help="Documento fuente: .pdf, .md o .txt.")
+    pp.add_argument(
+        "--tipo",
+        default="ficha",
+        choices=["ficha", "experiencia", "inventario"],
+        help="Plantilla a prerrellenar (def: ficha).",
+    )
+    pp.add_argument("--plantilla", default=None, help="Ruta de plantilla a usar (override de --tipo).")
+    pp.add_argument("--model", default=None, help="Modelo generador (def: el de LLM_BACKEND).")
+    pp.add_argument("--out", default=None, help="Fichero .md de salida (def: stdout).")
+    pp.set_defaults(func=cmd_prerrellenar)
 
     pc = sub.add_parser(
         "comparar",

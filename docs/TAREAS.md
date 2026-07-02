@@ -1,6 +1,6 @@
 # Tareas pendientes
 
-Trabajo planificado del proyecto. Estado a 2026-06-30. Lo de "rigor" **se saca de cara** (no es
+Trabajo planificado del proyecto. Estado a 2026-07-02. Lo de "rigor" **se saca de cara** (no es
 respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md](RESULTADOS-testimonio.md).
 
 ## Rigor de los resultados
@@ -29,12 +29,18 @@ respaldo defensivo): es lo que cierra el resultado de [RESULTADOS-testimonio.md]
       `user_only` cae **0.83→0.33 sin voz** (Δ−0.50), con controles planos (both −0.05, tech_only ni baja):
       el testimonio **descubre** la capa cognitiva, no solo la refuerza. Confirma la predicción pre-registrada.
       Corrida asistida (subagentes), k=1; la varianza con k=3 y el pipeline-código quedan como pulido.
-- [~] **Semi-automatizar el dossier.** Parte OFFLINE HECHA: `ingest.py` convierte las plantillas rellenas
+- [x] **Semi-automatizar el dossier.** Parte OFFLINE HECHA: `ingest.py` convierte las plantillas rellenas
       (01/02/03) en un `Dossier` validado, determinista, sin API (`interaction-review ingerir --ficha … --experiencia …`).
       Extrae nombre/dominio de la ficha, admite varios técnicos/usuarios (ids distintos), saca los documentos
       marcados del inventario, y asigna el `kind` correcto por plantilla. Verificado end-to-end contra el formato
-      real (plantillas → dossier → `revisar`). 9 tests. **Falta (API):** ingerir documentación arbitraria (PDFs,
-      model cards) de forma inteligente → plantillas prerrellenas; eso sí necesita LLM.
+      real (plantillas → dossier → `revisar`). 9 tests. **Parte INTELIGENTE (API) HECHA (MVP):** `smart_ingest.py` +
+      `interaction-review prerrellenar` convierten un documento arbitrario (PDF/model card) en una plantilla
+      prerrellena con UNA llamada al LLM (structured output). Reparto ADR-004: lo mecánico (leer el PDF con `pypdf`,
+      localizar los huecos ✍️, reconstruir el markdown) en código; al modelo solo el mapeo, con la regla de no
+      inventar (pregunta sin soporte en el documento → hueco vacío). El humano revisa antes de `ingerir`. Verificado
+      end-to-end contra nube (Haiku) sobre una model card sintética, cerrando el círculo con `ingerir`; 10 tests
+      deterministas (LLM monkeypatcheado), incl. el round-trip prerrelleno → `extract_answers`. Mecanismo genérico
+      a las tres plantillas (`--tipo`); verificada la ficha (01). Pulido: extender/verificar 02 y 03.
 - [x] **Informe presentable** (HTML) — HECHO. `report_html.render_findings_html`: informe autocontenido
       (CSS embebido, sin dependencias de red), diseño editorial sobrio para gobernanza sanitaria, imprime a
       PDF (`@media print`). Escapa todo el texto libre (anti-inyección). `revisar --format html`
