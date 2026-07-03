@@ -241,7 +241,10 @@ templates/          The three input templates
 Note on language: the tooling, documentation, and code are in English. Spanish is kept on purpose in the
 evidence layer: the prompts that produced the measured numbers, the case data and result files under
 `data/` and `docs/`, and the test fixtures that mirror that domain content. Translating the prompts or the
-case data would require re-running the experiments to keep the figures valid.
+case data would require re-running the experiments to keep the figures valid. **Consequence:** because the
+generator prompts are in Spanish, the **findings come out in Spanish** regardless of the template language;
+if you fill the templates in English the report structure is English but the finding text is Spanish. A
+per-language prompt layer (re-validated once) is the clean fix; until then this is expected.
 
 ## Privacy
 

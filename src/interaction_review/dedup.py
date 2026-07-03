@@ -159,16 +159,14 @@ def _merge(members: list[Finding]) -> Finding:
     )
 
 
-def deduplicate(
+def cluster(
     findings: list[Finding], threshold: float = DEFAULT_THRESHOLD
-) -> list[Finding]:
-    """Collapses near-duplicate findings. Stable with respect to the input order.
+) -> list[list[Finding]]:
+    """Groups near-duplicate findings into clusters of members, stable by input order.
 
-    Returns one finding per cluster (representative with merged guidelines and
-    `merged_count`), in the order in which each cluster was opened. Idempotent for
-    well-separated clusters (the common case), but NOT guaranteed in general: the merged
-    representative can end up more similar to a neighboring cluster than the original
-    first member was, so a second pass may merge clusters the first left apart.
+    Grouping by REPRESENTATIVE (the first member of each open cluster), not single-linkage,
+    to avoid transitive over-merging. Shared with the offline validation scripts
+    (scripts/dedup_report.py) so they audit the SAME grouping the product uses.
     """
     clusters: list[list[Finding]] = []
     reps: list[Finding] = []  # provisional representative (the first of each cluster)
@@ -183,4 +181,18 @@ def deduplicate(
         else:
             clusters.append([f])
             reps.append(f)
-    return [_merge(c) for c in clusters]
+    return clusters
+
+
+def deduplicate(
+    findings: list[Finding], threshold: float = DEFAULT_THRESHOLD
+) -> list[Finding]:
+    """Collapses near-duplicate findings. Stable with respect to the input order.
+
+    Returns one finding per cluster (representative with merged guidelines and
+    `merged_count`), in the order in which each cluster was opened. Idempotent for
+    well-separated clusters (the common case), but NOT guaranteed in general: the merged
+    representative can end up more similar to a neighboring cluster than the original
+    first member was, so a second pass may merge clusters the first left apart.
+    """
+    return [_merge(c) for c in cluster(findings, threshold)]

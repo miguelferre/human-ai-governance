@@ -25,29 +25,6 @@ from interaction_review.schemas import Finding
 _TP = {"tp_match", "tp_new"}
 
 
-def _clusters_llm(findings: list[Finding]) -> list[list[Finding]]:
-    """Reproduces the grouping of deduplicate_llm (pre_dedup=False) returning members."""
-    by_id = {f.id: f for f in findings}
-    order = {f.id: n for n, f in enumerate(findings)}
-    groups = dedup_llm._llm_groups(findings, None, 0.0)
-    assigned: set[str] = set()
-    clusters: list[list[Finding]] = []
-    for ids in groups:
-        members = [by_id[i] for i in dict.fromkeys(ids) if i in by_id and i not in assigned]
-        if len(members) >= 2:
-            assigned.update(m.id for m in members)
-            clusters.append(members)
-    for f in findings:
-        if f.id not in assigned:
-            clusters.append([f])
-    # Same guardrail as deduplicate_llm: splits groups with disparate loci.
-    refined = []
-    for c in clusters:
-        refined.extend(dedup_llm._refine_group(c, dedup_llm.SEMANTIC_LOCUS_FLOOR))
-    refined.sort(key=lambda c: min(order[m.id] for m in c))
-    return refined
-
-
 def _eval_run(run: dict) -> dict:
     findings = [Finding.model_validate(x) for x in run["findings"]]
     adj = {a["finding_id"]: a for a in run["adjudications"]}
@@ -56,7 +33,9 @@ def _eval_run(run: dict) -> dict:
     cov_before = {a["matched_golden_id"] for a in adj.values()
                   if a.get("label") == "tp_match" and a.get("matched_golden_id")}
 
-    clusters = _clusters_llm(findings)
+    # cluster_llm audits the SAME grouping the product uses (pre_dedup already skipped:
+    # raw findings, each with its adjudication, for a clean cross with the golden).
+    clusters = dedup_llm.cluster_llm(findings)
     cov_after, impure = set(), 0
     for c in clusters:
         gs = {adj[m.id]["matched_golden_id"] for m in c

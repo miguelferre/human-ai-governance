@@ -190,6 +190,16 @@ def test_a4_para_cuando_no_hay_gaps(monkeypatch):
     assert len(out) == 1 and out[0].id == "a4-001"  # only the initial pass
 
 
+def test_a4_handles_null_guideline_ids(monkeypatch):
+    # The model may return guideline_ids: null (not a list). Must not crash on `for i in None`.
+    from interaction_review.approaches import a4_agent
+
+    monkeypatch.setattr(a4_agent, "generate", lambda d, gl, *, few_shot, label: [_grounded(label)])
+    monkeypatch.setattr(a4_agent, "_assess_gaps", lambda g, f: {"seguir": True, "guideline_ids": None})
+    out = a4_agent.run(_dossier(), list(all_guidelines()))
+    assert len(out) == 1 and out[0].id == "a4-001"  # no valid ids -> stops after the initial pass
+
+
 def test_a4_acota_iteraciones(monkeypatch):
     from interaction_review.approaches import a4_agent
 

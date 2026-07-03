@@ -174,7 +174,7 @@ def _finding_html(f: Finding, idx: int) -> str:
 
 
 def _crosswalk_html(findings: list[Finding]) -> str:
-    from interaction_review.regulatory import crosswalk, framework_names
+    from interaction_review.regulatory import crosswalk, framework_names, guideline_notes
 
     cw = crosswalk(findings)
     if not cw:
@@ -194,6 +194,15 @@ def _crosswalk_html(findings: list[Finding]) -> str:
             parts.append(
                 f'<div class="cw-row"><span class="ref">{_esc(ref)}</span>'
                 f'<span class="g">{_esc(", ".join(gids))}</span></div>'
+            )
+        parts.append("</div>")
+    notes = guideline_notes({gid for f in findings for gid in f.guideline_ids})
+    if notes:
+        parts.append('<div class="cw-fw"><h3>Why these map</h3>')
+        for gid, nota in notes:
+            parts.append(
+                f'<div class="cw-row"><span class="ref">{_esc(gid)}</span>'
+                f'<span class="g">{_esc(nota)}</span></div>'
             )
         parts.append("</div>")
     parts.append("</section>")
@@ -219,6 +228,8 @@ def render_findings_html(
     sev_counts = {s: sum(1 for f in findings if f.severity is s) for s in Severity}
 
     doc: list[str] = []
+    # lang='en' is the report chrome language; finding TEXT may be Spanish (the generator
+    # prompts are Spanish by design — see README). A per-language layer would set this right.
     doc.append("<!doctype html><html lang='en'><head><meta charset='utf-8'>")
     doc.append("<meta name='viewport' content='width=device-width, initial-scale=1'>")
     doc.append(f"<title>Review - {_esc(dossier.system_name)}</title>")

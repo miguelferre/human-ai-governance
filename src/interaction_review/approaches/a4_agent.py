@@ -38,7 +38,7 @@ def run(dossier: Dossier, guidelines: list[Guideline]) -> list[Finding]:
         decision = _assess_gaps(guidelines, findings)
         if not decision.get("seguir"):
             break
-        ids = [i for i in decision.get("guideline_ids", []) if i in by_id]
+        ids = [i for i in (decision.get("guideline_ids") or []) if i in by_id]
         if not ids:
             break
         target = [by_id[i] for i in ids]

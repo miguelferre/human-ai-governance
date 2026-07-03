@@ -72,3 +72,13 @@ def test_ollama_connect_error_message_interpolates_model(monkeypatch):
         llm.call_structured(model="my-model-xyz", system="s", user="u", tool=_TOOL, temperature=0.0)
     msg = str(ei.value)
     assert "my-model-xyz" in msg and "{model}" not in msg
+
+
+def test_num_ctx_falls_back_on_malformed(monkeypatch):
+    monkeypatch.setenv("OLLAMA_NUM_CTX", "not-a-number")
+    assert llm._num_ctx() == llm.DEFAULT_NUM_CTX  # no crash on a bad env value
+
+
+def test_num_ctx_reads_valid_value(monkeypatch):
+    monkeypatch.setenv("OLLAMA_NUM_CTX", "4096")
+    assert llm._num_ctx() == 4096

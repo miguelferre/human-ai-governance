@@ -85,3 +85,17 @@ def test_render_crosswalk_has_sections():
 def test_render_crosswalk_graceful_when_empty():
     md = render_regulatory_crosswalk([_f("f", [])])
     assert "do not cite guidelines mapped" in md.lower()
+
+
+# --- guideline notes (curated map rationale surfaced in the report) --------- #
+def test_guideline_notes_returns_rationale():
+    from interaction_review.regulatory import guideline_notes
+
+    notes = dict(guideline_notes(["PAIR-ET-3", "HAX-G2"]))
+    assert notes.get("PAIR-ET-3")  # non-empty rationale
+    assert guideline_notes(["NO-EXISTE"]) == []
+
+
+def test_render_crosswalk_includes_notes():
+    md = render_regulatory_crosswalk([_f("f", ["PAIR-ET-3"])])
+    assert "Why these map" in md

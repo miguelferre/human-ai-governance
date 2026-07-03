@@ -194,7 +194,9 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
         return 0
 
     adjudications = [Adjudication.model_validate(x) for x in _load_json(args.adjudications)]
-    run = compute_run_metrics(args.approach, findings, adjudications, golden)
+    # Label honestly: findings loaded from a file are not "the b0 approach" (the default).
+    label = f"file:{Path(args.findings).name}" if args.findings else args.approach
+    run = compute_run_metrics(label, findings, adjudications, golden)
     agg = aggregate([run])
     _emit(render_metrics_md([agg]), args.out)
     return 0

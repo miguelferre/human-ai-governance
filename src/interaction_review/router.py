@@ -43,5 +43,9 @@ def route(dossier: Dossier, guidelines: list[Guideline]) -> tuple[list[Finding],
 
     if real_gaps or thin:
         motivo = "sparse b1" if thin and not real_gaps else "coverage gaps"
-        return deduplicate(run_p3(dossier, guidelines)), f"p3+dedup (escalated: {motivo})"
+        # Keep b1's findings (already generated, and it sometimes catches what p3 misses) and
+        # merge with p3; dedup collapses the overlap. Recall-first (beta>1), so we do not
+        # throw paid-for signal away.
+        merged = deduplicate(b1 + run_p3(dossier, guidelines))
+        return merged, f"p3+dedup (escalated: {motivo}, b1∪p3)"
     return b1, "b1 (easy case: sufficient coverage)"

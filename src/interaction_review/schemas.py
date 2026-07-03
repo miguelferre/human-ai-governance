@@ -187,8 +187,11 @@ class AdjudicationLabel(str, Enum):
 class Adjudication(BaseModel):
     """Verdict on a `Finding`.
 
-    It is produced first by the LLM judge and reviewed/corrected by the human. `human_confirmed`
-    allows distinguishing the automatic verdict from the validated one.
+    Produced first by the LLM judge. `human_confirmed` distinguishes the automatic verdict
+    from a validated one. NOTE (MVP): the human review is currently an EXTERNAL step
+    (scripts/export_adjudicacion.py emits a review sheet, corrections are applied by hand);
+    nothing writes `human_confirmed` automatically yet. The field is the hook for wiring an
+    importer of those corrections later.
     """
 
     finding_id: str

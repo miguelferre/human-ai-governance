@@ -10,7 +10,7 @@ def render_regulatory_crosswalk(findings: list[Finding]) -> str:
     """'Evidence of conformity' section: which AI Act / NIST AI RMF requirements
     the findings touch, and through which guideline. Indicative, not a legal opinion (ADR-008).
     """
-    from interaction_review.regulatory import crosswalk, framework_names
+    from interaction_review.regulatory import crosswalk, framework_names, guideline_notes
 
     cw = crosswalk(findings)
     lines: list[str] = ["## Regulatory crosswalk (indicative)", ""]
@@ -28,6 +28,12 @@ def render_regulatory_crosswalk(findings: list[Finding]) -> str:
         lines.append(f"### {names.get(fw, fw)}")
         for ref, gids in items:
             lines.append(f"- **{ref}**: {', '.join(gids)}")
+        lines.append("")
+    notes = guideline_notes({gid for f in findings for gid in f.guideline_ids})
+    if notes:
+        lines.append("### Why these map")
+        for gid, nota in notes:
+            lines.append(f"- **{gid}**: {nota}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 

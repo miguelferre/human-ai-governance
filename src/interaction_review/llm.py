@@ -84,12 +84,29 @@ def _call_anthropic(model, system, user, tool, temperature, max_tokens) -> dict[
     for block in resp.content:
         if getattr(block, "type", None) == "tool_use":
             return dict(block.input)
+    # A truncated response has no tool_use block; say so instead of a generic error.
+    if getattr(resp, "stop_reason", None) == "max_tokens":
+        raise RuntimeError(
+            f"The model hit max_tokens ({max_tokens}) before completing the tool call. "
+            "Raise max_tokens or reduce the dossier / guideline batch size."
+        )
     raise RuntimeError("The model did not return a tool_use block.")
 
 
 # --------------------------------------------------------------------------- #
 # Ollama backend (local): structured output via `format` (JSON-schema).
 # --------------------------------------------------------------------------- #
+def _num_ctx() -> int:
+    """OLLAMA_NUM_CTX as int, falling back to the default if unset or malformed."""
+    raw = os.environ.get("OLLAMA_NUM_CTX")
+    if not raw:
+        return DEFAULT_NUM_CTX
+    try:
+        return int(raw)
+    except ValueError:
+        return DEFAULT_NUM_CTX
+
+
 def ollama_payload(model, system, user, schema, temperature) -> dict[str, Any]:
     """Builds the body of /api/chat (pure function, testable without network)."""
     return {
@@ -102,7 +119,7 @@ def ollama_payload(model, system, user, schema, temperature) -> dict[str, Any]:
         "stream": False,
         "options": {
             "temperature": temperature,
-            "num_ctx": int(os.environ.get("OLLAMA_NUM_CTX", DEFAULT_NUM_CTX)),
+            "num_ctx": _num_ctx(),
         },
     }
 

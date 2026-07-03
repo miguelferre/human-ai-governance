@@ -91,7 +91,23 @@ def deduplicate_llm(
     base = deduplicate(findings) if pre_dedup else list(findings)
     if len(base) < 2:
         return base
+    clusters = cluster_llm(base, model=model, temperature=temperature, locus_floor=locus_floor)
+    return [_merge(c) for c in clusters]
 
+
+def cluster_llm(
+    base: list[Finding],
+    *,
+    model: str | None = None,
+    temperature: float = 0.0,
+    locus_floor: float = SEMANTIC_LOCUS_FLOOR,
+) -> list[list[Finding]]:
+    """Semantic-dedup clusters (members) over an ALREADY lexically-deduped list `base`.
+
+    Does NOT pre-dedup or merge (the caller does). Guarantees each id lands in EXACTLY one
+    cluster (order by first appearance), and applies the anti-over-merge guardrail. Shared
+    with scripts/dedup_llm_report.py so it audits the same grouping the product uses.
+    """
     by_id = {f.id: f for f in base}
     groups = _llm_groups(base, model, temperature)
 
@@ -114,4 +130,4 @@ def deduplicate_llm(
         refined.extend(_refine_group(c, locus_floor) if locus_floor > 0 else [c])
     # Stable order: by the index of the earliest member of each cluster.
     refined.sort(key=lambda c: min(order[m.id] for m in c))
-    return [_merge(c) for c in refined]
+    return refined

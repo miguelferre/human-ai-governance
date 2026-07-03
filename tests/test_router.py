@@ -35,11 +35,11 @@ def test_coverage_gaps_escalate_to_p3_dedup(monkeypatch):
     monkeypatch.setattr(router, "run_b1", lambda d, g: b1out)
     monkeypatch.setattr(router, "_assess_gaps", lambda g, f: {"seguir": True, "guideline_ids": ["HAX-G5"]})
     monkeypatch.setattr(router, "run_p3", lambda d, g: p3out)
-    # sentinel: we confirm that dedup is applied to the p3 output
+    # sentinel: we confirm that dedup is applied to the b1 ∪ p3 union
     monkeypatch.setattr(router, "deduplicate", lambda fs: fs[:1])
     findings, choice = router.route(_dossier(), GUIDES)
     assert "p3+dedup" in choice and "gaps" in choice
-    assert findings == p3out[:1]  # dedup applied
+    assert findings == (b1out + p3out)[:1]  # dedup applied to b1 ∪ p3 (b1 not discarded)
 
 
 def test_thin_b1_escalates_even_without_gaps(monkeypatch):

@@ -88,6 +88,21 @@ def crosswalk(findings: list[Finding]) -> dict[str, list[tuple[str, list[str]]]]
     return out
 
 
+def guideline_notes(guideline_ids: Iterable[str]) -> list[tuple[str, str]]:
+    """(guideline_id, rationale note) for the given guidelines that carry a `nota`.
+
+    Surfaces the curated per-guideline map notes (guideline -> why it touches the framework)
+    so they reach the report instead of sitting unused in the YAML. Deduped, sorted by id.
+    """
+    m = _raw()["map"]
+    seen: dict[str, str] = {}
+    for gid in guideline_ids:
+        entry = m.get(gid)
+        if entry and entry.get("nota") and gid not in seen:
+            seen[gid] = entry["nota"]
+    return sorted(seen.items())
+
+
 def unmapped_guidelines() -> list[str]:
     """Real guidelines that have NO entry in the map (should be empty: all mapped)."""
     mapped = set(_raw()["map"])

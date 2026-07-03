@@ -27,7 +27,7 @@ import json
 import statistics
 from pathlib import Path
 
-from interaction_review.dedup import DEFAULT_THRESHOLD
+from interaction_review.dedup import DEFAULT_THRESHOLD, cluster
 from interaction_review.schemas import Finding
 
 _TP = {"tp_match", "tp_new"}
@@ -50,12 +50,9 @@ def _eval_run(run: dict, threshold: float) -> dict:
     }
     tp_before = sum(1 for a in adj.values() if a.get("label") in _TP)
 
-    # To audit purity we need to know which raw findings fell into each cluster.
-    # deduplicate() returns representatives; re-deriving the clusters by the id of the
-    # representative is not enough. Instead, we group them ourselves replicating the
-    # criterion: simpler and more robust -> map each finding to its cluster via an
-    # "instrumented" dedup.
-    clusters = _clusters(findings, threshold)
+    # To audit purity we need the cluster MEMBERS (deduplicate() returns only merged
+    # representatives). dedup.cluster() exposes exactly the product's grouping.
+    clusters = cluster(findings, threshold)
 
     cov_after: set[str] = set()
     impure = 0
@@ -107,30 +104,6 @@ def _eval_run(run: dict, threshold: float) -> dict:
         ),
         "dup_factor_after": dup_factor,
     }
-
-
-def _clusters(findings: list[Finding], threshold: float) -> list[list[Finding]]:
-    """Reproduces the grouping of dedup.deduplicate, returning the members.
-
-    (deduplicate() returns them already merged; here we need the members to audit
-    purity against the golden, so we replicate the same loop by representative.)
-    """
-    from interaction_review.dedup import similarity
-
-    clusters: list[list[Finding]] = []
-    reps: list[Finding] = []
-    for f in findings:
-        best_i, best_sim = -1, threshold
-        for i, rep in enumerate(reps):
-            s = similarity(f, rep)
-            if s >= best_sim:
-                best_i, best_sim = i, s
-        if best_i >= 0:
-            clusters[best_i].append(f)
-        else:
-            clusters.append([f])
-            reps.append(f)
-    return clusters
 
 
 def _agg(runs: list[dict], approach: str, threshold: float) -> dict:
