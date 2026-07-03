@@ -89,8 +89,8 @@ privacy is paramount.
 ## Does it work?
 
 Yes, and it is measured, not promised, against public cases documented by independent sources. The corpus
-spans **8 sectors** (healthcare, aviation, justice, finance, public administration, HR, welfare,
-disability); the table reports the specific experiments run on subsets of it:
+spans **9 sectors** (healthcare, aviation, justice, finance, public administration, HR, welfare,
+disability, content moderation); the table reports the specific experiments run on subsets of it:
 
 | Test | Result |
 |---|---|
