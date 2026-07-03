@@ -40,7 +40,8 @@ without seeing them, and without spitting out generic output.
 
 ## Consequences and assumed limits
 
-- **n = 1 golden case** -> **formative** evaluation, not a benchmark. The second case
-  (climate) is a **partial held-out test**: it is not used to tune prompts.
+- **n = 1 golden case** -> **formative** evaluation, not a benchmark. Held-out cases
+  (later realized as Epic Sepsis, HireVue, COMPAS, … — see RESULTS.md) are a **partial
+  held-out test**: they are not used to tune prompts.
 - **Overfitting**: all tuning is done looking only at the clinical case; assumed risk.
 - A generic finding counts as a **failure**, by metric design.

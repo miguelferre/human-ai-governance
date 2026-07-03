@@ -52,7 +52,8 @@ labeling `tp_new` even while naming the correct golden in its rationale. This
 underestimated recall and inflated variance (it was a judge artifact, not the generator).
 
 **Robust fix:** the model no longer emits the label. It gives atomic sub-answers
-(`corresponde_a_golden`, `es_generico`, `es_real`) and the **label is derived in code**
+(`corresponde_a_golden`, `es_generico`, `es_real`; in the current code `corresponde_a_candidato`
++ `es_real`, with genericity moved to a structural code gate) and the **label is derived in code**
 (`judge.py`). This way it cannot contradict itself. General lesson: with structured
 output, do not ask for a conclusion that depends on a reasoning it has not yet written;
 ask for atomic facts and compose the conclusion yourself.

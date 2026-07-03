@@ -1,6 +1,6 @@
 """Per-issue coverage analysis of the golden from a run file.
 
-Reads a JSON saved by `comparar --save` and the answer key, and shows:
+Reads a JSON saved by `compare --save` and the answer key, and shows:
 - per approach: mean findings, mean tp_new, matched golden issues, recall.
 - issue-by-issue coverage of B1 union B2: which are rediscovered and which slip through.
 

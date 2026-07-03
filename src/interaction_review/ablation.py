@@ -16,7 +16,7 @@ If it does not change, the differentiator is in grounding, not in discovery.
 
 This module is OFFLINE and deterministic: deriving the control dossier and counting the
 golden distribution do not call the LLM. The run of steps 2-3 (which does call it)
-lives in the `comparar` flow.
+lives in the `compare` flow.
 """
 
 from __future__ import annotations

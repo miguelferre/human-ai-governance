@@ -11,7 +11,7 @@ labeled by **the source that reveals it** and the recall of the problems that on
 
 ## What was measured
 
-Over each `GoldenIssue` of the **7 cases with real testimony** (64 problems in 6 sectors),
+Over each `GoldenIssue` of the **9 cases with real testimony** (83 problems),
 it was labeled by hand (reading the content of each source in the dossier) as to where it is *detectable*:
 
 - **`user_only`**: only the testimony of an end user sustains it. Without that voice, the
@@ -34,26 +34,35 @@ much even if we wanted it to.
 |---|---|---|---|---|---|---|
 | robodebt-hard | 10 | 0 | 4 | 5 | 1 | 0% |
 | concern-cds | 9 | 0 | 7 | 2 | 0 | 0% |
-| alert-fatigue-ehr | 8 | 2 | 5 | 1 | 0 | 25% |
-| post-office-horizon | 9 | 2 | 5 | 2 | 0 | 22% |
+| midas-michigan | 9 | 0 | 6 | 3 | 0 | 0% |
 | toeslagenaffaire | 10 | 2 | 4 | 4 | 0 | 20% |
+| post-office-horizon | 9 | 2 | 5 | 2 | 0 | 22% |
+| alert-fatigue-ehr | 8 | 2 | 5 | 1 | 0 | 25% |
 | asiana-214 | 9 | 3 | 3 | 3 | 0 | 33% |
 | cierre-cuentas-bancarias | 9 | 3 | 3 | 3 | 0 | 33% |
-| **TOTAL** | **64** | **12 (19%)** | **31 (48%)** | **20 (31%)** | **1** |  |
+| arkansas-medicaid | 10 | 4 | 1 | 5 | 0 | 40% |
+| **TOTAL** | **83** | **16 (19%)** | **38 (46%)** | **28 (34%)** | **1** |  |
+
+> **Note (2026-07-03):** midas-michigan and arkansas-medicaid were labeled after the first
+> version of this table (which had 7 cases / 64 problems). Regenerate it with
+> `scripts/ablacion_report.py dist data/external/*/answer_key.json`. arkansas has the highest
+> voice dependence of the corpus (4/10) but was **not** part of the effect run below (which
+> predates its labeling); re-running the effect including it is pending API.
 
 ## Honest reading
 
 **1. The voice does add, but not as massive recall: it is 1 in every 5 problems.** 19% of the
 known problems are revealed **only** by the testimony. It is neither zero (this qualifies the C3 headline, which
-looked only at global recall) nor the majority. The bulk of the voice's value (the 48% `both`)
+looked only at global recall) nor the majority. The bulk of the voice's value (the 46% `both`)
 is **grounding**: it gives vivid, credible evidence to problems the documentation already reveals.
 
-**2. The contribution depends on how documented the case is.** The two cases with **0 `user_only`**
-(robodebt and CONCERN) are the most covered by official reports or exhaustive technical sheets:
+**2. The contribution depends on how documented the case is.** The three cases with **0 `user_only`**
+(robodebt, CONCERN and MiDAS) are the most covered by official reports or exhaustive technical sheets:
 there almost everything is already written down and the testimony only confirms. By contrast, where
-the living source is the operator or the pilot (Asiana, account closure: **3/9**), a third of
-the problems would be lost without the voice. **Product implication:** the less documented
-a system is (the normal case in a real audit) the more the testimony adds.
+the living source is the operator or the pilot (Asiana, account closure: **3/9**; arkansas: **4/10**,
+the highest of the corpus), a third or more of the problems would be lost without the voice.
+**Product implication:** the less documented a system is (the normal case in a real audit) the more
+the testimony adds.
 
 **3. What *only* the voice reveals is systematically the cognitive layer.** The 12 `user_only`
 are not random; they are almost always the same type of problem:

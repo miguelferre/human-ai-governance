@@ -8,7 +8,7 @@ Two modes:
           to recall: if there is barely any user_only, the voice cannot contribute
           much recall even if it wanted to. An honest result on its own.
 
-  compare Requires already-judged runs (produced by `comparar`, spends API). Given
+  compare Requires already-judged runs (produced by `compare`, spends API). Given
           the labeled golden and two runs -WITH voice and WITHOUT voice (dossier
           without END_USER)-, it prints the recall per subset in each condition and
           the delta in user_only, which is the underlying question: does recall drop
@@ -157,7 +157,7 @@ def cmd_compare(args: argparse.Namespace) -> int:
     if not voz or not sin:
         print(
             f"There are no adjudications for approach '{args.approach}' in one of the runs. "
-            "Was `comparar` run with --save over both dossiers (with voice and without voice)?"
+            "Was `compare` run with --save over both dossiers (with voice and without voice)?"
         )
         return 1
 

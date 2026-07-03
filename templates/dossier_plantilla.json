@@ -1,26 +1,26 @@
 {
-  "_instrucciones": "Plantilla estructurada del dossier (opcional; alternativa a los .md). Rellena los campos entre <...>. Cada respuesta o documento se vuelca como una entrada de 'sources' con su procedencia ('kind'): document | technician | end_user | other. Puedes anadir tantas 'sources' como necesites. No incluyas datos personales. Borra este campo '_instrucciones' al entregar si quieres.",
-  "system_name": "<nombre del sistema>",
-  "domain": "<dominio / para que se usa, sin datos personales>",
-  "summary": "<resumen breve del sistema y de como interactua con su usuario>",
+  "_instructions": "Structured dossier template (optional; an alternative to the .md files). Fill in the fields between <...>. Each answer or document becomes one 'sources' entry with its provenance ('kind'): document | technician | end_user | other. Add as many 'sources' as you need. Do not include personal data. Delete this '_instructions' field before delivering if you like.",
+  "system_name": "<system name>",
+  "domain": "<domain / what it is used for, no personal data>",
+  "summary": "<brief summary of the system and how it interacts with its user>",
   "sources": [
     {
-      "id": "doc-ficha",
+      "id": "doc-card",
       "kind": "document",
-      "label": "Ficha tecnica / model card",
-      "content": "<texto o resumen del documento. Ej.: 'Clasifica X en alto/medio/bajo. Precision 0,82. No se reporta rendimiento por subgrupo.'>"
+      "label": "Technical sheet / model card",
+      "content": "<text or summary of the document. E.g.: 'Classifies X into high/medium/low. Accuracy 0.82. No per-subgroup performance reported.'>"
     },
     {
       "id": "tech-1",
       "kind": "technician",
-      "label": "Responsable tecnico",
-      "content": "<lo que cuenta el perfil tecnico sobre como funciona y se disenó la interaccion>"
+      "label": "Technical owner",
+      "content": "<what the technical profile reports about how the interaction works and was designed>"
     },
     {
       "id": "user-1",
       "kind": "end_user",
-      "label": "Usuario final",
-      "content": "<como vive el usuario final el sistema: que ve, si se fia, que hace cuando discrepa>"
+      "label": "End user",
+      "content": "<how the end user experiences the system: what they see, whether they trust it, what they do when they disagree>"
     }
   ]
 }

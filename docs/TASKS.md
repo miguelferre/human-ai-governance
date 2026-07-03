@@ -27,8 +27,8 @@ defensive backup): it is what closes out the result in [RESULTS-testimony.md](RE
 - [x] **Targeted ablation of the testimony.** DONE in full
       ([RESULTS-ablation-testimony.md](RESULTS-ablation-testimony.md), [ADR-007](adr/ADR-007-testimony-ablation.md)).
       Scaffolding (`revealed_by` field, `ablation.without_voice`, `metrics.recall_by_revealed_by`, `scripts/ablacion_report.py`),
-      labeling of the 7 goldens and **run of the voice vs no-voice effect** (within-subject, blind generator +
-      independent judge; data in `runs/ablacion_voz_k1.json`). **Result:** (1) ceiling, 12/64 (19%) of
+      labeling of the 9 goldens and **run of the voice vs no-voice effect** (within-subject, blind generator +
+      independent judge; data in `docs/ablacion-voz/consolidado_k1.json`). **Result:** (1) ceiling, 16/83 (19%) of
       the problems are revealed only by the voice, systematically the cognitive ones; (2) effect, the recall of
       `user_only` drops **0.83->0.33 without voice** (Δ−0.50), with flat controls (both −0.05, tech_only does not even drop):
       the testimony **discovers** the cognitive layer, it does not just reinforce it. It confirms the pre-registered prediction.

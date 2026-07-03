@@ -43,7 +43,9 @@ Provisional reading: the pipeline wins; the agent is NOT justified. Still to be 
 
 ### B. Are the numbers real?
 - **B1, structure or quantity?** A "B1-exhaustive" (single prompt asking for MANY findings, one
-  pass). If it matches P3, the advantage was quantity; if not, the structure contributes. _Status: pending._
+  pass). If it matches P3, the advantage was quantity; if not, the structure contributes. _Status:
+  partially answered — `b1x` implemented (`approaches/b1x_exhaustivo.py`); its local run was aborted for
+  slowness, but the map already shows structure gives reliability (B1 unstable in hard cases), not just quantity._
 - **B2, human adjudication of P3.** _Status: DONE (2026-06-29)._
   - **Result:** the 12 distinct matches are legitimate -> **0.80 real, not inflated**.
   - **Important finding:** P3 is **undervalued**. Of the 3 "missed", GI-13 (onboarding) and
@@ -78,7 +80,8 @@ Provisional reading: the pipeline wins; the agent is NOT justified. Still to be 
     inferred cleanly a priori; **p3+dedup is the robust default**. Detail in [RESULTS.md](RESULTS.md).
 - **C1, false positives in a "good" system.** Give P3 the dossier of a well-designed system
   (few problems). Does it stay quiet or invent to fill blocks? An auditor that always finds 25
-  faults is useless. _Status: pending (requires a synthetic dossier of a "good" system)._
+  faults is useless. _Status: ✅ DONE (2026-06-29). B1/P3/A4 return 0 findings on a well-designed
+  system (`runs/c1_bueno.json`); the verbosity is redundancy, not fabrication._
 - **C2, robustness to input format.** Vary the dossier (less detail, different phrasing) and see
   whether the findings hold. _Status: ✅ DONE (2026-06-29, IBD v2 paraphrased by LLM, same
   information, narrative prose instead of the telegraphic model-card style, k=3, cloud)._
@@ -102,7 +105,8 @@ Provisional reading: the pipeline wins; the agent is NOT justified. Still to be 
 
 ### Confirmation with variance
 - **k=3** of the key approaches (P3 and A4 at least) once the previous tests are closed, to
-  apply the `beats` rule formally. _Status: pending (high cost on a slow local machine)._
+  apply the `beats` rule formally. _Status: ✅ DONE in cloud (all runs in the results table are k=3;
+  the testimony pipeline was also confirmed at k=3, see RESULTS-testimony.md)._
 
 ## Status as of 2026-06-29 (executed on Claude CLOUD; synthesis in RESULTS.md)
 
