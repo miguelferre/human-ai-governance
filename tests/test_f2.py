@@ -216,3 +216,28 @@ def test_run_experiment_b0_es_el_suelo(monkeypatch):
     assert agg.genericity_rate.mean == pytest.approx(1.0)
     assert agg.primary_score.mean == 0.0
     assert agg.primary_score.std == 0.0  # deterministic, replicated
+
+
+def test_checkpoint_not_self_overwritten_without_json_suffix(tmp_path):
+    # If save_path does not end in .json, the .gen checkpoint must still be a SEPARATE
+    # file (was: str.replace left gen_path == save_path -> final overwrote the checkpoint).
+    import json
+
+    def fake_judge(findings, golden, dossier):
+        return [Adjudication(finding_id=f.id, label=AdjudicationLabel.FP_GENERIC) for f in findings]
+
+    save = tmp_path / "out.data"  # deliberately NOT .json
+    runner.run_experiment(
+        dossier=_dossier(),
+        golden=[GoldenIssue(id="G1", description="d")],
+        guidelines=list(all_guidelines()),
+        approaches=["b0"],
+        k=1,
+        judge=fake_judge,
+        save_path=str(save),
+    )
+    gen = tmp_path / "out.gen.json"
+    assert gen.exists() and save.exists()
+    # checkpoint = pre-judge snapshot (no adjudications); final file has them
+    assert json.loads(gen.read_text(encoding="utf-8"))["runs"]["b0"][0]["adjudications"] == []
+    assert json.loads(save.read_text(encoding="utf-8"))["runs"]["b0"][0]["adjudications"]

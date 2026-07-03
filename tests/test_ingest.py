@@ -61,6 +61,29 @@ def test_empty_template_yields_no_answers():
     assert extract_answers(empty) == []
 
 
+def test_answer_with_markdown_list_is_not_truncated():
+    # A user answers with a Markdown list (natural in .md). Plain bullets are answer
+    # content, not new questions: they must NOT truncate the answer (regression).
+    md = (
+        "# T\n---\n"
+        "## 7. Alerts\n"
+        "- **How many alerts does it generate?**\n"
+        "  ✍️ Far too many. The main problems are:\n"
+        "  - alert fatigue: ~40 popups per shift\n"
+        "  - no way to silence repeated warnings\n"
+        "  Nurses end up ignoring all of them.\n"
+        "- **Does the system interrupt?**\n"
+        "  ✍️ Yes, mid-task.\n"
+    )
+    d = dict(extract_answers(md))
+    ans = d["How many alerts does it generate?"]
+    assert "alert fatigue" in ans
+    assert "no way to silence" in ans
+    assert "Nurses end up ignoring" in ans  # the line AFTER the list also survives
+    # the next bold question still cuts the answer and is captured on its own
+    assert d["Does the system interrupt?"] == "Yes, mid-task."
+
+
 # --- ingest_templates ------------------------------------------------------- #
 def test_builds_dossier_with_correct_kinds(tmp_path):
     f = tmp_path / "profile.md"; f.write_text(_PROFILE, encoding="utf-8")

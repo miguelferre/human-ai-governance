@@ -87,6 +87,27 @@ def test_empty_findings_do_not_crash():
     assert m.primary_score == 0.0
 
 
+def test_mismatched_adjudications_raise():
+    # Adjudications from ANOTHER run against these findings must NOT silently produce
+    # precision > 1 (was: 5 adjudications / 1 finding -> precision 5.0).
+    findings = [_grounded("f1")]
+    alien = [
+        Adjudication(finding_id=f"z{i}", label=AdjudicationLabel.TP_NEW) for i in range(5)
+    ]
+    with pytest.raises(ValueError):
+        compute_run_metrics("p3", findings, alien, _golden())
+
+
+def test_duplicate_adjudication_raises():
+    findings = [_grounded("f1")]
+    dup = [
+        Adjudication(finding_id="f1", label=AdjudicationLabel.TP_NEW),
+        Adjudication(finding_id="f1", label=AdjudicationLabel.TP_MATCH, matched_golden_id="G1"),
+    ]
+    with pytest.raises(ValueError):
+        compute_run_metrics("p3", findings, dup, _golden())
+
+
 def test_f_beta_zero_when_no_signal():
     assert f_beta(0.0, 0.0) == 0.0
 

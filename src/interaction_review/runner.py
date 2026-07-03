@@ -51,7 +51,9 @@ def run_experiment(
     # CHECKPOINT: save the generation (expensive) BEFORE judging. If phase 2 fails, it is
     # re-judged from here with scripts/rejudge.py without re-generating. Compatible structure.
     if save_path:
-        gen_path = save_path.replace(".json", ".gen.json")
+        # with_suffix (not str.replace) so a save_path without a .json suffix does
+        # not collapse onto itself and overwrite the checkpoint it is meant to protect.
+        gen_path = str(Path(save_path).with_suffix(".gen.json"))
         checkpoint = {
             "config": {"approaches": approaches, "k": k, "gen_model": llm.gen_model(),
                        "judge_model": llm.judge_model(), "system_name": dossier.system_name},

@@ -69,7 +69,24 @@ def compute_run_metrics(
     - genericity_rate: FP_GENERIC / total findings.
     - grounding_rate: findings with the 3 anchors / total findings
       (measured over the Finding objects, independent of the judge).
+
+    Raises ValueError if the adjudications do not correspond to these findings
+    (an id that is not among them, or the same finding adjudicated twice). Without
+    this, mismatched --findings/--adjudications files silently produce nonsense
+    (e.g. precision > 1 when there are more adjudications than findings).
     """
+    finding_ids = {f.id for f in findings}
+    seen: set[str] = set()
+    for a in adjudications:
+        if a.finding_id not in finding_ids:
+            raise ValueError(
+                f"Adjudication references unknown finding id {a.finding_id!r}. "
+                "The adjudications do not match these findings (mismatched files?)."
+            )
+        if a.finding_id in seen:
+            raise ValueError(f"Duplicate adjudication for finding id {a.finding_id!r}.")
+        seen.add(a.finding_id)
+
     n = len(findings)
     by_label: dict[AdjudicationLabel, int] = {lbl: 0 for lbl in AdjudicationLabel}
     matched_golden: set[str] = set()

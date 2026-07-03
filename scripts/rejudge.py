@@ -18,11 +18,15 @@ from interaction_review.metrics import aggregate, beats, compute_run_metrics
 from interaction_review.report import render_metrics_md
 from interaction_review.schemas import Dossier, Finding, GoldenIssue
 
-RUNS = sys.argv[1] if len(sys.argv) > 1 else "runs/eii_k3.json"
-GOLDEN = sys.argv[2] if len(sys.argv) > 2 else "data/golden/caso-EII/answer_key.json"
-DOSSIER = sys.argv[3] if len(sys.argv) > 3 else "data/golden/caso-EII/dossier_blind.json"
-OUT_JSON = RUNS.replace(".json", "_rejudged.json")
-OUT_MD = RUNS.replace(".json", "_rejudged.md")
+# Defaults point at the v2 golden set (15 issues), the canonical one the validation
+# runs use. The old v0 default (answer_key.json, 16 issues) silently mismatched any
+# v2 run passed as argv[1] without a golden. The guard in main() catches the mismatch
+# regardless of which combination is passed.
+RUNS = sys.argv[1] if len(sys.argv) > 1 else "runs/eii_k3_v2.json"
+GOLDEN = sys.argv[2] if len(sys.argv) > 2 else "data/golden/caso-EII/answer_key_v2.json"
+DOSSIER = sys.argv[3] if len(sys.argv) > 3 else "data/golden/caso-EII/dossier_blind_v2.json"
+OUT_JSON = str(Path(RUNS).with_suffix("")) + "_rejudged.json"
+OUT_MD = str(Path(RUNS).with_suffix("")) + "_rejudged.md"
 DETERMINISTIC = {"b0"}
 
 
@@ -34,6 +38,18 @@ def main() -> None:
     data = json.loads(Path(RUNS).read_text(encoding="utf-8"))
     golden = [GoldenIssue.model_validate(g) for g in json.loads(Path(GOLDEN).read_text(encoding="utf-8"))]
     dossier = Dossier.model_validate(json.loads(Path(DOSSIER).read_text(encoding="utf-8")))
+
+    # Guard: re-judging against a golden that does not match the run silently produces
+    # metrics different from the published ones. The run records how many golden it was
+    # judged against; refuse to proceed if it disagrees with the loaded answer key.
+    n_run = data.get("config", {}).get("n_golden")
+    if n_run is not None and n_run != len(golden):
+        raise SystemExit(
+            f"Golden mismatch: {GOLDEN} has {len(golden)} issues but {RUNS} was judged "
+            f"against {n_run}. Pass the matching answer_key + dossier as argv[2]/argv[3] "
+            f"(v2 -> answer_key_v2.json + dossier_blind_v2.json; v0 -> answer_key.json + dossier_blind.json)."
+        )
+
     approaches = list(data["runs"].keys())
     k = data["config"]["k"]
     log(f"Re-judging {RUNS} with judge={llm.judge_model()} | approaches={approaches} | k={k}")

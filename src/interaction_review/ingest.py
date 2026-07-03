@@ -20,13 +20,33 @@ from interaction_review.schemas import Dossier, Source, SourceKind
 _PEN = "✍"  # ✍ (with or without variation selector) = space for the answer.
 
 
+def _is_question_bullet(s: str) -> bool:
+    """True if a stripped line is a TEMPLATE question bullet (not answer content).
+
+    Template questions are **bold** bullets (`- **...**`) or inventory checkboxes
+    (`- [ ]`/`- [x]`). A plain bullet (`- foo`) written by the user INSIDE an answer
+    is content, not a new question: treating it as structural truncated multi-line
+    answers that contained a Markdown list (silent data loss on the star input).
+    """
+    if s.startswith(("- ", "* ")):
+        body = s[2:].lstrip()
+        return body.startswith(("**", "["))
+    return False
+
+
 def _is_structural(line: str) -> bool:
-    """True if the line cuts an answer (new question/section/instruction)."""
+    """True if the line cuts an answer (new question/section/instruction).
+
+    Plain bullets do NOT cut: they may be list items the user wrote inside a
+    multi-line answer. Only bold/checkbox question bullets, headings and the other
+    markers below end an answer.
+    """
     s = line.strip()
     if not s:
         return False  # blank lines do NOT cut (multi-paragraph answers)
     return (
-        s.startswith(("- ", "* ", "#", "---", ">", "**"))
+        s.startswith(("#", "---", ">", "**"))
+        or _is_question_bullet(s)
         or s.startswith("\U0001f3af")  # 🎯 "What for" meta-instruction
         or _PEN in s
     )
@@ -62,7 +82,7 @@ def extract_answers(md: str) -> list[tuple[str, str]]:
     while i < len(lines):
         line = lines[i]
         s = line.strip()
-        if s.startswith("#") or (s.startswith(("- ", "* ")) and _PEN not in s):
+        if s.startswith("#") or (_is_question_bullet(s) and _PEN not in s):
             last_prompt = _prompt_text(line)
             i += 1
             continue
