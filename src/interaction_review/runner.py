@@ -7,8 +7,13 @@ re-measured without generating again (reproducibility, ADR-002). `runs/` is giti
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Callable
+
+
+def _log(msg: str) -> None:
+    print(msg, file=sys.stderr, flush=True)
 
 from interaction_review import llm
 from interaction_review.approaches import REGISTRY
@@ -43,9 +48,11 @@ def run_experiment(
             raise ValueError(f"Unknown approach: {name}. Available: {sorted(REGISTRY)}")
 
     # --- Phase 1: generation (generator model) ---
+    _log(f"[compare] phase 1/2 generation | approaches={approaches} k={k} model={llm.gen_model()}")
     gen_results: dict[str, list[list[Finding]]] = {}
     for name in approaches:
         n_iter = 1 if name in DETERMINISTIC else k
+        _log(f"[compare]   generating {name}: {n_iter} run(s)...")
         gen_results[name] = [REGISTRY[name](dossier, guidelines) for _ in range(n_iter)]
 
     # CHECKPOINT: save the generation (expensive) BEFORE judging. If phase 2 fails, it is
@@ -65,11 +72,14 @@ def run_experiment(
         }
         Path(gen_path).parent.mkdir(parents=True, exist_ok=True)
         Path(gen_path).write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2), encoding="utf-8")
+        _log(f"[compare] generation checkpoint saved: {gen_path}")
 
     # --- Phase 2: adjudication + metrics (judge model) ---
+    _log(f"[compare] phase 2/2 adjudication | judge={llm.judge_model()}")
     aggregates: dict[str, AggregateMetrics] = {}
     runs_detail: dict[str, list[dict]] = {}
     for name in approaches:
+        _log(f"[compare]   judging {name} ({len(gen_results[name])} run(s))...")
         run_metrics: list[RunMetrics] = []
         detail: list[dict] = []
         for findings in gen_results[name]:

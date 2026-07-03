@@ -84,6 +84,17 @@ def test_prefill_empty_template_returns_as_is(monkeypatch):
     assert smart_ingest.prefill_template("doc", "# no blanks\n") == "# no blanks\n"
 
 
+def test_prefill_warns_when_document_is_truncated(monkeypatch, capsys):
+    # A document longer than PREFILL_MAX_CHARS must warn (was: silent truncation, so
+    # answers past the cut looked "not stated").
+    from interaction_review import prompts
+
+    monkeypatch.setattr(llm, "call_structured", lambda **kw: {"answers": []})
+    big = "x" * (prompts.PREFILL_MAX_CHARS + 100)
+    smart_ingest.prefill_template(big, _TEMPLATE)
+    assert "only the first" in capsys.readouterr().err.lower()
+
+
 # --- document reading ------------------------------------------------------- #
 def test_read_document_plaintext(tmp_path):
     p = tmp_path / "doc.md"

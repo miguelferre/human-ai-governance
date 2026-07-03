@@ -116,8 +116,16 @@ def _call_ollama(model, system, user, tool, temperature) -> dict[str, Any]:
     except httpx.ConnectError as e:
         raise LLMNotConfigured(
             f"Ollama does not respond at {base}. Install Ollama and/or start the service "
-            "(`ollama serve`), and pull the model (`ollama pull {model}`)."
+            f"(`ollama serve`), and pull the model (`ollama pull {model}`)."
         ) from e
+    except httpx.HTTPStatusError as e:
+        # A 404 means the model is not pulled: a configuration error, not a transient
+        # failure. Raise LLMNotConfigured so call_structured does NOT retry it 3x.
+        if e.response.status_code == 404:
+            raise LLMNotConfigured(
+                f"Ollama at {base} does not have model {model!r} (404). Pull it: `ollama pull {model}`."
+            ) from e
+        raise  # other HTTP errors (e.g. transient 5xx): let the retry loop handle them
     content = resp.json()["message"]["content"]
     return json.loads(content)
 

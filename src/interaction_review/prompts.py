@@ -345,8 +345,12 @@ RULES (non-negotiable):
 
 Return EVERYTHING through the rellenar_plantilla tool."""
 
+# Max document characters sent to the model in one prefill call. Beyond this the
+# document is truncated (and the caller warns), so answers past this point look "not stated".
+PREFILL_MAX_CHARS = 24000
 
-def prefill_user(doc_text: str, slots_payload: list[dict], max_chars: int = 24000) -> str:
+
+def prefill_user(doc_text: str, slots_payload: list[dict], max_chars: int = PREFILL_MAX_CHARS) -> str:
     """`slots_payload`: list of {slot, section, question}. Truncates the document if it exceeds max_chars."""
     doc = doc_text.strip()
     truncated = len(doc) > max_chars

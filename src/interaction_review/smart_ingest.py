@@ -14,6 +14,7 @@ The output is a template in OUR format (answers after ✍️), which a human rev
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -133,6 +134,13 @@ def prefill_template(
     slots = parse_template_slots(template_md)
     if not slots:
         return template_md
+    if len(doc_text) > prompts.PREFILL_MAX_CHARS:
+        print(
+            f"[prefill] warning: the document has {len(doc_text)} characters; only the first "
+            f"{prompts.PREFILL_MAX_CHARS} are sent to the model. Content past that point will look "
+            "'not stated' (blank slots). Split the document or fill those sections by hand.",
+            file=sys.stderr,
+        )
     payload = [
         {"slot": s.index, "section": s.section, "question": s.question or s.section}
         for s in slots

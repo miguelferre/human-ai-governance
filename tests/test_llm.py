@@ -1,10 +1,15 @@
 """Tests for the LLM wrapper: backend selection and Ollama payload construction.
 
-Makes no network calls: only deterministic logic (env -> model, payload dict).
+Makes no real network calls: httpx.post is monkeypatched where an Ollama call is exercised.
 """
+
+import httpx
+import pytest
 
 from interaction_review import llm
 from interaction_review.prompts import FINDINGS_TOOL
+
+_TOOL = {"name": "t", "input_schema": {"type": "object"}}
 
 
 def test_backend_por_defecto_es_anthropic(monkeypatch):
@@ -42,3 +47,28 @@ def test_ollama_payload_lleva_schema_y_opciones(monkeypatch):
     assert p["options"]["num_ctx"] == llm.DEFAULT_NUM_CTX
     roles = [m["role"] for m in p["messages"]]
     assert roles == ["system", "user"]
+
+
+# --- Ollama error handling (config errors must not be retried as transient) --- #
+def test_ollama_404_is_config_error(monkeypatch):
+    # Model not pulled -> 404 -> LLMNotConfigured (NOT 3 retries then RuntimeError).
+    monkeypatch.setenv("LLM_BACKEND", "ollama")
+    req = httpx.Request("POST", "http://localhost:11434/api/chat")
+    monkeypatch.setattr(httpx, "post", lambda *a, **k: httpx.Response(404, request=req))
+    with pytest.raises(llm.LLMNotConfigured) as ei:
+        llm.call_structured(model="qwen2.5:14b", system="s", user="u", tool=_TOOL, temperature=0.0)
+    assert "pull" in str(ei.value).lower()
+
+
+def test_ollama_connect_error_message_interpolates_model(monkeypatch):
+    # Regression: the 'ollama pull {model}' hint was a non-f-string literal.
+    monkeypatch.setenv("LLM_BACKEND", "ollama")
+
+    def boom(*a, **k):
+        raise httpx.ConnectError("connection refused")
+
+    monkeypatch.setattr(httpx, "post", boom)
+    with pytest.raises(llm.LLMNotConfigured) as ei:
+        llm.call_structured(model="my-model-xyz", system="s", user="u", tool=_TOOL, temperature=0.0)
+    msg = str(ei.value)
+    assert "my-model-xyz" in msg and "{model}" not in msg

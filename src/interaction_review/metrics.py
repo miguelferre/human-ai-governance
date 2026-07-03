@@ -197,10 +197,10 @@ def _stat(values: list[float]) -> Stat:
 def aggregate(runs: list[RunMetrics]) -> AggregateMetrics:
     """Aggregates k RunMetrics of the same approach. Raises if the list is empty or mixes approaches."""
     if not runs:
-        raise ValueError("aggregate() necesita al menos una ejecucion.")
+        raise ValueError("aggregate() needs at least one run.")
     approaches = {r.approach for r in runs}
     if len(approaches) > 1:
-        raise ValueError(f"aggregate() mezcla approaches distintos: {approaches}")
+        raise ValueError(f"aggregate() mixes different approaches: {approaches}")
     return AggregateMetrics(
         approach=runs[0].approach,
         k=len(runs),
