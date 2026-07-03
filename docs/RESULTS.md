@@ -35,7 +35,7 @@ HAX-18/PAIR):
 
 B0 = 0.00 across all (floor). All LLM approaches: precision ~0.93-1.0, genericity 0.
 The last three (held-out 2026-06-30, new judge) are public cases documented by independent
-sources; they reproduce the pattern, reinforcing "it is not overfitting" (now **5 held-out**, 3 domains).
+sources; they reproduce the pattern, reinforcing "it is not overfitting" (now **5 held-out** from independent sources).
 
 ## Conclusion: it is not a single winner, it is a map
 
@@ -60,8 +60,8 @@ capability of the model**. Neither "the agent is always superfluous" nor "the ag
   in code, structural genericity gate, candidates preselected by guideline).
   For AI governance this is a lesson in itself: *trust the model to judge, but put deterministic
   guardrails in place*. **B0 is the canary**: if it scores > 0, the measurement is broken.
-- **It was not overfitting.** **Five** held-out across **three domains** (Epic Sepsis and HireVue;
-  COMPAS, MCAS-aviation and content moderation, these three built from independent cited sources)
+- **It was not overfitting.** **Five** held-out from independent sources (Epic Sepsis, HireVue,
+  COMPAS, MCAS-aviation and content moderation; the last three built from independent cited sources)
   reproduce the patterns. The high recall of the clinical case was not a trick of the case: P3/A4 recover
   0.93-1.00 of problems documented by third parties, precision 0.93-1.0.
 - **There is no false alarm (C1).** On a well-designed system, B1/P3/A4 return **0
@@ -185,7 +185,7 @@ not a reliable discriminator. Another honest result: the router's complexity doe
 ## Honest limitations
 
 - Golden sets are small and built by the evaluator (IBD case) or from public sources
-  (held-out); the number of cases is already reasonable (6 cases, 5 held-out, 3 domains) but still not a benchmark.
+  (held-out); the number of cases is already reasonable (6 cases, 5 held-out from independent sources) but still not a benchmark.
 - The "zero" of B1 in IBD-Claude could be a one-off API hiccup, but it illustrates the
   single prompt's lack of a safety net.
 - The 3 new held-out (COMPAS/MCAS/moderation) are of **medium** difficulty and well documented,

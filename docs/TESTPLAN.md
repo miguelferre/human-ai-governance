@@ -23,7 +23,7 @@ Provisional reading: the pipeline wins; the agent is NOT justified. Still to be 
 - **A1, held-out external cases.** Search the literature/web for real cases with interaction problems
   DOCUMENTED by independent sources (objective golden, not our interpretation);
   build dossier + golden and run B1/P3/A4. This is THE overfitting test. _Status: ✅ DONE, **5
-  held-out in 3 domains**._
+  held-out from independent sources**._
   - Epic Sepsis (a different clinical one) + HireVue (HR), 2026-06-29.
   - **COMPAS** (justice), **MCAS-aviation** (737 MAX cockpit) and **content moderation** (2026-06-30),
     built from cited independent sources (blind neutralized dossier + golden of 9 issues each
@@ -107,7 +107,7 @@ Provisional reading: the pipeline wins; the agent is NOT justified. Still to be 
 ## Status as of 2026-06-29 (executed on Claude CLOUD; synthesis in RESULTS.md)
 
 - **B2** human adjudication of P3: ✅ DONE (0.80 real, undervalued; grader bug documented).
-- **A1** generalization: ✅ DONE with **5 held-out in 3 domains** (HireVue, Epic; + COMPAS, MCAS-aviation, moderation on 2026-06-30) -> **it was NOT overfitting** (patterns reproduced in all: P3/A4 0.93-1.00).
+- **A1** generalization: ✅ DONE with **5 held-out from independent sources** (HireVue, Epic, COMPAS, MCAS-aviation, moderation on 2026-06-30) -> **it was NOT overfitting** (patterns reproduced in all: P3/A4 0.93-1.00).
 - **B1** structure vs quantity: ✅ answered by the map, the structure contributes **reliability** in hard cases (B1 unstable, one run at 0), not just quantity; in easy cases B1≈P3. (The `b1x` approach was implemented; its local run was aborted for slowness.)
 - **C1** false positives in a good system: ✅ DONE. B1/P3/A4 return **0 findings**; they do not invent. P3's verbosity is redundancy, not fabrication.
 - **A2** alternative blocks: ✅ DONE (R-A ruled out: neutral `p3n` 0.89 ≥ hand-designed `p3` 0.82; see above).

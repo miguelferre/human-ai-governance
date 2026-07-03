@@ -88,17 +88,18 @@ privacy is paramount.
 
 ## Does it work?
 
-Yes, and it is measured against **held-out cases documented by independent sources**, across **8 sectors**
-(healthcare, aviation, justice, finance, public administration, HR, welfare, disability):
+Yes, and it is measured, not promised, against public cases documented by independent sources. The corpus
+spans **8 sectors** (healthcare, aviation, justice, finance, public administration, HR, welfare,
+disability); the table reports the specific experiments run on subsets of it:
 
 | Test | Result |
 |---|---|
 | Real clinical case (golden set from a human expert) | rediscovers **13-14 of 15** problems, ~100% precision |
-| Held-out across several sectors | recall **0.80-1.00**, not overfitting |
+| **5 held-out** cases from independent sources (Epic Sepsis, HireVue, COMPAS, MCAS-aviation, moderation) | recall **0.80-1.00**, not overfitting |
 | **Well-designed** system (false-positive control) | **0 findings**, does not invent to look productive |
 | Phrasing robustness (same case, different words) | stable recall, understands rather than keyword-matches |
 | **Hard test**, n=3: golden set from an independent body (a Royal Commission, a state auditor, a federal court) + raw dossier, separate hands | recall **0.70-0.90** (mean ~0.79): recovers what they flagged without seeing it |
-| **Product number**, with the reproducible pipeline and an **independent judge** (a different model), k=3 | p3: recall **0.91 ± 0.055**, precision **0.965** |
+| **Product number**, over the **9 testimony cases**, with the reproducible pipeline and an **independent judge** (a different model), k=3 | p3: recall **0.91 ± 0.055**, precision **0.965** |
 
 The last one matters most, because it is not scored by the same engine that generates it: the judge is a
 different model and the flow is reproducible. And it does so with a **cheap** generator model. Run three
