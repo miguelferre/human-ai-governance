@@ -1,9 +1,9 @@
-"""Re-juzga los hallazgos YA guardados de una corrida (sin re-generar) y recalcula.
+"""Re-judges the ALREADY saved findings of a run (without re-generating) and recomputes.
 
-Util cuando se arregla el juez: reaprovecha la parte cara (generacion) y solo
-vuelve a adjudicar + medir. Guarda un *_rejudged.json y *_rejudged.md.
+Useful when the judge is fixed: it reuses the expensive part (generation) and only
+re-adjudicates + measures. Saves a *_rejudged.json and *_rejudged.md.
 
-Uso:  LLM_BACKEND=ollama uv run python scripts/rejudge.py [runs/eii_k3.json]
+Usage:  LLM_BACKEND=ollama uv run python scripts/rejudge.py [runs/eii_k3.json]
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ def main() -> None:
     dossier = Dossier.model_validate(json.loads(Path(DOSSIER).read_text(encoding="utf-8")))
     approaches = list(data["runs"].keys())
     k = data["config"]["k"]
-    log(f"Re-juzgando {RUNS} con juez={llm.judge_model()} | approaches={approaches} | k={k}")
+    log(f"Re-judging {RUNS} with judge={llm.judge_model()} | approaches={approaches} | k={k}")
 
     aggregates = {}
     new_runs: dict[str, list[dict]] = {}
@@ -47,7 +47,7 @@ def main() -> None:
         detail = []
         for i, det in enumerate(sets, start=1):
             findings = [Finding.model_validate(f) for f in det["findings"]]
-            log(f"  [{name}] corrida {i}/{len(sets)} — re-juzgando {len(findings)} hallazgos...")
+            log(f"  [{name}] run {i}/{len(sets)} - re-judging {len(findings)} findings...")
             adjs = J.adjudicate(findings, golden, dossier)
             rm = compute_run_metrics(name, findings, adjs, golden)
             rms.append(rm)
@@ -71,15 +71,15 @@ def main() -> None:
     Path(OUT_JSON).write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
     table = render_metrics_md([aggregates[a] for a in approaches])
-    lines = [table, "", "## Regla de decision (margen > ruido)"]
+    lines = [table, "", "## Decision rule (margin > noise)"]
     for cand, base in (("b1", "b0"), ("b2", "b1")):
         if cand in aggregates and base in aggregates:
-            verdict = "GANA" if beats(aggregates[cand], aggregates[base]) else "NO gana"
+            verdict = "WINS" if beats(aggregates[cand], aggregates[base]) else "does NOT win"
             dc, db = aggregates[cand].primary_score, aggregates[base].primary_score
             lines.append(f"- {cand} vs {base}: **{verdict}** ({dc.mean:.2f}+/-{dc.std:.2f} vs {db.mean:.2f}+/-{db.std:.2f})")
     out = "\n".join(lines)
     Path(OUT_MD).write_text(out, encoding="utf-8")
-    log(f"\nEscrito: {OUT_JSON} y {OUT_MD}\n")
+    log(f"\nWritten: {OUT_JSON} and {OUT_MD}\n")
     print(out)
 
 

@@ -1,4 +1,4 @@
-"""Tests de metricas con valores calculados a mano (golden sintetico de juguete)."""
+"""Tests for metrics with hand-computed values (synthetic toy golden)."""
 
 import pytest
 
@@ -47,7 +47,7 @@ def _scenario():
 
 
 def test_pre_registered_params_are_fixed():
-    # Si esto cambia, exige un ADR nuevo (ADR-002).
+    # If this changes, it requires a new ADR (ADR-002).
     assert BETA == 2.0
     assert GENERICITY_THRESHOLD == 0.25
 
@@ -66,7 +66,7 @@ def test_run_metrics_hand_computed():
 
 
 def test_genericity_gate_zeroes_primary_score():
-    # 2 de 3 hallazgos genericos -> genericity 0.667 > 0.25 -> primary = 0
+    # 2 of 3 findings generic -> genericity 0.667 > 0.25 -> primary = 0
     findings = [_bare("f1"), _bare("f2"), _grounded("f3")]
     adj = [
         Adjudication(finding_id="f1", label=AdjudicationLabel.FP_GENERIC),
@@ -97,7 +97,7 @@ def test_aggregate_mean_and_std():
     agg = aggregate(runs)
     assert agg.k == 3
     assert agg.recall.mean == pytest.approx(2 / 3)
-    assert agg.recall.std == pytest.approx(0.0)  # deterministico aqui
+    assert agg.recall.std == pytest.approx(0.0)  # deterministic here
 
 
 def test_aggregate_rejects_mixed_approaches():
@@ -121,7 +121,7 @@ def _agg(name: str, scores: list[float]) -> AggregateMetrics:
 
 
 def test_beats_requires_margin_above_noise():
-    # margen 0.2 >> ruido (0.05 + 0) -> gana
+    # margin 0.2 >> noise (0.05 + 0) -> wins
     assert beats(_agg("cand", [0.75, 0.85]), _agg("base", [0.6, 0.6])) is True
-    # margen 0.02 < ruido combinado 0.10 -> NO gana
+    # margin 0.02 < combined noise 0.10 -> does NOT win
     assert beats(_agg("cand", [0.57, 0.67]), _agg("base", [0.55, 0.65])) is False

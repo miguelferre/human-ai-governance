@@ -1,12 +1,12 @@
-"""Mapeo de las guidelines HAX/PAIR a marco normativo (EU AI Act / NIST AI RMF).
+"""Mapping of the HAX/PAIR guidelines to a regulatory framework (EU AI Act / NIST AI RMF).
 
-Convierte un hallazgo atado a guidelines en su situacion regulatoria: que
-articulos del AI Act y que subcategorias del NIST AI RMF toca. El objetivo es que
-el informe sirva como *evidencia de conformidad* para el comprador de gobernanza,
-no solo como critica de diseno academica.
+Converts a finding tied to guidelines into its regulatory situation: which
+articles of the AI Act and which subcategories of the NIST AI RMF it touches. The goal is for
+the report to serve as *evidence of conformity* for the governance buyer,
+not just as an academic design critique.
 
-Los datos viven en guidelines/regulatory_map.yaml. Es un mapeo ORIENTATIVO, no un
-dictamen legal (ver ADR-008 y el aviso del propio YAML).
+The data lives in guidelines/regulatory_map.yaml. It is an INDICATIVE mapping, not a
+legal opinion (see ADR-008 and the notice in the YAML itself).
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ from interaction_review.schemas import Finding
 
 _MAP_FILE = Path(__file__).parent / "guidelines" / "regulatory_map.yaml"
 
-# Orden de presentacion de los marcos.
+# Presentation order of the frameworks.
 FRAMEWORKS: tuple[str, ...] = ("eu_ai_act", "nist_ai_rmf")
 
 
@@ -33,23 +33,23 @@ def _raw() -> dict:
 
 
 def framework_names() -> dict[str, str]:
-    """id de framework -> nombre legible."""
+    """framework id -> readable name."""
     fw = _raw()["frameworks"]
     return {k: fw[k]["name"] for k in FRAMEWORKS}
 
 
 def _ref_sort_key(ref: str) -> tuple[str, int, str]:
-    """Ordena refs: por prefijo textual y primer numero (Art. 9 antes que Art. 13)."""
+    """Sorts refs: by textual prefix and first number (Art. 9 before Art. 13)."""
     m = re.search(r"\d+", ref)
     if m:
         return (ref[: m.start()].strip(), int(m.group()), ref)
-    return (ref, 9999, ref)  # caracteristicas sin numero: al final de su prefijo
+    return (ref, 9999, ref)  # features without a number: at the end of their prefix
 
 
 def refs_for(guideline_ids: Iterable[str]) -> dict[str, list[str]]:
-    """Union de refs normativos por framework para un conjunto de guidelines.
+    """Union of regulatory refs by framework for a set of guidelines.
 
-    Devuelve solo los frameworks con al menos un ref. Ignora ids desconocidos.
+    Returns only the frameworks with at least one ref. Ignores unknown ids.
     """
     m = _raw()["map"]
     acc: dict[str, set[str]] = {fw: set() for fw in FRAMEWORKS}
@@ -63,10 +63,10 @@ def refs_for(guideline_ids: Iterable[str]) -> dict[str, list[str]]:
 
 
 def crosswalk(findings: list[Finding]) -> dict[str, list[tuple[str, list[str]]]]:
-    """Por framework: cada ref -> las guidelines (citadas por los hallazgos) que lo implican.
+    """By framework: each ref -> the guidelines (cited by the findings) that imply it.
 
-    Es la vista de 'evidencia de conformidad': que requisitos regulatorios tocan los
-    hallazgos del informe y por que guideline.
+    It is the 'evidence of conformity' view: which regulatory requirements the
+    report's findings touch and through which guideline.
     """
     m = _raw()["map"]
     per_fw: dict[str, dict[str, set[str]]] = {fw: {} for fw in FRAMEWORKS}
@@ -89,14 +89,14 @@ def crosswalk(findings: list[Finding]) -> dict[str, list[tuple[str, list[str]]]]
 
 
 def unmapped_guidelines() -> list[str]:
-    """Guidelines reales que NO tienen entrada en el mapa (debe ser vacio: todas mapeadas)."""
+    """Real guidelines that have NO entry in the map (should be empty: all mapped)."""
     mapped = set(_raw()["map"])
     real = set(guidelines_by_id())
     return sorted(real - mapped)
 
 
 def unknown_map_ids() -> list[str]:
-    """Ids del mapa que no corresponden a ninguna guideline real (erratas)."""
+    """Map ids that do not correspond to any real guideline (typos)."""
     mapped = set(_raw()["map"])
     real = set(guidelines_by_id())
     return sorted(mapped - real)

@@ -1,8 +1,8 @@
-"""Tests del deduplicado de hallazgos (paso de producto).
+"""Tests for finding deduplication (product step).
 
-El dedup es DETERMINISTA y no ve el golden: se prueba con hallazgos sinteticos cuyo
-comportamiento esperado se razona a mano. La validacion cuantitativa (reduccion,
-pureza, cobertura) sobre runs reales vive en scripts/dedup_report.py, no aqui.
+Dedup is DETERMINISTIC and does not see the golden: it is tested with synthetic findings
+whose expected behavior is reasoned by hand. The quantitative validation (reduction,
+purity, coverage) over real runs lives in scripts/dedup_report.py, not here.
 """
 
 from interaction_review.dedup import (
@@ -26,15 +26,15 @@ def _f(fid: str, title: str, locus: str, guidelines: list[str], **kw) -> Finding
     )
 
 
-# El duplicado tipico: MISMO problema, guideline DISTINTA (lo que vimos en P3/p3n).
+# The typical duplicate: SAME problem, DIFFERENT guideline (what we saw in P3/p3n).
 _ONB_A = _f("a", "Onboarding inicial sin reciclaje periodico", "Formacion a los medicos del piloto", ["HAX-G1"])
 _ONB_B = _f("b", "Onboarding inicial sin reciclaje formal", "Formacion a los medicos del piloto", ["PAIR-MM-1"])
-# Problema claramente distinto.
+# Clearly different problem.
 _OVERRIDE = _f("c", "Override asimetrico mal capturado", "Boton de rechazo del score", ["HAX-G9"])
 
 
 def test_default_threshold_is_documented_value():
-    # Si cambia, exige recalibrar (scripts/dedup_report.py) y nota en RESULTADOS.md.
+    # If it changes, it requires recalibration (scripts/dedup_report.py) and a note in RESULTADOS.md.
     assert DEFAULT_THRESHOLD == 0.60
 
 
@@ -47,8 +47,8 @@ def test_similarity_low_for_distinct_problems():
 
 
 def test_similarity_guard_rejects_templated_titles_with_disjoint_vocab():
-    # Mismo patron de frase ("Falta de comunicacion de X ..."), problemas DISTINTOS:
-    # sin solape real de vocabulario, el ratio de titulo NO debe fundirlos (la guarda).
+    # Same phrase pattern ("Falta de comunicacion de X ..."), DIFFERENT problems:
+    # without real vocabulary overlap, the title ratio must NOT merge them (the guard).
     a = _f("x", "Falta de comunicacion del rendimiento por subgrupo", "Presentacion del score al medico", ["HAX-G2"])
     b = _f("y", "Falta de comunicacion de recalibraciones tras cambios", "Ciclo mensual de Change Request", ["HAX-G14"])
     assert similarity(a, b) < DEFAULT_THRESHOLD
@@ -59,8 +59,8 @@ def test_merges_same_problem_and_unions_guidelines():
     assert len(out) == 1
     merged = out[0]
     assert merged.merged_count == 2
-    # Union de guidelines en orden de aparicion (el valor del producto: un hallazgo
-    # por problema, anotado con TODAS las guidelines que incumple).
+    # Union of guidelines in order of appearance (the product value: one finding
+    # per problem, annotated with ALL the guidelines it violates).
     assert merged.guideline_ids == ["HAX-G1", "PAIR-MM-1"]
 
 
@@ -77,7 +77,7 @@ def test_representative_prefers_grounded_then_severe_then_rich():
     )
     out = deduplicate([weak, strong])
     assert len(out) == 1
-    # El representante (texto que sobrevive) es el mas severo/rico, y la severidad sube.
+    # The representative (surviving text) is the most severe/rich one, and severity rises.
     assert out[0].title == strong.title
     assert out[0].severity == Severity.HIGH
     assert set(out[0].guideline_ids) == {"HAX-G1", "PAIR-MM-1"}

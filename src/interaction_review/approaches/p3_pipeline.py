@@ -1,12 +1,12 @@
-"""P3 - Pipeline determinista (NO agente): barrido por bloques de aspectos.
+"""P3 - Deterministic pipeline (NOT an agent): sweep by aspect blocks.
 
-Hipotesis (de los datos de B1): una sola pasada cubre ~38% por corrida pero la union
-de varias llega a ~73%; o sea, una pasada unica se deja aspectos. P3 hace una pasada
-FOCALIZADA por cada bloque de guidelines y junta los hallazgos, para subir el recall
-por corrida sin perder anclaje.
+Hypothesis (from the B1 data): a single pass covers ~38% per run but the union
+of several reaches ~73%; that is, a single pass leaves aspects out. P3 makes one
+FOCUSED pass per guideline block and merges the findings, to raise recall
+per run without losing anchoring.
 
-Flujo FIJO (sin decisiones autonomas del modelo): N pasadas (una por bloque) -> merge.
-Eso lo distingue de un agente (A4): aqui el control de flujo lo decide el codigo.
+FIXED flow (no autonomous model decisions): N passes (one per block) -> merge.
+That is what distinguishes it from an agent (A4): here the control flow is decided by the code.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from __future__ import annotations
 from interaction_review.approaches._generator import generate
 from interaction_review.schemas import Dossier, Finding, Guideline
 
-# Bloques de aspectos de interaccion -> ids de guideline. Cubren TODO HAX-18 + PAIR.
+# Interaction aspect blocks -> guideline ids. They cover ALL of HAX-18 + PAIR.
 BUCKETS: dict[str, list[str]] = {
     "presentacion_y_confianza": ["HAX-G2", "HAX-G4", "HAX-G11", "PAIR-ET-1", "PAIR-ET-2", "PAIR-ET-3"],
     "correccion_y_feedback": ["HAX-G9", "HAX-G15", "HAX-G16", "PAIR-FC-1", "PAIR-FC-2"],
@@ -35,5 +35,5 @@ def run(dossier: Dossier, guidelines: list[Guideline]) -> list[Finding]:
         if not gl:
             continue
         collected.extend(generate(dossier, gl, few_shot=False, label=f"p3-{bucket}"))
-    # Re-id unico y estable (los labels por bloque colisionarian en el indice).
+    # Unique and stable re-id (the per-block labels would collide in the index).
     return [f.model_copy(update={"id": f"p3-{n:03d}"}) for n, f in enumerate(collected, start=1)]

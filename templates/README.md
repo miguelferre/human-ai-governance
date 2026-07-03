@@ -1,132 +1,132 @@
-# Plantillas para describir tu sistema de IA
+# Templates to describe your AI system
 
-Gracias por ayudarnos a revisar tu sistema. Estas plantillas sirven para
-contarnos **cómo es tu sistema de IA y, sobre todo, cómo lo vive la persona que
-lo usa**. Con lo que nos cuentes construimos una revisión estructurada de la
-*capa de interacción* y te devolvemos hallazgos concretos y recomendaciones.
+Thank you for helping to review your system. These templates serve to
+describe **what your AI system is like and, above all, how the person who uses
+it experiences it**. With what is provided, a structured review of the
+*interaction layer* is built and specific findings and recommendations are returned.
 
-No necesitas conocimientos técnicos para la mayoría de las preguntas. Escribe con
-tus palabras: es mejor una respuesta sincera y concreta que una respuesta
-"perfecta".
-
----
-
-## ¿Qué estamos revisando exactamente?
-
-No revisamos si el modelo "acierta" (eso ya lo miden otras herramientas).
-Revisamos la **capa de interacción**: todo lo que ocurre entre el resultado del
-modelo y la decisión de la persona. Por ejemplo:
-
-- ¿Queda claro qué hace el sistema y qué **no** hace?
-- ¿La persona entiende **por qué** propone lo que propone?
-- ¿Se muestra cuándo el sistema está **poco seguro**?
-- Cuando la persona **no está de acuerdo**, ¿puede cambiarlo? ¿queda registro? ¿sirve de algo?
-- ¿Interrumpe en mal momento? ¿hay demasiadas alertas?
-
-> Ejemplo sencillo: un sistema sugiere la prioridad de un ticket de soporte. Si
-> el agente casi siempre acepta la sugerencia sin mirarla y, cuando la cambia,
-> ese cambio no se guarda en ningún sitio, eso es un problema de la capa de
-> interacción, aunque el modelo sea muy preciso.
+No technical knowledge is needed for most of the questions. Write in
+plain words: an honest, specific answer is better than a
+"perfect" one.
 
 ---
 
-## ¿Qué necesitamos de ti?
+## What exactly is being reviewed?
 
-Tres plantillas (rellena las que te correspondan según tu rol) y, si los tienes,
-algunos documentos:
+It is not whether the model "gets it right" (that is already measured by other tools).
+What is reviewed is the **interaction layer**: everything that happens between the model's
+output and the person's decision. For example:
 
-| Plantilla | Qué recoge | Quién la rellena mejor |
+- Is it clear what the system does and what it does **not** do?
+- Does the person understand **why** it proposes what it proposes?
+- Is it shown when the system is **not very confident**?
+- When the person **disagrees**, can they change it? Is there a record? Does it serve any purpose?
+- Does it interrupt at the wrong moment? Are there too many alerts?
+
+> Simple example: a system suggests the priority of a support ticket. If
+> the agent almost always accepts the suggestion without looking at it and, when they change it,
+> that change is not saved anywhere, that is a problem of the interaction
+> layer, even if the model is very accurate.
+
+---
+
+## What is needed from you?
+
+Three templates (fill in the ones that apply to your role) and, if available,
+some documents:
+
+| Template | What it captures | Who fills it in best |
 |---|---|---|
-| [`01_ficha_sistema__perfil_tecnico.md`](01_ficha_sistema__perfil_tecnico.md) | Qué hace el sistema, cómo presenta el resultado, override, alertas, supervisión | Responsable técnico, data scientist, responsable de producto/implantación |
-| [`02_experiencia_uso__usuario_final.md`](02_experiencia_uso__usuario_final.md) | Cómo se vive el sistema en el día a día | Usuario final (quien usa la herramienta para decidir) |
-| [`03_inventario_documentos.md`](03_inventario_documentos.md) | Qué documentos existen y nos puedes aportar | Cualquiera con acceso a la documentación |
+| [`01_system_card__technical_profile.md`](01_system_card__technical_profile.md) | What the system does, how it presents the result, override, alerts, oversight | Technical lead, data scientist, product/deployment lead |
+| [`02_usage_experience__end_user.md`](02_usage_experience__end_user.md) | How the system is experienced day to day | End user (whoever uses the tool to decide) |
+| [`03_document_inventory.md`](03_document_inventory.md) | What documents exist and can be provided | Anyone with access to the documentation |
 
-No hace falta que una sola persona lo rellene todo. De hecho, **es mejor que no**:
-nos interesa contrastar la visión técnica con la del usuario final.
-
----
-
-## ¿De quién necesitamos cada cosa, y por qué?
-
-- **Del perfil técnico / producto** → cómo está construido y diseñado el sistema
-  por dentro (la "intención"). Plantilla 01 + documentos técnicos.
-- **Del usuario final** → cómo se experimenta de verdad (la "realidad de uso").
-  Plantilla 02.
-- **El contraste entre ambas** es una de las cosas más valiosas que buscamos.
-  Cuando el técnico cree que "el cambio del usuario se guarda y sirve para
-  mejorar" pero el usuario dice "no sé si cambiarlo sirve de algo", ahí hay una
-  señal importante. Por eso pedimos las dos voces por separado.
+A single person does not have to fill in everything. In fact, **it is better they do not**:
+the interest is in contrasting the technical view with that of the end user.
 
 ---
 
-## ¿Para qué usaremos lo que nos des?
+## Who is each thing needed from, and why?
 
-- Para construir un **dossier** del sistema (su descripción normalizada) y pasarlo
-  por la revisión.
-- Para producir **hallazgos anclados**: cada observación irá atada a una guideline
-  reconocida (HAX-18 de Microsoft, PAIR de Google) y a un punto concreto de tu
-  sistema, con la evidencia de lo que nos contaste.
-- **No** se comparte con terceros ni se usa para nada más.
-
----
-
-## Privacidad (importante)
-
-- **No incluyas datos de personas** (pacientes, clientes, usuarios reales): ni
-  nombres, ni identificadores, ni casos concretos identificables. Para revisar la
-  interacción **no hacen falta**. Describe el sistema, no a sus usuarios.
-- Si un documento contiene datos sensibles, **anonimízalo o quítalos** antes de
-  enviarlo. Si tienes dudas, mejor no lo envíes y descríbelo con palabras.
-- Si tu sistema es clínico, lo anterior aplica con más razón.
+- **From the technical / product profile** -> how the system is built and designed
+  on the inside (the "intent"). Template 01 + technical documents.
+- **From the end user** -> how it is really experienced (the "reality of use").
+  Template 02.
+- **The contrast between the two** is one of the most valuable things sought.
+  When the technical side believes that "the user's change is saved and serves to
+  improve" but the user says "I don't know if changing it does any good", there is an
+  important signal there. That is why the two voices are requested separately.
 
 ---
 
-## Un matiz que nos ayuda mucho
+## What will what you provide be used for?
 
-Cuéntanos **cómo es** el sistema, no **qué crees que está mal**. La gracia de la
-revisión es que detecte los problemas por sí sola a partir de una descripción
-fiel. Si nos adelantas tu diagnóstico ("creo que el override está mal capturado"),
-no pasa nada, pero apúntalo **al final, en la sección "Lo que tú ya sospechas"** de
-cada plantilla, separado del resto. Así no se mezcla con la descripción.
+- To build a **dossier** of the system (its normalized description) and put it
+  through the review.
+- To produce **anchored findings**: each observation will be tied to a recognized
+  guideline (Microsoft's HAX-18, Google's PAIR) and to a specific point in your
+  system, with the evidence of what was reported.
+- It is **not** shared with third parties or used for anything else.
 
 ---
 
-## Cómo entregarlo
+## Privacy (important)
 
-Tienes dos opciones, la que te resulte más cómoda:
+- **Do not include personal data** (patients, clients, real users): no
+  names, no identifiers, no identifiable specific cases. To review the
+  interaction they **are not needed**. Describe the system, not its users.
+- If a document contains sensitive data, **anonymize it or remove it** before
+  sending it. When in doubt, better not send it and describe it in words.
+- If your system is clinical, the above applies all the more.
 
-1. **Rellenar los `.md`** (estas plantillas) escribiendo bajo cada pregunta, y
-   enviárnoslos.
-2. **Rellenar [`dossier_plantilla.json`](dossier_plantilla.json)** si prefieres un
-   formato estructurado (o si vas a integrarlo con la herramienta directamente).
+---
 
-Adjunta también los documentos que hayas marcado en la plantilla 03.
+## A nuance that helps a lot
+
+Describe **what the system is like**, not **what you think is wrong** with it. The point of the
+review is for it to detect the problems on its own from a faithful description. If
+you want to share your own diagnosis in advance ("I think the override is poorly captured"),
+that is fine, but note it **at the end, in the "What you already suspect" section** of
+each template, separate from the rest. That way it does not get mixed with the description.
+
+---
+
+## How to deliver it
+
+There are two options, whichever is more convenient:
+
+1. **Fill in the `.md` files** (these templates) by writing under each question, and
+   send them back.
+2. **Fill in [`dossier_plantilla.json`](dossier_plantilla.json)** if a structured
+   format is preferred (or if it is going to be integrated directly with the tool).
+
+Also attach the documents marked in template 03.
 
 ---
 
 <details>
-<summary><strong>Mapa interno de trazabilidad (uso del equipo evaluador)</strong></summary>
+<summary><strong>Internal traceability map (evaluating team use)</strong></summary>
 
-Las plantillas evitan a propósito la jerga de guidelines. Esta es la correspondencia
-interna entre cada bloque y las guidelines que cubre, para construir hallazgos
-anclados:
+The templates deliberately avoid guideline jargon. This is the internal
+correspondence between each block and the guidelines it covers, to build anchored
+findings:
 
-| Bloque de la plantilla | Guidelines principales |
+| Template block | Main guidelines |
 |---|---|
-| Qué hace / qué no hace | HAX-G1, PAIR-MM-1, PAIR-UN-1 |
-| Rendimiento y límites | HAX-G2, PAIR-MM-2 |
-| Cómo se presenta el resultado | HAX-G4 |
-| Confianza / incertidumbre | HAX-G2, PAIR-ET-2, PAIR-ET-3 |
-| Explicación del "por qué" | HAX-G11, PAIR-ET-1 |
-| Override / corrección | HAX-G9, HAX-G16, PAIR-FC-1, PAIR-FC-2 |
-| Descarte y temporización / alertas | HAX-G3, HAX-G8 |
+| What it does / does not do | HAX-G1, PAIR-MM-1, PAIR-UN-1 |
+| Performance and limits | HAX-G2, PAIR-MM-2 |
+| How the result is presented | HAX-G4 |
+| Confidence / uncertainty | HAX-G2, PAIR-ET-2, PAIR-ET-3 |
+| Explanation of the "why" | HAX-G11, PAIR-ET-1 |
+| Override / correction | HAX-G9, HAX-G16, PAIR-FC-1, PAIR-FC-2 |
+| Dismissal and timing / alerts | HAX-G3, HAX-G8 |
 | Onboarding | HAX-G1, PAIR-MM-1 |
-| Ante incertidumbre / fallo | HAX-G10, PAIR-EF-1, PAIR-EF-2 |
-| Supervisión / subgrupos | PAIR-DE-1, HAX-G6 |
-| Cambios y controles | HAX-G14, HAX-G17, HAX-G18 |
+| On uncertainty / failure | HAX-G10, PAIR-EF-1, PAIR-EF-2 |
+| Oversight / subgroups | PAIR-DE-1, HAX-G6 |
+| Changes and controls | HAX-G14, HAX-G17, HAX-G18 |
 | Feedback | HAX-G15, PAIR-FC-1 |
 
-El "answer key" (problemas conocidos para validar la herramienta) se recoge **por
-separado** y nunca dentro de estas plantillas, para no contaminar la ejecución ciega.
+The "answer key" (known problems to validate the tool) is collected **separately**
+and never within these templates, so as not to contaminate the blind run.
 
 </details>

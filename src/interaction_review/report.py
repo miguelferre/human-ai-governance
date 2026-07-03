@@ -1,4 +1,4 @@
-"""Render de informes en texto/markdown (la salida v1 es CLI, nunca interfaz)."""
+"""Rendering of reports in text/markdown (the v1 output is CLI, never a UI)."""
 
 from __future__ import annotations
 
@@ -7,20 +7,20 @@ from interaction_review.schemas import Dossier, Finding
 
 
 def render_regulatory_crosswalk(findings: list[Finding]) -> str:
-    """Seccion 'evidencia de conformidad': que requisitos del AI Act / NIST AI RMF
-    tocan los hallazgos, y por que guideline. Orientativo, no dictamen legal (ADR-008).
+    """'Evidence of conformity' section: which AI Act / NIST AI RMF requirements
+    the findings touch, and through which guideline. Indicative, not a legal opinion (ADR-008).
     """
     from interaction_review.regulatory import crosswalk, framework_names
 
     cw = crosswalk(findings)
-    lines: list[str] = ["## Crosswalk normativo (orientativo)", ""]
+    lines: list[str] = ["## Regulatory crosswalk (indicative)", ""]
     if not cw:
-        lines.append("_(Los hallazgos no citan guidelines mapeadas a marco normativo.)_")
+        lines.append("_(The findings do not cite guidelines mapped to a regulatory framework.)_")
         return "\n".join(lines)
     lines.append(
-        "Requisitos que tocan los hallazgos de arriba, con la guideline que los ancla. "
-        "**No es dictamen legal** (ver ADR-008): aplicabilidad segun rol y si el sistema "
-        "es de alto riesgo."
+        "Requirements touched by the findings above, with the guideline that anchors them. "
+        "**Not a legal opinion** (see ADR-008): applicability depends on the role and whether the "
+        "system is high-risk."
     )
     lines.append("")
     names = framework_names()
@@ -33,48 +33,48 @@ def render_regulatory_crosswalk(findings: list[Finding]) -> str:
 
 
 def render_findings_md(dossier: Dossier, findings: list[Finding], approach: str) -> str:
-    """Informe de hallazgos en markdown."""
+    """Findings report in markdown."""
     lines: list[str] = []
-    lines.append(f"# Revision de la capa de interaccion - {dossier.system_name}")
+    lines.append(f"# Interaction layer review - {dossier.system_name}")
     lines.append("")
-    lines.append(f"- **Dominio:** {dossier.domain}")
+    lines.append(f"- **Domain:** {dossier.domain}")
     lines.append(f"- **Approach:** {approach}")
-    lines.append(f"- **Fuentes:** {len(dossier.sources)}")
-    lines.append(f"- **Hallazgos:** {len(findings)}")
+    lines.append(f"- **Sources:** {len(dossier.sources)}")
+    lines.append(f"- **Findings:** {len(findings)}")
     grounded = sum(1 for f in findings if f.is_grounded())
     pct = (grounded / len(findings) * 100) if findings else 0.0
-    lines.append(f"- **Anclados (guideline+locus+evidencia):** {grounded}/{len(findings)} ({pct:.0f}%)")
-    # Si viene deduplicado, el informe consolida varios hallazgos crudos en cada uno.
+    lines.append(f"- **Anchored (guideline+locus+evidence):** {grounded}/{len(findings)} ({pct:.0f}%)")
+    # If deduplicated, the report consolidates several raw findings into each one.
     raw = sum(f.merged_count for f in findings)
     if raw > len(findings):
-        lines.append(f"- **Deduplicado:** {raw} hallazgos crudos consolidados en {len(findings)}.")
+        lines.append(f"- **Deduplicated:** {raw} raw findings consolidated into {len(findings)}.")
     lines.append("")
 
     for f in findings:
-        flag = "OK" if f.is_grounded() else "GENERICO?"
-        consolida = f" _(consolida {f.merged_count})_" if f.merged_count > 1 else ""
-        lines.append(f"## [{flag}] {f.title}{consolida}")
+        flag = "OK" if f.is_grounded() else "GENERIC?"
+        merged = f" _(consolidates {f.merged_count})_" if f.merged_count > 1 else ""
+        lines.append(f"## [{flag}] {f.title}{merged}")
         lines.append("")
-        lines.append(f"- **Guidelines:** {', '.join(f.guideline_ids) or '(ninguna)'}")
-        lines.append(f"- **Severidad:** {f.severity.value}")
-        lines.append(f"- **Locus:** {f.locus or '(sin locus concreto)'}")
-        lines.append(f"- **Evidencia:** {f.evidence or '(sin evidencia)'}")
+        lines.append(f"- **Guidelines:** {', '.join(f.guideline_ids) or '(none)'}")
+        lines.append(f"- **Severity:** {f.severity.value}")
+        lines.append(f"- **Locus:** {f.locus or '(no concrete locus)'}")
+        lines.append(f"- **Evidence:** {f.evidence or '(no evidence)'}")
         if f.anti_pattern:
-            lines.append(f"- **Anti-patron:** {f.anti_pattern}")
+            lines.append(f"- **Anti-pattern:** {f.anti_pattern}")
         if f.rationale:
-            lines.append(f"- **Por que importa aqui:** {f.rationale}")
+            lines.append(f"- **Why it matters here:** {f.rationale}")
         if f.recommendation:
-            lines.append(f"- **Recomendacion:** {f.recommendation}")
+            lines.append(f"- **Recommendation:** {f.recommendation}")
         lines.append("")
     return "\n".join(lines)
 
 
 def render_metrics_md(aggregates: list[AggregateMetrics]) -> str:
-    """Tabla comparativa de approaches (media +/- std sobre k corridas)."""
+    """Comparative table of approaches (mean +/- std over k runs)."""
     lines: list[str] = []
-    lines.append("# Comparativa de approaches")
+    lines.append("# Approach comparison")
     lines.append("")
-    lines.append("| Approach | k | Recall | Precision | Genericidad | Grounding | Primary (F-beta*) |")
+    lines.append("| Approach | k | Recall | Precision | Genericity | Grounding | Primary (F-beta*) |")
     lines.append("|---|---|---|---|---|---|---|")
 
     def cell(s) -> str:  # noqa: ANN001 - Stat
@@ -86,6 +86,6 @@ def render_metrics_md(aggregates: list[AggregateMetrics]) -> str:
             f"{cell(a.genericity_rate)} | {cell(a.grounding_rate)} | {cell(a.primary_score)} |"
         )
     lines.append("")
-    lines.append("> Primary = F-beta (beta>1, prioriza recall) sujeto a techo de genericidad (ADR-002).")
-    lines.append("> Genericidad: menor es mejor. Grounding: mayor es mejor.")
+    lines.append("> Primary = F-beta (beta>1, prioritizes recall) subject to a genericity ceiling (ADR-002).")
+    lines.append("> Genericity: lower is better. Grounding: higher is better.")
     return "\n".join(lines)

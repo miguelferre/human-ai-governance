@@ -1,18 +1,18 @@
-"""Capa SEMANTICA del deduplicado (con LLM): el residual que el lexico no junta.
+"""SEMANTIC layer of the deduplication (with LLM): the residual that the lexical step does not join.
 
-El dedup determinista (dedup.py) colapsa duplicados textualmente evidentes, pero deja
-el residual "mismo problema, redaccion/guideline muy distinta" (calibracion: matches
-reales con Jaccard mediana 0.127 -> el texto no basta). Ese juicio es IRREDUCIBLE:
-aqui lo hace un LLM, coherente con la tesis del proyecto (lo mecanico al codigo, al
-modelo solo lo irreducible, ADR-004).
+The deterministic dedup (dedup.py) collapses textually obvious duplicates, but leaves
+the residual "same problem, very different wording/guideline" (calibration: real
+matches with median Jaccard 0.127 -> text is not enough). That judgment is IRREDUCIBLE:
+here an LLM does it, consistent with the project's thesis (the mechanical part to the code, to the
+model only the irreducible part, ADR-004).
 
-Flujo: dedup lexico (barato, sin LLM) -> UNA llamada al modelo para agrupar el residual
-por problema subyacente -> merge de cada grupo (reutiliza dedup._merge: une guidelines,
-severidad maxima, merged_count acumulado). El modelo SOLO agrupa por id; el merge y la
-garantia de no perder ningun hallazgo son deterministas, en codigo.
+Flow: lexical dedup (cheap, no LLM) -> ONE call to the model to group the residual
+by underlying problem -> merge of each group (reuses dedup._merge: unites guidelines,
+maximum severity, cumulative merged_count). The model ONLY groups by id; the merge and the
+guarantee of not losing any finding are deterministic, in code.
 
-Garantia: cada hallazgo de entrada aparece en EXACTAMENTE un hallazgo de salida (no se
-pierde ni se duplica), aunque el modelo alucine ids o repita uno en dos grupos.
+Guarantee: each input finding appears in EXACTLY one output finding (it is neither
+lost nor duplicated), even if the model hallucinates ids or repeats one in two groups.
 """
 
 from __future__ import annotations
@@ -21,16 +21,16 @@ from interaction_review import llm, prompts
 from interaction_review.dedup import _merge, _representative, deduplicate, text_similarity
 from interaction_review.schemas import Finding
 
-# Barandilla anti-sobrefundido (el LLM PROPONE, el codigo COMPRUEBA): dentro de un grupo
-# que el modelo dio por "mismo problema", se VETA al miembro cuyo locus+titulo es muy
-# dispar del representante (probablemente otro problema del mismo area). Calibrado offline:
-# el prompt estricto solo no bajaba la impureza; este gate si. Floor bajo -> solo corta
-# los emparejamientos egregios, conserva los reescritos genuinos (mismo locus, otra cita).
+# Anti-over-merge guardrail (the LLM PROPOSES, the code CHECKS): within a group
+# that the model deemed "same problem", the member whose locus+title is very
+# dissimilar from the representative is VETOED (probably another problem in the same area). Calibrated offline:
+# the strict prompt alone did not lower the impurity; this gate did. Low floor -> only cuts
+# the egregious pairings, keeps the genuine rewrites (same locus, different citation).
 SEMANTIC_LOCUS_FLOOR: float = 0.18
 
 
 def _llm_groups(findings: list[Finding], model: str | None, temperature: float) -> list[list[str]]:
-    """Pide al modelo los grupos de ids que son el mismo problema. Devuelve listas de ids."""
+    """Asks the model for the groups of ids that are the same problem. Returns lists of ids."""
     payload = [
         {"id": f.id, "title": f.title, "locus": f.locus, "guideline_ids": f.guideline_ids}
         for f in findings
@@ -53,11 +53,11 @@ def _llm_groups(findings: list[Finding], model: str | None, temperature: float) 
 
 
 def _refine_group(members: list[Finding], floor: float) -> list[list[Finding]]:
-    """Barandilla: dentro de un grupo del LLM, separa a quien tenga locus muy dispar.
+    """Guardrail: within an LLM group, separates whoever has a very dissimilar locus.
 
-    Devuelve subgrupos: el nucleo (parecido al representante por titulo+locus) y cada
-    outlier suelto. Asi un grupo que mezclaba dos problemas vecinos se parte y deja de
-    conflar. No pierde hallazgos (los outliers quedan como singletons).
+    Returns subgroups: the core (similar to the representative by title+locus) and each
+    outlier on its own. This way a group that mixed two neighboring problems is split and stops
+    conflating. It does not lose findings (the outliers remain as singletons).
     """
     if len(members) < 2:
         return [members]
@@ -80,11 +80,11 @@ def deduplicate_llm(
     temperature: float = 0.0,
     locus_floor: float = SEMANTIC_LOCUS_FLOOR,
 ) -> list[Finding]:
-    """Deduplica con una capa semantica (LLM) sobre el dedup lexico.
+    """Deduplicates with a semantic layer (LLM) on top of the lexical dedup.
 
-    `pre_dedup`: aplica antes el dedup determinista (recomendado: menos items que mandar
-    al modelo y se centra en el residual dificil). `locus_floor`: barandilla anti-sobrefundido
-    (el LLM propone los grupos, el codigo veta miembros con locus dispar; 0 = sin barandilla).
+    `pre_dedup`: applies the deterministic dedup first (recommended: fewer items to send
+    to the model and it focuses on the hard residual). `locus_floor`: anti-over-merge guardrail
+    (the LLM proposes the groups, the code vetoes members with a dissimilar locus; 0 = no guardrail).
     """
     base = deduplicate(findings) if pre_dedup else list(findings)
     if len(base) < 2:
@@ -93,7 +93,7 @@ def deduplicate_llm(
     by_id = {f.id: f for f in base}
     groups = _llm_groups(base, model, temperature)
 
-    # Construye clusters respetando: cada id en UN solo cluster; orden por 1a aparicion.
+    # Builds clusters respecting: each id in ONLY one cluster; order by 1st appearance.
     order = {f.id: n for n, f in enumerate(base)}
     assigned: set[str] = set()
     clusters: list[list[Finding]] = []
@@ -102,14 +102,14 @@ def deduplicate_llm(
         if len(members) >= 2:
             assigned.update(m.id for m in members)
             clusters.append(members)
-    # Los no agrupados quedan solos.
+    # The ungrouped ones remain on their own.
     for f in base:
         if f.id not in assigned:
             clusters.append([f])
-    # Barandilla en codigo: parte los grupos que mezclan loci dispares.
+    # Guardrail in code: splits the groups that mix dissimilar loci.
     refined: list[list[Finding]] = []
     for c in clusters:
         refined.extend(_refine_group(c, locus_floor) if locus_floor > 0 else [c])
-    # Orden estable: por el indice del miembro mas temprano de cada cluster.
+    # Stable order: by the index of the earliest member of each cluster.
     refined.sort(key=lambda c: min(order[m.id] for m in c))
     return [_merge(c) for c in refined]

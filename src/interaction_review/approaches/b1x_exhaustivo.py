@@ -1,8 +1,8 @@
-"""B1x - Prompt unico EXHAUSTIVO (ablacion: ¿la ventaja de P3 es estructura o cantidad?).
+"""B1x - Single EXHAUSTIVE prompt (ablation: is P3's advantage structure or quantity?).
 
-Igual que B1 (una sola pasada, sin bloques) pero empujando al maximo el numero de
-hallazgos. Si B1x se acerca a P3, la ventaja de P3 era generar MAS (cantidad), no su
-descomposicion por bloques (estructura). Si B1x sigue por debajo, la estructura aporta.
+Same as B1 (a single pass, no blocks) but pushing the number of findings to the
+maximum. If B1x gets close to P3, P3's advantage was generating MORE (quantity), not its
+decomposition into blocks (structure). If B1x stays below, the structure contributes.
 """
 
 from __future__ import annotations

@@ -1,18 +1,18 @@
-"""P3-neutral (prueba A2) - Pipeline determinista con particion NEUTRAL de guidelines.
+"""P3-neutral (test A2) - Deterministic pipeline with a NEUTRAL partition of guidelines.
 
-Control de overfitting (R-A del TESTPLAN): P3 'normal' agrupa las guidelines en 5
-bloques SEMANTICOS hechos a mano conociendo el caso (p3_pipeline.BUCKETS). Si esa
-agrupacion afinada fuera la fuente de la ventaja -y no la descomposicion en si-, P3
-no generalizaria: seria overfitting al caso.
+Overfitting control (R-A of the TESTPLAN): 'normal' P3 groups the guidelines into 5
+SEMANTIC blocks made by hand knowing the case (p3_pipeline.BUCKETS). If that
+fine-tuned grouping were the source of the advantage (and not the decomposition itself), P3
+would not generalize: it would be overfitting to the case.
 
-P3-neutral usa la particion de los PROPIOS AUTORES, ya presente en los datos: el
-campo `group` de cada guideline (las 4 fases de HAX-18: Inicialmente / Durante /
-Cuando se equivoca / Con el tiempo; y los 6 capitulos de PAIR). No hay diseno a
-mano: los bloques se DERIVAN de los datos. Si P3-neutral ~= P3 en recall, la ventaja
-es DESCOMPONER, no mis bloques -> la mejora generaliza.
+P3-neutral uses the partition from the AUTHORS THEMSELVES, already present in the data: the
+`group` field of each guideline (the 4 phases of HAX-18: Initially / During /
+When wrong / Over time; and the 6 PAIR chapters). There is no hand
+design: the blocks are DERIVED from the data. If P3-neutral ~= P3 in recall, the advantage
+is DECOMPOSING, not my blocks -> the improvement generalizes.
 
-Mismo flujo FIJO que P3 (una pasada focalizada por bloque -> merge); lo unico que
-cambia es como se agrupan las guidelines. Sigue siendo un pipeline, NO un agente.
+Same FIXED flow as P3 (one focused pass per block -> merge); the only thing that
+changes is how the guidelines are grouped. It is still a pipeline, NOT an agent.
 """
 
 from __future__ import annotations
@@ -22,10 +22,10 @@ from interaction_review.schemas import Dossier, Finding, Guideline
 
 
 def buckets_by_group(guidelines: list[Guideline]) -> dict[str, list[Guideline]]:
-    """Agrupa por (corpus, group) preservando el orden de aparicion.
+    """Groups by (corpus, group) preserving the order of appearance.
 
-    Neutral por construccion: la clave es la taxonomia oficial del corpus, no una
-    agrupacion nuestra. Con corpus hax+pair salen 4 (fases HAX) + 6 (capitulos PAIR).
+    Neutral by construction: the key is the corpus's official taxonomy, not a
+    grouping of ours. With the hax+pair corpus this yields 4 (HAX phases) + 6 (PAIR chapters).
     """
     buckets: dict[str, list[Guideline]] = {}
     for g in guidelines:
@@ -47,5 +47,5 @@ def run(dossier: Dossier, guidelines: list[Guideline]) -> list[Finding]:
         if not gl:
             continue
         collected.extend(generate(dossier, gl, few_shot=False, label=f"p3n-{_slug(key)}"))
-    # Re-id unico y estable (los labels por bloque colisionarian en el indice).
+    # Unique and stable re-id (the per-block labels would collide in the index).
     return [f.model_copy(update={"id": f"p3n-{n:03d}"}) for n, f in enumerate(collected, start=1)]

@@ -1,11 +1,11 @@
-"""A4 - Agente: bucle con control de flujo decidido por el MODELO (no por codigo).
+"""A4 - Agent: loop with control flow decided by the MODEL (not by code).
 
-Diferencia clave con P3 (pipeline fijo): P3 barre SIEMPRE los mismos bloques. A4 hace
-una pasada inicial amplia y luego, en cada iteracion, el MODELO decide -mirando lo que
-lleva- que areas faltan y si merece otra pasada o parar. Esa autonomia (que investigar
-y cuando terminar, segun el estado) es lo que lo hace agente.
+Key difference from P3 (fixed pipeline): P3 ALWAYS sweeps the same blocks. A4 makes
+an initial broad pass and then, on each iteration, the MODEL decides (looking at what
+it has so far) which areas are missing and whether another pass is worth it or it should stop.
+That autonomy (what to investigate and when to finish, based on the state) is what makes it an agent.
 
-Barandilla anti-loop: MAX_ITERS acota el numero de iteraciones (no hay bucle abierto).
+Anti-loop guardrail: MAX_ITERS bounds the number of iterations (there is no open loop).
 """
 
 from __future__ import annotations
@@ -14,11 +14,11 @@ from interaction_review import llm, prompts
 from interaction_review.approaches._generator import gen_temperature, generate
 from interaction_review.schemas import Dossier, Finding, Guideline
 
-MAX_ITERS = 4  # tope duro de iteraciones (1 amplia + hasta 3 dirigidas)
+MAX_ITERS = 4  # hard cap on iterations (1 broad + up to 3 targeted)
 
 
 def _assess_gaps(guidelines: list[Guideline], findings: list[Finding]) -> dict:
-    """Decision AUTONOMA del modelo: ¿seguir? ¿que guidelines investigar ahora?"""
+    """AUTONOMOUS model decision: keep going? which guidelines to investigate now?"""
     payload = [{"title": f.title, "guideline_ids": f.guideline_ids} for f in findings]
     out = llm.call_structured(
         model=llm.gen_model(),

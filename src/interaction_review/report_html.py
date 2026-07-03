@@ -1,8 +1,8 @@
-"""Informe HTML autocontenido de la revision (un solo .html, CSS embebido, sin red).
+"""Self-contained HTML report of the review (a single .html, embedded CSS, no network).
 
-Pensado para el comprador de gobernanza/calidad: serio, editorial, imprime a PDF.
-Complementa el markdown de `report.py`; consume los mismos `Finding`. Todo el
-contenido dinamico se escapa con html.escape (texto libre del dossier/hallazgos).
+Intended for the governance/quality buyer: serious, editorial, prints to PDF.
+Complements the markdown from `report.py`; consumes the same `Finding`. All the
+dynamic content is escaped with html.escape (free text from the dossier/findings).
 """
 
 from __future__ import annotations
@@ -12,8 +12,8 @@ import html
 from interaction_review.schemas import Dossier, Finding, Severity
 
 # --------------------------------------------------------------------------- #
-# Estilo: documento de auditoria editorial. Papel calido + tinta + azul pizarra.
-# Fuentes del sistema con aire editorial (sin dependencias de red). Print-friendly.
+# Style: editorial audit document. Warm paper + ink + slate blue.
+# System fonts with an editorial feel (no network dependencies). Print-friendly.
 # --------------------------------------------------------------------------- #
 _CSS = """
 :root {
@@ -33,7 +33,7 @@ body {
 }
 .sheet { max-width: 860px; margin: 0 auto; padding: 0 32px 96px; }
 
-/* Cabecera */
+/* Header */
 .masthead { padding: 56px 0 28px; border-bottom: 2px solid var(--ink); margin-bottom: 40px; }
 .kicker {
   font-family: var(--mono); font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
@@ -47,7 +47,7 @@ body {
 }
 .masthead .meta b { color: var(--ink); font-weight: 600; }
 
-/* Resumen: tira de cifras */
+/* Summary: number strip */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line);
   border: 1px solid var(--line); margin-bottom: 12px; }
 .stat { background: var(--surface); padding: 16px 18px; }
@@ -65,7 +65,7 @@ section.findings > h2, section.crosswalk > h2 {
   color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 8px; margin: 0 0 8px;
 }
 
-/* Hallazgo */
+/* Finding */
 .finding { display: grid; grid-template-columns: 46px 1fr; gap: 20px; padding: 26px 0;
   border-bottom: 1px solid var(--line); break-inside: avoid; }
 .finding .idx { font-size: 28px; color: var(--accent); font-variant-numeric: tabular-nums;
@@ -107,7 +107,7 @@ section.crosswalk { margin-top: 52px; break-inside: avoid; }
 footer { margin-top: 40px; padding-top: 18px; border-top: 2px solid var(--ink);
   font-family: var(--sans); font-size: 11.5px; color: var(--ink-soft); }
 
-/* Aparicion suave (solo pantalla) */
+/* Soft appearance (screen only) */
 @media screen {
   .finding, .stat, .cw-fw { animation: rise .5s ease both; }
   .finding:nth-child(2) { animation-delay: .04s; } .finding:nth-child(3) { animation-delay: .08s; }
@@ -122,7 +122,7 @@ footer { margin-top: 40px; padding-top: 18px; border-top: 2px solid var(--ink);
 }
 """
 
-_SEV_LABEL = {Severity.HIGH: "Alta", Severity.MEDIUM: "Media", Severity.LOW: "Baja"}
+_SEV_LABEL = {Severity.HIGH: "High", Severity.MEDIUM: "Medium", Severity.LOW: "Low"}
 
 
 def _esc(text: str) -> str:
@@ -146,9 +146,9 @@ def _finding_html(f: Finding, idx: int) -> str:
     parts.append(f"<h3>{_esc(f.title)}</h3>")
     parts.append(f'<span class="pill {sev}">{_SEV_LABEL.get(f.severity, sev)}</span>')
     if grounded:
-        parts.append('<span class="tag ok">Anclado</span>')
+        parts.append('<span class="tag ok">Anchored</span>')
     else:
-        parts.append('<span class="tag warn">Sin anclar</span>')
+        parts.append('<span class="tag warn">Not anchored</span>')
     parts.append("</div>")
 
     if f.guideline_ids:
@@ -156,18 +156,18 @@ def _finding_html(f: Finding, idx: int) -> str:
         parts.append(f'<p class="gids">{chips}</p>')
 
     parts.append('<dl class="f-body">')
-    parts.append(_row("Locus", f.locus or "(sin locus concreto)"))
-    parts.append(_row("Evidencia", f.evidence or "(sin evidencia)", cls="evidence"))
+    parts.append(_row("Locus", f.locus or "(no concrete locus)"))
+    parts.append(_row("Evidence", f.evidence or "(no evidence)", cls="evidence"))
     if f.anti_pattern:
-        parts.append(_row("Anti-patrón", f.anti_pattern))
+        parts.append(_row("Anti-pattern", f.anti_pattern))
     if f.rationale:
-        parts.append(_row("Por qué importa", f.rationale))
+        parts.append(_row("Why it matters", f.rationale))
     if f.recommendation:
-        parts.append(_row("Recomendación", f.recommendation))
+        parts.append(_row("Recommendation", f.recommendation))
     parts.append("</dl>")
 
     if f.merged_count > 1:
-        parts.append(f'<p class="merged">Consolida {f.merged_count} hallazgos crudos.</p>')
+        parts.append(f'<p class="merged">Consolidates {f.merged_count} raw findings.</p>')
 
     parts.append("</div></article>")
     return "".join(parts)
@@ -181,11 +181,11 @@ def _crosswalk_html(findings: list[Finding]) -> str:
         return ""
     names = framework_names()
     parts: list[str] = ['<section class="crosswalk">']
-    parts.append("<h2>Crosswalk normativo</h2>")
+    parts.append("<h2>Regulatory crosswalk</h2>")
     parts.append(
-        '<p class="cw-note">Requisitos que tocan los hallazgos, con la guideline que los ancla. '
-        "Orientativo, <b>no dictamen legal</b> (ADR-008): la aplicabilidad depende del rol y de si "
-        "el sistema es de alto riesgo.</p>"
+        '<p class="cw-note">Requirements touched by the findings, with the guideline that anchors them. '
+        "Indicative, <b>not a legal opinion</b> (ADR-008): applicability depends on the role and on whether "
+        "the system is high-risk.</p>"
     )
     for fw, items in cw.items():
         parts.append('<div class="cw-fw">')
@@ -207,7 +207,7 @@ def render_findings_html(
     *,
     include_crosswalk: bool = False,
 ) -> str:
-    """Informe HTML autocontenido. `include_crosswalk` anexa el mapeo normativo."""
+    """Self-contained HTML report. `include_crosswalk` appends the regulatory mapping."""
     n = len(findings)
     grounded = sum(1 for f in findings if f.is_grounded())
     pct = round(grounded / n * 100) if n else 0
@@ -215,42 +215,42 @@ def render_findings_html(
     sev_counts = {s: sum(1 for f in findings if f.severity is s) for s in Severity}
 
     doc: list[str] = []
-    doc.append("<!doctype html><html lang='es'><head><meta charset='utf-8'>")
+    doc.append("<!doctype html><html lang='en'><head><meta charset='utf-8'>")
     doc.append("<meta name='viewport' content='width=device-width, initial-scale=1'>")
-    doc.append(f"<title>Revisión — {_esc(dossier.system_name)}</title>")
+    doc.append(f"<title>Review - {_esc(dossier.system_name)}</title>")
     doc.append(f"<style>{_CSS}</style></head><body><main class='sheet'>")
 
-    # Cabecera
+    # Header
     doc.append("<header class='masthead'>")
-    doc.append("<p class='kicker'>Revisión de la capa de interacción humano–IA</p>")
+    doc.append("<p class='kicker'>Human-AI interaction layer review</p>")
     doc.append(f"<h1>{_esc(dossier.system_name)}</h1>")
     doc.append(f"<p class='domain'>{_esc(dossier.domain)}</p>")
     doc.append(
         f"<div class='meta'><span><b>Approach:</b> {_esc(approach)}</span>"
-        f"<span><b>Fuentes:</b> {len(dossier.sources)}</span>"
-        f"<span><b>Guías:</b> HAX-18 · PAIR</span></div>"
+        f"<span><b>Sources:</b> {len(dossier.sources)}</span>"
+        f"<span><b>Guidelines:</b> HAX-18 · PAIR</span></div>"
     )
     doc.append("</header>")
 
-    # Resumen
+    # Summary
     dedup_note = (
-        f"{raw}→{n}" if raw > n else "—"
+        f"{raw}->{n}" if raw > n else "n/a"
     )
     doc.append("<div class='stats'>")
-    doc.append(f"<div class='stat'><div class='n'>{n}</div><div class='l'>Hallazgos</div></div>")
+    doc.append(f"<div class='stat'><div class='n'>{n}</div><div class='l'>Findings</div></div>")
     doc.append(
-        f"<div class='stat'><div class='n'>{pct}%</div><div class='l'>Anclados</div></div>"
+        f"<div class='stat'><div class='n'>{pct}%</div><div class='l'>Anchored</div></div>"
     )
     doc.append(
         f"<div class='stat'><div class='n'>{sev_counts[Severity.HIGH]}</div>"
-        f"<div class='l'>Severidad alta</div></div>"
+        f"<div class='l'>High severity</div></div>"
     )
     doc.append(
-        f"<div class='stat'><div class='n'>{dedup_note}</div><div class='l'>Consolidación</div></div>"
+        f"<div class='stat'><div class='n'>{dedup_note}</div><div class='l'>Consolidation</div></div>"
     )
     doc.append("</div>")
 
-    # Barra de severidad proporcional
+    # Proportional severity bar
     if n:
         doc.append("<div class='sev-bar'>")
         for s, klass in ((Severity.HIGH, "s-high"), (Severity.MEDIUM, "s-medium"), (Severity.LOW, "s-low")):
@@ -259,23 +259,23 @@ def render_findings_html(
                 doc.append(f"<span class='{klass}' style='width:{w:.1f}%'></span>")
         doc.append("</div>")
 
-    # Hallazgos
-    doc.append("<section class='findings'><h2>Hallazgos</h2>")
+    # Findings
+    doc.append("<section class='findings'><h2>Findings</h2>")
     if findings:
         for i, f in enumerate(findings, 1):
             doc.append(_finding_html(f, i))
     else:
-        doc.append("<p><em>Sin hallazgos: el sistema no presenta problemas de interacción detectables.</em></p>")
+        doc.append("<p><em>No findings: the system shows no detectable interaction problems.</em></p>")
     doc.append("</section>")
 
-    # Crosswalk normativo
+    # Regulatory crosswalk
     if include_crosswalk:
         doc.append(_crosswalk_html(findings))
 
     doc.append(
-        "<footer>Generado por el revisor de la capa de interacción humano–IA · "
-        "hallazgos anclados a HAX-18 (Microsoft) y PAIR (Google). "
-        "El crosswalk normativo es orientativo, no dictamen legal.</footer>"
+        "<footer>Generated by the human-AI interaction layer reviewer · "
+        "findings anchored to HAX-18 (Microsoft) and PAIR (Google). "
+        "The regulatory crosswalk is indicative, not a legal opinion.</footer>"
     )
     doc.append("</main></body></html>")
     return "".join(doc)

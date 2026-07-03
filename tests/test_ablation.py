@@ -1,5 +1,5 @@
-"""Tests de la ablacion del testimonio (ADR-007): dossier de control, distribucion
-del golden y recall desglosado por `revealed_by`. Valores calculados a mano."""
+"""Tests for the testimony ablation (ADR-007): control dossier, golden distribution
+and recall broken down by `revealed_by`. Hand-computed values."""
 
 import pytest
 
@@ -45,7 +45,7 @@ def test_without_voice_removes_only_end_user():
 def test_without_voice_does_not_mutate_original():
     d = _dossier()
     _ = without_voice(d)
-    assert len(d.sources) == 4  # el original intacto
+    assert len(d.sources) == 4  # the original untouched
     assert has_voice(d)
 
 
@@ -86,7 +86,7 @@ def test_default_revealed_by_is_unknown():
 
 # --- recall_by_revealed_by -------------------------------------------------- #
 def test_recall_by_revealed_by_splits_correctly():
-    # 2 USER_ONLY (u-hit emparejado, u-miss no), 1 BOTH emparejado, 1 TECH_ONLY no.
+    # 2 USER_ONLY (u-hit matched, u-miss not), 1 BOTH matched, 1 TECH_ONLY not.
     golden = [
         GoldenIssue(id="u-hit", description="", revealed_by=RevealedBy.USER_ONLY),
         GoldenIssue(id="u-miss", description="", revealed_by=RevealedBy.USER_ONLY),
@@ -96,7 +96,7 @@ def test_recall_by_revealed_by_splits_correctly():
     adj = [
         Adjudication(finding_id="f1", label=AdjudicationLabel.TP_MATCH, matched_golden_id="u-hit"),
         Adjudication(finding_id="f2", label=AdjudicationLabel.TP_MATCH, matched_golden_id="b-hit"),
-        Adjudication(finding_id="f3", label=AdjudicationLabel.TP_NEW),  # no cuenta a recall
+        Adjudication(finding_id="f3", label=AdjudicationLabel.TP_NEW),  # does not count toward recall
     ]
     by = {sr.revealed_by: sr for sr in recall_by_revealed_by(adj, golden)}
 
@@ -105,7 +105,7 @@ def test_recall_by_revealed_by_splits_correctly():
     assert by[RevealedBy.USER_ONLY].recall == 0.5
     assert by[RevealedBy.BOTH].recall == 1.0
     assert by[RevealedBy.TECH_ONLY].recall == 0.0
-    # buckets ausentes en el golden no aparecen:
+    # buckets absent from the golden do not appear:
     assert RevealedBy.UNKNOWN not in by
 
 

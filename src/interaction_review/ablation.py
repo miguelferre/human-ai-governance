@@ -1,22 +1,22 @@
-"""Ablacion del testimonio del usuario final (ADR-007).
+"""Ablation of the end user's testimony (ADR-007).
 
-Pregunta que responde: el testimonio del usuario final, ¿aporta al RECALL del
-revisor (descubre problemas que la documentacion tecnica no revela) o solo al
-grounding/credibilidad de los que ya se detectarian?
+Question it answers: does the end user's testimony contribute to the reviewer's
+RECALL (discovering problems that the technical documentation does not reveal) or only to the
+grounding/credibility of those that would already be detected?
 
-Diseno del experimento:
-  1. Etiquetar cada GoldenIssue con `revealed_by` (USER_ONLY / TECH_ONLY / BOTH).
-  2. Correr el revisor sobre el dossier COMPLETO (con voz).
-  3. Correr el revisor sobre el dossier SIN las fuentes END_USER (`without_voice`).
-  4. Comparar el recall del subconjunto USER_ONLY entre ambas condiciones
+Experiment design:
+  1. Label each GoldenIssue with `revealed_by` (USER_ONLY / TECH_ONLY / BOTH).
+  2. Run the reviewer over the COMPLETE dossier (with voice).
+  3. Run the reviewer over the dossier WITHOUT the END_USER sources (`without_voice`).
+  4. Compare the recall of the USER_ONLY subset between both conditions
      (`metrics.recall_by_revealed_by`).
 
-Si el testimonio es el diferencial, el recall de USER_ONLY se desploma sin voz.
-Si no cambia, el diferencial esta en el grounding, no en el descubrimiento.
+If the testimony is the differentiator, USER_ONLY recall collapses without voice.
+If it does not change, the differentiator is in grounding, not in discovery.
 
-Este modulo es OFFLINE y determinista: derivar el dossier de control y contar la
-distribucion del golden no llaman al LLM. La corrida de los pasos 2-3 (que si lo
-llama) vive en el flujo `comparar`.
+This module is OFFLINE and deterministic: deriving the control dossier and counting the
+golden distribution do not call the LLM. The run of steps 2-3 (which does call it)
+lives in the `comparar` flow.
 """
 
 from __future__ import annotations
@@ -25,12 +25,12 @@ from interaction_review.schemas import Dossier, GoldenIssue, RevealedBy, SourceK
 
 
 def without_voice(dossier: Dossier) -> Dossier:
-    """Dossier de control 'sin voz': el mismo salvo las fuentes END_USER.
+    """Control dossier 'without voice': the same one except the END_USER sources.
 
-    Es la condicion de ablacion: se retira el testimonio del usuario final y se
-    conserva todo lo demas (documentacion y perfil tecnico). Devuelve una copia;
-    no muta el original. Lanza si no quedaria ninguna fuente (un dossier hecho solo
-    de voz no se puede ablar de forma justa).
+    It is the ablation condition: the end user's testimony is removed and
+    everything else is kept (documentation and technical profile). Returns a copy;
+    it does not mutate the original. Raises if no source would remain (a dossier made only
+    of voice cannot be ablated fairly).
     """
     kept = [s for s in dossier.sources if s.kind is not SourceKind.END_USER]
     if not kept:
@@ -42,16 +42,16 @@ def without_voice(dossier: Dossier) -> Dossier:
 
 
 def has_voice(dossier: Dossier) -> bool:
-    """True si el dossier contiene al menos una fuente END_USER (testimonio)."""
+    """True if the dossier contains at least one END_USER source (testimony)."""
     return any(s.kind is SourceKind.END_USER for s in dossier.sources)
 
 
 def revealed_by_distribution(golden: list[GoldenIssue]) -> dict[RevealedBy, int]:
-    """Cuenta cuantos GoldenIssue hay por cada valor de `revealed_by`.
+    """Counts how many GoldenIssue there are for each `revealed_by` value.
 
-    Resultado OFFLINE informativo por si solo: si casi ningun issue es USER_ONLY,
-    el techo de lo que el testimonio puede aportar al recall es bajo *antes* de
-    gastar una sola llamada al LLM.
+    An OFFLINE result informative on its own: if almost no issue is USER_ONLY,
+    the ceiling of what the testimony can contribute to recall is low *before*
+    spending a single LLM call.
     """
     counts: dict[RevealedBy, int] = {rb: 0 for rb in RevealedBy}
     for g in golden:

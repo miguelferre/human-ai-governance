@@ -1,7 +1,7 @@
-"""Tests de F2 sin tocar la API: prompts, parseo, logica del juez y orquestacion.
+"""Tests for F2 without touching the API: prompts, parsing, judge logic and orchestration.
 
-Las llamadas reales al LLM se monkeypatchean. Lo que se testea es la logica
-determinista alrededor (anclaje, coherencia de etiquetas, agregacion).
+The real LLM calls are monkeypatched. What is tested is the deterministic logic
+around them (grounding, label coherence, aggregation).
 """
 
 import pytest
@@ -42,7 +42,7 @@ def test_generator_user_fewshot_toggle_y_anclaje():
     few = prompts.generator_user(_dossier(), g, few_shot=True)
     assert "BIEN (anclado)" not in zero
     assert "BIEN (anclado)" in few
-    # el catalogo de guidelines y el dossier estan en el prompt
+    # the guideline catalog and the dossier are in the prompt
     assert "HAX-G9" in zero and "Sistema X" in zero
 
 
@@ -51,20 +51,20 @@ def test_generator_system_prohibe_genericos():
     assert prompts.FINDINGS_TOOL["name"] == "report_findings"
 
 
-# --- parseo de hallazgos ---
+# --- finding parsing ---
 def test_to_finding_normaliza_y_calcula_anclaje():
     raw = {
         "title": "t",
         "guideline_ids": ["HAX-G9", ""],
         "locus": "el boton de override",
         "evidence": "'solo se pide el motivo al discrepar'",
-        "severity": "altisima",  # invalida -> medium
+        "severity": "altisima",  # invalid -> medium
         "rationale": "r",
         "recommendation": "rec",
     }
     f = _to_finding("b1", 3, raw)
     assert f.id == "b1-003"
-    assert f.guideline_ids == ["HAX-G9"]  # filtra vacios
+    assert f.guideline_ids == ["HAX-G9"]  # filters out empties
     assert f.severity.value == "medium"
     assert f.is_grounded() is True
 
@@ -74,21 +74,21 @@ def test_to_finding_sin_anclaje_no_grounded():
     assert not f.is_grounded()
 
 
-# --- candidatos del juez (deuda de medicion: TESTPLAN B2) ---
+# --- judge candidates (measurement debt: TESTPLAN B2) ---
 def test_candidates_incluye_todos_los_golden_probables_primero():
     f = Finding(id="f1", title="t", guideline_ids=["HAX-G9"], locus="x", evidence="y")
     comparte = GoldenIssue(id="G-comparte", description="d", guideline_ids=["HAX-G9"])
-    # Golden tagueado con OTRA guideline (otro corpus): antes quedaba EXCLUIDO -> falso fallo.
+    # Golden tagged with ANOTHER guideline (another corpus): before it was EXCLUDED -> false miss.
     distinto = GoldenIssue(id="G-distinto", description="d", guideline_ids=["PAIR-ET-2"])
     cands = judge_mod._candidates(f, [distinto, comparte])
     ids = [g.id for g in cands]
-    assert set(ids) == {"G-comparte", "G-distinto"}  # ya NO se excluye al que no comparte
-    assert ids[0] == "G-comparte"  # el que comparte guideline va primero (pista al juez)
+    assert set(ids) == {"G-comparte", "G-distinto"}  # the non-sharing one is NO longer excluded
+    assert ids[0] == "G-comparte"  # the one sharing a guideline goes first (hint to the judge)
 
 
 def test_candidates_recupera_match_con_guideline_distinta(monkeypatch):
-    # El hallazgo cita HAX-G9 pero el problema real es el golden tagueado con PAIR-ET-2.
-    # Con el filtro viejo no era candidato; ahora si, y el juez puede emparejarlo.
+    # The finding cites HAX-G9 but the real problem is the golden tagged with PAIR-ET-2.
+    # With the old filter it was not a candidate; now it is, and the judge can match it.
     f = Finding(id="f1", title="t", guideline_ids=["HAX-G9"], locus="x", evidence="y")
     golden = [GoldenIssue(id="G-PAIR", description="mismo problema", guideline_ids=["PAIR-ET-2"])]
 
@@ -102,28 +102,28 @@ def test_candidates_recupera_match_con_guideline_distinta(monkeypatch):
     assert adj.label == AdjudicationLabel.TP_MATCH and adj.matched_golden_id == "G-PAIR"
 
 
-# --- logica del juez (LLM monkeypatcheado) ---
+# --- judge logic (LLM monkeypatched) ---
 def _grounded(fid: str) -> Finding:
     return Finding(id=fid, title=fid, guideline_ids=["HAX-G1"], locus="x", evidence="y")
 
 
 def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
-    # x1..x4 anclados; x6 SIN anclaje (locus/evidencia vacios).
+    # x1..x4 grounded; x6 NOT grounded (empty locus/evidence).
     findings = [_grounded(f"x{i}") for i in (1, 2, 3, 4)] + [
         Finding(id="x6", title="x6", guideline_ids=["HAX-G1"])
     ]
-    golden = [GoldenIssue(id="G1", description="d")]  # candidato (fallback) para los anclados
+    golden = [GoldenIssue(id="G1", description="d")]  # candidate (fallback) for the grounded ones
 
     def fake_call(**kwargs):
-        # El modelo solo confirma candidato; la etiqueta se deriva en codigo.
+        # The model only confirms a candidate; the label is derived in code.
         return {
             "adjudications": [
                 {"finding_id": "x1", "judge_rationale": "ok", "corresponde_a_candidato": "G1", "es_real": True},
-                # candidato inexistente -> no es match; es_real True -> tp_new
+                # nonexistent candidate -> not a match; es_real True -> tp_new
                 {"finding_id": "x2", "judge_rationale": "x", "corresponde_a_candidato": "NOPE", "es_real": True},
                 {"finding_id": "x3", "judge_rationale": "x", "corresponde_a_candidato": "ninguno", "es_real": False},
-                # x4 ausente a proposito -> fp_incorrect
-                # x6: el juez intenta emparejarlo, pero NO esta anclado -> el gate fuerza fp_generic
+                # x4 absent on purpose -> fp_incorrect
+                # x6: the judge tries to match it, but it is NOT grounded -> the gate forces fp_generic
                 {"finding_id": "x6", "judge_rationale": "x", "corresponde_a_candidato": "G1", "es_real": True},
             ]
         }
@@ -132,22 +132,22 @@ def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
     by_id = {a.finding_id: a for a in judge_mod.adjudicate(findings, golden, _dossier())}
     assert by_id["x1"].label == AdjudicationLabel.TP_MATCH and by_id["x1"].matched_golden_id == "G1"
     assert by_id["x2"].label == AdjudicationLabel.TP_NEW and by_id["x2"].matched_golden_id is None
-    assert by_id["x3"].label == AdjudicationLabel.FP_INCORRECT  # ninguno + no real
-    assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT  # ausente -> prudencia
-    # gate estructural: sin anclaje es fp_generic AUNQUE el juez diga que corresponde a G1
+    assert by_id["x3"].label == AdjudicationLabel.FP_INCORRECT  # none + not real
+    assert by_id["x4"].label == AdjudicationLabel.FP_INCORRECT  # absent -> caution
+    # structural gate: without grounding it is fp_generic EVEN IF the judge says it matches G1
     assert by_id["x6"].label == AdjudicationLabel.FP_GENERIC and by_id["x6"].matched_golden_id is None
 
 
-# --- orquestacion (b0 determinista, juez falso, sin API) ---
+# --- orchestration (deterministic b0, fake judge, no API) ---
 def test_generate_robusto_ante_estructura_mala(monkeypatch):
-    # El tool-use de Anthropic puede devolver items que no son objeto -> deben ignorarse.
+    # Anthropic tool-use may return items that are not objects -> they must be ignored.
     from interaction_review.approaches import _generator
 
     bad = {"findings": ["basura-string", {"title": "t", "guideline_ids": ["HAX-G1"], "locus": "x",
                                           "evidence": "y", "severity": "low", "rationale": "r", "recommendation": "z"}]}
     monkeypatch.setattr(_generator.llm, "call_structured", lambda **k: bad)
     out = _generator.generate(_dossier(), list(all_guidelines()), few_shot=False, label="t")
-    assert len(out) == 1 and out[0].is_grounded()  # solo el item-objeto sobrevive
+    assert len(out) == 1 and out[0].is_grounded()  # only the object item survives
 
 
 def test_p3_buckets_cubren_todas_las_guidelines():
@@ -155,7 +155,7 @@ def test_p3_buckets_cubren_todas_las_guidelines():
 
     cubiertos = {gid for ids in BUCKETS.values() for gid in ids}
     todas = {g.id for g in all_guidelines()}
-    assert cubiertos == todas  # sin omisiones ni ids inventados
+    assert cubiertos == todas  # no omissions or invented ids
 
 
 def test_p3_run_reid_unico(monkeypatch):
@@ -167,7 +167,7 @@ def test_p3_run_reid_unico(monkeypatch):
     monkeypatch.setattr(p3_pipeline, "generate", fake_generate)
     out = p3_pipeline.run(_dossier(), list(all_guidelines()))
     ids = [f.id for f in out]
-    assert len(ids) == len(set(ids)) == len(p3_pipeline.BUCKETS)  # un hallazgo por bloque, ids unicos
+    assert len(ids) == len(set(ids)) == len(p3_pipeline.BUCKETS)  # one finding per block, unique ids
     assert ids[0] == "p3-001"
 
 
@@ -180,7 +180,7 @@ def test_a4_para_cuando_no_hay_gaps(monkeypatch):
     )
     monkeypatch.setattr(a4_agent, "_assess_gaps", lambda guidelines, findings: {"seguir": False, "guideline_ids": []})
     out = a4_agent.run(_dossier(), list(all_guidelines()))
-    assert len(out) == 1 and out[0].id == "a4-001"  # solo la pasada inicial
+    assert len(out) == 1 and out[0].id == "a4-001"  # only the initial pass
 
 
 def test_a4_acota_iteraciones(monkeypatch):
@@ -190,11 +190,11 @@ def test_a4_acota_iteraciones(monkeypatch):
         a4_agent, "generate",
         lambda d, gl, *, few_shot, label: [_grounded(f"{label}")],
     )
-    # el modelo SIEMPRE quiere seguir -> el tope MAX_ITERS debe acotar (anti-loop)
+    # the model ALWAYS wants to continue -> the MAX_ITERS cap must bound it (anti-loop)
     monkeypatch.setattr(a4_agent, "_assess_gaps", lambda guidelines, findings: {"seguir": True, "guideline_ids": ["HAX-G1"]})
     out = a4_agent.run(_dossier(), list(all_guidelines()))
     assert len(out) == a4_agent.MAX_ITERS
-    assert len({f.id for f in out}) == len(out)  # ids unicos
+    assert len({f.id for f in out}) == len(out)  # unique ids
 
 
 def test_run_experiment_b0_es_el_suelo(monkeypatch):
@@ -212,7 +212,7 @@ def test_run_experiment_b0_es_el_suelo(monkeypatch):
     )
     agg = res["_aggregate_objs"]["b0"]
     assert agg.k == 3
-    # B0 genera 1 hallazgo por guideline, todos genericos -> gate falla -> primary 0
+    # B0 generates 1 finding per guideline, all generic -> gate fails -> primary 0
     assert agg.genericity_rate.mean == pytest.approx(1.0)
     assert agg.primary_score.mean == 0.0
-    assert agg.primary_score.std == 0.0  # determinista replicado
+    assert agg.primary_score.std == 0.0  # deterministic, replicated

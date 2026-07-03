@@ -1,12 +1,12 @@
 # data/
 
-Convención de privacidad (ver [ADR-003](../docs/adr/ADR-003-manejo-datos-phi.md)):
+Privacy convention (see [ADR-003](../docs/adr/ADR-003-phi-data-handling.md)):
 
-- `data/golden/` — **PRIVADO, gitignored.** El caso clínico real (dossier
-  de-identificado) y el answer key (`GoldenIssue`). Lo aporta el usuario; no se
-  busca fuera. El sistema NO ve el answer key durante la ejecución ciega.
-- `data/private/` — **PRIVADO, gitignored.** Cualquier otro material sensible.
-- `data/examples/` — material de ejemplo **no sensible y versionable** (p. ej. un
-  dossier sintético de juguete para probar la CLI).
+- `data/golden/` (**PRIVATE, gitignored**). The real clinical case (de-identified
+  dossier) and the answer key (`GoldenIssue`). Provided by the user; not sought
+  externally. The system does NOT see the answer key during the blind run.
+- `data/private/` (**PRIVATE, gitignored**). Any other sensitive material.
+- `data/examples/`, **non-sensitive, versionable** example material (e.g. a toy
+  synthetic dossier to test the CLI).
 
-Solo `data/examples/` y este README se versionan.
+Only `data/examples/` and this README are versioned.

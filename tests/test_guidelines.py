@@ -1,4 +1,4 @@
-"""Tests de carga y validez de los corpus de guidelines."""
+"""Tests for loading and validating the guideline corpora."""
 
 from interaction_review.guidelines import all_guidelines, guidelines_by_id, load_corpus
 from interaction_review.schemas import GuidelineCorpus
@@ -33,6 +33,6 @@ def test_every_guideline_has_examples_and_group():
 
 def test_index_roundtrip_and_key_ids_present():
     idx = guidelines_by_id()
-    # G9 (correccion/override) y FC-2 (control/override) son centrales al caso clinico.
+    # G9 (correction/override) and FC-2 (control/override) are central to the clinical case.
     assert idx["HAX-G9"].corpus is GuidelineCorpus.HAX
     assert idx["PAIR-FC-2"].corpus is GuidelineCorpus.PAIR

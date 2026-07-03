@@ -1,11 +1,11 @@
-"""Metricas de evaluacion contra el golden set.
+"""Evaluation metrics against the golden set.
 
-Implementa la definicion de exito del plan (seccion 1):
-recall, precision, genericity_rate, grounding_rate, tp_new, y la metrica
-primaria F-beta sujeta a un techo de genericidad.
+Implements the plan's definition of success (section 1):
+recall, precision, genericity_rate, grounding_rate, tp_new, and the primary
+F-beta metric subject to a genericity ceiling.
 
-Constantes PRE-REGISTRADAS (ver docs/adr/ADR-002): se fijan aqui, en codigo,
-ANTES de ver resultados, para no racionalizarlas a posteriori.
+PRE-REGISTERED constants (see docs/adr/ADR-002): they are fixed here, in code,
+BEFORE seeing results, so as not to rationalize them after the fact.
 """
 
 from __future__ import annotations
@@ -22,17 +22,17 @@ from interaction_review.schemas import (
     RevealedBy,
 )
 
-# --- Parametros pre-registrados (ADR-002) ---
-# beta > 1 prioriza recall: en auditoria, no detectar un problema real es peor
-# que un falso positivo barato de descartar.
+# --- Pre-registered parameters (ADR-002) ---
+# beta > 1 prioritizes recall: in auditing, failing to detect a real problem is worse
+# than a false positive that is cheap to discard.
 BETA: float = 2.0
-# Un approach con genericity_rate por encima de este techo NO se considera valido
-# aunque tenga buen F-beta: escupir genericos es, por definicion, un fallo.
+# An approach with genericity_rate above this ceiling is NOT considered valid
+# even if it has a good F-beta: spitting out generic findings is, by definition, a failure.
 GENERICITY_THRESHOLD: float = 0.25
 
 
 def f_beta(precision: float, recall: float, beta: float = BETA) -> float:
-    """F-beta. Devuelve 0.0 si el denominador es 0."""
+    """F-beta. Returns 0.0 if the denominator is 0."""
     b2 = beta * beta
     denom = b2 * precision + recall
     if denom == 0:
@@ -41,7 +41,7 @@ def f_beta(precision: float, recall: float, beta: float = BETA) -> float:
 
 
 class RunMetrics(BaseModel):
-    """Metricas de UNA ejecucion de un approach sobre el caso golden."""
+    """Metrics of ONE run of an approach on the golden case."""
 
     approach: str
     n_findings: int
@@ -53,7 +53,7 @@ class RunMetrics(BaseModel):
     tp_new: int
     fbeta: float
     meets_genericity_gate: bool
-    primary_score: float  # F-beta si pasa el gate de genericidad, si no 0.0
+    primary_score: float  # F-beta if it passes the genericity gate, otherwise 0.0
 
 
 def compute_run_metrics(
@@ -62,13 +62,13 @@ def compute_run_metrics(
     adjudications: list[Adjudication],
     golden: list[GoldenIssue],
 ) -> RunMetrics:
-    """Calcula las metricas de una ejecucion.
+    """Computes the metrics of a run.
 
-    - recall: GoldenIssues emparejados (via TP_MATCH) / total golden.
-    - precision: hallazgos reales (TP_MATCH + TP_NEW) / total hallazgos.
-    - genericity_rate: FP_GENERIC / total hallazgos.
-    - grounding_rate: hallazgos con los 3 anclajes / total hallazgos
-      (se mide sobre los Finding, independiente del juez).
+    - recall: matched GoldenIssues (via TP_MATCH) / total golden.
+    - precision: real findings (TP_MATCH + TP_NEW) / total findings.
+    - genericity_rate: FP_GENERIC / total findings.
+    - grounding_rate: findings with the 3 anchors / total findings
+      (measured over the Finding objects, independent of the judge).
     """
     n = len(findings)
     by_label: dict[AdjudicationLabel, int] = {lbl: 0 for lbl in AdjudicationLabel}
@@ -104,11 +104,11 @@ def compute_run_metrics(
 
 
 class SubsetRecall(BaseModel):
-    """Recall sobre el subconjunto del golden con un `revealed_by` dado.
+    """Recall over the golden subset with a given `revealed_by`.
 
-    Es la unidad de la ablacion del testimonio (ADR-007). Comparar el mismo
-    subconjunto (p. ej. USER_ONLY) entre la condicion CON voz y SIN voz mide si el
-    testimonio del usuario aporta al recall o solo al grounding.
+    It is the unit of the testimony ablation (ADR-007). Comparing the same
+    subset (e.g. USER_ONLY) between the WITH-voice and WITHOUT-voice conditions measures whether the
+    user's testimony contributes to recall or only to grounding.
     """
 
     revealed_by: RevealedBy
@@ -121,11 +121,11 @@ def recall_by_revealed_by(
     adjudications: list[Adjudication],
     golden: list[GoldenIssue],
 ) -> list[SubsetRecall]:
-    """Desglosa el recall por la fuente que revela cada GoldenIssue.
+    """Breaks down recall by the source that reveals each GoldenIssue.
 
-    Devuelve una entrada por cada valor de `revealed_by` PRESENTE en el golden
-    (los ausentes se omiten). El matching es el mismo que en `compute_run_metrics`:
-    un golden esta emparejado si algun hallazgo lo referencia via TP_MATCH.
+    Returns one entry per `revealed_by` value PRESENT in the golden
+    (absent ones are omitted). The matching is the same as in `compute_run_metrics`:
+    a golden is matched if some finding references it via TP_MATCH.
     """
     matched: set[str] = {
         a.matched_golden_id
@@ -150,14 +150,14 @@ def recall_by_revealed_by(
 
 
 class Stat(BaseModel):
-    """Media y desviacion tipica de una metrica sobre k ejecuciones."""
+    """Mean and standard deviation of a metric over k runs."""
 
     mean: float
     std: float
 
 
 class AggregateMetrics(BaseModel):
-    """Agregado de k ejecuciones del mismo approach (media +/- std)."""
+    """Aggregate of k runs of the same approach (mean +/- std)."""
 
     approach: str
     k: int
@@ -172,13 +172,13 @@ def _stat(values: list[float]) -> Stat:
     if not values:
         return Stat(mean=0.0, std=0.0)
     mean = statistics.mean(values)
-    # pstdev (poblacional): k es pequeno y describimos exactamente estas k corridas.
+    # pstdev (population): k is small and we describe exactly these k runs.
     std = statistics.pstdev(values) if len(values) > 1 else 0.0
     return Stat(mean=mean, std=std)
 
 
 def aggregate(runs: list[RunMetrics]) -> AggregateMetrics:
-    """Agrega k RunMetrics del mismo approach. Lanza si la lista esta vacia o mezcla approaches."""
+    """Aggregates k RunMetrics of the same approach. Raises if the list is empty or mixes approaches."""
     if not runs:
         raise ValueError("aggregate() necesita al menos una ejecucion.")
     approaches = {r.approach for r in runs}
@@ -196,11 +196,11 @@ def aggregate(runs: list[RunMetrics]) -> AggregateMetrics:
 
 
 def beats(candidate: AggregateMetrics, baseline: AggregateMetrics) -> bool:
-    """Regla de decision del plan: un approach 'gana' a otro si mejora la metrica
-    primaria por un margen MAYOR que la varianza observada.
+    """Decision rule of the plan: an approach 'beats' another if it improves the primary
+    metric by a margin GREATER than the observed variance.
 
-    Operativizacion: la media del candidato supera a la del baseline por mas que
-    la suma de sus desviaciones tipicas (margen > ruido combinado).
+    Operationalization: the candidate's mean exceeds the baseline's by more than
+    the sum of their standard deviations (margin > combined noise).
     """
     margin = candidate.primary_score.mean - baseline.primary_score.mean
     noise = candidate.primary_score.std + baseline.primary_score.std

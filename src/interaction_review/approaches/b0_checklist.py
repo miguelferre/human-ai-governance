@@ -1,9 +1,9 @@
-"""B0 - Checklist determinista (sin LLM). El suelo de la escalera de baselines.
+"""B0 - Deterministic checklist (no LLM). The floor of the baseline ladder.
 
-Por construccion, B0 ignora el contenido del dossier y emite una pregunta fija
-por guideline. Es GENERICO a proposito: no ancla los hallazgos en un locus ni en
-evidencia del sistema concreto. Sirve para fijar el listón mas bajo: si un
-approach con LLM (B1) no supera claramente a esto, el LLM no esta aportando nada.
+By construction, B0 ignores the dossier content and emits a fixed question
+per guideline. It is GENERIC on purpose: it does not anchor the findings in a locus
+or in evidence from the concrete system. It serves to set the lowest bar: if an
+LLM-based approach (B1) does not clearly beat this, the LLM is contributing nothing.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ def run(dossier: Dossier, guidelines: list[Guideline]) -> list[Finding]:
                 id=f"b0-{i:03d}",
                 title=f"Revisar guideline: {g.title}",
                 guideline_ids=[g.id],
-                # locus y evidence vacios A PROPOSITO: B0 no mira el sistema.
+                # locus and evidence empty ON PURPOSE: B0 does not look at the system.
                 locus="",
                 evidence="",
                 anti_pattern=g.anti_patterns[0] if g.anti_patterns else None,

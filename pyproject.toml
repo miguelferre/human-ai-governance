@@ -1,7 +1,7 @@
 [project]
 name = "interaction-review"
 version = "0.0.1"
-description = "Revisor de la capa de interaccion humano-IA: evalua un sistema de IA contra guidelines HAX-18 y PAIR."
+description = "Human-AI interaction layer reviewer: evaluates an AI system against HAX-18 and PAIR guidelines."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -9,14 +9,14 @@ authors = [{ name = "Miguel Ferreiro Garcia" }]
 dependencies = [
     "pydantic>=2.7,<3",
     "pyyaml>=6,<7",
-    # SDK del LLM nube. No se usa en F0 (B0 es determinista) pero se fija ya porque
-    # es nucleo del proyecto a partir de F2 (B1/B2).
+    # Cloud LLM SDK. Not used in F0 (B0 is deterministic) but pinned already because
+    # it is core to the project from F2 on (B1/B2).
     "anthropic>=0.40,<1",
-    # Backend local (Ollama /api/chat). Ya venia transitiva via anthropic; se
-    # declara explicita porque se usa directamente (ADR-004).
+    # Local backend (Ollama /api/chat). It already came in transitively via anthropic;
+    # declared explicitly because it is used directly (ADR-004).
     "httpx>=0.27,<1",
-    # Lectura de PDF para la ingesta inteligente (documento -> plantilla prerrellena).
-    # Puro Python, sin binarios; solo se usa en `prerrellenar`.
+    # PDF reading for smart ingestion (document -> pre-filled template).
+    # Pure Python, no binaries; only used in `prefill`.
     "pypdf>=4,<6",
 ]
 

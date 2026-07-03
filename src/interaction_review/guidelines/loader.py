@@ -1,4 +1,4 @@
-"""Carga y valida los corpus de guidelines (HAX-18 y PAIR) desde YAML."""
+"""Loads and validates the guideline corpora (HAX-18 and PAIR) from YAML."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ _FILES = {
 
 
 def load_corpus(corpus: GuidelineCorpus) -> list[Guideline]:
-    """Carga un corpus concreto desde su YAML y lo valida con pydantic."""
+    """Loads a specific corpus from its YAML and validates it with pydantic."""
     path = _FILES[corpus]
     raw = yaml.safe_load(path.read_text(encoding="utf-8"))
     declared = GuidelineCorpus(raw["corpus"])
@@ -28,7 +28,7 @@ def load_corpus(corpus: GuidelineCorpus) -> list[Guideline]:
 
 @lru_cache(maxsize=1)
 def all_guidelines() -> tuple[Guideline, ...]:
-    """Todas las guidelines de todos los corpus (cacheado)."""
+    """All guidelines from all corpora (cached)."""
     out: list[Guideline] = []
     for corpus in GuidelineCorpus:
         out.extend(load_corpus(corpus))
@@ -40,5 +40,5 @@ def all_guidelines() -> tuple[Guideline, ...]:
 
 
 def guidelines_by_id() -> dict[str, Guideline]:
-    """Indice id -> Guideline sobre todos los corpus."""
+    """Index id -> Guideline over all corpora."""
     return {g.id: g for g in all_guidelines()}

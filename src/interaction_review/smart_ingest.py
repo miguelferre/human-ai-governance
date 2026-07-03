@@ -1,15 +1,15 @@
-"""Ingesta INTELIGENTE: un documento arbitrario (PDF, model card) -> plantilla prerrellena.
+"""SMART ingestion: an arbitrary document (PDF, model card) -> pre-filled template.
 
-Complementa a `ingest.py` (que parsea NUESTRAS plantillas ya rellenas, sin API). Aqui el
-problema es el inverso y es IRREDUCIBLE al codigo: leer documentacion heterogenea y mapear su
-contenido a las preguntas de la plantilla. Eso lo hace el LLM (ADR-004: al modelo solo lo
-irreducible). El reparto:
-  - CODIGO (determinista): extraer el texto del PDF, localizar los huecos ✍️ de la plantilla,
-    reconstruir el markdown con las respuestas.
-  - LLM: responder cada pregunta con lo que consta en el documento (y SOLO eso).
+Complements `ingest.py` (which parses OUR already-filled templates, no API). Here the
+problem is the inverse and IRREDUCIBLE to code: reading heterogeneous documentation and
+mapping its content to the template questions. That is done by the LLM (ADR-004: to the
+model, only the irreducible part). The split:
+  - CODE (deterministic): extract the text from the PDF, locate the ✍️ blanks in the
+    template, rebuild the Markdown with the answers.
+  - LLM: answer each question with what is in the document (and ONLY that).
 
-La salida es una plantilla markdown en NUESTRO formato (respuestas tras ✍️), que un humano
-revisa y luego `ingerir` convierte en Dossier. El modelo prerrellena; la persona valida.
+The output is a template in OUR format (answers after ✍️), which a human reviews and then
+`ingest` turns into a Dossier. The model pre-fills; the person validates.
 """
 
 from __future__ import annotations
@@ -19,32 +19,32 @@ from pathlib import Path
 
 from interaction_review import llm, prompts
 
-_PEN = "✍"  # ✍ (con o sin selector de variacion): marca el hueco de respuesta.
+_PEN = "✍"  # ✍ (with or without variation selector): marks the answer blank.
 
-# Plantillas del repo (se resuelven desde la raiz; overridable con --plantilla en el CLI).
+# Repo templates (resolved from the root; overridable with --template in the CLI).
 _TEMPLATE_DIR = Path(__file__).resolve().parents[2] / "templates"
 TEMPLATE_FILES = {
-    "ficha": "01_ficha_sistema__perfil_tecnico.md",
-    "experiencia": "02_experiencia_uso__usuario_final.md",
-    "inventario": "03_inventario_documentos.md",
+    "profile": "01_system_card__technical_profile.md",
+    "experience": "02_usage_experience__end_user.md",
+    "inventory": "03_document_inventory.md",
 }
 
 
-def template_path(tipo: str) -> Path:
+def template_path(kind: str) -> Path:
     try:
-        return _TEMPLATE_DIR / TEMPLATE_FILES[tipo]
+        return _TEMPLATE_DIR / TEMPLATE_FILES[kind]
     except KeyError as e:
         raise ValueError(
-            f"Tipo de plantilla desconocido: {tipo!r}. Usa uno de {sorted(TEMPLATE_FILES)}."
+            f"Unknown template type: {kind!r}. Use one of {sorted(TEMPLATE_FILES)}."
         ) from e
 
 
-# --- Lectura del documento (determinista) ----------------------------------- #
+# --- Reading the document (deterministic) ----------------------------------- #
 def read_document(path: str | Path) -> str:
-    """Texto plano de un documento. PDF via pypdf; .md/.txt tal cual."""
+    """Plain text of a document. PDF via pypdf; .md/.txt as-is."""
     p = Path(path)
     if not p.exists():
-        raise FileNotFoundError(f"No existe el documento: {p}")
+        raise FileNotFoundError(f"Document does not exist: {p}")
     if p.suffix.lower() == ".pdf":
         return _read_pdf(p)
     return p.read_text(encoding="utf-8")
@@ -54,24 +54,24 @@ def _read_pdf(p: Path) -> str:
     try:
         from pypdf import PdfReader
     except ImportError as e:  # pragma: no cover
-        raise ValueError("Leer PDF requiere el paquete 'pypdf' (ejecuta `uv sync`).") from e
+        raise ValueError("Reading PDF requires the 'pypdf' package (run `uv sync`).") from e
     reader = PdfReader(str(p))
     text = "\n".join((page.extract_text() or "") for page in reader.pages)
     if not text.strip():
         raise ValueError(
-            f"No se extrajo texto de {p.name}. ¿Es un PDF escaneado (imagen)? El MVP no hace "
-            "OCR; conviertelo a texto o rellena la plantilla a mano."
+            f"No text was extracted from {p.name}. Is it a scanned (image) PDF? The MVP does "
+            "not do OCR; convert it to text or fill the template by hand."
         )
     return text
 
 
-# --- Huecos de la plantilla (determinista) ---------------------------------- #
+# --- Template blanks (deterministic) ---------------------------------------- #
 @dataclass(frozen=True)
 class TemplateSlot:
-    index: int       # orden de aparicion del ✍️ (0-based)
-    line_index: int  # linea del ✍️ en la plantilla
-    section: str     # cabecera ## vigente
-    question: str    # ultimo bullet en negrita (o "" si el hueco cuelga de la seccion)
+    index: int       # appearance order of the ✍️ (0-based)
+    line_index: int  # line of the ✍️ in the template
+    section: str     # active ## heading
+    question: str    # last bold bullet (or "" if the blank hangs off the section)
 
 
 def _clean_question(line: str) -> str:
@@ -82,7 +82,7 @@ def _clean_question(line: str) -> str:
 
 
 def parse_template_slots(template_md: str) -> list[TemplateSlot]:
-    """Localiza cada hueco ✍️ con su seccion y su pregunta (el bullet que lo precede)."""
+    """Locates each ✍️ blank with its section and its question (the bullet before it)."""
     slots: list[TemplateSlot] = []
     section = ""
     question = ""
@@ -90,7 +90,7 @@ def parse_template_slots(template_md: str) -> list[TemplateSlot]:
         s = line.strip()
         if s.startswith("##"):
             section = _clean_question(line)
-            question = ""  # nueva seccion: se reinicia la pregunta vigente
+            question = ""  # new section: the active question resets
             continue
         if _PEN in line:
             slots.append(
@@ -103,12 +103,12 @@ def parse_template_slots(template_md: str) -> list[TemplateSlot]:
 
 
 def _one_line(text: str) -> str:
-    """Colapsa la respuesta a UNA linea de texto plano (robusto para extract_answers)."""
+    """Collapses the answer to ONE line of plain text (robust for extract_answers)."""
     return " ".join(text.split())
 
 
 def fill_template(template_md: str, answers: dict[int, str]) -> str:
-    """Reinserta las respuestas tras cada ✍️, preservando el marcador y la indentacion."""
+    """Reinserts the answers after each ✍️, preserving the marker and the indentation."""
     lines = template_md.splitlines()
     slot_no = 0
     for i, line in enumerate(lines):
@@ -121,7 +121,7 @@ def fill_template(template_md: str, answers: dict[int, str]) -> str:
     return "\n".join(lines) + tail
 
 
-# --- Orquestacion (LLM) ----------------------------------------------------- #
+# --- Orchestration (LLM) ---------------------------------------------------- #
 def prefill_template(
     doc_text: str,
     template_md: str,
@@ -129,7 +129,7 @@ def prefill_template(
     model: str | None = None,
     temperature: float = 0.0,
 ) -> str:
-    """Prerrellena la plantilla con las respuestas que el documento sustente. Una llamada al LLM."""
+    """Pre-fills the template with the answers the document supports. One LLM call."""
     slots = parse_template_slots(template_md)
     if not slots:
         return template_md
@@ -158,13 +158,13 @@ def prefill_template(
 
 def prefill_document(
     doc_path: str | Path,
-    tipo: str = "ficha",
+    kind: str = "profile",
     *,
     template_file: str | Path | None = None,
     model: str | None = None,
 ) -> str:
-    """De un documento a la plantilla `tipo` prerrellena (texto markdown)."""
+    """From a document to the `kind` template pre-filled (Markdown text)."""
     doc_text = read_document(doc_path)
-    tpl = Path(template_file) if template_file else template_path(tipo)
+    tpl = Path(template_file) if template_file else template_path(kind)
     template_md = tpl.read_text(encoding="utf-8")
     return prefill_template(doc_text, template_md, model=model)

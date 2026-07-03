@@ -1,7 +1,7 @@
-"""Construccion de prompts y esquemas de tool-use (funciones puras y testeables).
+"""Prompt construction and tool-use schemas (pure, testable functions).
 
-Separa la logica de prompting de la llamada al LLM (`llm.py`) para poder testear
-que el prompt contiene lo que debe sin gastar API.
+Separates the prompting logic from the LLM call (`llm.py`) so we can test
+that the prompt contains what it should without spending API calls.
 """
 
 from __future__ import annotations
@@ -10,7 +10,7 @@ from interaction_review.schemas import Dossier, GoldenIssue, Guideline
 
 
 # --------------------------------------------------------------------------- #
-# Formateo de entrada compartido por todos los approaches con LLM.
+# Input formatting shared by all LLM-based approaches.
 # --------------------------------------------------------------------------- #
 def format_guidelines(guidelines: list[Guideline]) -> str:
     lines = []
@@ -33,7 +33,7 @@ def format_dossier(dossier: Dossier) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Generador de hallazgos (B1 / B2).
+# Findings generator (B1 / B2).
 # --------------------------------------------------------------------------- #
 GENERATOR_SYSTEM = """\
 Eres un auditor experto en la CAPA DE INTERACCION humano-IA (no en la capa tecnica del modelo).
@@ -137,7 +137,7 @@ FINDINGS_TOOL = {
 
 
 # --------------------------------------------------------------------------- #
-# Juez / adjudicador (modelo y prompt distintos del generador: ADR-002).
+# Judge / adjudicator (different model and prompt from the generator: ADR-002).
 # --------------------------------------------------------------------------- #
 JUDGE_SYSTEM = """\
 Eres un adjudicador IMPARCIAL. Para CADA hallazgo te damos los CANDIDATOS del golden, con los
@@ -158,7 +158,7 @@ una entrada por hallazgo."""
 
 
 def judge_user(payload: list[dict], dossier: Dossier) -> str:
-    """`payload`: lista de hallazgos, cada uno con sus 'candidates' preseleccionados."""
+    """`payload`: list of findings, each with its preselected 'candidates'."""
     blocks = ["DOSSIER (para verificar que la evidencia es real):", format_dossier(dossier), ""]
     blocks.append("HALLAZGOS Y SUS CANDIDATOS:")
     for f in payload:
@@ -186,8 +186,8 @@ JUDGE_TOOL = {
                 "type": "array",
                 "items": {
                     "type": "object",
-                    # La ETIQUETA se deriva en codigo (judge.py): corresponde_a_candidato valido
-                    # -> tp_match; si "ninguno" -> tp_new/fp_incorrect segun es_real. Razonar primero.
+                    # The LABEL is derived in code (judge.py): valid corresponde_a_candidato
+                    # -> tp_match; if "ninguno" -> tp_new/fp_incorrect depending on es_real. Reason first.
                     "properties": {
                         "finding_id": {"type": "string"},
                         "judge_rationale": {"type": "string", "description": "Razonamiento; escribelo primero."},
@@ -207,7 +207,7 @@ JUDGE_TOOL = {
 
 
 # --------------------------------------------------------------------------- #
-# Consolidador semantico (dedup LLM): el residual que el dedup lexico no junta.
+# Semantic consolidator (LLM dedup): the residual that lexical dedup does not merge.
 # --------------------------------------------------------------------------- #
 SEMANTIC_DEDUP_SYSTEM = """\
 Eres un consolidador de hallazgos de una auditoria de la capa de interaccion humano-IA.
@@ -231,7 +231,7 @@ Devuelve solo los grupos (de 2+ miembros) que cumplan esto, via consolidar. Lo q
 
 
 def semantic_dedup_user(findings_payload: list[dict]) -> str:
-    """`findings_payload`: lista de {id, title, locus, guideline_ids}."""
+    """`findings_payload`: list of {id, title, locus, guideline_ids}."""
     lines = ["HALLAZGOS A CONSOLIDAR:"]
     for f in findings_payload:
         gl = ", ".join(f.get("guideline_ids", []))
@@ -269,7 +269,7 @@ SEMANTIC_DEDUP_TOOL = {
 
 
 # --------------------------------------------------------------------------- #
-# Agente A4: decision autonoma de cobertura (que investigar / cuando parar).
+# A4 agent: autonomous coverage decision (what to investigate / when to stop).
 # --------------------------------------------------------------------------- #
 AGENT_GAPS_SYSTEM = """\
 Eres un revisor de la capa de interaccion que decide si su revision esta COMPLETA o le
@@ -323,50 +323,51 @@ AGENT_GAPS_TOOL = {
 
 
 # --------------------------------------------------------------------------- #
-# Prerrelleno de plantillas desde un documento (ingesta inteligente de PDFs).
-# El LLM extrae de un documento arbitrario (PDF/model card) las respuestas a las
-# preguntas de una plantilla; SOLO lo que consta, sin inventar. El humano revisa
-# el markdown antes de `ingerir`. Coherente con la tesis: lo mecanico (leer el
-# PDF, reconstruir el markdown) al codigo; al modelo, solo el mapeo irreducible.
+# Prefilling templates from a document (smart ingestion of PDFs).
+# The LLM extracts from an arbitrary document (PDF/model card) the answers to a
+# template's questions; ONLY what is stated, without inventing. The human reviews
+# the markdown before `ingerir`. Consistent with the thesis: the mechanical part
+# (reading the PDF, rebuilding the markdown) goes to code; only the irreducible
+# mapping goes to the model.
 # --------------------------------------------------------------------------- #
 PREFILL_SYSTEM = """\
-Eres un asistente que PRERRELLENA una plantilla de auditoria a partir de un documento
-(model card, ficha tecnica, documentacion de un sistema de IA). Te dan el texto del documento
-y una lista NUMERADA de preguntas. Para cada pregunta, responde con lo que diga el documento.
+You are an assistant that PREFILLS an audit template from a document
+(model card, technical sheet, documentation of an AI system). You are given the document text
+and a NUMBERED list of questions. For each question, answer with what the document says.
 
-REGLAS (no negociables):
-- Usa UNICAMENTE informacion presente en el documento. No inventes, no supongas, no completes con
-  conocimiento general. Si el documento no responde a una pregunta, devuelve answer = "" (cadena vacia).
-- Prefiere parafrasis fiel o cita breve. Sin adornos.
-- Texto plano, una o dos frases por respuesta. Nada de markdown, vinetas ni saltos de linea.
-- No incluyas datos personales de individuos aunque aparezcan.
-- Responde a CADA pregunta por su numero de slot. Es mejor un "" honesto que un relleno inventado.
+RULES (non-negotiable):
+- Use ONLY information present in the document. Do not invent, do not assume, do not fill in with
+  general knowledge. If the document does not answer a question, return answer = "" (empty string).
+- Prefer a faithful paraphrase or a short quote. No embellishments.
+- Plain text, one or two sentences per answer. No markdown, bullets or line breaks.
+- Do not include personal data of individuals even if it appears.
+- Answer EACH question by its slot number. An honest "" is better than an invented filler.
 
-Devuelve TODO mediante la herramienta rellenar_plantilla."""
+Return EVERYTHING through the rellenar_plantilla tool."""
 
 
 def prefill_user(doc_text: str, slots_payload: list[dict], max_chars: int = 24000) -> str:
-    """`slots_payload`: lista de {slot, section, question}. Trunca el documento si excede max_chars."""
+    """`slots_payload`: list of {slot, section, question}. Truncates the document if it exceeds max_chars."""
     doc = doc_text.strip()
     truncated = len(doc) > max_chars
     if truncated:
         doc = doc[:max_chars]
     blocks = [
-        "DOCUMENTO FUENTE" + (" (truncado)" if truncated else "") + ":",
+        "SOURCE DOCUMENT" + (" (truncated)" if truncated else "") + ":",
         doc,
         "",
-        "PREGUNTAS (responde por numero de slot, SOLO con lo que conste en el documento):",
+        "QUESTIONS (answer by slot number, ONLY with what is stated in the document):",
     ]
     for s in slots_payload:
         sec = f"[{s['section']}] " if s.get("section") else ""
         blocks.append(f"  {s['slot']}. {sec}{s['question']}")
-    blocks.append('\nDevuelve una respuesta por slot via rellenar_plantilla (answer="" si no consta).')
+    blocks.append('\nReturn one answer per slot via rellenar_plantilla (answer="" if not stated).')
     return "\n".join(blocks)
 
 
 PREFILL_TOOL = {
     "name": "rellenar_plantilla",
-    "description": "Devuelve la respuesta a cada pregunta de la plantilla, basada solo en el documento.",
+    "description": "Returns the answer to each template question, based only on the document.",
     "input_schema": {
         "type": "object",
         "properties": {
@@ -375,10 +376,10 @@ PREFILL_TOOL = {
                 "items": {
                     "type": "object",
                     "properties": {
-                        "slot": {"type": "integer", "description": "Numero de la pregunta."},
+                        "slot": {"type": "integer", "description": "Question number."},
                         "answer": {
                             "type": "string",
-                            "description": 'Respuesta basada SOLO en el documento; "" si no consta.',
+                            "description": 'Answer based ONLY on the document; "" if not stated.',
                         },
                     },
                     "required": ["slot", "answer"],

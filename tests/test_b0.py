@@ -1,4 +1,4 @@
-"""Tests del approach B0 (checklist determinista, el suelo)."""
+"""Tests for the B0 approach (deterministic checklist, the floor)."""
 
 from interaction_review.approaches import run_b0
 from interaction_review.guidelines import all_guidelines
@@ -21,6 +21,6 @@ def test_b0_emits_one_finding_per_guideline():
 
 
 def test_b0_findings_are_generic_by_construction():
-    # B0 NO mira el sistema: ningun hallazgo esta anclado (sin locus ni evidencia).
+    # B0 does NOT look at the system: no finding is grounded (no locus or evidence).
     findings = run_b0(_dossier(), list(all_guidelines()))
     assert all(not f.is_grounded() for f in findings)

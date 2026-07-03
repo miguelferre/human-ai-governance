@@ -1,7 +1,7 @@
-"""Orquestacion del experimento: corre approaches k veces, adjudica y agrega.
+"""Experiment orchestration: runs approaches k times, adjudicates and aggregates.
 
-Guarda los crudos (hallazgos + adjudicaciones) para poder re-adjudicar o re-medir
-sin volver a generar (reproducibilidad, ADR-002). `runs/` esta gitignored.
+Saves the raw data (findings + adjudications) so they can be re-adjudicated or
+re-measured without generating again (reproducibility, ADR-002). `runs/` is gitignored.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from interaction_review.judge import adjudicate as default_judge
 from interaction_review.metrics import AggregateMetrics, RunMetrics, aggregate, compute_run_metrics
 from interaction_review.schemas import Adjudication, Dossier, Finding, GoldenIssue, Guideline
 
-# Approaches sin aleatoriedad: basta generar/juzgar una vez y replicar.
+# Approaches without randomness: it is enough to generate/judge once and replicate.
 DETERMINISTIC = {"b0"}
 
 JudgeFn = Callable[[list[Finding], list[GoldenIssue], Dossier], list[Adjudication]]
@@ -32,24 +32,24 @@ def run_experiment(
     judge: JudgeFn = default_judge,
     save_path: str | None = None,
 ) -> dict:
-    """Devuelve {'aggregates': {name: AggregateMetrics}, 'runs': {...}, 'config': {...}}.
+    """Returns {'aggregates': {name: AggregateMetrics}, 'runs': {...}, 'config': {...}}.
 
-    Dos fases para no recargar modelos en cada iteracion: primero TODA la generacion
-    (mantiene cargado el modelo generador), luego TODA la adjudicacion (mantiene
-    cargado el modelo juez). En local, eso reduce los swaps de modelo de ~13 a 1.
+    Two phases to avoid reloading models on each iteration: first ALL the generation
+    (keeps the generator model loaded), then ALL the adjudication (keeps the judge
+    model loaded). Locally, that reduces model swaps from ~13 to 1.
     """
     for name in approaches:
         if name not in REGISTRY:
-            raise ValueError(f"Approach desconocido: {name}. Disponibles: {sorted(REGISTRY)}")
+            raise ValueError(f"Unknown approach: {name}. Available: {sorted(REGISTRY)}")
 
-    # --- Fase 1: generacion (modelo generador) ---
+    # --- Phase 1: generation (generator model) ---
     gen_results: dict[str, list[list[Finding]]] = {}
     for name in approaches:
         n_iter = 1 if name in DETERMINISTIC else k
         gen_results[name] = [REGISTRY[name](dossier, guidelines) for _ in range(n_iter)]
 
-    # CHECKPOINT: guardar la generacion (cara) ANTES de juzgar. Si la fase 2 falla, se
-    # re-juzga desde aqui con scripts/rejudge.py sin re-generar. Estructura compatible.
+    # CHECKPOINT: save the generation (expensive) BEFORE judging. If phase 2 fails, it is
+    # re-judged from here with scripts/rejudge.py without re-generating. Compatible structure.
     if save_path:
         gen_path = save_path.replace(".json", ".gen.json")
         checkpoint = {
@@ -64,7 +64,7 @@ def run_experiment(
         Path(gen_path).parent.mkdir(parents=True, exist_ok=True)
         Path(gen_path).write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # --- Fase 2: adjudicacion + metricas (modelo juez) ---
+    # --- Phase 2: adjudication + metrics (judge model) ---
     aggregates: dict[str, AggregateMetrics] = {}
     runs_detail: dict[str, list[dict]] = {}
     for name in approaches:
@@ -81,7 +81,7 @@ def run_experiment(
                     "metrics": rm.model_dump(),
                 }
             )
-        # Replicar el resultado determinista hasta k (varianza 0).
+        # Replicate the deterministic result up to k (variance 0).
         if name in DETERMINISTIC and k > 1:
             run_metrics = run_metrics * k
             detail = detail * k
@@ -106,6 +106,6 @@ def run_experiment(
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         Path(save_path).write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # Devolvemos los objetos AggregateMetrics tambien, para el render.
+    # We also return the AggregateMetrics objects, for the render.
     result["_aggregate_objs"] = aggregates
     return result

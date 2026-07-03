@@ -1,14 +1,14 @@
-"""Ingesta de las plantillas rellenas -> Dossier (determinista, offline).
+"""Ingesting filled templates -> Dossier (deterministic, offline).
 
-Ataca el cuello de botella del caso de uso real: que construir la entrada no
-cueste lo mismo que auditar a mano. El cliente rellena plantillas markdown
-amigables (templates/01 tecnico, 02 usuario, 03 inventario) y esto las convierte
-en el `Dossier` canonico que consumen los approaches, sin edicion manual de JSON.
+Attacks the bottleneck of the real use case: making the input cost less to build
+than auditing by hand. The client fills friendly Markdown templates (templates/01
+technical, 02 user, 03 inventory) and this turns them into the canonical `Dossier`
+that the approaches consume, with no manual JSON editing.
 
-Es un parser del formato CONTROLADO de nuestras plantillas (preguntas en negrita o
-cabeceras `##`, respuesta tras el marcador ✍️), no un lector de documentos
-arbitrarios: ingerir PDFs/model cards heterogeneos de forma inteligente necesita
-el LLM y vive en otro sitio. Aqui, cero API.
+It is a parser for the CONTROLLED format of our templates (questions in bold or `##`
+headings, answer after the ✍️ marker), not a reader of arbitrary documents:
+smartly ingesting heterogeneous PDFs/model cards needs the LLM and lives elsewhere.
+Here, zero API.
 """
 
 from __future__ import annotations
@@ -17,23 +17,23 @@ from pathlib import Path
 
 from interaction_review.schemas import Dossier, Source, SourceKind
 
-_PEN = "✍"  # ✍ (con o sin variation selector) = espacio para la respuesta.
+_PEN = "✍"  # ✍ (with or without variation selector) = space for the answer.
 
 
 def _is_structural(line: str) -> bool:
-    """True si la linea corta una respuesta (nueva pregunta/seccion/instruccion)."""
+    """True if the line cuts an answer (new question/section/instruction)."""
     s = line.strip()
     if not s:
-        return False  # las lineas en blanco NO cortan (respuestas multi-parrafo)
+        return False  # blank lines do NOT cut (multi-paragraph answers)
     return (
         s.startswith(("- ", "* ", "#", "---", ">", "**"))
-        or s.startswith("\U0001f3af")  # 🎯 metainstruccion "Para que"
+        or s.startswith("\U0001f3af")  # 🎯 "What for" meta-instruction
         or _PEN in s
     )
 
 
 def _prompt_text(line: str) -> str:
-    """Extrae el texto de una pregunta (bullet en negrita) o cabecera."""
+    """Extracts the text of a question (bold bullet) or heading."""
     s = line.strip()
     if s.startswith("#"):
         return s.lstrip("#").strip()
@@ -42,14 +42,14 @@ def _prompt_text(line: str) -> str:
 
 
 def extract_answers(md: str) -> list[tuple[str, str]]:
-    """(pregunta, respuesta) por cada ✍️ con respuesta no vacia, en orden.
+    """(question, answer) for each ✍️ with a non-empty answer, in order.
 
-    La respuesta es el texto tras el marcador ✍️ (resto de linea + lineas
-    siguientes) hasta el proximo elemento estructural. Ignora la cabecera de
-    instrucciones (todo lo anterior al primer separador `---`).
+    The answer is the text after the ✍️ marker (rest of the line + following
+    lines) up to the next structural element. Ignores the instructions header
+    (everything before the first `---` separator).
     """
     lines = md.splitlines()
-    # Saltar la cabecera de la plantilla (hasta el primer '---').
+    # Skip the template header (up to the first '---').
     start = 0
     for i, ln in enumerate(lines):
         if ln.strip() == "---":
@@ -67,13 +67,13 @@ def extract_answers(md: str) -> list[tuple[str, str]]:
             i += 1
             continue
         if _PEN in line:
-            # Respuesta: resto de la linea tras el ✍️, mas lineas siguientes.
-            # El marcador es ✍ (U+270D) + selector de variacion U+FE0F: lo quitamos.
+            # Answer: rest of the line after the ✍️, plus following lines.
+            # The marker is ✍ (U+270D) + variation selector U+FE0F: we strip it.
             rest = line.split(_PEN, 1)[1].replace("️", "").strip()
             buf = [rest] if rest else []
             j = i + 1
             while j < len(lines) and not _is_structural(lines[j]):
-                buf.append(lines[j].strip())  # las lineas de continuacion van indentadas
+                buf.append(lines[j].strip())  # continuation lines are indented
                 j += 1
             answer = "\n".join(buf).strip()
             if answer:
@@ -85,7 +85,7 @@ def extract_answers(md: str) -> list[tuple[str, str]]:
 
 
 def _format_source(answers: list[tuple[str, str]]) -> str:
-    """Texto de la Source: cada pregunta respondida con su respuesta."""
+    """Source text: each answered question with its answer."""
     blocks = [f"**{q}**\n{a}" if q else a for q, a in answers]
     return "\n\n".join(blocks)
 
@@ -104,87 +104,87 @@ def _read(path: str | Path) -> str:
 
 def ingest_templates(
     *,
-    ficha: list[str] | None = None,
-    experiencia: list[str] | None = None,
-    inventario: str | None = None,
+    profile: list[str] | None = None,
+    experience: list[str] | None = None,
+    inventory: str | None = None,
     system_name: str | None = None,
     domain: str | None = None,
     summary: str = "",
 ) -> Dossier:
-    """Construye un Dossier desde plantillas rellenas.
+    """Builds a Dossier from filled templates.
 
-    `ficha`/`experiencia` aceptan varias rutas (varios tecnicos / usuarios). El
-    nombre y el dominio se toman de la primera ficha si no se pasan explicitos.
-    Lanza ValueError si no hay ninguna fuente con contenido.
+    `profile`/`experience` accept several paths (several technicians / users). The
+    name and domain are taken from the first profile if not passed explicitly.
+    Raises ValueError if there is no source with content.
     """
-    ficha = ficha or []
-    experiencia = experiencia or []
+    profile = profile or []
+    experience = experience or []
     sources: list[Source] = []
 
-    for idx, path in enumerate(ficha, 1):
+    for idx, path in enumerate(profile, 1):
         answers = extract_answers(_read(path))
         if not answers:
             continue
-        suffix = f"-{idx}" if len(ficha) > 1 else ""
+        suffix = f"-{idx}" if len(profile) > 1 else ""
         sources.append(
             Source(
-                id=f"ficha-tecnica{suffix}",
+                id=f"technical-profile{suffix}",
                 kind=SourceKind.TECHNICIAN,
-                label="Ficha del sistema (perfil técnico)",
+                label="System card (technical profile)",
                 content=_format_source(answers),
             )
         )
         if system_name is None:
-            system_name = _find(answers, "nombre del sistema")
+            system_name = _find(answers, "system name")
         if domain is None:
-            domain = _find(answers, "dominio")
+            domain = _find(answers, "domain")
 
-    for idx, path in enumerate(experiencia, 1):
+    for idx, path in enumerate(experience, 1):
         answers = extract_answers(_read(path))
         if not answers:
             continue
-        suffix = f"-{idx}" if len(experiencia) > 1 else ""
+        suffix = f"-{idx}" if len(experience) > 1 else ""
         sources.append(
             Source(
-                id=f"experiencia-usuario{suffix}",
+                id=f"end-user-experience{suffix}",
                 kind=SourceKind.END_USER,
-                label="Experiencia de uso (usuario final)",
+                label="Usage experience (end user)",
                 content=_format_source(answers),
             )
         )
 
-    if inventario:
-        answers = extract_answers(_read(inventario))
-        marcados = _checked_documents(_read(inventario))
+    if inventory:
+        answers = extract_answers(_read(inventory))
+        checked = _checked_documents(_read(inventory))
         content = _format_source(answers)
-        if marcados:
-            content = ("Documentos disponibles:\n" + "\n".join(f"- {m}" for m in marcados)
+        if checked:
+            content = ("Available documents:\n" + "\n".join(f"- {m}" for m in checked)
                        + (("\n\n" + content) if content else ""))
         if content:
             sources.append(
                 Source(
-                    id="inventario-documentos",
+                    id="document-inventory",
                     kind=SourceKind.DOCUMENT,
-                    label="Inventario de documentos aportados",
+                    label="Inventory of provided documents",
                     content=content,
                 )
             )
 
     if not sources:
         raise ValueError(
-            "Ninguna plantilla tenia respuestas. ¿Se rellenaron los espacios ✍️?"
+            "No template had answers. Were the ✍️ blanks filled in?"
         )
 
     return Dossier(
-        system_name=system_name or "(sistema sin nombre)",
-        domain=domain or "(dominio no especificado)",
+        system_name=system_name or "(unnamed system)",
+        domain=domain or "(unspecified domain)",
         summary=summary,
         sources=sources,
     )
 
 
 def _checked_documents(md: str) -> list[str]:
-    """Documentos marcados con [x] en la plantilla de inventario."""
+    """Documents marked with [x] in the inventory template."""
     out: list[str] = []
     for ln in md.splitlines():
         s = ln.strip()

@@ -1,4 +1,4 @@
-"""Corpus de guidelines (HAX-18 y PAIR) y su cargador."""
+"""Guideline corpora (HAX-18 and PAIR) and their loader."""
 
 from interaction_review.guidelines.loader import (
     all_guidelines,

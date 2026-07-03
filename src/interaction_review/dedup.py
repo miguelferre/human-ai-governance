@@ -1,26 +1,26 @@
-"""Deduplicado de hallazgos: el paso de PRODUCTO que faltaba.
+"""Finding deduplication: the missing PRODUCT step.
 
-El anti-patron persistente de P3 (y peor en p3n): el barrido por bloques emite el
-MISMO problema varias veces, normalmente citando una guideline distinta cada vez
-(p. ej. "onboarding sin reciclaje" aparecio 7 veces via HAX-G1, HAX-G12, PAIR-UN-2,
-PAIR-MM-1, PAIR-EF-2, PAIR-DE-1...). ~60-100 hallazgos para ~15 problemas reales.
-Un auditor humano no quiere leer el mismo problema cinco veces.
+The persistent anti-pattern of P3 (and worse in p3n): the block-by-block sweep emits the
+SAME problem several times, usually citing a different guideline each time
+(e.g. "onboarding sin reciclaje" appeared 7 times via HAX-G1, HAX-G12, PAIR-UN-2,
+PAIR-MM-1, PAIR-EF-2, PAIR-DE-1...). ~60-100 findings for ~15 real problems.
+A human auditor does not want to read the same problem five times.
 
-Este paso COLAPSA hallazgos casi-duplicados en uno representativo que UNE las
-guidelines de todos sus miembros. La salida es "un hallazgo por problema, anotado
-con todas las guidelines que incumple" -> mas accionable, no menos.
+This step COLLAPSES near-duplicate findings into one representative that MERGES the
+guidelines of all its members. The output is "one finding per problem, annotated
+with all the guidelines it violates" -> more actionable, not less.
 
-Principios (coherentes con el proyecto, ver ADR-004): es DETERMINISTA y vive en el
-CODIGO, sin LLM. No mira el golden ni las adjudicaciones (en produccion no existen):
-agrupa solo por el CONTENIDO del hallazgo. La similitud es lexica (no semantica
-profunda) a proposito: reproducible, auditable y sin coste. La validez del umbral se
-mide aparte (scripts/dedup_report.py) contra adjudicaciones que este paso nunca ve:
-no debe fundir problemas reales distintos (pureza) ni bajar la cobertura (recall).
+Principles (consistent with the project, see ADR-004): it is DETERMINISTIC and lives in the
+CODE, without an LLM. It does not look at the golden or the adjudications (in production they do not exist):
+it groups only by the CONTENT of the finding. The similarity is lexical (not deep
+semantic) on purpose: reproducible, auditable and free. The validity of the threshold is
+measured separately (scripts/dedup_report.py) against adjudications that this step never sees:
+it must not merge distinct real problems (purity) nor lower the coverage (recall).
 
-La agrupacion es por REPRESENTANTE (no enlace-simple): cada hallazgo se compara con
-los representantes de los clusters ya abiertos y se une al mas parecido por encima del
-umbral, o abre cluster nuevo. Evita el encadenamiento transitivo (A~B, B~C => A~C) que
-fundiria de mas. El resultado es estable respecto al orden de entrada (el de la pasada).
+The grouping is by REPRESENTATIVE (not single-linkage): each finding is compared with
+the representatives of the already-open clusters and joins the most similar one above the
+threshold, or opens a new cluster. It avoids the transitive chaining (A~B, B~C => A~C) that
+would over-merge. The result is stable with respect to the input order (that of the sweep).
 """
 
 from __future__ import annotations
@@ -31,21 +31,21 @@ from difflib import SequenceMatcher
 
 from interaction_review.schemas import Finding, Severity
 
-# Umbral de similitud para considerar dos hallazgos el MISMO problema. Calibrado
-# offline (scripts/dedup_report.py) sobre los runs P3/p3n de EII: el valor mas
-# agresivo que mantiene la PUREZA a 0 en p3 (no funde golden distintos) y conserva
-# la cobertura. Por debajo de 0.60 empiezan las conflaciones; ver docs/RESULTADOS.md.
+# Similarity threshold to consider two findings the SAME problem. Calibrated
+# offline (scripts/dedup_report.py) over the P3/p3n runs of EII: the most
+# aggressive value that keeps PURITY at 0 in p3 (does not merge distinct golden) and preserves
+# the coverage. Below 0.60 the conflations begin; see docs/RESULTADOS.md.
 DEFAULT_THRESHOLD: float = 0.60
 
-# Para que el ratio de titulo (que capta el mismo titulo reescrito) AYUDE, exigimos
-# ademas un minimo de solape de vocabulario real. Sin esta guarda, titulos con la
-# misma PLANTILLA pero distinto problema ("Falta de comunicacion de X al clinico")
-# se fundian: la calibracion lo confirmo (variante 'max' -> impureza disparada).
+# For the title ratio (which captures the same title rewritten) to HELP, we also require
+# a minimum of real vocabulary overlap. Without this guard, titles with the
+# same TEMPLATE but a different problem ("Falta de comunicacion de X al clinico")
+# would merge: the calibration confirmed it (variant 'max' -> impurity spiked).
 _SEQ_REQUIRES_JACCARD: float = 0.25
 
-# Palabras vacias (es) que sobreviven al filtro de longitud y solo anaden ruido a la
-# similitud lexica. Lista corta y conservadora: solo funcionales, ningun termino de
-# dominio (modelo/sistema/medico... SI discriminan y se conservan).
+# Stopwords (es) that survive the length filter and only add noise to the
+# lexical similarity. Short and conservative list: only functional words, no domain
+# term (modelo/sistema/medico... DO discriminate and are kept).
 _STOPWORDS: frozenset[str] = frozenset(
     """del las los con por para una uno que sin mas muy pero como sus este esta esto
     ese esa eso entre sobre cuando donde ante tras desde hacia hasta son han hay ser
@@ -61,12 +61,12 @@ def _strip_accents(s: str) -> str:
 
 
 def _norm(s: str) -> str:
-    """Normaliza texto para comparar: sin acentos, minusculas, espacios colapsados."""
+    """Normalizes text for comparison: without accents, lowercase, collapsed spaces."""
     return re.sub(r"\s+", " ", _strip_accents(s).lower()).strip()
 
 
 def _tokens(s: str) -> set[str]:
-    """Bolsa de tokens de contenido: sin acentos, >=3 chars, sin stopwords."""
+    """Bag of content tokens: without accents, >=3 chars, no stopwords."""
     words = re.findall(r"[a-z0-9]+", _strip_accents(s).lower())
     return {w for w in words if len(w) >= 3 and w not in _STOPWORDS}
 
@@ -79,31 +79,31 @@ def _jaccard(a: set[str], b: set[str]) -> float:
 
 
 def text_similarity(a: str, b: str) -> float:
-    """Jaccard de tokens de contenido entre dos textos libres (0..1).
+    """Jaccard of content tokens between two free texts (0..1).
 
-    Reutilizable fuera del dedup: el juez la usa para AMPLIAR los candidatos del
-    golden por similitud de texto (no solo por id de guideline compartido), que es
-    la deuda de medicion documentada en TESTPLAN (un hallazgo que cita la guideline
-    'equivocada' se quedaba sin candidato y daba un falso fallo).
+    Reusable outside the dedup: the judge uses it to WIDEN the golden candidates
+    by text similarity (not only by shared guideline id), which is
+    the measurement debt documented in TESTPLAN (a finding that cites the
+    'wrong' guideline was left without a candidate and produced a false failure).
     """
     return _jaccard(_tokens(a), _tokens(b))
 
 
 def _signature_tokens(f: Finding) -> set[str]:
-    # Titulo + locus: lo que identifica el PROBLEMA. La evidencia y el rationale son
-    # largos y ruidosos (inflarian falsos parecidos); el titulo lleva el tema.
+    # Title + locus: what identifies the PROBLEM. The evidence and the rationale are
+    # long and noisy (they would inflate false similarities); the title carries the topic.
     return _tokens(f"{f.title} {f.locus}")
 
 
 def similarity(a: Finding, b: Finding) -> float:
-    """Cuanto se parecen dos hallazgos como 'mismo problema' (0..1).
+    """How similar two findings are as the 'same problem' (0..1).
 
-    Combina dos senales:
-    - Jaccard de tokens de (titulo+locus): solapamiento de vocabulario del problema.
-    - Ratio de secuencia del titulo normalizado: capta el mismo titulo reescrito, pero
-      SOLO si ya hay un minimo de solape de vocabulario (_SEQ_REQUIRES_JACCARD); si no,
-      titulos con la misma plantilla y distinto problema se fundirian (ver calibracion).
-    NO exige compartir guideline: el duplicado tipico cita una guideline DISTINTA.
+    Combines two signals:
+    - Jaccard of (title+locus) tokens: overlap of the problem's vocabulary.
+    - Sequence ratio of the normalized title: captures the same title rewritten, but
+      ONLY if there is already a minimum of vocabulary overlap (_SEQ_REQUIRES_JACCARD); if not,
+      titles with the same template and a different problem would merge (see calibration).
+    It does NOT require sharing a guideline: the typical duplicate cites a DIFFERENT guideline.
     """
     jac = _jaccard(_signature_tokens(a), _signature_tokens(b))
     if jac < _SEQ_REQUIRES_JACCARD:
@@ -113,7 +113,7 @@ def similarity(a: Finding, b: Finding) -> float:
 
 
 def _union_guidelines(members: list[Finding]) -> list[str]:
-    """Union de guideline_ids preservando el orden de primera aparicion."""
+    """Union of guideline_ids preserving the order of first appearance."""
     seen: dict[str, None] = {}
     for f in members:
         for gid in f.guideline_ids:
@@ -122,7 +122,7 @@ def _union_guidelines(members: list[Finding]) -> list[str]:
 
 
 def _representative(members: list[Finding]) -> Finding:
-    """El miembro mas completo del cluster: anclado > severo > rico en texto > primero."""
+    """The most complete member of the cluster: grounded > severe > rich in text > first."""
 
     def richness(f: Finding) -> int:
         return len(f.evidence) + len(f.rationale) + len(f.recommendation)
@@ -138,14 +138,14 @@ def _representative(members: list[Finding]) -> Finding:
 
 
 def _merge(members: list[Finding]) -> Finding:
-    """Funde un cluster en un hallazgo: el representante + guidelines unidas.
+    """Merges a cluster into one finding: the representative + merged guidelines.
 
-    `merged_count` es ACUMULATIVO (cuantos hallazgos crudos representa en total), no
-    "cuantos se unieron en esta pasada": asi re-deduplicar una lista ya deduplicada
-    preserva el contador (idempotencia) y fundir hallazgos ya fundidos suma bien.
+    `merged_count` is CUMULATIVE (how many raw findings it represents in total), not
+    "how many were merged in this pass": this way re-deduplicating an already-deduplicated list
+    preserves the counter (idempotence) and merging already-merged findings adds up correctly.
     """
     if len(members) == 1:
-        return members[0]  # solo: se conserva tal cual (incluido su merged_count).
+        return members[0]  # single: kept as is (including its merged_count).
     rep = _representative(members)
     severity = max(members, key=lambda f: _SEVERITY_RANK.get(f.severity, 0)).severity
     anti = rep.anti_pattern or next((f.anti_pattern for f in members if f.anti_pattern), None)
@@ -162,14 +162,14 @@ def _merge(members: list[Finding]) -> Finding:
 def deduplicate(
     findings: list[Finding], threshold: float = DEFAULT_THRESHOLD
 ) -> list[Finding]:
-    """Colapsa hallazgos casi-duplicados. Estable respecto al orden de entrada.
+    """Collapses near-duplicate findings. Stable with respect to the input order.
 
-    Devuelve un hallazgo por cluster (representante con guidelines unidas y
-    `merged_count`), en el orden en que se abrio cada cluster. Idempotente:
+    Returns one finding per cluster (representative with merged guidelines and
+    `merged_count`), in the order in which each cluster was opened. Idempotent:
     deduplicate(deduplicate(x)) == deduplicate(x).
     """
     clusters: list[list[Finding]] = []
-    reps: list[Finding] = []  # representante provisional (el primero de cada cluster)
+    reps: list[Finding] = []  # provisional representative (the first of each cluster)
     for f in findings:
         best_i, best_sim = -1, threshold
         for i, rep in enumerate(reps):

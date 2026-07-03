@@ -1,244 +1,253 @@
-# Revisor de la capa de interacción humano-IA
+# Human-AI Interaction Layer Reviewer
 
-> **Audita el salpicadero de un sistema de IA, no el motor.**
+> **Audit an AI system's dashboard, not its engine.**
 
-![El ecosistema de la capa de interacción humano-IA: los datos alimentan el modelo; el modelo mueve las herramientas conectadas y guía a la persona; la persona actúa y se adapta; los resultados vuelven para mejorar el modelo, todo bajo una capa de gobernanza.](docs/assets/human-ai-ecosystem.jpg)
+![The ecosystem around the human-AI interaction layer: data feeds the model; the model drives connected tools and guides the person; the person acts and adapts; outcomes loop back to improve the model, all under a governance layer.](docs/assets/human-ai-ecosystem.jpg)
 
-Cuando una IA ayuda a decidir a una persona (un médico, un piloto, un funcionario), el punto donde
-más cosas se tuercen no suele ser el modelo, es **cómo el sistema le habla a esa persona**: si le
-presenta el resultado de forma que se fíe de más, si puede corregirlo, si el aviso salta en buen
-momento. Esta herramienta audita esa capa, la de la interacción, y te devuelve una lista de
-problemas concretos, cada uno atado a una guía de diseño reconocida y a la evidencia que lo sostiene.
+When an AI helps a person make a decision (a doctor, a pilot, a caseworker), the point where things
+most often go wrong is usually not the model itself but **how the system talks to that person**:
+whether it presents the result in a way that invites over-trust, whether it can be corrected, whether
+the alert fires at the right moment. This tool audits that layer, the interaction layer, and returns a
+list of concrete problems, each anchored to a recognized design guideline and to the evidence that
+supports it.
 
-> ¿Lo prefieres en lenguaje llano, como se lo contarías a un cliente? Está en **[docs/PRODUCTO.md](docs/PRODUCTO.md)**.
+A plain-language overview is in **[docs/PRODUCT.md](docs/PRODUCT.md)**.
 
-## El problema: se mira el motor, no el salpicadero
+## The problem: the engine gets audited, the dashboard does not
 
-Me gusta explicarlo con el coche. Cuando compras uno, todo el mundo mira el motor: potencia,
-consumo, lo que contamina. Está medido y regulado hasta el último tornillo. Pero casi nadie te
-pregunta si el salpicadero está bien pensado: si el aviso del ángulo muerto salta cuando toca o te
-despista justo al girar, si puedes silenciar una alerta que no paras de ver, si entiendes lo que te
-dice el coche o te fías a ciegas.
+It is easiest to see with a car. When buying one, everyone looks at the engine: power, fuel use,
+emissions. That is measured and regulated down to the last bolt. Almost nobody asks whether the
+dashboard is well designed: whether the blind-spot warning fires when it should or distracts right as
+the driver turns, whether an alert that keeps showing can be silenced, whether the driver understands
+what the car is saying or trusts it blindly.
 
-Con la IA pasa lo mismo. Las herramientas de gobernanza que hay hoy (watsonx.governance, Fiddler,
-Arize) auditan el motor: sesgo, precisión, deriva, explicabilidad técnica. El salpicadero no lo mira
-casi nadie. Y el salpicadero, cómo se le presenta el resultado a la persona, es justo donde se cuela
-el exceso de confianza en la máquina, la fatiga de alerta, el *override* que nadie captura, el aviso a
-destiempo. Ahí es donde un profesional decide si se fía del modelo, lo corrige o lo ignora. Hoy eso
-se revisa a mano, con una hoja de cálculo. Esto lo automatiza.
+The same holds for AI. Today's governance tools (watsonx.governance, Fiddler, Arize) audit the engine:
+bias, accuracy, drift, technical explainability. Almost nobody looks at the dashboard, how the result
+is presented to the person, which is exactly where over-trust in the machine, alert fatigue, the
+uncaptured override, and mistimed prompts creep in. That is where a professional decides whether to
+trust the model, correct it, or ignore it. Today this is reviewed by hand, in a spreadsheet. This
+project automates it.
 
-## Qué hace
+## What it does
 
-Le das la descripción de un sistema (qué hace, cómo se le muestra al usuario y **qué cuentan los que
-lo usan**) y te devuelve una lista de problemas de esa capa. Pero no problemas de manual. Cada
-hallazgo va **atado a tres cosas**:
+Given a description of a system (what it does, how it is shown to the user, and **what the people who
+use it report**), it returns a list of problems in that layer. Not textbook problems: every finding is
+**anchored to three things**:
 
-1. una **guía de diseño reconocida** que incumple,
-2. el **punto concreto** del sistema donde ocurre,
-3. la **evidencia** sacada de la propia documentación.
+1. a **recognized design guideline** it breaks,
+2. the **specific point** in the system where it happens,
+3. the **evidence** taken from the system's own documentation.
 
-Si no puede apoyar un hallazgo en evidencia, no lo suelta. Un informe lleno de "mejora la
-explicabilidad" no vale, porque sirve para cualquier sistema. Esto señala "aquí, en esta pantalla, el
-score aparece prerrellenado y empuja al médico a aceptarlo sin pensar". Eso sí lo puedes accionar.
+If a finding cannot be supported by evidence, it is not reported. A report full of "improve
+explainability" is useless, because it fits any system. This one points to "here, on this screen, the
+score appears pre-filled and pushes the clinician to accept it without thinking." That is actionable.
 
-Las guías van **masticadas**: uso las 18 de Microsoft (**HAX-18**) y el guidebook de Google (**PAIR**),
-que son el estándar de facto, traducidas a hallazgos concretos. No necesitas conocerlas.
+The guidelines come pre-digested: it uses Microsoft's 18 (**HAX-18**) and Google's guidebook
+(**PAIR**), the de facto standard, translated into concrete findings. No prior knowledge of them is
+required.
 
-## Cómo funciona
+## How it works
 
-El sistema se alimenta de **tres plantillas** que rellenan las partes interesadas, las convierte en un
-expediente (un *dossier*) y sobre él genera el informe.
+The system is fed by **three templates** filled in by the stakeholders, turns them into a case file (a
+*dossier*), and generates the report from it.
 
-### Las tres plantillas
+### The three templates
 
-- **[Perfil técnico](templates/01_ficha_sistema__perfil_tecnico.md)**: quien construye o mantiene el sistema.
-- **[Experiencia de uso](templates/02_experiencia_uso__usuario_final.md)**: **el usuario final**. Esta es la pieza que nadie más audita, el testimonio real de quien convive con la IA (¿la acepta por inercia? ¿puede corregirla? ¿la ignora?).
-- **[Inventario de documentos](templates/03_inventario_documentos.md)**: qué documentación hay disponible.
+- **[Technical profile](templates/01_system_card__technical_profile.md)**: whoever builds or maintains the system.
+- **[Usage experience](templates/02_usage_experience__end_user.md)**: **the end user**. This is the piece nobody else audits, the real testimony of whoever lives with the AI (do they accept it out of inertia? can they correct it? do they ignore it?).
+- **[Document inventory](templates/03_document_inventory.md)**: what documentation is available.
 
-Esas tres respuestas **son** la entrada. El diferencial está en la segunda: cruzar lo que el equipo
-técnico *cree* que pasa con lo que el usuario *vive*, porque ese desajuste es, en sí mismo, una señal
-de la capa de interacción.
+Those three answers **are** the input. The differentiator is the second one: contrasting what the
+technical team *believes* happens with what the user *experiences*, because that mismatch is itself a
+signal about the interaction layer.
 
-### De la entrada al informe
+### From input to report
 
-No hay que tocar JSON. Rellenas las plantillas en markdown y `ingerir` te arma el expediente solo, así
-construir la entrada no cuesta lo mismo que auditar a mano. ¿Ya tienes un PDF, una model card o la
-transcripción de una entrevista? `prerrellenar` se lo pasa al modelo para que rellene la plantilla (la
-ficha desde el documento técnico, la experiencia desde la entrevista) con lo que consta, y solo eso:
-lo que no aparece lo deja en blanco, no se lo inventa. Tú revisas, corriges, y de ahí a `revisar`, que
-es quien genera el informe de hallazgos.
+There is no JSON to edit. The templates are filled in Markdown and `ingest` builds the case file on its
+own, so preparing the input does not cost as much as auditing by hand. Already have a PDF, a model card,
+or an interview transcript? `prefill` passes it to the model to fill the template (the technical profile
+from the technical document, the usage experience from the interview) with what is actually there, and
+only that: whatever is missing is left blank, not made up. The human reviews and corrects, and from
+there to `review`, which generates the findings report.
 
-### Determinista por defecto, modelo solo donde hace falta, y local si quieres
+### Deterministic by default, model only where needed, and local if wanted
 
-El trabajo está repartido a propósito: **lo mecánico al código, al modelo solo lo que no se puede hacer
-con reglas**.
+The work is split on purpose: **the mechanical parts in code, the model only for what cannot be done
+with rules**.
 
-- **Sin modelo de lenguaje, deterministas** (mismo resultado siempre, sin conexión): convertir las
-  plantillas en el expediente (`ingerir`), consolidar duplicados (`dedup`), el mapeo normativo
-  (`crosswalk`), el informe HTML, las métricas, y el approach **B0**, una checklist que sirve de suelo
-  de control.
-- **Necesitan un modelo**: generar los hallazgos a partir del expediente, el prerrelleno inteligente de
-  plantillas, y el juez que puntúa en la evaluación. Es el eslabón irreducible: detectar un problema de
-  interacción y anclarlo en evidencia no se hace con una regla.
+- **No language model, deterministic** (same result every time, offline): turning the templates into the
+  case file (`ingest`), consolidating duplicates (`dedup`), the regulatory mapping (`crosswalk`), the
+  HTML report, the metrics, and the **B0** approach, a checklist that serves as a control floor.
+- **Need a model**: generating the findings from the case file, the smart template pre-fill, and the
+  judge that scores the evaluation. This is the irreducible link: detecting an interaction problem and
+  anchoring it in evidence cannot be done with a rule.
 
-Y ese modelo **puede ser local**: con `LLM_BACKEND=ollama` todo el pipeline corre en tu máquina con un
-modelo abierto (qwen, gemma...), sin que ningún dato salga a la nube. Es lo que quieres cuando la
-privacidad manda.
+And that model **can be local**: with `LLM_BACKEND=ollama` the whole pipeline runs on the user's machine
+with an open model (qwen, gemma...), without any data leaving for the cloud. That is what is wanted when
+privacy is paramount.
 
-## ¿Funciona?
+## Does it work?
 
-Sí, y está medido contra **casos held-out documentados por fuentes independientes**, en **8 sectores**
-(sanidad, aviación, justicia, finanzas, administración pública, RRHH, bienestar, discapacidad):
+Yes, and it is measured against **held-out cases documented by independent sources**, across **8 sectors**
+(healthcare, aviation, justice, finance, public administration, HR, welfare, disability):
 
-| Prueba | Resultado |
+| Test | Result |
 |---|---|
-| Caso clínico real (golden de un experto humano) | redescubre **13-14 de 15** problemas, precisión ~100% |
-| Held-out en varios sectores | recall **0.80-1.00**, no es overfitting |
-| Sistema **bien diseñado** (control de falsos positivos) | **0 hallazgos**, no inventa para parecer productivo |
-| Robustez al fraseo (mismo caso, otras palabras) | recall estable, entiende y no pesca palabras clave |
-| **Test duro**, n=3: golden de un órgano independiente (Royal Commission, un auditor estatal, un tribunal federal) + dossier en bruto, manos separadas | recall **0.70-0.90** (media ~0.79): recupera lo que señalaron sin verlo |
-| **Número del producto**, con el pipeline reproducible y un **juez independiente** (otro modelo), k=3 | p3: recall **0.91 ± 0.055**, precisión **0.965** |
+| Real clinical case (golden set from a human expert) | rediscovers **13-14 of 15** problems, ~100% precision |
+| Held-out across several sectors | recall **0.80-1.00**, not overfitting |
+| **Well-designed** system (false-positive control) | **0 findings**, does not invent to look productive |
+| Phrasing robustness (same case, different words) | stable recall, understands rather than keyword-matches |
+| **Hard test**, n=3: golden set from an independent body (a Royal Commission, a state auditor, a federal court) + raw dossier, separate hands | recall **0.70-0.90** (mean ~0.79): recovers what they flagged without seeing it |
+| **Product number**, with the reproducible pipeline and an **independent judge** (a different model), k=3 | p3: recall **0.91 ± 0.055**, precision **0.965** |
 
-El último es el que más me importa, porque no lo mide el mismo motor que genera: el juez es otro modelo
-y el flujo es reproducible. Y lo hace con un **modelo barato** de generador. Repetido tres veces por
-caso, el número aguanta y la barra entre casos se estrecha, así que no era suerte de una sola corrida.
+The last one matters most, because it is not scored by the same engine that generates it: the judge is a
+different model and the flow is reproducible. And it does so with a **cheap** generator model. Run three
+times per case, the number holds and the spread across cases narrows, so it was not a fluke of a single
+run.
 
-**Y lo del testimonio no es una corazonada, está medido.** Si al expediente le quitas la voz del usuario
-y dejas solo la documentación técnica, el revisor pierde recall justo en los problemas que solo esa voz
-revela: cae de **0.83 a 0.56**, mientras los controles no se mueven. Y los más vivenciales, la
-deferencia a la máquina, sentirse culpable ante el sistema, la confianza erosionada, caen **a cero** sin
-la voz, porque ninguna ficha técnica los insinúa. Cuánto baja el agregado depende de cuánto infiera el
-generador de la propia doc (con un modelo más conservador la caída llegaba a 0.33), pero el núcleo duro,
-lo que la persona vive, solo lo trae la voz. Ese es el argumento del diferencial, ya con dato.
+**And the testimony is not a hunch, it is measured.** Removing the user's voice from the case file and
+leaving only the technical documentation, the reviewer loses recall precisely on the problems that only
+that voice reveals: it drops from **0.83 to 0.56**, while the controls do not move. And the most
+experiential ones, deference to the machine, feeling guilty in front of the system, eroded trust, drop
+**to zero** without the voice, because no technical spec hints at them. How far the aggregate falls
+depends on how much the generator infers from the documentation itself (with a more conservative model
+the drop reached 0.33), but the hard core, what the person lives through, is brought only by the voice.
+That is the differentiator's argument, now with data.
 
-Detalle y método: **[docs/RESULTADOS.md](docs/RESULTADOS.md)** (el experimento) ·
-**[docs/RESULTADOS-testimonio.md](docs/RESULTADOS-testimonio.md)** (casos con testimonio real, test duro
-n=3 y el número reproducible) · **[docs/RESULTADOS-ablacion-testimonio.md](docs/RESULTADOS-ablacion-testimonio.md)**
-(el efecto de la voz).
+Detail and method: **[docs/RESULTS.md](docs/RESULTS.md)** (the experiment) ·
+**[docs/RESULTS-testimony.md](docs/RESULTS-testimony.md)** (cases with real testimony, hard test n=3, and
+the reproducible number) · **[docs/RESULTS-ablation-testimony.md](docs/RESULTS-ablation-testimony.md)**
+(the effect of the voice).
 
-## Para quien firma la compra
+## In the language of whoever signs the purchase
 
-HAX y PAIR son el estándar de diseño, pero quien aprueba la compra (gobernanza, calidad, cumplimiento) no
-razona en HAX-G2, razona en AI Act y NIST. Así que el informe se traduce solo. Con `--crosswalk`, cada
-hallazgo sale también mapeado a los artículos del **EU AI Act** (el 13 de transparencia, el 14 de
-supervisión humana, que nombra el *automation bias* de forma explícita, el 86 de derecho a explicación) y
-a las subcategorías del **NIST AI RMF**. Deja de ser una crítica de diseño y pasa a ser evidencia de
-conformidad que entra en su expediente. Es orientativo, no dictamen legal, y así está dicho en el propio
-informe. Y si hay que enseñarlo, `--format html` saca un informe autocontenido y presentable que imprime a
-PDF sin depender de nada externo.
+HAX and PAIR are the design standard, but whoever approves the purchase (governance, quality, compliance)
+does not reason in HAX-G2, they reason in the AI Act and NIST. So the report translates itself. With
+`--crosswalk`, each finding also comes mapped to the articles of the **EU AI Act** (Article 13 on
+transparency, Article 14 on human oversight, which names *automation bias* explicitly, Article 86 on the
+right to explanation) and to the subcategories of the **NIST AI RMF**. It stops being a design critique
+and becomes conformity evidence that goes into their file. It is indicative, not a legal ruling, and the
+report says so itself. And when it needs to be shown, `--format html` produces a self-contained,
+presentable report that prints to PDF without depending on anything external.
 
-Dicho con precisión: esto es una **auditoría para la gobernanza**, no un sistema que gobierne en tiempo
-real. Produce la evidencia que alimenta el expediente de cumplimiento y la decisión de qué arreglar. No
-se queda vigilando el sistema ni interviene solo (ver [Qué es y qué no es](#qué-es-y-qué-no-es)).
+To be precise: this is an **audit for governance**, not a system that governs in real time. It produces
+the evidence that feeds the compliance file and the decision on what to fix. It does not stay watching
+the system or intervene on its own (see [What it is and what it is not](#what-it-is-and-what-it-is-not)).
 
-## Un experimento con método, no humo
+## An experiment with method, not hype
 
-La pregunta de partida no fue "cómo construyo el agente" sino **si hace falta uno**. Antes de construir
-nada grande se establecieron baselines simples y se midió: la complejidad solo se justifica si **gana de
-forma medible**.
+The starting question was not "how do I build the agent" but **whether one is needed**. Before building
+anything large, simple baselines were set and measured: complexity is justified only if it **wins
+measurably**.
 
-- Escalera: **B0** checklist determinista, **B1** prompt único, **P3** pipeline determinista, **A4** agente.
-- Conclusión, que es un mapa y no un ganador único: el **pipeline determinista + deduplicado** es lo
-  robusto. El **agente moderno no se paga solo**: iguala en el mejor caso, pero pierde cuando la entrada
-  se degrada (lo normal en una auditoría).
-- Lección transversal: el eslabón frágil fue el **LLM-juez** (la medición), no el generador, así que la
-  medición se blindó con barandillas deterministas en código.
+- Ladder: **B0** deterministic checklist, **B1** single prompt, **P3** deterministic pipeline, **A4** agent.
+- Conclusion, a map rather than a single winner: the **deterministic pipeline + dedup** is the robust
+  option. The **modern agent does not pay for itself**: it ties in the best case but loses when the input
+  degrades (the norm in an audit).
+- Cross-cutting lesson: the fragile link was the **LLM judge** (the measurement), not the generator, so the
+  measurement was hardened with deterministic guardrails in code.
 
-Decisiones de diseño en **[docs/adr/](docs/adr/)**; plan de validación y limitaciones honestas en
+Design decisions in **[docs/adr/](docs/adr/)**; validation plan and honest limitations in
 **[docs/TESTPLAN.md](docs/TESTPLAN.md)**.
 
-## Qué es y qué no es
+## What it is and what it is not
 
-Para que nadie se lleve una idea equivocada:
+So that no one gets the wrong idea:
 
-- **Es una auditoría, no gobernanza en tiempo real.** Te da una foto rigurosa de la capa de interacción
-  en un momento dado, con hallazgos accionables. No se queda enganchado al sistema vigilándolo ni
-  interviene solo. Su sitio es alimentar la gobernanza, no sustituirla.
-- **El testimonio capta lo que la persona vive y sabe contar, no lo que ni ella percibe.** Es su mayor
-  fuerza y su límite honesto: alguien con exceso de confianza en la máquina que no es consciente de ello
-  no lo va a narrar, y ahí la entrevista no llega. El complemento natural es la **telemetría objetiva**:
-  cuánto tarda en aceptar una recomendación frente a lo que tardaría en leerla, la tasa real de
-  corrección, cuántas alertas ignora. Hoy eso se puede aportar como registros de uso (plantilla 03);
-  integrarlo como una fuente que se cruza con el resto es la dirección por la que el producto crece.
-- **Da la foto; aún falta cerrar el ciclo.** El informe es una lista de problemas anclados. Registrar qué
-  se corrigió y volver a medir para demostrar que el riesgo bajó es el siguiente paso, todavía no está.
-- **La generación de hallazgos necesita un modelo de lenguaje**, y eso es a propósito (es lo irreducible),
-  no una dependencia accidental. Todo lo demás es determinista y corre sin nube; el modelo, además, puede
-  ser local. Así que "sin API no funciona nada" no es cierto: la ingesta, el dedup, el crosswalk, el HTML
-  y el canario B0 van sin conexión.
+- **It is an audit, not real-time governance.** It gives a rigorous snapshot of the interaction layer at a
+  given moment, with actionable findings. It does not stay attached to the system watching it, nor does it
+  intervene on its own. Its place is to feed governance, not replace it.
+- **The testimony captures what the person lives through and can articulate, not what they do not even
+  perceive.** That is both its strength and its honest limit: someone with over-trust in the machine who is
+  not aware of it will not narrate it, and there the interview does not reach. The natural complement is
+  **objective telemetry**: how long they take to accept a recommendation versus how long reading it would
+  take, the real correction rate, how many alerts they ignore. Today that can be supplied as usage logs
+  (template 03); integrating it as a source that is cross-checked against the rest is the direction the
+  product grows in.
+- **It gives the snapshot; the loop is not yet closed.** The report is a list of anchored problems.
+  Recording what was fixed and measuring again to show the risk went down is the next step, not yet built.
+- **Generating the findings needs a language model**, and that is on purpose (it is the irreducible part),
+  not an accidental dependency. Everything else is deterministic and runs offline; the model, moreover, can
+  be local. So "nothing works without the API" is false: ingestion, dedup, crosswalk, HTML, and the B0
+  canary all run without a connection.
 
-## Instalación
+## Installation
 
 ```bash
 uv sync --extra dev
 ```
 
-## Uso
+## Usage
 
 ```bash
-# (Opcional) De un documento a una plantilla prerrellena con el modelo (revísala luego):
-uv run interaction-review prerrellenar --doc ruta/model_card.pdf --tipo ficha       --out templates/01_relleno.md
-uv run interaction-review prerrellenar --doc ruta/entrevista.txt  --tipo experiencia --out templates/02_relleno.md
+# (Optional) From a document to a pre-filled template with the model (review it afterwards):
+uv run interaction-review prefill --doc path/model_card.pdf --type profile    --out templates/01_filled.md
+uv run interaction-review prefill --doc path/interview.txt  --type experience --out templates/02_filled.md
 
-# De las tres plantillas rellenas al expediente (determinista, sin API):
-uv run interaction-review ingerir \
-    --ficha templates/01_relleno.md --experiencia templates/02_relleno.md \
-    --inventario templates/03_relleno.md --out ruta/dossier.json
+# From the three filled templates to the case file (deterministic, no API):
+uv run interaction-review ingest \
+    --profile templates/01_filled.md --experience templates/02_filled.md \
+    --inventory templates/03_filled.md --out path/dossier.json
 
-# Informe de hallazgos, con el mapeo normativo y en HTML listo para imprimir a PDF:
-uv run interaction-review revisar --dossier ruta/dossier.json --approach p3 --dedup \
-    --crosswalk --format html --out informe.html
+# Findings report, with the regulatory mapping and in HTML ready to print to PDF:
+uv run interaction-review review --dossier path/dossier.json --approach p3 --dedup \
+    --crosswalk --format html --out report.html
 
-# 'auto' (router de producto): b1 si el caso es fácil, p3+dedup si es difícil:
-uv run interaction-review revisar --dossier ruta/dossier.json --approach auto
+# 'auto' (product router): b1 if the case is easy, p3+dedup if it is hard:
+uv run interaction-review review --dossier path/dossier.json --approach auto
 
-# Métricas contra un golden set (con LLM-juez):
-uv run interaction-review comparar \
-    --dossier ruta/dossier.json --golden ruta/answer_key.json \
-    --approaches b0,b1,p3 --k 3 --save runs/salida.json
+# Metrics against a golden set (with LLM judge):
+uv run interaction-review compare \
+    --dossier path/dossier.json --golden path/answer_key.json \
+    --approaches b0,b1,p3 --k 3 --save runs/output.json
 ```
 
-Approaches: `b0` (checklist, sin modelo) · `b1` (prompt único) · `p3` (pipeline, **el producto**) ·
-`a4` (agente). `--dedup` consolida casi-duplicados (determinista); `--dedup-llm` es la capa semántica
-opcional (usa modelo). `--crosswalk` añade el mapeo a EU AI Act / NIST; `--format html` saca el informe
-presentable. El comando `comparar` requiere `ANTHROPIC_API_KEY` (salvo solo `b0`), o corre entero en
-local con `LLM_BACKEND=ollama`.
+Approaches: `b0` (checklist, no model) · `b1` (single prompt) · `p3` (pipeline, **the product**) ·
+`a4` (agent). `--dedup` consolidates near-duplicates (deterministic); `--dedup-llm` is the optional
+semantic layer (uses the model). `--crosswalk` adds the mapping to EU AI Act / NIST; `--format html`
+produces the presentable report. The `compare` command requires `ANTHROPIC_API_KEY` (except for `b0`
+alone), or runs entirely local with `LLM_BACKEND=ollama`.
 
-> **Local / Windows.** Para correr en local con [Ollama](https://ollama.com) antepón `LLM_BACKEND=ollama`.
-> Si el Control de aplicaciones de Windows bloquea el lanzador `.exe`, invoca el módulo directamente:
+> **Local / Windows.** To run locally with [Ollama](https://ollama.com) prefix `LLM_BACKEND=ollama`.
+> If Windows Application Control blocks the `.exe` launcher, invoke the module directly:
 > `uv run python -m interaction_review.cli ...`.
 
-## Estructura
+## Layout
 
 ```
 src/interaction_review/
-  schemas.py        Contrato de datos (Dossier, Finding, GoldenIssue, ...)
-  guidelines/       HAX-18 y PAIR como datos enlazables + regulatory_map.yaml (AI Act / NIST)
-  approaches/       Escalera de approaches (b0/b1/b2/p3/p3n/a4)
-  ingest.py         Plantillas rellenas -> expediente (determinista, sin API)
-  smart_ingest.py   Documento (PDF/model card/entrevista) -> plantilla prerrellena (modelo; el humano revisa)
-  dedup.py          Consolidación determinista de hallazgos (producto)
-  dedup_llm.py      Capa semántica opcional (modelo)
-  router.py         Enrutado 'auto' por dificultad
-  regulatory.py     Crosswalk de los hallazgos a EU AI Act / NIST AI RMF
-  ablation.py       Ablación del testimonio (dossier con voz vs sin voz)
-  metrics.py        recall, precisión, genericidad, grounding, F-beta, recall por fuente
-  report.py         Informe markdown · report_html.py Informe HTML autocontenido
-  cli.py            Comandos prerrellenar / ingerir / revisar / evaluar / comparar
-docs/adr/           Decisiones de diseño (ADR-001..008)
-data/external/      Casos held-out públicos (dossier + golden por caso)
-data/golden/        PRIVADO, gitignored (caso clínico real)
-templates/          Las tres plantillas de entrada
+  schemas.py        Data contract (Dossier, Finding, GoldenIssue, ...)
+  guidelines/       HAX-18 and PAIR as linkable data + regulatory_map.yaml (AI Act / NIST)
+  approaches/       Approach ladder (b0/b1/b2/p3/p3n/a4)
+  ingest.py         Filled templates -> case file (deterministic, no API)
+  smart_ingest.py   Document (PDF/model card/interview) -> pre-filled template (model; human reviews)
+  dedup.py          Deterministic finding consolidation (product)
+  dedup_llm.py      Optional semantic layer (model)
+  router.py         'auto' routing by difficulty
+  regulatory.py     Crosswalk of findings to EU AI Act / NIST AI RMF
+  ablation.py       Testimony ablation (case file with voice vs without voice)
+  metrics.py        recall, precision, genericity, grounding, F-beta, recall by source
+  report.py         Markdown report · report_html.py self-contained HTML report
+  cli.py            Commands prefill / ingest / review / evaluate / compare
+docs/adr/           Design decisions (ADR-001..008)
+data/external/      Public held-out cases (dossier + golden per case)
+data/golden/        PRIVATE, gitignored (real clinical case)
+templates/          The three input templates
 ```
 
-## Privacidad
+Note on language: the tooling, documentation, and code are in English. Spanish is kept on purpose in the
+evidence layer: the prompts that produced the measured numbers, the case data and result files under
+`data/` and `docs/`, and the test fixtures that mirror that domain content. Translating the prompts or the
+case data would require re-running the experiments to keep the figures valid.
 
-El material clínico es privado y **nunca se versiona** (`data/golden/`, `data/private/`). Las llamadas al
-modelo en la nube envían datos fuera, así que el dossier debe estar **de-identificado** antes de cualquier
-corrida con datos reales (ver [ADR-003](docs/adr/ADR-003-manejo-datos-phi.md)). Si eso no es suficiente,
-el backend local (`LLM_BACKEND=ollama`) mantiene todo dentro de tu máquina.
+## Privacy
 
-## Referencias
+Clinical material is private and **never versioned** (`data/golden/`, `data/private/`). Cloud model calls
+send data out, so the dossier must be **de-identified** before any run with real data (see
+[ADR-003](docs/adr/ADR-003-phi-data-handling.md)). When that is not enough, the local backend
+(`LLM_BACKEND=ollama`) keeps everything on the machine.
+
+## References
 
 - Amershi et al. (2019), *Guidelines for Human-AI Interaction*, CHI. (HAX-18)
 - Google PAIR, *People + AI Guidebook*.

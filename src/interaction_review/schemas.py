@@ -1,10 +1,10 @@
-"""Esquemas de datos del revisor de la capa de interaccion humano-IA.
+"""Data schemas of the human-AI interaction layer reviewer.
 
-Estos modelos son el contrato comun que consumen TODOS los approaches (B0, B1,
-B2, y mas adelante P3/A4), de modo que la comparacion entre ellos sea justa:
-todos reciben el mismo `Dossier` y todos emiten `Finding`s con el mismo esquema.
+These models are the common contract consumed by ALL approaches (B0, B1,
+B2, and later P3/A4), so that the comparison between them is fair:
+they all receive the same `Dossier` and they all emit `Finding`s with the same schema.
 
-Ver el plan v0 y docs/adr/ para el porque de cada decision.
+See the v0 plan and docs/adr/ for the rationale behind each decision.
 """
 
 from __future__ import annotations
@@ -15,54 +15,54 @@ from pydantic import BaseModel, Field, field_validator
 
 
 # --------------------------------------------------------------------------- #
-# Entrada: el sistema bajo revision, normalizado a un "dossier".
+# Input: the system under review, normalized to a "dossier".
 # --------------------------------------------------------------------------- #
 class SourceKind(str, Enum):
-    """Procedencia de una fuente del dossier.
+    """Provenance of a dossier source.
 
-    La procedencia es de primera clase: un desajuste entre lo que el TECHNICIAN
-    cree que hace el sistema y lo que el END_USER vive es, en si mismo, una
-    senal de la capa de interaccion (ver plan, seccion 2).
+    Provenance is first-class: a mismatch between what the TECHNICIAN
+    believes the system does and what the END_USER experiences is, in itself, a
+    signal of the interaction layer (see plan, section 2).
     """
 
-    DOCUMENT = "document"      # documentacion importada sobre el modelo/sistema
-    TECHNICIAN = "technician"  # texto de un perfil tecnico (implementa/mantiene)
-    END_USER = "end_user"      # texto de un usuario final (usa el sistema)
+    DOCUMENT = "document"      # imported documentation about the model/system
+    TECHNICIAN = "technician"  # text from a technical profile (implements/maintains)
+    END_USER = "end_user"      # text from an end user (uses the system)
     OTHER = "other"
 
 
 class Source(BaseModel):
-    """Una pieza de informacion sobre el sistema, con su procedencia."""
+    """A piece of information about the system, with its provenance."""
 
-    id: str = Field(..., description="Identificador estable, p.ej. 'doc-ficha' o 'user-medico-1'.")
+    id: str = Field(..., description="Stable identifier, e.g. 'doc-card' or 'user-doctor-1'.")
     kind: SourceKind
-    label: str = Field(..., description="Etiqueta legible de la fuente.")
-    content: str = Field(..., description="Texto bruto o transcrito de la fuente.")
+    label: str = Field(..., description="Human-readable label of the source.")
+    content: str = Field(..., description="Raw or transcribed text of the source.")
 
 
 class Dossier(BaseModel):
-    """Representacion canonica del sistema de IA y de su interaccion.
+    """Canonical representation of the AI system and its interaction.
 
-    Es la entrada normalizada que consumen todos los approaches. Se construye a
-    partir de fuentes heterogeneas (documentos, texto de tecnicos y de usuarios)
+    It is the normalized input consumed by all approaches. It is built from
+    heterogeneous sources (documents, text from technicians and from users)
     via `ingest`.
     """
 
     system_name: str
-    domain: str = Field(..., description="Dominio, p.ej. 'cribado de derivacion AP->digestivo'.")
-    summary: str = Field("", description="Resumen breve del sistema y su flujo de interaccion.")
+    domain: str = Field(..., description="Domain, e.g. 'primary-care to gastro referral screening'.")
+    summary: str = Field("", description="Brief summary of the system and its interaction flow.")
     sources: list[Source] = Field(default_factory=list)
 
     @field_validator("sources")
     @classmethod
     def _at_least_one_source(cls, v: list[Source]) -> list[Source]:
         if not v:
-            raise ValueError("El dossier necesita al menos una fuente.")
+            raise ValueError("The dossier needs at least one source.")
         return v
 
 
 # --------------------------------------------------------------------------- #
-# Guidelines (HAX-18 / PAIR) codificadas como datos enlazables.
+# Guidelines (HAX-18 / PAIR) encoded as linkable data.
 # --------------------------------------------------------------------------- #
 class GuidelineCorpus(str, Enum):
     HAX = "HAX"    # Microsoft, Amershi et al. 2019 (18 guidelines)
@@ -70,23 +70,23 @@ class GuidelineCorpus(str, Enum):
 
 
 class Guideline(BaseModel):
-    """Un item atomico y enlazable de un corpus de guidelines."""
+    """An atomic and linkable item of a guidelines corpus."""
 
-    id: str = Field(..., description="Id estable, p.ej. 'HAX-G1' o 'PAIR-FC-2'.")
+    id: str = Field(..., description="Stable id, e.g. 'HAX-G1' or 'PAIR-FC-2'.")
     corpus: GuidelineCorpus
-    group: str = Field(..., description="Fase (HAX) o capitulo (PAIR) al que pertenece.")
+    group: str = Field(..., description="Phase (HAX) or chapter (PAIR) it belongs to.")
     title: str
     description: str
-    good_example: str = Field(..., description="Ejemplo de buen cumplimiento.")
-    bad_example: str = Field(..., description="Ejemplo de incumplimiento / anti-patron.")
+    good_example: str = Field(..., description="Example of good compliance.")
+    bad_example: str = Field(..., description="Example of non-compliance / anti-pattern.")
     anti_patterns: list[str] = Field(
         default_factory=list,
-        description="Anti-patrones concretos asociados, para deteccion.",
+        description="Concrete associated anti-patterns, for detection.",
     )
 
 
 # --------------------------------------------------------------------------- #
-# Salida: hallazgos. Mismo esquema para todos los approaches.
+# Output: findings. Same schema for all approaches.
 # --------------------------------------------------------------------------- #
 class Severity(str, Enum):
     LOW = "low"
@@ -95,72 +95,72 @@ class Severity(str, Enum):
 
 
 class Finding(BaseModel):
-    """Un hallazgo sobre la capa de interaccion.
+    """A finding about the interaction layer.
 
-    El nucleo del proyecto: un hallazgo util esta ANCLADO en tres cosas
-    (ver `is_grounded`). Un hallazgo sin anclaje es generico y, por la definicion
-    de exito del plan, cuenta como fallo, no como acierto.
+    The core of the project: a useful finding is ANCHORED in three things
+    (see `is_grounded`). A finding without anchoring is generic and, by the plan's
+    definition of success, counts as a failure, not as a success.
     """
 
     id: str
     title: str
     guideline_ids: list[str] = Field(
         default_factory=list,
-        description="Guidelines concretas que respalda/incumple (ancla 1).",
+        description="Concrete guidelines it supports/breaks (anchor 1).",
     )
     locus: str = Field(
         "",
-        description="Punto CONCRETO del sistema al que se refiere el hallazgo (ancla 2).",
+        description="CONCRETE point of the system the finding refers to (anchor 2).",
     )
     evidence: str = Field(
         "",
-        description="Cita o referencia textual de la entrada que lo sustenta (ancla 3).",
+        description="Textual quote or reference from the input that supports it (anchor 3).",
     )
-    anti_pattern: str | None = Field(None, description="Anti-patron detectado, si aplica.")
+    anti_pattern: str | None = Field(None, description="Detected anti-pattern, if applicable.")
     severity: Severity = Severity.MEDIUM
-    rationale: str = Field("", description="Por que es un problema en ESTE sistema.")
-    recommendation: str = Field("", description="Accion concreta recomendada.")
+    rationale: str = Field("", description="Why it is a problem in THIS system.")
+    recommendation: str = Field("", description="Concrete recommended action.")
     merged_count: int = Field(
         1,
         ge=1,
-        description="Cuantos hallazgos crudos consolida (1 = sin consolidar). Lo fija el "
-        "paso de deduplicado; un valor >1 significa que varias pasadas describian el mismo "
-        "problema (a menudo citando guidelines distintas) y se han unido en este.",
+        description="How many raw findings it consolidates (1 = not consolidated). Set by the "
+        "dedup step; a value >1 means several passes described the same problem (often citing "
+        "different guidelines) and were merged into this one.",
     )
 
     def is_grounded(self) -> bool:
-        """True si el hallazgo tiene los tres anclajes (guideline + locus + evidencia).
+        """True if the finding has the three anchors (guideline + locus + evidence).
 
-        Es el criterio operativo de no-genericidad usado por `metrics`.
+        It is the operational non-genericity criterion used by `metrics`.
         """
         return bool(self.guideline_ids) and bool(self.locus.strip()) and bool(self.evidence.strip())
 
 
 # --------------------------------------------------------------------------- #
-# Golden set y adjudicacion (evaluacion).
+# Golden set and adjudication (evaluation).
 # --------------------------------------------------------------------------- #
 class RevealedBy(str, Enum):
-    """Desde que TIPO de fuente del dossier es detectable un GoldenIssue.
+    """From which TYPE of dossier source a GoldenIssue is detectable.
 
-    Es el eje de la ablacion del testimonio (ADR-007): permite medir el recall
-    sobre el subconjunto de problemas que SOLO revela la voz del usuario final,
-    con y sin esas fuentes en el dossier. Si el testimonio es el diferencial del
-    producto, el recall en `USER_ONLY` debe desplomarse al quitar las fuentes
-    END_USER; si no cambia, el diferencial esta en grounding/credibilidad, no en
-    descubrir problemas nuevos.
+    It is the axis of the testimony ablation (ADR-007): it allows measuring recall
+    over the subset of problems that ONLY the end user's voice reveals,
+    with and without those sources in the dossier. If the testimony is the product's
+    differentiator, recall on `USER_ONLY` should collapse when removing the
+    END_USER sources; if it does not change, the differentiator is in grounding/credibility, not in
+    discovering new problems.
     """
 
-    USER_ONLY = "user_only"  # solo detectable desde testimonio de usuario final (END_USER)
-    TECH_ONLY = "tech_only"  # solo desde documentacion / perfil tecnico (DOCUMENT/TECHNICIAN)
-    BOTH = "both"            # detectable desde ambas: la doc lo describe y el usuario lo vive
-    UNKNOWN = "unknown"      # aun sin etiquetar (default: no participa en la ablacion)
+    USER_ONLY = "user_only"  # only detectable from end user testimony (END_USER)
+    TECH_ONLY = "tech_only"  # only from documentation / technical profile (DOCUMENT/TECHNICIAN)
+    BOTH = "both"            # detectable from both: the doc describes it and the user experiences it
+    UNKNOWN = "unknown"      # not yet labeled (default: does not participate in the ablation)
 
 
 class GoldenIssue(BaseModel):
-    """Un problema de interaccion conocido del caso golden (answer key).
+    """A known interaction problem of the golden case (answer key).
 
-    Material derivado de informacion privada del usuario: vive bajo data/golden/
-    (gitignored). El sistema NO lo ve durante la ejecucion ciega.
+    Material derived from the user's private information: it lives under data/golden/
+    (gitignored). The system does NOT see it during the blind run.
     """
 
     id: str
@@ -170,31 +170,31 @@ class GoldenIssue(BaseModel):
     severity: Severity = Severity.MEDIUM
     revealed_by: RevealedBy = Field(
         RevealedBy.UNKNOWN,
-        description="Fuente que revela el problema (ablacion del testimonio, ADR-007). "
-        "Default UNKNOWN: los golden sin etiquetar no participan en la ablacion.",
+        description="Source that reveals the problem (testimony ablation, ADR-007). "
+        "Default UNKNOWN: unlabeled golden do not participate in the ablation.",
     )
 
 
 class AdjudicationLabel(str, Enum):
-    """Etiqueta de un hallazgo reportado frente al golden set."""
+    """Label of a reported finding against the golden set."""
 
-    TP_MATCH = "tp_match"          # real y coincide con un GoldenIssue conocido
-    TP_NEW = "tp_new"              # real pero NO estaba en el golden (descubrimiento)
-    FP_GENERIC = "fp_generic"      # generico / no anclado: vale para cualquier sistema
-    FP_INCORRECT = "fp_incorrect"  # concreto pero incorrecto
+    TP_MATCH = "tp_match"          # real and matches a known GoldenIssue
+    TP_NEW = "tp_new"              # real but was NOT in the golden (discovery)
+    FP_GENERIC = "fp_generic"      # generic / not anchored: applies to any system
+    FP_INCORRECT = "fp_incorrect"  # concrete but incorrect
 
 
 class Adjudication(BaseModel):
-    """Veredicto sobre un `Finding`.
+    """Verdict on a `Finding`.
 
-    Lo produce primero el LLM-juez y lo revisa/corrige el humano. `human_confirmed`
-    permite distinguir el veredicto automatico del validado.
+    It is produced first by the LLM judge and reviewed/corrected by the human. `human_confirmed`
+    allows distinguishing the automatic verdict from the validated one.
     """
 
     finding_id: str
     label: AdjudicationLabel
     matched_golden_id: str | None = Field(
-        None, description="Id del GoldenIssue emparejado, si label == TP_MATCH."
+        None, description="Id of the matched GoldenIssue, if label == TP_MATCH."
     )
     judge_rationale: str = ""
     human_confirmed: bool = False

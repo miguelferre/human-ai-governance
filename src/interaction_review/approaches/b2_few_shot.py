@@ -1,7 +1,7 @@
-"""B2 - Prompt unico con un ejemplo trabajado (few-shot) para suprimir genericidad.
+"""B2 - Single prompt with one worked example (few-shot) to suppress genericity.
 
-Sigue siendo UNA sola llamada al LLM; la unica diferencia con B1 es el ejemplo
-bueno/malo en el prompt.
+It is still ONE single LLM call; the only difference from B1 is the good/bad
+example in the prompt.
 """
 
 from __future__ import annotations

@@ -1,18 +1,20 @@
-"""Validacion OFFLINE del deduplicado sobre runs ya juzgados (sin API).
+"""OFFLINE validation of the deduplication over already-judged runs (no API).
 
-El dedup agrupa por contenido y NO ve el golden ni las adjudicaciones. Aqui las
-usamos -despues- como vara de medir independiente para responder dos preguntas:
+The dedup groups by content and does NOT see the golden or the adjudications. Here
+we use them -afterwards- as an independent yardstick to answer two questions:
 
-  1. ¿Conserva la senal? La cobertura de golden tras fundir = union de los golden
-     de cada cluster. Debe ser IDENTICA a la de antes (el dedup no tira hallazgos).
-  2. ¿Es PURO? Un cluster es impuro si funde hallazgos adjudicados a golden DISTINTOS
-     -> habria conflado dos problemas reales en un solo item del informe. Eso es el
-     dano real del dedup, y se mide contra etiquetas que el dedup nunca vio.
+  1. Does it preserve the signal? The golden coverage after merging = union of the
+     goldens of each cluster. It must be IDENTICAL to the one before (the dedup does
+     not drop findings).
+  2. Is it PURE? A cluster is impure if it merges findings adjudicated to DIFFERENT
+     goldens -> it would have conflated two real problems into a single item of the
+     report. That is the real harm of the dedup, and it is measured against labels
+     the dedup never saw.
 
-Y la ganancia de producto: cuanto colapsa el conteo (~60-100 -> ~N) y cuantos
-clusters quedan por problema (ideal: 1, no 5).
+And the product gain: how much the count collapses (~60-100 -> ~N) and how many
+clusters remain per problem (ideal: 1, not 5).
 
-Uso:
+Usage:
     uv run python scripts/dedup_report.py runs/a2_eii_k3.json
     uv run python scripts/dedup_report.py runs/a2_eii_k3.json --sweep
     uv run python scripts/dedup_report.py runs/a2_eii_k3.json --threshold 0.55
@@ -36,7 +38,7 @@ def _load(path: str) -> dict:
 
 
 def _eval_run(run: dict, threshold: float) -> dict:
-    """Metricas de un run individual antes/despues de deduplicar."""
+    """Metrics of an individual run before/after deduplicating."""
     findings = [Finding.model_validate(x) for x in run["findings"]]
     adj = {a["finding_id"]: a for a in run["adjudications"]}
 
@@ -48,11 +50,11 @@ def _eval_run(run: dict, threshold: float) -> dict:
     }
     tp_before = sum(1 for a in adj.values() if a.get("label") in _TP)
 
-    # Para auditar pureza necesitamos saber que crudos cayeron en cada cluster.
-    # deduplicate() devuelve representantes; re-derivamos los clusters con la misma
-    # logica de id -> reconstruimos por id del representante no basta. En su lugar,
-    # agrupamos nosotros replicando el criterio: mas simple y robusto -> mapear cada
-    # finding a su cluster via un dedup "instrumentado".
+    # To audit purity we need to know which raw findings fell into each cluster.
+    # deduplicate() returns representatives; re-deriving the clusters by the id of the
+    # representative is not enough. Instead, we group them ourselves replicating the
+    # criterion: simpler and more robust -> map each finding to its cluster via an
+    # "instrumented" dedup.
     clusters = _clusters(findings, threshold)
 
     cov_after: set[str] = set()
@@ -75,7 +77,7 @@ def _eval_run(run: dict, threshold: float) -> dict:
             clusters_per_golden[g] = clusters_per_golden.get(g, 0) + 1
 
     n_after = len(clusters)
-    # clusters por golden cubierto (ideal 1): media sobre los golden realmente cubiertos
+    # clusters per covered golden (ideal 1): mean over the goldens actually covered
     dup_factor = (
         statistics.mean(clusters_per_golden.values()) if clusters_per_golden else 0.0
     )
@@ -108,10 +110,10 @@ def _eval_run(run: dict, threshold: float) -> dict:
 
 
 def _clusters(findings: list[Finding], threshold: float) -> list[list[Finding]]:
-    """Reproduce la agrupacion de dedup.deduplicate, devolviendo los miembros.
+    """Reproduces the grouping of dedup.deduplicate, returning the members.
 
-    (deduplicate() devuelve ya fundidos; aqui necesitamos los miembros para auditar
-    pureza contra el golden, asi que replicamos el mismo bucle por representante.)
+    (deduplicate() returns them already merged; here we need the members to audit
+    purity against the golden, so we replicate the same loop by representative.)
     """
     from interaction_review.dedup import similarity
 
@@ -155,10 +157,10 @@ def _agg(runs: list[dict], approach: str, threshold: float) -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(description="Valida el deduplicado sobre un run juzgado.")
-    p.add_argument("run", help="Ruta a un runs/*.json ya juzgado.")
+    p = argparse.ArgumentParser(description="Validates the deduplication over a judged run.")
+    p.add_argument("run", help="Path to an already-judged runs/*.json.")
     p.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD)
-    p.add_argument("--sweep", action="store_true", help="Barre umbrales 0.40..0.75.")
+    p.add_argument("--sweep", action="store_true", help="Sweeps thresholds 0.40..0.75.")
     args = p.parse_args(argv)
 
     data = _load(args.run)
@@ -166,8 +168,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.sweep:
         thresholds = [0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75]
-        print(f"# Barrido de umbral — {args.run}\n")
-        print("| approach | T | n_antes | n_despues | reduccion | cov_perdida | impuros | dup_antes | dup_despues |")
+        print(f"# Threshold sweep - {args.run}\n")
+        print("| approach | T | n_before | n_after | reduction | cov_lost | impure | dup_before | dup_after |")
         print("|---|---|---|---|---|---|---|---|---|")
         for approach, runs in runs_by_approach.items():
             if not runs or not runs[0].get("adjudications"):
@@ -182,8 +184,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     t = args.threshold
-    print(f"# Deduplicado @ T={t:.2f} -- {args.run}\n")
-    print("| approach | k | n_antes | n_despues | reduccion | cov antes->desp | cov_perdida | impuros | prec antes->desp | dup/golden antes->desp |")
+    print(f"# Deduplication @ T={t:.2f} -- {args.run}\n")
+    print("| approach | k | n_before | n_after | reduction | cov before->after | cov_lost | impure | prec before->after | dup/golden before->after |")
     print("|---|---|---|---|---|---|---|---|---|---|")
     for approach, runs in runs_by_approach.items():
         if not runs or not runs[0].get("adjudications"):

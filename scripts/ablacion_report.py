@@ -1,19 +1,20 @@
-"""Reporte de la ablacion del testimonio del usuario (ADR-007).
+"""Report of the user testimony ablation (ADR-007).
 
-Dos modos:
+Two modes:
 
-  dist    OFFLINE, sin API. Dado uno o varios answer_key etiquetados con
-          `revealed_by`, imprime la distribucion (user_only / tech_only / both)
-          por caso y agregada. Es el TECHO del aporte del testimonio al recall:
-          si casi no hay user_only, la voz no puede aportar mucho recall aunque
-          quisiera. Resultado honesto por si solo.
+  dist    OFFLINE, no API. Given one or more answer_key files labeled with
+          `revealed_by`, it prints the distribution (user_only / tech_only / both)
+          per case and aggregated. It is the CEILING of the testimony's contribution
+          to recall: if there is barely any user_only, the voice cannot contribute
+          much recall even if it wanted to. An honest result on its own.
 
-  compare Necesita runs ya juzgados (los produce `comparar`, gasta API). Dado el
-          golden etiquetado y dos runs -CON voz y SIN voz (dossier sin END_USER)-,
-          imprime el recall por subconjunto en cada condicion y el delta en
-          user_only, que es la pregunta de fondo: ¿cae el recall al quitar la voz?
+  compare Requires already-judged runs (produced by `comparar`, spends API). Given
+          the labeled golden and two runs -WITH voice and WITHOUT voice (dossier
+          without END_USER)-, it prints the recall per subset in each condition and
+          the delta in user_only, which is the underlying question: does recall drop
+          when the voice is removed?
 
-Uso:
+Usage:
     uv run python scripts/ablacion_report.py dist data/external/*/answer_key.json
     uv run python scripts/ablacion_report.py compare \\
         --golden data/external/robodebt-hard/answer_key.json \\
@@ -44,12 +45,12 @@ def _golden(path: str) -> list[GoldenIssue]:
 
 
 def _case_name(path: str) -> str:
-    # data/external/<caso>/answer_key.json -> <caso>
+    # data/external/<case>/answer_key.json -> <case>
     return Path(path).parent.name or Path(path).stem
 
 
 # --------------------------------------------------------------------------- #
-# Modo dist: distribucion revealed_by (offline).
+# dist mode: revealed_by distribution (offline).
 # --------------------------------------------------------------------------- #
 def cmd_dist(args: argparse.Namespace) -> int:
     rows: list[tuple[str, dict[RevealedBy, int]]] = []
@@ -58,11 +59,11 @@ def cmd_dist(args: argparse.Namespace) -> int:
         try:
             golden = _golden(path)
         except FileNotFoundError:
-            print(f"(aviso) no existe: {path}")
+            print(f"(warning) does not exist: {path}")
             continue
         dist = revealed_by_distribution(golden)
-        # Un caso donde TODO es unknown no esta etiquetado -> no participa en la ablacion.
-        # (Asi un glob sobre data/external/* se queda solo con los casos con testimonio.)
+        # A case where EVERYTHING is unknown is not labeled -> it does not take part in the ablation.
+        # (This way a glob over data/external/* keeps only the cases with testimony.)
         etiquetados = sum(v for rb, v in dist.items() if rb is not RevealedBy.UNKNOWN)
         if etiquetados == 0:
             omitidos.append(_case_name(path))
@@ -70,13 +71,13 @@ def cmd_dist(args: argparse.Namespace) -> int:
         rows.append((_case_name(path), dist))
 
     if not rows:
-        print("No se cargo ningun golden etiquetado con revealed_by.")
+        print("No golden labeled with revealed_by was loaded.")
         return 1
 
-    print("# Ablacion del testimonio - distribucion del golden (offline, ADR-007)\n")
-    print("Cuantos GoldenIssue revela cada tipo de fuente. `user_only` es el techo del "
-          "aporte del testimonio al recall.\n")
-    header = "| caso | total | user_only | both | tech_only | unknown | %voz-dependiente |"
+    print("# Testimony ablation - golden distribution (offline, ADR-007)\n")
+    print("How many GoldenIssue each source type reveals. `user_only` is the ceiling of "
+          "the testimony's contribution to recall.\n")
+    header = "| case | total | user_only | both | tech_only | unknown | %voice-dependent |"
     print(header)
     print("|---|---|---|---|---|---|---|")
 
@@ -87,7 +88,7 @@ def cmd_dist(args: argparse.Namespace) -> int:
         total_issues += n
         for rb in RevealedBy:
             tot[rb] += dist[rb]
-        # "voz-dependiente" = user_only (solo la voz lo revela). Techo de recall del testimonio.
+        # "voice-dependent" = user_only (only the voice reveals it). Recall ceiling of the testimony.
         pct = dist[RevealedBy.USER_ONLY] / n * 100 if n else 0.0
         print(
             f"| {name} | {n} | {dist[RevealedBy.USER_ONLY]} | {dist[RevealedBy.BOTH]} | "
@@ -101,21 +102,21 @@ def cmd_dist(args: argparse.Namespace) -> int:
         f"**{tot[RevealedBy.UNKNOWN]}** | **{pct_tot:.0f}%** |"
     )
     print(
-        f"\n> Lectura: {tot[RevealedBy.USER_ONLY]}/{total_issues} problemas "
-        f"({pct_tot:.0f}%) solo los revela la voz del usuario; "
-        f"{tot[RevealedBy.BOTH]} los revelan voz Y documentacion (ahi el testimonio "
-        f"aporta grounding, no recall)."
+        f"\n> Reading: {tot[RevealedBy.USER_ONLY]}/{total_issues} problems "
+        f"({pct_tot:.0f}%) are revealed only by the user's voice; "
+        f"{tot[RevealedBy.BOTH]} are revealed by voice AND documentation (there the testimony "
+        f"contributes grounding, not recall)."
     )
     if omitidos:
         print(
-            f"\n> Omitidos {len(omitidos)} casos sin etiquetar (no participan en la ablacion): "
+            f"\n> Omitted {len(omitidos)} unlabeled cases (they do not take part in the ablation): "
             f"{', '.join(sorted(omitidos))}."
         )
     return 0
 
 
 # --------------------------------------------------------------------------- #
-# Modo compare: recall por subconjunto con voz vs sin voz (necesita runs).
+# compare mode: recall per subset with voice vs without voice (needs runs).
 # --------------------------------------------------------------------------- #
 def _adjs_per_run(data: dict, approach: str) -> list[list[Adjudication]]:
     runs = data.get("runs", {}).get(approach, [])
@@ -131,7 +132,7 @@ def _adjs_per_run(data: dict, approach: str) -> list[list[Adjudication]]:
 def _mean_recall_by_subset(
     runs_adj: list[list[Adjudication]], golden: list[GoldenIssue]
 ) -> dict[RevealedBy, tuple[float, float, int]]:
-    """Media (y std) del recall por subconjunto sobre k runs. Devuelve {rb: (mean, std, n_golden)}."""
+    """Mean (and std) of recall per subset over k runs. Returns {rb: (mean, std, n_golden)}."""
     per_rb: dict[RevealedBy, list[float]] = {rb: [] for rb in RevealedBy}
     n_by_rb: dict[RevealedBy, int] = {}
     for adj in runs_adj:
@@ -155,13 +156,13 @@ def cmd_compare(args: argparse.Namespace) -> int:
 
     if not voz or not sin:
         print(
-            f"No hay adjudicaciones para approach '{args.approach}' en uno de los runs. "
-            "¿Se corrio `comparar` con --save sobre ambos dossiers (con voz y sin voz)?"
+            f"There are no adjudications for approach '{args.approach}' in one of the runs. "
+            "Was `comparar` run with --save over both dossiers (with voice and without voice)?"
         )
         return 1
 
-    print(f"# Ablacion del testimonio - recall por subconjunto ({args.approach}, ADR-007)\n")
-    print("| revealed_by | n | recall CON voz | recall SIN voz | delta |")
+    print(f"# Testimony ablation - recall per subset ({args.approach}, ADR-007)\n")
+    print("| revealed_by | n | recall WITH voice | recall WITHOUT voice | delta |")
     print("|---|---|---|---|---|")
     for rb in _ORDER:
         if rb not in voz and rb not in sin:
@@ -174,38 +175,38 @@ def cmd_compare(args: argparse.Namespace) -> int:
             f"{delta:+.2f} |"
         )
 
-    # El titular: el delta en user_only.
+    # The headline: the delta in user_only.
     if RevealedBy.USER_ONLY in voz:
         mv = voz[RevealedBy.USER_ONLY][0]
         ms = sin.get(RevealedBy.USER_ONLY, (0.0, 0.0, 0))[0]
         drop = mv - ms
         print(
-            f"\n> **Titular:** en los problemas que solo revela la voz, el recall pasa de "
-            f"{mv:.2f} (con voz) a {ms:.2f} (sin voz), delta {drop:+.2f}. "
+            f"\n> **Headline:** on the problems that only the voice reveals, the recall goes from "
+            f"{mv:.2f} (with voice) to {ms:.2f} (without voice), delta {drop:+.2f}. "
             + (
-                "El testimonio SI aporta recall."
+                "The testimony DOES contribute recall."
                 if drop >= 0.15
-                else "El testimonio aporta poco recall (su valor esta en el grounding)."
+                else "The testimony contributes little recall (its value is in the grounding)."
             )
         )
     else:
-        print("\n> No hay subconjunto user_only en este golden: nada que aislar aqui.")
+        print("\n> There is no user_only subset in this golden: nothing to isolate here.")
     return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="Reporte de la ablacion del testimonio (ADR-007).")
+    p = argparse.ArgumentParser(description="Report of the testimony ablation (ADR-007).")
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    pd = sub.add_parser("dist", help="Distribucion revealed_by del golden (offline, sin API).")
-    pd.add_argument("goldens", nargs="+", help="Rutas a answer_key.json etiquetados.")
+    pd = sub.add_parser("dist", help="revealed_by distribution of the golden (offline, no API).")
+    pd.add_argument("goldens", nargs="+", help="Paths to labeled answer_key.json files.")
     pd.set_defaults(func=cmd_dist)
 
-    pc = sub.add_parser("compare", help="Recall por subconjunto con voz vs sin voz (necesita runs).")
-    pc.add_argument("--golden", required=True, help="answer_key.json etiquetado.")
-    pc.add_argument("--voz", required=True, help="runs/*.json del dossier CON voz.")
-    pc.add_argument("--sin-voz", required=True, dest="sin_voz", help="runs/*.json del dossier SIN voz.")
-    pc.add_argument("--approach", default="p3", help="Approach a comparar (def: p3).")
+    pc = sub.add_parser("compare", help="Recall per subset with voice vs without voice (needs runs).")
+    pc.add_argument("--golden", required=True, help="labeled answer_key.json.")
+    pc.add_argument("--voz", required=True, help="runs/*.json of the dossier WITH voice.")
+    pc.add_argument("--sin-voz", required=True, dest="sin_voz", help="runs/*.json of the dossier WITHOUT voice.")
+    pc.add_argument("--approach", default="p3", help="Approach to compare (default: p3).")
     pc.set_defaults(func=cmd_compare)
     return p
 

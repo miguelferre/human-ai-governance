@@ -1,7 +1,7 @@
-"""LLM-juez: adjudica los hallazgos contra el golden set (ADR-002).
+"""LLM-judge: adjudicates the findings against the golden set (ADR-002).
 
-Usa un modelo y un prompt DISTINTOS del generador para no auto-evaluarse. Su
-salida es un pre-etiquetado que despues revisa el humano (`human_confirmed`).
+Uses a model and a prompt DIFFERENT from the generator to avoid self-evaluation. Its
+output is a pre-labeling that the human then reviews (`human_confirmed`).
 """
 
 from __future__ import annotations
@@ -22,27 +22,27 @@ from interaction_review.schemas import (
 
 @lru_cache(maxsize=1)
 def _group_by_guideline() -> dict[str, str]:
-    """id de guideline -> 'corpus:grupo' (fase HAX / capitulo PAIR)."""
+    """guideline id -> 'corpus:group' (HAX phase / PAIR chapter)."""
     return {g.id: f"{g.corpus.value}:{g.group}" for g in all_guidelines()}
 
 
 def _shares_area(fg: set[str], f_groups: set[str], g: GoldenIssue, gmap: dict[str, str]) -> bool:
-    """El hallazgo y el golden comparten guideline EXACTA o el mismo grupo/area."""
+    """The finding and the golden share the EXACT guideline or the same group/area."""
     if fg & set(g.guideline_ids):
         return True
     return bool(f_groups & {gmap[i] for i in g.guideline_ids if i in gmap})
 
 
 def _candidates(f: Finding, golden: list[GoldenIssue]) -> list[GoldenIssue]:
-    """TODOS los golden como candidatos, los PROBABLES primero.
+    """ALL the golden as candidates, the LIKELY ones first.
 
-    Deuda de medicion (TESTPLAN B2): el filtro original solo ofrecia golden que
-    compartian guideline EXACTA con el hallazgo. Un hallazgo que citaba la guideline
-    'equivocada' (otra fase, u otro corpus) se quedaba sin el golden correcto entre sus
-    candidatos -> FALSO FALLO (P3 real ~14/15 medido como ~12). La 'lista corta' era una
-    muleta para el juez 14B local (ADR-004); el juez nube es fuerte y puede escanear los
-    15. Se ofrecen TODOS, con los que comparten guideline/grupo primero (pista) y el resto
-    ordenado por similitud de texto, para no negar un match por discrepancia de cita.
+    Measurement debt (TESTPLAN B2): the original filter only offered golden that
+    shared the EXACT guideline with the finding. A finding that cited the 'wrong'
+    guideline (another phase, or another corpus) was left without the correct golden among its
+    candidates -> FALSE MISS (real P3 ~14/15 measured as ~12). The 'short list' was a
+    crutch for the local 14B judge (ADR-004); the cloud judge is strong and can scan all
+    15. ALL are offered, with those that share guideline/group first (a hint) and the rest
+    ordered by text similarity, so as not to deny a match due to a citation discrepancy.
     """
     gmap = _group_by_guideline()
     fg = set(f.guideline_ids)
@@ -84,15 +84,15 @@ def _payload(grounded: list[Finding], golden: list[GoldenIssue]) -> list[dict]:
 def adjudicate(
     findings: list[Finding], golden: list[GoldenIssue], dossier: Dossier
 ) -> list[Adjudication]:
-    """Devuelve una adjudicacion por hallazgo (en el mismo orden de `findings`)."""
+    """Returns one adjudication per finding (in the same order as `findings`)."""
     if not findings:
         return []
     grounded = [f for f in findings if f.is_grounded()]
-    # Candidatos por hallazgo (para validar que el juez elige uno de SU lista).
+    # Candidates per finding (to validate that the judge picks one from ITS list).
     cand_ids_by_finding = {f.id: {g.id for g in _candidates(f, golden)} for f in grounded}
 
-    # Juzgar en LOTES pequenos: una sola llamada con 20+ hallazgos satura el limite de
-    # tiempo del 14B (paso en P3). Lotes de BATCH mantienen cada llamada corta y fiable.
+    # Judge in small BATCHES: a single call with 20+ findings saturates the time
+    # limit of the 14B (happened in P3). Batches of BATCH keep each call short and reliable.
     raw: dict = {}
     BATCH = 6
     for i in range(0, len(grounded), BATCH):
@@ -102,7 +102,7 @@ def adjudicate(
             system=prompts.JUDGE_SYSTEM,
             user=prompts.judge_user(_payload(chunk, golden), dossier),
             tool=prompts.JUDGE_TOOL,
-            temperature=0.0,  # juez determinista
+            temperature=0.0,  # deterministic judge
         )
         if isinstance(out, dict):
             for a in out.get("adjudications", []):
@@ -111,14 +111,14 @@ def adjudicate(
 
     adjudications: list[Adjudication] = []
     for f in findings:
-        # GENERICIDAD ESTRUCTURAL (gate duro, en codigo): sin anclaje => fp_generic SIEMPRE,
-        # antes de mirar al juez. Sin esto, B0 (checklist vacio) contamina el suelo.
+        # STRUCTURAL GENERICITY (hard gate, in code): without anchoring => fp_generic ALWAYS,
+        # before looking at the judge. Without this, B0 (empty checklist) contaminates the floor.
         if not f.is_grounded():
             adjudications.append(
                 Adjudication(
                     finding_id=f.id,
                     label=AdjudicationLabel.FP_GENERIC,
-                    judge_rationale="(no anclado: sin locus/evidencia)",
+                    judge_rationale="(not anchored: no locus/evidence)",
                 )
             )
             continue
@@ -128,11 +128,11 @@ def adjudicate(
                 Adjudication(
                     finding_id=f.id,
                     label=AdjudicationLabel.FP_INCORRECT,
-                    judge_rationale="(sin clasificacion del juez)",
+                    judge_rationale="(no judge classification)",
                 )
             )
             continue
-        # La ETIQUETA se DERIVA: candidato valido -> tp_match; si "ninguno" -> tp_new/fp_incorrect.
+        # The LABEL is DERIVED: valid candidate -> tp_match; if "none" -> tp_new/fp_incorrect.
         cc = str(a.get("corresponde_a_candidato", "")).strip()
         matched = cc if cc in cand_ids_by_finding.get(f.id, set()) else None
         if matched is not None:

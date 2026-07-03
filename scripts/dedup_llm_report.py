@@ -1,12 +1,13 @@
-"""Validacion de la capa SEMANTICA del dedup (LLM) sobre runs ya juzgados.
+"""Validation of the SEMANTIC layer of the dedup (LLM) over already-judged runs.
 
-Como dedup_report.py pero para deduplicate_llm: mide cuanto colapsa el conteo y si el
-agrupado del modelo es PURO (no funde golden distintos), usando las adjudicaciones -que
-el dedup no ve- como vara independiente. A diferencia del determinista, gasta API (una
-llamada por corrida). Para auditar pureza se agrupa sobre los hallazgos CRUDOS
-(pre_dedup=False): cada crudo tiene su adjudicacion, asi el cruce con el golden es limpio.
+Like dedup_report.py but for deduplicate_llm: it measures how much the count collapses
+and whether the model's grouping is PURE (does not merge different goldens), using the
+adjudications -which the dedup does not see- as an independent yardstick. Unlike the
+deterministic one, it spends API (one call per run). To audit purity it groups over the
+RAW findings (pre_dedup=False): each raw finding has its adjudication, so the cross with
+the golden is clean.
 
-Uso:
+Usage:
     uv run python scripts/dedup_llm_report.py runs/a2_eii_k3.json --approach p3
 """
 
@@ -25,7 +26,7 @@ _TP = {"tp_match", "tp_new"}
 
 
 def _clusters_llm(findings: list[Finding]) -> list[list[Finding]]:
-    """Reproduce la agrupacion de deduplicate_llm (pre_dedup=False) devolviendo miembros."""
+    """Reproduces the grouping of deduplicate_llm (pre_dedup=False) returning members."""
     by_id = {f.id: f for f in findings}
     order = {f.id: n for n, f in enumerate(findings)}
     groups = dedup_llm._llm_groups(findings, None, 0.0)
@@ -39,7 +40,7 @@ def _clusters_llm(findings: list[Finding]) -> list[list[Finding]]:
     for f in findings:
         if f.id not in assigned:
             clusters.append([f])
-    # Misma barandilla que deduplicate_llm: parte grupos de loci dispares.
+    # Same guardrail as deduplicate_llm: splits groups with disparate loci.
     refined = []
     for c in clusters:
         refined.extend(dedup_llm._refine_group(c, dedup_llm.SEMANTIC_LOCUS_FLOOR))
@@ -51,7 +52,7 @@ def _eval_run(run: dict) -> dict:
     findings = [Finding.model_validate(x) for x in run["findings"]]
     adj = {a["finding_id"]: a for a in run["adjudications"]}
     n_raw = len(findings)
-    n_det = len(deduplicate(findings))  # referencia: dedup determinista
+    n_det = len(deduplicate(findings))  # reference: deterministic dedup
     cov_before = {a["matched_golden_id"] for a in adj.values()
                   if a.get("label") == "tp_match" and a.get("matched_golden_id")}
 
@@ -71,14 +72,14 @@ def _eval_run(run: dict) -> dict:
 
 
 def main(argv=None) -> int:
-    p = argparse.ArgumentParser(description="Valida la capa semantica del dedup (gasta API).")
+    p = argparse.ArgumentParser(description="Validates the semantic layer of the dedup (spends API).")
     p.add_argument("run")
     p.add_argument("--approach", default="p3")
     args = p.parse_args(argv)
     data = json.loads(Path(args.run).read_text(encoding="utf-8"))
     runs = data["runs"].get(args.approach, [])
     if not runs or not runs[0].get("adjudications"):
-        print(f"(sin adjudicaciones para {args.approach} en {args.run})")
+        print(f"(no adjudications for {args.approach} in {args.run})")
         return 1
     rows = [_eval_run(r) for r in runs]
 
@@ -86,11 +87,11 @@ def main(argv=None) -> int:
         return statistics.mean(r[k] for r in rows)
 
     print(f"# Dedup-LLM @ {args.run} [{args.approach}] (k={len(rows)})\n")
-    print(f"- n crudo:        {m('n_raw'):.1f}")
-    print(f"- n dedup lexico: {m('n_det'):.1f}")
-    print(f"- n dedup LLM:    {m('n_llm'):.1f}  (reduccion vs crudo {(1-m('n_llm')/m('n_raw'))*100:.0f}%)")
-    print(f"- cobertura golden: {m('cov_before'):.1f} -> {m('cov_after'):.1f}  (perdida total {sum(r['cov_lost'] for r in rows)})")
-    print(f"- clusters impuros (funden >=2 golden): {sum(r['impure'] for r in rows)} en {len(rows)} corridas")
+    print(f"- n raw:          {m('n_raw'):.1f}")
+    print(f"- n lexical dedup: {m('n_det'):.1f}")
+    print(f"- n LLM dedup:    {m('n_llm'):.1f}  (reduction vs raw {(1-m('n_llm')/m('n_raw'))*100:.0f}%)")
+    print(f"- golden coverage: {m('cov_before'):.1f} -> {m('cov_after'):.1f}  (total loss {sum(r['cov_lost'] for r in rows)})")
+    print(f"- impure clusters (merge >=2 goldens): {sum(r['impure'] for r in rows)} in {len(rows)} runs")
     return 0
 
 

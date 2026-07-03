@@ -1,15 +1,15 @@
-"""Approaches de revision (la 'escalera de complejidad' del plan).
+"""Review approaches (the plan's 'complexity ladder').
 
-Todos comparten la misma firma para que la comparacion sea justa:
+They all share the same signature so the comparison is fair:
 
     run(dossier: Dossier, guidelines: list[Guideline]) -> list[Finding]
 
-Escalera:
-  - b0: checklist determinista (sin LLM). El suelo.
-  - b1: prompt unico zero-shot.            (F2)
-  - b2: prompt unico few-shot.             (F2)
-  - p3: pipeline determinista (NO agente). (solo si los datos lo piden)
-  - a4: agente.                            (solo si los datos lo piden)
+Ladder:
+  - b0: deterministic checklist (no LLM). The floor.
+  - b1: single zero-shot prompt.           (F2)
+  - b2: single few-shot prompt.            (F2)
+  - p3: deterministic pipeline (NOT an agent). (only if the data calls for it)
+  - a4: agent.                             (only if the data calls for it)
 """
 
 from __future__ import annotations
@@ -28,13 +28,13 @@ from interaction_review.schemas import Dossier, Finding, Guideline
 Approach = Callable[[Dossier, list[Guideline]], list[Finding]]
 
 REGISTRY: dict[str, Approach] = {
-    "b0": run_b0,    # checklist determinista (sin LLM)
-    "b1": run_b1,    # prompt unico zero-shot
-    "b1x": run_b1x,  # prompt unico EXHAUSTIVO (ablacion estructura vs cantidad)
-    "b2": run_b2,    # prompt unico few-shot
-    "p3": run_p3,    # pipeline determinista: barrido por bloques SEMANTICOS (NO agente)
-    "p3n": run_p3n,  # P3 con particion NEUTRAL por `group` (prueba A2: overfitting de bloques)
-    "a4": run_a4,    # agente: bucle con control de flujo decidido por el modelo
+    "b0": run_b0,    # deterministic checklist (no LLM)
+    "b1": run_b1,    # single zero-shot prompt
+    "b1x": run_b1x,  # single EXHAUSTIVE prompt (structure vs quantity ablation)
+    "b2": run_b2,    # single few-shot prompt
+    "p3": run_p3,    # deterministic pipeline: sweep by SEMANTIC blocks (NOT an agent)
+    "p3n": run_p3n,  # P3 with a NEUTRAL partition by `group` (test A2: block overfitting)
+    "a4": run_a4,    # agent: loop with control flow decided by the model
 }
 
 __all__ = [

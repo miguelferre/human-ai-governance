@@ -1,4 +1,4 @@
-"""Tests del contrato de datos."""
+"""Tests for the data contract."""
 
 import pytest
 from pydantic import ValidationError
@@ -12,11 +12,11 @@ def _src() -> Source:
 
 def test_finding_grounded_requires_all_three_anchors():
     base = dict(id="f1", title="t")
-    assert not Finding(**base).is_grounded()  # sin nada
-    assert not Finding(**base, guideline_ids=["HAX-G9"]).is_grounded()  # falta locus+evidencia
+    assert not Finding(**base).is_grounded()  # nothing at all
+    assert not Finding(**base, guideline_ids=["HAX-G9"]).is_grounded()  # missing locus+evidence
     assert not Finding(
         **base, guideline_ids=["HAX-G9"], locus="captura de override"
-    ).is_grounded()  # falta evidencia
+    ).is_grounded()  # missing evidence
     assert Finding(
         **base,
         guideline_ids=["HAX-G9"],
@@ -33,5 +33,5 @@ def test_finding_blank_anchors_do_not_count():
 def test_dossier_requires_at_least_one_source():
     with pytest.raises(ValidationError):
         Dossier(system_name="x", domain="d", sources=[])
-    # con una fuente, valido
+    # with one source, valid
     Dossier(system_name="x", domain="d", sources=[_src()])

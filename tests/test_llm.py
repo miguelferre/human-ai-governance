@@ -1,6 +1,6 @@
-"""Tests del wrapper LLM: seleccion de backend y construccion del payload de Ollama.
+"""Tests for the LLM wrapper: backend selection and Ollama payload construction.
 
-No hace llamadas de red: solo logica determinista (env -> modelo, dict del payload).
+Makes no network calls: only deterministic logic (env -> model, payload dict).
 """
 
 from interaction_review import llm
@@ -20,7 +20,7 @@ def test_backend_ollama_cambia_modelos_por_defecto(monkeypatch):
     monkeypatch.setenv("LLM_BACKEND", "ollama")
     monkeypatch.delenv("GEN_MODEL", raising=False)
     monkeypatch.delenv("JUDGE_MODEL", raising=False)
-    # qwen2.5:14b cabe en 16 GB y juzga bien; 32b se desborda (ver ADR-004).
+    # qwen2.5:14b fits in 16 GB and judges well; 32b overflows (see ADR-004).
     assert "qwen2.5:14b" == llm.gen_model()
     assert "qwen2.5:14b" == llm.judge_model()
 
@@ -36,7 +36,7 @@ def test_ollama_payload_lleva_schema_y_opciones(monkeypatch):
     schema = FINDINGS_TOOL["input_schema"]
     p = llm.ollama_payload("qwen2.5:14b-instruct", "SYS", "USR", schema, 0.7)
     assert p["model"] == "qwen2.5:14b-instruct"
-    assert p["format"] == schema          # decodificacion restringida al JSON-schema
+    assert p["format"] == schema          # decoding constrained to the JSON schema
     assert p["stream"] is False
     assert p["options"]["temperature"] == 0.7
     assert p["options"]["num_ctx"] == llm.DEFAULT_NUM_CTX

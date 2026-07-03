@@ -1,36 +1,36 @@
-"""Enrutado por dificultad: el mapa de resultados, automatizado.
+"""Routing by difficulty: the results map, automated.
 
-Conclusion del experimento (RESULTADOS.md): con un modelo fuerte, en casos FACILES el
-prompt unico (b1) basta y es el mas conciso; en casos DIFICILES hace falta ESTRUCTURA
-(b1 es inestable, una corrida se fue a 0) y el pipeline (p3) es lo robusto. La dificultad
-NO se conoce a priori, asi que el router la INFIERE:
+Conclusion of the experiment (RESULTS.md): with a strong model, in EASY cases the
+single prompt (b1) is enough and is the most concise; in HARD cases STRUCTURE is needed
+(b1 is unstable, one run went to 0) and the pipeline (p3) is the robust option. The difficulty
+is NOT known a priori, so the router INFERS it:
 
-1. Corre b1 (barato, conciso).
-2. Pregunta al modelo si quedan AREAS sin cubrir (reusa el gap-check de A4).
-3. Si hay huecos -o b1 vino escaso (su modo de fallo: inestabilidad)-> ESCALA a p3 + dedup.
-   Si no, se queda con b1.
+1. Runs b1 (cheap, concise).
+2. Asks the model whether there are AREAS left uncovered (reuses the gap-check from A4).
+3. If there are gaps (or b1 came out thin, its failure mode: instability) -> ESCALATES to p3 + dedup.
+   Otherwise, it stays with b1.
 
-Asi se obtiene lo mejor de cada celda del mapa: conciso cuando se puede, exhaustivo cuando
-hace falta; y el escalado por "b1 escaso" cubre justo la inestabilidad de b1 (la corrida a 0).
-NO es un rung de la escalera (no se compara en `comparar`): es la capa de PRODUCTO.
+This way the best of each cell of the map is obtained: concise when possible, exhaustive when
+needed; and the escalation due to "thin b1" covers exactly b1's instability (the run to 0).
+It is NOT a rung of the ladder (it is not compared in `compare`): it is the PRODUCT layer.
 """
 
 from __future__ import annotations
 
-from interaction_review.approaches._generator import generate  # noqa: F401  (asegura backend cargado)
+from interaction_review.approaches._generator import generate  # noqa: F401  (ensures backend loaded)
 from interaction_review.approaches.a4_agent import _assess_gaps
 from interaction_review.approaches.b1_single_prompt import run as run_b1
 from interaction_review.approaches.p3_pipeline import run as run_p3
 from interaction_review.dedup import deduplicate
 from interaction_review.schemas import Dossier, Finding, Guideline
 
-# Si b1 trae menos hallazgos anclados que esto, lo tratamos como "escaso" y escalamos
-# aunque el gap-check no lo pida: blinda contra la inestabilidad de b1 (corrida a 0).
+# If b1 brings fewer grounded findings than this, we treat it as "thin" and escalate
+# even if the gap-check does not ask for it: it shields against b1's instability (run to 0).
 MIN_B1_GROUNDED: int = 3
 
 
 def route(dossier: Dossier, guidelines: list[Guideline]) -> tuple[list[Finding], str]:
-    """Elige b1 (facil) o p3+dedup (dificil) segun la cobertura. Devuelve (findings, eleccion)."""
+    """Chooses b1 (easy) or p3+dedup (hard) based on the coverage. Returns (findings, choice)."""
     by_id = {g.id: g for g in guidelines}
     b1 = run_b1(dossier, guidelines)
     grounded = [f for f in b1 if f.is_grounded()]
@@ -42,6 +42,6 @@ def route(dossier: Dossier, guidelines: list[Guideline]) -> tuple[list[Finding],
     thin = len(grounded) < MIN_B1_GROUNDED
 
     if real_gaps or thin:
-        motivo = "b1 escaso" if thin and not real_gaps else "huecos de cobertura"
-        return deduplicate(run_p3(dossier, guidelines)), f"p3+dedup (escalado: {motivo})"
-    return b1, "b1 (caso facil: cobertura suficiente)"
+        motivo = "sparse b1" if thin and not real_gaps else "coverage gaps"
+        return deduplicate(run_p3(dossier, guidelines)), f"p3+dedup (escalated: {motivo})"
+    return b1, "b1 (easy case: sufficient coverage)"

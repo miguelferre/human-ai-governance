@@ -1,4 +1,4 @@
-"""B1 - Prompt unico zero-shot. El baseline con LLM a batir."""
+"""B1 - Single zero-shot prompt. The LLM baseline to beat."""
 
 from __future__ import annotations
 
