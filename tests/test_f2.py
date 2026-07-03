@@ -107,6 +107,13 @@ def _grounded(fid: str) -> Finding:
     return Finding(id=fid, title=fid, guideline_ids=["HAX-G1"], locus="x", evidence="y")
 
 
+def test_adjudicate_rejects_duplicate_ids():
+    # raw/candidate maps are keyed by finding id; colliding ids would silently drop findings.
+    findings = [_grounded("dup"), _grounded("dup")]
+    with pytest.raises(ValueError):
+        judge_mod.adjudicate(findings, [GoldenIssue(id="G1", description="d")], _dossier())
+
+
 def test_adjudicate_deriva_etiqueta_de_candidatos(monkeypatch):
     # x1..x4 grounded; x6 NOT grounded (empty locus/evidence).
     findings = [_grounded(f"x{i}") for i in (1, 2, 3, 4)] + [

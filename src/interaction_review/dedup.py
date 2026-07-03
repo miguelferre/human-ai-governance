@@ -141,8 +141,8 @@ def _merge(members: list[Finding]) -> Finding:
     """Merges a cluster into one finding: the representative + merged guidelines.
 
     `merged_count` is CUMULATIVE (how many raw findings it represents in total), not
-    "how many were merged in this pass": this way re-deduplicating an already-deduplicated list
-    preserves the counter (idempotence) and merging already-merged findings adds up correctly.
+    "how many were merged in this pass": re-deduplicating an already-deduplicated list
+    preserves the counter, and merging already-merged findings adds up correctly.
     """
     if len(members) == 1:
         return members[0]  # single: kept as is (including its merged_count).
@@ -165,8 +165,10 @@ def deduplicate(
     """Collapses near-duplicate findings. Stable with respect to the input order.
 
     Returns one finding per cluster (representative with merged guidelines and
-    `merged_count`), in the order in which each cluster was opened. Idempotent:
-    deduplicate(deduplicate(x)) == deduplicate(x).
+    `merged_count`), in the order in which each cluster was opened. Idempotent for
+    well-separated clusters (the common case), but NOT guaranteed in general: the merged
+    representative can end up more similar to a neighboring cluster than the original
+    first member was, so a second pass may merge clusters the first left apart.
     """
     clusters: list[list[Finding]] = []
     reps: list[Finding] = []  # provisional representative (the first of each cluster)

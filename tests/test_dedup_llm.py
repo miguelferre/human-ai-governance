@@ -4,6 +4,8 @@ The deterministic logic around the model is tested: that the merge respects the 
 of not losing or duplicating findings even if the model hallucinates ids or repeats one across two groups.
 """
 
+import pytest
+
 from interaction_review import dedup_llm
 from interaction_review import llm
 from interaction_review.schemas import Finding, Severity
@@ -59,6 +61,13 @@ def test_short_input_returned_as_is(monkeypatch):
     assert dedup_llm.deduplicate_llm([], pre_dedup=False, locus_floor=0) == []
     one = [_f("a", "HAX-G1")]
     assert dedup_llm.deduplicate_llm(one, pre_dedup=False, locus_floor=0) == one
+
+
+def test_duplicate_ids_rejected():
+    # The "no finding lost" guarantee relies on unique ids; collisions must be refused.
+    findings = [_f("a", "HAX-G1"), _f("a", "HAX-G2")]  # same id
+    with pytest.raises(ValueError):
+        dedup_llm.deduplicate_llm(findings, pre_dedup=False, locus_floor=0)
 
 
 def test_empty_groups_keeps_all_singletons(monkeypatch):

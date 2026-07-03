@@ -87,6 +87,8 @@ def adjudicate(
     """Returns one adjudication per finding (in the same order as `findings`)."""
     if not findings:
         return []
+    if len({f.id for f in findings}) != len(findings):
+        raise ValueError("adjudicate needs unique finding ids (found id collisions).")
     grounded = [f for f in findings if f.is_grounded()]
     # Candidates per finding (to validate that the judge picks one from ITS list).
     cand_ids_by_finding = {f.id: {g.id for g in _candidates(f, golden)} for f in grounded}

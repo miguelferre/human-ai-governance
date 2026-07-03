@@ -103,6 +103,8 @@ def test_all_distinct_preserved():
 
 
 def test_idempotent():
+    # Idempotent for WELL-SEPARATED clusters (the common case). Not a general guarantee:
+    # a rebuilt representative can drift toward a neighbor (see deduplicate's docstring).
     once = deduplicate([_ONB_A, _ONB_B, _OVERRIDE])
     twice = deduplicate(once)
     assert len(once) == len(twice) == 2

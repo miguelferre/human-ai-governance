@@ -86,6 +86,8 @@ def deduplicate_llm(
     to the model and it focuses on the hard residual). `locus_floor`: anti-over-merge guardrail
     (the LLM proposes the groups, the code vetoes members with a dissimilar locus; 0 = no guardrail).
     """
+    if len({f.id for f in findings}) != len(findings):
+        raise ValueError("deduplicate_llm needs unique finding ids (found id collisions).")
     base = deduplicate(findings) if pre_dedup else list(findings)
     if len(base) < 2:
         return base

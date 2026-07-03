@@ -22,8 +22,12 @@ from interaction_review import llm, prompts
 
 _PEN = "✍"  # ✍ (with or without variation selector): marks the answer blank.
 
-# Repo templates (resolved from the root; overridable with --template in the CLI).
-_TEMPLATE_DIR = Path(__file__).resolve().parents[2] / "templates"
+# Templates ship inside the package (pyproject force-include). Prefer the packaged copy
+# so it works installed as a wheel; fall back to the repo checkout for `uv run`.
+# Overridable with --template in the CLI.
+_PKG_TEMPLATES = Path(__file__).parent / "templates"
+_REPO_TEMPLATES = Path(__file__).resolve().parents[2] / "templates"
+_TEMPLATE_DIR = _PKG_TEMPLATES if _PKG_TEMPLATES.is_dir() else _REPO_TEMPLATES
 TEMPLATE_FILES = {
     "profile": "01_system_card__technical_profile.md",
     "experience": "02_usage_experience__end_user.md",
