@@ -190,8 +190,8 @@ uv run interaction-review ingest \
     --profile templates/01_filled.md --experience templates/02_filled.md \
     --inventory templates/03_filled.md --out path/dossier.json
 
-# Findings report, with the regulatory mapping and in HTML ready to print to PDF:
-uv run interaction-review review --dossier path/dossier.json --approach p3 --dedup \
+# Findings report (p3 + dedup is the default), with the regulatory mapping and in HTML:
+uv run interaction-review review --dossier path/dossier.json \
     --crosswalk --format html --out report.html
 
 # 'auto' (product router): b1 if the case is easy, p3+dedup if it is hard:
@@ -203,11 +203,13 @@ uv run interaction-review compare \
     --approaches b0,b1,p3 --k 3 --save runs/output.json
 ```
 
-Approaches: `b0` (checklist, no model) · `b1` (single prompt) · `p3` (pipeline, **the product**) ·
-`a4` (agent). `--dedup` consolidates near-duplicates (deterministic); `--dedup-llm` is the optional
-semantic layer (uses the model). `--crosswalk` adds the mapping to EU AI Act / NIST; `--format html`
-produces the presentable report. The `compare` command requires `ANTHROPIC_API_KEY` (except for `b0`
-alone), or runs entirely local with `LLM_BACKEND=ollama`.
+Approaches: `p3` (pipeline, **the product**, the **default**) · `b0` (checklist, no model) ·
+`b1` (single prompt) · `a4` (agent), or `auto` (router). For p3/p3n, deterministic `--dedup` is
+**on by default**; disable it with `--no-dedup`. `--dedup-llm` is the optional semantic layer (uses
+the model). `--crosswalk` adds the mapping to EU AI Act / NIST; `--format html` produces the
+presentable report. Note `review` now needs an LLM by default (the p3 product); use `--approach b0`
+for the offline checklist. `compare` requires `ANTHROPIC_API_KEY` (except `b0` alone), or runs
+entirely local with `LLM_BACKEND=ollama`.
 
 > **Local / Windows.** To run locally with [Ollama](https://ollama.com) prefix `LLM_BACKEND=ollama`.
 > If Windows Application Control blocks the `.exe` launcher, invoke the module directly:

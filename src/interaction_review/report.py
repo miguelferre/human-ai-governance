@@ -32,8 +32,13 @@ def render_regulatory_crosswalk(findings: list[Finding]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def render_findings_md(dossier: Dossier, findings: list[Finding], approach: str) -> str:
-    """Findings report in markdown."""
+_META_FIELDS = (("date", "Generated"), ("tool_version", "Tool version"), ("model", "Generator model"))
+
+
+def render_findings_md(
+    dossier: Dossier, findings: list[Finding], approach: str, *, meta: dict | None = None
+) -> str:
+    """Findings report in markdown. `meta` (optional) adds provenance lines (date/model/version)."""
     lines: list[str] = []
     lines.append(f"# Interaction layer review - {dossier.system_name}")
     lines.append("")
@@ -48,6 +53,10 @@ def render_findings_md(dossier: Dossier, findings: list[Finding], approach: str)
     raw = sum(f.merged_count for f in findings)
     if raw > len(findings):
         lines.append(f"- **Deduplicated:** {raw} raw findings consolidated into {len(findings)}.")
+    if meta:
+        for key, label in _META_FIELDS:
+            if meta.get(key):
+                lines.append(f"- **{label}:** {meta[key]}")
     lines.append("")
 
     for f in findings:

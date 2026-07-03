@@ -14,8 +14,11 @@ import time
 from typing import Any
 
 # --- Defaults per backend ---
-DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"     # Anthropic: cheap generator
-DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"           # Anthropic: judge (different model)
+DEFAULT_GEN_MODEL = "claude-haiku-4-5-20251001"     # Anthropic: cheap generator (dated snapshot)
+# NOTE (reproducibility): the judge default is a FLOATING alias, not a dated snapshot, so the
+# provider may re-point it and quietly shift "the reproducible number". The run config records
+# this alias; for a frozen run pin it via JUDGE_MODEL=claude-sonnet-4-6-<date>.
+DEFAULT_JUDGE_MODEL = "claude-sonnet-4-6"           # Anthropic: judge (different model from gen)
 DEFAULT_OLLAMA_GEN = "qwen2.5:14b"                  # Local: generator (what is evaluated)
 DEFAULT_OLLAMA_JUDGE = "qwen2.5:14b"                # Local: fits entirely in 16 GB and judges well.
 # Note (ADR-004): qwen2.5:32b would be the ideal judge by capability, but does NOT fit in 16 GB of

@@ -8,13 +8,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from interaction_review.approaches import REGISTRY
 from interaction_review.dedup import deduplicate
 from interaction_review.dedup_llm import deduplicate_llm
 from interaction_review.guidelines import all_guidelines
-from interaction_review.llm import LLMNotConfigured
+from interaction_review.llm import LLMNotConfigured, gen_model
 from interaction_review.metrics import aggregate, beats, compute_run_metrics
 from interaction_review.report import (
     render_findings_md,
@@ -35,6 +37,13 @@ from interaction_review.schemas import (
 
 def _load_json(path: str):
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def _tool_version() -> str:
+    try:
+        return version("interaction-review")
+    except PackageNotFoundError:
+        return "dev"
 
 
 def _select_guidelines(corpus_arg: str) -> list[Guideline]:
@@ -63,17 +72,17 @@ def _emit(text: str, out: str | None) -> None:
         print(text)
 
 
-def _maybe_dedup(findings: list[Finding], args: argparse.Namespace) -> list[Finding]:
-    """Applies the requested consolidation (--dedup-llm takes priority over --dedup).
+def _maybe_dedup(findings: list[Finding], *, dedup: bool, dedup_llm: bool) -> list[Finding]:
+    """Applies the requested consolidation (dedup_llm takes priority over dedup).
 
-    Shared by the normal and the 'auto' path so that --dedup/--dedup-llm are honored
-    in both (before, the router path silently ignored them).
+    Shared by the normal and the 'auto' path so both honor the flags (before, the
+    router path silently ignored them).
     """
-    if args.dedup_llm:
+    if dedup_llm:
         before = len(findings)
         findings = deduplicate_llm(findings)
         print(f"[dedup-llm] {before} -> {len(findings)} findings consolidated.", file=sys.stderr)
-    elif args.dedup:
+    elif dedup:
         before = len(findings)
         findings = deduplicate(findings)
         print(f"[dedup] {before} -> {len(findings)} findings consolidated.", file=sys.stderr)
@@ -90,7 +99,8 @@ def cmd_review(args: argparse.Namespace) -> int:
 
         findings, choice = route(dossier, guidelines)
         print(f"[router] {choice} -> {len(findings)} findings.", file=sys.stderr)
-        findings = _maybe_dedup(findings, args)
+        # the router already dedups its p3 branch; honor an explicit --dedup/--dedup-llm too
+        findings = _maybe_dedup(findings, dedup=args.dedup, dedup_llm=args.dedup_llm)
         label = f"auto ({choice})"
     else:
         approach = REGISTRY.get(args.approach)
@@ -100,13 +110,23 @@ def cmd_review(args: argparse.Namespace) -> int:
                 file=sys.stderr,
             )
             return 2
-        findings = _maybe_dedup(approach(dossier, guidelines), args)
+        # p3/p3n are verbose by design -> dedup on by default (disable with --no-dedup)
+        dedup = args.dedup or (args.approach in ("p3", "p3n") and not args.no_dedup)
+        findings = _maybe_dedup(approach(dossier, guidelines), dedup=dedup, dedup_llm=args.dedup_llm)
         label = args.approach
 
+    # Provenance for the report (it goes into a compliance file, so date/model/version matter).
+    meta = {
+        "date": datetime.now(timezone.utc).date().isoformat(),
+        "tool_version": _tool_version(),
+        "model": "deterministic (no model)" if args.approach == "b0" else gen_model(),
+    }
     if args.format == "html":
-        report = render_findings_html(dossier, findings, label, include_crosswalk=args.crosswalk)
+        report = render_findings_html(
+            dossier, findings, label, include_crosswalk=args.crosswalk, meta=meta
+        )
     else:
-        report = render_findings_md(dossier, findings, label)
+        report = render_findings_md(dossier, findings, label, meta=meta)
         if args.crosswalk:
             report = report + "\n" + render_regulatory_crosswalk(findings)
     _emit(report, args.out)
@@ -114,9 +134,40 @@ def cmd_review(args: argparse.Namespace) -> int:
 
 
 def cmd_evaluate(args: argparse.Namespace) -> int:
+    golden = [GoldenIssue.model_validate(x) for x in _load_json(args.golden)]
+
+    # From a compare runs/*.json: read findings + adjudications for one run directly.
+    # Closes the compare -> evaluate loop (before, --adjudications wanted a JSON no tool wrote).
+    if args.run:
+        data = _load_json(args.run)
+        runs = data.get("runs", {}).get(args.approach)
+        if not runs:
+            print(
+                f"[evaluate] no runs for approach {args.approach!r} in {args.run}. "
+                f"Available: {sorted(data.get('runs', {}))}.",
+                file=sys.stderr,
+            )
+            return 2
+        if not 0 <= args.idx < len(runs):
+            print(f"[evaluate] --idx {args.idx} out of range (0..{len(runs) - 1}).", file=sys.stderr)
+            return 2
+        det = runs[args.idx]
+        findings = [Finding.model_validate(x) for x in det.get("findings", [])]
+        adjudications = [Adjudication.model_validate(x) for x in det.get("adjudications", [])]
+        if not adjudications:
+            print(
+                f"[evaluate] run {args.idx} of {args.approach!r} has no adjudications "
+                "(is it a .gen.json checkpoint?).",
+                file=sys.stderr,
+            )
+            return 2
+        run = compute_run_metrics(args.approach, findings, adjudications, golden)
+        _emit(render_metrics_md([aggregate([run])]), args.out)
+        return 0
+
     if not args.findings and not args.dossier:
         print(
-            "[evaluate] needs either --findings (precomputed) or --dossier (to generate them).",
+            "[evaluate] needs --run (compare output), --findings (precomputed), or --dossier.",
             file=sys.stderr,
         )
         return 2
@@ -130,8 +181,6 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
             print(f"Approach '{args.approach}' not available.", file=sys.stderr)
             return 2
         findings = approach(dossier, _select_guidelines(args.corpus))
-
-    golden = [GoldenIssue.model_validate(x) for x in _load_json(args.golden)]
 
     if not args.adjudications:
         grounded = sum(1 for f in findings if f.is_grounded())
@@ -266,14 +315,20 @@ def build_parser() -> argparse.ArgumentParser:
     pr.add_argument("--dossier", required=True, help="JSON with the system Dossier.")
     pr.add_argument(
         "--approach",
-        default="b0",
-        help="Approach: b0/b1/b2/p3/p3n/a4, or 'auto' (product router: b1 easy / p3+dedup hard).",
+        default="p3",
+        help="Approach: p3 (default, the product) / b0/b1/b2/p3n/a4, or 'auto' "
+        "(router: b1 easy / p3+dedup hard). Needs an LLM except b0.",
     )
     pr.add_argument("--corpus", default="hax,pair", help="Corpus: hax, pair or both (default: hax,pair).")
     pr.add_argument(
         "--dedup",
         action="store_true",
-        help="Consolidates near-duplicate findings, deterministic (recommended with p3/p3n).",
+        help="Consolidates near-duplicate findings, deterministic. On by default for p3/p3n.",
+    )
+    pr.add_argument(
+        "--no-dedup",
+        action="store_true",
+        help="Disables the default dedup for p3/p3n (emit the raw block-by-block findings).",
     )
     pr.add_argument(
         "--dedup-llm",
@@ -296,10 +351,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     pe = sub.add_parser("evaluate", help="Computes metrics against a golden set.")
     pe.add_argument("--golden", required=True, help="JSON with the list of GoldenIssue.")
+    pe.add_argument("--run", default=None, help="compare runs/*.json: read findings+adjudications for --approach/--idx.")
+    pe.add_argument("--idx", type=int, default=0, help="Run index within --run (default: 0).")
     pe.add_argument("--dossier", default=None, help="Dossier JSON (if --findings is not passed).")
     pe.add_argument("--findings", default=None, help="JSON with already-generated findings.")
     pe.add_argument("--adjudications", default=None, help="JSON with adjudications (LLM judge + review).")
-    pe.add_argument("--approach", default="b0", help="Approach to use if findings are generated (default: b0).")
+    pe.add_argument("--approach", default="b0", help="Approach: label, or the key to read from --run (default: b0).")
     pe.add_argument("--corpus", default="hax,pair", help="Corpus (default: hax,pair).")
     pe.add_argument("--out", default=None, help="Output .md file (default: stdout).")
     pe.set_defaults(func=cmd_evaluate)
