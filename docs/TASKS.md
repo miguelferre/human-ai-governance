@@ -67,8 +67,3 @@ defensive backup): it is what closes out the result in [RESULTS-testimony.md](RE
       Integrity test: all guidelines mapped, no phantom ids. It turns the academic report into
       situated evidence of conformity. Narrative extension, not an engine one.
 - [x] README that sells the product (done 2026-06-30).
-
-## Security
-
-- [ ] **Rotate the Anthropic API key.** It was left exposed in the chat and the current `.env` returns 401: generate a
-      new one at console.anthropic.com and revoke the old one.
