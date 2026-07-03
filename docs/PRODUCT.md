@@ -30,7 +30,7 @@ It was tested against a real clinical case that had already been worked through 
 
 The second point is the most reassuring. It was given a well-designed system, one of those with hardly any problems, and it stayed quiet. Zero findings. It did not invent anything to justify that it was working. An auditor that always finds twenty-five faults is useless, because there is no way to know when to believe it.
 
-The third point was to rule out that it was luck specific to that case. More systems were taken from the literature, with problems documented by independent people, and there are now eight sectors that bear no resemblance to one another, from healthcare to aviation, justice, finance and public administration. It extracts the same patterns. It had not memorized the home case.
+The third point was to rule out that it was luck specific to that case. More systems were taken from the literature, with problems documented by independent people, and there are now nine sectors that bear no resemblance to one another, from healthcare to aviation, justice, finance, public administration and content moderation. It extracts the same patterns. It had not memorized the home case.
 
 The fourth point was that it should not depend on how the input is written. The system description was entirely rewritten, the same information but in other words and another format. It extracts the same thing. It understands what it reads, it does not fish for keywords.
 
