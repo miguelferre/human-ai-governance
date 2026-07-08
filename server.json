@@ -1,0 +1,35 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.miguelferre/human-ai-governance",
+  "description": "Audit the human-AI interaction layer of an AI system against HAX-18 and PAIR: evidence-anchored findings on over-trust, automation bias, correction and alert timing, mapped to the EU AI Act and NIST AI RMF.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/miguelferre/human-ai-governance",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "interaction-review",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "description": "Anthropic API key for the cloud model. Not needed if you set LLM_BACKEND=ollama for a fully local run.",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "LLM_BACKEND",
+          "description": "Set to 'ollama' to run the whole pipeline locally with an open model (no data leaves the machine). Defaults to Anthropic (cloud).",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

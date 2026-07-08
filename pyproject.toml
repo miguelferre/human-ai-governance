@@ -1,11 +1,25 @@
 [project]
 name = "interaction-review"
-version = "0.0.1"
+version = "0.1.0"
 description = "Human-AI interaction layer reviewer: evaluates an AI system against HAX-18 and PAIR guidelines."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "Miguel Ferreiro Garcia" }]
+authors = [{ name = "Miguel Ferreiro García" }]
+keywords = [
+    "ai-governance", "human-ai-interaction", "human-in-the-loop", "human-oversight",
+    "eu-ai-act", "hax", "pair", "llm-evaluation", "automation-bias", "ai-audit",
+    "mcp", "inspect-ai",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "pydantic>=2.7,<3",
     "pyyaml>=6,<7",
@@ -18,15 +32,31 @@ dependencies = [
     # PDF reading for smart ingestion (document -> pre-filled template).
     # Pure Python, no binaries; only used in `prefill`.
     "pypdf>=4,<6",
+    # MCP server (interaction-review-mcp). Core, not an extra, so `uvx --from git+... interaction-review-mcp`
+    # works with no extras friction. Pinned <2: v2 renames FastMCP->MCPServer and the 2026-07-28 spec
+    # deprecates sampling and goes stateless (see ADR-009). The server is stateless already, so the
+    # v2 migration is mechanical.
+    "mcp>=1.28,<2",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8,<9",
 ]
+# Evaluation harness port (ADR-010). Optional: the product does not need inspect-ai; only the
+# `evals/inspect/` bridge does. Pinned <0.4 (0.3.x has a fast release cadence).
+evals = [
+    "inspect-ai>=0.3.241,<0.4",
+]
 
 [project.scripts]
 interaction-review = "interaction_review.cli:main"
+interaction-review-mcp = "interaction_review.mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/miguelferre/human-ai-governance"
+Repository = "https://github.com/miguelferre/human-ai-governance"
+Issues = "https://github.com/miguelferre/human-ai-governance/issues"
 
 [build-system]
 requires = ["hatchling"]
@@ -39,6 +69,9 @@ packages = ["src/interaction_review"]
 # wheel (not only from the repo checkout). smart_ingest prefers this packaged copy.
 [tool.hatch.build.targets.wheel.force-include]
 "templates" = "interaction_review/templates"
+# Ship the demo dossier inside the package so the MCP resource `example://dossier` resolves
+# when installed as a wheel (e.g. via `uvx`), not only from the repo checkout.
+"data/examples/dossier_demo.json" = "interaction_review/examples/dossier_demo.json"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

@@ -1,5 +1,11 @@
 # Human-AI Interaction Layer Reviewer
 
+**`interaction-review` is an open-source tool to audit the human-AI interaction layer of an AI
+system: how it presents its results, whether the person can correct it, and whether its alerts fire
+at the right moment. It scores that layer against Microsoft's HAX-18 and Google's PAIR design
+guidelines and returns concrete findings, each anchored in evidence and mapped to the EU AI Act and
+the NIST AI RMF.**
+
 > **Audit an AI system's dashboard, not its engine.**
 
 ![The ecosystem around the human-AI interaction layer: data feeds the model; the model drives connected tools and guides the person; the person acts and adapts; outcomes loop back to improve the model, all under a governance layer.](docs/assets/human-ai-ecosystem.jpg)
@@ -100,6 +106,7 @@ disability, content moderation); the table reports the specific experiments run 
 | Phrasing robustness (same case, different words) | stable recall, understands rather than keyword-matches |
 | **Hard test**, n=3: golden set from an independent body (a Royal Commission, a state auditor, a federal court) + raw dossier, separate hands | recall **0.70-0.90** (mean ~0.79): recovers what they flagged without seeing it |
 | **Product number**, over the **9 testimony cases**, with the reproducible pipeline and an **independent judge** (a different model), k=3 | p3: recall **0.91 ± 0.055**, precision **0.965** |
+| **Out-of-domain climate case** (Google Flood Hub early warning, held-out, run **after** the pre-registration and not folded into the number above), k=3 | p3: recall **0.90 ± 0.08**, precision **1.00** ([demo](docs/demo/google-flood-hub-review.html) · [detail](docs/RESULTS-floodhub.md)) |
 
 The last one matters most, because it is not scored by the same engine that generates it: the judge is a
 different model and the flow is reproducible. And it does so with a **cheap** generator model. Run three
@@ -150,6 +157,36 @@ measurably**.
 
 Design decisions in **[docs/adr/](docs/adr/)**; validation plan and honest limitations in
 **[docs/TESTPLAN.md](docs/TESTPLAN.md)**.
+
+## Evals: an Inspect AI port
+
+The home-grown evaluation (`compare`) is rigorous but illegible to the AI-evaluation / assurance market,
+which reads **[Inspect AI](https://inspect.aisi.org.uk/)** (the UK AI Security Institute's framework). So
+it is ported, as an honest **bridge** (`evals/inspect/`, an optional `[evals]` extra). Run it with
+`--model none`, because the method is the project's own, not Inspect's:
+
+```bash
+uv sync --extra dev --extra evals
+uv run inspect eval evals/inspect/hax_pair_review.py --model none -T approach=b0 --limit 1   # free smoke
+uv run inspect view
+```
+
+**What the framework gives:** the dataset -> solver -> scorer orchestration with parallelism, retries and
+resume; `--epochs` as *k*; the standard `.eval` log and `inspect view` (per-case transcript = the real
+findings report, inspectable adjudications, the models as task args); mean +/- stderr aggregation;
+`--limit` / `--sample-id` for debugging; a format anyone in the AISI circuit can audit without reading my
+code.
+
+**What stays hand-built (the method is not reimplemented):** generation is my `p3` pipeline through my
+`llm.py` (Spanish prompts, forced tool-use, semantic buckets); the deterministic dedup; the judge with
+the full [ADR-006](docs/adr/ADR-006-judge-offers-all-golden.md) protocol and the grounding gate in code; the
+pre-registered metrics (F2 with a genericity ceiling, [ADR-002](docs/adr/ADR-002-evaluation-design.md))
+instead of accuracy; the human validation of adjudications; and custody of the answer keys.
+
+**It is a window, not a re-measurement.** The canonical product number (recall 0.91 +/- 0.055 over the 9
+testimony cases, [docs/RESULTS-testimony.md](docs/RESULTS-testimony.md)) is pre-registered and does not
+change; Inspect aggregates differently. Details in
+[evals/inspect/README.md](evals/inspect/README.md) and [ADR-010](docs/adr/ADR-010-inspect-bridge.md).
 
 ## What it is and what it is not
 
@@ -215,6 +252,51 @@ entirely local with `LLM_BACKEND=ollama`.
 > If Windows Application Control blocks the `.exe` launcher, invoke the module directly:
 > `uv run python -m interaction_review.cli ...`.
 
+## Use it from Claude or your IDE (MCP)
+
+The same audit runs as an **MCP server**, so anyone on Claude Desktop, Claude Code, or an MCP-capable
+IDE can point it at *their own* system without cloning this repo. It ships the reviewer as tools,
+resources, and a guided `audit_my_system` prompt.
+
+No release needed: `uvx` runs it straight from GitHub. **Claude Desktop** (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "interaction-review": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/miguelferre/human-ai-governance", "interaction-review-mcp"],
+      "env": { "ANTHROPIC_API_KEY": "sk-ant-..." }
+    }
+  }
+}
+```
+
+**Claude Code** (one line; swap the key for `LLM_BACKEND=ollama` to run fully local):
+
+```bash
+claude mcp add interaction-review \
+  --env ANTHROPIC_API_KEY=sk-ant-... \
+  -- uvx --from git+https://github.com/miguelferre/human-ai-governance interaction-review-mcp
+```
+
+The tools:
+
+| Tool | Model? | What it does |
+|---|---|---|
+| `review_dossier` | yes (except `b0`) | Audit a dossier; returns the report **and** the structured findings |
+| `ingest_templates` | no | Filled template text -> dossier JSON |
+| `validate_dossier` | no | Schema check + stats (source kinds, whether it carries end-user voice) |
+| `regulatory_crosswalk` | no | Findings -> EU AI Act / NIST mapping |
+| `render_report` | no | Re-render findings to Markdown/HTML (+crosswalk) without paying for the model again |
+| `get_template` | no | The raw Markdown of a template to fill in |
+
+Notes. The key lives in the client's `env` block; **the server does not read a `.env`**. A `p3` review
+makes several model calls and can take a minute or two, so if a client's tool timeout is short, raise
+it (`MCP_TIMEOUT` in Claude Code) or use `approach='b1'` (one call) or `approach='b0'` (free, no model).
+The server is stateless and pinned to the `mcp` 1.x SDK (see [ADR-009](docs/adr/ADR-009-mcp-server.md));
+`server.json` in the repo root is ready for the official MCP registry.
+
 ## Layout
 
 ```
@@ -232,7 +314,9 @@ src/interaction_review/
   metrics.py        recall, precision, genericity, grounding, F-beta, recall by source
   report.py         Markdown report · report_html.py self-contained HTML report
   cli.py            Commands prefill / ingest / review / evaluate / compare
-docs/adr/           Design decisions (ADR-001..008)
+  mcp_server.py     MCP server: the reviewer as tools/resources for Claude and IDEs
+docs/adr/           Design decisions (ADR-001..010)
+evals/inspect/      Inspect AI port of the eval (optional [evals] extra)
 data/external/      Public held-out cases (dossier + golden per case)
 data/golden/        PRIVATE, gitignored (real clinical case)
 templates/          The three input templates
@@ -257,3 +341,13 @@ send data out, so the dossier must be **de-identified** before any run with real
 
 - Amershi et al. (2019), *Guidelines for Human-AI Interaction*, CHI. (HAX-18)
 - Google PAIR, *People + AI Guidebook*.
+
+## Author
+
+Built by **Miguel Ferreiro García** — AI governance specialist (EU AI Act, ISO/IEC 42001) working on
+human oversight and clinical AI validation, based in Santiago de Compostela, Spain. This tool grew out
+of that practice: auditing the layer where an AI system meets the person who has to decide with it.
+
+[LinkedIn](https://www.linkedin.com/in/miguel-ferreiro-garcia/) · [GitHub](https://github.com/miguelferre)
+
+To cite it, see [CITATION.cff](CITATION.cff) ("Cite this repository" on GitHub).

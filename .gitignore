@@ -7,6 +7,11 @@ data/private/
 # Resultados crudos de corridas (pueden contener fragmentos del dossier)
 runs/
 
+# Logs del eval de Inspect AI (inspect eval / inspect view). No versionar.
+logs/
+.eval_smoke/
+*.eval
+
 # --- Python ---
 __pycache__/
 *.py[cod]
@@ -27,6 +32,9 @@ venv/
 
 # --- uv ---
 # uv.lock SI se versiona (reproducibilidad). No lo ignoramos.
+
+# --- Kit de visibilidad/GEO (borradores para aplicar a mano en GitHub; no es parte del producto) ---
+geo-kit/
 
 # --- SO / editores ---
 .DS_Store

@@ -122,30 +122,33 @@ def _read(path: str | Path) -> str:
     return Path(path).read_text(encoding="utf-8")
 
 
-def ingest_templates(
+def build_dossier(
     *,
-    profile: list[str] | None = None,
-    experience: list[str] | None = None,
-    inventory: str | None = None,
+    profile_texts: list[str] | None = None,
+    experience_texts: list[str] | None = None,
+    inventory_text: str | None = None,
     system_name: str | None = None,
     domain: str | None = None,
     summary: str = "",
 ) -> Dossier:
-    """Builds a Dossier from filled templates.
+    """Builds a Dossier from the TEXT of filled templates (no file I/O).
 
-    `profile`/`experience` accept several paths (several technicians / users). The
-    name and domain are taken from the first profile if not passed explicitly.
-    Raises ValueError if there is no source with content.
+    Same logic as `ingest_templates` but operating on in-memory strings, so a caller
+    that already holds the template content (the MCP server, where there are no file
+    paths) does not need files on disk. `ingest_templates` reads the files and delegates
+    here. `profile_texts`/`experience_texts` accept several entries (several technicians /
+    users); the name and domain are taken from the first profile if not passed explicitly.
+    Raises ValueError if no template had a filled-in answer.
     """
-    profile = profile or []
-    experience = experience or []
+    profile_texts = profile_texts or []
+    experience_texts = experience_texts or []
     sources: list[Source] = []
 
-    for idx, path in enumerate(profile, 1):
-        answers = extract_answers(_read(path))
+    for idx, text in enumerate(profile_texts, 1):
+        answers = extract_answers(text)
         if not answers:
             continue
-        suffix = f"-{idx}" if len(profile) > 1 else ""
+        suffix = f"-{idx}" if len(profile_texts) > 1 else ""
         sources.append(
             Source(
                 id=f"technical-profile{suffix}",
@@ -159,11 +162,11 @@ def ingest_templates(
         if domain is None:
             domain = _find(answers, "domain")
 
-    for idx, path in enumerate(experience, 1):
-        answers = extract_answers(_read(path))
+    for idx, text in enumerate(experience_texts, 1):
+        answers = extract_answers(text)
         if not answers:
             continue
-        suffix = f"-{idx}" if len(experience) > 1 else ""
+        suffix = f"-{idx}" if len(experience_texts) > 1 else ""
         sources.append(
             Source(
                 id=f"end-user-experience{suffix}",
@@ -173,9 +176,9 @@ def ingest_templates(
             )
         )
 
-    if inventory:
-        answers = extract_answers(_read(inventory))
-        checked = _checked_documents(_read(inventory))
+    if inventory_text:
+        answers = extract_answers(inventory_text)
+        checked = _checked_documents(inventory_text)
         content = _format_source(answers)
         if checked:
             content = ("Available documents:\n" + "\n".join(f"- {m}" for m in checked)
@@ -200,6 +203,32 @@ def ingest_templates(
         domain=domain or "(unspecified domain)",
         summary=summary,
         sources=sources,
+    )
+
+
+def ingest_templates(
+    *,
+    profile: list[str] | None = None,
+    experience: list[str] | None = None,
+    inventory: str | None = None,
+    system_name: str | None = None,
+    domain: str | None = None,
+    summary: str = "",
+) -> Dossier:
+    """Builds a Dossier from filled templates (file paths).
+
+    `profile`/`experience` accept several paths (several technicians / users). The
+    name and domain are taken from the first profile if not passed explicitly.
+    Raises ValueError if there is no source with content. Reads the files and delegates
+    the construction to `build_dossier`.
+    """
+    return build_dossier(
+        profile_texts=[_read(p) for p in (profile or [])],
+        experience_texts=[_read(p) for p in (experience or [])],
+        inventory_text=_read(inventory) if inventory else None,
+        system_name=system_name,
+        domain=domain,
+        summary=summary,
     )
 
 

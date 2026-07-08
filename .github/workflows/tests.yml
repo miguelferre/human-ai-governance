@@ -12,7 +12,8 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Sync dependencies
-        run: uv sync --extra dev
+        # `evals` pulls inspect-ai so the Inspect bridge smoke runs in CI too.
+        run: uv sync --extra dev --extra evals
       - name: Run tests
         # The whole suite is offline (LLM calls are monkeypatched); no API key needed.
         run: uv run pytest -q

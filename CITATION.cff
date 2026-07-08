@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Human-AI Interaction Layer Reviewer"
+abstract: >-
+  An open-source tool that audits the human-AI interaction layer of an AI
+  system (how it presents results, whether it can be corrected, and whether its
+  alerts fire at the right time) against Microsoft's HAX-18 and Google's PAIR
+  design guidelines, producing evidence-anchored findings mapped to the EU AI
+  Act and the NIST AI RMF.
+type: software
+authors:
+  - given-names: Miguel
+    family-names: Ferreiro García
+    affiliation: Independent
+    city: Santiago de Compostela
+    country: ES
+repository-code: "https://github.com/miguelferre/human-ai-governance"
+url: "https://github.com/miguelferre/human-ai-governance"
+license: MIT
+version: 0.1.0
+keywords:
+  - ai-governance
+  - human-ai-interaction
+  - human-in-the-loop
+  - human-oversight
+  - responsible-ai
+  - eu-ai-act
+  - llm-evaluation
+  - llm-as-judge
+  - automation-bias
+  - ai-audit
+  - hax
+  - pair
