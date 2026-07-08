@@ -57,6 +57,34 @@ prohibió que fuera el factor determinante.
 **Problemas:** 1) categoría escueta sin razonamiento [CITA · presentación]; 2) cálculo no divulgado, opaco [CITA · explicación]; 3) el acusado rara vez puede impugnar [CITA · override]; 4) deferencia del juez a la puntuación [CITA · supervisión]; 5) brecha de debido proceso por opacidad [CITA · explicación/override]; 6) los "warning labels" pueden ser inviables en la práctica [CITA · supervisión/controles]; 7) sin ventaja de exactitud sobre un lego pese a presentarse con autoridad [CITA hallazgo/INF marco · incertidumbre-confianza].
 **Fuentes:** Angwin/Larson/Mattu/Kirchner 2016 ProPublica "Machine Bias"; Kirchner 2016 ProPublica (Loomis); Dressel & Farid 2018 Sci Adv (10.1126/sciadv.aao5580); State v. Loomis 2016 WI 68.
 
+## CASO — Google Flood Hub · clima / alerta temprana de inundaciones · NO CLÍNICO
+Añadido 2026-07-08. **Primer caso con las plantillas rellenas versionadas** (`google-flood-hub/raw/`):
+el dossier es reproducible desde ahí con `ingest`. Método y procedencia completos en
+`google-flood-hub/raw/00_LEEME_enfoque.md` y en `docs/RESULTS-floodhub.md`.
+**Dossier (hechos, neutralizado):** IA de Google/DeepMind (modelo LSTM) que predice crecidas fluviales
+hasta 7 días, en 80-100 países y ~700 M de personas. Mapa con 4 niveles de severidad por periodo de
+retorno (~2/5/20 años), hidrograma y mapas de inundación; difusión por buscador, Maps y notificaciones.
+Modelo probabilístico por dentro; de cara al usuario, una línea de pronóstico + categoría + etiqueta
+binaria de confianza del gauge. Dos voces de usuario: decisor institucional de acción anticipatoria
+(traduce a mano el nivel a su trigger) y población vulnerable con poca conectividad (el aviso le llega
+mediado o no le llega). 10 GoldenIssues.
+**Problemas (answer_key):** 1) incertidumbre no mostrada al usuario [INF sobre UI · PAIR-ET-2/HAX-G2];
+2) marco de periodo de retorno malinterpretable [CITA AMS 2018 · HAX-G2/PAIR-MM-2]; 3) el nivel del
+sistema no es el trigger de acción, traducción manual [CITA GiveDirectly · HAX-G17/PAIR-FC-2]; 4) sin
+canal de feedback al sistema [INF vacío documental · HAX-G15/PAIR-FC-1]; 5) fiabilidad en extremos/sin
+aforo no comunicada [CITA Nature 2024 · HAX-G2/PAIR-ET-3]; 6) sin explicación del porqué [CITA panel de
+ayuda · HAX-G11/PAIR-ET-1]; 7) el caveat de confianza no llega al usuario final [INF · HAX-G2/PAIR-EF-1];
+8) la alerta no alcanza a la población sin conectividad [CITA Rest of World · PAIR-UN-1/HAX-G3]; 9)
+fatiga de alerta por falsas alarmas sin control de descarte [CITA/INF · HAX-G8/PAIR-ET-3]; 10) "no
+fuente única" sin medios de integración [CITA ayuda Google · HAX-G10/HAX-G2].
+**Fuentes:** Nearing et al. 2024 *Nature* 627 (10.1038/s41586-024-07145-1; abierto PMC10954541);
+Google Research blog (modelo global, 7 días, 700 M); Flood Hub Help (support.google.com/flood-hub/answer/
+15636593·15637289·15638004·15636998); GiveDirectly (givedirectly.org/flood-forecast-ai) + JBA; Rest of
+World 2025 (restofworld.org/2025/google-flood-hub-cash-aid); Li et al. 2026 *J. Hydrology X*
+(10.1016/j.hydroa.2026.100215, crítica en extremos, metodológicamente disputada); AMS *Wea. Climate
+Soc.* 2018 (periodo de retorno vs probabilidad). **Atribución honesta:** la evidencia causal de
+Bangladesh 2020 (CSAE Oxford, Gros et al.) fue con GloFAS+FFWC, **no** con Flood Hub; no atribuida aquí.
+
 ---
 
 **Prioridad para A1 (anti-overfitting):** los NO clínicos (E4 HireVue y E2/E5) son los más valiosos
